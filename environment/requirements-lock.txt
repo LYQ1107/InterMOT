@@ -1,0 +1,20 @@
+# SAM3_InterMOT environment lock target (deferred).
+#
+# This file records the intended pinned set. A real `pip freeze` lock must be
+# generated after the environment is created; environment creation was
+# deferred because N0 is blocked on checkpoint access, not on dependencies.
+
+torch==2.10.0
+torchvision
+numpy>=1.26,<2
+pyyaml
+pytest
+tqdm
+ftfy==6.1.1
+regex
+iopath>=0.1.10
+typing_extensions
+huggingface_hub
+timm>=1.0.17
+
+# sam3 (editable install from pinned commit 4cbac146c1b5a1e3a7f5c6a894901090b4dfd65b)

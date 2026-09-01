@@ -1,0 +1,25 @@
+name: sam3_intermot
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - pip
+  - pip:
+      # Official SAM 3 README: Python 3.12+, PyTorch 2.7+, CUDA 12.6+.
+      # The README example pins torch==2.10.0 with cu128 wheels.
+      - --index-url https://download.pytorch.org/whl/cu128
+      - torch==2.10.0
+      - torchvision
+      - numpy>=1.26,<2
+      - pyyaml
+      - pytest
+      - tqdm
+      - ftfy==6.1.1
+      - regex
+      - iopath>=0.1.10
+      - typing_extensions
+      - huggingface_hub
+
+# After creating the environment:
+#   conda activate sam3_intermot
+#   pip install -e third_party/sam3

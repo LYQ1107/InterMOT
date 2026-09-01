@@ -1,0 +1,44 @@
+# Public, machine-independent InterMOT configuration template.
+project:
+  name: SAM3_InterMOT
+  version: 0.1.0
+
+backend:
+  type: sam3_multiplex
+  checkpoint_path: null              # Set to a locally accessible checkpoint.
+  checkpoint_source: official
+  checkpoint_source_type: official_user_provided
+  official_repository: facebook/sam3
+  official_access_status: user_must_request_access
+  binary_integrity: user_must_record_sha256
+  checkpoint_sha256: null
+  checkpoint_size_bytes: null
+  max_num_objects: 16
+  multiplex_count: 16
+  compile: false
+  warm_up: false
+  output_prob_thresh: 0.5
+  gpus: []                           # Set explicitly for the local machine.
+
+tracking:
+  detection_interval: 5
+  confirm_after_frames: 5
+  lost_after_frames: 10
+  max_lost_frames: 45
+  tombstone_cooldown_frames: 30
+  association:
+    iou_threshold: 0.2
+    center_threshold: 120.0
+
+interaction:
+  duplicate_iou_threshold: 0.5
+  max_lost_gap_for_handover: 45
+  budget_per_100_frames: 0
+
+dataset:
+  root: /path/to/dancetrack       # Set to a local dataset directory.
+  split: val
+
+evaluation:
+  trackeval_root: null
+  trackeval_commit: 14a4f2e4b96d7913899966ce7e70771f0ee7fc75
