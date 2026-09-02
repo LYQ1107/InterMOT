@@ -225,6 +225,53 @@ class Sam3Backend(PromptVideoTrackerBackend):
         self._apply_stable_ids(obs)
         return obs
 
+    def register_detected_observation(
+        self,
+        observation: PromptObjectObservation,
+        *,
+        source: str = "detected_candidate_registration",
+    ) -> int:
+        """Register one already-observed object for a later correction.
+
+        ``detect_concept`` and propagation expose candidate observations, but
+        they do not create entries in the adapter's prompt-object registry.
+        ``correct_object`` intentionally requires such an entry so an
+        external prompt id cannot silently target an unknown object.  The
+        N72R3 outer runtime therefore calls this explicit bridge after
+        freezing ``Y_pre``.  It records only the observed box and the
+        native/local mapping; it does not issue a prompt or infer a public
+        identity.  A subsequent ``correct_object`` can then re-prompt the
+        registered candidate while retaining the complete object set.
+        """
+
+        self._require_session()
+        if not isinstance(observation, PromptObjectObservation):
+            raise TypeError("observation must be PromptObjectObservation")
+        object_id = int(observation.sam_object_id)
+        box = np.asarray(observation.box_xyxy, dtype=float).reshape(-1)
+        if box.size != 4 or not np.all(np.isfinite(box)):
+            raise ValueError(f"invalid detected observation box for object id: {object_id}")
+        if object_id in self._objects:
+            existing = self._objects[object_id]
+            if _iou(existing["box"], box) < 0.999:
+                raise ValueError(f"detected object id already registered with a different box: {object_id}")
+            return object_id
+
+        clipped = self._clip_box(box)
+        self._objects[object_id] = {
+            "box": clipped.copy(),
+            "human_box": clipped.copy(),
+            "frame": int(observation.frame_idx),
+            "source": str(source),
+        }
+        raw_id = (
+            int(observation.raw_sam_object_id)
+            if observation.raw_sam_object_id is not None
+            else object_id
+        )
+        self._bind_external_sam_id(object_id, raw_id)
+        return object_id
+
     def add_box(
         self,
         frame_idx: int,

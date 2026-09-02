@@ -64,7 +64,8 @@ def test_handover_uses_distinct_raw_ids_and_persistent_lineage():
         from_segment="seg0", to_segment="seg1", frame_boundary=10,
     )
     assert len(txns) == 1
-    assert txns[0].status == "PASS"
+    assert txns[0].status.startswith("HEURISTIC")
+    assert txns[0].authority_eligible is False
     assert txns[0].old_raw_sam_id != txns[0].new_raw_sam_id
     assert txns[0].public_id == 1004
     assert handover.audit()["raw_id_equality_used_for_match"] is False

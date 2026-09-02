@@ -1,5 +1,6 @@
 """Online identity state machine: birth / active / lost / reactivation."""
 
+from copy import deepcopy
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional, Tuple
 
@@ -47,6 +48,10 @@ class StateManagerConfig:
     appearance_negative_cap: int = 16
     appearance_min_machine_confidence: float = 0.5
     appearance_reliability_threshold: float = 0.0
+    # N72R3 mode: the outer persistent identity runtime owns births and public
+    # IDs.  The association state manager may score/solve existing states but
+    # must never promote an unmatched candidate into authority by itself.
+    external_identity_authority: bool = False
 
 
 class StateManager:
@@ -61,6 +66,9 @@ class StateManager:
         self.output_log: List[dict] = []
         self.candidate_log: List[dict] = []
         self.scope_expiry: Dict[int, int] = {}
+        self.external_public_ids: Dict[int, int] = {}
+        self.unmatched_candidates: List[dict] = []
+        self.unmatched_states: List[int] = []
         self.appearance_memory = AppearanceMemory(
             anchor_cap=config.appearance_anchor_cap,
             negative_cap=config.appearance_negative_cap,
@@ -109,9 +117,59 @@ class StateManager:
         return {pid for pid, exp in self.scope_expiry.items() if exp >= frame}
 
     def _new_pid(self) -> int:
+        if self.cfg.external_identity_authority:
+            raise RuntimeError(
+                "external_identity_authority=True forbids StateManager-local births"
+            )
         pid = self.next_pid
         self.next_pid += 1
         return pid
+
+    def register_identity_state(
+        self,
+        state_id: int,
+        public_id: int,
+        initial_observation: dict,
+        frame: int,
+    ) -> IdentityState:
+        """Register an outer-owned identity state without allocating a PID.
+
+        ``state_id`` is the solver axis and ``public_id`` is supplied by the
+        sequence-persistent identity runtime.  They are intentionally stored
+        separately even when their numeric values happen to coincide.
+        """
+
+        if not self.cfg.external_identity_authority:
+            raise RuntimeError(
+                "register_identity_state requires external_identity_authority=True"
+            )
+        state = int(state_id)
+        public = int(public_id)
+        if state <= 0 or public <= 0:
+            raise ValueError("state_id and public_id must be positive")
+        existing = self.states.get(state)
+        if existing is not None:
+            if self.external_public_ids.get(state) != public:
+                raise ValueError(f"state {state} already has a different public ID")
+            return existing
+        feature = np.asarray(initial_observation.get("feat", []), dtype=np.float32)
+        box = np.asarray(initial_observation.get("box", [0, 0, 0, 0]), dtype=float)
+        native = int(initial_observation.get("native_tid", -1))
+        identity_state = IdentityState(state, feature, box, int(frame), native)
+        self.states[state] = identity_state
+        self.external_public_ids[state] = public
+        self.next_pid = max(self.next_pid, state + 1)
+        return identity_state
+
+    def register_from_persistent_identity(self, record: object, obs: dict, frame: int) -> IdentityState:
+        """Adapter for a ``PersistentIdentityRecord`` owned by the outer runtime."""
+
+        return self.register_identity_state(
+            int(getattr(record, "association_state_id")),
+            int(getattr(record, "public_id")),
+            obs,
+            frame,
+        )
 
     @staticmethod
     def _json_feature(obs: dict) -> List[float]:
@@ -271,6 +329,9 @@ class StateManager:
             "public_id_to_native_tid": public_id_to_native_tid,
             "appearance_memory_enabled": bool(self.cfg.use_appearance_memory),
             "public_authority_resolver_present": self.public_authority_resolver is not None,
+            "external_identity_authority": bool(self.cfg.external_identity_authority),
+            "unmatched_candidates": deepcopy(self.unmatched_candidates),
+            "unmatched_states": list(self.unmatched_states),
             "human_events": [],
         }
         self.candidate_log.append(record)
@@ -305,6 +366,8 @@ class StateManager:
         obs_list: List[dict],
         model: Optional[nn.Module] = None,
     ) -> List[Tuple[int, np.ndarray]]:
+        self.unmatched_candidates = []
+        self.unmatched_states = []
         states = self.candidates(frame)
         n_obs = len(obs_list)
         rows: List[Tuple[int, np.ndarray]] = []
@@ -330,6 +393,7 @@ class StateManager:
                     st.mark_lost(frame)
                 else:
                     st.advance_lost()
+            self.unmatched_states = [int(st.pid) for st in states]
             return rows
         if self.cfg.variant == "set":
             scores = score_matrix_set(
@@ -414,7 +478,23 @@ class StateManager:
             if j >= 0:
                 matched_state[j] = True
             if j < 0 or scores[i, j] < self.cfg.score_threshold:
-                # birth
+                # In N72R3 the outer runtime decides whether an unmatched
+                # candidate is a birth.  Keeping it unmatched here prevents
+                # an association-local PID from becoming public authority.
+                if self.cfg.external_identity_authority:
+                    self.unmatched_candidates.append(
+                        {
+                            "candidate_index": int(i),
+                            "candidate_uid": obs.get("candidate_uid"),
+                            "obs_id": int(obs.get("obs_id", i)),
+                            "box": np.asarray(obs.get("box", [0, 0, 0, 0]), dtype=float).copy(),
+                            "feature": np.asarray(obs.get("feat", []), dtype=np.float32).copy(),
+                            "frame": int(frame),
+                            "reason": "OUTER_BIRTH_DECISION_REQUIRED",
+                        }
+                    )
+                    candidate_public_ids[i] = None
+                    continue
                 pid = self._new_pid()
                 st = IdentityState(pid, obs["feat"], obs["box"], frame, obs["native_tid"])
                 self.states[pid] = st
@@ -450,6 +530,9 @@ class StateManager:
                 st.mark_lost(frame)
             else:
                 st.advance_lost()
+        self.unmatched_states = [
+            int(st.pid) for index, st in enumerate(states) if not matched_state[index]
+        ]
         if self.candidate_log and int(self.candidate_log[-1].get("frame", -1)) == int(frame):
             self.candidate_log[-1]["candidate_public_ids"] = candidate_public_ids
             self.candidate_log[-1]["candidate_public_id_mapping_complete"] = bool(
@@ -492,6 +575,34 @@ class StateManager:
         target.setdefault("human_events", []).append(event_view)
         return True
 
+    def snapshot(self) -> dict:
+        """Capture association state without breaking the memory object alias."""
+
+        attributes = {
+            key: value
+            for key, value in vars(self).items()
+            if key not in {"appearance_memory", "public_authority_resolver"}
+        }
+        return {
+            "schema_version": "N72R3_STATE_MANAGER_SNAPSHOT_V1",
+            "attributes": deepcopy(attributes),
+            "public_authority_resolver": self.public_authority_resolver,
+            "appearance_memory": self.appearance_memory.snapshot(),
+        }
+
+    def restore(self, snapshot: dict) -> None:
+        """Restore association state in place, including appearance memory."""
+
+        if snapshot.get("schema_version") != "N72R3_STATE_MANAGER_SNAPSHOT_V1":
+            raise ValueError("unsupported StateManager snapshot schema")
+        memory = self.appearance_memory
+        resolver = snapshot.get("public_authority_resolver")
+        vars(self).clear()
+        vars(self).update(deepcopy(snapshot.get("attributes", {})))
+        self.public_authority_resolver = resolver
+        self.appearance_memory = memory
+        memory.restore(snapshot.get("appearance_memory", {}))
+
     def state_summary(self) -> dict:
         return {
             "n_states": len(self.states),
@@ -499,6 +610,8 @@ class StateManager:
             "lost": sum(1 for s in self.states.values() if s.state == IdentityState.LOST),
             "terminated": sum(1 for s in self.states.values() if s.state == IdentityState.TERMINATED),
             "next_pid": self.next_pid,
+            "external_identity_authority": bool(self.cfg.external_identity_authority),
+            "external_public_ids": {str(key): int(value) for key, value in self.external_public_ids.items()},
             "appearance_memory_enabled": bool(self.cfg.use_appearance_memory),
             "appearance_memory_records": len(self.appearance_memory.records)
             if self.cfg.use_appearance_memory

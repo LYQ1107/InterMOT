@@ -266,7 +266,10 @@ class N72R2SimulatedHumanObserver:
                     if not self._read_frames
                     else min(self._read_frames) - (self._frame or 0)
                 ),
-                "runtime_future_gt_used": False,
+                # Do not overwrite the computed leakage bit.  The accessor
+                # increments ``gt_read_future`` when a future frame request
+                # is rejected; this public audit must preserve that fact.
+                "runtime_future_gt_used": bool(self.audit.gt_read_future > 0),
             }
         )
         return data

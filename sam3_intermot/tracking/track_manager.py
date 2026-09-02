@@ -176,6 +176,26 @@ class TrackManager:
         track.sam_object_id = None
         return track
 
+    def detach_all_session_bindings(self) -> List[int]:
+        """Detach every session-local SAM binding without deleting tracks.
+
+        ``sam_object_id`` belongs to one active SAM session.  This explicit
+        boundary operation clears only that binding; the Track objects, MOT
+        IDs, lifecycle state, observations and output history remain owned by
+        the caller's sequence-persistent runtime.
+        """
+
+        detached: List[int] = []
+        for track in self._tracks.values():
+            if track.state in (TrackState.TERMINATED, TrackState.DELETED):
+                continue
+            if track.sam_object_id is None:
+                continue
+            detached.append(int(track.mot_track_id))
+            self._sam_to_track.pop(track.sam_object_id, None)
+            track.sam_object_id = None
+        return sorted(detached)
+
     def remove_output(self, frame_idx: int, track_id: int) -> None:
         if frame_idx in self._outputs:
             self._outputs[frame_idx].pop(track_id, None)

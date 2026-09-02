@@ -35,6 +35,8 @@ class HandoverTransaction:
     frame_boundary: int
     source_run_id: str
     status: str
+    authority_eligible: bool = False
+    evidence_score: Optional[float] = None
 
     def as_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -79,8 +81,18 @@ class PersistentLineageHandover:
             raise ValueError("handover requires distinct sessions")
         if transaction.from_segment == transaction.to_segment:
             raise ValueError("handover requires distinct segment identifiers")
-        if transaction.status not in {"PASS", "AMBIGUOUS", "NO_MATCH", "COLLISION"}:
+        if transaction.status not in {
+            "PASS",
+            "HEURISTIC_PROPOSAL",
+            "HEURISTIC_STRONG",
+            "HEURISTIC_AMBIGUOUS",
+            "AMBIGUOUS",
+            "NO_MATCH",
+            "COLLISION",
+        }:
             raise ValueError(f"unsupported handover status: {transaction.status}")
+        if transaction.status.startswith("HEURISTIC") and transaction.authority_eligible:
+            raise ValueError("heuristic handover evidence cannot be authority eligible")
         self.transactions.append(transaction)
         return transaction
 
@@ -157,7 +169,9 @@ class PersistentLineageHandover:
                 public_id=int(old_public),
                 frame_boundary=int(frame_boundary),
                 source_run_id=self.source_run_id,
-                status="PASS",
+                status="HEURISTIC_STRONG" if best[0] >= 0.70 else "HEURISTIC_PROPOSAL",
+                authority_eligible=False,
+                evidence_score=float(score),
             )
             self.add(transaction)
             transactions.append(transaction)
@@ -169,7 +183,7 @@ class PersistentLineageHandover:
             statuses[item.status] = statuses.get(item.status, 0) + 1
         public_ids = [item.public_id for item in self.transactions if item.status == "PASS"]
         return {
-            "schema_version": "N72R2_HANDOVER_LEDGER_V1",
+            "schema_version": "N72R3_HANDOVER_EVIDENCE_LEDGER_V2",
             "source_run_id": self.source_run_id,
             "sequence": self.sequence,
             "transaction_count": len(self.transactions),
@@ -177,6 +191,12 @@ class PersistentLineageHandover:
             "expected_pairs": expected_pairs,
             "unique_public_ids": len(set(public_ids)),
             "public_id_collisions": len(public_ids) - len(set(public_ids)),
+            "authority_eligible_transaction_count": sum(
+                1 for item in self.transactions if item.authority_eligible
+            ),
+            "heuristic_transaction_count": sum(
+                1 for item in self.transactions if item.status.startswith("HEURISTIC")
+            ),
             "raw_id_equality_used_for_match": False,
             "runtime_future_gt_used": False,
             "transactions": [item.as_dict() for item in self.transactions],

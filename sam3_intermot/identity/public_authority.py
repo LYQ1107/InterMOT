@@ -17,7 +17,10 @@ from typing import Any, Iterable, Optional
 AUTHORITY_STATUSES = (
     "EXACT",
     "EXPLICIT_NONE",
+    "NO_CANDIDATE_ASSIGNED",
     "NO_PUBLIC_AUTHORITY",
+    "NO_AUTHORITY",
+    "TERMINATED",
     "STALE_BINDING",
     "COLLISION",
     "AMBIGUOUS",
@@ -49,6 +52,39 @@ class PublicAuthorityBinding:
             raise ValueError(f"unknown authority status: {self.status}")
         if self.valid_to_frame is not None and self.valid_to_frame < self.valid_from_frame:
             raise ValueError("valid_to_frame precedes valid_from_frame")
+
+    def as_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass(frozen=True)
+class IdentityStateAuthorityBinding:
+    """Immutable identity-state → public authority binding.
+
+    Unlike the legacy candidate-scoped binding above, this record contains no
+    candidate UID.  A candidate is a per-frame observation that may change or
+    disappear; the persistent identity binding is created once and survives
+    those changes.
+    """
+
+    source_run_id: str
+    sequence: str
+    association_state_id: int
+    identity_lineage_id: int
+    mot_track_id: int
+    public_id: int
+    created_frame: int
+    binding_transaction_id: str
+    valid_to_frame: Optional[int] = None
+    status: str = "EXACT"
+
+    def __post_init__(self) -> None:
+        if self.status not in {"EXACT", "TERMINATED"}:
+            raise ValueError(f"invalid persistent authority status: {self.status}")
+        if int(self.public_id) != int(self.mot_track_id):
+            raise ValueError("persistent public_id must equal mot_track_id")
+        if self.valid_to_frame is not None and int(self.valid_to_frame) < int(self.created_frame):
+            raise ValueError("persistent authority valid_to_frame precedes created_frame")
 
     def as_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -89,10 +125,98 @@ class PublicAuthorityBridge:
         self.session_id = None if session_id is None else str(session_id)
         self._bindings: list[PublicAuthorityBinding] = []
         self._explicit_none: set[tuple[int, int]] = set()
+        self._identity_bindings: dict[int, IdentityStateAuthorityBinding] = {}
+        self._identity_none: set[tuple[int, int]] = set()
 
     @property
     def bindings(self) -> tuple[PublicAuthorityBinding, ...]:
         return tuple(self._bindings)
+
+    @property
+    def identity_bindings(self) -> tuple[IdentityStateAuthorityBinding, ...]:
+        return tuple(self._identity_bindings.values())
+
+    def bind_identity_state(
+        self,
+        *,
+        association_state_id: int,
+        public_id: int,
+        mot_track_id: int,
+        lineage_id: int,
+        created_frame: int,
+        transaction_id: str,
+        valid_to_frame: Optional[int] = None,
+    ) -> IdentityStateAuthorityBinding:
+        """Create the one immutable authority binding for a persistent state.
+
+        Repeating the exact same binding is idempotent.  A different public ID
+        for an existing state is rejected before any new record is appended.
+        This is the only exact state→public path used by N72R3.
+        """
+
+        state_id = int(association_state_id)
+        public = int(public_id)
+        mot = int(mot_track_id)
+        lineage = int(lineage_id)
+        existing = self._identity_bindings.get(state_id)
+        if existing is not None:
+            if (
+                existing.public_id != public
+                or existing.mot_track_id != mot
+                or existing.identity_lineage_id != lineage
+            ):
+                raise ValueError(
+                    f"association state {state_id} already has immutable public authority "
+                    f"{existing.public_id}"
+                )
+            return existing
+        occupied = [
+            item
+            for item in self._identity_bindings.values()
+            if item.public_id == public and item.association_state_id != state_id
+        ]
+        if occupied:
+            raise ValueError(f"public_id {public} is already bound to another identity state")
+        binding = IdentityStateAuthorityBinding(
+            source_run_id=self.source_run_id,
+            sequence=self.sequence,
+            association_state_id=state_id,
+            identity_lineage_id=lineage,
+            mot_track_id=mot,
+            public_id=public,
+            created_frame=int(created_frame),
+            binding_transaction_id=str(transaction_id),
+            valid_to_frame=None if valid_to_frame is None else int(valid_to_frame),
+        )
+        self._identity_bindings[state_id] = binding
+        return binding
+
+    def record_identity_no_candidate(self, association_state_id: int, frame_idx: int) -> None:
+        """Record a legal boundary decision without altering identity authority."""
+
+        state_id = int(association_state_id)
+        if state_id not in self._identity_bindings:
+            raise ValueError(f"unknown persistent identity state: {state_id}")
+        self._identity_none.add((state_id, int(frame_idx)))
+
+    def resolve_identity_state(
+        self, association_state_id: int, frame_idx: Optional[int] = None
+    ) -> AuthorityResolution:
+        state_id = int(association_state_id)
+        binding = self._identity_bindings.get(state_id)
+        if binding is None:
+            return AuthorityResolution("NO_AUTHORITY", reason="identity_state_not_bound")
+        if frame_idx is not None:
+            frame = int(frame_idx)
+            if (state_id, frame) in self._identity_none:
+                return AuthorityResolution("EXPLICIT_NONE", reason="persistent_identity_has_no_candidate")
+            if frame < binding.created_frame or (
+                binding.valid_to_frame is not None and frame > binding.valid_to_frame
+            ):
+                return AuthorityResolution("STALE_BINDING", reason="outside_identity_valid_range")
+        if binding.status == "TERMINATED":
+            return AuthorityResolution("TERMINATED", public_id=binding.public_id, binding=binding)
+        return AuthorityResolution("EXACT", public_id=binding.public_id, reason="persistent_identity", binding=binding)
 
     def bind_track(
         self,
@@ -220,6 +344,9 @@ class PublicAuthorityBridge:
             return AuthorityResolution("SOURCE_RUN_MISMATCH", reason="sequence")
         if association_state_id is None and candidate_uid is None and mot_track_id is None:
             raise ValueError("at least one resolution key is required")
+        if association_state_id is not None and int(association_state_id) in self._identity_bindings:
+            if candidate_uid is None and mot_track_id is None:
+                return self.resolve_identity_state(int(association_state_id), frame_idx)
         selected = list(self._bindings)
         if association_state_id is not None:
             selected = [b for b in selected if b.association_state_id == int(association_state_id)]
@@ -258,6 +385,9 @@ class PublicAuthorityBridge:
         # authoritative binding for this state, while still rejecting a
         # collision at that latest frame.  New code should use the explicit
         # frame-aware method above.
+        identity = self._identity_bindings.get(int(association_state_id))
+        if identity is not None:
+            return int(identity.public_id)
         candidates = [
             item for item in self._bindings
             if item.association_state_id == int(association_state_id)
@@ -275,7 +405,7 @@ class PublicAuthorityBridge:
         exact = sum(1 for b in self._bindings if b.status == "EXACT")
         collision = sum(1 for b in self._bindings if b.status == "COLLISION")
         result: dict[str, Any] = {
-            "schema_version": "N72R2_PUBLIC_AUTHORITY_BRIDGE_V1",
+            "schema_version": "N72R3_PUBLIC_AUTHORITY_BRIDGE_V2",
             "source_run_id": self.source_run_id,
             "sequence": self.sequence,
             "session_id": self.session_id,
@@ -283,6 +413,8 @@ class PublicAuthorityBridge:
             "exact_binding_count": exact,
             "collision_binding_count": collision,
             "explicit_none_count": len(self._explicit_none),
+            "persistent_identity_binding_count": len(self._identity_bindings),
+            "persistent_identity_no_candidate_count": len(self._identity_none),
             # This is a semantic guard, not a numeric comparison: equality
             # can occur by chance when independent allocators start at the
             # same value.  Only the TrackManager/namespace source above is
@@ -321,19 +453,54 @@ class PublicAuthorityBridge:
 
     def as_dict(self) -> dict[str, Any]:
         return {
-            "schema_version": "N72R2_PUBLIC_AUTHORITY_BRIDGE_V1",
+            "schema_version": "N72R3_PUBLIC_AUTHORITY_BRIDGE_V2",
             "source_run_id": self.source_run_id,
             "sequence": self.sequence,
             "session_id": self.session_id,
             "bindings": [b.as_dict() for b in self._bindings],
             "explicit_none": [list(item) for item in sorted(self._explicit_none)],
+            "identity_bindings": [b.as_dict() for b in self._identity_bindings.values()],
+            "identity_no_candidate": [list(item) for item in sorted(self._identity_none)],
             "audit": self.audit(),
+        }
+
+    def snapshot(self) -> dict[str, Any]:
+        """Capture both legacy evidence and N72R3 identity authority."""
+
+        return {
+            "schema_version": "N72R3_PUBLIC_AUTHORITY_BRIDGE_SNAPSHOT_V1",
+            "source_run_id": self.source_run_id,
+            "sequence": self.sequence,
+            "session_id": self.session_id,
+            "bindings": [item.as_dict() for item in self._bindings],
+            "explicit_none": [list(item) for item in sorted(self._explicit_none)],
+            "identity_bindings": [item.as_dict() for item in self._identity_bindings.values()],
+            "identity_no_candidate": [list(item) for item in sorted(self._identity_none)],
+        }
+
+    def restore(self, snapshot: dict[str, Any]) -> None:
+        if str(snapshot.get("source_run_id")) != self.source_run_id:
+            raise ValueError("authority snapshot source_run_id mismatch")
+        if str(snapshot.get("sequence")) != self.sequence:
+            raise ValueError("authority snapshot sequence mismatch")
+        self.session_id = snapshot.get("session_id")
+        self._bindings = [PublicAuthorityBinding(**item) for item in snapshot.get("bindings", [])]
+        self._explicit_none = {
+            (int(item[0]), int(item[1])) for item in snapshot.get("explicit_none", [])
+        }
+        self._identity_bindings = {
+            int(item["association_state_id"]): IdentityStateAuthorityBinding(**item)
+            for item in snapshot.get("identity_bindings", [])
+        }
+        self._identity_none = {
+            (int(item[0]), int(item[1])) for item in snapshot.get("identity_no_candidate", [])
         }
 
 
 __all__ = [
     "AUTHORITY_STATUSES",
     "AuthorityResolution",
+    "IdentityStateAuthorityBinding",
     "PublicAuthorityBinding",
     "PublicAuthorityBridge",
 ]

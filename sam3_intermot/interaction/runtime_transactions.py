@@ -14,12 +14,26 @@ from __future__ import annotations
 import hashlib
 import json
 import math
+import copy
 from dataclasses import dataclass, field
 from typing import Any, Mapping
+
+from sam3_intermot.backend.sam3_state_snapshot import (
+    restore_continuation_state,
+    snapshot_continuation_state,
+)
 
 
 class RuntimeCausalError(ValueError):
     """Raised when an event transaction violates the causal contract."""
+
+
+class RuntimeInteractionError(RuntimeError):
+    """Raised when an interaction cannot be committed atomically."""
+
+
+class RuntimeInteractionRollbackError(RuntimeInteractionError):
+    """Raised when a failed interaction also cannot be fully restored."""
 
 
 def _text(value: Any) -> bool:
@@ -204,4 +218,250 @@ class RuntimeCausalGuard:
         }
 
 
-__all__ = ["RuntimeCausalError", "RuntimeCausalGuard"]
+def _capture_component(obj: Any) -> tuple[str, Any]:
+    """Capture one mutable CPU-side component without losing object identity."""
+
+    if obj is None:
+        return "none", None
+    snapshot = getattr(obj, "snapshot", None)
+    restore = getattr(obj, "restore", None)
+    if callable(snapshot) and callable(restore):
+        return "snapshot_restore", copy.deepcopy(snapshot())
+    serialize = getattr(obj, "serialize", None)
+    deserialize = getattr(type(obj), "deserialize", None)
+    if callable(serialize) and callable(deserialize):
+        return "serialize_deserialize", copy.deepcopy(serialize())
+    if hasattr(obj, "__dict__"):
+        return "dict", copy.deepcopy(vars(obj))
+    raise RuntimeInteractionError(
+        f"component {type(obj).__name__} has no snapshot/restore contract"
+    )
+
+
+def _restore_component(obj: Any, kind: str, payload: Any) -> None:
+    if kind == "none":
+        return
+    if kind == "snapshot_restore":
+        obj.restore(copy.deepcopy(payload))
+        return
+    if kind == "serialize_deserialize":
+        restored = type(obj).deserialize(copy.deepcopy(payload))
+        if not hasattr(obj, "__dict__") or not hasattr(restored, "__dict__"):
+            raise RuntimeInteractionError(
+                f"serialized component {type(obj).__name__} is not in-place restorable"
+            )
+        vars(obj).clear()
+        vars(obj).update(copy.deepcopy(vars(restored)))
+        return
+    if kind == "dict":
+        if not hasattr(obj, "__dict__"):
+            raise RuntimeInteractionError(f"component {type(obj).__name__} has no __dict__")
+        vars(obj).clear()
+        vars(obj).update(copy.deepcopy(payload))
+        return
+    raise RuntimeInteractionError(f"unknown component snapshot kind: {kind}")
+
+
+def _capture_backend(backend: Any) -> tuple[str, Any]:
+    """Use the pinned SAM3 continuation snapshot whenever a real session exists."""
+
+    predictor = getattr(backend, "_predictor", None)
+    session_id = getattr(backend, "_session_id", None)
+    if predictor is not None and session_id is not None:
+        try:
+            return "sam3_continuation", snapshot_continuation_state(backend)
+        except Exception as exc:  # pragma: no cover - depends on live SAM3 state
+            raise RuntimeInteractionError(
+                f"official backend continuation snapshot failed: {exc}"
+            ) from exc
+    if hasattr(backend, "__dict__"):
+        return "python_object", copy.deepcopy(vars(backend))
+    raise RuntimeInteractionError(
+        f"backend {type(backend).__name__} has no continuation snapshot contract"
+    )
+
+
+def _restore_backend(backend: Any, kind: str, payload: Any) -> None:
+    if kind == "sam3_continuation":
+        try:
+            restore_continuation_state(backend, payload)
+        except Exception as exc:  # pragma: no cover - depends on live SAM3 state
+            raise RuntimeInteractionError(
+                f"official backend continuation restore failed: {exc}"
+            ) from exc
+        return
+    if kind == "python_object":
+        if not hasattr(backend, "__dict__"):
+            raise RuntimeInteractionError(f"backend {type(backend).__name__} has no __dict__")
+        vars(backend).clear()
+        vars(backend).update(copy.deepcopy(payload))
+        return
+    raise RuntimeInteractionError(f"unknown backend snapshot kind: {kind}")
+
+
+@dataclass
+class RuntimeInteractionTransaction:
+    """Atomic backend → identity → memory transaction for one event.
+
+    The transaction owns no identity policy and never infers a public ID.  The
+    caller supplies already-authoritative identity mutations.  A real SAM3
+    backend is captured through ``sam3_state_snapshot``; all other mutable
+    components are restored in place so existing references remain valid.
+    """
+
+    backend: Any
+    track_manager: Any = None
+    lineages: Any = None
+    persistent_runtime: Any = None
+    state_manager: Any = None
+    appearance_memory: Any = None
+    public_authority: Any = None
+    allocator: Any = None
+    event_id: str = ""
+    _backend_kind: str = field(init=False, default="")
+    _backend_snapshot: Any = field(init=False, default=None)
+    _component_snapshots: dict[str, tuple[str, Any]] = field(init=False, default_factory=dict)
+    _phase_results: dict[str, Any] = field(init=False, default_factory=dict)
+    _committed: bool = field(init=False, default=False)
+    _rolled_back: bool = field(init=False, default=False)
+    _rollback_errors: list[str] = field(init=False, default_factory=list)
+
+    def __post_init__(self) -> None:
+        if self.backend is None:
+            raise RuntimeInteractionError("backend is required")
+        if self.persistent_runtime is not None:
+            self.track_manager = self.track_manager or getattr(self.persistent_runtime, "manager", None)
+            self.lineages = self.lineages or getattr(self.persistent_runtime, "lineages", None)
+            self.public_authority = self.public_authority or getattr(self.persistent_runtime, "authority", None)
+            self.allocator = self.allocator or getattr(self.persistent_runtime, "_public_allocator", None)
+            self.appearance_memory = self.appearance_memory or getattr(self.persistent_runtime, "appearance_memory", None)
+        if self.state_manager is not None and self.appearance_memory is None:
+            self.appearance_memory = getattr(self.state_manager, "appearance_memory", None)
+        self._backend_kind, self._backend_snapshot = _capture_backend(self.backend)
+        components = {
+            "track_manager": self.track_manager,
+            "lineages": self.lineages,
+            "persistent_runtime": self.persistent_runtime,
+            "state_manager": self.state_manager,
+            "appearance_memory": self.appearance_memory,
+            "public_authority": self.public_authority,
+            "allocator": self.allocator,
+        }
+        for name, obj in components.items():
+            if obj is None:
+                self._component_snapshots[name] = ("none", None)
+                continue
+            kind, payload = _capture_component(obj)
+            self._component_snapshots[name] = (kind, payload)
+
+    def __enter__(self) -> "RuntimeInteractionTransaction":
+        return self
+
+    @staticmethod
+    def _check_phase_result(phase: str, result: Any) -> Any:
+        if result is False:
+            raise RuntimeInteractionError(f"{phase} phase returned failure")
+        if isinstance(result, Mapping) and result.get("accepted") is False:
+            raise RuntimeInteractionError(
+                f"{phase} phase returned rejected result: {result.get('reason', 'unknown')}"
+            )
+        return result
+
+    def execute(
+        self,
+        backend_operation,
+        identity_operation,
+        memory_operation,
+    ) -> dict[str, Any]:
+        """Run all three phases and commit only if every phase succeeds."""
+
+        if self._committed or self._rolled_back:
+            raise RuntimeInteractionError("transaction is already finalized")
+        try:
+            self._phase_results["backend"] = self._check_phase_result(
+                "backend", backend_operation()
+            )
+            self._phase_results["identity"] = self._check_phase_result(
+                "identity", identity_operation()
+            )
+            self._phase_results["memory"] = self._check_phase_result(
+                "memory", memory_operation()
+            )
+            self.commit()
+            return self.audit(status="PASS_RUNTIME_INTERACTION_COMMITTED")
+        except Exception as exc:
+            try:
+                self.rollback()
+            except RuntimeInteractionRollbackError:
+                raise
+            raise RuntimeInteractionError(
+                f"{self.event_id or 'interaction'} failed in atomic transaction: {exc}"
+            ) from exc
+
+    def commit(self) -> None:
+        if self._committed or self._rolled_back:
+            raise RuntimeInteractionError("transaction is already finalized")
+        self._committed = True
+
+    def rollback(self) -> None:
+        if self._rolled_back:
+            return
+        if self._committed:
+            raise RuntimeInteractionError("cannot roll back a committed transaction")
+        errors: list[str] = []
+        try:
+            _restore_backend(self.backend, self._backend_kind, self._backend_snapshot)
+        except Exception as exc:
+            errors.append(f"backend:{exc}")
+        restored: set[str] = set()
+        for name, (kind, payload) in self._component_snapshots.items():
+            if kind == "none" or kind == "alias":
+                continue
+            obj = getattr(self, name if name != "allocator" else "allocator", None)
+            if obj is None:
+                continue
+            try:
+                _restore_component(obj, kind, payload)
+                restored.add(name)
+            except Exception as exc:
+                errors.append(f"{name}:{exc}")
+        # Aliased component entries need no second restore; their canonical
+        # object has already been restored in place.
+        self._rollback_errors = errors
+        self._rolled_back = True
+        if errors:
+            raise RuntimeInteractionRollbackError(
+                "atomic rollback incomplete: " + "; ".join(errors)
+            )
+
+    def __exit__(self, exc_type, exc, traceback) -> bool:
+        if exc_type is not None and not self._committed and not self._rolled_back:
+            self.rollback()
+            return False
+        return False
+
+    def audit(self, *, status: Optional[str] = None) -> dict[str, Any]:
+        return {
+            "schema_version": "N72R3_RUNTIME_INTERACTION_TRANSACTION_V1",
+            "event_id": self.event_id or None,
+            "status": status
+            or ("PASS_RUNTIME_INTERACTION_COMMITTED" if self._committed else "ROLLED_BACK" if self._rolled_back else "OPEN"),
+            "backend_snapshot_kind": self._backend_kind,
+            "snapshotted_components": sorted(self._component_snapshots),
+            "component_aliases": {},
+            "phase_names": ["backend", "identity", "memory"],
+            "completed_phases": sorted(self._phase_results),
+            "committed": self._committed,
+            "rolled_back": self._rolled_back,
+            "rollback_errors": list(self._rollback_errors),
+            "runtime_future_gt_used": False,
+        }
+
+
+__all__ = [
+    "RuntimeCausalError",
+    "RuntimeCausalGuard",
+    "RuntimeInteractionError",
+    "RuntimeInteractionRollbackError",
+    "RuntimeInteractionTransaction",
+]

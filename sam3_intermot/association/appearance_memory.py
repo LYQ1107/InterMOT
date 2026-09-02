@@ -262,6 +262,11 @@ class AppearanceMemory:
             },
         }
 
+    def snapshot(self) -> dict:
+        """Return the complete CPU-side memory state for an outer transaction."""
+
+        return self.serialize()
+
     @classmethod
     def deserialize(cls, payload: dict) -> "AppearanceMemory":
         obj = cls(
@@ -306,3 +311,10 @@ class AppearanceMemory:
             r.negative = r.negative[-obj.negative_cap :] if obj.negative_cap > 0 else []
             obj.records[int(pid_s)] = r
         return obj
+
+    def restore(self, payload: dict) -> None:
+        """Restore memory in place so StateManager references remain valid."""
+
+        restored = type(self).deserialize(payload)
+        self.__dict__.clear()
+        self.__dict__.update(restored.__dict__)
