@@ -256,6 +256,186 @@ class Sam3Backend(PromptVideoTrackerBackend):
         self._add_human_to_cache(int(frame_idx), obs)
         return obs
 
+    def seed_box_from_past_state(
+        self,
+        frame_idx: int,
+        object_id: int,
+        box_xyxy: np.ndarray,
+    ) -> Optional[PromptObjectObservation]:
+        """Re-initialize an independent session from a past-state box.
+
+        The box must come from a previously frozen same-sequence runtime
+        observation.  It is not a human event, GT, or a future-frame input.
+        The official SAM3 prompt path is retained, while the returned
+        observation is explicitly marked as ``past_state_seed`` and not human
+        verified.  Cross-session public identity is assigned only later by
+        the N72R2 handover ledger; ``object_id`` is an adapter-local key.
+        """
+
+        self._require_session()
+        seed_id = int(object_id)
+        if seed_id in self._objects:
+            raise ValueError(f"past-state seed object already exists: {seed_id}")
+        box = self._clip_box(np.asarray(box_xyxy, dtype=float).reshape(-1))
+        self._objects[seed_id] = {
+            "box": box.copy(),
+            "human_box": box.copy(),
+            "frame": int(frame_idx),
+            "source": "past_state_seed",
+        }
+        prompt_box = self._prompt_with_variants(
+            int(frame_idx), seed_id, box, "past_state_seed"
+        )
+        self._objects[seed_id]["box"] = prompt_box.copy()
+        self._objects[seed_id]["human_box"] = box.copy()
+        self._objects[seed_id]["frame"] = int(frame_idx)
+        self._last_prompt_frame = int(frame_idx)
+        target = self._find_obs_for_ext(
+            self._output_cache.get(int(frame_idx), []), seed_id
+        )
+        if target is None:
+            # Do not leave an unobservable object in subsequent whole-set
+            # official prompts.  The caller records this as candidate-recall
+            # evidence instead of upgrading it to an authority binding.
+            self._objects.pop(seed_id, None)
+            self._ext_to_sam.pop(seed_id, None)
+            for mapped_sam, mapped_external in list(self._sam_to_ext.items()):
+                if int(mapped_external) == seed_id:
+                    self._sam_to_ext.pop(mapped_sam, None)
+            return None
+        result = target.copy()
+        result.source = "past_state_seed"
+        result.is_human_verified = False
+        return result
+
+    def rebind_past_state_boxes(
+        self,
+        frame_idx: int,
+        seeds: Sequence[Tuple[int, np.ndarray]],
+    ) -> dict:
+        """Re-initialize one independent session with one official multi-box prompt.
+
+        The pinned multiplex model accepts a complete ``bounding_boxes`` batch,
+        and resets/rebuilds its prompt state on every ``add_prompt`` request.
+        Calling that real interface once for the whole persisted object set is
+        materially different from repeatedly adding one seed (each repeated
+        call can discard the preceding seed).  This adapter-level primitive is
+        deliberately limited to same-sequence past runtime boxes: it does not
+        read GT, assign public IDs, or infer a match from numeric IDs.
+
+        The returned mapping contains only observations that the official
+        response exposed in a one-to-one box match.  Unobserved or ambiguous
+        seeds remain explicit failures; they are never converted into a
+        TrackManager/public-authority binding.
+        """
+
+        self._require_session()
+        normalized: list[tuple[int, np.ndarray]] = []
+        seen: set[int] = set()
+        for object_id, box_xyxy in seeds:
+            external_id = int(object_id)
+            if external_id in seen or external_id in self._objects:
+                raise ValueError(f"duplicate or existing past-state object id: {external_id}")
+            raw_box = np.asarray(box_xyxy, dtype=float).reshape(-1)
+            if raw_box.size != 4 or not np.all(np.isfinite(raw_box)):
+                raise ValueError(f"invalid past-state box for object {external_id}")
+            box = self._clip_box(raw_box)
+            seen.add(external_id)
+            normalized.append((external_id, box))
+        if not normalized:
+            raise ValueError("at least one past-state box is required")
+
+        self._objects = {
+            external_id: {
+                "box": box.copy(),
+                "human_box": box.copy(),
+                "frame": int(frame_idx),
+                "source": "past_state_rebind",
+            }
+            for external_id, box in normalized
+        }
+        self._ext_to_sam.clear()
+        self._sam_to_ext.clear()
+        self._last_prompt_frame = int(frame_idx)
+
+        prompt_boxes = [box.copy() for _, box in normalized]
+        attempts: list[dict] = []
+        obs_list = self._send_prompt(
+            int(frame_idx), boxes=prompt_boxes, source="past_state_rebind"
+        )
+        self._apply_stable_ids(obs_list)
+        attempts.append(
+            {
+                "variant": "persisted_box",
+                "requested_count": len(normalized),
+                "observed_count": len(obs_list),
+            }
+        )
+
+        # The regular adapter already uses this official, deterministic
+        # centered shrink for oversized boxes.  Apply it to the *whole* batch
+        # only if the first complete prompt did not expose every seed.
+        if len(obs_list) < len(normalized):
+            sanitized = [(external_id, self._sanitize_box(box)) for external_id, box in normalized]
+            for external_id, box in sanitized:
+                self._objects[external_id]["box"] = box.copy()
+            obs_list = self._send_prompt(
+                int(frame_idx),
+                boxes=[box.copy() for _, box in sanitized],
+                source="past_state_rebind_sanitized",
+            )
+            self._apply_stable_ids(obs_list)
+            attempts.append(
+                {
+                    "variant": "sanitized_box",
+                    "requested_count": len(sanitized),
+                    "observed_count": len(obs_list),
+                }
+            )
+
+        # _match_outputs_to_ext performs one-to-one greedy IoU matching.  Use
+        # the established map only when an exposed raw observation exists;
+        # duplicate boxes cannot silently satisfy two persisted objects.
+        raw_by_id = {
+            int(obs.raw_sam_object_id): obs
+            for obs in obs_list
+            if obs.raw_sam_object_id is not None
+        }
+        recovered: dict[int, PromptObjectObservation] = {}
+        failures: list[dict] = []
+        for external_id, _ in normalized:
+            sam_id = self._ext_to_sam.get(external_id)
+            target = raw_by_id.get(int(sam_id)) if sam_id is not None else None
+            if target is None:
+                failures.append(
+                    {
+                        "object_id": external_id,
+                        "reason": "official_multi_box_prompt_did_not_return_unique_observation",
+                    }
+                )
+                self._objects.pop(external_id, None)
+                old_sam = self._ext_to_sam.pop(external_id, None)
+                if old_sam is not None:
+                    self._sam_to_ext.pop(int(old_sam), None)
+                continue
+            result = target.copy()
+            result.source = "past_state_rebind"
+            result.is_human_verified = False
+            recovered[external_id] = result
+
+        return {
+            "frame_idx": int(frame_idx),
+            "requested_count": len(normalized),
+            "recovered_count": len(recovered),
+            "failure_count": len(failures),
+            "failures": failures,
+            "attempts": attempts,
+            "one_to_one_matching": True,
+            "source": "official_multiplex_add_prompt_bounding_boxes",
+            "runtime_future_gt_used": False,
+            "observations": recovered,
+        }
+
     def add_points(
         self,
         frame_idx: int,
