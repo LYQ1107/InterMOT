@@ -207,6 +207,7 @@ class Sam3Backend(PromptVideoTrackerBackend):
         self._text_prompt = None
         self._prompt_fallback_log = []
         self._resume_repair_log = []
+        self._last_official_prompt_outputs: Dict[int, List[PromptObjectObservation]] = {}
         return self._session_id
 
     # ------------------------------------------------------------------
@@ -575,6 +576,7 @@ class Sam3Backend(PromptVideoTrackerBackend):
         *,
         keep_masks: bool = True,
         cache_outputs: bool = True,
+        max_frame_num_to_track: Optional[int] = None,
         output_callback: Optional[
             Callable[[int, List[PromptObjectObservation]], None]
         ] = None,
@@ -596,6 +598,14 @@ class Sam3Backend(PromptVideoTrackerBackend):
         if start_idx is None:
             start_idx = self._last_prompt_frame if self._last_prompt_frame is not None else 0
         req["start_frame_index"] = int(start_idx)
+        if max_frame_num_to_track is not None:
+            if int(max_frame_num_to_track) < 0:
+                raise ValueError("max_frame_num_to_track must be non-negative")
+            # The official detector bounds are exclusive while propagation
+            # yields the end frame inclusively.  Bounded callers pass one
+            # extra context frame; the default remains the historical full
+            # video request.
+            req["max_frame_num_to_track"] = int(max_frame_num_to_track)
         self._prepare_resumable_official_stream(int(start_idx), int(end_frame))
         # Intentionally do NOT pass max_frame_num_to_track.  The pinned official
         # code computes a detector feature window of length
@@ -755,9 +765,193 @@ class Sam3Backend(PromptVideoTrackerBackend):
         self._sam_to_ext.clear()
         self._last_prompt_frame = None
         self._resume_repair_log = []
+        self._last_official_prompt_outputs = {}
 
     def get_frame_outputs(self, frame_idx: int) -> List[PromptObjectObservation]:
         return [o.copy() for o in self._output_cache.get(frame_idx, [])]
+
+    def get_last_official_prompt_outputs(self, frame_idx: int) -> List[PromptObjectObservation]:
+        """Return the latest official prompt response before human cache rows.
+
+        ``correct_object`` appends a human-verified observation to the normal
+        adapter cache for the interaction ledger.  This separate projection
+        preserves the official response without prompting SAM3 again or
+        inferring provenance from a source string.
+        """
+
+        return [
+            observation.copy()
+            for observation in self._last_official_prompt_outputs.get(int(frame_idx), [])
+        ]
+
+    def reconcile_official_tracker_to_visible_outputs(self, frame_idx: int) -> dict:
+        """Restore the official tracker mask/ID cardinality at a causal boundary.
+
+        The pinned multiplex implementation can retain zero-area tracklets in
+        ``tracker_metadata`` after a detector propagation while omitting them
+        from ``cached_frame_outputs``.  Its next-frame tracker path still
+        returns the full ID list, but not a mask row for every ID, which makes
+        the official association assertion fail before future candidates can
+        be produced.  N72R4 uses this explicit adapter-level boundary repair:
+        only raw SAM IDs with no visible mask at the frozen event frame are
+        removed through the official model ``remove_object`` API.  It does not
+        touch the persistent public-identity runtime, create an identity, read
+        GT, or alter the default behavior of existing callers.
+
+        The returned audit is part of the official-branch provenance.  A
+        caller must preserve it and must not treat a removed official
+        tracklet as a public-ID or recovery assignment.
+        """
+        self._require_session()
+        if int(frame_idx) < 0:
+            raise ValueError("frame_idx must be non-negative")
+        predictor = self._predictor
+        if predictor is None or self._session_id is None:
+            raise RuntimeError("no active official session")
+        entry = predictor._all_inference_states.get(self._session_id)
+        state = entry.get("state") if isinstance(entry, dict) else None
+        if not isinstance(state, dict):
+            raise RuntimeError("official inference state is unavailable")
+        cached = state.get("cached_frame_outputs", {})
+        frame_cache = cached.get(int(frame_idx), cached.get(str(frame_idx), {}))
+        if not isinstance(frame_cache, dict) or not frame_cache:
+            raise RuntimeError(
+                f"cannot reconcile official tracker without visible frame outputs: {frame_idx}"
+            )
+        metadata = state.get("tracker_metadata")
+        if not isinstance(metadata, dict):
+            raise RuntimeError("official tracker metadata is unavailable")
+        metadata_ids = [int(value) for value in metadata.get("obj_ids_all_gpu", [])]
+        visible_ids = [int(value) for value in frame_cache.keys()]
+        if len(visible_ids) != len(set(visible_ids)):
+            raise RuntimeError(f"official frame cache has duplicate raw IDs: {frame_idx}")
+        missing_ids = [value for value in metadata_ids if value not in set(visible_ids)]
+        model = getattr(predictor, "model", None)
+        remove_object = getattr(model, "remove_object", None)
+        if missing_ids and remove_object is None:
+            raise NotSupportedError(
+                "official SAM3 model does not expose the required remove_object state repair"
+            )
+        removed_ids: list[int] = []
+        for object_id in missing_ids:
+            # frame_idx=None avoids asking the official model to synthesize a
+            # replacement output while the event-frame Y_pre is frozen.
+            remove_object(state, int(object_id), frame_idx=None, is_user_action=False)
+            removed_ids.append(int(object_id))
+        remaining_ids = [int(value) for value in metadata.get("obj_ids_all_gpu", [])]
+        metadata_compaction = self._compact_official_position_metadata(
+            state,
+            metadata_ids_before=metadata_ids,
+            metadata_ids_after=remaining_ids,
+        )
+        remaining_state_ids = sorted(
+            {
+                int(value)
+                for item in state.get("sam2_inference_states", [])
+                for value in item.get("obj_ids", [])
+            }
+        )
+        if set(remaining_ids) != set(remaining_state_ids):
+            raise RuntimeError(
+                "official state repair left metadata/state ID mismatch: "
+                f"metadata={remaining_ids}, states={remaining_state_ids}"
+            )
+        if set(remaining_ids) != set(visible_ids):
+            raise RuntimeError(
+                "official state repair did not match visible event IDs: "
+                f"remaining={remaining_ids}, visible={visible_ids}"
+            )
+        return {
+            "status": "PASS_OFFICIAL_VISIBLE_ID_STATE_RECONCILIATION",
+            "frame_idx": int(frame_idx),
+            "metadata_ids_before": metadata_ids,
+            "visible_ids_at_event": sorted(visible_ids),
+            "removed_invisible_raw_ids": removed_ids,
+            "metadata_ids_after": remaining_ids,
+            "sam2_state_ids_after": remaining_state_ids,
+            "position_metadata_compaction": metadata_compaction,
+            "official_remove_object_api": True,
+            "persistent_public_identity_touched": False,
+            "public_id_created": False,
+            "runtime_future_gt_used": False,
+        }
+
+    @staticmethod
+    def _compact_official_position_metadata(
+        state: dict,
+        *,
+        metadata_ids_before: List[int],
+        metadata_ids_after: List[int],
+    ) -> dict:
+        """Keep adapter-side positional tracker metadata aligned after removal.
+
+        ``Sam3MultiplexTracking.remove_object`` updates the official object
+        axes but, at the pinned version, leaves the GPU metadata tensors in
+        their pre-removal positional layout.  The next official planning
+        phase expects both layouts to have the same length.  Compact only the
+        documented position-indexed tensors; do not inspect or rewrite any
+        model parameters, masks, feature cache, or SAM2 state tensors.
+        """
+        metadata = state.get("tracker_metadata", {})
+        gpu_metadata = metadata.get("gpu_metadata", {}) if isinstance(metadata, dict) else {}
+        before_count = len(metadata_ids_before)
+        keep_indices = [
+            index
+            for index, object_id in enumerate(metadata_ids_before)
+            if int(object_id) in {int(value) for value in metadata_ids_after}
+        ]
+        if len(keep_indices) != len(metadata_ids_after):
+            raise RuntimeError(
+                "official metadata compaction cannot map remaining object IDs: "
+                f"before={metadata_ids_before}, after={metadata_ids_after}"
+            )
+        compacted_fields: list[str] = []
+        for key, value in list(gpu_metadata.items()):
+            if key == "N_obj":
+                continue
+            shape = getattr(value, "shape", None)
+            if shape is None or len(shape) == 0 or int(shape[0]) != before_count:
+                continue
+            if hasattr(value, "index_select"):
+                import torch
+
+                index = torch.as_tensor(
+                    keep_indices, dtype=torch.long, device=value.device
+                )
+                compacted = value.index_select(0, index)
+                if len(shape) > 1 and int(shape[1]) == before_count:
+                    compacted = compacted.index_select(1, index)
+            else:
+                compacted = value[keep_indices]
+                if getattr(compacted, "ndim", 0) > 1 and int(compacted.shape[1]) == before_count:
+                    compacted = compacted[:, keep_indices]
+            gpu_metadata[key] = compacted
+            compacted_fields.append(str(key))
+        if gpu_metadata:
+            gpu_metadata["N_obj"] = len(metadata_ids_after)
+        mismatched_fields = {
+            str(key): list(getattr(value, "shape", ()))
+            for key, value in gpu_metadata.items()
+            if key != "N_obj"
+            and getattr(value, "shape", None) is not None
+            and len(value.shape) > 0
+            and int(value.shape[0]) != len(metadata_ids_after)
+        }
+        if mismatched_fields:
+            raise RuntimeError(
+                "official GPU position metadata remains misaligned: "
+                f"{mismatched_fields}"
+            )
+        return {
+            "status": "PASS_POSITION_METADATA_COMPACTED"
+            if gpu_metadata
+            else "PASS_NO_POSITION_METADATA",
+            "before_count": before_count,
+            "after_count": len(metadata_ids_after),
+            "keep_indices": keep_indices,
+            "compacted_fields": sorted(compacted_fields),
+            "gpu_metadata_n_obj": gpu_metadata.get("N_obj") if gpu_metadata else None,
+        }
 
     def runtime_memory_policy(self) -> dict:
         """Return the actual adapter/runtime memory settings for provenance."""
@@ -943,6 +1137,7 @@ class Sam3Backend(PromptVideoTrackerBackend):
         self._text_prompt = None
         self._prompt_fallback_log = []
         self._resume_repair_log = []
+        self._last_official_prompt_outputs = {}
 
     # ------------------------------------------------------------------
     def _bind_external_sam_id(self, external_id: int, sam_id: int) -> None:
@@ -999,6 +1194,9 @@ class Sam3Backend(PromptVideoTrackerBackend):
             request["clear_old_boxes"] = True
         response = self._predictor.handle_request(request=request)
         obs_list = self._parse_outputs(response, int(frame_idx), source)
+        self._last_official_prompt_outputs[int(frame_idx)] = [
+            observation.copy() for observation in obs_list
+        ]
         self._last_prompt_frame = int(frame_idx)
         self._output_cache[int(frame_idx)] = obs_list
         if boxes is not None and len(boxes) == len(self._objects):
