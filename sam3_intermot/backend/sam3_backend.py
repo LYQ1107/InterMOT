@@ -525,6 +525,7 @@ class Sam3Backend(PromptVideoTrackerBackend):
         embeddings: Optional[Sequence[np.ndarray]] = None,
         embedding_fn: Optional[Callable[[int, np.ndarray], np.ndarray]] = None,
         include_masks: bool = True,
+        include_raw_provenance: bool = False,
     ) -> List[dict]:
         """Export all postprocessed SAM3 candidates cached for one frame.
 
@@ -574,8 +575,7 @@ class Sam3Backend(PromptVideoTrackerBackend):
                     if embedding_status == "MACHINE_ROI_FALLBACK":
                         embedding_status = "MACHINE_ROI_FALLBACK_FAILED"
                         feature_source = "machine_roi_fallback_invalid"
-            rows.append(
-                {
+            row = {
                     "frame_idx": int(observation.frame_idx),
                     "native_tid": int(observation.sam_object_id),
                     "box_xyxy": np.asarray(observation.box_xyxy, dtype=float).copy(),
@@ -598,7 +598,24 @@ class Sam3Backend(PromptVideoTrackerBackend):
                     "candidate_index": int(index),
                     "native_id_source": "official_out_obj_ids",
                 }
-            )
+            # This is an explicit opt-in extension.  The historical export
+            # keeps its byte/schema behaviour, while N72 can distinguish the
+            # immutable official raw axis from the adapter-visible ID after
+            # stable-ID binding.
+            if include_raw_provenance:
+                raw_id = observation.raw_sam_object_id
+                row.update(
+                    {
+                        "raw_native_id": None if raw_id is None else int(raw_id),
+                        "raw_native_id_source": (
+                            "official_out_obj_ids"
+                            if raw_id is not None
+                            else "UNAVAILABLE_NOT_OFFICIAL_OBSERVATION"
+                        ),
+                        "adapter_external_id": int(observation.sam_object_id),
+                    }
+                )
+            rows.append(row)
         return rows
 
     def close(self) -> None:
@@ -901,6 +918,7 @@ class Sam3Backend(PromptVideoTrackerBackend):
                 PromptObjectObservation(
                     frame_idx=frame_idx,
                     sam_object_id=int(oid),
+                    raw_sam_object_id=int(oid),
                     mask=mask,
                     box_xyxy=box,
                     confidence=float(probs[i]) if i < len(probs) else 0.5,
@@ -929,6 +947,7 @@ class Sam3Backend(PromptVideoTrackerBackend):
                 PromptObjectObservation(
                     frame_idx=frame_idx,
                     sam_object_id=int(oid),
+                    raw_sam_object_id=int(oid),
                     mask=mask,
                     box_xyxy=box,
                     confidence=float(item.get("score", item.get("scores", 0.5))),

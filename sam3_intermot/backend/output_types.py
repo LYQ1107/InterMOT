@@ -15,6 +15,10 @@ class PromptObjectObservation:
     mask: np.ndarray
     box_xyxy: np.ndarray
     confidence: float
+    # Raw official ``out_obj_ids`` are retained only when the backend parser
+    # has an authoritative value.  ``sam_object_id`` remains the historical
+    # adapter-visible/stable ID so existing callers keep their semantics.
+    raw_sam_object_id: Optional[int] = None
     presence_score: Optional[float] = None
     source: str = "automatic_propagation"
     is_human_verified: bool = False
@@ -32,6 +36,7 @@ class PromptObjectObservation:
             mask=self.mask.copy(),
             box_xyxy=self.box_xyxy.copy(),
             confidence=self.confidence,
+            raw_sam_object_id=self.raw_sam_object_id,
             presence_score=self.presence_score,
             source=self.source,
             is_human_verified=self.is_human_verified,
