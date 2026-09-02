@@ -22,6 +22,15 @@ class PromptObjectObservation:
     presence_score: Optional[float] = None
     source: str = "automatic_propagation"
     is_human_verified: bool = False
+    # Optional run/segment provenance is carried with the observation when
+    # available.  These fields are metadata only; they never replace the
+    # official raw axis or become a public identity by numeric coincidence.
+    source_run_id: Optional[str] = None
+    session_id: Optional[str] = None
+    segment_id: Optional[str] = None
+    window_id: Optional[str] = None
+    chunk_id: Optional[str] = None
+    candidate_index: Optional[int] = None
 
     def __post_init__(self) -> None:
         self.mask = np.asarray(self.mask)
@@ -40,4 +49,10 @@ class PromptObjectObservation:
             presence_score=self.presence_score,
             source=self.source,
             is_human_verified=self.is_human_verified,
+            source_run_id=self.source_run_id,
+            session_id=self.session_id,
+            segment_id=self.segment_id,
+            window_id=self.window_id,
+            chunk_id=self.chunk_id,
+            candidate_index=self.candidate_index,
         )

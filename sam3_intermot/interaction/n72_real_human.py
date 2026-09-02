@@ -24,6 +24,7 @@ from sam3_intermot.provenance.mapping import (
     MAPPING_STATUSES,
     canonical_candidate_uid,
 )
+from sam3_intermot.provenance.path_safety import resolve_within_root
 
 
 PROTOCOL_ID = "N72_REAL_HUMAN_EVENT_TAPE_V1"
@@ -147,10 +148,12 @@ def _atomic_json(path: Path, payload: Any) -> None:
 def _resolve(ref: Any, root: Path | None) -> Path | None:
     if not _text(ref):
         return None
-    path = Path(str(ref))
-    if not path.is_absolute():
-        path = (root or Path.cwd()) / path
-    return path.resolve()
+    if root is None:
+        return Path(str(ref)).resolve()
+    try:
+        return resolve_within_root(str(ref), root)
+    except Exception:
+        return None
 
 
 def load_candidate_tape(path: Path) -> dict[str, Any]:
@@ -560,20 +563,100 @@ class N72RealHumanEventAdapter:
 
 
 class N72RealHumanTapeRecorder:
-    """Append externally emitted JSON records without truncating prior input."""
+    """Append externally emitted JSON records with a lock and hash chain.
 
-    def __init__(self, path: Path | str) -> None:
+    Legacy records without hash fields remain readable.  New records are
+    enriched inside the locked append critical section; duplicate event IDs
+    are checked against the existing file, not just the current batch.
+    """
+
+    def __init__(self, path: Path | str, *, server_session_nonce: str | None = None) -> None:
         self.path = Path(path)
+        self.server_session_nonce = server_session_nonce
 
-    def append_record(self, record: Mapping[str, Any]) -> None:
+    @staticmethod
+    def _canonical(record: Mapping[str, Any]) -> bytes:
+        return (json.dumps(dict(record), ensure_ascii=False, sort_keys=True, allow_nan=False, separators=(",", ":")) + "\n").encode("utf-8")
+
+    @classmethod
+    def _event_hash(cls, record: Mapping[str, Any]) -> str:
+        return hashlib.sha256(cls._canonical(record)).hexdigest()
+
+    def _read_existing(self) -> tuple[list[dict[str, Any]], str | None, set[str]]:
+        records: list[dict[str, Any]] = []
+        last_hash: str | None = None
+        event_ids: set[str] = set()
+        if not self.path.exists():
+            return records, last_hash, event_ids
+        with self.path.open("r", encoding="utf-8") as handle:
+            for line_number, line in enumerate(handle, 1):
+                if not line.strip():
+                    continue
+                try:
+                    item = json.loads(line)
+                except json.JSONDecodeError as exc:
+                    raise ValueError(f"corrupted JSONL at line {line_number}") from exc
+                if not isinstance(item, dict):
+                    raise ValueError(f"JSONL record at line {line_number} is not an object")
+                event_id = item.get("event_id")
+                if event_id is not None:
+                    if str(event_id) in event_ids:
+                        raise ValueError(f"duplicate event_id already stored: {event_id}")
+                    event_ids.add(str(event_id))
+                stored_hash = item.get("event_sha256")
+                if stored_hash is not None:
+                    unsigned = dict(item)
+                    unsigned.pop("event_sha256", None)
+                    if self._event_hash(unsigned) != stored_hash:
+                        raise ValueError(f"event hash mismatch at line {line_number}")
+                    previous = item.get("previous_event_sha256")
+                    if previous != last_hash:
+                        raise ValueError(f"hash-chain discontinuity at line {line_number}")
+                    last_hash = str(stored_hash)
+                else:
+                    # Historical unchained rows are preserved; the first new
+                    # V2 row starts a new verifiable chain from null.
+                    last_hash = None
+                records.append(item)
+        return records, last_hash, event_ids
+
+    def append_record(self, record: Mapping[str, Any]) -> dict[str, Any]:
         if not isinstance(record, Mapping):
             raise TypeError("record must be a JSON object")
-        encoded = (json.dumps(dict(record), ensure_ascii=False, sort_keys=True, allow_nan=False) + "\n").encode("utf-8")
         self.path.parent.mkdir(parents=True, exist_ok=True)
-        with self.path.open("ab") as handle:
-            handle.write(encoded)
-            handle.flush()
-            os.fsync(handle.fileno())
+        lock_path = self.path.with_name(self.path.name + ".lock")
+        with lock_path.open("a+b") as lock_handle:
+            try:
+                import fcntl
+
+                fcntl.flock(lock_handle.fileno(), fcntl.LOCK_EX)
+            except ImportError as exc:  # pragma: no cover - non-POSIX only
+                raise RuntimeError("N72R1 append-only recorder requires POSIX file locking") from exc
+            try:
+                _, previous_hash, event_ids = self._read_existing()
+                event_id = record.get("event_id")
+                if event_id is not None and str(event_id) in event_ids:
+                    raise ValueError(f"duplicate event_id already stored: {event_id}")
+                enriched = dict(record)
+                enriched.setdefault("server_session_nonce", self.server_session_nonce)
+                enriched["previous_event_sha256"] = previous_hash
+                enriched["event_sha256"] = self._event_hash(enriched)
+                encoded = self._canonical(enriched)
+                with self.path.open("ab") as handle:
+                    handle.write(encoded)
+                    handle.flush()
+                    os.fsync(handle.fileno())
+                directory_fd = os.open(str(self.path.parent), os.O_DIRECTORY)
+                try:
+                    os.fsync(directory_fd)
+                finally:
+                    os.close(directory_fd)
+                return enriched
+            finally:
+                try:
+                    fcntl.flock(lock_handle.fileno(), fcntl.LOCK_UN)
+                except Exception:
+                    pass
 
 
 __all__ = [

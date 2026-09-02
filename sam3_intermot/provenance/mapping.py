@@ -13,6 +13,11 @@ import math
 from collections import Counter, defaultdict
 from typing import Any, Iterable, Mapping
 
+import numpy as np
+
+
+CANDIDATE_UID_V2_SCHEMA = "N72R1_CANDIDATE_UID_V2"
+
 
 MAPPING_STATUSES = (
     "EXACT",
@@ -73,6 +78,106 @@ def canonical_candidate_uid(
         "sequence_global_id": str(sequence_global_id),
     }
     encoded = json.dumps(payload, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
+
+
+def canonical_box_digest(box_xyxy: Any) -> str:
+    """Digest the four box coordinates using the frozen V2 byte contract."""
+
+    try:
+        values = np.asarray(box_xyxy, dtype="<f4").reshape(-1)
+    except (TypeError, ValueError) as exc:
+        raise ValueError("box_xyxy must be numeric") from exc
+    if values.size != 4 or not np.all(np.isfinite(values)):
+        raise ValueError("box_xyxy must contain exactly four finite values")
+    return hashlib.sha256(np.ascontiguousarray(values, dtype="<f4").tobytes()).hexdigest()
+
+
+def canonical_mask_digest(mask: Any) -> str:
+    """Digest mask shape plus contiguous bytes; shape changes cannot collide."""
+
+    try:
+        values = np.asarray(mask)
+    except (TypeError, ValueError) as exc:
+        raise ValueError("mask must be array-like") from exc
+    if values.ndim != 2:
+        raise ValueError("mask must be two-dimensional")
+    values = np.ascontiguousarray(values.astype(np.uint8, copy=False))
+    shape_bytes = json.dumps(
+        {"shape": [int(value) for value in values.shape]},
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+        allow_nan=False,
+    ).encode("utf-8")
+    return hashlib.sha256(shape_bytes + b"\0" + values.tobytes()).hexdigest()
+
+
+def canonical_candidate_uid_v2(
+    *,
+    source_run_id: str,
+    sequence: str,
+    session_id: str,
+    segment_id: str,
+    window_id: str,
+    chunk_id: str,
+    frame_idx: int,
+    candidate_index: int,
+    official_raw_sam_id: int,
+    adapter_external_id: int,
+    box_digest: str,
+    mask_sha256: str,
+) -> str:
+    """Create the collision-resistant N72R1 candidate UID.
+
+    V2 intentionally refuses to manufacture a UID when a run/session or one
+    of the official/stable identity axes is absent.  It also uses digests of
+    canonical box/mask bytes so a changed observation cannot silently reuse a
+    previous UID.
+    """
+
+    required_text = {
+        "source_run_id": source_run_id,
+        "sequence": sequence,
+        "session_id": session_id,
+        "segment_id": segment_id,
+        "window_id": window_id,
+        "chunk_id": chunk_id,
+        "box_digest": box_digest,
+        "mask_sha256": mask_sha256,
+    }
+    if any(not isinstance(value, str) or not value.strip() for value in required_text.values()):
+        raise ValueError("V2 UID requires non-empty run/session/segment/window/chunk and digests")
+    integer_axes = {
+        "frame_idx": frame_idx,
+        "candidate_index": candidate_index,
+        "official_raw_sam_id": official_raw_sam_id,
+        "adapter_external_id": adapter_external_id,
+    }
+    if any(isinstance(value, bool) or not isinstance(value, int) for value in integer_axes.values()):
+        raise ValueError("V2 UID integer axes must be integers")
+    payload = {
+        "schema": CANDIDATE_UID_V2_SCHEMA,
+        "source_run_id": source_run_id,
+        "sequence": sequence,
+        "session_id": session_id,
+        "segment_id": segment_id,
+        "window_id": window_id,
+        "chunk_id": chunk_id,
+        "frame_idx": int(frame_idx),
+        "candidate_index": int(candidate_index),
+        "official_raw_sam_id": int(official_raw_sam_id),
+        "adapter_external_id": int(adapter_external_id),
+        "box_digest": box_digest,
+        "mask_sha256": mask_sha256,
+    }
+    encoded = json.dumps(
+        payload,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+        allow_nan=False,
+    ).encode("utf-8")
     return hashlib.sha256(encoded).hexdigest()
 
 
@@ -256,8 +361,12 @@ def validate_mapping_batch(
 
 
 __all__ = [
+    "CANDIDATE_UID_V2_SCHEMA",
     "MAPPING_STATUSES",
+    "canonical_box_digest",
     "canonical_candidate_uid",
+    "canonical_candidate_uid_v2",
+    "canonical_mask_digest",
     "resolve_exact_mapping",
     "validate_mapping_batch",
 ]

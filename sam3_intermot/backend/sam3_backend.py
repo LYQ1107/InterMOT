@@ -472,13 +472,31 @@ class Sam3Backend(PromptVideoTrackerBackend):
         self._require_session()
         if object_id not in self._objects:
             raise ValueError(f"invalid object id: {object_id}")
+        object_id = int(object_id)
         sam_id = self._ext_to_sam.get(object_id)
         del self._objects[object_id]
         self._ext_to_sam.pop(object_id, None)
         if sam_id is not None:
             self._sam_to_ext.pop(sam_id, None)
+        # Cached observations may carry either the adapter-visible external
+        # ID or the immutable raw official ID.  Remove both representations;
+        # filtering only on ``sam_object_id == sam_id`` leaves stable-bound
+        # observations behind.
+        visible_ids = {object_id}
+        raw_ids = {object_id}
+        if sam_id is not None:
+            visible_ids.add(int(sam_id))
+            raw_ids.add(int(sam_id))
         for frame_obs in self._output_cache.values():
-            frame_obs[:] = [o for o in frame_obs if o.sam_object_id != sam_id]
+            frame_obs[:] = [
+                o
+                for o in frame_obs
+                if int(o.sam_object_id) not in visible_ids
+                and not (
+                    o.raw_sam_object_id is not None
+                    and int(o.raw_sam_object_id) in raw_ids
+                )
+            ]
         if self._objects and self._last_prompt_frame is not None:
             obs = self._send_prompt(
                 self._last_prompt_frame,
@@ -596,7 +614,11 @@ class Sam3Backend(PromptVideoTrackerBackend):
                     "feature_source": feature_source,
                     "is_human_verified": bool(observation.is_human_verified),
                     "candidate_index": int(index),
-                    "native_id_source": "official_out_obj_ids",
+                    # ``native_tid`` is the adapter-visible stable ID after
+                    # binding.  The immutable official axis is exposed
+                    # separately as ``raw_native_id`` when requested.
+                    "native_id_source": "adapter_visible_stable_id_after_binding",
+                    "legacy_native_tid_semantics": "adapter_visible_stable_id_after_binding",
                 }
             # This is an explicit opt-in extension.  The historical export
             # keeps its byte/schema behaviour, while N72 can distinguish the
@@ -615,6 +637,65 @@ class Sam3Backend(PromptVideoTrackerBackend):
                         "adapter_external_id": int(observation.sam_object_id),
                     }
                 )
+            rows.append(row)
+        return rows
+
+    def export_frame_candidates_v2(
+        self,
+        frame_idx: int,
+        *,
+        metadata: dict,
+        segment_local_ids: Sequence[str],
+        sequence_global_ids: Sequence[str],
+        embeddings: Optional[Sequence[np.ndarray]] = None,
+        embedding_fn: Optional[Callable[[int, np.ndarray], np.ndarray]] = None,
+    ) -> List[dict]:
+        """Export a mandatory, provenance-complete Candidate V2 frame.
+
+        The local/global axes are explicit inputs from the same run's binding
+        ledger.  This method intentionally refuses to derive them from raw or
+        adapter IDs, and it never adds a public identity.  The legacy exporter
+        remains available for compatibility and is used only to obtain the
+        same normalized machine feature values/common fields.
+        """
+        from sam3_intermot.provenance.candidate_v2 import build_candidate_v2_row
+
+        observations = self.get_frame_outputs(int(frame_idx))
+        if len(segment_local_ids) != len(observations) or len(sequence_global_ids) != len(observations):
+            raise ValueError("Candidate V2 local/global axis lengths must equal the complete candidate count")
+        context = dict(metadata)
+        context.setdefault("session_id", self._session_id)
+        legacy = self.export_frame_candidates(
+            int(frame_idx), embeddings=embeddings, embedding_fn=embedding_fn, include_masks=True
+        )
+        if len(legacy) != len(observations):
+            raise RuntimeError("legacy/V2 candidate count changed during export")
+        rows: List[dict] = []
+        for index, (observation, legacy_row) in enumerate(zip(observations, legacy)):
+            # ``export_frame_candidates`` already normalizes an explicitly
+            # supplied embedding.  Feed the original caller value to the V2
+            # builder as well so the two schema projections share one
+            # canonical normalization pass instead of normalizing the
+            # legacy projection a second time.  The fallback path remains
+            # compatible with embedding_fn and still preserves its audit
+            # provenance.
+            feature_input = (
+                embeddings[index]
+                if embeddings is not None
+                else legacy_row.get("embedding")
+            )
+            row = build_candidate_v2_row(
+                observation,
+                metadata=context,
+                candidate_index=index,
+                segment_local_id=str(segment_local_ids[index]),
+                sequence_global_id=str(sequence_global_ids[index]),
+                feature=feature_input,
+                feature_status=(
+                    "AVAILABLE" if legacy_row.get("embedding") is not None else legacy_row.get("embedding_status")
+                ),
+                feature_source=str(legacy_row.get("feature_source", "official_response_no_embedding")),
+            )
             rows.append(row)
         return rows
 
@@ -746,7 +827,12 @@ class Sam3Backend(PromptVideoTrackerBackend):
     ) -> None:
         """Replace raw SAM model ids with stable external ids where known."""
         for obs in obs_list:
-            ext = self._sam_to_ext.get(obs.sam_object_id)
+            raw_or_visible_id = (
+                obs.raw_sam_object_id
+                if obs.raw_sam_object_id is not None
+                else obs.sam_object_id
+            )
+            ext = self._sam_to_ext.get(raw_or_visible_id)
             if ext is not None:
                 obs.sam_object_id = ext
 

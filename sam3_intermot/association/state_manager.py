@@ -50,8 +50,12 @@ class StateManagerConfig:
 
 
 class StateManager:
-    def __init__(self, config: StateManagerConfig) -> None:
+    def __init__(self, config: StateManagerConfig, public_authority_resolver=None) -> None:
         self.cfg = config
+        # This bridge is intentionally opt-in.  A StateManager PID is an
+        # association-local state ID and must not be presented as public
+        # identity without an explicit same-run resolver.
+        self.public_authority_resolver = public_authority_resolver
         self.states: Dict[int, IdentityState] = {}
         self.next_pid = 1
         self.output_log: List[dict] = []
@@ -139,6 +143,16 @@ class StateManager:
                 {
                     "index": int(index),
                     "obs_id": int(obs.get("obs_id", index)),
+                    "candidate_uid": obs.get("candidate_uid"),
+                    "source_run_id": obs.get("source_run_id"),
+                    "session_id": obs.get("session_id"),
+                    "segment_id": obs.get("segment_id"),
+                    "window_id": obs.get("window_id"),
+                    "chunk_id": obs.get("chunk_id"),
+                    "official_raw_sam_id": obs.get("official_raw_sam_id"),
+                    "adapter_external_id": obs.get("adapter_external_id"),
+                    "segment_local_id": obs.get("segment_local_id"),
+                    "sequence_global_id": obs.get("sequence_global_id"),
                     "native_tid": int(obs.get("native_tid", -1)),
                     "native_age": float(obs.get("native_age", 0.0)),
                     "confidence": float(obs.get("conf", 1.0)),
@@ -150,6 +164,18 @@ class StateManager:
             )
         public_id_order = [int(s.pid) for s in states]
         candidate_order = [int(o.get("obs_id", index)) for index, o in enumerate(obs_list)]
+
+        def resolved_public_id(state: IdentityState) -> Optional[int]:
+            resolver = self.public_authority_resolver
+            if resolver is None:
+                return None
+            resolve = getattr(resolver, "resolve", None)
+            if not callable(resolve):
+                return None
+            value = resolve(int(state.pid))
+            return None if value is None else int(value)
+
+        public_id_axis = [resolved_public_id(state) for state in states]
 
         def assignment_pairs(values: np.ndarray) -> List[dict]:
             pairs: List[dict] = []
@@ -163,7 +189,13 @@ class StateManager:
                         "candidate_obs_id": int(obs_list[candidate_index].get("obs_id", candidate_index)),
                         "native_tid": int(obs_list[candidate_index].get("native_tid", -1)),
                         "state_index": int(state_index),
+                        # Kept for historical readers only.  N72R1 sidecars
+                        # use association_state_id + public_id_axis below.
                         "public_id": int(states[state_index].pid),
+                        "association_state_id": int(states[state_index].pid),
+                        "resolved_public_id": resolved_public_id(states[state_index]),
+                        "public_id_semantics": "legacy_state_pid_not_authoritative",
+                        "candidate_uid": obs_list[candidate_index].get("candidate_uid"),
                         "score": float(scores[candidate_index, state_index]),
                     }
                 )
@@ -188,7 +220,20 @@ class StateManager:
             "frame": int(frame),
             "public_ids": public_id_order,
             "public_id_order": public_id_order,
+            "association_state_axis": public_id_order,
+            "public_id_axis": public_id_axis,
+            "public_id_axis_complete": bool(states) and all(value is not None for value in public_id_axis),
+            "score_threshold": float(self.cfg.score_threshold),
+            "solver_version": "scipy.optimize.linear_sum_assignment",
+            "explicit_none_state_indices": [],
+            "assignment_solver_has_explicit_none": False,
             "candidate_order": candidate_order,
+            "candidate_axis": [o.get("candidate_uid") for o in obs_list],
+            "source_run_id": next((o.get("source_run_id") for o in obs_list if o.get("source_run_id") is not None), None),
+            "session_id": next((o.get("session_id") for o in obs_list if o.get("session_id") is not None), None),
+            "segment_id": next((o.get("segment_id") for o in obs_list if o.get("segment_id") is not None), None),
+            "window_id": next((o.get("window_id") for o in obs_list if o.get("window_id") is not None), None),
+            "chunk_id": next((o.get("chunk_id") for o in obs_list if o.get("chunk_id") is not None), None),
             "candidates": candidates,
             "candidate_native_ids": [int(o.get("native_tid", -1)) for o in obs_list],
             "candidate_complete": bool(all(c["feature_available"] for c in candidates)),
@@ -225,6 +270,7 @@ class StateManager:
             "assignment_pairs_after_scope": assignment_pairs(final_assignment),
             "public_id_to_native_tid": public_id_to_native_tid,
             "appearance_memory_enabled": bool(self.cfg.use_appearance_memory),
+            "public_authority_resolver_present": self.public_authority_resolver is not None,
             "human_events": [],
         }
         self.candidate_log.append(record)
