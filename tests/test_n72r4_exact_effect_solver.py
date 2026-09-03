@@ -100,3 +100,16 @@ def test_duplicate_candidate_uid_fails() -> None:
             source_run_id="toy",
             session_id="s",
         )
+
+
+def test_matrix_provenance_hash_preserves_both_orientations() -> None:
+    scores = np.asarray([[0.2, 0.7, -0.1], [0.9, 0.3, 0.4]], dtype=float)
+    artifact = solve_effect_assignment(
+        candidate_rows=_rows(3),
+        persistent_states=_states(2),
+        fused_state_candidate_scores=scores,
+        source_run_id="toy",
+        session_id="s",
+    )
+    assert artifact["state_candidate_score_matrix_sha256"] != artifact["candidate_state_score_matrix_sha256"]
+    assert artifact["candidate_state_score_matrix_sha256"] == artifact["fused_score_matrix_sha256"]

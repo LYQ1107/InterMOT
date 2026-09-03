@@ -9,6 +9,8 @@ implementation.
 from __future__ import annotations
 
 from collections.abc import Iterable, Mapping, Sequence
+import hashlib
+import json
 from typing import Any
 
 import numpy as np
@@ -17,6 +19,18 @@ from .public_assignment import solve_exact_public_assignment, validate_exact_pub
 
 
 SCHEMA_VERSION = "N72R3R1_EFFECT_ASSIGNMENT_WRAPPER_V1"
+
+
+def _matrix_sha256(values: Any) -> str:
+    """Hash a matrix in its supplied orientation, without transposing it."""
+    return hashlib.sha256(
+        json.dumps(
+            np.asarray(values, dtype=np.float64).tolist(),
+            sort_keys=True,
+            separators=(",", ":"),
+            allow_nan=False,
+        ).encode("utf-8")
+    ).hexdigest()
 
 
 def _field(value: Any, name: str) -> Any:
@@ -80,11 +94,18 @@ def solve_effect_assignment(
     errors = validate_exact_public_assignment(artifact)
     if errors:
         raise RuntimeError(f"exact public assignment validator failed: {errors}")
+    state_candidate_hash = _matrix_sha256(scores)
+    candidate_state_hash = _matrix_sha256(scores.T)
+    if candidate_state_hash != artifact["fused_score_matrix_sha256"]:
+        raise RuntimeError(
+            "solver candidate×state provenance hash disagrees with the submitted matrix"
+        )
     artifact.update(
         {
             "schema_version": SCHEMA_VERSION,
             "state_candidate_score_matrix_shape": [int(scores.shape[0]), int(scores.shape[1])],
-            "state_candidate_score_matrix_sha256": artifact["fused_score_matrix_sha256"],
+            "state_candidate_score_matrix_sha256": state_candidate_hash,
+            "candidate_state_score_matrix_sha256": candidate_state_hash,
             "solver_input_orientation": "state_x_candidate_transposed_to_candidate_x_state",
             "persistent_state_count": len(state_values),
             "runtime_future_gt_used": False,

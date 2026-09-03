@@ -36,6 +36,7 @@ R3_COMPARISON = ROOT / "outputs" / "N72R3R1" / "old_vs_new_comparison.json"
 SEMANTIC_RESULT = ROOT / "outputs" / "N72R3R1" / "corrected_replay" / "n72r3r1_semantic_repair_results.json"
 STAGE9 = STAGE_STATUS / "stage_09_attempt2_status.json"
 STAGE10 = STAGE_STATUS / "stage_10_status.json"
+STAGE10_RECALL = OUT / "candidate_recall" / "no_vs_m0_candidate_recall.json"
 STAGE11 = STAGE_STATUS / "stage_11_status.json"
 STAGE12 = STAGE_STATUS / "stage_12_status.json"
 STAGE13 = STAGE_STATUS / "stage_13_status.json"
@@ -181,6 +182,7 @@ def validate_inputs() -> dict[str, Any]:
         SEMANTIC_RESULT,
         STAGE9,
         STAGE10,
+        STAGE10_RECALL,
         STAGE11,
         STAGE12,
         STAGE13,
@@ -196,6 +198,7 @@ def validate_inputs() -> dict[str, Any]:
         require(path)
     stage9 = read_json(STAGE9)
     stage11 = read_json(STAGE11)
+    stage10_recall = read_json(STAGE10_RECALL)
     stage13 = read_json(STAGE13)
     stage14 = read_json(STAGE14_ATTEMPT4_STATUS)
     protocol14 = read_json(STAGE14_PROTOCOL)
@@ -207,6 +210,8 @@ def validate_inputs() -> dict[str, Any]:
         "stage9_paired_prefix_equivalence": stage9.get("paired_prefix_equivalence") is True,
         "stage9_runtime_future_gt_false": stage9.get("runtime_future_gt_used") is False,
         "stage11_execution_pass": str(stage11.get("status", "")).startswith("PASS_STAGE11"),
+        "stage10_recall_artifact_pass": stage10_recall.get("status") == "PASS_STAGE10_NO_VS_M0_POSTHOC_RECALL",
+        "stage10_recall_runtime_future_gt_false": stage10_recall.get("runtime_future_gt_used") is False,
         "stage11_runtime_future_gt_false": stage11.get("runtime_future_gt_used") is False,
         "stage13_runtime_future_gt_false": stage13.get("runtime_future_gt_used") is False,
         "stage14_attempt4_pass": stage14.get("status") == "PASS_STAGE14_EXPANSION_POLICY_FROZEN",
@@ -227,6 +232,7 @@ def validate_inputs() -> dict[str, Any]:
 
 def write_round(inputs: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
     results = read_json(STAGE11_RESULTS)
+    stage10_recall = read_json(STAGE10_RECALL)
     recovery = read_json(STAGE13_RESULTS)
     r3_gate = read_json(R3_GATE)
     r3_comparison = read_json(R3_COMPARISON)
@@ -284,6 +290,10 @@ def write_round(inputs: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]
         "recovery_accepted_proposals": stage13.get("runtime_validation", {}).get("accepted_recovery_assignments"),
         "recovery_proposals_changed_candidate_stream": not bool(stage13.get("runtime_validation", {}).get("official_candidate_stream_unchanged") is True),
         "candidate_recall_long_horizon_incomplete": True,
+        "stage10_candidate_recall": {
+            "aggregate": stage10_recall.get("aggregate", {}),
+            "m0_minus_no_candidate_recall": stage10_recall.get("m0_minus_no_candidate_recall", {}),
+        },
         "most_supported_bottleneck": "association/candidate-state interface remains unresolved; the bounded evidence does not justify separating candidate recall from decision-boundary failure",
         "decision": "NO_NEW_M3_CONFIRMATION_PRECONDITION",
     }
@@ -448,6 +458,7 @@ def write_stage_statuses(inputs: dict[str, Any], diagnosis: dict[str, Any], roun
 
 def write_final_gate(inputs: dict[str, Any], diagnosis: dict[str, Any], statuses: dict[str, Any]) -> dict[str, Any]:
     stage11 = read_json(STAGE11_RESULTS)
+    stage10_recall = read_json(STAGE10_RECALL)
     recovery = read_json(STAGE13_RESULTS)
     stage14_manifest = read_json(STAGE14_MANIFEST)
     gate = {
@@ -476,6 +487,7 @@ def write_final_gate(inputs: dict[str, Any], diagnosis: dict[str, Any], statuses
             "m3_m4_true_correct_crossings_positive": False,
             "protected_identity_regression_zero": True,
             "candidate_recovery_identity_gain_positive": False,
+            "stage10_recall_artifact_valid": True,
             "expanded_policy_complete": True,
             "expanded_policy_executed": False,
             "confirmation_executed": False,
@@ -511,6 +523,11 @@ def write_final_gate(inputs: dict[str, Any], diagnosis: dict[str, Any], statuses
             "identity_error_gain": diagnosis["recovery_identity_error_gain_r1_minus_r0"],
             "accepted_proposals": diagnosis.get("recovery_accepted_proposals"),
         },
+        "candidate_recall": {
+            "source": str(STAGE10_RECALL),
+            "aggregate": stage10_recall.get("aggregate", {}),
+            "m0_minus_no_candidate_recall": stage10_recall.get("m0_minus_no_candidate_recall", {}),
+        },
         "preserved_failure_evidence": [
             "outputs/N72R3R1/attempts/",
             "outputs/N72R4/attempts/",
@@ -531,7 +548,7 @@ def write_final_gate(inputs: dict[str, Any], diagnosis: dict[str, Any], statuses
 
 def render_report(gate: dict[str, Any], diagnosis: dict[str, Any]) -> str:
     stage11 = read_json(STAGE11_RESULTS)
-    stage10 = read_json(STAGE10)
+    stage10 = read_json(STAGE10_RECALL)
     stage9 = read_json(STAGE9)
     stage14 = read_json(STAGE14_MANIFEST)
     stage14_audit = read_json(STAGE14_AUDIT)
@@ -605,9 +622,9 @@ def render_report(gate: dict[str, Any], diagnosis: dict[str, Any]) -> str:
         "",
         "Stage 10 NO→M0 candidate recall (official future candidate stream):",
         "",
-        f"- H20: `{stage10.get('summary', {}).get('aggregate', {}).get('B0_NO_INTERVENTION', {}).get('20', {}).get('candidate_recall')}` → `{stage10.get('summary', {}).get('aggregate', {}).get('B1_CURRENT_FRAME_CORRECTION', {}).get('20', {}).get('candidate_recall')}` (Δ `{stage10.get('summary', {}).get('delta_m0_minus_no', {}).get('20')}`)",
-        f"- H50: `{stage10.get('summary', {}).get('aggregate', {}).get('B0_NO_INTERVENTION', {}).get('50', {}).get('candidate_recall')}` → `{stage10.get('summary', {}).get('aggregate', {}).get('B1_CURRENT_FRAME_CORRECTION', {}).get('50', {}).get('candidate_recall')}` (Δ `{stage10.get('summary', {}).get('delta_m0_minus_no', {}).get('50')}`)",
-        f"- H100: `{stage10.get('summary', {}).get('aggregate', {}).get('B0_NO_INTERVENTION', {}).get('100', {}).get('candidate_recall')}` → `{stage10.get('summary', {}).get('aggregate', {}).get('B1_CURRENT_FRAME_CORRECTION', {}).get('100', {}).get('candidate_recall')}` (Δ `{stage10.get('summary', {}).get('delta_m0_minus_no', {}).get('100')}`)",
+        f"- H20: `{stage10.get('aggregate', {}).get('B0_NO_INTERVENTION', {}).get('20', {}).get('candidate_recall')}` → `{stage10.get('aggregate', {}).get('B1_CURRENT_FRAME_CORRECTION', {}).get('20', {}).get('candidate_recall')}` (Δ `{stage10.get('m0_minus_no_candidate_recall', {}).get('20')}`)",
+        f"- H50: `{stage10.get('aggregate', {}).get('B0_NO_INTERVENTION', {}).get('50', {}).get('candidate_recall')}` → `{stage10.get('aggregate', {}).get('B1_CURRENT_FRAME_CORRECTION', {}).get('50', {}).get('candidate_recall')}` (Δ `{stage10.get('m0_minus_no_candidate_recall', {}).get('50')}`)",
+        f"- H100: `{stage10.get('aggregate', {}).get('B0_NO_INTERVENTION', {}).get('100', {}).get('candidate_recall')}` → `{stage10.get('aggregate', {}).get('B1_CURRENT_FRAME_CORRECTION', {}).get('100', {}).get('candidate_recall')}` (Δ `{stage10.get('m0_minus_no_candidate_recall', {}).get('100')}`)",
         "",
         "Correction therefore helps short-horizon candidate availability but degrades the aggregate at H50/H100. That effect is separate from memory’s Mx–M0 increment and is not a demonstrated public-ID gain.",
         "",
