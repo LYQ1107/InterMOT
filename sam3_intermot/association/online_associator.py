@@ -234,7 +234,7 @@ def score_matrix_pairwise(
                 sim = float(np.dot(o["feat"], s.effective_feat()))
                 piou = predicted_iou(s, o["box"], frame)
                 gap = min(1.0, max(0, frame - s.last_seen_frame) / 200.0)
-                nsame = 1.0 if o["native_tid"] == s.last_native_tid else 0.0
+                nsame = 1.0 if native_same(s, o) else 0.0
                 w = reid_weights or {"sim": 1.5, "iou": 1.0, "native": 0.5, "gap": 0.1}
                 scores[i, j] = (
                     w["sim"] * sim
