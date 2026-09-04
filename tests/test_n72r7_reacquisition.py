@@ -90,6 +90,19 @@ def test_pool_rejects_duplicate_candidate_uid() -> None:
         )
 
 
+def test_pool_retains_finite_degenerate_box_as_audited_candidate() -> None:
+    candidate = _main()
+    candidate["box_xyxy"] = [5.0, 5.0, 5.0, 6.0]
+    pool, _ = build_candidate_pool(
+        [candidate],
+        sequence="toy",
+        frame=11,
+        include_target_session=False,
+    )
+    assert len(pool) == 1
+    assert pool[0]["geometry_valid"] is False
+
+
 def test_selector_is_future_only_and_returns_candidate_without_public_id() -> None:
     pool, _ = build_candidate_pool(
         [_main()],

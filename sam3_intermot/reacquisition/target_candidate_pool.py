@@ -23,8 +23,8 @@ FEATURE_DIM = 512
 
 def _finite_box(value: Any, label: str) -> list[float]:
     box = np.asarray(value, dtype=np.float64).reshape(-1)
-    if box.size != 4 or not np.all(np.isfinite(box)) or box[2] <= box[0] or box[3] <= box[1]:
-        raise ValueError(f"{label}: invalid positive finite xyxy box")
+    if box.size != 4 or not np.all(np.isfinite(box)):
+        raise ValueError(f"{label}: box must be four finite xyxy values")
     return [float(item) for item in box]
 
 
@@ -90,6 +90,7 @@ def _normalize(
         "sequence": str(sequence),
         "candidate_index": int(candidate_index),
         "box_xyxy": box,
+        "geometry_valid": bool(box[2] > box[0] and box[3] > box[1]),
         "mask_sha256": None if raw.get("mask_sha256") is None else str(raw["mask_sha256"]),
         "feature_sha256": feature_hash,
         "feature_available": feature is not None,
