@@ -40,10 +40,14 @@ def _feature(value: Any, label: str) -> np.ndarray | None:
     return array / norm
 
 
-def _feature_hash(array: np.ndarray | None, supplied: Any) -> str | None:
+def _feature_hash(array: np.ndarray | None, supplied: Any, raw_value: Any = None) -> str | None:
     if array is None:
         return None if supplied in (None, "", "None") else str(supplied)
-    actual = hashlib.sha256(np.asarray(array, dtype="<f4").tobytes()).hexdigest()
+    # Frozen artifacts hash the source float32 vector.  Normalizing for the
+    # selector can change a nearly-unit vector by a few ulps, so hashing the
+    # normalized copy would reject valid provenance.
+    source = np.asarray(array if raw_value is None else raw_value, dtype="<f4").reshape(-1)
+    actual = hashlib.sha256(source.tobytes()).hexdigest()
     if supplied not in (None, "", "None") and str(supplied) != actual:
         raise ValueError(f"feature hash mismatch: supplied={supplied} actual={actual}")
     return actual
@@ -73,7 +77,8 @@ def _normalize(
     box_value = raw.get("box_xyxy", raw.get("box"))
     box = _finite_box(box_value, f"{source_kind}:{uid}")
     feature = _feature(raw.get("feature", raw.get("embedding")), f"{source_kind}:{uid}")
-    feature_hash = _feature_hash(feature, raw.get("feature_sha256"))
+    raw_feature = raw.get("feature", raw.get("embedding"))
+    feature_hash = _feature_hash(feature, raw.get("feature_sha256"), raw_feature)
     source_session = raw.get("source_session_id", raw.get("target_session_scope"))
     incumbent = raw.get("solver_public_id", raw.get("public_id"))
     incumbent_public = None if incumbent in (None, "", "None") else int(incumbent)
@@ -88,6 +93,7 @@ def _normalize(
         "mask_sha256": None if raw.get("mask_sha256") is None else str(raw["mask_sha256"]),
         "feature_sha256": feature_hash,
         "feature_available": feature is not None,
+        "feature_hash_basis": "source_float32_before_unit_normalization" if feature is not None else "supplied_source_artifact",
         "feature": feature,
         "official_raw_sam_id": _raw_id(raw),
         "adapter_external_id": None if raw.get("adapter_external_id") is None else int(raw["adapter_external_id"]),
