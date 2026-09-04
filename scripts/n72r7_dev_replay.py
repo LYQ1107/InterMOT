@@ -31,7 +31,9 @@ from sam3_intermot.association.effect_assignment import solve_effect_assignment 
 from sam3_intermot.reacquisition.target_candidate_pool import (  # noqa: E402
     MAIN_B0_CANDIDATE,
     TARGET_SESSION_CURRENT_RAW,
+    TARGET_SESSION_REQUERY,
     build_candidate_pool,
+    build_candidate_pool_with_requery,
     serializable_candidate,
 )
 from sam3_intermot.reacquisition.target_candidate_selector import (  # noqa: E402
@@ -306,6 +308,8 @@ def run_event(
     output_root: Path,
     selector: TargetCandidateSelector,
     protocol: Mapping[str, Any],
+    target_requery_path: Path | None = None,
+    target_authority_pair: tuple[int, int] | None = None,
 ) -> dict[str, Any]:
     event_id = str(event["event_id"])
     sequence = str(event["sequence"])
@@ -314,9 +318,15 @@ def run_event(
     c0_rows = read_jsonl(resolve(str(frozen_manifest["c0"]["path"])))
     c1_rows = read_jsonl(resolve(str(frozen_manifest["c1"]["path"])))
     target_stream_rows = read_jsonl(resolve(str(frozen_manifest["target_stream_frames"])))
+    requery_rows = (
+        read_jsonl(resolve(str(target_requery_path)))
+        if target_requery_path is not None
+        else []
+    )
     c0_by_frame = {int(row["frame"]): row for row in c0_rows}
     c1_by_frame = {int(row["frame"]): row for row in c1_rows}
     target_by_frame = {int(row["frame"]): row for row in target_stream_rows}
+    requery_by_frame = {int(row["frame"]): row for row in requery_rows}
     done = read_json(resolve(str(frozen_manifest["target_stream_done"])))
     anchor = read_json(resolve(str(done["human_anchor"])))
     anchor_feature = np.asarray(anchor["feature"], dtype=np.float32).reshape(-1)
@@ -379,13 +389,22 @@ def run_event(
         c1 = c1_by_frame[frame]
         raw_target_rows = list(target_by_frame[frame].get("candidate_rows", []))
         include_target = variant == "D2"
-        pool, pool_audit = build_candidate_pool(
-            c0.get("candidate_rows", []),
-            raw_target_rows if include_target else (),
-            sequence=sequence,
-            frame=frame,
-            include_target_session=include_target,
-        )
+        if target_requery_path is None:
+            pool, pool_audit = build_candidate_pool(
+                c0.get("candidate_rows", []),
+                raw_target_rows if include_target else (),
+                sequence=sequence,
+                frame=frame,
+                include_target_session=include_target,
+            )
+        else:
+            pool, pool_audit = build_candidate_pool_with_requery(
+                c0.get("candidate_rows", []),
+                raw_target_rows,
+                list(requery_by_frame[frame].get("candidate_rows", [])),
+                sequence=sequence,
+                frame=frame,
+            )
         for candidate in pool:
             candidate_source_counts[str(candidate["candidate_source"])] += 1
         c0_candidates = list(c0.get("candidate_rows", []))
@@ -397,6 +416,14 @@ def run_event(
         replay_pairs = list(c0_pairs)
         if target_public not in {public_id for _, public_id in replay_pairs}:
             target_pair = next((pair for pair in c1_pairs if pair[1] == target_public), None)
+            if target_pair is None and target_authority_pair is not None:
+                override_state, override_public = (int(target_authority_pair[0]), int(target_authority_pair[1]))
+                if override_public != target_public:
+                    raise RuntimeError(
+                        f"target authority override public mismatch: {event_id}:{frame}:"
+                        f"{override_public}!={target_public}"
+                    )
+                target_pair = (override_state, override_public)
             if target_pair is None:
                 raise RuntimeError(f"target public authority missing from C1: {event_id}:{frame}:{target_public}")
             if target_pair[0] in {state_id for state_id, _ in replay_pairs}:
@@ -606,6 +633,13 @@ def run_event(
         "n72r6_c0_source_sha256": str(frozen_manifest["c0"]["sha256"]),
         "n72r6_c1_source": str(resolve(str(frozen_manifest["c1"]["path"]))),
         "n72r6_target_stream_source": str(resolve(str(frozen_manifest["target_stream_frames"]))),
+        "n72r7_requery_source": None if target_requery_path is None else str(resolve(str(target_requery_path))),
+        "n72r7_requery_source_sha256": None if target_requery_path is None else sha256_file(resolve(str(target_requery_path))),
+        "target_authority_override": None if target_authority_pair is None else {
+            "association_state_id": int(target_authority_pair[0]),
+            "public_id": int(target_authority_pair[1]),
+            "source": "explicit_confirmation_event_authority",
+        },
         "protocol_sha256": protocol["protocol_sha256"],
         "target_selection_count": target_selections,
         "explicit_none_selection_count": none_selections,
@@ -618,7 +652,13 @@ def run_event(
         "distractor_feature_hashes": distractor_hashes,
         "candidate_source_counts": dict(sorted(candidate_source_counts.items())),
         "candidate_pool_complete": True,
-        "candidate_pool_source_order": [MAIN_B0_CANDIDATE] if variant == "D1" else [MAIN_B0_CANDIDATE, TARGET_SESSION_CURRENT_RAW],
+        "candidate_pool_source_order": (
+            [MAIN_B0_CANDIDATE]
+            if variant == "D1" and target_requery_path is None
+            else [MAIN_B0_CANDIDATE, TARGET_SESSION_CURRENT_RAW]
+            if target_requery_path is None
+            else [MAIN_B0_CANDIDATE, TARGET_SESSION_CURRENT_RAW, TARGET_SESSION_REQUERY]
+        ),
         "raw_switch_preserves_public_id": all(not item["public_id_changed"] for item in raw_switches),
         "event_frame_memory_read": False,
         "first_memory_visible_frame": event_frame + 1,

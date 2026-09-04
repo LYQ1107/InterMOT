@@ -327,7 +327,11 @@ def _load_runtime_scenarios() -> dict[str, dict[str, Any]]:
 def _validate_d1_d2_batch(root: Path, variant: str, scenarios: Mapping[str, Any]) -> dict[str, list[dict[str, Any]]]:
     batch_path = root / "batch_manifest.json"
     batch = read_json(batch_path)
-    if batch.get("status") != "PASS_N72R7_INDEPENDENT_DEV_BATCH":
+    accepted_batch_statuses = {
+        "PASS_N72R7_INDEPENDENT_DEV_BATCH",
+        "PASS_N72R7_LEARNED_DECODER_BATCH",
+    }
+    if batch.get("status") not in accepted_batch_statuses:
         raise RuntimeError(f"{variant} batch is not PASS: {batch.get('status')}")
     if int(batch.get("requested_event_count", -1)) != 32 or int(batch.get("completed_event_count", -1)) != 32 or int(batch.get("failed_event_count", -1)) != 0:
         raise RuntimeError(f"{variant} batch count is incomplete")

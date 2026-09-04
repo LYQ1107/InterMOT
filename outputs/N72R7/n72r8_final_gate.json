@@ -1,0 +1,42 @@
+{
+  "calibration_authorized": false,
+  "confirmation_route": {
+    "event_count": 2,
+    "independent_sequence_count": 2,
+    "result": "outputs/N72R7/confirmation/posthoc_attempt1/n72r7_confirmation_posthoc_results.json",
+    "status": "PASS_EXECUTION_FAIL_FUTURE_EFFECT"
+  },
+  "created_at_utc": "2026-09-04T22:14:30.098100+00:00",
+  "decoder_lora_authorized": false,
+  "development_route": {
+    "event_count": 32,
+    "independent_sequence_count": 18,
+    "mechanism": "CAUSAL_MULTI_QUERY_SAM3_TARGET_REQUERY",
+    "result": "outputs/N72R7/r5_requery_posthoc/full_attempt1/n72r7_r5_requery_posthoc_results.json",
+    "status": "PASS_EXECUTION_FAIL_FUTURE_EFFECT"
+  },
+  "historical_evidence_preserved": true,
+  "interaction_source": "simulated_from_gt",
+  "posthoc_gt_used": true,
+  "production_authorized": false,
+  "real_human_evidence": false,
+  "reason": "R5 increased candidate recall and had a positive H20 development comparison, but H50/H100 confidence intervals crossed zero and D2 added no future identity benefit over the current target-session baseline. The reserved two-sequence confirmation had zero treatment-induced assignment changes and zero identity-error reduction. No production or downstream learning authorization follows.",
+  "research_gate": "FAIL_FUTURE_EFFECT",
+  "runtime_future_gt_used": false,
+  "schema_version": "N72R8_FINAL_GATE_V1",
+  "selector_authorized": false,
+  "stage_12": "outputs/N72R7/stage_12_status.json",
+  "stage_13": "outputs/N72R7/stage_13_status.json",
+  "status": "N72R8_CONFIRMATION_COMPLETE_FAIL_FUTURE_EFFECT",
+  "strict_gate": {
+    "confirmation_assignment_change_count": 0,
+    "confirmation_h20_ci_lower": 0.0,
+    "confirmation_identity_error_reduction": 0.0,
+    "confirmation_protected_regression_count": 0,
+    "positive_ci_lower_required": "> 0",
+    "r5_h100_ci_lower": -0.0037118972979279987,
+    "r5_h20_ci_lower": 0.006932870370370368,
+    "r5_h50_ci_lower": -0.005587737813801641
+  },
+  "terminal_state": "EVIDENCE_BACKED_EXHAUSTION_OF_REGISTERED_N72R7_ROUTES"
+}

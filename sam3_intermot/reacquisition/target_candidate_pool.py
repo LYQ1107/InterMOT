@@ -18,6 +18,7 @@ import numpy as np
 
 MAIN_B0_CANDIDATE = "MAIN_B0_CANDIDATE"
 TARGET_SESSION_CURRENT_RAW = "TARGET_SESSION_CURRENT_RAW"
+TARGET_SESSION_REQUERY = "TARGET_SESSION_REQUERY"
 FEATURE_DIM = 512
 
 
@@ -114,10 +115,16 @@ def _normalize(
     }
     if not np.isfinite(normalized["confidence"]) or not np.isfinite(normalized["presence_score"]):
         raise ValueError(f"{source_kind}:{uid}: non-finite confidence/presence")
-    if source_kind == TARGET_SESSION_CURRENT_RAW:
+    if source_kind in {TARGET_SESSION_CURRENT_RAW, TARGET_SESSION_REQUERY}:
         if raw.get("public_id") is not None:
             raise ValueError(f"target source carries a public ID: {uid}")
-        if raw.get("candidate_kind") != "TARGET_CORRECTION_SESSION_CANDIDATE":
+        allowed_kinds = {
+            TARGET_SESSION_CURRENT_RAW: {"TARGET_CORRECTION_SESSION_CANDIDATE"},
+            TARGET_SESSION_REQUERY: {
+                "TARGET_CORRECTION_SESSION_REQUERY_CANDIDATE",
+            },
+        }[source_kind]
+        if raw.get("candidate_kind") not in allowed_kinds:
             raise ValueError(f"target source has wrong candidate kind: {uid}")
     return normalized
 
@@ -178,6 +185,82 @@ def build_candidate_pool(
     return candidates, audit
 
 
+def build_candidate_pool_with_requery(
+    main_candidates: Sequence[Mapping[str, Any]],
+    target_candidates: Sequence[Mapping[str, Any]] = (),
+    requery_candidates: Sequence[Mapping[str, Any]] = (),
+    *,
+    sequence: str,
+    frame: int,
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    """Build a pool with the frozen current target row plus re-query rows.
+
+    This is deliberately separate from :func:`build_candidate_pool`: the
+    original N72R7 D2 contract allows exactly one current target-session row,
+    while the R5 candidate-generator route needs several independently
+    prompted, session-local rows.  Neither source carries public-ID authority;
+    the exact solver remains the only assignment authority.
+    """
+
+    main = [
+        _normalize(
+            item,
+            source_kind=MAIN_B0_CANDIDATE,
+            sequence=str(sequence),
+            frame=int(frame),
+            candidate_index=index,
+        )
+        for index, item in enumerate(main_candidates)
+    ]
+    if len(target_candidates) > 1:
+        raise ValueError(
+            f"current target-session pool is expected to contain at most one row: {sequence}:{frame}"
+        )
+    current = [
+        _normalize(
+            item,
+            source_kind=TARGET_SESSION_CURRENT_RAW,
+            sequence=str(sequence),
+            frame=int(frame),
+            candidate_index=len(main) + index,
+        )
+        for index, item in enumerate(target_candidates)
+    ]
+    requery = [
+        _normalize(
+            item,
+            source_kind=TARGET_SESSION_REQUERY,
+            sequence=str(sequence),
+            frame=int(frame),
+            candidate_index=len(main) + len(current) + index,
+        )
+        for index, item in enumerate(requery_candidates)
+    ]
+    candidates = main + current + requery
+    uids = [str(item["candidate_uid"]) for item in candidates]
+    if len(uids) != len(set(uids)):
+        raise ValueError(f"candidate UID collision at {sequence}:{frame}")
+    audit = {
+        "schema_version": "N72R7_TARGET_CANDIDATE_POOL_WITH_REQUERY_V1",
+        "sequence": str(sequence),
+        "frame": int(frame),
+        "candidate_count": len(candidates),
+        "main_b0_candidate_count": len(main),
+        "target_session_candidate_count": len(current),
+        "target_session_requery_candidate_count": len(requery),
+        "candidate_sources": [item["candidate_source"] for item in candidates],
+        "candidate_uids": uids,
+        "public_id_inference": False,
+        "all_candidate_public_ids_null_before_solver": all(
+            item["public_id"] is None for item in candidates
+        ),
+        "runtime_future_gt_used": False,
+        "runtime_gt_read": False,
+        "posthoc_gt_used": False,
+    }
+    return candidates, audit
+
+
 def serializable_candidate(candidate: Mapping[str, Any], *, include_feature: bool = False) -> dict[str, Any]:
     """Return an audit row with no numpy objects and no candidate-owned public ID."""
 
@@ -198,6 +281,8 @@ __all__ = [
     "FEATURE_DIM",
     "MAIN_B0_CANDIDATE",
     "TARGET_SESSION_CURRENT_RAW",
+    "TARGET_SESSION_REQUERY",
     "build_candidate_pool",
+    "build_candidate_pool_with_requery",
     "serializable_candidate",
 ]

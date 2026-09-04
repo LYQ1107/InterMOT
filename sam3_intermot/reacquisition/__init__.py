@@ -11,6 +11,10 @@ from .target_candidate_selector import (
     TargetCandidateSelector,
     TargetSelectionContext,
 )
+from .target_id_features import (
+    candidate_feature_vector,
+    context_feature_vector,
+)
 
 __all__ = [
     "MAIN_B0_CANDIDATE",
@@ -20,4 +24,6 @@ __all__ = [
     "SelectorConfig",
     "TargetCandidateSelector",
     "TargetSelectionContext",
+    "candidate_feature_vector",
+    "context_feature_vector",
 ]
