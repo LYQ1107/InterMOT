@@ -639,7 +639,10 @@ def posthoc_score(runtime: Mapping[str, Any]) -> dict[str, Any]:
             raise RuntimeError(f"selected event missing from frozen policy: {event_id}")
         scenario["target_dataset_gt_id"] = int(policy_event["dataset_gt_id"])
         scenario["action_type"] = str(policy_event["action_type"])
-        scenario["rows"] = {variant: rows[variant][event_id] for variant in EVENT_VARIANTS}
+        scenario["rows"] = {
+            variant: {int(row["frame"]): row for row in rows[variant][event_id]}
+            for variant in EVENT_VARIANTS
+        }
         sequence = str(scenario["sequence"])
         if sequence not in gt_by_sequence:
             gt_by_sequence[sequence] = _load_gt(sequence)
