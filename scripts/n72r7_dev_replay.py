@@ -186,23 +186,81 @@ def write_development_protocol() -> dict[str, Any]:
     return body
 
 
+def _explicit_authority_pairs(row: Mapping[str, Any], *, label: str) -> list[tuple[int, int]]:
+    """Extract the state→public authority pairs without using row indices."""
+
+    state_axis = [int(value) for value in row.get("association_state_axis", [])]
+    if len(state_axis) != len(set(state_axis)):
+        raise RuntimeError(f"{label} association state axis contains duplicates")
+    by_state: dict[int, int] = {}
+    for item in row.get("identity_rows", []):
+        state_id = item.get("association_state_id")
+        public_id = item.get("public_id")
+        if state_id is None or public_id is None:
+            continue
+        state_id = int(state_id)
+        public_id = int(public_id)
+        if state_id in by_state and by_state[state_id] != public_id:
+            raise RuntimeError(f"{label} has conflicting public authority for state {state_id}")
+        by_state[state_id] = public_id
+    # Some frozen rows carry the same explicit authority on candidate rows;
+    # use it only as a provenance fallback, never as a row-index inference.
+    for item in row.get("candidate_rows", []):
+        state_id = item.get("solver_association_state_id")
+        public_id = item.get("solver_public_id")
+        if state_id is None or public_id is None:
+            continue
+        state_id = int(state_id)
+        public_id = int(public_id)
+        if state_id in by_state and by_state[state_id] != public_id:
+            raise RuntimeError(f"{label} candidate/identity authority conflict for state {state_id}")
+        by_state[state_id] = public_id
+    missing = [state_id for state_id in state_axis if state_id not in by_state]
+    if missing:
+        raise RuntimeError(f"{label} lacks explicit state→public authority for {missing}")
+    pairs = [(state_id, by_state[state_id]) for state_id in state_axis]
+    public_ids = [public_id for _, public_id in pairs]
+    if len(public_ids) != len(set(public_ids)):
+        raise RuntimeError(f"{label} explicit public authority axis contains duplicates")
+    return pairs
+
+
+def _map_matrix_row_to_public_axis(
+    row_values: Sequence[float],
+    source_pairs: Sequence[tuple[int, int]],
+    target_pairs: Sequence[tuple[int, int]],
+) -> np.ndarray:
+    """Map a frozen score row through explicit public authority bindings."""
+
+    source_public_to_column = {public_id: index for index, (_, public_id) in enumerate(source_pairs)}
+    result = np.zeros(len(target_pairs), dtype=np.float64)
+    values = np.asarray(row_values, dtype=np.float64).reshape(-1)
+    if values.size != len(source_pairs):
+        raise RuntimeError(
+            f"score row/authority mismatch: values={values.size} source_pairs={len(source_pairs)}"
+        )
+    for index, (_, public_id) in enumerate(target_pairs):
+        source_index = source_public_to_column.get(public_id)
+        if source_index is not None:
+            result[index] = float(values[source_index])
+    return result
+
+
 def _target_base_vector(
     target_uid: str,
     c1_row: Mapping[str, Any],
-    c0_public_axis: Sequence[int],
+    replay_pairs: Sequence[tuple[int, int]],
+    c1_pairs: Sequence[tuple[int, int]],
 ) -> tuple[np.ndarray, str]:
     c1_candidates = list(c1_row.get("candidate_rows", []))
     matches = [index for index, item in enumerate(c1_candidates) if str(item.get("candidate_uid")) == target_uid]
     c1_matrix = np.asarray(c1_row.get("base_score_matrix", []), dtype=np.float64)
-    c1_public = [int(value) for value in c1_row.get("public_id_axis", [])]
-    if len(matches) == 1 and c1_matrix.ndim == 2 and c1_matrix.shape[0] == len(c1_candidates) and c1_matrix.shape[1] == len(c1_public):
-        vector = np.zeros(len(c0_public_axis), dtype=np.float64)
-        row = c1_matrix[matches[0]]
-        for index, public_id in enumerate(c0_public_axis):
-            if int(public_id) in c1_public:
-                vector[index] = float(row[c1_public.index(int(public_id))])
-        return vector, "N72R6_C1_TARGET_ROW_BASE_SCORE"
-    return np.zeros(len(c0_public_axis), dtype=np.float64), "NEUTRAL_ZERO_NO_ACCEPTED_C1_TARGET_ROW"
+    if len(matches) == 1 and c1_matrix.ndim == 2 and c1_matrix.shape[0] == len(c1_candidates) and c1_matrix.shape[1] == len(c1_pairs):
+        return (
+            _map_matrix_row_to_public_axis(c1_matrix[matches[0]], c1_pairs, replay_pairs),
+            "N72R6_C1_TARGET_ROW_BASE_SCORE",
+        )
+    return np.zeros(len(replay_pairs), dtype=np.float64), "NEUTRAL_ZERO_NO_ACCEPTED_C1_TARGET_ROW"
 
 
 def _solver_rows(
@@ -332,20 +390,36 @@ def run_event(
             candidate_source_counts[str(candidate["candidate_source"])] += 1
         c0_candidates = list(c0.get("candidate_rows", []))
         c0_matrix = np.asarray(c0.get("base_score_matrix", []), dtype=np.float64)
-        state_axis = [int(value) for value in c0.get("association_state_axis", [])]
-        public_axis = [int(value) for value in c0.get("public_id_axis", [])]
-        if c0_matrix.shape != (len(c0_candidates), len(state_axis)) or len(state_axis) != len(public_axis):
+        c0_pairs = _explicit_authority_pairs(c0, label=f"B0:{event_id}:{frame}")
+        c1_pairs = _explicit_authority_pairs(c1, label=f"C1:{event_id}:{frame}")
+        if c0_matrix.shape != (len(c0_candidates), len(c0_pairs)):
             raise RuntimeError(f"B0 matrix/axis mismatch: {event_id}:{frame}")
+        replay_pairs = list(c0_pairs)
+        if target_public not in {public_id for _, public_id in replay_pairs}:
+            target_pair = next((pair for pair in c1_pairs if pair[1] == target_public), None)
+            if target_pair is None:
+                raise RuntimeError(f"target public authority missing from C1: {event_id}:{frame}:{target_public}")
+            if target_pair[0] in {state_id for state_id, _ in replay_pairs}:
+                raise RuntimeError(f"target state authority collides with B0 state: {event_id}:{frame}:{target_pair}")
+            replay_pairs.append(target_pair)
+        state_axis = [state_id for state_id, _ in replay_pairs]
+        public_axis = [public_id for _, public_id in replay_pairs]
         base_vectors: dict[str, np.ndarray] = {}
-        for index, candidate in enumerate(pool[: len(c0_candidates)]):
-            base_vectors[str(candidate["candidate_uid"])] = c0_matrix[index].copy()
+        for index, candidate in enumerate(c0_candidates):
+            base_vectors[str(candidate["candidate_uid"])] = _map_matrix_row_to_public_axis(
+                c0_matrix[index], c0_pairs, replay_pairs
+            )
         for candidate in pool[len(c0_candidates):]:
-            vector, source = _target_base_vector(str(candidate["candidate_uid"]), c1, public_axis)
+            vector, source = _target_base_vector(
+                str(candidate["candidate_uid"]), c1, replay_pairs, c1_pairs
+            )
             base_vectors[str(candidate["candidate_uid"])] = vector
             candidate["base_score_source"] = source
         base_target_scores = {
             str(candidate["candidate_uid"]): (
-                None if target_public not in public_axis else float(base_vectors[str(candidate["candidate_uid"])] [public_axis.index(target_public)])
+                None
+                if target_public not in public_axis
+                else float(base_vectors[str(candidate["candidate_uid"])] [public_axis.index(target_public)])
             )
             for candidate in pool
         }
@@ -360,7 +434,11 @@ def run_event(
         selected_uid = selection["selected_candidate_uid"]
         target_selections += int(selected_uid is not None)
         none_selections += int(selected_uid is None)
-        fused = np.stack([base_vectors[str(candidate["candidate_uid"])] for candidate in pool], axis=0) if pool else np.zeros((0, len(state_axis)))
+        fused = (
+            np.stack([base_vectors[str(candidate["candidate_uid"])] for candidate in pool], axis=0)
+            if pool
+            else np.zeros((0, len(state_axis)))
+        )
         target_col = None if target_public not in public_axis else public_axis.index(target_public)
         injected_delta = 0.0
         if selected_uid is not None and target_col is not None:
@@ -476,6 +554,12 @@ def run_event(
                 "base_score_matrix": np.asarray([base_vectors[str(item["candidate_uid"])] for item in pool], dtype=np.float64).tolist(),
                 "fused_score_matrix": fused.astype(float).tolist(),
                 "score_matrix_orientation": "candidate_x_association_state",
+                "association_state_axis": state_axis,
+                "public_id_axis": public_axis,
+                "explicit_authority_pairs": [
+                    {"association_state_id": state_id, "public_id": public_id}
+                    for state_id, public_id in replay_pairs
+                ],
                 "target_public_column_index": target_col,
                 "target_public_evidence_injected_candidate_uid": selected_uid if injected_delta > 0.0 else None,
                 "target_public_evidence_delta": float(injected_delta),
