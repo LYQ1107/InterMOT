@@ -17,6 +17,11 @@ import numpy as np
 from sam3_intermot.association.appearance_memory import AppearanceMemory
 from sam3_intermot.identity.lineage import IdentityLineageRegistry
 from sam3_intermot.identity.public_authority import PublicAuthorityBridge
+from sam3_intermot.identity.correction_epoch import (
+    CorrectionEpoch,
+    apply_epoch_to_persistent_record,
+    make_correction_epoch,
+)
 from sam3_intermot.tracking.track import TrackState
 from sam3_intermot.tracking.track_manager import TrackManager
 
@@ -64,6 +69,19 @@ class PersistentIdentityRecord:
     motion_state_ref: Any = field(default_factory=dict)
     last_box: Optional[list[float]] = None
     event_history: list[dict[str, Any]] = field(default_factory=list)
+    # Native IDs are session-scoped; these fields are provenance, never
+    # replacements for the immutable public/lineage IDs.
+    last_native_scope: Optional[str] = None
+    correction_epoch_id: Optional[str] = None
+    human_anchor_feature: Optional[list[float]] = None
+    human_anchor_sha256: Optional[str] = None
+    target_session_scope: Optional[str] = None
+    previous_native_tid: Optional[int] = None
+    previous_native_scope: Optional[str] = None
+    native_constraints_cleared: bool = False
+    motion_reanchored: bool = False
+    machine_prototype_frozen: bool = False
+    correction_epoch_active: bool = False
 
     def __post_init__(self) -> None:
         if self.status not in PERSISTENT_STATUSES:
@@ -102,6 +120,17 @@ class PersistentIdentityRecord:
                 "motion_state_ref": self.motion_state_ref,
                 "last_box": self.last_box,
                 "event_history": self.event_history,
+                "last_native_scope": self.last_native_scope,
+                "correction_epoch_id": self.correction_epoch_id,
+                "human_anchor_feature": self.human_anchor_feature,
+                "human_anchor_sha256": self.human_anchor_sha256,
+                "target_session_scope": self.target_session_scope,
+                "previous_native_tid": self.previous_native_tid,
+                "previous_native_scope": self.previous_native_scope,
+                "native_constraints_cleared": self.native_constraints_cleared,
+                "motion_reanchored": self.motion_reanchored,
+                "machine_prototype_frozen": self.machine_prototype_frozen,
+                "correction_epoch_active": self.correction_epoch_active,
             }
         )
 
@@ -129,6 +158,23 @@ class PersistentIdentityRecord:
             motion_state_ref=deepcopy(value.get("motion_state_ref") or {}),
             last_box=None if value.get("last_box") is None else [float(x) for x in value["last_box"]],
             event_history=deepcopy(value.get("event_history") or []),
+            last_native_scope=value.get("last_native_scope"),
+            correction_epoch_id=value.get("correction_epoch_id"),
+            human_anchor_feature=(
+                None
+                if value.get("human_anchor_feature") is None
+                else [float(x) for x in value["human_anchor_feature"]]
+            ),
+            human_anchor_sha256=value.get("human_anchor_sha256"),
+            target_session_scope=value.get("target_session_scope"),
+            previous_native_tid=(
+                None if value.get("previous_native_tid") is None else int(value["previous_native_tid"])
+            ),
+            previous_native_scope=value.get("previous_native_scope"),
+            native_constraints_cleared=bool(value.get("native_constraints_cleared", False)),
+            motion_reanchored=bool(value.get("motion_reanchored", False)),
+            machine_prototype_frozen=bool(value.get("machine_prototype_frozen", False)),
+            correction_epoch_active=bool(value.get("correction_epoch_active", False)),
         )
 
 
@@ -242,6 +288,7 @@ class SequencePersistentIdentityRuntime:
         raw_sam_id: Optional[int] = None,
         appearance_state: Optional[dict[str, Any]] = None,
         motion_state_ref: Any = None,
+        native_scope: Optional[str] = None,
     ) -> PersistentIdentityRecord:
         """Allocate a public identity only after an outer birth decision."""
 
@@ -287,6 +334,7 @@ class SequencePersistentIdentityRuntime:
             appearance_state=deepcopy(appearance_state or {}),
             motion_state_ref=deepcopy(motion_state_ref or {}),
             last_box=self._box(observation),
+            last_native_scope=None if native_scope in (None, "") else str(native_scope),
         )
         self.identities[state_id] = record
         self._public_to_state[assigned_public] = state_id
@@ -366,6 +414,7 @@ class SequencePersistentIdentityRuntime:
         session_id: Optional[str] = None,
         adapter_external_id: Optional[int] = None,
         raw_sam_id: Optional[int] = None,
+        native_scope: Optional[str] = None,
     ) -> PersistentIdentityRecord:
         record = self._record(identity)
         if record.status == "TERMINATED":
@@ -398,10 +447,45 @@ class SequencePersistentIdentityRuntime:
         record.current_session_id = session
         record.current_adapter_external_id = adapter
         record.current_raw_sam_id = raw
+        if native_scope not in (None, ""):
+            record.last_native_scope = str(native_scope)
         record.last_box = self._box(observation)
         self.active_session_id = session
         self._log(record, int(frame_idx), "BIND_CANDIDATE", str(candidate_uid))
         return record
+
+    def begin_correction_epoch(
+        self,
+        identity: int | PersistentIdentityRecord,
+        *,
+        epoch_id: str,
+        frame_idx: int,
+        human_anchor: Any,
+        authoritative_box: Any,
+        target_session_scope: str,
+        target_native_tid: Optional[int] = None,
+    ) -> CorrectionEpoch:
+        """Start a target-scoped correction without changing public identity."""
+
+        record = self._record(identity)
+        previous_tid = record.current_adapter_external_id
+        previous_scope = record.last_native_scope
+        epoch = make_correction_epoch(
+            epoch_id=str(epoch_id),
+            public_id=int(record.public_id),
+            start_frame=int(frame_idx),
+            human_anchor=human_anchor,
+            target_session_scope=str(target_session_scope),
+            previous_native_tid=previous_tid,
+            previous_native_scope=previous_scope,
+        )
+        apply_epoch_to_persistent_record(record, epoch, human_anchor, authoritative_box)
+        record.last_seen_frame = int(frame_idx)
+        record.status = "ACTIVE"
+        if target_native_tid is not None:
+            record.current_adapter_external_id = int(target_native_tid)
+        self._log(record, int(frame_idx), "CORRECTION_EPOCH_READY", None, reason=epoch.epoch_id)
+        return epoch
 
     def clear_current_session_bindings(
         self,
@@ -466,6 +550,7 @@ class SequencePersistentIdentityRuntime:
         session_id: Optional[str] = None,
         adapter_external_id: Optional[int] = None,
         raw_sam_id: Optional[int] = None,
+        native_scope: Optional[str] = None,
     ) -> PersistentIdentityRecord:
         return self.bind_candidate(
             identity,
@@ -475,6 +560,7 @@ class SequencePersistentIdentityRuntime:
             session_id=session_id,
             adapter_external_id=adapter_external_id,
             raw_sam_id=raw_sam_id,
+            native_scope=native_scope,
         )
 
     def terminate(

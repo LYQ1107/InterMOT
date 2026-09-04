@@ -91,5 +91,27 @@ class IdentityLineageRegistry:
         )
 
     def restore(self, snapshot: dict) -> None:
-        self._lineages = deepcopy(snapshot["lineages"])
-        self._next_lineage_id = snapshot["next_lineage_id"]
+        """Restore native Python snapshots and JSON-safe prestate artifacts."""
+
+        def unwrap(value):
+            if isinstance(value, dict) and "attributes" in value and "__class__" in value:
+                return value["attributes"]
+            return value
+
+        restored: Dict[int, IdentityLineage] = {}
+        for key, value in snapshot["lineages"].items():
+            if isinstance(value, IdentityLineage):
+                lineage = deepcopy(value)
+            else:
+                attrs = unwrap(value)
+                if not isinstance(attrs, dict):
+                    raise TypeError(f"unsupported identity lineage snapshot: {type(value)!r}")
+                lineage = IdentityLineage(
+                    lineage_id=int(attrs["lineage_id"]),
+                    created_frame=int(attrs["created_frame"]),
+                    mot_track_ids=[int(item) for item in attrs.get("mot_track_ids", [])],
+                    closed_frame=(None if attrs.get("closed_frame") is None else int(attrs["closed_frame"])),
+                )
+            restored[int(key)] = lineage
+        self._lineages = restored
+        self._next_lineage_id = int(snapshot["next_lineage_id"])

@@ -16,6 +16,7 @@ from sam3_intermot.association.online_associator import (
     score_matrix_pairwise,
     score_matrix_set,
 )
+from sam3_intermot.association.native_scope import native_scope_of
 
 
 @dataclass
@@ -155,7 +156,14 @@ class StateManager:
         feature = np.asarray(initial_observation.get("feat", []), dtype=np.float32)
         box = np.asarray(initial_observation.get("box", [0, 0, 0, 0]), dtype=float)
         native = int(initial_observation.get("native_tid", -1))
-        identity_state = IdentityState(state, feature, box, int(frame), native)
+        identity_state = IdentityState(
+            state,
+            feature,
+            box,
+            int(frame),
+            native,
+            native_scope=initial_observation.get("native_scope", initial_observation.get("native_tid_scope")),
+        )
         self.states[state] = identity_state
         self.external_public_ids[state] = public
         self.next_pid = max(self.next_pid, state + 1)
@@ -212,6 +220,7 @@ class StateManager:
                     "segment_local_id": obs.get("segment_local_id"),
                     "sequence_global_id": obs.get("sequence_global_id"),
                     "native_tid": int(obs.get("native_tid", -1)),
+                    "native_scope": native_scope_of(obs),
                     "native_age": float(obs.get("native_age", 0.0)),
                     "confidence": float(obs.get("conf", 1.0)),
                     "box": np.asarray(obs.get("box", [0, 0, 0, 0]), dtype=float).reshape(-1).tolist(),
@@ -344,7 +353,14 @@ class StateManager:
     ) -> IdentityState:
         st = self.states.get(pid)
         if st is None:
-            st = IdentityState(pid, obs["feat"], obs["box"], frame, obs["native_tid"])
+            st = IdentityState(
+                pid,
+                obs["feat"],
+                obs["box"],
+                frame,
+                obs["native_tid"],
+                native_scope=native_scope_of(obs),
+            )
             self.states[pid] = st
         return st
 
@@ -518,6 +534,7 @@ class StateManager:
                 obs["native_tid"],
                 self.cfg.ema,
                 update_prototype=not freeze,
+                native_scope=native_scope_of(obs),
             )
             if self.cfg.use_appearance_memory:
                 self.update_machine_appearance(st.pid, frame, obs["feat"], float(obs.get("conf", 1.0)))

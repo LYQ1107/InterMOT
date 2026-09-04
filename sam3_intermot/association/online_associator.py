@@ -9,6 +9,7 @@ import torch.nn.functional as F
 
 from sam3_intermot.n9.models import MLP
 from sam3_intermot.association.appearance_memory import AppearanceMemory
+from sam3_intermot.association.native_scope import native_same, native_scope_of
 
 MOTION_DIM = 12
 
@@ -45,8 +46,8 @@ def motion_vec(state, obs, frame: int, n_obs: int) -> np.ndarray:
     b = np.asarray(obs["box"], dtype=float)
     gap = max(0, frame - state.last_seen_frame)
     dist = center_dist(state.last_box, b) if state.last_box is not None else 1000.0
-    native_same = 1.0 if obs["native_tid"] == state.last_native_tid else 0.0
-    native_pos = 1.0 if state.has_positive(obs["native_tid"], frame) else 0.0
+    native_same_value = 1.0 if native_same(state, obs) else 0.0
+    native_pos = 1.0 if state.has_positive(obs["native_tid"], frame, native_scope_of(obs)) else 0.0
     return np.asarray(
         [
             min(1.0, gap / 200.0),
@@ -57,7 +58,7 @@ def motion_vec(state, obs, frame: int, n_obs: int) -> np.ndarray:
             min(1.0, (b[2] - b[0]) / 2000.0),
             min(1.0, (b[3] - b[1]) / 1000.0),
             min(1.0, state.last_seen_frame / 2000.0),
-            native_same,
+            native_same_value,
             min(1.0, obs["native_age"] / 2000.0),
             float(obs["has_feat"]),
             native_pos,
@@ -245,16 +246,16 @@ def score_matrix_pairwise(
     # strong short-term cue (a cue only; public identity is never native tid)
     for i, o in enumerate(obs_list):
         for j, s in enumerate(states):
-            if o["native_tid"] == s.last_native_tid:
+            if native_same(s, o):
                 scores[i, j] += native_bonus
     # Preserve the complete legacy score as the audit baseline.  The final
     # hard-negative pass below is repeated after the additive appearance term
     # so the new evidence can never override a native constraint.
     for i, o in enumerate(obs_list):
         for j, s in enumerate(states):
-            if s.has_negative(o["native_tid"], frame):
+            if s.has_negative(o["native_tid"], frame, native_scope_of(o)):
                 scores[i, j] = -1e9
-            elif s.has_positive(o["native_tid"], frame):
+            elif s.has_positive(o["native_tid"], frame, native_scope_of(o)):
                 scores[i, j] += positive_bonus
     base_scores = scores.copy()
     appearance_memory_scores = np.zeros_like(scores, dtype=np.float32)
@@ -278,7 +279,7 @@ def score_matrix_pairwise(
     # were already included in ``base_scores`` and remain additive.
     for i, o in enumerate(obs_list):
         for j, s in enumerate(states):
-            if s.has_negative(o["native_tid"], frame):
+            if s.has_negative(o["native_tid"], frame, native_scope_of(o)):
                 scores[i, j] = -1e9
     if score_audit is not None:
         score_audit.clear()
@@ -390,11 +391,11 @@ def score_matrix_set(
         )[0].cpu().numpy()
     for i, o in enumerate(obs_list):
         for j, s in enumerate(states):
-            if s.has_negative(o["native_tid"], frame):
+            if s.has_negative(o["native_tid"], frame, native_scope_of(o)):
                 logits[i, j] = -1e9
-            elif s.has_positive(o["native_tid"], frame):
+            elif s.has_positive(o["native_tid"], frame, native_scope_of(o)):
                 logits[i, j] += positive_bonus
-            elif o["native_tid"] == s.last_native_tid:
+            elif native_same(s, o):
                 logits[i, j] += native_bonus
     base_scores = logits.copy()
     appearance_memory_scores = np.zeros_like(logits, dtype=np.float32)
@@ -418,7 +419,7 @@ def score_matrix_set(
     # appearance evidence from overriding the existing native identity rules.
     for i, o in enumerate(obs_list):
         for j, s in enumerate(states):
-            if s.has_negative(o["native_tid"], frame):
+            if s.has_negative(o["native_tid"], frame, native_scope_of(o)):
                 logits[i, j] = -1e9
     if score_audit is not None:
         score_audit.clear()

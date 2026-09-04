@@ -23,6 +23,7 @@ class IdentityState:
         box: np.ndarray,
         frame: int,
         native_tid: int = -1,
+        native_scope: Optional[str] = None,
     ) -> None:
         self.pid = int(pid)
         v = np.asarray(feat, dtype=np.float32)
@@ -36,10 +37,13 @@ class IdentityState:
         self.last_seen_frame = int(frame)
         self.birth_frame = int(frame)
         self.last_native_tid = int(native_tid)
+        self.last_native_scope = None if native_scope in (None, "") else str(native_scope)
         self.positive_native_tids: Set[int] = set()
         self.negative_native_tids: Set[int] = set()
         self.positive_expiry: Dict[int, Optional[int]] = {}
         self.negative_expiry: Dict[int, Optional[int]] = {}
+        self.positive_native_scopes: Dict[int, Optional[str]] = {}
+        self.negative_native_scopes: Dict[int, Optional[str]] = {}
         self.confidence = 1.0
         self.lost_age = 0
         self.matched_count = 1
@@ -104,6 +108,7 @@ class IdentityState:
         native_tid: int,
         ema: float,
         update_prototype: bool = True,
+        native_scope: Optional[str] = None,
     ) -> None:
         v = np.asarray(feat, dtype=np.float32)
         n = float(np.linalg.norm(v))
@@ -123,6 +128,7 @@ class IdentityState:
         self.last_box = np.asarray(box, dtype=float).copy()
         self.last_seen_frame = int(frame)
         self.last_native_tid = int(native_tid)
+        self.last_native_scope = None if native_scope in (None, "") else str(native_scope)
         self.state = self.ACTIVE
         self.lost_age = 0
         self.confidence = min(1.0, self.confidence + 0.05)
@@ -145,27 +151,61 @@ class IdentityState:
             self.authority = max(self.authority, float(authority))
             self.anchor_frame = frame if frame is not None else self.anchor_frame
 
-    def has_positive(self, native_tid: int, frame: int) -> bool:
+    @staticmethod
+    def _scope_compatible(expected: Optional[str], observed: Optional[str]) -> bool:
+        return expected is None or observed in (None, "") or str(expected) == str(observed)
+
+    def has_positive(self, native_tid: int, frame: int, native_scope: Optional[str] = None) -> bool:
         if int(native_tid) not in self.positive_native_tids:
+            return False
+        if not self._scope_compatible(
+            self.positive_native_scopes.get(int(native_tid)), native_scope
+        ):
             return False
         exp = self.positive_expiry.get(int(native_tid))
         return exp is None or frame <= exp
 
-    def has_negative(self, native_tid: int, frame: int) -> bool:
+    def has_negative(self, native_tid: int, frame: int, native_scope: Optional[str] = None) -> bool:
         if int(native_tid) not in self.negative_native_tids:
+            return False
+        if not self._scope_compatible(
+            self.negative_native_scopes.get(int(native_tid)), native_scope
+        ):
             return False
         exp = self.negative_expiry.get(int(native_tid))
         return exp is None or frame <= exp
 
-    def add_positive(self, native_tid: int, expiry: Optional[int] = None) -> None:
+    def add_positive(
+        self,
+        native_tid: int,
+        expiry: Optional[int] = None,
+        native_scope: Optional[str] = None,
+    ) -> None:
         tid = int(native_tid)
         self.positive_native_tids.add(tid)
         self.positive_expiry[tid] = expiry
+        self.positive_native_scopes[tid] = None if native_scope in (None, "") else str(native_scope)
 
-    def add_negative(self, native_tid: int, expiry: Optional[int] = None) -> None:
+    def add_negative(
+        self,
+        native_tid: int,
+        expiry: Optional[int] = None,
+        native_scope: Optional[str] = None,
+    ) -> None:
         tid = int(native_tid)
         self.negative_native_tids.add(tid)
         self.negative_expiry[tid] = expiry
+        self.negative_native_scopes[tid] = None if native_scope in (None, "") else str(native_scope)
+
+    def clear_native_constraints(self) -> None:
+        """Clear session-local positive/negative native constraints."""
+
+        self.positive_native_tids.clear()
+        self.negative_native_tids.clear()
+        self.positive_expiry.clear()
+        self.negative_expiry.clear()
+        self.positive_native_scopes.clear()
+        self.negative_native_scopes.clear()
 
     def prune_constraints(self, frame: int) -> None:
         for tid in list(self.positive_native_tids):
@@ -173,11 +213,13 @@ class IdentityState:
             if exp is not None and frame > exp:
                 self.positive_native_tids.remove(tid)
                 self.positive_expiry.pop(tid, None)
+                self.positive_native_scopes.pop(tid, None)
         for tid in list(self.negative_native_tids):
             exp = self.negative_expiry.get(tid)
             if exp is not None and frame > exp:
                 self.negative_native_tids.remove(tid)
                 self.negative_expiry.pop(tid, None)
+                self.negative_native_scopes.pop(tid, None)
 
     def mark_lost(self, frame: int) -> None:
         self.state = self.LOST
@@ -204,8 +246,11 @@ class IdentityState:
             "birth_frame": self.birth_frame,
             "lost_age": self.lost_age,
             "last_native_tid": self.last_native_tid,
+            "last_native_scope": self.last_native_scope,
             "pos_native": sorted(self.positive_native_tids),
             "neg_native": sorted(self.negative_native_tids),
+            "pos_native_scopes": dict(self.positive_native_scopes),
+            "neg_native_scopes": dict(self.negative_native_scopes),
             "anchor_frame": self.anchor_frame,
             "confidence": self.confidence,
             "matched_count": self.matched_count,

@@ -12,6 +12,7 @@ behaviour; no third-party source file is modified.
 """
 
 import os
+import hashlib
 import time
 import uuid
 from typing import Callable, Dict, List, Optional, Sequence, Tuple
@@ -83,6 +84,7 @@ class Sam3Backend(PromptVideoTrackerBackend):
         self._text_prompt: Optional[str] = None
         self._prompt_fallback_log: List[dict] = []
         self._resume_repair_log: List[dict] = []
+        self._last_recovery_failure: Optional[dict] = None
 
     # ------------------------------------------------------------------
     def _require_checkpoint(self) -> None:
@@ -207,6 +209,7 @@ class Sam3Backend(PromptVideoTrackerBackend):
         self._text_prompt = None
         self._prompt_fallback_log = []
         self._resume_repair_log = []
+        self._last_recovery_failure = None
         self._last_official_prompt_outputs: Dict[int, List[PromptObjectObservation]] = {}
         return self._session_id
 
@@ -765,6 +768,7 @@ class Sam3Backend(PromptVideoTrackerBackend):
         self._sam_to_ext.clear()
         self._last_prompt_frame = None
         self._resume_repair_log = []
+        self._last_recovery_failure = None
         self._last_official_prompt_outputs = {}
 
     def get_frame_outputs(self, frame_idx: int) -> List[PromptObjectObservation]:
@@ -783,6 +787,232 @@ class Sam3Backend(PromptVideoTrackerBackend):
             observation.copy()
             for observation in self._last_official_prompt_outputs.get(int(frame_idx), [])
         ]
+
+    def retain_official_raw_object(
+        self,
+        frame_idx: int,
+        keep_raw_sam_id: int,
+    ) -> dict:
+        """Retain one official raw object inside an isolated target session.
+
+        A pinned multiplex box prompt can materialize several detector
+        objects even when the request contains one box.  This adapter-level
+        recovery removes every other raw object through the official model
+        ``remove_object`` API, compacts only the documented positional
+        metadata, and installs a target-only partial-propagation action.  It
+        never touches another backend/session or assigns a public identity.
+        """
+
+        self._require_session()
+        predictor = self._predictor
+        if predictor is None or self._session_id is None:
+            raise RuntimeError("no active official session")
+        entry = predictor._all_inference_states.get(self._session_id)
+        state = entry.get("state") if isinstance(entry, dict) else None
+        if not isinstance(state, dict):
+            raise RuntimeError("official inference state is unavailable")
+        metadata = state.get("tracker_metadata")
+        if not isinstance(metadata, dict):
+            raise RuntimeError("official tracker metadata is unavailable")
+        before_ids = [int(value) for value in metadata.get("obj_ids_all_gpu", [])]
+        keep = int(keep_raw_sam_id)
+        if keep not in before_ids:
+            raise RuntimeError(
+                f"requested official raw object is not active: keep={keep}, active={before_ids}"
+            )
+        model = getattr(predictor, "model", None)
+        remove_object = getattr(model, "remove_object", None)
+        add_history = getattr(model, "add_action_history", None)
+        if not callable(remove_object) or not callable(add_history):
+            raise NotSupportedError(
+                "official target isolation requires model.remove_object and model.add_action_history"
+            )
+
+        for raw_id in before_ids:
+            if raw_id != keep:
+                remove_object(state, int(raw_id), frame_idx=None, is_user_action=False)
+
+        after_ids = [int(value) for value in metadata.get("obj_ids_all_gpu", [])]
+        self._compact_official_position_metadata(
+            state,
+            metadata_ids_before=before_ids,
+            metadata_ids_after=after_ids,
+        )
+        if after_ids != [keep]:
+            raise RuntimeError(
+                f"official target isolation left unexpected raw IDs: before={before_ids}, after={after_ids}"
+            )
+
+        # The detector response and adapter cache may still contain the
+        # removed objects.  Keep only the immutable raw target observation;
+        # no synthetic row is created if it is absent.
+        def keep_observation(observation: PromptObjectObservation) -> bool:
+            raw = observation.raw_sam_object_id
+            return int(raw if raw is not None else observation.sam_object_id) == keep
+
+        for cache in (self._output_cache, self._last_official_prompt_outputs):
+            for cached_frame, observations in list(cache.items()):
+                cache[int(cached_frame)] = [
+                    observation
+                    for observation in observations
+                    if keep_observation(observation)
+                ]
+
+        state["action_history"] = []
+        add_history(
+            state,
+            action_type="refine",
+            frame_idx=int(frame_idx),
+            obj_ids=[keep],
+        )
+        return {
+            "status": "PASS_OFFICIAL_TARGET_RAW_OBJECT_ISOLATED",
+            "frame_idx": int(frame_idx),
+            "kept_raw_sam_id": keep,
+            "removed_raw_sam_ids": [value for value in before_ids if value != keep],
+            "metadata_ids_before": before_ids,
+            "metadata_ids_after": after_ids,
+            "official_remove_object_api": True,
+            "official_target_only_propagation_action": "refine",
+            "official_target_only_action_history": True,
+            "persistent_public_identity_touched": False,
+            "runtime_future_gt_used": False,
+        }
+
+    def recover_target_box_prompt(
+        self,
+        frame_idx: int,
+        object_id: int,
+        box_xyxy: np.ndarray,
+        *,
+        text: str = "person",
+    ) -> dict:
+        """Recover a target-only stream when box-only SAM3 output is empty.
+
+        This is a diagnostic-gated adapter fallback.  The official text+box
+        request is allowed to expose scene detections, but the requested
+        external box is mapped by the existing one-to-one IoU rule and every
+        other raw object is removed before any future propagation.  Callers
+        must preserve the returned scene count/isolation audit.
+        """
+
+        self._require_session()
+        if int(object_id) not in self._objects:
+            raise ValueError(f"invalid object id: {object_id}")
+        self._last_recovery_failure = None
+        human_box = self._clip_box(np.asarray(box_xyxy, dtype=float).reshape(-1))
+        self._objects[int(object_id)]["box"] = human_box.copy()
+        self._objects[int(object_id)]["human_box"] = human_box.copy()
+        observations = self._send_prompt(
+            int(frame_idx),
+            boxes=[human_box],
+            text=str(text),
+            source="target_session_text_box_recovery",
+        )
+        recovery_prompt_attempts = [
+            {
+                "prompt_kind": "text_plus_box",
+                "box_xyxy": human_box.astype(float).tolist(),
+                "official_count": len(observations),
+                "target_found": False,
+            }
+        ]
+        target = self._find_obs_for_ext(observations, int(object_id))
+        recovery_prompt_attempts[0]["target_found"] = target is not None
+        if target is None:
+            # The pinned multiplex predictor can reject a box+text request
+            # after a long propagation even though its supported box-only
+            # prompt path can still recover the same target.  Reuse only the
+            # backend's existing, deterministic prompt-box variants; do not
+            # invent a new predictor API or use a future/GT box.
+            for variant_index, variant in enumerate(self._human_prompt_variants(human_box)):
+                self._objects[int(object_id)]["box"] = variant.copy()
+                observations = self._send_prompt(
+                    int(frame_idx),
+                    boxes=[variant],
+                    source="target_session_box_recovery_fallback",
+                )
+                target = self._find_obs_for_ext(observations, int(object_id))
+                recovery_prompt_attempts.append(
+                    {
+                        "prompt_kind": "box_only_variant",
+                        "variant_index": int(variant_index),
+                        "box_xyxy": variant.astype(float).tolist(),
+                        "official_count": len(observations),
+                        "target_found": target is not None,
+                    }
+                )
+                if target is not None:
+                    break
+        if target is None:
+            self._last_recovery_failure = {
+                "schema_version": "N72R6_TARGET_RECOVERY_FAILURE_V1",
+                "status": "FAIL_TARGET_RECOVERY_NO_OFFICIAL_OBSERVATION",
+                "frame_idx": int(frame_idx),
+                "object_id": int(object_id),
+                "text_prompt": str(text),
+                "recovery_prompt_attempts": recovery_prompt_attempts,
+                "scene_official_count_before_isolation": len(observations),
+                "retained_official_count": 0,
+                "retained_raw_sam_id": None,
+                "runtime_future_gt_used": False,
+            }
+            raise RuntimeError(
+                "official target recovery returned no observation overlapping the target box "
+                f"after {len(recovery_prompt_attempts)} supported prompt attempts"
+            )
+        raw = target.raw_sam_object_id
+        if raw is None:
+            raw = target.sam_object_id
+        isolation = self.retain_official_raw_object(int(frame_idx), int(raw))
+        retained = self._last_official_prompt_outputs.get(int(frame_idx), [])
+        self._apply_stable_ids(retained)
+        self._output_cache[int(frame_idx)] = [observation.copy() for observation in retained]
+        self._last_official_prompt_outputs[int(frame_idx)] = [
+            observation.copy() for observation in retained
+        ]
+
+        # Keep the recovery audit JSON-serializable.  The full observation
+        # objects remain in the official caches for the target session; the
+        # persisted provenance only needs their immutable axes and geometry.
+        observation_audit = [
+            {
+                "frame_idx": int(observation.frame_idx),
+                "raw_sam_object_id": (
+                    None
+                    if observation.raw_sam_object_id is None
+                    else int(observation.raw_sam_object_id)
+                ),
+                "adapter_external_id": int(observation.sam_object_id),
+                "box_xyxy": np.asarray(observation.box_xyxy, dtype=float).tolist(),
+                "confidence": float(observation.confidence),
+                "presence_score": (
+                    None
+                    if observation.presence_score is None
+                    else float(observation.presence_score)
+                ),
+                "source": str(observation.source),
+                "mask_sha256": hashlib.sha256(
+                    np.asarray(observation.mask, dtype=bool).tobytes()
+                ).hexdigest()
+                if observation.mask is not None
+                else None,
+            }
+            for observation in retained
+        ]
+        return {
+            "status": "PASS_TARGET_BOX_TEXT_RECOVERY_AND_ISOLATION",
+            "frame_idx": int(frame_idx),
+            "object_id": int(object_id),
+            "text_prompt": str(text),
+            "recovery_prompt_attempts": recovery_prompt_attempts,
+            "scene_official_count_before_isolation": len(observations),
+            "retained_official_count": len(retained),
+            "retained_raw_sam_id": int(raw),
+            "observations": observation_audit,
+            "isolation": isolation,
+            "runtime_future_gt_used": False,
+        }
 
     def reconcile_official_tracker_to_visible_outputs(self, frame_idx: int) -> dict:
         """Restore the official tracker mask/ID cardinality at a causal boundary.
@@ -1137,6 +1367,7 @@ class Sam3Backend(PromptVideoTrackerBackend):
         self._text_prompt = None
         self._prompt_fallback_log = []
         self._resume_repair_log = []
+        self._last_recovery_failure = None
         self._last_official_prompt_outputs = {}
 
     # ------------------------------------------------------------------

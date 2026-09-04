@@ -254,6 +254,10 @@ def normalize_candidate(
         "sequence_global_native_id": None if global_native is None else int(global_native),
         "native_id_source": candidate.get("native_id_source", candidate.get("raw_native_id_source")),
         "native_tid_scope": candidate.get("native_tid_scope", "session_local_adapter_external_id"),
+        "native_scope": candidate.get(
+            "native_scope",
+            candidate.get("native_tid_scope", "session_local_adapter_external_id"),
+        ),
         "native_tid": adapter,
         "binding_sam_id": adapter,
         "adapter_mapping_collision": False,
@@ -331,6 +335,7 @@ def candidate_for_score(candidate: Mapping[str, Any]) -> dict[str, Any]:
         "feat": np.asarray(candidate["feature"], dtype=np.float32),
         "has_feat": 1.0,
         "native_tid": int(candidate["native_tid"]),
+        "native_scope": candidate.get("native_scope", candidate.get("native_tid_scope")),
         "native_age": float(candidate.get("native_age", 0.0)),
         "conf": float(candidate.get("confidence", 1.0)),
     }
@@ -479,12 +484,16 @@ def new_runtime(sequence: str, event_id: str) -> SequencePersistentIdentityRunti
     )
 
 
-def new_state_manager(runtime: SequencePersistentIdentityRuntime) -> StateManager:
+def new_state_manager(
+    runtime: SequencePersistentIdentityRuntime,
+    *,
+    max_lost_gap: int = 90,
+) -> StateManager:
     manager = StateManager(
         StateManagerConfig(
             score_threshold=0.0,
             variant="reid",
-            max_lost_gap=90,
+            max_lost_gap=int(max_lost_gap),
             external_identity_authority=True,
         ),
         public_authority_resolver=runtime.authority,
@@ -498,7 +507,12 @@ def new_state_manager(runtime: SequencePersistentIdentityRuntime) -> StateManage
         native = int(record.current_adapter_external_id if record.current_adapter_external_id is not None else -1)
         state = manager.register_from_persistent_identity(
             record,
-            {"feat": feature, "box": box, "native_tid": native},
+            {
+                "feat": feature,
+                "box": box,
+                "native_tid": native,
+                "native_scope": getattr(record, "last_native_scope", None),
+            },
             int(record.last_seen_frame if record.last_seen_frame is not None else record.created_frame),
         )
         if record.status == "LOST":
@@ -625,6 +639,7 @@ def apply_exact_frame(
     memory_read_source: str | None = None,
     freeze_public_ids: Iterable[int] | None = None,
     persistence_mode: str | None = None,
+    birth_none_excluded_uids: Iterable[str] | None = None,
 ) -> dict[str, Any]:
     """Apply an exact solver result and retain solver-NONE vs birth semantics."""
 
@@ -634,6 +649,7 @@ def apply_exact_frame(
         raise RuntimeError(f"solver candidate coverage mismatch: {event_id}/{branch}/{frame}")
     state_by_id = {int(state.pid): state for state in states}
     frozen_public_ids = {int(value) for value in (freeze_public_ids or ())}
+    no_birth_uids = {str(value) for value in (birth_none_excluded_uids or ())}
     matched_state_ids: set[int] = set()
     candidate_decisions: list[dict[str, Any]] = []
     public_to_uid: dict[int, str] = {}
@@ -661,6 +677,7 @@ def apply_exact_frame(
                 session_id=session_id,
                 adapter_external_id=int(candidate["adapter_external_id"]),
                 raw_sam_id=int(candidate["official_raw_sam_id"]),
+                native_scope=candidate.get("native_scope", candidate.get("native_tid_scope")),
             )
             freeze_appearance = int(record.public_id) in frozen_public_ids
             state.update_machine(
@@ -670,6 +687,7 @@ def apply_exact_frame(
                 int(candidate["native_tid"]),
                 0.9,
                 update_prototype=not freeze_appearance,
+                native_scope=candidate.get("native_scope", candidate.get("native_tid_scope")),
             )
             if freeze_appearance:
                 # Motion/native continuity still follows the assigned
@@ -684,13 +702,14 @@ def apply_exact_frame(
             else:
                 persist_machine_feature(record, candidate, frame)
             assignment_status = "ASSIGNED_TO_PUBLIC_ID"
-        elif birth_none:
+        elif birth_none and uid not in no_birth_uids:
             record = runtime.create_identity(
                 int(frame),
                 candidate_obs(candidate, frame, source="frozen_candidate"),
                 session_id=session_id,
                 adapter_external_id=int(candidate["adapter_external_id"]),
                 raw_sam_id=int(candidate["official_raw_sam_id"]),
+                native_scope=candidate.get("native_scope", candidate.get("native_tid_scope")),
                 candidate_uid=uid,
                 appearance_state={
                     "last_machine_feature": list(candidate["feature"]),
@@ -701,7 +720,12 @@ def apply_exact_frame(
             )
             manager.register_from_persistent_identity(
                 record,
-                {"feat": np.asarray(candidate["feature"], dtype=np.float32), "box": np.asarray(candidate["box_xyxy"], dtype=float), "native_tid": int(candidate["native_tid"])},
+                {
+                    "feat": np.asarray(candidate["feature"], dtype=np.float32),
+                    "box": np.asarray(candidate["box_xyxy"], dtype=float),
+                    "native_tid": int(candidate["native_tid"]),
+                    "native_scope": candidate.get("native_scope", candidate.get("native_tid_scope")),
+                },
                 int(frame),
             )
             final_public = int(record.public_id)

@@ -1,7 +1,7 @@
 """Track Manager: stable MOT IDs, lifecycle and identity-mapping invariants."""
 
 from copy import deepcopy
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Optional
 
 import numpy as np
 
@@ -252,8 +252,78 @@ class TrackManager:
         )
 
     def restore(self, snapshot: dict) -> None:
-        self._tracks = deepcopy(snapshot["tracks"])
-        self._sam_to_track = deepcopy(snapshot["sam_to_track"])
-        self._tombstones = deepcopy(snapshot["tombstones"])
-        self._next_track_id = snapshot["next_track_id"]
-        self._outputs = deepcopy(snapshot["outputs"])
+        """Restore a Python snapshot or its JSON-safe representation.
+
+        N72R5 prestate artifacts are written through the repository's generic
+        JSON encoder.  That encoder necessarily turns integer dictionary keys
+        into strings and represents dataclasses as ``__class__`` plus an
+        ``attributes`` object.  Decode those representations here so a
+        persisted prestate remains executable rather than merely printable.
+        """
+
+        def unwrap(value: Any) -> Any:
+            if isinstance(value, dict) and "attributes" in value and "__class__" in value:
+                return value["attributes"]
+            return value
+
+        def observation(value: Any) -> PromptObjectObservation:
+            if isinstance(value, PromptObjectObservation):
+                return deepcopy(value)
+            attrs = unwrap(value)
+            if not isinstance(attrs, dict):
+                raise TypeError(f"unsupported observation snapshot: {type(value)!r}")
+            return PromptObjectObservation(
+                frame_idx=int(attrs["frame_idx"]),
+                sam_object_id=int(attrs["sam_object_id"]),
+                mask=np.asarray(attrs.get("mask"), dtype=bool),
+                box_xyxy=np.asarray(attrs.get("box_xyxy"), dtype=float),
+                confidence=float(attrs["confidence"]),
+                raw_sam_object_id=(None if attrs.get("raw_sam_object_id") is None else int(attrs["raw_sam_object_id"])),
+                presence_score=(None if attrs.get("presence_score") is None else float(attrs["presence_score"])),
+                source=str(attrs.get("source", "automatic_propagation")),
+                is_human_verified=bool(attrs.get("is_human_verified", False)),
+                source_run_id=attrs.get("source_run_id"),
+                session_id=attrs.get("session_id"),
+                segment_id=attrs.get("segment_id"),
+                window_id=attrs.get("window_id"),
+                chunk_id=attrs.get("chunk_id"),
+                candidate_index=(None if attrs.get("candidate_index") is None else int(attrs["candidate_index"])),
+            )
+
+        def track(value: Any) -> Track:
+            if isinstance(value, Track):
+                return deepcopy(value)
+            attrs = unwrap(value)
+            if not isinstance(attrs, dict):
+                raise TypeError(f"unsupported track snapshot: {type(value)!r}")
+            restored = Track(
+                mot_track_id=int(attrs["mot_track_id"]),
+                identity_lineage_id=int(attrs["identity_lineage_id"]),
+                sam_object_id=(None if attrs.get("sam_object_id") is None else int(attrs["sam_object_id"])),
+                state=TrackState(str(attrs.get("state", TrackState.TENTATIVE))),
+                start_frame=int(attrs.get("start_frame", 0)),
+            )
+            restored.last_seen_frame = None if attrs.get("last_seen_frame") is None else int(attrs["last_seen_frame"])
+            restored.last_human_verified_frame = (
+                None if attrs.get("last_human_verified_frame") is None else int(attrs["last_human_verified_frame"])
+            )
+            restored.last_box = None if attrs.get("last_box") is None else np.asarray(attrs["last_box"], dtype=float)
+            restored.last_mask = None if attrs.get("last_mask") is None else np.asarray(attrs["last_mask"], dtype=bool)
+            restored.age = int(attrs.get("age", 0))
+            restored.time_since_update = int(attrs.get("time_since_update", 0))
+            restored.confidence_history = [float(item) for item in attrs.get("confidence_history", [])]
+            restored.presence_history = [float(item) for item in attrs.get("presence_history", [])]
+            restored.source_history = [str(item) for item in attrs.get("source_history", [])]
+            restored.delete_reason = attrs.get("delete_reason")
+            return restored
+
+        raw_tracks = snapshot["tracks"]
+        self._tracks = {int(key): track(value) for key, value in raw_tracks.items()}
+        self._sam_to_track = {int(key): int(value) for key, value in snapshot["sam_to_track"].items()}
+        self._tombstones = {int(key): int(value) for key, value in snapshot["tombstones"].items()}
+        self._next_track_id = int(snapshot["next_track_id"])
+        raw_outputs = snapshot.get("outputs", {})
+        self._outputs = {
+            int(frame): {int(track_id): observation(value) for track_id, value in mapping.items()}
+            for frame, mapping in raw_outputs.items()
+        }
