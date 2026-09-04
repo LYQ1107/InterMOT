@@ -590,7 +590,13 @@ def main() -> int:
     requested = sorted(args.event_id) if args.event_id else sorted(frozen)
     unknown = sorted(set(requested) - set(frozen))
     if unknown:
-        raise ValueError(f"unknown event IDs: {unknown}")
+        error = ValueError(
+            "requested event IDs are not in the frozen N72R6 replay/target-stream set: "
+            f"{unknown}; available_count={len(frozen)}"
+        )
+        failure = write_failure(output_root, "__input_validation__", args.variant, error)
+        print(json.dumps({"status": "FAIL_INPUT_VALIDATION", "artifact": str(failure), "error": str(error)}))
+        return 1
     selector = TargetCandidateSelector(SelectorConfig())
     results: list[dict[str, Any]] = []
     failures: list[dict[str, Any]] = []
