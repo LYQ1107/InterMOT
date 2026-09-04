@@ -38,12 +38,13 @@ TARGET_MANIFEST = ROOT / "outputs/N72R6/recovery_target_stream_manifest_attempt3
 EVENT_POLICY = ROOT / "outputs/N72R5/mechanism_rounds/round_06_event_policy/real_event_manifest.json"
 D1_ROOT = N72R7_ROOT / "dev_replay/d1_full_attempt2"
 D2_ROOT = N72R7_ROOT / "dev_replay/d2_full_attempt1"
-RUNTIME_VALIDATION_PATH = N72R7_ROOT / "posthoc/runtime_validation.json"
-RESULT_PATH = N72R7_ROOT / "posthoc/n72r7_d1_d2_posthoc_results.json"
-EVENT_METRICS_PATH = N72R7_ROOT / "posthoc/event_metrics.jsonl"
-STAGE_PATH = N72R7_ROOT / "stage_05_status.json"
-CONTROLLER_PATH = N72R7_ROOT / "CONTROLLER_STATUS.json"
-HUMAN_STATUS_PATH = N72R7_ROOT / "HUMAN_READABLE_STATUS.md"
+POSTHOC_ROOT = N72R7_ROOT / "posthoc_attempt2"
+RUNTIME_VALIDATION_PATH = POSTHOC_ROOT / "runtime_validation.json"
+RESULT_PATH = POSTHOC_ROOT / "n72r7_d1_d2_posthoc_results.json"
+EVENT_METRICS_PATH = POSTHOC_ROOT / "event_metrics.jsonl"
+STAGE_PATH = N72R7_ROOT / "stage_05_status_attempt2.json"
+CONTROLLER_PATH = N72R7_ROOT / "CONTROLLER_STATUS_attempt2.json"
+HUMAN_STATUS_PATH = N72R7_ROOT / "HUMAN_READABLE_STATUS_attempt2.md"
 FAILURE_ROOT = N72R7_ROOT / "attempts"
 
 HORIZONS = (20, 50, 100)
@@ -265,7 +266,7 @@ def _finalize_metric(metric: dict[str, Any]) -> dict[str, Any]:
 
 def _merge_metric(destination: dict[str, Any], source: Mapping[str, Any]) -> None:
     for key, value in source.items():
-        if key.endswith("_sum") or key.endswith("_frames") or key.endswith("_count") or key == "evaluated_frames" or key == "window_frame_count":
+        if key.endswith("_sum") or key.endswith("_frames") or key.endswith("_count") or key.endswith("_compared") or key == "evaluated_frames" or key == "window_frame_count":
             if isinstance(value, (int, float)):
                 destination[key] = destination.get(key, 0) + value
 
@@ -761,8 +762,8 @@ def write_status(result: Mapping[str, Any], runtime: Mapping[str, Any]) -> None:
         "selector_validation_accuracy": None,
         "NONE_accuracy": None,
         "raw_switch_count": {
-            "D1": sum(int(item["raw_switch_count"]) for item in d1.get("event_metrics", [])) if isinstance(d1.get("event_metrics"), list) else None,
-            "D2": sum(int(item["raw_switch_count"]) for item in d2.get("event_metrics", [])) if isinstance(d2.get("event_metrics"), list) else None,
+            "D1": int(d1.get("raw_switch_count", 0)),
+            "D2": int(d2.get("raw_switch_count", 0)),
         },
         "successful_reacquisition_count": {
             "D1": int(d1.get("posthoc_correct_switch_count", 0)),
