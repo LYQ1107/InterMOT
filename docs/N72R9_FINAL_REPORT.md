@@ -224,4 +224,4 @@ outputs/N72R9/replay/full/runtime_audit.json                19627fd73cc509812be5
 outputs/N72R9/ccam_paired_replay_results.json               fa4a17ee5fcf2727739eb759bac7dab2ab7c49c583eaba718e6a87fb4b8717cc
 ```
 
-最终 Git commit：`5b0c6d6`（本报告和本轮代码均随该提交推送）；本报告不会改变任何历史 N36–N72R8 证据。
+实现与研究产物提交：`fd54c92`；本报告的最终收口提交是该提交的直接后继。报告不会改变任何历史 N36–N72R8 证据。
