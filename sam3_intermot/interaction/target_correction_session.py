@@ -61,6 +61,13 @@ class TargetScopedCorrectionSession:
     human_box: Optional[list[float]] = None
     seeded: bool = False
     main_y_pre_frozen: bool = False
+    # Historical callers isolate a singleton official raw object.  N72R10's
+    # fresh future session uses the same singleton official target isolation
+    # but preserves the official action history; this avoids the historical
+    # clear-history propagation truncation while bounding active-object
+    # memory.  The option is explicit so the lifecycle is auditable.
+    isolate_official_target_state: bool = True
+    preserve_official_action_history: bool = False
     _official_by_frame: Dict[int, List[PromptObjectObservation]] = field(default_factory=dict)
     _recovery_audit: Optional[dict[str, Any]] = None
     _recovery_attempts: List[dict[str, Any]] = field(default_factory=list)
@@ -189,18 +196,39 @@ class TargetScopedCorrectionSession:
                 prompt_frame,
                 self.target_object_id,
                 box,
+                isolate_official_target_state=self.isolate_official_target_state,
+                preserve_official_action_history=self.preserve_official_action_history,
             )
             self._recovery_audit = dict(recovery)
             official = self._copy_rows(getter(prompt_frame))
-        if len(official) != 1:
-            raise RuntimeError(
-                "target event prompt did not expose exactly one official target row: "
-                f"{self.event_id}:{self.event_frame}:{len(official)}"
-            )
-        self._target_raw_sam_id = self._raw_id(official[0])
-        self._official_by_frame[prompt_frame] = official
+        if self.isolate_official_target_state:
+            if len(official) != 1:
+                raise RuntimeError(
+                    "target event prompt did not expose exactly one official target row: "
+                    f"{self.event_id}:{self.event_frame}:{len(official)}"
+                )
+            target_rows = official
+        else:
+            retained_raw = None
+            if isinstance(self._recovery_audit, dict):
+                retained_raw = self._recovery_audit.get("retained_raw_sam_id")
+            if retained_raw is None:
+                finder = getattr(self.backend, "_find_obs_for_ext", None)
+                mapped = finder(official, self.target_object_id) if callable(finder) else None
+                if mapped is not None:
+                    retained_raw = self._raw_id(mapped)
+            if retained_raw is None:
+                raise RuntimeError("non-isolated target session has no retained official raw ID")
+            target_rows = [row for row in official if self._raw_id(row) == int(retained_raw)]
+            if len(target_rows) != 1:
+                raise RuntimeError(
+                    "non-isolated target session did not expose one retained raw target row: "
+                    f"{self.event_id}:{self.event_frame}:raw={retained_raw}:matched={len(target_rows)}"
+                )
+        self._target_raw_sam_id = self._raw_id(target_rows[0])
+        self._official_by_frame[prompt_frame] = self._copy_rows(target_rows)
         self.seeded = True
-        return self._copy_rows(official)
+        return self._copy_rows(target_rows)
 
     def propagate_to(self, end_frame: int) -> dict[int, list[PromptObjectObservation]]:
         if not self.seeded or self.session_id is None:
@@ -411,6 +439,8 @@ class TargetScopedCorrectionSession:
             "target_session_scope": self.target_session_scope,
             "main_y_pre_frozen": self.main_y_pre_frozen,
             "seeded_from_human_box": self.seeded,
+            "isolate_official_target_state": bool(self.isolate_official_target_state),
+            "preserve_official_action_history": bool(self.preserve_official_action_history),
             "official_frame_count": len(self._official_by_frame),
             "official_candidate_count": sum(len(rows) for rows in self._official_by_frame.values()),
             "target_raw_sam_id": self._target_raw_sam_id,

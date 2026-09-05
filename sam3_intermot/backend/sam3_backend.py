@@ -60,6 +60,7 @@ class Sam3Backend(PromptVideoTrackerBackend):
         output_prob_thresh: float = 0.5,
         async_loading_frames: bool = False,
         device: str = "cuda",
+        official_batched_grounding_batch_size: Optional[int] = None,
     ) -> None:
         self.checkpoint_path = str(checkpoint_path) if checkpoint_path else None
         self.max_num_objects = max_num_objects
@@ -72,6 +73,14 @@ class Sam3Backend(PromptVideoTrackerBackend):
         self.output_prob_thresh = output_prob_thresh
         self.async_loading_frames = async_loading_frames
         self.device = device
+        if official_batched_grounding_batch_size is not None:
+            if int(official_batched_grounding_batch_size) <= 0:
+                raise ValueError("official_batched_grounding_batch_size must be positive")
+            self.official_batched_grounding_batch_size = int(
+                official_batched_grounding_batch_size
+            )
+        else:
+            self.official_batched_grounding_batch_size = None
         self._predictor = None
         self._session_id: Optional[str] = None
         self._frame_h = 0
@@ -138,6 +147,33 @@ class Sam3Backend(PromptVideoTrackerBackend):
             # memory is a runtime adapter setting (no source modification).
             if hasattr(tm, "offload_output_to_cpu_for_eval"):
                 tm.offload_output_to_cpu_for_eval = True
+        if self.official_batched_grounding_batch_size is not None:
+            batch_targets = [
+                self._predictor.model,
+                getattr(self._predictor.model, "tracker", None),
+                getattr(self._predictor.model, "model", None),
+            ]
+            batch_target = next(
+                (
+                    target
+                    for target in batch_targets
+                    if target is not None
+                    and hasattr(target, "use_batched_grounding")
+                    and hasattr(target, "batched_grounding_batch_size")
+                ),
+                None,
+            )
+            if batch_target is None:
+                raise RuntimeError(
+                    "official batched grounding controls are unavailable on the pinned model"
+                )
+            batch_target.use_batched_grounding = True
+            batch_target.batched_grounding_batch_size = int(
+                self.official_batched_grounding_batch_size
+            )
+            self._official_batched_grounding_target = type(batch_target).__name__
+        else:
+            self._official_batched_grounding_target = None
 
         self._runtime_memory_policy = {
             "offload_video_to_cpu": True,
@@ -150,6 +186,9 @@ class Sam3Backend(PromptVideoTrackerBackend):
             # state.  Keep this false and explicit in every tape artifact.
             "offload_state_to_cpu": False,
             "trim_past_non_cond_mem_for_eval": False,
+            "official_batched_grounding": self.official_batched_grounding_batch_size is not None,
+            "official_batched_grounding_batch_size": self.official_batched_grounding_batch_size,
+            "official_batched_grounding_target": self._official_batched_grounding_target,
             "recondition_every_nth_frame": int(
                 getattr(self._predictor.model, "recondition_every_nth_frame", 16)
             ),
@@ -792,18 +831,29 @@ class Sam3Backend(PromptVideoTrackerBackend):
         self,
         frame_idx: int,
         keep_raw_sam_id: int,
+        *,
+        clear_action_history: bool = True,
+        add_target_refine_history: bool = True,
     ) -> dict:
         """Retain one official raw object inside an isolated target session.
 
         A pinned multiplex box prompt can materialize several detector
         objects even when the request contains one box.  This adapter-level
         recovery removes every other raw object through the official model
-        ``remove_object`` API, compacts only the documented positional
-        metadata, and installs a target-only partial-propagation action.  It
-        never touches another backend/session or assigns a public identity.
+        ``remove_object`` API and compacts only the documented positional
+        metadata.  Historical callers also clear the official action history
+        and install a target-only partial-propagation action.  N72R10 can
+        instead preserve that history after the same object removal; the
+        probe demonstrated that this avoids truncating the official future
+        propagation while still keeping one active target source.  Neither
+        mode touches another backend/session or assigns a public identity.
         """
 
         self._require_session()
+        if bool(clear_action_history) != bool(add_target_refine_history):
+            raise ValueError(
+                "clear_action_history and add_target_refine_history must be enabled or disabled together"
+            )
         predictor = self._predictor
         if predictor is None or self._session_id is None:
             raise RuntimeError("no active official session")
@@ -858,15 +908,21 @@ class Sam3Backend(PromptVideoTrackerBackend):
                     if keep_observation(observation)
                 ]
 
-        state["action_history"] = []
-        add_history(
-            state,
-            action_type="refine",
-            frame_idx=int(frame_idx),
-            obj_ids=[keep],
-        )
+        if clear_action_history:
+            state["action_history"] = []
+        if add_target_refine_history:
+            add_history(
+                state,
+                action_type="refine",
+                frame_idx=int(frame_idx),
+                obj_ids=[keep],
+            )
         return {
-            "status": "PASS_OFFICIAL_TARGET_RAW_OBJECT_ISOLATED",
+            "status": (
+                "PASS_OFFICIAL_TARGET_RAW_OBJECT_ISOLATED"
+                if clear_action_history and add_target_refine_history
+                else "PASS_OFFICIAL_TARGET_RAW_OBJECT_ISOLATED_HISTORY_PRESERVED"
+            ),
             "frame_idx": int(frame_idx),
             "kept_raw_sam_id": keep,
             "removed_raw_sam_ids": [value for value in before_ids if value != keep],
@@ -874,7 +930,9 @@ class Sam3Backend(PromptVideoTrackerBackend):
             "metadata_ids_after": after_ids,
             "official_remove_object_api": True,
             "official_target_only_propagation_action": "refine",
-            "official_target_only_action_history": True,
+            "official_target_only_action_history": bool(add_target_refine_history),
+            "official_action_history_cleared": bool(clear_action_history),
+            "official_action_history_preserved": not bool(clear_action_history),
             "persistent_public_identity_touched": False,
             "runtime_future_gt_used": False,
         }
@@ -886,6 +944,8 @@ class Sam3Backend(PromptVideoTrackerBackend):
         box_xyxy: np.ndarray,
         *,
         text: str = "person",
+        isolate_official_target_state: bool = True,
+        preserve_official_action_history: bool = False,
     ) -> dict:
         """Recover a target-only stream when box-only SAM3 output is empty.
 
@@ -964,13 +1024,34 @@ class Sam3Backend(PromptVideoTrackerBackend):
         raw = target.raw_sam_object_id
         if raw is None:
             raw = target.sam_object_id
-        isolation = self.retain_official_raw_object(int(frame_idx), int(raw))
-        retained = self._last_official_prompt_outputs.get(int(frame_idx), [])
-        self._apply_stable_ids(retained)
-        self._output_cache[int(frame_idx)] = [observation.copy() for observation in retained]
-        self._last_official_prompt_outputs[int(frame_idx)] = [
-            observation.copy() for observation in retained
-        ]
+        if isolate_official_target_state:
+            isolation = self.retain_official_raw_object(
+                int(frame_idx),
+                int(raw),
+                clear_action_history=not bool(preserve_official_action_history),
+                add_target_refine_history=not bool(preserve_official_action_history),
+            )
+            retained = self._last_official_prompt_outputs.get(int(frame_idx), [])
+            self._apply_stable_ids(retained)
+            self._output_cache[int(frame_idx)] = [observation.copy() for observation in retained]
+            self._last_official_prompt_outputs[int(frame_idx)] = [
+                observation.copy() for observation in retained
+            ]
+        else:
+            # N72R10 keeps the official multi-object state intact so SAM3 can
+            # propagate its normal scene stream.  The target-session adapter
+            # projects the selected raw ID later; no competitor is exposed as
+            # target evidence and no official object is removed here.
+            isolation = {
+                "status": "PASS_OFFICIAL_MULTI_OBJECT_STATE_PRESERVED_TARGET_PROJECTED",
+                "frame_idx": int(frame_idx),
+                "target_raw_sam_id": int(raw),
+                "official_remove_object_api": False,
+                "official_target_only_propagation_action": "adapter_raw_id_projection",
+                "persistent_public_identity_touched": False,
+                "runtime_future_gt_used": False,
+            }
+            retained = [target.copy()]
 
         # Keep the recovery audit JSON-serializable.  The full observation
         # objects remain in the official caches for the target session; the
@@ -1009,6 +1090,8 @@ class Sam3Backend(PromptVideoTrackerBackend):
             "scene_official_count_before_isolation": len(observations),
             "retained_official_count": len(retained),
             "retained_raw_sam_id": int(raw),
+            "isolate_official_target_state": bool(isolate_official_target_state),
+            "preserve_official_action_history": bool(preserve_official_action_history),
             "observations": observation_audit,
             "isolation": isolation,
             "runtime_future_gt_used": False,
