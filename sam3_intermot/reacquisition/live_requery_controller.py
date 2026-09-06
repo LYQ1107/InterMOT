@@ -66,11 +66,19 @@ class LiveFutureRequeryController:
         frame_paths: Sequence[Any] | Mapping[int, Any],
         feature_fn: Callable[[int, Sequence[float]], Any] | None,
         end_frame: int,
+        post_session_feature_materializer: Callable[
+            [Sequence[Mapping[str, Any]]], list[dict[str, Any]]
+        ] | None = None,
     ) -> None:
         if not callable(backend_factory):
             raise TypeError("backend_factory must be callable")
         if not callable(feature_fn) and feature_fn is not None:
             raise TypeError("feature_fn must be callable or None")
+        if (
+            not callable(post_session_feature_materializer)
+            and post_session_feature_materializer is not None
+        ):
+            raise TypeError("post_session_feature_materializer must be callable or None")
         if int(end_frame) < int(event_frame) + 1:
             raise ValueError("end_frame must include at least event_frame+1")
         self.backend_factory = backend_factory
@@ -80,6 +88,10 @@ class LiveFutureRequeryController:
         self.target_public_id = int(target_public_id)
         self.frame_paths = frame_paths
         self.feature_fn = feature_fn
+        self.post_session_feature_materializer = post_session_feature_materializer
+        self._post_session_feature_materializer_enabled = (
+            post_session_feature_materializer is not None
+        )
         self.end_frame = int(end_frame)
         self.active_source: ActiveRequerySource | None = None
         self.last_trigger_frame: int | None = None
@@ -135,7 +147,11 @@ class LiveFutureRequeryController:
             event_frame=self.event_frame,
             target_public_id=self.target_public_id,
             frame_paths=self.frame_paths,
-            feature_fn=self.feature_fn,
+            feature_fn=(
+                None
+                if self.post_session_feature_materializer is not None
+                else self.feature_fn
+            ),
         )
         self.trigger_count += 1
         self.requery_sessions_started += 1
@@ -149,6 +165,11 @@ class LiveFutureRequeryController:
                 main_y_pre_frozen=True,
             )
             rows = session.query_current_frame()
+            if self.post_session_feature_materializer is not None:
+                # query_current_frame closes each short official probe session
+                # before returning.  Feature extraction therefore cannot keep
+                # OSNet resident beside a live SAM3 probe.
+                rows = self.post_session_feature_materializer(rows)
             self._pending_session = session
             self._pending_probe_rows = deepcopy(rows)
             self.probe_count += len(rows)
@@ -217,8 +238,18 @@ class LiveFutureRequeryController:
             none_score=none_score,
             margin=margin,
         )
-        grouped = self._rows_by_frame(rows)
         session_audit = session.audit()
+        # Propagation is complete and the audit/geometry observations are now
+        # independent of the official backend.  Release SAM3 before the
+        # short-lived OSNet materializer is constructed.
+        _close_and_release(session)
+        self._pending_session = None
+        self._pending_probe_rows = []
+        self._pending_start_audit = None
+        session_audit["closed_before_post_session_feature_materialization"] = True
+        if self.post_session_feature_materializer is not None:
+            rows = self.post_session_feature_materializer(rows)
+        grouped = self._rows_by_frame(rows)
         active = ActiveRequerySource(
             trigger_frame=int(session.trigger_frame),
             selected_candidate_uid=selected_uid,
@@ -229,19 +260,8 @@ class LiveFutureRequeryController:
         )
         self.active_source = active
         self.selected_count += 1
-        # ``propagate_if_selected`` has fully materialized the selected rows and
-        # the audit above is a deep-copied observation of the completed
-        # propagation.  Keeping the FutureFrameRequerySession alive here would
-        # retain its official backend, session state, and frame window while
-        # the controller only consumes ``rows_by_frame``.  Release that
-        # resource before returning; ActiveRequerySource is intentionally an
-        # observation-only record and never owns an executable session.
-        _close_and_release(session)
         session_audit["closed_after_materialization"] = True
         active.session_audit = session_audit
-        self._pending_session = None
-        self._pending_probe_rows = []
-        self._pending_start_audit = None
         gc.collect()
         return deepcopy(rows)
 
@@ -267,6 +287,12 @@ class LiveFutureRequeryController:
             "requery_sessions_started": self.requery_sessions_started,
             "retired_source_count": self._retired_source_count,
             "pending_probe_count": len(self._pending_probe_rows),
+            "post_session_feature_materializer": self._post_session_feature_materializer_enabled,
+            "feature_materialization_phase": (
+                "after_sam3_session_release"
+                if self._post_session_feature_materializer_enabled
+                else "inside_future_session_legacy_compatibility"
+            ),
             "active_source": None if self.active_source is None else {
                 "trigger_frame": self.active_source.trigger_frame,
                 "selected_candidate_uid": self.active_source.selected_candidate_uid,
@@ -291,6 +317,7 @@ class LiveFutureRequeryController:
         self.backend_factory = None  # type: ignore[assignment]
         self.frame_paths = ()
         self.feature_fn = None
+        self.post_session_feature_materializer = None
         gc.collect()
         try:
             import torch

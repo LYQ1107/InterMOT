@@ -9,6 +9,7 @@ manifest.  Existing completed event directories are skipped only after their
 
 from __future__ import annotations
 
+from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 import argparse
 import hashlib
@@ -19,17 +20,155 @@ import subprocess
 import sys
 import tempfile
 import time
-from typing import Any
+from typing import Any, Sequence
 
 
 ROOT = Path(__file__).resolve().parents[1]
 SCHEDULE = ROOT / "outputs/N72R11/secondary_event_manifest.json"
 DEFAULT_OUTPUT = ROOT / "outputs/N72R11/secondary_interactions_attempt_01"
-DEFAULT_GPUS = (1, 2, 3, 4)
+DEFAULT_GPUS: tuple[int, ...] = ()
+MAX_N72R11_GPUS = 4
+
+
+@dataclass(frozen=True)
+class GpuSnapshot:
+    """Physical GPU state sampled immediately before a child launch."""
+
+    gpu_id: int
+    uuid: str | None
+    total_mib: int
+    used_mib: int
+    free_mib: int
+    utilization_percent: int
+    external_compute_process_count: int
+    external_compute_used_mib: int
+    idle: bool
+
+
+_compute_process_probe_supported = True
 
 
 def now_utc() -> str:
     return datetime.now(timezone.utc).isoformat()
+
+
+def _parse_smi_int(value: str, *, default: int = 0) -> int:
+    text = str(value).strip()
+    if not text or text.upper() in {"N/A", "[N/A]", "NOT SUPPORTED"}:
+        return int(default)
+    try:
+        return int(float(text))
+    except ValueError:
+        return int(default)
+
+
+def query_gpu_snapshots(candidate_gpu_ids: Sequence[int]) -> list[GpuSnapshot]:
+    """Read physical GPU and compute-app state from the real nvidia-smi CLI."""
+
+    global _compute_process_probe_supported
+    requested = {int(value) for value in candidate_gpu_ids}
+    gpu_result = subprocess.run(
+        [
+            "nvidia-smi",
+            "--query-gpu=index,uuid,memory.total,memory.used,memory.free,utilization.gpu",
+            "--format=csv,noheader,nounits",
+        ],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    physical: dict[int, dict[str, Any]] = {}
+    for line in gpu_result.stdout.splitlines():
+        if not line.strip():
+            continue
+        fields = [part.strip() for part in line.split(",")]
+        if len(fields) < 6:
+            raise RuntimeError(f"nvidia-smi GPU row has unexpected schema: {line!r}")
+        gpu_id = _parse_smi_int(fields[0], default=-1)
+        if gpu_id < 0 or (requested and gpu_id not in requested):
+            continue
+        physical[gpu_id] = {
+            "uuid": None if fields[1].upper() in {"N/A", "[N/A]"} else fields[1],
+            "total_mib": _parse_smi_int(fields[2]),
+            "used_mib": _parse_smi_int(fields[3]),
+            "free_mib": _parse_smi_int(fields[4]),
+            "utilization_percent": _parse_smi_int(fields[5]),
+        }
+    if not physical:
+        scope = "all physical GPUs" if not requested else sorted(requested)
+        raise RuntimeError(f"nvidia-smi returned no candidate GPUs for {scope}")
+
+    apps_by_uuid: dict[str, list[int]] = {}
+    try:
+        app_result = subprocess.run(
+            [
+                "nvidia-smi",
+                "--query-compute-apps=gpu_uuid,pid,used_gpu_memory",
+                "--format=csv,noheader,nounits",
+            ],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+    except (OSError, subprocess.CalledProcessError):
+        # Some drivers expose GPU telemetry but not the compute-app query.  Do
+        # not fail the batch; the manifest records the degraded probe.
+        _compute_process_probe_supported = False
+    else:
+        _compute_process_probe_supported = True
+        for line in app_result.stdout.splitlines():
+            if not line.strip() or "no running processes" in line.lower():
+                continue
+            fields = [part.strip() for part in line.split(",")]
+            if len(fields) < 3:
+                continue
+            uuid = fields[0]
+            if uuid not in {value.get("uuid") for value in physical.values()}:
+                continue
+            apps_by_uuid.setdefault(uuid, []).append(_parse_smi_int(fields[2]))
+
+    snapshots: list[GpuSnapshot] = []
+    for gpu_id in sorted(physical):
+        value = physical[gpu_id]
+        used_apps = apps_by_uuid.get(str(value["uuid"]), [])
+        snapshots.append(
+            GpuSnapshot(
+                gpu_id=int(gpu_id),
+                uuid=value["uuid"],
+                total_mib=int(value["total_mib"]),
+                used_mib=int(value["used_mib"]),
+                free_mib=int(value["free_mib"]),
+                utilization_percent=int(value["utilization_percent"]),
+                external_compute_process_count=len(used_apps),
+                external_compute_used_mib=sum(used_apps),
+                idle=bool(_compute_process_probe_supported and not used_apps),
+            )
+        )
+    return snapshots
+
+
+def choose_gpu(
+    snapshots: Sequence[GpuSnapshot],
+    *,
+    n72r11_active_gpu_ids: Sequence[int],
+) -> GpuSnapshot:
+    """Choose an unoccupied-by-this-batch physical GPU by live telemetry."""
+
+    active = {int(value) for value in n72r11_active_gpu_ids}
+    candidates = [snapshot for snapshot in snapshots if snapshot.gpu_id not in active]
+    if not candidates:
+        raise RuntimeError("no physical GPU remains outside active N72R11 child slots")
+    idle = [snapshot for snapshot in candidates if snapshot.idle]
+    pool = idle if idle else candidates
+    return sorted(
+        pool,
+        key=lambda snapshot: (
+            -int(snapshot.free_mib),
+            int(snapshot.utilization_percent),
+            int(snapshot.external_compute_used_mib),
+            int(snapshot.gpu_id),
+        ),
+    )[0]
 
 
 def sha256_file(path: Path) -> str:
@@ -112,7 +251,11 @@ def main() -> int:
     parser.add_argument("--output-root", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--attempt", type=int, default=1)
     parser.add_argument("--max-workers", type=int, default=4)
-    parser.add_argument("--gpu-ids", default=",".join(str(value) for value in DEFAULT_GPUS))
+    parser.add_argument(
+        "--gpu-ids",
+        default=None,
+        help="comma-separated physical GPU IDs; omit to discover all physical GPUs",
+    )
     parser.add_argument("--start-index", type=int, default=0)
     parser.add_argument("--limit", type=int, default=None)
     parser.add_argument("--event-id", action="append", default=None)
@@ -120,9 +263,17 @@ def main() -> int:
     args = parser.parse_args()
     schedule_path = args.schedule if args.schedule.is_absolute() else ROOT / args.schedule
     output_root = args.output_root if args.output_root.is_absolute() else ROOT / args.output_root
-    gpu_ids = tuple(int(value.strip()) for value in str(args.gpu_ids).split(",") if value.strip())
-    if not gpu_ids or int(args.max_workers) < 1 or int(args.max_workers) > len(gpu_ids):
-        raise SystemExit("max-workers must be in 1..number of gpu-ids")
+    if args.gpu_ids is None or not str(args.gpu_ids).strip():
+        discovered = query_gpu_snapshots(DEFAULT_GPUS)
+        gpu_ids = tuple(snapshot.gpu_id for snapshot in discovered)
+    else:
+        gpu_ids = tuple(int(value.strip()) for value in str(args.gpu_ids).split(",") if value.strip())
+    if not gpu_ids:
+        raise SystemExit("no candidate physical GPUs were discovered")
+    if int(args.max_workers) < 1 or int(args.max_workers) > min(MAX_N72R11_GPUS, len(gpu_ids)):
+        raise SystemExit(
+            f"max-workers must be in 1..{min(MAX_N72R11_GPUS, len(gpu_ids))}"
+        )
     if int(args.attempt) < 1 or int(args.start_index) < 0:
         raise SystemExit("attempt/start-index must be non-negative and attempt must be positive")
     payload, events = read_schedule(schedule_path)
@@ -174,6 +325,13 @@ def main() -> int:
             "status": state,
             "attempt": int(args.attempt),
             "gpu_id": None,
+            "gpu_snapshot_at_launch": None,
+            "gpu_selection_reason": None,
+            "external_compute_process_count": None,
+            "external_compute_used_mib": None,
+            "free_mib_at_launch": None,
+            "used_mib_at_launch": None,
+            "utilization_at_launch": None,
             "returncode": None,
             "done_sha256": None if done is None else sha256_file(output_root / event_id / "done.json"),
             "log": None,
@@ -201,6 +359,7 @@ def main() -> int:
                 "selected_event_ids": [str(event["event_id"]) for event in selected],
                 "max_workers": int(args.max_workers),
                 "gpu_ids": list(gpu_ids),
+                "compute_process_probe_supported": bool(_compute_process_probe_supported),
                 "runtime_future_gt_used": False,
                 "interaction_source": "simulated_from_gt",
                 "records": [records[event_id] for event_id in sorted(records)],
@@ -222,10 +381,17 @@ def main() -> int:
                 next_index += 1
                 event_id = str(event["event_id"])
                 used_gpu_ids = {value[4] for value in active.values()}
-                available_gpu_ids = [value for value in gpu_ids if value not in used_gpu_ids]
-                if not available_gpu_ids:
-                    raise RuntimeError("internal scheduler error: no free physical GPU slot")
-                gpu_id = available_gpu_ids[0]
+                snapshots = query_gpu_snapshots(gpu_ids)
+                selected_snapshot = choose_gpu(
+                    snapshots,
+                    n72r11_active_gpu_ids=used_gpu_ids,
+                )
+                gpu_id = int(selected_snapshot.gpu_id)
+                selection_reason = (
+                    "idle_free_mib_descending_utilization_ascending"
+                    if selected_snapshot.idle
+                    else "no_idle_gpu_free_mib_descending_utilization_external_memory"
+                )
                 log_path = log_root / f"{event_id}.attempt{int(args.attempt)}.log"
                 log_path.parent.mkdir(parents=True, exist_ok=True)
                 log_handle = log_path.open("wb")
@@ -239,6 +405,13 @@ def main() -> int:
                     {
                         "status": "RUNNING",
                         "gpu_id": gpu_id,
+                        "gpu_snapshot_at_launch": asdict(selected_snapshot),
+                        "gpu_selection_reason": selection_reason,
+                        "external_compute_process_count": selected_snapshot.external_compute_process_count,
+                        "external_compute_used_mib": selected_snapshot.external_compute_used_mib,
+                        "free_mib_at_launch": selected_snapshot.free_mib,
+                        "used_mib_at_launch": selected_snapshot.used_mib,
+                        "utilization_at_launch": selected_snapshot.utilization_percent,
                         "log": str(log_path),
                         "command": command,
                         "started_at_utc": now_utc(),

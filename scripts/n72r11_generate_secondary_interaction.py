@@ -19,6 +19,7 @@ rollout.
 from __future__ import annotations
 
 from copy import deepcopy
+from dataclasses import dataclass
 from datetime import datetime, timezone
 import argparse
 import gc
@@ -41,9 +42,9 @@ if str(ROOT) not in sys.path:
 
 from sam3_intermot.association.effect_assignment import solve_effect_assignment  # noqa: E402
 from sam3_intermot.association.target_edge_bridge import SOURCE_NAMES  # noqa: E402
-from sam3_intermot.interaction.target_correction_session import (  # noqa: E402
-    TargetScopedCorrectionSession,
-    extract_human_roi_feature,
+from sam3_intermot.interaction.target_correction_session import TargetScopedCorrectionSession  # noqa: E402
+from sam3_intermot.reacquisition.frozen_feature_materializer import (  # noqa: E402
+    FrozenOSNetFeatureMaterializer,
 )
 from sam3_intermot.reacquisition.live_requery_controller import LiveFutureRequeryController  # noqa: E402
 from sam3_intermot.reacquisition.target_candidate_pool import (  # noqa: E402
@@ -54,12 +55,9 @@ from sam3_intermot.reacquisition.target_candidate_pool import (  # noqa: E402
 from scripts.n72r5_stage07_official_full_loop import (  # noqa: E402
     CHECKPOINT,
     DATA_ROOT,
-    FrozenMachineOSNetN72R5,
     image_files,
 )
 from scripts.n72r6_target_correction_stream import (  # noqa: E402
-    _candidate_row,
-    _frame_row,
     _materialize_event_local_window,
     atomic_json,
     atomic_jsonl,
@@ -76,8 +74,32 @@ TARGET_PUBLIC_EDGE_BASE = 4.50
 TARGET_PUBLIC_EDGE_CURRENT = 4.00
 
 
+@dataclass(frozen=True)
+class TargetSessionAuditRef:
+    """Small immutable reference retained after the SAM3 session is closed."""
+
+    session_id: str
+    target_session_scope: str
+
+
 def now_utc() -> str:
     return datetime.now(timezone.utc).isoformat()
+
+
+def _cuda_memory_snapshot() -> dict[str, int] | None:
+    if not torch.cuda.is_available():
+        return None
+    return {
+        "allocated_mib": int(torch.cuda.memory_allocated() / (1024 * 1024)),
+        "reserved_mib": int(torch.cuda.memory_reserved() / (1024 * 1024)),
+        "max_allocated_mib": int(torch.cuda.max_memory_allocated() / (1024 * 1024)),
+        "max_reserved_mib": int(torch.cuda.max_memory_reserved() / (1024 * 1024)),
+    }
+
+
+def _reset_cuda_peak_stats() -> None:
+    if torch.cuda.is_available():
+        torch.cuda.reset_peak_memory_stats()
 
 
 def _finite_box(value: Any, label: str) -> np.ndarray:
@@ -224,6 +246,123 @@ def _candidate_projection(rows: Sequence[Mapping[str, Any]]) -> list[dict[str, A
     return [{key: item.get(key) for key in keys} for item in rows]
 
 
+def _mask_sha256(mask: Any) -> str | None:
+    if mask is None:
+        return None
+    value = np.asarray(mask, dtype=bool)
+    return hashlib.sha256(value.tobytes()).hexdigest() if value.size else None
+
+
+def _candidate_geometry_row(
+    event: Mapping[str, Any],
+    observation: Any,
+    frame: int,
+    epoch_id: str,
+    *,
+    session_id: str,
+    target_session_scope: str,
+) -> dict[str, Any]:
+    """Serialize only official geometry before releasing the SAM3 session."""
+
+    raw = getattr(observation, "raw_sam_object_id", None)
+    if raw is None:
+        raw = getattr(observation, "sam_object_id", None)
+    if raw is None:
+        raise RuntimeError("official target observation has no raw/native object ID")
+    adapter = getattr(observation, "sam_object_id", raw)
+    box = np.asarray(getattr(observation, "box_xyxy"), dtype=float).reshape(-1)
+    if box.size != 4 or not np.all(np.isfinite(box)):
+        raise ValueError("official target observation box is not finite")
+    confidence = float(getattr(observation, "confidence", 0.0))
+    presence = getattr(observation, "presence_score", None)
+    presence_value = None if presence is None else float(presence)
+    if not math.isfinite(confidence) or (
+        presence_value is not None and not math.isfinite(presence_value)
+    ):
+        raise ValueError("official target observation score is non-finite")
+    return {
+        "candidate_uid": f"{event['event_id']}:target:{int(frame)}:{int(raw)}:{int(adapter)}",
+        "candidate_index": 0,
+        "candidate_kind": "TARGET_CORRECTION_SESSION_CANDIDATE",
+        "sequence": str(event["sequence"]),
+        "frame": int(frame),
+        "official_raw_sam_id": int(raw),
+        "adapter_external_id": int(adapter),
+        "native_tid": int(adapter),
+        "native_scope": str(target_session_scope),
+        "native_tid_scope": str(target_session_scope),
+        "box_xyxy": box.tolist(),
+        "mask_sha256": _mask_sha256(getattr(observation, "mask", None)),
+        "confidence": confidence,
+        "presence_score": presence_value,
+        "feature": None,
+        "feature_dim": None,
+        "feature_sha256": None,
+        "feature_source": None,
+        "source": str(getattr(observation, "source", "official_target_session")),
+        "source_session_id": str(session_id),
+        "target_session_scope": str(target_session_scope),
+        "human_target_scope_public_id": int(event["n72r6_target_public_id"]),
+        "correction_epoch_id": str(epoch_id),
+        "public_id": None,
+        "public_id_inference": False,
+        "runtime_future_gt_used": False,
+        "runtime_gt_read": False,
+        "posthoc_gt_used": False,
+    }
+
+
+def _frame_row_secondary(
+    event: Mapping[str, Any],
+    frame: int,
+    candidate_rows: list[dict[str, Any]],
+    *,
+    epoch_id: str,
+    session: TargetSessionAuditRef,
+    frame_path: Path,
+    main_y_pre_hash: str,
+    main_y_pre_candidate_hash: str,
+) -> dict[str, Any]:
+    """Build the historical frame schema from a lightweight session ref."""
+
+    event_frame = int(event["event_frame"])
+    return {
+        "schema_version": "N72R6_TARGET_CORRECTION_FRAME_V1",
+        "record_kind": "target_correction_session_frame",
+        "event_id": str(event["event_id"]),
+        "sequence": str(event["sequence"]),
+        "action_type": str(event["action_type"]),
+        "event_frame": event_frame,
+        "frame": int(frame),
+        "frame_horizon": int(frame - event_frame),
+        "target_session_local_frame": int(frame - event_frame),
+        "phase": "EVENT_FRAME_TARGET_SESSION" if frame == event_frame else "FUTURE_TARGET_SESSION",
+        "is_event_frame": bool(frame == event_frame),
+        "is_future_frame": bool(frame > event_frame),
+        "frame_hash_sha256": sha256_file(frame_path),
+        "candidate_rows": candidate_rows,
+        "candidate_count": len(candidate_rows),
+        "candidate_set_complete": True,
+        "candidate_stream_kind": "INDEPENDENT_ONE_TARGET_SAM3_SESSION",
+        "target_session_scope": str(session.target_session_scope),
+        "source_session_id": str(session.session_id),
+        "correction_epoch_id": str(epoch_id),
+        "human_target_scope_public_id": int(event["n72r6_target_public_id"]),
+        "main_y_pre_frozen": True,
+        "main_y_pre_semantic_hash": main_y_pre_hash,
+        "main_y_pre_candidate_content_sha256": main_y_pre_candidate_hash,
+        "event_frame_memory_read": False,
+        "memory_read": False,
+        "first_memory_visible_frame": event_frame + 1,
+        "runtime_future_gt_used": False,
+        "runtime_gt_read": False,
+        "posthoc_gt_used": False,
+        "public_id_inference": False,
+        "interaction_source": "simulated_from_gt",
+        "not_real_human_evidence": True,
+    }
+
+
 def _make_backend(device: str) -> Any:
     return __import__("sam3_intermot.backend.sam3_backend", fromlist=["Sam3Backend"]).Sam3Backend(
         checkpoint_path=str(CHECKPOINT),
@@ -237,6 +376,7 @@ def _make_backend(device: str) -> Any:
         output_prob_thresh=0.30,
         async_loading_frames=False,
         device=str(device),
+        official_batched_grounding_batch_size=1,
     )
 
 
@@ -493,11 +633,16 @@ def run_event(
     started = time_now = datetime.now(timezone.utc).timestamp()
     backend: Any | None = None
     session: TargetScopedCorrectionSession | None = None
-    encoder: FrozenMachineOSNetN72R5 | None = None
     window_handle: tempfile.TemporaryDirectory[str] | None = None
+    feature_materializer: FrozenOSNetFeatureMaterializer | None = None
     controller: LiveFutureRequeryController | None = None
     live_audit_before_close: dict[str, Any] | None = None
     live_audit_after_close: dict[str, Any] | None = None
+    memory_telemetry: dict[str, Any] = {
+        "after_target_sam": None,
+        "after_target_feature_materialization": None,
+        "during_live_sam_peak": None,
+    }
     try:
         backend = _make_backend(device)
         session = TargetScopedCorrectionSession(
@@ -527,32 +672,82 @@ def run_event(
             },
         )
         session.start(target_video_dir, main_y_pre_frozen=True)
-        encoder = FrozenMachineOSNetN72R5(device)
-        anchor = extract_human_roi_feature(sequence_paths[secondary_frame], human_box, encoder)
         session.seed_from_human_box(human_box)
         session.propagate_to(end_frame)
-        target_rows_by_frame: dict[int, list[dict[str, Any]]] = {}
+        memory_telemetry["after_target_sam"] = _cuda_memory_snapshot()
+        target_session_id = str(session.session_id)
+        target_session_scope = str(session.target_session_scope)
+        session_audit = session.audit()
+        memory_policy = backend.runtime_memory_policy()
+        target_geometry_rows_by_frame: dict[int, list[dict[str, Any]]] = {}
         for frame in range(secondary_frame, end_frame + 1):
             observation = session.candidate_at(frame)
             frame_rows: list[dict[str, Any]] = []
             if observation is not None:
-                feature = encoder.encode(sequence_paths[frame], [observation.box_xyxy.tolist()])[0]
-                frame_rows.append(_candidate_row(event, observation, frame, feature, epoch_id, session))
-            target_rows_by_frame[frame] = frame_rows
-        if not target_rows_by_frame.get(secondary_frame):
+                frame_rows.append(
+                    _candidate_geometry_row(
+                        event,
+                        observation,
+                        frame,
+                        epoch_id,
+                        session_id=target_session_id,
+                        target_session_scope=target_session_scope,
+                    )
+                )
+            target_geometry_rows_by_frame[frame] = frame_rows
+        if not target_geometry_rows_by_frame.get(secondary_frame):
             raise RuntimeError("secondary target session produced no event-frame official candidate")
-        session_audit = session.audit()
-        memory_policy = backend.runtime_memory_policy()
         c0_projection = _candidate_projection(c0_event_candidates)
         main_y_pre_hash = digest_json({"source": str(item["c0_source"]), "frame": secondary_frame, "row": c0_event_row})
         main_y_pre_candidate_hash = digest_json(c0_projection)
+
+        # Phase T1 is now complete.  Keep only plain geometry/audit records;
+        # no live official session or temporary SAM3 video remains while the
+        # frozen machine feature extractor is constructed.
+        target_session_ref = TargetSessionAuditRef(
+            session_id=target_session_id,
+            target_session_scope=target_session_scope,
+        )
+        session.close()
+        session = None
+        backend = None
+        if window_handle is not None:
+            window_handle.cleanup()
+            window_handle = None
+        gc.collect()
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
+
+        feature_materializer = FrozenOSNetFeatureMaterializer(
+            device=device,
+            frame_paths=sequence_paths,
+        )
+        anchor = feature_materializer.materialize_human_anchor(
+            frame=secondary_frame,
+            box_xyxy=human_box,
+        )
+        geometry_rows = [
+            row
+            for frame in range(secondary_frame, end_frame + 1)
+            for row in target_geometry_rows_by_frame[frame]
+        ]
+        materialized_rows = feature_materializer.materialize_rows(
+            geometry_rows,
+            feature_source="target_session_machine_roi_feature",
+        )
+        memory_telemetry["after_target_feature_materialization"] = _cuda_memory_snapshot()
+        target_rows_by_frame: dict[int, list[dict[str, Any]]] = {
+            frame: [] for frame in range(secondary_frame, end_frame + 1)
+        }
+        for row in materialized_rows:
+            target_rows_by_frame[int(row["frame"])].append(row)
         target_stream_rows = [
-            _frame_row(
+            _frame_row_secondary(
                 event,
                 frame,
                 target_rows_by_frame[frame],
                 epoch_id=epoch_id,
-                session=session,
+                session=target_session_ref,
                 frame_path=sequence_paths[frame],
                 main_y_pre_hash=main_y_pre_hash,
                 main_y_pre_candidate_hash=main_y_pre_candidate_hash,
@@ -580,18 +775,11 @@ def run_event(
                 "posthoc_gt_used": False,
             },
         )
-        predicted_box = list(target_rows_by_frame[secondary_frame + 1][0]["box_xyxy"] if target_rows_by_frame.get(secondary_frame + 1) else human_box.astype(float).tolist())
-        # Close the target-session backend before any live controller backend is
-        # created.  This is important for one-process-per-event GPU bounds.
-        session.close()
-        session = None
-        backend.close()
-        backend = None
-        del window_handle
-        window_handle = None
-        gc.collect()
-        if torch.cuda.is_available():
-            torch.cuda.empty_cache()
+        predicted_box = list(
+            target_rows_by_frame[secondary_frame + 1][0]["box_xyxy"]
+            if target_rows_by_frame.get(secondary_frame + 1)
+            else human_box.astype(float).tolist()
+        )
 
         live_payload: dict[str, Any] = {
             "schema_version": "N72R11_SECONDARY_LIVE_REQUERY_V1",
@@ -610,10 +798,16 @@ def run_event(
             "trigger_records": [],
         }
         if enable_live:
-            def feature_fn(frame: int, box: Sequence[float]) -> np.ndarray:
-                if encoder is None:
-                    raise RuntimeError("secondary machine encoder was released before live feature extraction")
-                return encoder.encode(sequence_paths[int(frame)], [list(box)])[0]
+            _reset_cuda_peak_stats()
+            def live_feature_materializer(
+                rows: Sequence[Mapping[str, Any]],
+            ) -> list[dict[str, Any]]:
+                if feature_materializer is None:
+                    raise RuntimeError("feature materializer was not initialized")
+                return feature_materializer.materialize_rows(
+                    rows,
+                    feature_source="future_frame_requery_machine_roi_feature",
+                )
 
             controller = LiveFutureRequeryController(
                 backend_factory=lambda: _make_backend(device),
@@ -622,7 +816,8 @@ def run_event(
                 event_frame=secondary_frame,
                 target_public_id=target_public_id,
                 frame_paths=sequence_paths,
-                feature_fn=feature_fn,
+                feature_fn=None,
+                post_session_feature_materializer=live_feature_materializer,
                 end_frame=end_frame,
             )
             # Check every available future frame in order.  The pre-probe pool
@@ -751,6 +946,7 @@ def run_event(
                 assigned_rows = active_rows if active_rows else current_rows
                 if assigned_rows:
                     predicted_box = list(assigned_rows[0]["box_xyxy"])
+            memory_telemetry["during_live_sam_peak"] = _cuda_memory_snapshot()
             live_payload["status"] = (
                 "PASS_LIVE_PROBE_AND_COMMIT"
                 if live_payload["future_rows"]
@@ -799,6 +995,7 @@ def run_event(
             "candidate_tape_sha256": str(item["c0_source_sha256"]),
             "target_session_audit": session_audit,
             "runtime_memory_policy": memory_policy,
+            "memory_telemetry": memory_telemetry,
             "checkpoint": str(CHECKPOINT),
             "checkpoint_sha256": sha256_file(CHECKPOINT),
             "attempt": int(attempt),
@@ -821,6 +1018,7 @@ def run_event(
             "traceback": traceback.format_exc(),
             "runtime_future_gt_used": False,
             "historical_outputs_modified": False,
+            "memory_telemetry": memory_telemetry,
             "created_at_utc": now_utc(),
         }
         atomic_json(_failure_path(output_root, event_id), failure)
@@ -843,10 +1041,10 @@ def run_event(
                 pass
         if window_handle is not None:
             window_handle.cleanup()
-        del encoder
         del session
         del backend
         del controller
+        del feature_materializer
         gc.collect()
         if torch.cuda.is_available():
             torch.cuda.empty_cache()
