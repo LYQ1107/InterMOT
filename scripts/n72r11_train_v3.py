@@ -448,14 +448,19 @@ def run_self_rollout(model: nn.Module, arrays: Mapping[str, np.ndarray], metadat
             )
             if accepted:
                 feature = candidate_features[0, top_index, :512]
-                recent.append(feature)
-                if margin >= 0.30:
-                    long_term.append(feature)
-                recent = recent[-RECENT_TRUSTED_SLOTS:]
-                long_term = long_term[-LONG_TERM_TRUSTED_SLOTS:]
+                feature_norm = float(np.linalg.norm(feature))
+                if feature.size == 512 and np.isfinite(feature).all() and feature_norm > 1.0e-6:
+                    recent.append(feature)
+                    if margin >= 0.30:
+                        long_term.append(feature)
+                    recent = recent[-RECENT_TRUSTED_SLOTS:]
+                    long_term = long_term[-LONG_TERM_TRUSTED_SLOTS:]
             if c > 1:
-                distractors.append(candidate_features[0, int(order[1]), :512])
-                distractors = distractors[-DISTRACTOR_SLOTS:]
+                distractor = candidate_features[0, int(order[1]), :512]
+                distractor_norm = float(np.linalg.norm(distractor))
+                if distractor.size == 512 and np.isfinite(distractor).all() and distractor_norm > 1.0e-6:
+                    distractors.append(distractor)
+                    distractors = distractors[-DISTRACTOR_SLOTS:]
     predicted = sum(bool(row["accepted"]) for row in records)
     return {
         "schema_version": "N72R11_CAUSAL_SELF_ROLLOUT_V1",
@@ -486,19 +491,45 @@ def stage_base(stage: str) -> dict[str, Any]:
 
 
 def main() -> int:
+    global CORPUS_ROOT, OUTPUT_ROOT, STAGE_07, STAGE_08, STAGE_09, STAGE_10, STAGE_11
+
     parser = __import__("argparse").ArgumentParser()
     parser.add_argument("--phase", choices=("smoke", "bootstrap", "self_rollout", "finetune"), required=True)
     parser.add_argument("--device", default="cuda:5")
     parser.add_argument("--batch-size", type=int, default=DEFAULT_BATCH_SIZE)
-    parser.add_argument("--bootstrap-checkpoint", type=Path, default=OUTPUT_ROOT / "v3_bootstrap.pt")
+    parser.add_argument("--corpus-root", type=Path, default=CORPUS_ROOT)
+    parser.add_argument("--output-root", type=Path, default=OUTPUT_ROOT)
+    parser.add_argument("--stage-dir", type=Path, default=ROOT / "outputs/N72R11")
+    parser.add_argument("--resource-censored", action="store_true")
+    parser.add_argument("--bootstrap-checkpoint", type=Path, default=None)
     parser.add_argument("--output-checkpoint", type=Path, default=None)
     args = parser.parse_args()
+    CORPUS_ROOT = args.corpus_root if args.corpus_root.is_absolute() else ROOT / args.corpus_root
+    OUTPUT_ROOT = args.output_root if args.output_root.is_absolute() else ROOT / args.output_root
+    stage_dir = args.stage_dir if args.stage_dir.is_absolute() else ROOT / args.stage_dir
+    STAGE_07 = stage_dir / "stage_07_training_input_audit.json"
+    STAGE_08 = stage_dir / "stage_08_training_smoke.json"
+    STAGE_09 = stage_dir / "stage_09_bootstrap_training.json"
+    STAGE_10 = stage_dir / "stage_10_causal_self_rollout.json"
+    STAGE_11 = stage_dir / "stage_11_finetune.json"
+    bootstrap_checkpoint = args.bootstrap_checkpoint
+    if bootstrap_checkpoint is None:
+        bootstrap_checkpoint = OUTPUT_ROOT / "v3_bootstrap.pt"
+    elif not bootstrap_checkpoint.is_absolute():
+        bootstrap_checkpoint = ROOT / bootstrap_checkpoint
     set_seed()
     device = device_from(str(args.device))
     phase = str(args.phase)
     stage_path = {"smoke": STAGE_08, "bootstrap": STAGE_09, "self_rollout": STAGE_10, "finetune": STAGE_11}[phase]
     status = stage_base(f"N72R11-{phase}")
+    status["resource_censored_development"] = bool(args.resource_censored)
     try:
+        corpus_manifest = read_json(CORPUS_ROOT / "corpus_manifest.json")
+        corpus_is_resource_censored = bool(corpus_manifest.get("resource_censored_development", False))
+        if corpus_is_resource_censored != bool(args.resource_censored):
+            raise RuntimeError(
+                "resource-censored corpus requires --resource-censored and cannot be used by the default production path"
+            )
         train_arrays, train_metadata, train_summary = load_split("train")
         validation_arrays, validation_metadata, validation_summary = load_split("validation")
         if phase == "smoke":
@@ -524,6 +555,7 @@ def main() -> int:
                 raise RuntimeError("smoke restored logits are non-finite")
             status.update({
                 "status": "PASS_N72R11_TRAINING_SMOKE",
+                "resource_censored_development": bool(args.resource_censored),
                 "device": str(device),
                 "example_count": count,
                 "loss": float(loss.detach().cpu()),
@@ -538,6 +570,7 @@ def main() -> int:
             audit = {
                 **stage_base("N72R11-07-TRAINING-INPUT-AUDIT"),
                 "status": "PASS_N72R11_TRAINING_INPUT_AUDIT",
+                "resource_censored_development": bool(args.resource_censored),
                 "train_summary": train_summary,
                 "validation_summary": validation_summary,
                 "fixed_sequence_split": "12 train / 6 validation from event_protocol; no frame randomization",
@@ -560,7 +593,7 @@ def main() -> int:
                 "finished_at_utc": now_utc(),
             })
         elif phase == "self_rollout":
-            checkpoint = Path(args.bootstrap_checkpoint)
+            checkpoint = bootstrap_checkpoint
             model, payload = load_checkpoint(checkpoint, device)
             rollout = run_self_rollout(model, validation_arrays, validation_metadata, device)
             output = OUTPUT_ROOT / "causal_self_rollout.json"
@@ -575,7 +608,7 @@ def main() -> int:
                 "finished_at_utc": now_utc(),
             })
         else:
-            checkpoint = Path(args.bootstrap_checkpoint)
+            checkpoint = bootstrap_checkpoint
             model, bootstrap_payload = load_checkpoint(checkpoint, device)
             history, validation = train_epochs(model, train_arrays, validation_arrays, device=device, epochs=FINETUNE_EPOCHS, batch_size=int(args.batch_size), learning_rate=FINETUNE_LEARNING_RATE, phase="finetune")
             output = args.output_checkpoint or (OUTPUT_ROOT / "v3_finetuned.pt")

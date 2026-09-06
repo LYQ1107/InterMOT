@@ -161,6 +161,7 @@ class FutureFrameRequerySession:
         feature_fn: Callable[[int, Sequence[float]], Any] | None = None,
         session_factory: Callable[..., TargetScopedCorrectionSession] = TargetScopedCorrectionSession,
         query_specs: Sequence[Mapping[str, Any]] = QUERY_SPECS,
+        streaming_propagation: bool = False,
     ) -> None:
         if not callable(backend_factory):
             raise TypeError("backend_factory must be callable and return a fresh backend")
@@ -177,6 +178,7 @@ class FutureFrameRequerySession:
         self.feature_fn = feature_fn
         self.session_factory = session_factory
         self.query_specs = tuple(deepcopy(dict(spec)) for spec in query_specs)
+        self.streaming_propagation = bool(streaming_propagation)
         if not self.query_specs:
             raise ValueError("at least one frozen query spec is required")
         self._trigger_frame: int | None = None
@@ -493,6 +495,50 @@ class FutureFrameRequerySession:
             query_box_xyxy=query_box_xyxy,
         )
 
+    def _append_streamed_frame(
+        self,
+        *,
+        observations,
+        frame,
+        query_index,
+        query_name,
+        query_box_xyxy,
+        session,
+        probe_row,
+    ) -> None:
+        """Serialize and retain one compact streamed frame."""
+
+        frame_rows = [
+            row
+            for row in (
+                self._serialize_propagated_observation(
+                    observation,
+                    frame=int(frame),
+                    query_index=int(query_index),
+                    query_name=str(query_name),
+                    query_box_xyxy=query_box_xyxy,
+                )
+                for observation in observations
+            )
+            if row is not None
+        ]
+        for row in frame_rows:
+            row["source_session_id"] = session.session_id
+            row["target_session_scope"] = session.target_session_scope
+            row["native_scope"] = session.target_session_scope
+            row["native_tid_scope"] = session.target_session_scope
+            row["probe_candidate_uid"] = str(probe_row["candidate_uid"])
+        self._future_candidates.extend(frame_rows)
+        self._future_frame_coverage.append(
+            {
+                "global_frame": int(frame),
+                "local_frame": int(frame - self.trigger_frame),
+                "candidate_count": len(frame_rows),
+                "candidate_uids": [str(row["candidate_uid"]) for row in frame_rows],
+                "runtime_future_gt_used": False,
+            }
+        )
+
     @staticmethod
     def _cleanup_backend_session(
         session: TargetScopedCorrectionSession | None,
@@ -653,41 +699,37 @@ class FutureFrameRequerySession:
             self._active_backend = backend
             self._active_session = session
             session.seed_from_human_box(prompt_box)
-            outputs = session.propagate_to(self.end_frame)
             self._future_candidates = []
             self._future_frame_coverage = []
-            for frame in range(self.trigger_frame, self.end_frame + 1):
-                observations = list(outputs.get(frame, []))
-                frame_rows = [
-                    row
-                    for row in (
-                        self._serialize_propagated_observation(
-                            observation,
-                            frame=frame,
-                            query_index=query_index,
-                            query_name=query_name,
-                            query_box_xyxy=prompt_box,
-                        )
-                        for observation in observations
+            if self.streaming_propagation:
+                def _on_frame(frame: int, observations) -> None:
+                    self._append_streamed_frame(
+                        observations=observations,
+                        frame=frame,
+                        query_index=query_index,
+                        query_name=query_name,
+                        query_box_xyxy=prompt_box,
+                        session=session,
+                        probe_row=probe_row,
                     )
-                    if row is not None
-                ]
-                for row in frame_rows:
-                    row["source_session_id"] = session.session_id
-                    row["target_session_scope"] = session.target_session_scope
-                    row["native_scope"] = session.target_session_scope
-                    row["native_tid_scope"] = session.target_session_scope
-                    row["probe_candidate_uid"] = str(probe_row["candidate_uid"])
-                self._future_candidates.extend(frame_rows)
-                self._future_frame_coverage.append(
-                    {
-                        "global_frame": int(frame),
-                        "local_frame": int(frame - self.trigger_frame),
-                        "candidate_count": len(frame_rows),
-                        "candidate_uids": [str(row["candidate_uid"]) for row in frame_rows],
-                        "runtime_future_gt_used": False,
-                    }
+
+                session.propagate_to_streaming(
+                    self.end_frame,
+                    output_callback=_on_frame,
                 )
+            else:
+                outputs = session.propagate_to(self.end_frame)
+                for frame in range(self.trigger_frame, self.end_frame + 1):
+                    observations = list(outputs.get(frame, []))
+                    self._append_streamed_frame(
+                        observations=observations,
+                        frame=frame,
+                        query_index=query_index,
+                        query_name=query_name,
+                        query_box_xyxy=prompt_box,
+                        session=session,
+                        probe_row=probe_row,
+                    )
             self._active_session_audit = session.audit()
             if not any(int(row["frame"]) == self.trigger_frame for row in self._future_candidates):
                 raise RuntimeError("selected active session did not expose a trigger-frame candidate")
@@ -736,6 +778,7 @@ class FutureFrameRequerySession:
             "predicted_box_xyxy": deepcopy(self._predicted_box),
             "causal_state": deepcopy(self._causal_state),
             "query_specs": [deepcopy(dict(spec)) for spec in self.query_specs],
+            "streaming_propagation": self.streaming_propagation,
             "query_audits": deepcopy(self._query_audits),
             "probe_candidate_count": len(self._probe_candidates),
             "probe_candidates": deepcopy(self._probe_candidates),

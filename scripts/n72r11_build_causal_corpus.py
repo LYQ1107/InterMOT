@@ -294,16 +294,25 @@ def causal_score(candidate: Mapping[str, Any], base_score: float, trusted: Seque
 
 def load_secondary_artifact(item: Mapping[str, Any], record: Mapping[str, Any]) -> tuple[dict[int, dict[str, Any]], dict[int, list[dict[str, Any]]], dict[str, Any]]:
     event_id = str(item["event_id"])
-    if record.get("status") != "PASS" or int(record.get("returncode", 1)) != 0:
+    returncode = record.get("returncode")
+    if record.get("status") != "PASS" or (returncode is not None and int(returncode) != 0):
         raise RuntimeError(f"batch record is not PASS: {event_id}:{record.get('status')}")
-    done_path = Path(str(record.get("log", ""))).parent.parent / event_id / "done.json"
-    # The manifest's log path is stable even if the output root was moved; use
-    # the recorded output root first, then the explicit hash-protected files in
-    # the done artifact.
-    output_root = Path(str(record.get("log", ""))).parent.parent
-    done_path = output_root / event_id / "done.json"
+    # R1 has two sealed manifest schemas: child records carry returncode/log,
+    # while the retry merge carries an explicit hash-protected done_artifact
+    # and intentionally omits returncode.  Prefer the explicit artifact and
+    # fall back to the child log layout without accepting an unsealed record.
+    explicit_done = record.get("done_artifact") or record.get("done")
+    done_path = Path(str(explicit_done)) if explicit_done else Path()
+    if not done_path.is_file():
+        log_value = record.get("log")
+        if not isinstance(log_value, str) or not log_value:
+            raise FileNotFoundError(f"sealed secondary done artifact is not declared: {event_id}")
+        done_path = Path(log_value).parent.parent / event_id / "done.json"
     if not done_path.is_file():
         raise FileNotFoundError(f"missing secondary done artifact: {done_path}")
+    declared_hash = record.get("done_sha256")
+    if declared_hash is not None and sha256_file(done_path) != str(declared_hash):
+        raise RuntimeError(f"batch done artifact hash mismatch: {event_id}")
     done = read_json(done_path)
     if done.get("status") != "PASS_N72R11_SECONDARY_INTERACTION":
         raise RuntimeError(f"secondary done status is not PASS: {event_id}")
@@ -716,8 +725,20 @@ def main() -> int:
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--batch-manifest", type=Path, default=BATCH_MANIFEST_PATH)
+    parser.add_argument("--resource-censored", action="store_true")
+    parser.add_argument(
+        "--resource-audit",
+        type=Path,
+        default=ROOT / "outputs/N72R11R2/resource_censoring_audit.json",
+    )
+    parser.add_argument("--output-root", type=Path, default=OUTPUT_ROOT)
+    parser.add_argument("--stage-path", type=Path, default=STAGE_PATH)
     args = parser.parse_args()
     batch_manifest_path = args.batch_manifest if args.batch_manifest.is_absolute() else ROOT / args.batch_manifest
+    resource_audit_path = args.resource_audit if args.resource_audit.is_absolute() else ROOT / args.resource_audit
+    output_root = args.output_root if args.output_root.is_absolute() else ROOT / args.output_root
+    stage_path = args.stage_path if args.stage_path.is_absolute() else ROOT / args.stage_path
+    resource_censored = bool(args.resource_censored)
     started = now_utc()
     base_status: dict[str, Any] = {
         "schema_version": "N72R11_STAGE_06_STATUS_V1",
@@ -727,22 +748,49 @@ def main() -> int:
         "interaction_source": "simulated_from_gt",
         "real_human_evidence": False,
         "not_real_human_evidence": True,
+        "resource_censored_development": resource_censored,
     }
     try:
         schedule = read_json(SCHEDULE_PATH)
-        events = [dict(value) for value in schedule.get("events", []) if value.get("status") == "ELIGIBLE"]
-        if len(events) != 527 or len({str(value["event_id"]) for value in events}) != 527:
-            raise RuntimeError(f"expected 527 eligible secondary events, found {len(events)}")
+        all_events = [dict(value) for value in schedule.get("events", []) if value.get("status") == "ELIGIBLE"]
+        if len(all_events) != 527 or len({str(value["event_id"]) for value in all_events}) != 527:
+            raise RuntimeError(f"expected 527 eligible secondary events, found {len(all_events)}")
         batch = read_json(batch_manifest_path)
         accepted_batch_statuses = {"PASS_ALL_SELECTED", "PASS_ALL_SELECTED_AFTER_RETRY"}
-        if batch.get("status") not in accepted_batch_statuses or batch.get("counts") != {"PASS": 527}:
-            raise RuntimeError(f"secondary batch is not complete PASS_ALL_SELECTED: {batch.get('status')} {batch.get('counts')}")
         batch_records = {str(value["event_id"]): value for value in batch.get("records", [])}
-        if len(batch_records) != 527:
-            raise RuntimeError(f"secondary batch record count mismatch: {len(batch_records)}")
-        if any(str(value.get("status")) != "PASS" for value in batch_records.values()):
-            raise RuntimeError("secondary batch contains a non-PASS record")
-        protocol = read_json(PROTOCOL_PATH)
+        if resource_censored:
+            resource_audit = read_json(resource_audit_path)
+            audit_counts = resource_audit.get("counts", {})
+            if resource_audit.get("status") != "PASS_RESOURCE_CENSORED_DEVELOPMENT":
+                raise RuntimeError(f"resource censor audit is not PASS: {resource_audit.get('status')}")
+            if audit_counts.get("required") != 527 or audit_counts.get("retained_executable") != 516 or audit_counts.get("resource_censored_cuda_oom") != 11:
+                raise RuntimeError(f"resource censor counts invalid: {audit_counts}")
+            retained_ids = {str(row["event_id"]) for row in resource_audit.get("retained", [])}
+            events = [item for item in all_events if str(item["event_id"]) in retained_ids]
+            if len(events) != 516 or len(retained_ids) != 516:
+                raise RuntimeError(f"resource-censored event count mismatch: {len(events)}")
+            if len(batch_records) != 527:
+                raise RuntimeError(f"sealed merged batch record count mismatch: {len(batch_records)}")
+            batch_records = {
+                event_id: value
+                for event_id, value in batch_records.items()
+                if str(value.get("status")) == "PASS"
+            }
+            if len(batch_records) != 516:
+                raise RuntimeError(f"resource-censored executable batch count mismatch: {len(batch_records)}")
+            accepted_batch_statuses = {"PARTIAL_WITH_FAILURES"}
+        else:
+            events = all_events
+            if batch.get("status") not in accepted_batch_statuses or batch.get("counts") != {"PASS": 527}:
+                raise RuntimeError(f"secondary batch is not complete PASS_ALL_SELECTED: {batch.get('status')} {batch.get('counts')}")
+            if len(batch_records) != 527:
+                raise RuntimeError(f"secondary batch record count mismatch: {len(batch_records)}")
+            if any(str(value.get("status")) != "PASS" for value in batch_records.values()):
+                raise RuntimeError("secondary batch contains a non-PASS record")
+        if batch.get("status") not in accepted_batch_statuses:
+            raise RuntimeError(f"secondary batch status is not accepted: {batch.get('status')}")
+        protocol_path = PROTOCOL_PATH
+        protocol = read_json(protocol_path)
         train_sequences = [str(value) for value in protocol.get("train_sequences", [])]
         validation_sequences = [str(value) for value in protocol.get("validation_sequences", [])]
         if len(train_sequences) != 12 or len(validation_sequences) != 6 or set(train_sequences) & set(validation_sequences):
@@ -770,27 +818,30 @@ def main() -> int:
         split_summaries: dict[str, Any] = {}
         for split in ("train", "validation"):
             arrays, rows, summary = stack_split(event_payloads[split], gt_by_sequence)
-            atomic_npz(OUTPUT_ROOT / f"{split}.npz", **arrays)
-            atomic_jsonl(OUTPUT_ROOT / f"{split}_metadata.jsonl", rows)
+            atomic_npz(output_root / f"{split}.npz", **arrays)
+            atomic_jsonl(output_root / f"{split}_metadata.jsonl", rows)
             split_summaries[split] = {
                 **summary,
-                "npz": str(OUTPUT_ROOT / f"{split}.npz"),
-                "npz_sha256": sha256_file(OUTPUT_ROOT / f"{split}.npz"),
-                "metadata": str(OUTPUT_ROOT / f"{split}_metadata.jsonl"),
-                "metadata_sha256": sha256_file(OUTPUT_ROOT / f"{split}_metadata.jsonl"),
+                "npz": str(output_root / f"{split}.npz"),
+                "npz_sha256": sha256_file(output_root / f"{split}.npz"),
+                "metadata": str(output_root / f"{split}_metadata.jsonl"),
+                "metadata_sha256": sha256_file(output_root / f"{split}_metadata.jsonl"),
             }
-        atomic_jsonl(OUTPUT_ROOT / "event_audit.jsonl", event_audit)
+        atomic_jsonl(output_root / "event_audit.jsonl", event_audit)
         manifest = {
             "schema_version": "N72R11_CAUSAL_V3_CORPUS_V1",
-            "status": "PASS_N72R11_CAUSAL_CORPUS_SEALED",
+            "status": "PASS_N72R11_RESOURCE_CENSORED_CAUSAL_CORPUS" if resource_censored else "PASS_N72R11_CAUSAL_CORPUS_SEALED",
             "created_at_utc": now_utc(),
             "source_schedule": str(SCHEDULE_PATH),
             "source_schedule_sha256": sha256_file(SCHEDULE_PATH),
             "source_batch_manifest": str(batch_manifest_path),
             "source_batch_manifest_sha256": sha256_file(batch_manifest_path),
-            "source_protocol": str(PROTOCOL_PATH),
-            "source_protocol_sha256": sha256_file(PROTOCOL_PATH),
+            "source_protocol": str(protocol_path),
+            "source_protocol_sha256": sha256_file(protocol_path),
             "event_count": len(events),
+            "required_event_count": 527,
+            "resource_censored_development": resource_censored,
+            "resource_censored_count": 11 if resource_censored else 0,
             "sequence_count": len(set(train_sequences + validation_sequences)),
             "train_sequences": train_sequences,
             "validation_sequences": validation_sequences,
@@ -805,16 +856,16 @@ def main() -> int:
             "causal_selector": "base_target_plus_anchor_similarity_geometry_presence; selected state only; no GT",
             "offline_label": "highest candidate box IoU to dataset GT >= 0.50, else NONE; attached after runtime tensors",
             "splits": split_summaries,
-            "event_audit": str(OUTPUT_ROOT / "event_audit.jsonl"),
-            "event_audit_sha256": sha256_file(OUTPUT_ROOT / "event_audit.jsonl"),
+            "event_audit": str(output_root / "event_audit.jsonl"),
+            "event_audit_sha256": sha256_file(output_root / "event_audit.jsonl"),
         }
-        atomic_json(OUTPUT_ROOT / "corpus_manifest.json", manifest)
+        atomic_json(output_root / "corpus_manifest.json", manifest)
         result = {
             **base_status,
-            "status": "PASS_N72R11_CAUSAL_CORPUS_SEALED",
+            "status": "PASS_N72R11_RESOURCE_CENSORED_CAUSAL_CORPUS" if resource_censored else "PASS_N72R11_CAUSAL_CORPUS_SEALED",
             "finished_at_utc": now_utc(),
-            "corpus_manifest": str(OUTPUT_ROOT / "corpus_manifest.json"),
-            "corpus_manifest_sha256": sha256_file(OUTPUT_ROOT / "corpus_manifest.json"),
+            "corpus_manifest": str(output_root / "corpus_manifest.json"),
+            "corpus_manifest_sha256": sha256_file(output_root / "corpus_manifest.json"),
             "event_count": len(events),
             "train_examples": int(split_summaries["train"]["example_count"]),
             "validation_examples": int(split_summaries["validation"]["example_count"]),
@@ -823,11 +874,11 @@ def main() -> int:
             "split_sequence_counts": {"train": 12, "validation": 6},
             "production_authorized": False,
         }
-        atomic_json(STAGE_PATH, result)
+        atomic_json(stage_path, result)
         print(json.dumps(result, sort_keys=True))
         return 0
     except Exception as exc:
-        failure = OUTPUT_ROOT / "attempts" / f"corpus_failure_{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}.json"
+        failure = output_root / "attempts" / f"corpus_failure_{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}.json"
         failure_payload = {
             **base_status,
             "status": "FAIL_N72R11_CAUSAL_CORPUS",
@@ -837,7 +888,7 @@ def main() -> int:
             "traceback": traceback.format_exc(),
         }
         atomic_json(failure, failure_payload)
-        atomic_json(STAGE_PATH, {**failure_payload, "failure_artifact": str(failure)})
+        atomic_json(stage_path, {**failure_payload, "failure_artifact": str(failure)})
         print(json.dumps({"status": failure_payload["status"], "failure_artifact": str(failure), "error": str(exc)}, sort_keys=True))
         return 1
 

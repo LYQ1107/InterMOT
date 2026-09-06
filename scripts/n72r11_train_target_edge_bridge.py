@@ -43,6 +43,7 @@ from scripts.n72r11_train_v3 import (  # noqa: E402
     sha256_file,
     set_seed,
 )
+import scripts.n72r11_train_v3 as train_v3_module  # noqa: E402
 
 
 OUTPUT_ROOT = ROOT / "outputs/N72R11/training_v3"
@@ -208,21 +209,45 @@ def stage_base(stage: str) -> dict[str, Any]:
 
 
 def main() -> int:
+    global OUTPUT_ROOT, STAGE_12, STAGE_13, BRIDGE_CHECKPOINT
+
     parser = __import__("argparse").ArgumentParser()
     parser.add_argument("--phase", choices=("smoke", "train"), required=True)
     parser.add_argument("--device", default="cuda:5")
-    parser.add_argument("--scorer-checkpoint", type=Path, default=OUTPUT_ROOT / "v3_bootstrap.pt")
+    parser.add_argument("--corpus-root", type=Path, default=CORPUS_ROOT)
+    parser.add_argument("--output-root", type=Path, default=OUTPUT_ROOT)
+    parser.add_argument("--stage-dir", type=Path, default=ROOT / "outputs/N72R11")
+    parser.add_argument("--resource-censored", action="store_true")
+    parser.add_argument("--scorer-checkpoint", type=Path, default=None)
     parser.add_argument("--batch-size", type=int, default=DEFAULT_BATCH_SIZE)
     args = parser.parse_args()
+    corpus_root = args.corpus_root if args.corpus_root.is_absolute() else ROOT / args.corpus_root
+    OUTPUT_ROOT = args.output_root if args.output_root.is_absolute() else ROOT / args.output_root
+    stage_dir = args.stage_dir if args.stage_dir.is_absolute() else ROOT / args.stage_dir
+    STAGE_12 = stage_dir / "stage_12_bridge_smoke.json"
+    STAGE_13 = stage_dir / "stage_13_bridge_training.json"
+    BRIDGE_CHECKPOINT = OUTPUT_ROOT / "target_edge_bridge.pt"
+    scorer_checkpoint = args.scorer_checkpoint
+    if scorer_checkpoint is None:
+        scorer_checkpoint = OUTPUT_ROOT / "v3_bootstrap.pt"
+    elif not scorer_checkpoint.is_absolute():
+        scorer_checkpoint = ROOT / scorer_checkpoint
+    train_v3_module.CORPUS_ROOT = corpus_root
     set_seed(BRIDGE_SEED)
     device = device_from(str(args.device))
     stage_path = STAGE_12 if args.phase == "smoke" else STAGE_13
     status = stage_base(f"N72R11-{args.phase.upper()}-BRIDGE")
+    status["resource_censored_development"] = bool(args.resource_censored)
     try:
+        corpus_manifest = read_json(corpus_root / "corpus_manifest.json")
+        if bool(corpus_manifest.get("resource_censored_development", False)) != bool(args.resource_censored):
+            raise RuntimeError(
+                "resource-censored corpus requires --resource-censored and cannot use the default production path"
+            )
         train_arrays, train_metadata, train_summary = load_split("train")
         validation_arrays, validation_metadata, validation_summary = load_split("validation")
-        train_logits = frozen_scorer_logits(Path(args.scorer_checkpoint), train_arrays, device, int(args.batch_size))
-        validation_logits = frozen_scorer_logits(Path(args.scorer_checkpoint), validation_arrays, device, int(args.batch_size))
+        train_logits = frozen_scorer_logits(scorer_checkpoint, train_arrays, device, int(args.batch_size))
+        validation_logits = frozen_scorer_logits(scorer_checkpoint, validation_arrays, device, int(args.batch_size))
         train_features = bridge_features(train_arrays, train_logits)
         validation_features = bridge_features(validation_arrays, validation_logits)
         if args.phase == "smoke":
@@ -239,12 +264,13 @@ def main() -> int:
                 raise RuntimeError("bridge smoke output is non-finite")
             status.update({
                 "status": "PASS_N72R11_BRIDGE_SMOKE",
+                "resource_censored_development": bool(args.resource_censored),
                 "device": str(device),
                 "input_dim": BRIDGE_INPUT_DIM,
                 "residual_scale": float(scale),
                 "sample_count": sample,
-                "scorer_checkpoint": str(args.scorer_checkpoint),
-                "scorer_checkpoint_sha256": sha256_file(Path(args.scorer_checkpoint)),
+                "scorer_checkpoint": str(scorer_checkpoint),
+                "scorer_checkpoint_sha256": sha256_file(scorer_checkpoint),
                 "feature_shapes": {"train": list(train_features.shape), "validation": list(validation_features.shape)},
                 "finished_at_utc": now_utc(),
             })
@@ -297,8 +323,8 @@ def main() -> int:
                     "positive_competition_weight": POSITIVE_COMPETITION_WEIGHT,
                     "checkpoint_selection": "single preregistered train-only bridge run",
                 },
-                "scorer_checkpoint": str(args.scorer_checkpoint),
-                "scorer_checkpoint_sha256": sha256_file(Path(args.scorer_checkpoint)),
+                "scorer_checkpoint": str(scorer_checkpoint),
+                "scorer_checkpoint_sha256": sha256_file(scorer_checkpoint),
                 "train_summary": train_summary,
                 "validation_summary": validation_summary,
                 "history": history,
@@ -310,6 +336,7 @@ def main() -> int:
             atomic_torch(BRIDGE_CHECKPOINT, checkpoint_payload)
             status.update({
                 "status": "PASS_N72R11_BRIDGE_TRAINING",
+                "resource_censored_development": bool(args.resource_censored),
                 "device": str(device),
                 "checkpoint": str(BRIDGE_CHECKPOINT),
                 "checkpoint_sha256": sha256_file(BRIDGE_CHECKPOINT),

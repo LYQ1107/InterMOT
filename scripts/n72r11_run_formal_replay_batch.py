@@ -107,6 +107,7 @@ def main() -> int:
     parser.add_argument("--max-workers", type=int, default=4)
     parser.add_argument("--gpu-ids", default=",".join(str(value) for value in DEFAULT_GPUS))
     parser.add_argument("--event-id", action="append", default=None)
+    parser.add_argument("--resource-censored", action="store_true")
     args = parser.parse_args()
     output_root = args.output_root if args.output_root.is_absolute() else ROOT / args.output_root
     model_path = args.model_checkpoint if args.model_checkpoint.is_absolute() else ROOT / args.model_checkpoint
@@ -167,6 +168,7 @@ def main() -> int:
                 "runtime_future_gt_used": False,
                 "interaction_source": "simulated_from_gt",
                 "not_real_human_evidence": True,
+                "resource_censored_development": bool(args.resource_censored),
                 "records": [records[event_id] for event_id in sorted(records)],
                 "counts": counts,
             },

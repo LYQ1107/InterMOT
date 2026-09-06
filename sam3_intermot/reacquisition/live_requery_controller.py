@@ -69,6 +69,7 @@ class LiveFutureRequeryController:
         post_session_feature_materializer: Callable[
             [Sequence[Mapping[str, Any]]], list[dict[str, Any]]
         ] | None = None,
+        streaming_propagation: bool = False,
     ) -> None:
         if not callable(backend_factory):
             raise TypeError("backend_factory must be callable")
@@ -89,6 +90,7 @@ class LiveFutureRequeryController:
         self.frame_paths = frame_paths
         self.feature_fn = feature_fn
         self.post_session_feature_materializer = post_session_feature_materializer
+        self.streaming_propagation = bool(streaming_propagation)
         self._post_session_feature_materializer_enabled = (
             post_session_feature_materializer is not None
         )
@@ -152,6 +154,7 @@ class LiveFutureRequeryController:
                 if self.post_session_feature_materializer is not None
                 else self.feature_fn
             ),
+            streaming_propagation=self.streaming_propagation,
         )
         self.trigger_count += 1
         self.requery_sessions_started += 1
@@ -288,6 +291,7 @@ class LiveFutureRequeryController:
             "retired_source_count": self._retired_source_count,
             "pending_probe_count": len(self._pending_probe_rows),
             "post_session_feature_materializer": self._post_session_feature_materializer_enabled,
+            "streaming_propagation": self.streaming_propagation,
             "feature_materialization_phase": (
                 "after_sam3_session_release"
                 if self._post_session_feature_materializer_enabled

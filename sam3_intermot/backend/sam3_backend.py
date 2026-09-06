@@ -61,6 +61,7 @@ class Sam3Backend(PromptVideoTrackerBackend):
         async_loading_frames: bool = False,
         device: str = "cuda",
         official_batched_grounding_batch_size: Optional[int] = None,
+        trim_past_non_cond_mem_for_eval: bool = False,
     ) -> None:
         self.checkpoint_path = str(checkpoint_path) if checkpoint_path else None
         self.max_num_objects = max_num_objects
@@ -81,6 +82,9 @@ class Sam3Backend(PromptVideoTrackerBackend):
             )
         else:
             self.official_batched_grounding_batch_size = None
+        self.trim_past_non_cond_mem_for_eval = bool(
+            trim_past_non_cond_mem_for_eval
+        )
         self._predictor = None
         self._session_id: Optional[str] = None
         self._frame_h = 0
@@ -94,6 +98,10 @@ class Sam3Backend(PromptVideoTrackerBackend):
         self._prompt_fallback_log: List[dict] = []
         self._resume_repair_log: List[dict] = []
         self._last_recovery_failure: Optional[dict] = None
+        self._official_trim_target_refs: list[object] = []
+        self._official_trim_warmup_frames: Optional[int] = None
+        self._official_trim_schema_blockers: list[dict] = []
+        self._official_trim_enabled_frame_count = 0
 
     # ------------------------------------------------------------------
     def _require_checkpoint(self) -> None:
@@ -138,6 +146,8 @@ class Sam3Backend(PromptVideoTrackerBackend):
         tracker_models = [tracker]
         if tracker is not None and hasattr(tracker, "model"):
             tracker_models.append(tracker.model)
+        trim_targets: list[str] = []
+        self._official_trim_target_refs = []
         for tm in tracker_models:
             if tm is None:
                 continue
@@ -147,6 +157,24 @@ class Sam3Backend(PromptVideoTrackerBackend):
             # memory is a runtime adapter setting (no source modification).
             if hasattr(tm, "offload_output_to_cpu_for_eval"):
                 tm.offload_output_to_cpu_for_eval = True
+            if self.trim_past_non_cond_mem_for_eval:
+                if hasattr(tm, "trim_past_non_cond_mem_for_eval"):
+                    num_correct = int(
+                        getattr(tm, "num_frames_to_correct_for_eval", 1)
+                    )
+                    if num_correct > 1:
+                        raise RuntimeError(
+                            "official trim_past_non_cond_mem_for_eval requires "
+                            "num_frames_to_correct_for_eval <= 1"
+                        )
+                    tm.trim_past_non_cond_mem_for_eval = True
+                    trim_targets.append(type(tm).__name__)
+                    self._official_trim_target_refs.append(tm)
+        if self.trim_past_non_cond_mem_for_eval and not trim_targets:
+            raise RuntimeError(
+                "requested official trim_past_non_cond_mem_for_eval but pinned "
+                "tracker exposes no supported target"
+            )
         if self.official_batched_grounding_batch_size is not None:
             batch_targets = [
                 self._predictor.model,
@@ -185,7 +213,15 @@ class Sam3Backend(PromptVideoTrackerBackend):
             # uses process isolation instead of an unsupported mixed-device
             # state.  Keep this false and explicit in every tape artifact.
             "offload_state_to_cpu": False,
-            "trim_past_non_cond_mem_for_eval": False,
+            "trim_past_non_cond_mem_for_eval": bool(
+                self.trim_past_non_cond_mem_for_eval
+            ),
+            "trim_past_non_cond_mem_targets": sorted(set(trim_targets)),
+            "official_trim_warmup": "adapter_delays_activation_until_first_non_conditioning_past_output",
+            "official_trim_warmup_frames": None,
+            "official_trim_schema_blockers": [],
+            "official_trim_enabled_frame_count": 0,
+            "streaming_adapter_cache": "caller_controlled",
             "official_batched_grounding": self.official_batched_grounding_batch_size is not None,
             "official_batched_grounding_batch_size": self.official_batched_grounding_batch_size,
             "official_batched_grounding_target": self._official_batched_grounding_target,
@@ -662,8 +698,66 @@ class Sam3Backend(PromptVideoTrackerBackend):
         # while the caller creates the differentiable LoRA state.  Such a
         # state reports ``requires_grad=True`` but produces no autograd graph.
         stream = self._predictor.handle_stream_request(request=req)
+        self._official_trim_schema_blockers = []
+        self._official_trim_enabled_frame_count = 0
+        trim_activation_frame: Optional[int] = None
+        trim_monitoring_started = False
+        next_frame_hint = int(start_idx)
+        if self.trim_past_non_cond_mem_for_eval and self._official_trim_target_refs:
+            num_maskmem = max(
+                int(getattr(target, "num_maskmem", 0))
+                for target in self._official_trim_target_refs
+            )
+            # The pinned trim helper assumes every past output has the
+            # interactive ``multistep_point_inputs`` field.  The first
+            # conditioning prompt output does not carry that field, so let
+            # the initial non-conditioning outputs establish the history and
+            # activate the same official trim flag before the next frame.
+            trim_activation_frame = int(start_idx) + max(num_maskmem, 0) + 1
+            self._official_trim_warmup_frames = max(num_maskmem, 0) + 1
+            if isinstance(getattr(self, "_runtime_memory_policy", None), dict):
+                self._runtime_memory_policy["official_trim_warmup_frames"] = (
+                    self._official_trim_warmup_frames
+                )
+            self._set_official_trim(False)
         try:
-            for response in stream:
+            iterator = iter(stream)
+            while True:
+                if (
+                    self.trim_past_non_cond_mem_for_eval
+                    and (
+                        trim_monitoring_started
+                        or (
+                            trim_activation_frame is not None
+                            and next_frame_hint >= trim_activation_frame
+                        )
+                    )
+                ):
+                    blockers = self._official_trim_schema_blockers_for_frame(
+                        next_frame_hint
+                    )
+                    if not blockers:
+                        self._set_official_trim(True)
+                        trim_monitoring_started = True
+                        self._official_trim_enabled_frame_count += 1
+                        if isinstance(getattr(self, "_runtime_memory_policy", None), dict):
+                            self._runtime_memory_policy[
+                                "official_trim_enabled_frame_count"
+                            ] = self._official_trim_enabled_frame_count
+                        trim_activation_frame = None
+                    else:
+                        for blocker in blockers:
+                            if blocker not in self._official_trim_schema_blockers:
+                                self._official_trim_schema_blockers.append(blocker)
+                        self._set_official_trim(False)
+                        if isinstance(getattr(self, "_runtime_memory_policy", None), dict):
+                            self._runtime_memory_policy["official_trim_schema_blockers"] = (
+                                list(self._official_trim_schema_blockers)
+                            )
+                try:
+                    response = next(iterator)
+                except StopIteration:
+                    break
                 frame_idx = int(response["frame_index"])
                 if frame_idx > end_frame:
                     break
@@ -685,11 +779,94 @@ class Sam3Backend(PromptVideoTrackerBackend):
                     )
                 if cache_outputs or output_callback is None:
                     outputs[frame_idx] = obs_list
+                next_frame_hint = frame_idx + 1
         finally:
             close = getattr(stream, "close", None)
             if close is not None:
                 close()
+            if self.trim_past_non_cond_mem_for_eval:
+                self._set_official_trim(True)
         return outputs
+
+    def _set_official_trim(self, enabled: bool) -> None:
+        """Set the verified official trim flag on all exposed tracker targets."""
+
+        for target in self._official_trim_target_refs:
+            target.trim_past_non_cond_mem_for_eval = bool(enabled)
+
+    def _official_trim_schema_blockers_for_frame(self, frame_idx: int) -> list[dict]:
+        """Return adapter-visible reasons the pinned official trim is unsafe.
+
+        The official helper indexes ``past_out["multistep_point_inputs"]``
+        without a presence check.  Some official interactive/reconditioning
+        outputs are valid ``StageOutput`` dictionaries without that optional
+        training-only field.  Inspect only the exposed inference state and
+        keep the official flag disabled for the affected step; never mutate or
+        remove the continuation state.
+        """
+
+        if self._predictor is None or self._session_id is None:
+            return [{"reason": "official_session_state_unavailable"}]
+        states = getattr(self._predictor, "_all_inference_states", {})
+        session = states.get(self._session_id)
+        if not isinstance(session, dict) or not isinstance(session.get("state"), dict):
+            return [{"reason": "official_session_state_unavailable"}]
+        inference_state = session["state"]
+        tracker_states = inference_state.get("sam2_inference_states")
+        if not isinstance(tracker_states, list):
+            return [{"reason": "official_tracker_states_uninspectable"}]
+        if not self._official_trim_target_refs:
+            return [{"reason": "official_trim_target_unavailable"}]
+        target = self._official_trim_target_refs[0]
+        stride = int(getattr(target, "memory_temporal_stride_for_eval", 1))
+        num_maskmem = int(getattr(target, "num_maskmem", 0))
+        past_frame_idx = int(frame_idx) - stride * num_maskmem
+        blockers: list[dict] = []
+        for state_index, tracker_state in enumerate(tracker_states):
+            if not isinstance(tracker_state, dict):
+                blockers.append(
+                    {
+                        "reason": "official_tracker_state_uninspectable",
+                        "state_index": int(state_index),
+                    }
+                )
+                continue
+            output_dict = tracker_state.get("output_dict")
+            if not isinstance(output_dict, dict):
+                blockers.append(
+                    {
+                        "reason": "official_tracker_output_dict_uninspectable",
+                        "state_index": int(state_index),
+                    }
+                )
+                continue
+            non_cond = output_dict.get("non_cond_frame_outputs")
+            if not isinstance(non_cond, dict):
+                blockers.append(
+                    {
+                        "reason": "official_non_cond_outputs_uninspectable",
+                        "state_index": int(state_index),
+                    }
+                )
+                continue
+            past_out = non_cond.get(past_frame_idx)
+            if past_out is not None and (
+                not isinstance(past_out, dict)
+                or "multistep_point_inputs" not in past_out
+            ):
+                blockers.append(
+                    {
+                        "reason": "past_output_missing_multistep_point_inputs",
+                        "state_index": int(state_index),
+                        "past_frame_idx": int(past_frame_idx),
+                        "past_output_keys": sorted(
+                            str(key) for key in past_out.keys()
+                        )
+                        if isinstance(past_out, dict)
+                        else None,
+                    }
+                )
+        return blockers
 
     def _prepare_resumable_official_stream(self, start_frame: int, end_frame: int) -> None:
         """Repair the pinned multiplex fetch/full-propagation transition.

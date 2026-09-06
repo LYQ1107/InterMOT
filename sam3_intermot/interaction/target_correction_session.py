@@ -73,6 +73,10 @@ class TargetScopedCorrectionSession:
     _recovery_attempts: List[dict[str, Any]] = field(default_factory=list)
     _target_raw_sam_id: Optional[int] = None
     _official_extra_object_audit: list[dict[str, Any]] = field(default_factory=list)
+    _streaming_propagation_used: bool = False
+    _streaming_frame_count: int = 0
+    _streaming_candidate_count: int = 0
+    _streaming_backend_cache_outputs: Optional[bool] = None
     _closed: bool = False
 
     def __post_init__(self) -> None:
@@ -237,6 +241,92 @@ class TargetScopedCorrectionSession:
         if end < self.event_frame:
             raise ValueError("end_frame must include the event frame")
         return self.propagate_from(self.event_frame, end)
+
+    def propagate_to_streaming(
+        self,
+        end_frame: int,
+        *,
+        output_callback,
+    ) -> None:
+        """Propagate a target-only suffix without retaining future observations.
+
+        The callback receives sequence-global frame numbers and a short-lived
+        copied list of target-only official observations.  The event-frame
+        prompt row is emitted first, while future rows are forwarded directly
+        from the backend callback and are never inserted into
+        ``_official_by_frame``.
+        """
+
+        if not callable(output_callback):
+            raise TypeError("output_callback must be callable")
+        if not self.seeded or self.session_id is None:
+            raise RuntimeError("seed_from_human_box() must precede propagation")
+        end = int(end_frame)
+        if end < self.event_frame:
+            raise ValueError("end_frame must include the event frame")
+        self.propagate_from_streaming(
+            self.event_frame,
+            end,
+            output_callback=output_callback,
+        )
+
+    def propagate_from_streaming(
+        self,
+        start_frame: int,
+        end_frame: int,
+        *,
+        output_callback,
+    ) -> None:
+        """Stream a causal target-only range through a caller callback."""
+
+        if not callable(output_callback):
+            raise TypeError("output_callback must be callable")
+        if not self.seeded or self.session_id is None:
+            raise RuntimeError("seed_from_human_box() must precede propagation")
+        start = int(start_frame)
+        end = int(end_frame)
+        if start < self.event_frame or end < start:
+            raise ValueError("propagation range must be within event_frame..end_frame")
+
+        self._streaming_propagation_used = True
+        self._streaming_backend_cache_outputs = False
+        local_start = self._local_frame(start)
+        local_end = self._local_frame(end)
+
+        if start == self.event_frame:
+            event_rows = self._copy_rows(
+                self._official_by_frame.get(self.session_event_frame, [])
+            )
+            output_callback(self.event_frame, event_rows)
+            self._streaming_frame_count += 1
+            self._streaming_candidate_count += len(event_rows)
+
+        def _on_backend_frame(
+            local_frame: int,
+            rows: list[PromptObjectObservation],
+        ) -> None:
+            # The official stream can emit the prompt frame again.  The
+            # explicit prompt row above is the only transport row allowed at
+            # that causal boundary.
+            if (
+                int(local_frame) == self.session_event_frame
+                and self._official_by_frame.get(self.session_event_frame)
+            ):
+                return
+            target_rows = self._target_only_rows(int(local_frame), rows)
+            global_frame = self._global_frame(int(local_frame))
+            output_callback(global_frame, self._copy_rows(target_rows))
+            self._streaming_frame_count += 1
+            self._streaming_candidate_count += len(target_rows)
+
+        self.backend.propagate(
+            local_start,
+            local_end,
+            start_frame_index=local_start,
+            keep_masks=True,
+            cache_outputs=False,
+            output_callback=_on_backend_frame,
+        )
 
     def propagate_from(self, start_frame: int, end_frame: int) -> dict[int, list[PromptObjectObservation]]:
         """Propagate a target-only suffix from an explicit global frame.
@@ -454,6 +544,10 @@ class TargetScopedCorrectionSession:
             "public_id_inference": False,
             "recovery_audit": deepcopy(self._recovery_audit),
             "recovery_attempts": deepcopy(self._recovery_attempts),
+            "streaming_propagation_used": self._streaming_propagation_used,
+            "streaming_frame_count": self._streaming_frame_count,
+            "streaming_candidate_count": self._streaming_candidate_count,
+            "streaming_backend_cache_outputs": self._streaming_backend_cache_outputs,
             "closed": self._closed,
             "prompt_fallback_log": deepcopy(getattr(self.backend, "_prompt_fallback_log", [])),
             "resume_repair_log": deepcopy(getattr(self.backend, "_resume_repair_log", [])),

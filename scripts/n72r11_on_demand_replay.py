@@ -608,6 +608,7 @@ def _make_backend(device: str) -> Sam3Backend:
         async_loading_frames=False,
         device=device,
         official_batched_grounding_batch_size=1,
+        trim_past_non_cond_mem_for_eval=True,
     )
 
 
@@ -630,6 +631,7 @@ def _make_live_controller(inputs: Mapping[str, Any], *, end_frame: int, device: 
         frame_paths=paths,
         feature_fn=feature_fn,
         end_frame=int(end_frame),
+        streaming_propagation=True,
     )
 
 

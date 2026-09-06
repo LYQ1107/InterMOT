@@ -363,11 +363,16 @@ def _frame_row_secondary(
     }
 
 
-def _make_backend(device: str) -> Any:
+def _make_backend(
+    device: str,
+    *,
+    max_num_objects: int = 16,
+    multiplex_count: int = 16,
+) -> Any:
     return __import__("sam3_intermot.backend.sam3_backend", fromlist=["Sam3Backend"]).Sam3Backend(
         checkpoint_path=str(CHECKPOINT),
-        max_num_objects=16,
-        multiplex_count=16,
+        max_num_objects=int(max_num_objects),
+        multiplex_count=int(multiplex_count),
         use_fa3=False,
         use_rope_real=True,
         compile=False,
@@ -377,6 +382,7 @@ def _make_backend(device: str) -> Any:
         async_loading_frames=False,
         device=str(device),
         official_batched_grounding_batch_size=1,
+        trim_past_non_cond_mem_for_eval=True,
     )
 
 
@@ -591,6 +597,8 @@ def run_event(
     output_root: Path,
     horizon_override: int | None = None,
     enable_live: bool = True,
+    max_num_objects: int = 16,
+    multiplex_count: int = 16,
 ) -> dict[str, Any]:
     item = _load_schedule(event_id)
     secondary_frame = int(item["secondary_frame"])
@@ -644,7 +652,11 @@ def run_event(
         "during_live_sam_peak": None,
     }
     try:
-        backend = _make_backend(device)
+        backend = _make_backend(
+            device,
+            max_num_objects=int(max_num_objects),
+            multiplex_count=int(multiplex_count),
+        )
         session = TargetScopedCorrectionSession(
             backend=backend,
             event_id=event_id,
@@ -673,28 +685,33 @@ def run_event(
         )
         session.start(target_video_dir, main_y_pre_frozen=True)
         session.seed_from_human_box(human_box)
-        session.propagate_to(end_frame)
-        memory_telemetry["after_target_sam"] = _cuda_memory_snapshot()
         target_session_id = str(session.session_id)
         target_session_scope = str(session.target_session_scope)
+        target_geometry_rows_by_frame: dict[int, list[dict[str, Any]]] = {
+            frame: [] for frame in range(secondary_frame, end_frame + 1)
+        }
+
+        def _target_stream_callback(frame: int, observations: Sequence[Any]) -> None:
+            rows = [
+                _candidate_geometry_row(
+                    event,
+                    observation,
+                    int(frame),
+                    epoch_id,
+                    session_id=target_session_id,
+                    target_session_scope=target_session_scope,
+                )
+                for observation in observations
+            ]
+            target_geometry_rows_by_frame[int(frame)] = rows
+
+        session.propagate_to_streaming(
+            end_frame,
+            output_callback=_target_stream_callback,
+        )
+        memory_telemetry["after_target_sam"] = _cuda_memory_snapshot()
         session_audit = session.audit()
         memory_policy = backend.runtime_memory_policy()
-        target_geometry_rows_by_frame: dict[int, list[dict[str, Any]]] = {}
-        for frame in range(secondary_frame, end_frame + 1):
-            observation = session.candidate_at(frame)
-            frame_rows: list[dict[str, Any]] = []
-            if observation is not None:
-                frame_rows.append(
-                    _candidate_geometry_row(
-                        event,
-                        observation,
-                        frame,
-                        epoch_id,
-                        session_id=target_session_id,
-                        target_session_scope=target_session_scope,
-                    )
-                )
-            target_geometry_rows_by_frame[frame] = frame_rows
         if not target_geometry_rows_by_frame.get(secondary_frame):
             raise RuntimeError("secondary target session produced no event-frame official candidate")
         c0_projection = _candidate_projection(c0_event_candidates)
@@ -810,7 +827,11 @@ def run_event(
                 )
 
             controller = LiveFutureRequeryController(
-                backend_factory=lambda: _make_backend(device),
+                backend_factory=lambda: _make_backend(
+                    device,
+                    max_num_objects=int(max_num_objects),
+                    multiplex_count=int(multiplex_count),
+                ),
                 sequence=sequence,
                 event_id=event_id,
                 event_frame=secondary_frame,
@@ -819,6 +840,7 @@ def run_event(
                 feature_fn=None,
                 post_session_feature_materializer=live_feature_materializer,
                 end_frame=end_frame,
+                streaming_propagation=True,
             )
             # Check every available future frame in order.  The pre-probe pool
             # includes only already emitted main/current/active rows; a newly
@@ -998,6 +1020,10 @@ def run_event(
             "memory_telemetry": memory_telemetry,
             "checkpoint": str(CHECKPOINT),
             "checkpoint_sha256": sha256_file(CHECKPOINT),
+            "backend_model_config": {
+                "max_num_objects": int(max_num_objects),
+                "multiplex_count": int(multiplex_count),
+            },
             "attempt": int(attempt),
             "horizon_override": None if horizon_override is None else int(horizon_override),
             "engineering_smoke_only": horizon_override is not None,
@@ -1018,6 +1044,10 @@ def run_event(
             "traceback": traceback.format_exc(),
             "runtime_future_gt_used": False,
             "historical_outputs_modified": False,
+            "backend_model_config": {
+                "max_num_objects": int(max_num_objects),
+                "multiplex_count": int(multiplex_count),
+            },
             "memory_telemetry": memory_telemetry,
             "created_at_utc": now_utc(),
         }
@@ -1058,6 +1088,8 @@ def main() -> int:
     parser.add_argument("--output-root", type=Path, default=DEFAULT_OUTPUT_ROOT)
     parser.add_argument("--horizon", type=int, default=None)
     parser.add_argument("--disable-live", action="store_true")
+    parser.add_argument("--max-num-objects", type=int, default=16)
+    parser.add_argument("--multiplex-count", type=int, default=16)
     args = parser.parse_args()
     try:
         result = run_event(
@@ -1067,6 +1099,8 @@ def main() -> int:
             output_root=args.output_root,
             horizon_override=None if args.horizon is None else int(args.horizon),
             enable_live=not bool(args.disable_live),
+            max_num_objects=int(args.max_num_objects),
+            multiplex_count=int(args.multiplex_count),
         )
         print(json.dumps({"status": result["status"], "event_id": result["event_id"], "frame_count": result["frame_count"]}, ensure_ascii=False))
         return 0
