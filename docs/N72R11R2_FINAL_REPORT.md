@@ -334,9 +334,11 @@ N72R11R2 evidence required by this report.
 Code changes were made in the isolated Git worktree
 `/data2/usr_for_deadline/SAM3_InterMOT_N72R5/worktree`, on branch
 `codex/n72r11r2-streaming-memory`, with remote
-`https://github.com/LYQ1107/InterMOT.git`. The final commit and remote branch
-verification are recorded after the final self-check. The new scripts are
-also included:
+`https://github.com/LYQ1107/InterMOT.git`. The implementation commit containing
+the new scripts and report baseline was pushed and verified as
+`f76dbd0176210fbc0252d88e6295384dee4d92a4`; the final documentation correction
+is pushed immediately afterward on the same branch. The new scripts are also
+included:
 
 - `scripts/n72r11r2_audit_formal_replay.py`
 - `scripts/n72r11r2_aggregate_formal_metrics.py`
