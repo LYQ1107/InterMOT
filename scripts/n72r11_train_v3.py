@@ -40,6 +40,16 @@ from sam3_intermot.reacquisition.models.n72r11_temporal_v3 import (  # noqa: E40
     TEMPORAL_FEATURE_DIM,
     n72r11_loss,
 )
+from sam3_intermot.reacquisition.temporal_state_policy import (  # noqa: E402
+    TEMPORAL_FEATURE_SCHEMA,
+    TemporalIdentityState,
+    build_temporal_features,
+    initialize_temporal_state,
+    state_audit,
+    state_memory_arrays,
+    update_temporal_state,
+)
+from sam3_intermot.association.target_edge_interface import select_candidate_from_logits  # noqa: E402
 
 
 CORPUS_ROOT = ROOT / "outputs/N72R11/training_v3"
@@ -124,6 +134,21 @@ def read_json(path: Path) -> dict[str, Any]:
 
 def read_jsonl(path: Path) -> list[dict[str, Any]]:
     return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
+
+
+def optional_state_feature(value: Any) -> np.ndarray | None:
+    """Translate the corpus zero-fill encoding into a causal state value.
+
+    Candidate tokens keep their fixed-width zero-filled embedding and explicit
+    availability scalar.  The shared temporal policy must see an absent
+    embedding as ``None`` so it cannot admit a fabricated unit vector into
+    trusted or distractor memory.
+    """
+
+    array = np.asarray(value, dtype=np.float32).reshape(-1)
+    if array.size != 512 or not np.isfinite(array).all():
+        raise RuntimeError("state candidate feature must be finite 512-D")
+    return None if float(np.linalg.norm(array)) <= 1.0e-6 else array
 
 
 def set_seed(seed: int = SEED) -> None:
@@ -218,6 +243,8 @@ def load_split(split: str) -> tuple[dict[str, np.ndarray], list[dict[str, Any]],
             raise RuntimeError(f"{split} metadata provenance violation at {index}")
         if int(row.get("label_index_raw", -1)) < 0 or int(row["label_index_raw"]) > len(row.get("candidate_uids", [])):
             raise RuntimeError(f"{split} metadata label outside candidate/NONE axis at {index}")
+        if row.get("temporal_feature_schema") != list(TEMPORAL_FEATURE_SCHEMA):
+            raise RuntimeError(f"{split} temporal feature schema mismatch at {index}")
     summary = {
         "split": split,
         "examples": n,
@@ -282,8 +309,13 @@ def train_epochs(
     batch_size: int,
     learning_rate: float,
     phase: str,
+    example_weights: np.ndarray | None = None,
 ) -> tuple[list[dict[str, Any]], dict[str, float]]:
     optimizer = torch.optim.AdamW(model.parameters(), lr=float(learning_rate), weight_decay=WEIGHT_DECAY)
+    if example_weights is not None:
+        example_weights = np.asarray(example_weights, dtype=np.float32).reshape(-1)
+        if example_weights.shape != (int(train_arrays["labels"].shape[0]),) or not np.isfinite(example_weights).all() or np.any(example_weights <= 0.0):
+            raise ValueError("example_weights must be finite positive and aligned with train examples")
     history: list[dict[str, Any]] = []
     generator = np.random.default_rng(SEED + (1 if phase == "finetune" else 0))
     global_step = 0
@@ -305,6 +337,7 @@ def train_epochs(
                 none_weight=NONE_WEIGHT,
                 pairwise_weight=PAIRWISE_WEIGHT,
                 pairwise_margin=PAIRWISE_MARGIN,
+                example_weight=None if example_weights is None else torch.as_tensor(example_weights[indices], device=device),
             )
             if not torch.isfinite(loss):
                 raise RuntimeError(f"non-finite {phase} loss at epoch={epoch} step={global_step}")
@@ -331,10 +364,19 @@ def train_epochs(
     return history, evaluate(model, validation_arrays, batch_size, device)
 
 
-def checkpoint_payload(model: nn.Module, *, phase: str, history: Sequence[Mapping[str, Any]], train_summary: Mapping[str, Any], validation_summary: Mapping[str, Any]) -> dict[str, Any]:
+def checkpoint_payload(
+    model: nn.Module,
+    *,
+    phase: str,
+    history: Sequence[Mapping[str, Any]],
+    train_summary: Mapping[str, Any],
+    validation_summary: Mapping[str, Any],
+    training_weighting: Mapping[str, Any] | None = None,
+) -> dict[str, Any]:
     return {
         "schema_version": "N72R11_V3_SCORER_CHECKPOINT_V1",
         "model_config": model_config(),
+        "temporal_feature_schema": list(TEMPORAL_FEATURE_SCHEMA),
         "state_dict": {key: value.detach().cpu() for key, value in model.state_dict().items()},
         "phase": phase,
         "seed": SEED,
@@ -349,6 +391,7 @@ def checkpoint_payload(model: nn.Module, *, phase: str, history: Sequence[Mappin
             "pairwise_weight": PAIRWISE_WEIGHT,
             "pairwise_margin": PAIRWISE_MARGIN,
             "checkpoint_selection": "minimum fixed validation loss; no future effect metrics",
+            "example_weighting": None if training_weighting is None else dict(training_weighting),
         },
         "train_summary": dict(train_summary),
         "validation_summary": dict(validation_summary),
@@ -364,22 +407,37 @@ def load_checkpoint(path: Path, device: torch.device) -> tuple[nn.Module, dict[s
     payload = torch.load(path, map_location=device, weights_only=False)
     if not isinstance(payload, Mapping) or not isinstance(payload.get("state_dict"), Mapping):
         raise RuntimeError(f"invalid V3 checkpoint: {path}")
+    if payload.get("temporal_feature_schema") != list(TEMPORAL_FEATURE_SCHEMA):
+        raise RuntimeError(f"V3 checkpoint temporal feature schema mismatch: {path}")
     model = N72R11TemporalIdentityModel(**model_config()).to(device)
     model.load_state_dict(payload["state_dict"], strict=True)
     return model, dict(payload)
 
 
-def memory_pad(values: Sequence[np.ndarray], slots: int) -> tuple[np.ndarray, np.ndarray]:
-    result = np.zeros((int(slots), 512), dtype=np.float32)
-    mask = np.zeros(int(slots), dtype=np.bool_)
-    for index, value in enumerate(list(values)[-int(slots):]):
-        value = np.asarray(value, dtype=np.float32).reshape(-1)
-        norm = float(np.linalg.norm(value))
-        if value.size != 512 or not np.isfinite(value).all() or norm <= 1.0e-6:
-            raise RuntimeError("self-rollout memory feature is invalid")
-        result[index] = value / norm
-        mask[index] = True
-    return result, mask
+def build_train_example_weights(metadata: Sequence[Mapping[str, Any]], labels: np.ndarray) -> np.ndarray:
+    """Pre-registered train-only category balancing; never uses future metrics."""
+
+    keys: list[tuple[str, str]] = []
+    for row, label in zip(metadata, np.asarray(labels, dtype=np.int64), strict=True):
+        candidate_count = len(row.get("candidate_uids", []))
+        if int(label) >= candidate_count:
+            source = "NONE"
+        else:
+            source = str(row.get("candidate_sources", ["UNKNOWN"] * candidate_count)[int(label)])
+        keys.append((str(row.get("action_type", "UNKNOWN")), source))
+    counts = defaultdict(int)
+    for key in keys:
+        counts[key] += 1
+    max_count = max(counts.values())
+    raw = np.asarray(
+        [np.sqrt(float(max_count) / float(counts[key])) for key in keys],
+        dtype=np.float64,
+    )
+    raw = np.clip(raw, 0.5, 3.0)
+    raw /= max(float(np.mean(raw)), 1.0e-12)
+    if not np.isfinite(raw).all() or np.any(raw <= 0.0):
+        raise RuntimeError("category balancing produced invalid weights")
+    return raw.astype(np.float32)
 
 
 def run_self_rollout(model: nn.Module, arrays: Mapping[str, np.ndarray], metadata: Sequence[Mapping[str, Any]], device: torch.device) -> dict[str, Any]:
@@ -391,16 +449,27 @@ def run_self_rollout(model: nn.Module, arrays: Mapping[str, np.ndarray], metadat
     for event_id in sorted(groups):
         indices = sorted(groups[event_id], key=lambda index: int(metadata[index]["frame"]))
         anchor = np.asarray(arrays["human_anchor"][indices[0]], dtype=np.float32)
-        recent: list[np.ndarray] = [anchor]
-        long_term: list[np.ndarray] = [anchor]
-        distractors: list[np.ndarray] = []
+        state = initialize_temporal_state(
+            anchor_feature=anchor,
+            anchor_box=metadata[indices[0]].get("anchor_box", [0.0, 0.0, 1.0, 1.0]),
+        )
         for index in indices:
             c = int(arrays["candidate_counts"][index])
             candidate_features = np.asarray(arrays["candidate_features"][index : index + 1, :c], dtype=np.float32)
             source_features = np.asarray(arrays["source_features"][index : index + 1, :c], dtype=np.float32)
-            recent_array, recent_mask = memory_pad(recent, RECENT_TRUSTED_SLOTS)
-            long_array, long_mask = memory_pad(long_term, LONG_TERM_TRUSTED_SLOTS)
-            distractor_array, distractor_mask = memory_pad(distractors, DISTRACTOR_SLOTS)
+            recent_array, recent_mask, long_array, long_mask, distractor_array, distractor_mask = state_memory_arrays(state)
+            row_meta = metadata[index]
+            causal_top = float(row_meta.get("causal_top_score", 0.0))
+            causal_second = float(row_meta.get("causal_second_score", 0.0))
+            causal_margin = float(row_meta.get("causal_margin", 0.0))
+            temporal = build_temporal_features(
+                state,
+                frame_horizon=int(row_meta["frame_horizon"]),
+                causal_top_score=causal_top,
+                causal_second_score=causal_second,
+                causal_margin=causal_margin,
+                has_future_requery=any(str(source) == "FUTURE_FRAME_REQUERY" for source in row_meta.get("candidate_sources", [])),
+            )
             tensors = (
                 torch.as_tensor(candidate_features, device=device),
                 torch.ones((1, c), dtype=torch.bool, device=device),
@@ -413,19 +482,36 @@ def run_self_rollout(model: nn.Module, arrays: Mapping[str, np.ndarray], metadat
                 torch.as_tensor(distractor_array[None], dtype=torch.float32, device=device),
                 torch.as_tensor(distractor_mask[None], dtype=torch.bool, device=device),
                 torch.as_tensor(arrays["neighbor_feature"][index : index + 1], dtype=torch.float32, device=device),
-                torch.as_tensor(arrays["temporal_features"][index : index + 1], dtype=torch.float32, device=device),
+                torch.as_tensor(temporal[None], dtype=torch.float32, device=device),
             )
             with torch.no_grad():
                 output = model(*tensors)[0].detach().float().cpu().numpy()
             candidate_logits = output[:c]
             none_logit = float(output[c])
-            order = np.argsort(-candidate_logits, kind="stable")
-            top_index = int(order[0]) if c else c
-            top = float(candidate_logits[top_index]) if c else float("-inf")
-            second = float(candidate_logits[int(order[1])]) if c > 1 else float("-inf")
-            margin = top - second if c > 1 else float("inf")
-            accepted = bool(c and top > none_logit and (c == 1 or margin >= 0.20))
-            selected_index = top_index if accepted else c
+            selection = select_candidate_from_logits(
+                candidate_logits,
+                none_logit,
+                [str(uid) for uid in row_meta["candidate_uids"][:c]],
+            )
+            accepted = bool(selection["accepted"])
+            selected_index = int(selection["selected_index"])
+            top_index = int(selection["best_candidate_index"])
+            top = float(selection["best_score"])
+            second = None if selection["second_score"] is None else float(selection["second_score"])
+            margin = float(selection["best_minus_second_margin"])
+            candidate_rows = [
+                {
+                    "candidate_uid": str(row_meta["candidate_uids"][candidate_index]),
+                    "box_xyxy": row_meta["candidate_boxes"][candidate_index],
+                    "candidate_source": row_meta.get("candidate_sources", ["UNKNOWN"] * c)[candidate_index],
+                    "feature": optional_state_feature(candidate_features[0, candidate_index, :512]),
+                    "feature_available": bool(np.linalg.norm(candidate_features[0, candidate_index, :512]) > 1.0e-6),
+                    "official_raw_sam_id": None,
+                    "native_scope": None,
+                }
+                for candidate_index in range(c)
+            ]
+            selected_uid = None if not accepted else str(row_meta["candidate_uids"][top_index])
             records.append(
                 {
                     "event_id": event_id,
@@ -439,28 +525,28 @@ def run_self_rollout(model: nn.Module, arrays: Mapping[str, np.ndarray], metadat
                     "second_candidate_logit": second,
                     "candidate_margin": margin,
                     "accepted": accepted,
-                    "recent_memory_size_before": len(recent),
-                    "long_term_memory_size_before": len(long_term),
-                    "distractor_memory_size_before": len(distractors),
+                    "recent_memory_size_before": len(state.recent_trusted),
+                    "long_term_memory_size_before": len(state.long_term_trusted),
+                    "distractor_memory_size_before": len(state.distractors),
                     "runtime_future_gt_used": False,
                     "gt_used_for_runtime_decision": False,
                 }
             )
-            if accepted:
-                feature = candidate_features[0, top_index, :512]
-                feature_norm = float(np.linalg.norm(feature))
-                if feature.size == 512 and np.isfinite(feature).all() and feature_norm > 1.0e-6:
-                    recent.append(feature)
-                    if margin >= 0.30:
-                        long_term.append(feature)
-                    recent = recent[-RECENT_TRUSTED_SLOTS:]
-                    long_term = long_term[-LONG_TERM_TRUSTED_SLOTS:]
-            if c > 1:
-                distractor = candidate_features[0, int(order[1]), :512]
-                distractor_norm = float(np.linalg.norm(distractor))
-                if distractor.size == 512 and np.isfinite(distractor).all() and distractor_norm > 1.0e-6:
-                    distractors.append(distractor)
-                    distractors = distractors[-DISTRACTOR_SLOTS:]
+            update = update_temporal_state(
+                state,
+                candidates=candidate_rows,
+                target_uid=selected_uid,
+                selected_uid=selected_uid,
+                selected_score=None if not accepted else float(selection["selected_score"]),
+                selected_margin=margin,
+                fused_target_scores=np.asarray(arrays["legacy_target_scores"][index, :c], dtype=np.float64),
+                frame_horizon=int(row_meta["frame_horizon"]),
+                assigned_candidate=None if not accepted else candidate_rows[top_index],
+                base_top_score=causal_top,
+                base_second_score=causal_second,
+            )
+            records[-1]["temporal_state_update"] = update
+            records[-1]["temporal_state_after"] = state_audit(state)
     predicted = sum(bool(row["accepted"]) for row in records)
     return {
         "schema_version": "N72R11_CAUSAL_SELF_ROLLOUT_V1",
@@ -503,6 +589,11 @@ def main() -> int:
     parser.add_argument("--resource-censored", action="store_true")
     parser.add_argument("--bootstrap-checkpoint", type=Path, default=None)
     parser.add_argument("--output-checkpoint", type=Path, default=None)
+    parser.add_argument(
+        "--category-balance",
+        action="store_true",
+        help="apply the pre-registered action/source balance weights during finetune only",
+    )
     args = parser.parse_args()
     CORPUS_ROOT = args.corpus_root if args.corpus_root.is_absolute() else ROOT / args.corpus_root
     OUTPUT_ROOT = args.output_root if args.output_root.is_absolute() else ROOT / args.output_root
@@ -610,9 +701,41 @@ def main() -> int:
         else:
             checkpoint = bootstrap_checkpoint
             model, bootstrap_payload = load_checkpoint(checkpoint, device)
-            history, validation = train_epochs(model, train_arrays, validation_arrays, device=device, epochs=FINETUNE_EPOCHS, batch_size=int(args.batch_size), learning_rate=FINETUNE_LEARNING_RATE, phase="finetune")
+            example_weights = build_train_example_weights(train_metadata, train_arrays["labels"]) if args.category_balance else None
+            weighting = None
+            if example_weights is not None:
+                weighting = {
+                    "enabled": True,
+                    "scheme": "inverse_sqrt_action_source_count_clipped_0.5_3.0_mean_normalized",
+                    "source": "train_metadata_and_offline_labels_only",
+                    "future_effect_metrics_used": False,
+                    "min": float(np.min(example_weights)),
+                    "max": float(np.max(example_weights)),
+                    "mean": float(np.mean(example_weights)),
+                }
+            history, validation = train_epochs(
+                model,
+                train_arrays,
+                validation_arrays,
+                device=device,
+                epochs=FINETUNE_EPOCHS,
+                batch_size=int(args.batch_size),
+                learning_rate=FINETUNE_LEARNING_RATE,
+                phase="finetune",
+                example_weights=example_weights,
+            )
             output = args.output_checkpoint or (OUTPUT_ROOT / "v3_finetuned.pt")
-            atomic_torch(output, checkpoint_payload(model, phase="finetune", history=history, train_summary=train_summary, validation_summary=validation))
+            atomic_torch(
+                output,
+                checkpoint_payload(
+                    model,
+                    phase="finetune",
+                    history=history,
+                    train_summary=train_summary,
+                    validation_summary=validation,
+                    training_weighting=weighting,
+                ),
+            )
             bootstrap_validation = dict(bootstrap_payload.get("validation_summary", {}))
             selected = "finetuned" if float(validation.get("loss", float("inf"))) < float(bootstrap_validation.get("loss", float("inf"))) else "bootstrap"
             selected_path = output if selected == "finetuned" else checkpoint
@@ -626,6 +749,7 @@ def main() -> int:
                 "bootstrap_validation": bootstrap_validation,
                 "finetuned_validation": validation,
                 "checkpoint_selection": "minimum fixed validation loss",
+                "category_balance": weighting,
                 "selected_checkpoint": str(selected_path),
                 "selected_phase": selected,
                 "history": history,

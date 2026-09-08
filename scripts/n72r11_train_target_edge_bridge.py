@@ -16,7 +16,7 @@ import os
 from pathlib import Path
 import tempfile
 import traceback
-from typing import Any, Mapping
+from typing import Any, Mapping, Sequence
 
 import numpy as np
 import torch
@@ -29,6 +29,7 @@ if str(ROOT) not in __import__("sys").path:
 from sam3_intermot.association.target_edge_bridge import (  # noqa: E402
     BRIDGE_INPUT_DIM,
     TargetEdgeBridge,
+    build_target_edge_feature_from_scalars,
     fit_residual_scale,
 )
 from scripts.n72r11_train_v3 import (  # noqa: E402
@@ -56,6 +57,7 @@ BRIDGE_LR = 1.0e-3
 BRIDGE_WEIGHT_DECAY = 1.0e-4
 PROTECTED_WEIGHT = 0.25
 POSITIVE_COMPETITION_WEIGHT = 0.25
+DELTA_L2_WEIGHT = 0.01
 
 
 def atomic_write(path: Path, text: str) -> None:
@@ -100,26 +102,46 @@ def atomic_torch(path: Path, value: Mapping[str, Any]) -> None:
             os.unlink(temporary)
 
 
-def bridge_features(arrays: Mapping[str, np.ndarray], logits: np.ndarray) -> np.ndarray:
+def bridge_features(
+    arrays: Mapping[str, np.ndarray],
+    logits: np.ndarray,
+    metadata: Sequence[Mapping[str, Any]],
+) -> np.ndarray:
     count, candidates = arrays["candidate_mask"].shape
-    if logits.shape != (count, candidates + 1) or not np.isfinite(logits).all():
+    if len(metadata) != count or logits.shape != (count, candidates + 1) or not np.isfinite(logits).all():
         raise RuntimeError(f"invalid frozen scorer logits: {logits.shape}")
-    source = np.asarray(arrays["source_features"], dtype=np.float32)
-    feature = np.concatenate(
-        [
-            (logits[:, :candidates] - logits[:, candidates, None])[..., None],
-            np.asarray(arrays["legacy_target_scores"], dtype=np.float32)[..., None],
-            np.asarray(arrays["legacy_best_other_scores"], dtype=np.float32)[..., None],
-            (np.asarray(arrays["legacy_target_scores"], dtype=np.float32) - np.asarray(arrays["legacy_best_other_scores"], dtype=np.float32))[..., None],
-            np.asarray(arrays["incumbent_target"], dtype=np.float32)[..., None],
-            np.asarray(arrays["incumbent_other"], dtype=np.float32)[..., None],
-            np.asarray(arrays["confidence"], dtype=np.float32)[..., None],
-            np.asarray(arrays["presence"], dtype=np.float32)[..., None],
-            np.asarray(arrays["motion_iou"], dtype=np.float32)[..., None],
-            source,
-        ],
-        axis=-1,
-    )
+    feature = np.zeros((count, candidates, BRIDGE_INPUT_DIM), dtype=np.float32)
+    target_scores = np.asarray(arrays["legacy_target_scores"], dtype=np.float32)
+    other_scores = np.asarray(arrays["legacy_best_other_scores"], dtype=np.float32)
+    incumbent_target = np.asarray(arrays["incumbent_target"], dtype=np.float32)
+    incumbent_other = np.asarray(arrays["incumbent_other"], dtype=np.float32)
+    confidence = np.asarray(arrays["confidence"], dtype=np.float32)
+    presence = np.asarray(arrays["presence"], dtype=np.float32)
+    motion = np.asarray(arrays["motion_iou"], dtype=np.float32)
+    for row_index, row in enumerate(metadata):
+        actual = len(row.get("candidate_uids", []))
+        if actual > candidates:
+            raise RuntimeError(f"bridge metadata candidate axis exceeds padded width at {row_index}")
+        sources = list(row.get("candidate_sources", []))
+        if len(sources) != actual:
+            raise RuntimeError(f"bridge metadata source axis mismatch at {row_index}")
+        for candidate_index in range(candidates):
+            source = sources[candidate_index] if candidate_index < actual else "UNKNOWN"
+            feature[row_index, candidate_index] = np.asarray(
+                build_target_edge_feature_from_scalars(
+                    candidate_logit=float(logits[row_index, candidate_index]),
+                    none_logit=float(logits[row_index, candidates]),
+                    legacy_target_score=float(target_scores[row_index, candidate_index]),
+                    legacy_best_other_score=float(other_scores[row_index, candidate_index]),
+                    incumbent_target=float(incumbent_target[row_index, candidate_index]),
+                    incumbent_other=float(incumbent_other[row_index, candidate_index]),
+                    confidence=float(confidence[row_index, candidate_index]),
+                    presence=float(presence[row_index, candidate_index]),
+                    motion_iou=float(motion[row_index, candidate_index]),
+                    candidate_source=str(source),
+                ),
+                dtype=np.float32,
+            )
     if feature.shape != (count, candidates, BRIDGE_INPUT_DIM) or not np.isfinite(feature).all():
         raise RuntimeError(f"invalid target-edge feature tensor: {feature.shape}")
     return feature.astype(np.float32)
@@ -145,19 +167,23 @@ def bridge_loss(
     bridge: TargetEdgeBridge,
     features: torch.Tensor,
     legacy_target: torch.Tensor,
+    legacy_best_other: torch.Tensor,
     labels: torch.Tensor,
     candidate_mask: torch.Tensor,
     protected_mask: torch.Tensor,
 ) -> tuple[torch.Tensor, dict[str, torch.Tensor]]:
     delta, calibrated = bridge(features, legacy_target)
+    if legacy_best_other.shape != legacy_target.shape or not torch.isfinite(legacy_best_other).all():
+        raise ValueError("legacy best-other tensor must align with finite legacy target")
     count = int(candidate_mask.shape[1])
     safe_calibrated = calibrated.masked_fill(~candidate_mask, torch.finfo(calibrated.dtype).min)
     none = torch.zeros((calibrated.shape[0], 1), dtype=calibrated.dtype, device=calibrated.device)
     scores = torch.cat([safe_calibrated, none], dim=1)
     ce = F.cross_entropy(scores, labels)
-    protected_values = delta.masked_fill(~protected_mask, 0.0)
+    protected_values = calibrated - legacy_best_other
+    protected_values = protected_values.masked_fill(~protected_mask, 0.0)
     protected_denominator = protected_mask.to(delta.dtype).sum().clamp_min(1.0)
-    protected_penalty = (torch.relu(protected_values) ** 2).sum() / protected_denominator
+    protected_penalty = (torch.relu(protected_values + 0.20) ** 2).sum() / protected_denominator
     positive = labels < count
     competition = delta.new_zeros(())
     if bool(positive.any()):
@@ -167,32 +193,65 @@ def bridge_loss(
         positive_mask.scatter_(1, positive_labels.unsqueeze(1), False)
         valid = positive_mask.any(dim=1)
         if bool(valid.any()):
-            best_other = positive_delta.masked_fill(~positive_mask, torch.finfo(delta.dtype).min).max(dim=1).values
-            target_delta = positive_delta[torch.arange(len(positive_labels), device=delta.device), positive_labels]
-            competition = F.relu(0.20 - target_delta[valid] + best_other[valid]).mean()
-    total = ce + PROTECTED_WEIGHT * protected_penalty + POSITIVE_COMPETITION_WEIGHT * competition
-    return total, {"cross_entropy": ce.detach(), "protected_penalty": protected_penalty.detach(), "positive_competition": competition.detach()}
+            target_calibrated = calibrated[positive]
+            target_value = target_calibrated[torch.arange(len(positive_labels), device=delta.device), positive_labels]
+            target_legacy_other = legacy_best_other[positive][torch.arange(len(positive_labels), device=delta.device), positive_labels]
+            competition = F.relu(0.20 - target_value[valid] + target_legacy_other[valid]).mean()
+    delta_l2 = (delta.masked_fill(~candidate_mask, 0.0) ** 2).sum() / candidate_mask.to(delta.dtype).sum().clamp_min(1.0)
+    total = ce + PROTECTED_WEIGHT * protected_penalty + POSITIVE_COMPETITION_WEIGHT * competition + DELTA_L2_WEIGHT * delta_l2
+    return total, {"cross_entropy": ce.detach(), "protected_penalty": protected_penalty.detach(), "positive_competition": competition.detach(), "delta_l2": delta_l2.detach()}
 
 
 def evaluate_bridge(bridge: TargetEdgeBridge, features: np.ndarray, arrays: Mapping[str, np.ndarray], device: torch.device, batch_size: int) -> dict[str, float]:
     bridge.eval()
     total = 0.0
     correct = 0
+    legacy_correct = 0
+    legacy_boundary_total = 0
+    legacy_boundary_success = 0
+    bridge_boundary_success = 0
+    protected_total = 0
+    protected_safe = 0
+    delta_values: list[float] = []
     n = int(arrays["labels"].shape[0])
     with torch.no_grad():
         for start in range(0, n, int(batch_size)):
             indices = np.arange(start, min(start + int(batch_size), n), dtype=np.int64)
             feat = torch.as_tensor(features[indices], dtype=torch.float32, device=device)
             target = torch.as_tensor(arrays["legacy_target_scores"][indices], dtype=torch.float32, device=device)
+            other = torch.as_tensor(arrays["legacy_best_other_scores"][indices], dtype=torch.float32, device=device)
             mask = torch.as_tensor(arrays["candidate_mask"][indices], dtype=torch.bool, device=device)
             labels = torch.as_tensor(arrays["labels"][indices], dtype=torch.long, device=device)
             protected = torch.as_tensor(arrays["protected_candidate_mask"][indices], dtype=torch.bool, device=device)
-            loss, _ = bridge_loss(bridge, feat, target, labels, mask, protected)
+            loss, _ = bridge_loss(bridge, feat, target, other, labels, mask, protected)
             delta, calibrated = bridge(feat, target)
             scores = torch.cat([calibrated.masked_fill(~mask, torch.finfo(calibrated.dtype).min), torch.zeros((len(indices), 1), device=device)], dim=1)
+            legacy_scores = torch.cat([target.masked_fill(~mask, torch.finfo(target.dtype).min), torch.zeros((len(indices), 1), device=device)], dim=1)
             total += float(loss.detach().cpu()) * len(indices)
             correct += int((scores.argmax(dim=1) == labels).sum().detach().cpu())
-    return {"loss": total / max(n, 1), "accuracy": correct / max(n, 1), "examples": n}
+            legacy_correct += int((legacy_scores.argmax(dim=1) == labels).sum().detach().cpu())
+            # The boundary diagnostics are target-vs-its-frozen best-other,
+            # evaluated only for positive labels and never used for training.
+            positive = labels < int(arrays["candidate_mask"].shape[1])
+            if bool(positive.any()):
+                rows = torch.arange(len(indices), device=device)[positive]
+                cols = labels[positive]
+                legacy_boundary_total += int(positive.sum().detach().cpu())
+                legacy_boundary_success += int((target[rows, cols] > other[rows, cols]).sum().detach().cpu())
+                bridge_boundary_success += int((calibrated[rows, cols] > other[rows, cols]).sum().detach().cpu())
+            protected_total += int(protected.sum().detach().cpu())
+            protected_safe += int(((calibrated <= other + 0.20) & protected).sum().detach().cpu())
+            delta_values.extend(delta[mask].detach().float().cpu().tolist())
+    return {
+        "loss": total / max(n, 1), "accuracy": correct / max(n, 1), "examples": n,
+        "legacy_accuracy": legacy_correct / max(n, 1),
+        "bridge_accuracy": correct / max(n, 1),
+        "legacy_positive_boundary_success": legacy_boundary_success / max(legacy_boundary_total, 1),
+        "bridge_positive_boundary_success": bridge_boundary_success / max(legacy_boundary_total, 1),
+        "protected_safe_rate": protected_safe / max(protected_total, 1),
+        "mean_abs_delta": float(np.mean(np.abs(np.asarray(delta_values, dtype=np.float64)))) if delta_values else 0.0,
+        "p95_abs_delta": float(np.percentile(np.abs(np.asarray(delta_values, dtype=np.float64)), 95.0)) if delta_values else 0.0,
+    }
 
 
 def stage_base(stage: str) -> dict[str, Any]:
@@ -248,8 +307,8 @@ def main() -> int:
         validation_arrays, validation_metadata, validation_summary = load_split("validation")
         train_logits = frozen_scorer_logits(scorer_checkpoint, train_arrays, device, int(args.batch_size))
         validation_logits = frozen_scorer_logits(scorer_checkpoint, validation_arrays, device, int(args.batch_size))
-        train_features = bridge_features(train_arrays, train_logits)
-        validation_features = bridge_features(validation_arrays, validation_logits)
+        train_features = bridge_features(train_arrays, train_logits, train_metadata)
+        validation_features = bridge_features(validation_arrays, validation_logits, validation_metadata)
         if args.phase == "smoke":
             scale = fit_residual_scale(
                 train_arrays["legacy_target_scores"][train_arrays["candidate_mask"]],
@@ -282,6 +341,9 @@ def main() -> int:
             optimizer = torch.optim.AdamW(bridge.parameters(), lr=BRIDGE_LR, weight_decay=BRIDGE_WEIGHT_DECAY)
             rng = np.random.default_rng(BRIDGE_SEED)
             history: list[dict[str, Any]] = []
+            best_validation_loss = float("inf")
+            best_state_dict: dict[str, torch.Tensor] | None = None
+            best_epoch = None
             for epoch in range(BRIDGE_EPOCHS):
                 bridge.train()
                 order = np.arange(len(train_features), dtype=np.int64)
@@ -293,10 +355,11 @@ def main() -> int:
                     optimizer.zero_grad(set_to_none=True)
                     feat = torch.as_tensor(train_features[indices], dtype=torch.float32, device=device)
                     target = torch.as_tensor(train_arrays["legacy_target_scores"][indices], dtype=torch.float32, device=device)
+                    other = torch.as_tensor(train_arrays["legacy_best_other_scores"][indices], dtype=torch.float32, device=device)
                     labels = torch.as_tensor(train_arrays["labels"][indices], dtype=torch.long, device=device)
                     mask = torch.as_tensor(train_arrays["candidate_mask"][indices], dtype=torch.bool, device=device)
                     protected = torch.as_tensor(train_arrays["protected_candidate_mask"][indices], dtype=torch.bool, device=device)
-                    loss, components = bridge_loss(bridge, feat, target, labels, mask, protected)
+                    loss, components = bridge_loss(bridge, feat, target, other, labels, mask, protected)
                     if not torch.isfinite(loss):
                         raise RuntimeError(f"non-finite bridge loss at epoch={epoch}")
                     loss.backward()
@@ -308,6 +371,13 @@ def main() -> int:
                     seen += len(indices)
                 validation = evaluate_bridge(bridge, validation_features, validation_arrays, device, int(args.batch_size))
                 history.append({"epoch": epoch + 1, "train_loss": running / max(seen, 1), "validation": validation})
+                if float(validation["loss"]) < best_validation_loss:
+                    best_validation_loss = float(validation["loss"])
+                    best_epoch = int(epoch + 1)
+                    best_state_dict = {key: value.detach().cpu().clone() for key, value in bridge.state_dict().items()}
+            if best_state_dict is None or best_epoch is None:
+                raise RuntimeError("bridge did not produce a validation checkpoint")
+            bridge.load_state_dict(best_state_dict, strict=True)
             checkpoint_payload = {
                 "schema_version": "N72R11_TARGET_EDGE_BRIDGE_CHECKPOINT_V1",
                 "state_dict": {key: value.detach().cpu() for key, value in bridge.state_dict().items()},
@@ -321,13 +391,18 @@ def main() -> int:
                     "weight_decay": BRIDGE_WEIGHT_DECAY,
                     "protected_weight": PROTECTED_WEIGHT,
                     "positive_competition_weight": POSITIVE_COMPETITION_WEIGHT,
-                    "checkpoint_selection": "single preregistered train-only bridge run",
+                    "checkpoint_selection": "minimum fixed validation loss; no future effect metrics",
+                    "selected_epoch": int(best_epoch),
+                    "selected_validation_loss": float(best_validation_loss),
+                    "delta_l2_weight": DELTA_L2_WEIGHT,
                 },
                 "scorer_checkpoint": str(scorer_checkpoint),
                 "scorer_checkpoint_sha256": sha256_file(scorer_checkpoint),
                 "train_summary": train_summary,
                 "validation_summary": validation_summary,
                 "history": history,
+                "selected_epoch": int(best_epoch),
+                "selected_validation_loss": float(best_validation_loss),
                 "runtime_future_gt_used": False,
                 "interaction_source": "simulated_from_gt",
                 "not_real_human_evidence": True,

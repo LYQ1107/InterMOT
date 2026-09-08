@@ -44,6 +44,13 @@ from sam3_intermot.association.target_edge_bridge import (  # noqa: E402
     TargetEdgeBridge,
     build_target_edge_feature,
 )
+from sam3_intermot.association.target_edge_interface import (  # noqa: E402
+    EDGE_MODE_BRIDGE,
+    EDGE_MODE_BASE,
+    EDGE_MODE_LEGACY_INJECTION,
+    apply_legacy_injection,
+    select_candidate_from_logits,
+)
 from sam3_intermot.reacquisition.live_requery_controller import (  # noqa: E402
     LiveFutureRequeryController,
 )
@@ -66,11 +73,20 @@ from sam3_intermot.reacquisition.target_candidate_pool import (  # noqa: E402
     serializable_candidate,
 )
 from sam3_intermot.reacquisition.target_id_features import candidate_feature_vector  # noqa: E402
+from sam3_intermot.reacquisition.frozen_feature_materializer import FrozenOSNetFeatureMaterializer  # noqa: E402
+from sam3_intermot.reacquisition.temporal_state_policy import (  # noqa: E402
+    TEMPORAL_FEATURE_SCHEMA,
+    TemporalIdentityState,
+    build_temporal_features,
+    initialize_temporal_state,
+    state_audit,
+    state_memory_arrays,
+    update_temporal_state,
+)
 from scripts import n72r9_temporal_replay as legacy  # noqa: E402
 from scripts.n72r5_stage07_official_full_loop import (  # noqa: E402
     CHECKPOINT,
     DATA_ROOT,
-    FrozenMachineOSNetN72R5,
     MACHINE_CHECKPOINT,
     image_files,
 )
@@ -335,15 +351,7 @@ def _model_values(
     pool: Sequence[Mapping[str, Any]],
     base_matrix: np.ndarray,
     public_axis: Sequence[int],
-    trusted_recent: Sequence[np.ndarray],
-    trusted_long: Sequence[np.ndarray],
-    distractors: Sequence[np.ndarray],
-    predicted_box: Sequence[float],
-    previous_raw: int | None,
-    previous_scope: str | None,
-    previous_score: float,
-    previous_uncertainty: float,
-    trusted_age: int,
+    state: TemporalIdentityState,
 ) -> dict[str, Any]:
     width, height = legacy._dimensions(str(inputs["sequence"]), int(frame))
     target_public = int(inputs["target_public_id"])
@@ -357,9 +365,9 @@ def _model_values(
                 candidate,
                 anchor_feature=inputs["anchor"],
                 anchor_box=inputs["anchor_box"],
-                predicted_box=predicted_box,
-                previous_raw_sam_id=previous_raw,
-                previous_native_scope=previous_scope,
+                    predicted_box=state.predicted_box,
+                    previous_raw_sam_id=state.previous_raw_sam_id,
+                    previous_native_scope=state.previous_native_scope,
                 image_width=width,
                 image_height=height,
                 candidate_count=len(pool),
@@ -374,8 +382,8 @@ def _model_values(
             legacy._causal_score(
                 candidate,
                 float(base_scores[index]),
-                trusted_recent[-1:] or trusted_long[-1:],
-                predicted_box,
+                state.recent_trusted[-1:] or state.long_term_trusted[-1:],
+                state.predicted_box,
             )
             for index, candidate in enumerate(pool)
         ],
@@ -389,21 +397,14 @@ def _model_values(
         [candidate_values[index, :MEMORY_FEATURE_DIM] for index in order[1:] if np.linalg.norm(candidate_values[index, :MEMORY_FEATURE_DIM]) > 1.0e-6],
         _unit(inputs["anchor"], "anchor"),
     )
-    recent_array, recent_mask = _memory_array(trusted_recent, RECENT_TRUSTED_SLOTS)
-    long_array, long_mask = _memory_array(trusted_long, LONG_TERM_TRUSTED_SLOTS)
-    distractor_array, distractor_mask = _memory_array(distractors, DISTRACTOR_SLOTS)
-    temporal = np.asarray(
-        [
-            float(frame - int(inputs["event_frame"])) / float(HORIZON),
-            float(np.tanh(top)),
-            float(np.tanh(second)),
-            float(np.tanh(margin)),
-            float(np.clip(previous_score, -1.0, 1.0)),
-            float(np.clip(previous_uncertainty, 0.0, 1.0)),
-            float(min(int(trusted_age), HORIZON)) / float(HORIZON),
-            float(any(str(candidate["candidate_source"]) == TARGET_SESSION_CURRENT_RAW for candidate in pool)),
-        ],
-        dtype=np.float32,
+    recent_array, recent_mask, long_array, long_mask, distractor_array, distractor_mask = state_memory_arrays(state)
+    temporal = build_temporal_features(
+        state,
+        frame_horizon=frame - int(inputs["event_frame"]),
+        causal_top_score=top,
+        causal_second_score=second,
+        causal_margin=margin,
+        has_future_requery=any(str(candidate["candidate_source"]) == FUTURE_FRAME_REQUERY for candidate in pool),
     )
     source_values = np.stack([_source_vector(str(candidate["candidate_source"])) for candidate in pool], axis=0).astype(np.float32)
     return {
@@ -475,16 +476,11 @@ def _score_pool(
     model: torch.nn.Module | None,
     bridge: TargetEdgeBridge | None,
     device: torch.device,
-    trusted_recent: Sequence[np.ndarray],
-    trusted_long: Sequence[np.ndarray],
-    distractors: Sequence[np.ndarray],
-    predicted_box: Sequence[float],
-    previous_raw: int | None,
-    previous_scope: str | None,
-    previous_score: float,
-    previous_uncertainty: float,
-    trusted_age: int,
+    state: TemporalIdentityState,
+    edge_mode: str,
 ) -> dict[str, Any]:
+    if edge_mode not in {EDGE_MODE_BASE, EDGE_MODE_LEGACY_INJECTION, EDGE_MODE_BRIDGE}:
+        raise ValueError(f"unknown target-edge mode: {edge_mode}")
     pairs, base_matrix = _base_for_pool(inputs, frame, pool)
     state_axis = [int(pair[0]) for pair in pairs]
     public_axis = [int(pair[1]) for pair in pairs]
@@ -494,22 +490,45 @@ def _score_pool(
         pool,
         base_matrix,
         public_axis,
-        trusted_recent,
-        trusted_long,
-        distractors,
-        predicted_box,
-        previous_raw,
-        previous_scope,
-        previous_score,
-        previous_uncertainty,
-        trusted_age,
+        state,
     )
     logits, none_logit = _model_logits(model, values, pool, device, _unit(inputs["anchor"], "anchor"))
+    selection = select_candidate_from_logits(
+        logits,
+        none_logit,
+        [str(candidate["candidate_uid"]) for candidate in pool],
+    )
+    order = [int(item["index"]) for item in selection["ranked_candidates"]]
+    selection["ranked_candidates"] = [
+        {
+            **item,
+            "candidate_source": str(pool[int(item["index"])] ["candidate_source"]),
+            "model_logit": float(logits[int(item["index"])]),
+            "model_score": float(item["score"]),
+            "none_logit": float(none_logit),
+            "runtime_future_gt_used": False,
+        }
+        for item in selection["ranked_candidates"]
+    ]
+    selection["candidate_count"] = len(pool)
+    selection["score_changed"] = bool(np.any(np.abs(np.asarray(selection["candidate_scores"], dtype=np.float64)) > 1.0e-9))
     fused = base_matrix.copy()
     target_col = int(values["target_col"])
     bridge_deltas = np.zeros(len(pool), dtype=np.float64)
     calibrated_target = base_matrix[:, target_col].copy()
-    if bridge is not None:
+    injected_delta = 0.0
+    if edge_mode == EDGE_MODE_LEGACY_INJECTION:
+        fused, injected_delta = apply_legacy_injection(
+            fused,
+            target_column=target_col,
+            candidate_uids=[str(candidate["candidate_uid"]) for candidate in pool],
+            selection=selection,
+        )
+        bridge_deltas = np.zeros(len(pool), dtype=np.float64)
+        calibrated_target = fused[:, target_col].copy()
+    elif edge_mode == EDGE_MODE_BRIDGE:
+        if bridge is None:
+            raise RuntimeError("corrected target-edge mode requires a bridge checkpoint")
         legacy_scores_by_public = [
             {int(public_axis[column]): float(base_matrix[index, column]) for column in range(len(public_axis))}
             for index in range(len(pool))
@@ -522,6 +541,7 @@ def _score_pool(
                 legacy_target_score=float(base_matrix[index, target_col]),
                 legacy_public_scores=legacy_scores_by_public[index],
                 target_public_id=int(inputs["target_public_id"]),
+                motion_iou=legacy._box_iou(candidate["box_xyxy"], state.predicted_box),
             )
             for index, candidate in enumerate(pool)
         ]
@@ -543,40 +563,9 @@ def _score_pool(
         none_score=0.0,
     )
     target_uid = _find_target_uid(solver, int(inputs["target_public_id"]))
-    scores = (logits - float(none_logit)).astype(np.float64)
-    order = sorted(range(len(pool)), key=lambda index: (-float(scores[index]), str(pool[index]["candidate_uid"])))
-    best_index = order[0] if order else None
-    second_index = order[1] if len(order) > 1 else None
-    best_score = None if best_index is None else float(scores[best_index])
-    second_score = None if second_index is None else float(scores[second_index])
-    model_margin = None if best_score is None else float(best_score - max(0.0, second_score or 0.0))
-    selected_uid = (
-        None
-        if best_index is None or best_score is None or best_score < ADMISSION_SCORE or (model_margin is not None and model_margin < ADMISSION_MARGIN)
-        else str(pool[best_index]["candidate_uid"])
-    )
-    selection = {
-        "selected_candidate_uid": selected_uid,
-        "selected_score": best_score,
-        "second_candidate_uid": None if second_index is None else str(pool[second_index]["candidate_uid"]),
-        "second_score": second_score,
-        "best_minus_second_margin": model_margin,
-        "none_logit": float(none_logit),
-        "ranked_candidates": [
-            {
-                "candidate_uid": str(pool[index]["candidate_uid"]),
-                "candidate_source": str(pool[index]["candidate_source"]),
-                "model_logit": float(logits[index]),
-                "model_score": float(scores[index]),
-                "runtime_future_gt_used": False,
-            }
-            for index in order
-        ],
-        "candidate_count": len(pool),
-        "score_changed": bool(any(abs(float(value)) > 1.0e-9 for value in scores)),
-        "runtime_future_gt_used": False,
-        "public_id_inference": False,
-    }
+    selection["edge_mode"] = edge_mode
+    selection["runtime_future_gt_used"] = False
+    selection["public_id_inference"] = False
     return {
         "pairs": pairs,
         "state_axis": state_axis,
@@ -588,6 +577,7 @@ def _score_pool(
         "none_logit": float(none_logit),
         "bridge_deltas": bridge_deltas,
         "calibrated_target": calibrated_target,
+        "injected_delta": float(injected_delta),
         "solver": solver,
         "target_uid": target_uid,
         "selection": selection,
@@ -617,10 +607,13 @@ def _make_live_controller(inputs: Mapping[str, Any], *, end_frame: int, device: 
     paths = image_files(DATA_ROOT / "train" / sequence)
     if int(end_frame) >= len(paths):
         raise RuntimeError(f"image coverage is incomplete for live controller: {sequence}:{end_frame}")
-    encoder = FrozenMachineOSNetN72R5(device)
+    materializer = FrozenOSNetFeatureMaterializer(device=device, frame_paths=paths)
 
-    def feature_fn(frame: int, box: Sequence[float]) -> np.ndarray:
-        return np.asarray(encoder.encode(paths[int(frame)], [list(box)])[0], dtype=np.float32)
+    def post_session_materializer(rows: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]:
+        return materializer.materialize_rows(
+            rows,
+            feature_source="future_frame_requery_machine_roi_feature",
+        )
 
     return LiveFutureRequeryController(
         backend_factory=lambda: _make_backend(device),
@@ -629,8 +622,9 @@ def _make_live_controller(inputs: Mapping[str, Any], *, end_frame: int, device: 
         event_frame=int(inputs["event_frame"]),
         target_public_id=int(inputs["target_public_id"]),
         frame_paths=paths,
-        feature_fn=feature_fn,
+        feature_fn=None,
         end_frame=int(end_frame),
+        post_session_feature_materializer=post_session_materializer,
         streaming_propagation=True,
     )
 
@@ -683,28 +677,33 @@ def _run_temporal_variant(
     enable_live: bool,
     force_trigger: bool,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
-    if variant not in {"E1_V3_BRIDGE", "E2_V3_BRIDGE_LIVE_ON_DEMAND"}:
-        raise ValueError(f"unknown N72R11 temporal variant: {variant}")
+    mode_by_variant = {
+        "E1_V3_LEGACY_INJECTION": EDGE_MODE_LEGACY_INJECTION,
+        "E2_V3_CORRECTED_BRIDGE": EDGE_MODE_BRIDGE,
+        "E3_V3_CORRECTED_BRIDGE_LIVE": EDGE_MODE_BRIDGE,
+    }
+    if variant not in mode_by_variant:
+        raise ValueError(f"unknown N72R11R3 temporal variant: {variant}")
     event_frame = int(inputs["event_frame"])
     target_public = int(inputs["target_public_id"])
     horizon = int(inputs["horizon"])
+    edge_mode = mode_by_variant[variant]
     rows: list[dict[str, Any]] = [_event_frame_row(inputs, variant)]
-    trusted_recent: list[np.ndarray] = [_unit(inputs["anchor"], "human anchor")]
-    trusted_long: list[np.ndarray] = [_unit(inputs["anchor"], "human anchor")]
-    distractors: list[np.ndarray] = []
-    predicted_box = [float(value) for value in inputs["anchor_box"]]
     event_target = list(inputs["rows"]["target_stream_source"].get(event_frame, {}).get("candidate_rows", []))
-    previous_raw = None if not event_target else event_target[0].get("official_raw_sam_id")
-    previous_raw = None if previous_raw is None else int(previous_raw)
-    previous_scope = None if not event_target else event_target[0].get("native_tid_scope")
-    previous_scope = None if previous_scope is None else str(previous_scope)
-    previous_score = 0.0
-    previous_uncertainty = 1.0
-    trusted_age = 0
+    initial_raw = event_target[0].get("official_raw_sam_id") if event_target else None
+    initial_scope = event_target[0].get("native_scope", event_target[0].get("native_tid_scope")) if event_target else None
+    state = initialize_temporal_state(
+        anchor_feature=inputs["anchor"],
+        anchor_box=inputs["anchor_box"],
+        previous_raw_sam_id=None if initial_raw is None else int(initial_raw),
+        previous_native_scope=None if initial_scope is None else str(initial_scope),
+    )
     live_controller = None
-    if variant.startswith("E2") and enable_live:
+    use_live = variant == "E3_V3_CORRECTED_BRIDGE_LIVE" and bool(enable_live)
+    if use_live:
         live_controller = _make_live_controller(inputs, end_frame=event_frame + horizon, device=str(device))
-    stats = {
+    stats: dict[str, Any] = {
+        "edge_mode": edge_mode,
         "trigger_count": 0,
         "probe_candidate_count": 0,
         "selected_fresh_count": 0,
@@ -713,6 +712,8 @@ def _run_temporal_variant(
         "model_score_changed_frame_count": 0,
         "target_assigned_frame_count": 0,
         "assignment_changed_from_pre_rescue_count": 0,
+        "trusted_memory_admission_count": 0,
+        "distractor_admission_count": 0,
     }
     try:
         for frame in range(event_frame + 1, event_frame + horizon + 1):
@@ -723,29 +724,9 @@ def _run_temporal_variant(
             if len(current_candidates) > 1:
                 raise RuntimeError(f"target stream is not singleton at {inputs['event_id']}:{frame}")
             pre_pool, pre_pool_audit = build_candidate_pool(
-                main_candidates,
-                current_candidates,
-                sequence=str(inputs["sequence"]),
-                frame=frame,
-                include_target_session=True,
+                main_candidates, current_candidates, sequence=str(inputs["sequence"]), frame=frame, include_target_session=True
             )
-            pre = _score_pool(
-                inputs,
-                frame,
-                pre_pool,
-                model,
-                bridge,
-                device,
-                trusted_recent,
-                trusted_long,
-                distractors,
-                predicted_box,
-                previous_raw,
-                previous_scope,
-                previous_score,
-                previous_uncertainty,
-                trusted_age,
-            )
+            pre = _score_pool(inputs, frame, pre_pool, model, bridge, device, state, EDGE_MODE_BASE)
             base_matrix = pre["base_matrix"]
             target_col = [int(value) for value in pre["public_axis"]].index(target_public)
             base_target_scores = base_matrix[:, target_col]
@@ -758,73 +739,41 @@ def _run_temporal_variant(
                     candidate_rows=pre_pool,
                     persistent_states=_state_objects(pre["pairs"]),
                     fused_state_candidate_scores=base_matrix.T,
-                    source_run_id=f"n72r11:pre:{inputs['event_id']}:{frame}",
-                    session_id=f"n72r11:pre:{inputs['event_id']}",
+                    source_run_id=f"n72r11r3:pre:{inputs['event_id']}:{frame}",
+                    session_id=f"n72r11r3:pre:{inputs['event_id']}",
                     none_score=0.0,
-                ),
-                target_public,
+                ), target_public
             )
             uncertain = bool(base_target_uid is None or base_margin < UNCERTAINTY_MARGIN)
             triggered = False
             applied = False
             probe_audit: dict[str, Any] | None = None
             selection_for_commit: dict[str, Any] | None = None
-            if variant.startswith("E2") and live_controller is not None and (uncertain or force_trigger and frame == event_frame + 1):
+            if live_controller is not None and (uncertain or force_trigger and frame == event_frame + 1):
                 triggered = True
                 stats["trigger_count"] += 1
                 causal_state = {
-                    "previous_raw_sam_id": previous_raw,
-                    "previous_native_scope": previous_scope,
-                    "previous_score": float(previous_score),
-                    "previous_uncertainty": float(previous_uncertainty),
-                    "trusted_age": int(trusted_age),
-                    "source_candidate_uid": str(base_target_uid) if base_target_uid is not None else None,
+                    **state_audit(state),
+                    "source_candidate_uid": None if base_target_uid is None else str(base_target_uid),
                     "runtime_future_gt_used": False,
                     "runtime_gt_read": False,
                     "posthoc_gt_used": False,
                 }
                 session, probe_rows = live_controller.probe(
-                    frame=frame,
-                    predicted_box=predicted_box,
-                    causal_state=causal_state,
+                    frame=frame, predicted_box=state.predicted_box, causal_state=causal_state
                 )
                 stats["probe_candidate_count"] += len(probe_rows)
-                probe_pool, probe_pool_audit = build_candidate_pool_with_future_requery(
-                    main_candidates,
-                    current_candidates,
-                    probe_rows,
-                    sequence=str(inputs["sequence"]),
-                    frame=frame,
+                probe_pool, _probe_pool_audit = build_candidate_pool_with_future_requery(
+                    main_candidates, current_candidates, probe_rows, sequence=str(inputs["sequence"]), frame=frame
                 )
-                probe = _score_pool(
-                    inputs,
-                    frame,
-                    probe_pool,
-                    model,
-                    bridge,
-                    device,
-                    trusted_recent,
-                    trusted_long,
-                    distractors,
-                    predicted_box,
-                    previous_raw,
-                    previous_scope,
-                    previous_score,
-                    previous_uncertainty,
-                    trusted_age,
-                )
+                probe = _score_pool(inputs, frame, probe_pool, model, bridge, device, state, edge_mode)
                 probe_target_uid = probe["target_uid"]
                 fresh = next(
-                    (
-                        item
-                        for item in probe_pool
-                        if str(item["candidate_uid"]) == str(probe_target_uid)
-                        and str(item["candidate_source"]) == FUTURE_FRAME_REQUERY
-                    ),
+                    (item for item in probe_pool if str(item["candidate_uid"]) == str(probe_target_uid) and str(item["candidate_source"]) == FUTURE_FRAME_REQUERY),
                     None,
                 )
                 selection_for_commit = {
-                    "selector": "N72R11_V3_BRIDGE_EXACT_SOLVER",
+                    "selector": "N72R11R3_V3_EDGE_INTERFACE_EXACT_SOLVER",
                     "base_assignment_uid": base_target_uid,
                     "base_assignment_margin": base_margin,
                     "probe_solver_target_uid": probe_target_uid,
@@ -833,104 +782,66 @@ def _run_temporal_variant(
                     "runtime_future_gt_used": False,
                     "public_id_inference": False,
                 }
-                if fresh is not None:
-                    live_controller.commit(
-                        session=session,
-                        selected_candidate_uid=str(fresh["candidate_uid"]),
-                        selection_audit=selection_for_commit,
-                        none_score=0.0,
-                        margin=base_margin,
-                    )
+                live_controller.commit(
+                    session=session,
+                    selected_candidate_uid=None if fresh is None else str(fresh["candidate_uid"]),
+                    selection_audit=selection_for_commit,
+                    none_score=0.0,
+                    margin=base_margin,
+                )
+                if fresh is None:
+                    stats["selected_fresh_solver_rejected_count"] += 1
+                else:
                     applied = True
                     stats["selected_fresh_count"] += 1
-                else:
-                    live_controller.commit(
-                        session=session,
-                        selected_candidate_uid=None,
-                        selection_audit=selection_for_commit,
-                        none_score=0.0,
-                        margin=base_margin,
-                    )
-                    stats["selected_fresh_solver_rejected_count"] += 1
                 probe_audit = live_controller.audit()
             active_rows = [] if live_controller is None else live_controller.active_candidates(frame)
             stats["live_future_candidate_rows"] += len(active_rows)
             if active_rows:
                 pool, pool_audit = build_candidate_pool_with_future_requery(
-                    main_candidates,
-                    current_candidates,
-                    active_rows,
-                    sequence=str(inputs["sequence"]),
-                    frame=frame,
+                    main_candidates, current_candidates, active_rows, sequence=str(inputs["sequence"]), frame=frame
                 )
             else:
                 pool, pool_audit = pre_pool, pre_pool_audit
-            scored = _score_pool(
-                inputs,
-                frame,
-                pool,
-                model,
-                bridge,
-                device,
-                trusted_recent,
-                trusted_long,
-                distractors,
-                predicted_box,
-                previous_raw,
-                previous_scope,
-                previous_score,
-                previous_uncertainty,
-                trusted_age,
-            )
+            scored = _score_pool(inputs, frame, pool, model, bridge, device, state, edge_mode)
             target_uid = scored["target_uid"]
             stats["model_score_changed_frame_count"] += int(scored["selection"].get("score_changed", False))
             stats["target_assigned_frame_count"] += int(target_uid is not None)
             stats["assignment_changed_from_pre_rescue_count"] += int(target_uid != base_target_uid)
             assigned = next((item for item in pool if str(item["candidate_uid"]) == str(target_uid)), None)
-            selected_feature = None if assigned is None else assigned.get("feature")
-            if selected_feature is not None:
-                feature = _unit(selected_feature, "assigned target feature")
-                trusted_recent.append(feature)
-                trusted_recent = trusted_recent[-RECENT_TRUSTED_SLOTS:]
-                if target_uid is not None and assigned.get("candidate_source") != FUTURE_FRAME_REQUERY:
-                    trusted_long.append(feature)
-                    trusted_long = trusted_long[-LONG_TERM_TRUSTED_SLOTS:]
-                trusted_age = 0
-                new_box = [float(value) for value in assigned["box_xyxy"]]
-                old_center = np.asarray([(predicted_box[0] + predicted_box[2]) / 2.0, (predicted_box[1] + predicted_box[3]) / 2.0])
-                new_center = np.asarray([(new_box[0] + new_box[2]) / 2.0, (new_box[1] + new_box[3]) / 2.0])
-                predicted_box = new_box
-                del old_center, new_center
-            else:
-                trusted_age += 1
-            for candidate in pool:
-                if target_uid is not None and str(candidate["candidate_uid"]) == str(target_uid):
-                    continue
-                if candidate.get("feature") is not None and len(distractors) < DISTRACTOR_SLOTS:
-                    distractors.append(_unit(candidate["feature"], "distractor feature"))
-                    break
-            if assigned is not None:
-                previous_raw = assigned.get("official_raw_sam_id")
-                previous_raw = None if previous_raw is None else int(previous_raw)
-                previous_scope = assigned.get("native_scope")
-                previous_scope = None if previous_scope is None else str(previous_scope)
-            previous_score = float(np.max(scored["fused_matrix"][:, target_col])) if scored["fused_matrix"].size else 0.0
-            previous_uncertainty = float(1.0 / (1.0 + max(base_margin, 0.0)))
+            selected_uid = scored["selection"].get("selected_candidate_uid")
+            state_update = update_temporal_state(
+                state,
+                candidates=pool,
+                target_uid=target_uid,
+                selected_uid=selected_uid,
+                selected_score=scored["selection"].get("selected_score"),
+                selected_margin=scored["selection"].get("best_minus_second_margin"),
+                fused_target_scores=scored["fused_matrix"][:, target_col],
+                frame_horizon=frame - event_frame,
+                assigned_candidate=assigned,
+                base_top_score=base_top,
+                base_second_score=base_second,
+            )
+            stats["trusted_memory_admission_count"] += int(state_update["trusted_admitted"])
+            stats["distractor_admission_count"] += int(state_update["distractor_added"])
             source_rows = [serializable_candidate(candidate, include_feature=False) for candidate in pool]
             for source_row in source_rows:
                 source_row["public_id"] = None
                 source_row["public_id_authority"] = None
             rows.append(
                 {
-                    "schema_version": "N72R11_ON_DEMAND_RUNTIME_FRAME_V1",
+                    "schema_version": "N72R11R3_ON_DEMAND_RUNTIME_FRAME_V1",
                     "record_kind": "future_association_frame",
                     "variant": variant,
+                    "edge_mode": edge_mode,
                     "event_id": str(inputs["event_id"]),
                     "sequence": str(inputs["sequence"]),
                     "event_frame": event_frame,
                     "frame": frame,
                     "frame_horizon": frame - event_frame,
                     "target_public_id": target_public,
+                    "temporal_feature_schema": list(TEMPORAL_FEATURE_SCHEMA),
                     "candidate_rows": _solver_rows(pool, scored["solver"]),
                     "candidate_count": len(pool),
                     "candidate_pool": {**pool_audit, "candidate_rows": source_rows},
@@ -938,8 +849,8 @@ def _run_temporal_variant(
                         "target_public_id": target_public,
                         "target_assigned_candidate_uid": target_uid,
                         "target_base_assigned_candidate_uid": base_target_uid,
-                        "target_selected_candidate_uid": scored["selection"].get("selected_candidate_uid"),
-                        "target_selector_and_solver_agree": bool(scored["selection"].get("selected_candidate_uid") is not None and str(scored["selection"].get("selected_candidate_uid")) == str(target_uid)),
+                        "target_selected_candidate_uid": selected_uid,
+                        "target_selector_and_solver_agree": bool(selected_uid is not None and str(selected_uid) == str(target_uid)),
                         "solver": scored["solver"],
                         "solver_public_id_immutable": True,
                         "runtime_future_gt_used": False,
@@ -952,10 +863,11 @@ def _run_temporal_variant(
                         "base_target_scores": scored["base_matrix"][:, target_col].astype(float).tolist(),
                         "fused_target_scores": scored["fused_matrix"][:, target_col].astype(float).tolist(),
                         "model_logit_by_candidate": scored["logits"].astype(float).tolist(),
-                        "model_score_by_candidate": (scored["logits"] - float(scored["none_logit"])).astype(float).tolist(),
+                        "model_score_by_candidate": np.asarray(scored["selection"]["candidate_scores"], dtype=np.float64).astype(float).tolist(),
                         "none_logit": float(scored["none_logit"]),
                         "bridge_target_delta_by_candidate": scored["bridge_deltas"].astype(float).tolist(),
                         "bridge_calibrated_target_by_candidate": scored["calibrated_target"].astype(float).tolist(),
+                        "legacy_injection_delta": float(scored["injected_delta"]),
                         "base_top1_score": base_top,
                         "base_top2_score": base_second,
                         "base_assignment_margin": base_margin,
@@ -970,9 +882,11 @@ def _run_temporal_variant(
                         "runtime_future_gt_used": False,
                     },
                     "memory_read": True,
-                    "memory_write": bool(target_uid is not None),
+                    "memory_write": bool(state_update["trusted_admitted"]),
                     "event_frame_memory_read": False,
                     "first_memory_visible_frame": event_frame + 1,
+                    "temporal_state_update": state_update,
+                    "temporal_state_after": state_audit(state),
                     "requery": {
                         "triggered": triggered,
                         "applied": applied,
@@ -985,8 +899,8 @@ def _run_temporal_variant(
                         "controller_audit": probe_audit,
                         "runtime_future_gt_used": False,
                     },
-                    "trusted_memory_update": "CAUSAL_TARGET_ASSIGNMENT" if target_uid is not None else "NO_TRUSTED_UPDATE",
-                    "distractor_memory_update_count": len(distractors),
+                    "trusted_memory_update": "SELECTED_TARGET_AGREEMENT_AND_ADMITTED" if state_update["trusted_admitted"] else "NO_TRUSTED_UPDATE",
+                    "distractor_memory_update_count": int(state_update["memory_sizes_after"]["distractors"]),
                     "runtime_future_gt_used": False,
                     "runtime_gt_read": False,
                     "posthoc_gt_used": False,
@@ -994,15 +908,10 @@ def _run_temporal_variant(
                     "public_id_immutable": True,
                 }
             )
-        if live_controller is not None:
-            controller_audit = live_controller.audit()
-        else:
-            controller_audit = {
-                "enabled": False,
-                "runtime_future_gt_used": False,
-                "event_frame_memory_read": False,
-                "first_memory_visible_frame": event_frame + 1,
-            }
+        controller_audit = live_controller.audit() if live_controller is not None else {
+            "enabled": False, "runtime_future_gt_used": False, "event_frame_memory_read": False,
+            "first_memory_visible_frame": event_frame + 1,
+        }
     finally:
         if live_controller is not None:
             controller_audit = live_controller.audit()
@@ -1080,16 +989,18 @@ def _validate_runtime(rows: Sequence[Mapping[str, Any]], inputs: Mapping[str, An
         requery = row.get("requery")
         if isinstance(requery, Mapping) and requery.get("applied") and str(requery.get("source")) != FUTURE_FRAME_REQUERY:
             errors.append(f"{variant}/{row.get('frame')}:requery_source")
-        if variant.startswith("E1") and isinstance(requery, Mapping) and requery.get("applied"):
+        if variant != "E3_V3_CORRECTED_BRIDGE_LIVE" and isinstance(requery, Mapping) and requery.get("applied"):
             errors.append(f"{variant}/{row.get('frame')}:live_source_in_E1")
     if errors:
         raise RuntimeError("runtime validation failed: " + "; ".join(sorted(set(errors))[:16]))
 
 
-def _load_v3_checkpoint(path: Path, device: torch.device) -> torch.nn.Module:
+def _load_v3_checkpoint(path: Path, device: torch.device, *, allow_legacy_schema: bool = False) -> torch.nn.Module:
     payload = torch.load(path, map_location=device, weights_only=False)
     if not isinstance(payload, Mapping) or not isinstance(payload.get("state_dict"), Mapping):
         raise RuntimeError(f"invalid N72R11 V3 checkpoint: {path}")
+    if payload.get("temporal_feature_schema") != list(TEMPORAL_FEATURE_SCHEMA) and not allow_legacy_schema:
+        raise RuntimeError(f"V3 checkpoint temporal feature schema mismatch: {path}")
     config = dict(payload.get("model_config", {}))
     allowed = {
         "candidate_feature_dim": CANDIDATE_FEATURE_DIM,
@@ -1117,6 +1028,9 @@ def _load_bridge_checkpoint(path: Path, device: torch.device) -> TargetEdgeBridg
     payload = torch.load(path, map_location=device, weights_only=False)
     if not isinstance(payload, Mapping) or not isinstance(payload.get("state_dict"), Mapping):
         raise RuntimeError(f"invalid N72R11 bridge checkpoint: {path}")
+    architecture = payload.get("architecture", {})
+    if not isinstance(architecture, Mapping) or int(architecture.get("input_dim", -1)) != 14:
+        raise RuntimeError(f"target-edge bridge feature schema mismatch: {path}")
     scale = float(payload.get("residual_scale"))
     bridge = TargetEdgeBridge(residual_scale=scale)
     bridge.load_state_dict(payload["state_dict"], strict=True)
@@ -1155,12 +1069,17 @@ def _posthoc_score(inputs: Mapping[str, Any], runtime_rows: Mapping[str, Sequenc
         "interaction_source": "simulated_from_gt",
         "not_real_human_evidence": True,
     }
-    names = {"E0_BASELINE_B0": "E0_BASELINE_B0", "E1_V3_BRIDGE": "E1_V3_BRIDGE", "E2_V3_BRIDGE_LIVE_ON_DEMAND": "E2_V3_BRIDGE_LIVE_ON_DEMAND"}
-    for comparison, (baseline, treatment) in (
-        ("E1_vs_E0", ("E0_BASELINE_B0", "E1_V3_BRIDGE")),
-        ("E2_vs_E0", ("E0_BASELINE_B0", "E2_V3_BRIDGE_LIVE_ON_DEMAND")),
-        ("E2_vs_E1", ("E1_V3_BRIDGE", "E2_V3_BRIDGE_LIVE_ON_DEMAND")),
-    ):
+    comparison_specs = (
+        ("E1_vs_E0", ("E0_BASELINE_B0", "E1_V3_LEGACY_INJECTION")),
+        ("E2_vs_E1", ("E1_V3_LEGACY_INJECTION", "E2_V3_CORRECTED_BRIDGE")),
+        ("E3_vs_E2", ("E2_V3_CORRECTED_BRIDGE", "E3_V3_CORRECTED_BRIDGE_LIVE")),
+        ("E3_vs_E0", ("E0_BASELINE_B0", "E3_V3_CORRECTED_BRIDGE_LIVE")),
+    )
+    skipped_comparisons: dict[str, list[str]] = {}
+    for comparison, (baseline, treatment) in comparison_specs:
+        if baseline not in runtime_rows or treatment not in runtime_rows:
+            skipped_comparisons[comparison] = [name for name in (baseline, treatment) if name not in runtime_rows]
+            continue
         event_payload["comparisons"][comparison] = {}
         for horizon in HORIZONS:
             event_payload["comparisons"][comparison][str(horizon)] = legacy._score_pair(
@@ -1182,6 +1101,8 @@ def _posthoc_score(inputs: Mapping[str, Any], runtime_rows: Mapping[str, Sequenc
         "schema_version": "N72R11_ON_DEMAND_POSTHOC_EVENT_V1",
         "status": "PASS_N72R11_POSTHOC_EVENT",
         "event": event_payload,
+        "available_variants": sorted(str(key) for key in runtime_rows),
+        "skipped_comparisons": skipped_comparisons,
         "runtime_future_gt_used": False,
         "posthoc_gt_used": True,
         "interaction_source": "simulated_from_gt",
@@ -1200,6 +1121,8 @@ def run_event(
     enable_live: bool,
     force_trigger: bool,
     smoke: bool,
+    allow_legacy_checkpoint_schema: bool = False,
+    variants: Sequence[str] | None = None,
 ) -> dict[str, Any]:
     inputs = _load_inputs(event, horizon=horizon)
     event_dir = output_root / str(inputs["event_id"])
@@ -1209,7 +1132,21 @@ def run_event(
     device_obj = torch.device(device)
     if device_obj.type == "cuda" and not torch.cuda.is_available():
         raise RuntimeError(f"requested CUDA device is unavailable: {device}")
-    model = None if smoke and model_checkpoint is None else _load_v3_checkpoint(model_checkpoint, device_obj) if model_checkpoint is not None else None
+    treatment_variants = (
+        "E1_V3_LEGACY_INJECTION",
+        "E2_V3_CORRECTED_BRIDGE",
+        "E3_V3_CORRECTED_BRIDGE_LIVE",
+    ) if variants is None else tuple(str(value) for value in variants)
+    if len(treatment_variants) != len(set(treatment_variants)) or not treatment_variants:
+        raise ValueError("variants must be a non-empty list of unique treatment variant names")
+    unknown = sorted(set(treatment_variants) - {
+        "E1_V3_LEGACY_INJECTION",
+        "E2_V3_CORRECTED_BRIDGE",
+        "E3_V3_CORRECTED_BRIDGE_LIVE",
+    })
+    if unknown:
+        raise ValueError(f"unknown N72R11R3 treatment variants: {unknown}")
+    model = None if smoke and model_checkpoint is None else _load_v3_checkpoint(model_checkpoint, device_obj, allow_legacy_schema=allow_legacy_checkpoint_schema) if model_checkpoint is not None else None
     bridge = None if smoke and bridge_checkpoint is None else _load_bridge_checkpoint(bridge_checkpoint, device_obj) if bridge_checkpoint is not None else None
     baseline_rows = _strip_runtime_rows(inputs["baseline_rows"], horizon)
     if baseline_rows[0].get("candidate_rows") != []:
@@ -1219,14 +1156,14 @@ def run_event(
         "E0_BASELINE_B0": baseline_rows,
     }
     stats: dict[str, Any] = {}
-    for variant in ("E1_V3_BRIDGE", "E2_V3_BRIDGE_LIVE_ON_DEMAND"):
+    for variant in treatment_variants:
         rows, variant_stats = _run_temporal_variant(
             inputs,
             variant=variant,
             model=model,
             bridge=bridge,
             device=device_obj,
-            enable_live=bool(enable_live and variant.startswith("E2")),
+            enable_live=bool(enable_live and variant == "E3_V3_CORRECTED_BRIDGE_LIVE"),
             force_trigger=bool(force_trigger),
         )
         runtime_rows[variant] = rows
@@ -1258,6 +1195,7 @@ def run_event(
         "status": "PASS_N72R11_ALL_RUNTIME_SEALED",
         "event_id": str(inputs["event_id"]),
         "variants": list(runtime_rows),
+        "treatment_variants": list(treatment_variants),
         "runtime_manifests": manifests,
         "runtime_future_gt_used": False,
         "runtime_gt_read": False,
@@ -1281,6 +1219,8 @@ def run_event(
         "stats": stats,
         "model_checkpoint": None if model_checkpoint is None else str(model_checkpoint),
         "bridge_checkpoint": None if bridge_checkpoint is None else str(bridge_checkpoint),
+        "allow_legacy_checkpoint_schema": bool(allow_legacy_checkpoint_schema),
+        "treatment_variants": list(treatment_variants),
         "horizon": int(horizon),
         "runtime_future_gt_used": False,
         "posthoc_gt_used": bool(posthoc.get("posthoc_gt_used") is True),
@@ -1306,6 +1246,14 @@ def main() -> int:
     parser.add_argument("--enable-live", action="store_true")
     parser.add_argument("--force-trigger", action="store_true")
     parser.add_argument("--smoke", action="store_true")
+    parser.add_argument("--allow-legacy-checkpoint-schema", action="store_true")
+    parser.add_argument(
+        "--variants",
+        nargs="+",
+        choices=("E1_V3_LEGACY_INJECTION", "E2_V3_CORRECTED_BRIDGE", "E3_V3_CORRECTED_BRIDGE_LIVE"),
+        default=None,
+        help="optional treatment subset for component-isolated development replay",
+    )
     args = parser.parse_args()
     protocol = read_json(PROTOCOL_PATH)
     matches = [item for item in protocol.get("source_event_selection", {}).get("events", []) if str(item["event_id"]) == str(args.event_id)]
@@ -1323,6 +1271,8 @@ def main() -> int:
             enable_live=bool(args.enable_live),
             force_trigger=bool(args.force_trigger),
             smoke=bool(args.smoke),
+            allow_legacy_checkpoint_schema=bool(args.allow_legacy_checkpoint_schema),
+            variants=args.variants,
         )
         print(json.dumps({"status": result["status"], "event_id": result["event_id"], "output": str(output_root / str(args.event_id))}, sort_keys=True))
         return 0

@@ -49,6 +49,54 @@ def _numeric_candidate_value(candidate: Mapping[str, Any], keys: Sequence[str], 
     return float(default)
 
 
+def build_target_edge_feature_from_scalars(
+    *,
+    candidate_logit: float,
+    none_logit: float,
+    legacy_target_score: float,
+    legacy_best_other_score: float,
+    incumbent_target: float,
+    incumbent_other: float,
+    confidence: float,
+    presence: float,
+    motion_iou: float,
+    candidate_source: str,
+) -> list[float]:
+    """Build the single frozen 14-D edge vector from explicit shared scalars.
+
+    ``motion_iou`` is deliberately required.  The old implementation silently
+    defaulted to a candidate field (or zero), which made training and runtime
+    use different effective features.
+    """
+
+    candidate_logit = _finite(candidate_logit, "candidate_logit")
+    none_logit = _finite(none_logit, "none_logit")
+    target = _finite(legacy_target_score, "legacy_target_score")
+    other = _finite(legacy_best_other_score, "legacy_best_other_score")
+    incumbent_target = _finite(incumbent_target, "incumbent_target")
+    incumbent_other = _finite(incumbent_other, "incumbent_other")
+    confidence = _finite(confidence, "confidence")
+    presence = _finite(presence, "presence")
+    motion_iou = _finite(motion_iou, "motion_iou")
+    source = str(candidate_source) if str(candidate_source) in SOURCE_NAMES else "UNKNOWN"
+    source_one_hot = [float(source == name) for name in SOURCE_NAMES]
+    feature = [
+        candidate_logit - none_logit,
+        target,
+        other,
+        target - other,
+        incumbent_target,
+        incumbent_other,
+        confidence,
+        presence,
+        motion_iou,
+        *source_one_hot,
+    ]
+    if len(feature) != BRIDGE_INPUT_DIM or not np.isfinite(np.asarray(feature, dtype=np.float64)).all():
+        raise RuntimeError("target-edge bridge scalar feature construction produced an invalid 14-D vector")
+    return feature
+
+
 def build_target_edge_feature(
     candidate: Mapping[str, Any],
     *,
@@ -57,6 +105,7 @@ def build_target_edge_feature(
     legacy_target_score: float,
     legacy_public_scores: Sequence[float] | Mapping[int, float],
     target_public_id: int,
+    motion_iou: float,
 ) -> list[float]:
     """Build the frozen 14-D candidate feature without posthoc fields."""
 
@@ -76,21 +125,18 @@ def build_target_edge_feature(
     incumbent_target = float(incumbent is not None and int(incumbent) == int(target_public_id))
     incumbent_other = float(incumbent is not None and int(incumbent) != int(target_public_id))
     source_one_hot = [float(_candidate_source(candidate) == name) for name in SOURCE_NAMES]
-    feature = [
-        candidate_logit - none_logit,
-        target_score,
-        best_other,
-        target_score - best_other,
-        incumbent_target,
-        incumbent_other,
-        _numeric_candidate_value(candidate, ("confidence", "score")),
-        _numeric_candidate_value(candidate, ("presence_score", "confidence")),
-        _numeric_candidate_value(candidate, ("motion_iou", "motion_iou_to_incumbent", "raw_continuity")),
-        *source_one_hot,
-    ]
-    if len(feature) != BRIDGE_INPUT_DIM or not np.isfinite(np.asarray(feature, dtype=np.float64)).all():
-        raise RuntimeError("target-edge bridge feature construction produced an invalid 14-D vector")
-    return feature
+    return build_target_edge_feature_from_scalars(
+        candidate_logit=candidate_logit,
+        none_logit=none_logit,
+        legacy_target_score=target_score,
+        legacy_best_other_score=best_other,
+        incumbent_target=incumbent_target,
+        incumbent_other=incumbent_other,
+        confidence=_numeric_candidate_value(candidate, ("confidence", "score")),
+        presence=_numeric_candidate_value(candidate, ("presence_score", "confidence")),
+        motion_iou=motion_iou,
+        candidate_source=_candidate_source(candidate),
+    )
 
 
 def fit_residual_scale(legacy_target: Sequence[float], legacy_best_other: Sequence[float]) -> float:
@@ -155,6 +201,7 @@ __all__ = [
     "BRIDGE_INPUT_DIM",
     "SOURCE_NAMES",
     "TargetEdgeBridge",
+    "build_target_edge_feature_from_scalars",
     "build_target_edge_feature",
     "fit_residual_scale",
 ]

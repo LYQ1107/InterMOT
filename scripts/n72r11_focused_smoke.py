@@ -175,6 +175,7 @@ def tensor_smoke() -> dict[str, object]:
         legacy_target_score=0.2,
         legacy_public_scores={1007: 0.2, 1008: 0.3},
         target_public_id=1007,
+        motion_iou=0.4,
     )
     if len(features) != BRIDGE_INPUT_DIM or not np.isfinite(np.asarray(features)).all():
         raise AssertionError("target-edge bridge feature contract failed")

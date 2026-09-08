@@ -41,6 +41,16 @@ from sam3_intermot.reacquisition.target_id_features import (  # noqa: E402
     CANDIDATE_FEATURE_DIM,
     candidate_feature_vector,
 )
+from sam3_intermot.reacquisition.temporal_state_policy import (  # noqa: E402
+    TEMPORAL_FEATURE_SCHEMA,
+    TEMPORAL_FEATURE_DIM as SHARED_TEMPORAL_FEATURE_DIM,
+    TemporalIdentityState,
+    build_temporal_features,
+    initialize_temporal_state,
+    state_audit,
+    state_memory_arrays,
+    update_temporal_state,
+)
 
 
 SCHEDULE_PATH = ROOT / "outputs/N72R11/secondary_event_manifest.json"
@@ -63,7 +73,7 @@ MEMORY_DIM = 512
 RECENT_SLOTS = 4
 LONG_TERM_SLOTS = 4
 DISTRACTOR_SLOTS = 8
-TEMPORAL_DIM = 8
+TEMPORAL_DIM = SHARED_TEMPORAL_FEATURE_DIM
 CAUSAL_MARGIN_ADMISSION = 0.20
 
 
@@ -442,15 +452,15 @@ def build_event_runtime(item: Mapping[str, Any], record: Mapping[str, Any]) -> t
     anchor = unit(details["anchor"]["feature"], f"{event_id} anchor")
     anchor_box = box_xyxy(item["current_target_box_posthoc_selection_only"], f"{event_id} anchor box")
     width, height = image_dimensions(str(item["sequence"]), start)
-    predicted_box = anchor_box.astype(np.float64).tolist()
-    previous_raw: int | None = None
-    previous_scope: str | None = None
-    previous_score = 0.0
-    previous_uncertainty = 1.0
-    trusted: list[np.ndarray] = [anchor]
-    long_term: list[np.ndarray] = [anchor]
-    distractors: list[np.ndarray] = []
-    trusted_age = 0
+    event_frame_candidates = list(target_by_frame.get(start, {}).get("candidate_rows", []))
+    initial_raw = event_frame_candidates[0].get("official_raw_sam_id") if event_frame_candidates else None
+    initial_scope = event_frame_candidates[0].get("native_scope", event_frame_candidates[0].get("native_tid_scope")) if event_frame_candidates else None
+    state = initialize_temporal_state(
+        anchor_feature=anchor,
+        anchor_box=anchor_box,
+        previous_raw_sam_id=None if initial_raw is None else int(initial_raw),
+        previous_native_scope=None if initial_scope is None else str(initial_scope),
+    )
     rows: list[dict[str, Any]] = []
     arrays: dict[str, list[np.ndarray]] = {
         "candidate_features": [],
@@ -499,9 +509,9 @@ def build_event_runtime(item: Mapping[str, Any], record: Mapping[str, Any]) -> t
                     candidate,
                     anchor_feature=anchor,
                     anchor_box=anchor_box,
-                    predicted_box=predicted_box,
-                    previous_raw_sam_id=previous_raw,
-                    previous_native_scope=previous_scope,
+                    predicted_box=state.predicted_box,
+                    previous_raw_sam_id=state.previous_raw_sam_id,
+                    previous_native_scope=state.previous_native_scope,
                     image_width=width,
                     image_height=height,
                     candidate_count=len(pool),
@@ -514,7 +524,7 @@ def build_event_runtime(item: Mapping[str, Any], record: Mapping[str, Any]) -> t
         if candidate_vectors.shape != (len(pool), CANDIDATE_FEATURE_DIM) or not np.all(np.isfinite(candidate_vectors)):
             raise RuntimeError(f"invalid causal candidate feature tensor: {event_id}:{frame}")
         causal_values = np.asarray(
-            [causal_score(candidate, target_scores[str(candidate["candidate_uid"])], trusted, predicted_box) for candidate in pool],
+            [causal_score(candidate, target_scores[str(candidate["candidate_uid"])], state.recent_trusted, state.predicted_box) for candidate in pool],
             dtype=np.float64,
         )
         order = sorted(range(len(pool)), key=lambda index: (-float(causal_values[index]), str(pool[index]["candidate_uid"])))
@@ -526,24 +536,15 @@ def build_event_runtime(item: Mapping[str, Any], record: Mapping[str, Any]) -> t
             [candidate_vectors[index, :MEMORY_DIM] for index in order[1:] if np.linalg.norm(candidate_vectors[index, :MEMORY_DIM]) > 1.0e-6],
             anchor,
         )
-        recent_array, recent_mask = pad_memory(trusted, RECENT_SLOTS)
-        long_array, long_mask = pad_memory(long_term, LONG_TERM_SLOTS)
-        distractor_array, distractor_mask = pad_memory(distractors, DISTRACTOR_SLOTS)
-        temporal = np.asarray(
-            [
-                float(frame - start) / float(HORIZON),
-                float(np.tanh(top_score)),
-                float(np.tanh(second_score)),
-                float(np.tanh(margin)),
-                float(np.clip(previous_score, -1.0, 1.0)),
-                float(np.clip(previous_uncertainty, 0.0, 1.0)),
-                float(min(trusted_age, HORIZON)) / float(HORIZON),
-                float(any(str(candidate["candidate_source"]) == FUTURE_FRAME_REQUERY for candidate in pool)),
-            ],
-            dtype=np.float32,
+        recent_array, recent_mask, long_array, long_mask, distractor_array, distractor_mask = state_memory_arrays(state)
+        temporal = build_temporal_features(
+            state,
+            frame_horizon=frame - start,
+            causal_top_score=top_score,
+            causal_second_score=second_score,
+            causal_margin=margin,
+            has_future_requery=any(str(candidate["candidate_source"]) == FUTURE_FRAME_REQUERY for candidate in pool),
         )
-        if not np.all(np.isfinite(temporal)):
-            raise RuntimeError(f"invalid temporal feature: {event_id}:{frame}")
         pool_uids = [str(candidate["candidate_uid"]) for candidate in pool]
         row = {
             "event_id": event_id,
@@ -555,6 +556,7 @@ def build_event_runtime(item: Mapping[str, Any], record: Mapping[str, Any]) -> t
             "frame_horizon": frame - start,
             "target_public_id_for_offline_audit": int(item["target_public_id"]),
             "target_dataset_gt_id_for_offline_label": int(item["target_dataset_gt_id"]),
+            "anchor_box": [float(value) for value in anchor_box],
             "candidate_uids": pool_uids,
             "candidate_boxes": [list(map(float, candidate["box_xyxy"])) for candidate in pool],
             "candidate_sources": [str(candidate["candidate_source"]) for candidate in pool],
@@ -569,7 +571,8 @@ def build_event_runtime(item: Mapping[str, Any], record: Mapping[str, Any]) -> t
             "causal_top_score": top_score,
             "causal_second_score": second_score,
             "causal_margin": margin,
-            "causal_state_update": "base_target_plus_anchor_similarity_geometry_presence_only",
+            "causal_state_update": "shared_temporal_state_policy; base_target_plus_anchor_similarity_geometry_presence_only",
+            "temporal_feature_schema": list(TEMPORAL_FEATURE_SCHEMA),
             "active_live_candidate_count": len(future_rows),
             "pool_audit": pool_audit,
             "runtime_future_gt_used": False,
@@ -598,38 +601,24 @@ def build_event_runtime(item: Mapping[str, Any], record: Mapping[str, Any]) -> t
         arrays["incumbent_other"].append(np.asarray([float(candidate.get("incumbent_public_id_if_any") is not None and candidate.get("incumbent_public_id_if_any") != int(item["target_public_id"])) for candidate in pool], dtype=np.float32))
         arrays["confidence"].append(np.asarray([float(candidate["confidence"]) for candidate in pool], dtype=np.float32))
         arrays["presence"].append(np.asarray([float(candidate["presence_score"]) for candidate in pool], dtype=np.float32))
-        arrays["motion_iou"].append(np.asarray([box_iou(candidate["box_xyxy"], predicted_box) for candidate in pool], dtype=np.float32))
+        arrays["motion_iou"].append(np.asarray([box_iou(candidate["box_xyxy"], state.predicted_box) for candidate in pool], dtype=np.float32))
         arrays["protected_candidate_mask"].append(np.asarray([bool(candidate.get("incumbent_public_id_if_any") is not None and candidate.get("incumbent_public_id_if_any") != int(item["target_public_id"])) for candidate in pool], dtype=np.bool_))
         selected = pool[top_index]
-        selected_feature = selected.get("feature")
-        if selected_feature is not None:
-            selected_feature = unit(selected_feature, f"{event_id}:{frame} selected feature")
-            old_center = np.asarray([(predicted_box[0] + predicted_box[2]) / 2.0, (predicted_box[1] + predicted_box[3]) / 2.0])
-            selected_box = list(map(float, selected["box_xyxy"]))
-            new_center = np.asarray([(selected_box[0] + selected_box[2]) / 2.0, (selected_box[1] + selected_box[3]) / 2.0])
-            predicted_box = selected_box
-            if top_score > 0.0 and margin >= CAUSAL_MARGIN_ADMISSION:
-                trusted.append(selected_feature)
-                trusted_age = 0
-                if margin >= 0.30 and (frame - start) % 5 == 0:
-                    long_term.append(selected_feature)
-            else:
-                trusted_age += 1
-            if len(order) > 1:
-                second_feature = pool[order[1]].get("feature")
-                if second_feature is not None:
-                    distractors.append(unit(second_feature, f"{event_id}:{frame} distractor feature"))
-        else:
-            trusted_age += 1
-        trusted = trusted[-RECENT_SLOTS:]
-        long_term = long_term[-LONG_TERM_SLOTS:]
-        distractors = distractors[-DISTRACTOR_SLOTS:]
-        previous_raw = selected.get("official_raw_sam_id")
-        previous_raw = None if previous_raw is None else int(previous_raw)
-        previous_scope = selected.get("native_scope")
-        previous_scope = None if previous_scope is None else str(previous_scope)
-        previous_score = top_score
-        previous_uncertainty = float(1.0 / (1.0 + max(margin, 0.0)))
+        state_update = update_temporal_state(
+            state,
+            candidates=pool,
+            target_uid=pool_uids[top_index],
+            selected_uid=pool_uids[top_index],
+            selected_score=top_score,
+            selected_margin=margin,
+            fused_target_scores=[target_scores[uid] for uid in pool_uids],
+            frame_horizon=frame - start,
+            assigned_candidate=selected,
+            base_top_score=top_score,
+            base_second_score=second_score,
+        )
+        row["temporal_state_update"] = state_update
+        row["temporal_state_after"] = state_audit(state)
     return rows, arrays, {"label_count_placeholder": len(rows), "future_requery_rows": int(details["future_requery_row_count"]), "selected_trigger_count": int(details["selected_trigger_count"])}
 
 
@@ -853,6 +842,7 @@ def main() -> int:
             "source_feature_names": list(SOURCE_NAMES),
             "source_feature_dim": SOURCE_FEATURE_DIM,
             "memory": {"recent_trusted_slots": RECENT_SLOTS, "long_term_trusted_slots": LONG_TERM_SLOTS, "distractor_slots": DISTRACTOR_SLOTS},
+            "temporal_feature_schema": list(TEMPORAL_FEATURE_SCHEMA),
             "causal_selector": "base_target_plus_anchor_similarity_geometry_presence; selected state only; no GT",
             "offline_label": "highest candidate box IoU to dataset GT >= 0.50, else NONE; attached after runtime tensors",
             "splits": split_summaries,
