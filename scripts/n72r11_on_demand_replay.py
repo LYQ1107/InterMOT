@@ -58,6 +58,22 @@ from sam3_intermot.association.target_edge_interface import (  # noqa: E402
     apply_legacy_injection,
     select_candidate_from_logits,
 )
+from sam3_intermot.association.counterfactual_safe_intervention import (  # noqa: E402
+    APPLY_PCTIS,
+    COUNTERFACTUAL_SAFE_V1,
+    KEEP_BASELINE,
+    build_counterfactual_audit,
+    commit_counterfactual_decision,
+    decide_counterfactual_safe_v1,
+)
+from sam3_intermot.association.learned_safe_intervention import (  # noqa: E402
+    SAFE_GATE_FEATURE_DIM,
+    SAFE_GATE_FEATURE_SCHEMA,
+    SafeInterventionMLP,
+    build_safe_gate_feature,
+    safe_gate_decision,
+    safe_gate_probability,
+)
 from sam3_intermot.reacquisition.live_requery_controller import (  # noqa: E402
     LiveFutureRequeryController,
 )
@@ -129,6 +145,19 @@ def sha256_file(path: Path) -> str:
         for block in iter(lambda: handle.read(1 << 20), b""):
             digest.update(block)
     return digest.hexdigest()
+
+
+def _json_sha256(value: Any) -> str:
+    """Hash a finite JSON-compatible audit value deterministically."""
+
+    payload = json.dumps(
+        value,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+        allow_nan=False,
+    ).encode("utf-8")
+    return hashlib.sha256(payload).hexdigest()
 
 
 def atomic_write(path: Path, text: str) -> None:
@@ -548,6 +577,19 @@ def _score_pool(
         state,
         base_target_uid,
     )
+    target_col_for_margin = int(values["target_col"])
+    target_scores_for_margin = base_matrix[:, target_col_for_margin].astype(np.float64)
+    target_order_for_margin = sorted(
+        range(len(pool)),
+        key=lambda index: (-float(target_scores_for_margin[index]), str(pool[index]["candidate_uid"])),
+    )
+    target_top_for_margin = float(target_scores_for_margin[target_order_for_margin[0]]) if target_order_for_margin else 0.0
+    target_second_for_margin = (
+        float(target_scores_for_margin[target_order_for_margin[1]])
+        if len(target_order_for_margin) > 1
+        else 0.0
+    )
+    values["base_assignment_margin"] = float(target_top_for_margin - target_second_for_margin)
     logits, none_logit = _model_logits(model, values, pool, device, _unit(inputs["anchor"], "anchor"))
     selection = select_candidate_from_logits(
         logits,
@@ -638,6 +680,12 @@ def _score_pool(
         "injected_delta": float(injected_delta),
         "solver": solver,
         "target_uid": target_uid,
+        # N72R12 keeps the historical names and adds explicit proposal-facing
+        # aliases.  Callers must still supply the already-solved matrices;
+        # this function does not infer public IDs from candidate order.
+        "proposal_solver": solver,
+        "proposal_target_uid": target_uid,
+        "proposal_fused_matrix": fused,
         "selection": selection,
     }
 
@@ -740,6 +788,8 @@ def _run_temporal_variant(
     variant: str,
     model: Any | None,
     bridge: TargetEdgeBridge | None,
+    safe_gate_model: SafeInterventionMLP | None,
+    safe_gate_checkpoint_sha256: str | None,
     device: torch.device,
     enable_live: bool,
     force_trigger: bool,
@@ -749,6 +799,8 @@ def _run_temporal_variant(
         "E1_V3_LEGACY_INJECTION": EDGE_MODE_LEGACY_INJECTION,
         "E1A_EXACT_ONPOLICY_V3_LEGACY": EDGE_MODE_LEGACY_INJECTION,
         "E1B_PCTIS_LEGACY": EDGE_MODE_LEGACY_INJECTION,
+        "E1C_PCTIS_SAFE": EDGE_MODE_LEGACY_INJECTION,
+        "E1D_PCTIS_LEARNED_SAFE": EDGE_MODE_LEGACY_INJECTION,
         "E2_PCTIS_LIVE": EDGE_MODE_LEGACY_INJECTION,
         "E2_V3_CORRECTED_BRIDGE": EDGE_MODE_BRIDGE,
         "E3_V3_CORRECTED_BRIDGE_LIVE": EDGE_MODE_BRIDGE,
@@ -785,6 +837,23 @@ def _run_temporal_variant(
         "assignment_changed_from_pre_rescue_count": 0,
         "trusted_memory_admission_count": 0,
         "distractor_admission_count": 0,
+        "proposal_count": 0,
+        "proposal_target_change_count": 0,
+        "safe_apply_count": 0,
+        "safe_keep_count": 0,
+        "learned_gate_predicted_apply_count": 0,
+        "learned_gate_predicted_keep_count": 0,
+        "learned_gate_blocked_by_deterministic_count": 0,
+        "keep_no_selection": 0,
+        "keep_no_target_change": 0,
+        "keep_other_public_owner": 0,
+        "keep_non_target_collateral": 0,
+        "keep_target_edge_not_dominant": 0,
+        "apply_rate": 0.0,
+        "base_target_assigned_count": 0,
+        "proposal_target_assigned_count": 0,
+        "committed_target_assigned_count": 0,
+        "non_target_changes_prevented": 0,
         "geometry_policy": (
             "POSITIVE_AREA_REQUIRED_BEFORE_MODEL_AND_SOLVER"
             if require_positive_geometry
@@ -898,13 +967,156 @@ def _run_temporal_variant(
                 geometry_audits.append(pool_audit)
             else:
                 pool, pool_audit = pre_pool, pre_pool_audit
-            scored = _score_pool(inputs, frame, pool, model, bridge, device, state, edge_mode)
-            target_uid = scored["target_uid"]
+            counterfactual_payload: dict[str, Any] | None = None
+            if variant in {"E1C_PCTIS_SAFE", "E1D_PCTIS_LEARNED_SAFE"}:
+                # E1C is deliberately a counterfactual comparison on one
+                # frozen candidate axis.  A live re-query would change the
+                # treatment rather than test the safety decision.
+                if active_rows or [str(item["candidate_uid"]) for item in pool] != [
+                    str(item["candidate_uid"]) for item in pre_pool
+                ]:
+                    raise RuntimeError("E1C requires the same frozen pool for base and proposal")
+                proposal = _score_pool(
+                    inputs, frame, pool, model, bridge, device, state, EDGE_MODE_LEGACY_INJECTION
+                )
+                if proposal["state_axis"] != pre["state_axis"] or proposal["public_axis"] != pre["public_axis"]:
+                    raise RuntimeError("E1C base/proposal public or state axis changed")
+                if not np.array_equal(pre["base_matrix"], proposal["base_matrix"]):
+                    raise RuntimeError("E1C proposal did not reuse the exact base score matrix")
+                audit = build_counterfactual_audit(
+                    target_public_id=target_public,
+                    pool=pool,
+                    base_matrix=pre["base_matrix"],
+                    proposed_matrix=proposal["fused_matrix"],
+                    public_axis=proposal["public_axis"],
+                    base_solver=pre["base_solver"],
+                    proposal_solver=proposal["solver"],
+                    selection=proposal["selection"],
+                    model_values=proposal["values"],
+                )
+                safety_decision = decide_counterfactual_safe_v1(audit)
+                learned_gate_payload: dict[str, Any] | None = None
+                if variant == "E1D_PCTIS_LEARNED_SAFE":
+                    if safe_gate_model is None or safe_gate_checkpoint_sha256 is None:
+                        raise RuntimeError("E1D requires a safe-gate checkpoint")
+                    gate_feature = build_safe_gate_feature(
+                        audit=audit,
+                        selection=proposal["selection"],
+                        state_audit=state_audit(state),
+                        action=str(inputs["action_type"]),
+                        source=audit.get("selected_candidate_source"),
+                        candidate_count=len(pool),
+                        pool=pool,
+                    )
+                    gate_probability = safe_gate_probability(safe_gate_model, gate_feature)
+                    gate_decision = safe_gate_decision(gate_probability)
+                    stats["learned_gate_predicted_apply_count"] += int(gate_decision == APPLY_PCTIS)
+                    stats["learned_gate_predicted_keep_count"] += int(gate_decision == KEEP_BASELINE)
+                    if (
+                        gate_decision == APPLY_PCTIS
+                        and safety_decision["decision"] != APPLY_PCTIS
+                    ):
+                        stats["learned_gate_blocked_by_deterministic_count"] += 1
+                    learned_gate_payload = {
+                        "schema_version": "N72R12_LEARNED_SAFE_GATE_RUNTIME_V1",
+                        "feature_dim": SAFE_GATE_FEATURE_DIM,
+                        "feature_schema": list(SAFE_GATE_FEATURE_SCHEMA),
+                        "feature": gate_feature.astype(float).tolist(),
+                        "feature_sha256": _json_sha256(gate_feature.astype(float).tolist()),
+                        "probability": float(gate_probability),
+                        "decision": gate_decision,
+                        "threshold": 0.5,
+                        "checkpoint_sha256": safe_gate_checkpoint_sha256,
+                        "deterministic_safety_decision": safety_decision,
+                        "runtime_future_gt_used": False,
+                        "runtime_gt_read": False,
+                        "posthoc_gt_used": False,
+                    }
+                    decision = dict(safety_decision)
+                    if (
+                        safety_decision["decision"] == APPLY_PCTIS
+                        and gate_decision != APPLY_PCTIS
+                    ):
+                        decision = {
+                            **safety_decision,
+                            "decision": KEEP_BASELINE,
+                            "intervention_applied": False,
+                            "rejection_reasons": [
+                                *list(safety_decision.get("rejection_reasons", [])),
+                                "LEARNED_GATE_KEEP",
+                            ],
+                        }
+                else:
+                    decision = safety_decision
+                committed = commit_counterfactual_decision(
+                    decision=decision,
+                    base_solver=pre["base_solver"],
+                    proposal_solver=proposal["solver"],
+                    base_matrix=pre["base_matrix"],
+                    proposal_matrix=proposal["fused_matrix"],
+                    base_target_uid=pre["base_target_uid"],
+                    proposal_target_uid=proposal["target_uid"],
+                    selection=proposal["selection"],
+                )
+                scored = proposal
+                committed_solver = committed["committed_solver"]
+                committed_matrix = np.asarray(committed["committed_matrix"], dtype=np.float64)
+                target_uid = committed["committed_target_uid"]
+                selected_uid = committed["committed_selected_uid"]
+                proposal_injection_delta = float(proposal["injected_delta"])
+                committed_injection_delta = proposal_injection_delta if committed["intervention_applied"] else 0.0
+                counterfactual_payload = {
+                    "policy": COUNTERFACTUAL_SAFE_V1,
+                    "decision": decision["decision"],
+                    "intervention_applied": bool(committed["intervention_applied"]),
+                    "audit": audit,
+                    "decision_audit": decision,
+                    **({
+                        "deterministic_safety_decision": safety_decision,
+                        "learned_gate": learned_gate_payload,
+                    } if variant == "E1D_PCTIS_LEARNED_SAFE" else {}),
+                    "committed_selected_uid": committed["committed_selected_uid"],
+                    "base_solver_sha256": _json_sha256(pre["base_solver"]),
+                    "proposal_solver_sha256": _json_sha256(proposal["solver"]),
+                    "committed_solver_sha256": _json_sha256(committed_solver),
+                    "base_matrix_sha256": _json_sha256(pre["base_matrix"].astype(float).tolist()),
+                    "proposal_matrix_sha256": _json_sha256(proposal["fused_matrix"].astype(float).tolist()),
+                    "committed_matrix_sha256": _json_sha256(committed_matrix.astype(float).tolist()),
+                    "runtime_future_gt_used": False,
+                    "runtime_gt_read": False,
+                    "posthoc_gt_used": False,
+                }
+                stats["proposal_count"] += 1
+                stats["proposal_target_change_count"] += int(audit["target_assignment_changed"])
+                stats["safe_apply_count"] += int(committed["intervention_applied"])
+                stats["safe_keep_count"] += int(not committed["intervention_applied"])
+                stats["base_target_assigned_count"] += int(pre["base_target_uid"] is not None)
+                stats["proposal_target_assigned_count"] += int(proposal["target_uid"] is not None)
+                stats["committed_target_assigned_count"] += int(target_uid is not None)
+                stats["non_target_changes_prevented"] += int(
+                    not committed["intervention_applied"]
+                    and int(audit["non_target_changed_public_count"]) > 0
+                )
+                for reason, key in (
+                    ("NO_ACCEPTED_SELECTION", "keep_no_selection"),
+                    ("NO_TARGET_CHANGE", "keep_no_target_change"),
+                    ("SELECTED_OWNED_BY_OTHER_PUBLIC", "keep_other_public_owner"),
+                    ("NON_TARGET_PUBLIC_COLLATERAL_CHANGE", "keep_non_target_collateral"),
+                    ("TARGET_EDGE_NOT_DOMINANT", "keep_target_edge_not_dominant"),
+                ):
+                    stats[key] += int(reason in decision["rejection_reasons"])
+            else:
+                scored = _score_pool(inputs, frame, pool, model, bridge, device, state, edge_mode)
+                committed_solver = scored["solver"]
+                committed_matrix = np.asarray(scored["fused_matrix"], dtype=np.float64)
+                target_uid = scored["target_uid"]
+                selected_uid = scored["selection"].get("selected_candidate_uid")
+                proposal_injection_delta = float(scored["injected_delta"])
+                committed_injection_delta = proposal_injection_delta
             stats["model_score_changed_frame_count"] += int(scored["selection"].get("score_changed", False))
             stats["target_assigned_frame_count"] += int(target_uid is not None)
             stats["assignment_changed_from_pre_rescue_count"] += int(target_uid != base_target_uid)
             assigned = next((item for item in pool if str(item["candidate_uid"]) == str(target_uid)), None)
-            selected_uid = scored["selection"].get("selected_candidate_uid")
             state_update = update_temporal_state(
                 state,
                 candidates=pool,
@@ -912,7 +1124,7 @@ def _run_temporal_variant(
                 selected_uid=selected_uid,
                 selected_score=scored["selection"].get("selected_score"),
                 selected_margin=scored["selection"].get("best_minus_second_margin"),
-                fused_target_scores=scored["fused_matrix"][:, target_col],
+                fused_target_scores=committed_matrix[:, target_col],
                 frame_horizon=frame - event_frame,
                 assigned_candidate=assigned,
                 base_top_score=base_top,
@@ -937,7 +1149,7 @@ def _run_temporal_variant(
                     "frame_horizon": frame - event_frame,
                     "target_public_id": target_public,
                     "temporal_feature_schema": list(TEMPORAL_FEATURE_SCHEMA),
-                    "candidate_rows": _solver_rows(pool, scored["solver"]),
+                    "candidate_rows": _solver_rows(pool, committed_solver),
                     "candidate_count": len(pool),
                     "candidate_pool": {**pool_audit, "candidate_rows": source_rows},
                     "assignment": {
@@ -946,23 +1158,29 @@ def _run_temporal_variant(
                         "target_base_assigned_candidate_uid": base_target_uid,
                         "target_selected_candidate_uid": selected_uid,
                         "target_selector_and_solver_agree": bool(selected_uid is not None and str(selected_uid) == str(target_uid)),
-                        "solver": scored["solver"],
+                        "solver": committed_solver,
                         "solver_public_id_immutable": True,
                         "runtime_future_gt_used": False,
                     },
                     "score_audit": {
                         "association_state_axis": scored["state_axis"],
                         "public_id_axis": scored["public_axis"],
-                        "fused_score_matrix": scored["fused_matrix"].astype(float).tolist(),
+                        "fused_score_matrix": committed_matrix.astype(float).tolist(),
                         "base_score_matrix": scored["base_matrix"].astype(float).tolist(),
+                        "proposal_score_matrix": scored["fused_matrix"].astype(float).tolist(),
+                        "committed_score_matrix": committed_matrix.astype(float).tolist(),
                         "base_target_scores": scored["base_matrix"][:, target_col].astype(float).tolist(),
-                        "fused_target_scores": scored["fused_matrix"][:, target_col].astype(float).tolist(),
+                        "fused_target_scores": committed_matrix[:, target_col].astype(float).tolist(),
+                        "proposal_target_scores": scored["fused_matrix"][:, target_col].astype(float).tolist(),
+                        "committed_target_scores": committed_matrix[:, target_col].astype(float).tolist(),
                         "model_logit_by_candidate": scored["logits"].astype(float).tolist(),
                         "model_score_by_candidate": np.asarray(scored["selection"]["candidate_scores"], dtype=np.float64).astype(float).tolist(),
                         "none_logit": float(scored["none_logit"]),
                         "bridge_target_delta_by_candidate": scored["bridge_deltas"].astype(float).tolist(),
                         "bridge_calibrated_target_by_candidate": scored["calibrated_target"].astype(float).tolist(),
                         "legacy_injection_delta": float(scored["injected_delta"]),
+                        "proposal_injection_delta": proposal_injection_delta,
+                        "committed_injection_delta": committed_injection_delta,
                         "base_top1_score": base_top,
                         "base_top2_score": base_second,
                         "base_assignment_margin": base_margin,
@@ -975,6 +1193,14 @@ def _run_temporal_variant(
                         "frame": frame,
                         "memory_read": True,
                         "runtime_future_gt_used": False,
+                    },
+                    "counterfactual_intervention": counterfactual_payload or {
+                        "policy": "NOT_APPLICABLE",
+                        "decision": "NOT_APPLICABLE",
+                        "intervention_applied": False,
+                        "runtime_future_gt_used": False,
+                        "runtime_gt_read": False,
+                        "posthoc_gt_used": False,
                     },
                     "memory_read": True,
                     "memory_write": bool(state_update["trusted_admitted"]),
@@ -1035,6 +1261,8 @@ def _run_temporal_variant(
             )
         )
     _validate_runtime(rows, inputs, variant)
+    if variant in {"E1C_PCTIS_SAFE", "E1D_PCTIS_LEARNED_SAFE"}:
+        stats["apply_rate"] = float(stats["safe_apply_count"] / max(stats["proposal_count"], 1))
     stats["runtime_future_gt_used"] = False
     stats["controller_audit"] = controller_audit
     return rows, stats
@@ -1109,6 +1337,134 @@ def _validate_runtime(rows: Sequence[Mapping[str, Any]], inputs: Mapping[str, An
         solver = assignment.get("solver")
         if not isinstance(solver, Mapping) or solver.get("runtime_future_gt_used") is not False:
             errors.append(f"{variant}/{row.get('frame')}:solver_boundary")
+        if variant in {"E1C_PCTIS_SAFE", "E1D_PCTIS_LEARNED_SAFE"}:
+            counterfactual = row.get("counterfactual_intervention")
+            if not isinstance(counterfactual, Mapping):
+                errors.append(f"{variant}/{row.get('frame')}:missing_counterfactual_audit")
+            elif not isinstance(solver, Mapping):
+                errors.append(f"{variant}/{row.get('frame')}:missing_committed_solver")
+            else:
+                audit = counterfactual.get("audit")
+                decision_audit = counterfactual.get("decision_audit")
+                if counterfactual.get("policy") != COUNTERFACTUAL_SAFE_V1 or not isinstance(audit, Mapping):
+                    errors.append(f"{variant}/{row.get('frame')}:counterfactual_policy_or_audit")
+                else:
+                    try:
+                        recomputed = decide_counterfactual_safe_v1(audit)
+                    except (TypeError, ValueError, KeyError) as exc:
+                        errors.append(f"{variant}/{row.get('frame')}:counterfactual_recompute:{type(exc).__name__}")
+                    else:
+                        effective_decision = recomputed
+                        if variant == "E1D_PCTIS_LEARNED_SAFE":
+                            learned_gate = counterfactual.get("learned_gate")
+                            safety_decision = counterfactual.get("deterministic_safety_decision")
+                            if not isinstance(learned_gate, Mapping) or not isinstance(safety_decision, Mapping):
+                                errors.append(f"{variant}/{row.get('frame')}:learned_gate_audit")
+                            else:
+                                for field in ("decision", "intervention_applied", "rejection_reasons"):
+                                    if safety_decision.get(field) != recomputed.get(field):
+                                        errors.append(f"{variant}/{row.get('frame')}:safety_decision_recompute:{field}")
+                                feature = np.asarray(learned_gate.get("feature", []), dtype=np.float64).reshape(-1)
+                                if (
+                                    int(learned_gate.get("feature_dim", -1)) != SAFE_GATE_FEATURE_DIM
+                                    or learned_gate.get("feature_schema") != list(SAFE_GATE_FEATURE_SCHEMA)
+                                    or feature.shape != (SAFE_GATE_FEATURE_DIM,)
+                                    or not np.isfinite(feature).all()
+                                    or learned_gate.get("feature_sha256") != _json_sha256(feature.astype(float).tolist())
+                                ):
+                                    errors.append(f"{variant}/{row.get('frame')}:learned_feature")
+                                try:
+                                    probability = float(learned_gate.get("probability"))
+                                    expected_learned_decision = safe_gate_decision(probability)
+                                except (TypeError, ValueError):
+                                    errors.append(f"{variant}/{row.get('frame')}:learned_probability")
+                                    probability = float("nan")
+                                    expected_learned_decision = None
+                                if (
+                                    expected_learned_decision is not None
+                                    and learned_gate.get("decision") != expected_learned_decision
+                                ):
+                                    errors.append(f"{variant}/{row.get('frame')}:learned_decision_threshold")
+                                if learned_gate.get("threshold") != 0.5:
+                                    errors.append(f"{variant}/{row.get('frame')}:learned_threshold")
+                                expected_checkpoint = inputs.get("safe_gate_checkpoint_sha256")
+                                if expected_checkpoint is None or learned_gate.get("checkpoint_sha256") != expected_checkpoint:
+                                    errors.append(f"{variant}/{row.get('frame')}:learned_checkpoint_hash")
+                                if any(learned_gate.get(flag) is not False for flag in ("runtime_future_gt_used", "runtime_gt_read", "posthoc_gt_used")):
+                                    errors.append(f"{variant}/{row.get('frame')}:learned_gate_boundary")
+                                if recomputed.get("decision") == APPLY_PCTIS and expected_learned_decision != APPLY_PCTIS:
+                                    effective_decision = {
+                                        **recomputed,
+                                        "decision": KEEP_BASELINE,
+                                        "intervention_applied": False,
+                                        "rejection_reasons": [
+                                            *list(recomputed.get("rejection_reasons", [])),
+                                            "LEARNED_GATE_KEEP",
+                                        ],
+                                    }
+                        if not isinstance(decision_audit, Mapping):
+                            errors.append(f"{variant}/{row.get('frame')}:missing_decision_audit")
+                        else:
+                            for field in ("decision", "intervention_applied", "rejection_reasons"):
+                                if decision_audit.get(field) != effective_decision.get(field):
+                                    errors.append(f"{variant}/{row.get('frame')}:decision_recompute:{field}")
+                        if counterfactual.get("decision") != effective_decision["decision"]:
+                            errors.append(f"{variant}/{row.get('frame')}:decision_name")
+                        if counterfactual.get("intervention_applied") is not effective_decision["intervention_applied"]:
+                            errors.append(f"{variant}/{row.get('frame')}:decision_applied")
+                        score_base = np.asarray(score.get("base_score_matrix", []), dtype=np.float64)
+                        score_proposal = np.asarray(score.get("proposal_score_matrix", []), dtype=np.float64)
+                        score_committed = np.asarray(score.get("committed_score_matrix", []), dtype=np.float64)
+                        if score_base.shape != score_proposal.shape or score_base.shape != score_committed.shape:
+                            errors.append(f"{variant}/{row.get('frame')}:counterfactual_matrix_shapes")
+                        elif not np.array_equal(score_committed, matrix):
+                            errors.append(f"{variant}/{row.get('frame')}:committed_matrix_not_fused_matrix")
+                        else:
+                            base_hash = _json_sha256(score_base.astype(float).tolist())
+                            proposal_hash = _json_sha256(score_proposal.astype(float).tolist())
+                            committed_hash = _json_sha256(score_committed.astype(float).tolist())
+                            if counterfactual.get("base_matrix_sha256") != base_hash:
+                                errors.append(f"{variant}/{row.get('frame')}:base_matrix_hash")
+                            if counterfactual.get("proposal_matrix_sha256") != proposal_hash:
+                                errors.append(f"{variant}/{row.get('frame')}:proposal_matrix_hash")
+                            if counterfactual.get("committed_matrix_sha256") != committed_hash:
+                                errors.append(f"{variant}/{row.get('frame')}:committed_matrix_hash")
+                            if counterfactual.get("committed_solver_sha256") != _json_sha256(solver):
+                                errors.append(f"{variant}/{row.get('frame')}:committed_solver_hash")
+                            committed_solver_hash = counterfactual.get("committed_solver_sha256")
+                            expected_solver_hash = (
+                                counterfactual.get("proposal_solver_sha256")
+                                if effective_decision["decision"] == APPLY_PCTIS
+                                else counterfactual.get("base_solver_sha256")
+                            )
+                            if committed_solver_hash != expected_solver_hash:
+                                errors.append(f"{variant}/{row.get('frame')}:decision_solver_hash")
+                            expected_matrix = score_proposal if effective_decision["decision"] == APPLY_PCTIS else score_base
+                            if not np.array_equal(score_committed, expected_matrix):
+                                errors.append(f"{variant}/{row.get('frame')}:decision_matrix_mismatch")
+                            expected_delta = float(score.get("proposal_injection_delta", 0.0)) if effective_decision["decision"] == APPLY_PCTIS else 0.0
+                            if abs(float(score.get("committed_injection_delta", 0.0)) - expected_delta) > 1.0e-9:
+                                errors.append(f"{variant}/{row.get('frame')}:decision_injection_delta")
+                        solver_rows = {
+                            str(item.get("candidate_uid")): item
+                            for item in solver.get("assignment_rows", [])
+                            if isinstance(item, Mapping)
+                        }
+                        if len(solver_rows) != len(output_rows) or set(solver_rows) != set(output_uids):
+                            errors.append(f"{variant}/{row.get('frame')}:committed_solver_candidate_axis")
+                        else:
+                            for item in output_rows:
+                                expected_item = solver_rows[str(item["candidate_uid"])]
+                                if item.get("solver_public_id") != expected_item.get("public_id") or item.get("solver_status") != expected_item.get("status"):
+                                    errors.append(f"{variant}/{row.get('frame')}:candidate_not_committed_solver")
+                                    break
+                            committed_target = assignment.get("target_assigned_candidate_uid")
+                            if committed_target != audit.get("base_target_uid") and effective_decision["decision"] == KEEP_BASELINE:
+                                errors.append(f"{variant}/{row.get('frame')}:keep_target_mismatch")
+                            if committed_target != audit.get("proposal_target_uid") and effective_decision["decision"] == APPLY_PCTIS:
+                                errors.append(f"{variant}/{row.get('frame')}:apply_target_mismatch")
+                            if assignment.get("target_selected_candidate_uid") != counterfactual.get("committed_selected_uid"):
+                                errors.append(f"{variant}/{row.get('frame')}:selected_target_mismatch")
         requery = row.get("requery")
         if isinstance(requery, Mapping) and requery.get("applied") and str(requery.get("source")) != FUTURE_FRAME_REQUERY:
             errors.append(f"{variant}/{row.get('frame')}:requery_source")
@@ -1185,6 +1541,23 @@ def _load_bridge_checkpoint(path: Path, device: torch.device) -> TargetEdgeBridg
     return bridge
 
 
+def _load_safe_gate_checkpoint(path: Path, device: torch.device) -> SafeInterventionMLP:
+    """Load the one N72R12 gate checkpoint without changing the PCTIS scorer."""
+
+    payload = torch.load(path, map_location=device, weights_only=False)
+    if not isinstance(payload, Mapping) or not isinstance(payload.get("state_dict"), Mapping):
+        raise RuntimeError(f"invalid N72R12 safe-gate checkpoint: {path}")
+    if int(payload.get("feature_dim", -1)) != SAFE_GATE_FEATURE_DIM:
+        raise RuntimeError(f"safe-gate feature dimension mismatch: {path}")
+    if payload.get("model_schema") != list(SAFE_GATE_FEATURE_SCHEMA):
+        raise RuntimeError(f"safe-gate feature schema mismatch: {path}")
+    model = SafeInterventionMLP()
+    model.load_state_dict(payload["state_dict"], strict=True)
+    model.to(device)
+    model.eval()
+    return model
+
+
 def _posthoc_score(inputs: Mapping[str, Any], runtime_rows: Mapping[str, Sequence[Mapping[str, Any]]]) -> dict[str, Any]:
     """Score sealed runtime outputs using the historical N72R9 metric code."""
 
@@ -1220,6 +1593,9 @@ def _posthoc_score(inputs: Mapping[str, Any], runtime_rows: Mapping[str, Sequenc
         ("E1A_vs_E0", ("E0_BASELINE_B0", "E1A_EXACT_ONPOLICY_V3_LEGACY")),
         ("E1B_vs_E1A", ("E1A_EXACT_ONPOLICY_V3_LEGACY", "E1B_PCTIS_LEGACY")),
         ("E1B_vs_E0", ("E0_BASELINE_B0", "E1B_PCTIS_LEGACY")),
+        ("E1C_vs_E0", ("E0_BASELINE_B0", "E1C_PCTIS_SAFE")),
+        ("E1C_vs_E1B", ("E1B_PCTIS_LEGACY", "E1C_PCTIS_SAFE")),
+        ("E1D_vs_E0", ("E0_BASELINE_B0", "E1D_PCTIS_LEARNED_SAFE")),
         ("E2_vs_E1B", ("E1B_PCTIS_LEGACY", "E2_PCTIS_LIVE")),
         ("E2_vs_E0", ("E0_BASELINE_B0", "E2_PCTIS_LIVE")),
         ("E2_vs_E1", ("E1_V3_LEGACY_INJECTION", "E2_V3_CORRECTED_BRIDGE")),
@@ -1277,9 +1653,11 @@ def run_event(
     scorer_kind: str = "v3",
     require_positive_geometry: bool = False,
     rebuild_baseline_geometry: bool = False,
+    safe_gate_checkpoint: Path | None = None,
 ) -> dict[str, Any]:
     inputs = _load_inputs(event, horizon=horizon)
     inputs = dict(inputs)
+    inputs["action_type"] = str(event["action_type"])
     inputs["require_positive_geometry"] = bool(require_positive_geometry)
     inputs["baseline_regenerated_from_frozen_sources"] = bool(rebuild_baseline_geometry)
     event_dir = output_root / str(inputs["event_id"])
@@ -1293,6 +1671,8 @@ def run_event(
         "E1_V3_LEGACY_INJECTION",
         "E2_V3_CORRECTED_BRIDGE",
         "E3_V3_CORRECTED_BRIDGE_LIVE",
+        "E1C_PCTIS_SAFE",
+        "E1D_PCTIS_LEARNED_SAFE",
     ) if variants is None else tuple(str(value) for value in variants)
     if len(treatment_variants) != len(set(treatment_variants)) or not treatment_variants:
         raise ValueError("variants must be a non-empty list of unique treatment variant names")
@@ -1300,9 +1680,11 @@ def run_event(
         "E1_V3_LEGACY_INJECTION",
         "E1A_EXACT_ONPOLICY_V3_LEGACY",
         "E1B_PCTIS_LEGACY",
+        "E1C_PCTIS_SAFE",
         "E2_PCTIS_LIVE",
         "E2_V3_CORRECTED_BRIDGE",
         "E3_V3_CORRECTED_BRIDGE_LIVE",
+        "E1D_PCTIS_LEARNED_SAFE",
     })
     if unknown:
         raise ValueError(f"unknown N72R11R3 treatment variants: {unknown}")
@@ -1313,6 +1695,16 @@ def run_event(
         allow_legacy_schema=allow_legacy_checkpoint_schema,
     ) if model_checkpoint is not None else None
     bridge = None if smoke and bridge_checkpoint is None else _load_bridge_checkpoint(bridge_checkpoint, device_obj) if bridge_checkpoint is not None else None
+    safe_gate_model = None
+    if "E1D_PCTIS_LEARNED_SAFE" in treatment_variants:
+        if safe_gate_checkpoint is None:
+            raise RuntimeError("E1D requires --safe-gate-checkpoint")
+        safe_gate_model = _load_safe_gate_checkpoint(safe_gate_checkpoint, device_obj)
+        inputs["safe_gate_checkpoint_sha256"] = sha256_file(safe_gate_checkpoint)
+    elif safe_gate_checkpoint is not None:
+        raise RuntimeError("--safe-gate-checkpoint is only valid for E1D_PCTIS_LEARNED_SAFE")
+    else:
+        inputs["safe_gate_checkpoint_sha256"] = None
     if require_positive_geometry and not rebuild_baseline_geometry:
         raise RuntimeError("positive geometry replay requires baseline regeneration from frozen sources")
     baseline_geometry_stats: dict[str, Any] | None = None
@@ -1343,6 +1735,8 @@ def run_event(
             variant=variant,
             model=model,
             bridge=bridge,
+            safe_gate_model=safe_gate_model,
+            safe_gate_checkpoint_sha256=None if safe_gate_checkpoint is None else sha256_file(safe_gate_checkpoint),
             device=device_obj,
             enable_live=bool(enable_live and variant in {"E3_V3_CORRECTED_BRIDGE_LIVE", "E2_PCTIS_LIVE"}),
             force_trigger=bool(force_trigger),
@@ -1438,6 +1832,7 @@ def run_event(
         "treatment_variants": list(treatment_variants),
         "horizon": int(horizon),
         "runtime_future_gt_used": False,
+        "runtime_gt_read": False,
         "posthoc_gt_used": bool(posthoc.get("posthoc_gt_used") is True),
         "interaction_source": "simulated_from_gt",
         "not_real_human_evidence": True,
@@ -1457,6 +1852,7 @@ def main() -> int:
     parser.add_argument("--device", default="cuda:1")
     parser.add_argument("--model-checkpoint", type=Path, default=None)
     parser.add_argument("--bridge-checkpoint", type=Path, default=None)
+    parser.add_argument("--safe-gate-checkpoint", type=Path, default=None)
     parser.add_argument("--scorer-kind", choices=("v3", "pctis"), default="v3")
     parser.add_argument("--horizon", type=int, default=HORIZON)
     parser.add_argument("--enable-live", action="store_true")
@@ -1472,6 +1868,8 @@ def main() -> int:
             "E1_V3_LEGACY_INJECTION",
             "E1A_EXACT_ONPOLICY_V3_LEGACY",
             "E1B_PCTIS_LEGACY",
+            "E1C_PCTIS_SAFE",
+            "E1D_PCTIS_LEARNED_SAFE",
             "E2_PCTIS_LIVE",
             "E2_V3_CORRECTED_BRIDGE",
             "E3_V3_CORRECTED_BRIDGE_LIVE",
@@ -1501,6 +1899,7 @@ def main() -> int:
             scorer_kind=str(args.scorer_kind),
             require_positive_geometry=bool(args.require_positive_geometry),
             rebuild_baseline_geometry=bool(args.rebuild_baseline_geometry),
+            safe_gate_checkpoint=None if args.safe_gate_checkpoint is None else _path(args.safe_gate_checkpoint),
         )
         print(json.dumps({"status": result["status"], "event_id": result["event_id"], "output": str(output_root / str(args.event_id))}, sort_keys=True))
         return 0
