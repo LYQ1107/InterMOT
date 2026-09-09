@@ -455,6 +455,48 @@ def _prediction_lines(
     }
 
 
+def _invalid_assigned_boxes(
+    rows: Sequence[Mapping[str, Any]], *, event_frame: int, event_id: str, variant: str
+) -> list[dict[str, Any]]:
+    """Report invalid exact-solver rows without changing or filtering them."""
+    invalid: list[dict[str, Any]] = []
+    for runtime_row in rows:
+        frame = runtime_row.get("frame")
+        if not isinstance(frame, int) or frame <= event_frame:
+            continue
+        for candidate in runtime_row.get("candidate_rows") or []:
+            if not isinstance(candidate, dict) or candidate.get("solver_status") != "ASSIGNED_TO_PUBLIC_ID":
+                continue
+            box = candidate.get("box_xyxy")
+            valid = (
+                isinstance(box, list)
+                and len(box) == 4
+                and all(
+                    isinstance(value, (int, float))
+                    and not isinstance(value, bool)
+                    and math.isfinite(float(value))
+                    for value in box
+                )
+                and box[2] > box[0]
+                and box[3] > box[1]
+            )
+            if not valid:
+                invalid.append(
+                    {
+                        "event_id": event_id,
+                        "sealed_runtime_variant": variant,
+                        "original_frame": frame,
+                        "relative_future_frame": frame - event_frame,
+                        "solver_public_id": candidate.get("solver_public_id"),
+                        "candidate_uid": candidate.get("candidate_uid"),
+                        "geometry_valid": candidate.get("geometry_valid"),
+                        "box_xyxy": box,
+                        "solver_status": candidate.get("solver_status"),
+                    }
+                )
+    return invalid
+
+
 def _gt_window_lines(gt_path: Path, *, event_frame: int, horizon: int, event_id: str) -> list[str]:
     lines: list[str] = []
     frames: set[int] = set()
@@ -592,6 +634,58 @@ def export_windows(
     if list(events_by_id) != [event["event_id"] for event in events]:
         raise WindowTrackEvalError("duplicate event IDs after selection")
 
+    # Preflight every sealed future row before writing a PASS manifest.  An
+    # assigned candidate with a non-positive box cannot be repaired in a
+    # post-hoc exporter: clipping, dropping, or inventing a one-pixel box would
+    # change the sealed solver output and invalidate the diagnostic.
+    runtime_cache: dict[tuple[str, str], list[dict[str, Any]]] = {}
+    invalid_boxes: list[dict[str, Any]] = []
+    for event in events:
+        for logical in LOGICAL_VARIANTS:
+            entry = event[logical]["entry"]
+            runtime_cache[(event["event_id"], logical)] = _load_runtime_rows(
+                entry, event["event_id"], event[logical]["sealed_runtime_variant"]
+            )
+            invalid_boxes.extend(
+                _invalid_assigned_boxes(
+                    runtime_cache[(event["event_id"], logical)],
+                    event_frame=event["event_frame"],
+                    event_id=event["event_id"],
+                    variant=event[logical]["sealed_runtime_variant"],
+                )
+            )
+    if invalid_boxes:
+        write_json_atomic(
+            output_root / "export_failure_invalid_assigned_boxes.json",
+            {
+                "schema_version": "N72R11R5_EXPORT_FAILURE_V1",
+                "status": "BLOCKED_INVALID_SEALED_ASSIGNED_BOXES",
+                "evaluation_scope": "INTERACTION_WINDOW_DIAGNOSTIC",
+                "reason": "sealed exact-solver assigned rows violate x2>x1 or y2>y1",
+                "event_count": len(events),
+                "logical_variant_count": len(LOGICAL_VARIANTS),
+                "invalid_assigned_row_count": len(invalid_boxes),
+                "unique_event_logical_frame_public_count": len(
+                    {
+                        (
+                            item["event_id"],
+                            item["sealed_runtime_variant"],
+                            item["original_frame"],
+                            item["solver_public_id"],
+                        )
+                        for item in invalid_boxes
+                    }
+                ),
+                "invalid_rows": invalid_boxes,
+                "allowed_repairs": [],
+                "historical_runtime_artifacts_modified": False,
+            },
+        )
+        raise WindowTrackEvalError(
+            f"{len(invalid_boxes)} sealed exact-solver assigned rows have invalid boxes; "
+            "post-hoc export cannot repair or omit them"
+        )
+
     protocol = build_protocol(
         frozen["sources"], output_root=output_root, source_branch=source_branch,
         source_commit=source_commit, trackeval_root=trackeval_path,
@@ -605,7 +699,6 @@ def export_windows(
         protocol["trackeval_commit"] = None
     write_json_atomic(output_root / "protocol.json", protocol)
 
-    runtime_cache: dict[tuple[str, str], list[dict[str, Any]]] = {}
     manifest_records: list[dict[str, Any]] = []
     window_records: list[dict[str, Any]] = []
     sequence_maps: dict[int, list[str]] = {horizon: [] for horizon in HORIZONS}
@@ -637,11 +730,6 @@ def export_windows(
             )
             for logical in LOGICAL_VARIANTS:
                 cache_key = (event["event_id"], logical)
-                if cache_key not in runtime_cache:
-                    entry = event[logical]["entry"]
-                    runtime_cache[cache_key] = _load_runtime_rows(
-                        entry, event["event_id"], event[logical]["sealed_runtime_variant"]
-                    )
                 lines, score_counts = _prediction_lines(
                     runtime_cache[cache_key], event_frame=event["event_frame"], horizon=horizon,
                     event_id=event["event_id"], variant=event[logical]["sealed_runtime_variant"],
