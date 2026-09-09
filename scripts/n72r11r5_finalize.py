@@ -21,7 +21,7 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from sam3_intermot.evaluation.window_trackeval import (  # noqa: E402
-    FROZEN_METRICS,
+    DEFAULT_FROZEN_METRICS,
     HORIZONS,
     LOGICAL_VARIANTS,
     WindowTrackEvalError,
@@ -59,7 +59,7 @@ def _source_facts(project_root: Path) -> dict[str, Any]:
         "frozen_protocol": None,
         "trackeval_commit": _git_value(project_root / "third_party/MOTIP/TrackEval", "rev-parse", "HEAD"),
     }
-    for logical, relative in FROZEN_METRICS.items():
+    for logical, relative in DEFAULT_FROZEN_METRICS.items():
         path = project_root / relative
         entry: dict[str, Any] = {"path": str(path), "exists": path.is_file()}
         if path.is_file():

@@ -22,7 +22,7 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from sam3_intermot.evaluation.window_trackeval import (  # noqa: E402
-    FROZEN_METRICS,
+    DEFAULT_FROZEN_METRICS,
     HORIZONS,
     LOGICAL_VARIANTS,
     WindowTrackEvalError,
@@ -301,7 +301,11 @@ def _paired_deltas(rows: list[dict[str, Any]]) -> dict[str, Any]:
     return result
 
 
-def _identity_interpretation(project_root: Path) -> dict[str, Any]:
+def _identity_interpretation(
+    project_root: Path,
+    *,
+    metrics_paths: Mapping[str, Path | str] | None = None,
+) -> dict[str, Any]:
     outputs: dict[str, Any] = {
         "schema_version": "N72R11R5_IDENTITY_METRIC_INTERPRETATION_V1",
         "source_metric_type": "N72R11R4 frozen identity-error posthoc metric, not TrackEval",
@@ -311,8 +315,13 @@ def _identity_interpretation(project_root: Path) -> dict[str, Any]:
         "by_variant": {},
     }
     source_values: dict[str, dict[str, Any]] = {}
-    for logical, relative in FROZEN_METRICS.items():
-        path = project_root / relative
+    selected_metrics = dict(DEFAULT_FROZEN_METRICS if metrics_paths is None else metrics_paths)
+    if set(selected_metrics) != set(DEFAULT_FROZEN_METRICS):
+        raise WindowTrackEvalError("identity metrics must provide exactly E1A_V3 and E1B_PCTIS")
+    for logical, recorded_path in selected_metrics.items():
+        path = Path(str(recorded_path))
+        if not path.is_absolute():
+            path = project_root / path
         metrics = _read_json(path)
         if metrics.get("complete") is not True:
             raise WindowTrackEvalError(f"frozen identity source is incomplete: {path}")
@@ -344,7 +353,18 @@ def aggregate(root: Path, project_root: Path) -> dict[str, Any]:
     export, run, rows, windows = _load_complete_inputs(root, project_root)
     pooled = _pooled_metrics(run)
     paired = _paired_deltas(rows)
-    identity = _identity_interpretation(project_root)
+    corrected_identity_sources = {
+        logical: export.get(key)
+        for logical, key in {
+            "E1A_V3": "source_e1a_metrics",
+            "E1B_PCTIS": "source_e1b_metrics",
+        }.items()
+        if isinstance(export.get(key), str) and export.get(key)
+    }
+    identity = _identity_interpretation(
+        project_root,
+        metrics_paths=corrected_identity_sources or None,
+    )
 
     # This is a diagnostic sanity summary, not a reimplementation of HOTA or
     # any other TrackEval metric.  A zero detection delta is intentionally

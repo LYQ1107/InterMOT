@@ -21,7 +21,7 @@ from typing import Any, Iterable, Mapping, Sequence
 
 HORIZONS = (20, 50, 100)
 LOGICAL_VARIANTS = ("E0_BASELINE_B0", "E1A_V3", "E1B_PCTIS")
-FROZEN_METRICS = {
+DEFAULT_FROZEN_METRICS = {
     "E1A_V3": "outputs/N72R11R4/formal_e1a_metrics.json",
     "E1B_PCTIS": "outputs/N72R11R4/formal_e1b_metrics_attempt_02.json",
 }
@@ -244,12 +244,21 @@ def _load_event_runtime(
     }
 
 
-def load_frozen_sources(root: Path | str) -> dict[str, Any]:
+def load_frozen_sources(
+    root: Path | str, *, metrics_paths: Mapping[str, Path | str] | None = None
+) -> dict[str, Any]:
     """Resolve and validate the exact E1A/E1B -> sealed runtime chain."""
     project_root = Path(root).resolve()
+    selected_metrics = dict(DEFAULT_FROZEN_METRICS if metrics_paths is None else metrics_paths)
+    if set(selected_metrics) != set(DEFAULT_FROZEN_METRICS):
+        raise WindowTrackEvalError(
+            "metrics_paths must provide exactly E1A_V3 and E1B_PCTIS"
+        )
     loaded: dict[str, Any] = {}
-    for logical, relative in FROZEN_METRICS.items():
-        metrics_path = project_root / relative
+    for logical, recorded_path in selected_metrics.items():
+        metrics_path = Path(str(recorded_path))
+        if not metrics_path.is_absolute():
+            metrics_path = project_root / metrics_path
         metrics, manifest_path, manifest = _load_source_manifest(metrics_path, project_root)
         protocol, protocol_path = _load_protocol(metrics, project_root)
         loaded[logical] = {
@@ -553,19 +562,159 @@ def _seqinfo_text(source_path: Path, pseudo: str, horizon: int) -> str:
     return "[Sequence]\n" + "".join(f"{key}={value}\n" for key, value in values.items())
 
 
-def _source_gt_and_seqinfo(data_root: Path, event: Mapping[str, Any]) -> tuple[Path, Path]:
+def _source_gt_and_seqinfo(
+    data_root: Path,
+    event: Mapping[str, Any],
+    *,
+    project_root: Path | None = None,
+) -> tuple[Path, Path]:
+    """Return the evidence-backed GT/seqinfo source for one frozen event."""
+    resolved = resolve_source_gt_and_seqinfo(data_root, event, project_root=project_root)
+    return Path(resolved["gt_path"]), Path(resolved["seqinfo_path"])
+
+
+def resolve_source_gt_and_seqinfo(
+    data_root: Path,
+    event: Mapping[str, Any],
+    *,
+    project_root: Path | None = None,
+) -> dict[str, Any]:
+    """Resolve one GT source and retain a machine-readable provenance record.
+
+    ``split=validation`` in the N72R9 protocol is a sequence-disjoint
+    learning/evaluation label, not necessarily the physical directory name in
+    the checked-out DanceTrack tree.  The two frozen validation events were
+    generated and replayed from ``train``.  A fallback is therefore allowed
+    only after exact frozen N72R6 GT-hash and N72R7 source-manifest checks.
+    """
     split = event.get("split")
-    sequence = event["sequence"]
+    sequence = event.get("sequence")
+    event_id = event.get("event_id")
     if split not in {"train", "validation", "val", "test"}:
-        raise WindowTrackEvalError(f"{event['event_id']}: unsupported frozen split {split!r}")
-    split_dir = "val" if split == "validation" else str(split)
-    sequence_dir = data_root / split_dir / sequence
-    return sequence_dir / "gt" / "gt.txt", sequence_dir / "seqinfo.ini"
+        raise WindowTrackEvalError(f"{event_id}: unsupported frozen split {split!r}")
+    if not isinstance(sequence, str) or not sequence:
+        raise WindowTrackEvalError(f"{event_id}: missing frozen sequence")
+    requested_split = str(split)
+    requested_dir_name = "val" if requested_split == "validation" else requested_split
+    requested_dir = data_root / requested_dir_name / sequence
+    requested_gt = requested_dir / "gt" / "gt.txt"
+    requested_seqinfo = requested_dir / "seqinfo.ini"
+    if requested_gt.is_file() and requested_seqinfo.is_file():
+        return {
+            "event_id": event_id,
+            "sequence": sequence,
+            "requested_split": requested_split,
+            "requested_directory": str(requested_dir),
+            "resolved_split": requested_split,
+            "resolved_directory": str(requested_dir),
+            "gt_path": str(requested_gt),
+            "seqinfo_path": str(requested_seqinfo),
+            "resolution": "REQUESTED_PHYSICAL_SPLIT",
+            "evidence": {
+                "requested_gt_exists": True,
+                "requested_seqinfo_exists": True,
+                "fallback_used": False,
+            },
+        }
+
+    # A partial requested directory is an integrity error, not permission to
+    # search another split.  The corrected N72R9 validation events have
+    # neither file under val, which is the only fallback case allowed here.
+    if requested_split != "validation" or requested_gt.exists() or requested_seqinfo.exists():
+        raise WindowTrackEvalError(
+            f"{event_id}: requested GT source incomplete or missing: "
+            f"split={requested_split!r}, gt={requested_gt}, seqinfo={requested_seqinfo}"
+        )
+    if project_root is None:
+        raise WindowTrackEvalError(
+            f"{event_id}: validation source is absent and no project root was supplied for frozen fallback audit"
+        )
+
+    train_dir = data_root / "train" / sequence
+    train_gt = train_dir / "gt" / "gt.txt"
+    train_seqinfo = train_dir / "seqinfo.ini"
+    if not train_gt.is_file() or not train_seqinfo.is_file():
+        raise WindowTrackEvalError(
+            f"{event_id}: validation source is absent and train fallback is incomplete: "
+            f"gt={train_gt}, seqinfo={train_seqinfo}"
+        )
+
+    audit_path = project_root / "outputs/N72R6/target_root_cause_audit.json"
+    if not audit_path.is_file():
+        raise WindowTrackEvalError(
+            f"{event_id}: cannot authorize validation-to-train resolution without frozen audit {audit_path}"
+        )
+    audit = _read_json(audit_path)
+    audit_events = {
+        str(item.get("event_id")): item
+        for item in audit.get("events", [])
+        if isinstance(item, dict) and item.get("event_id") is not None
+    }
+    audit_event = audit_events.get(str(event_id))
+    if not isinstance(audit_event, dict) or audit_event.get("sequence") != sequence:
+        raise WindowTrackEvalError(f"{event_id}: frozen N72R6 GT audit has no matching sequence evidence")
+    audit_inputs = audit.get("inputs")
+    recorded_gt_hash = (
+        audit_inputs.get("gt_sha256_by_sequence", {}).get(sequence)
+        if isinstance(audit_inputs, dict) and isinstance(audit_inputs.get("gt_sha256_by_sequence"), dict)
+        else None
+    )
+    actual_gt_hash = sha256_file(train_gt)
+    if not isinstance(recorded_gt_hash, str) or recorded_gt_hash != actual_gt_hash:
+        raise WindowTrackEvalError(
+            f"{event_id}: train GT hash does not match frozen N72R6 audit: "
+            f"recorded={recorded_gt_hash!r}, actual={actual_gt_hash}"
+        )
+
+    frozen_event = event.get("frozen_event")
+    if not isinstance(frozen_event, Mapping):
+        raise WindowTrackEvalError(f"{event_id}: missing frozen protocol event for source fallback audit")
+    source_manifest_value = frozen_event.get("source_event_manifest")
+    source_manifest_hash = frozen_event.get("source_event_manifest_sha256")
+    if not isinstance(source_manifest_value, str) or not isinstance(source_manifest_hash, str):
+        raise WindowTrackEvalError(f"{event_id}: frozen source event manifest provenance is incomplete")
+    source_manifest = Path(source_manifest_value)
+    if not source_manifest.is_file() or sha256_file(source_manifest) != source_manifest_hash:
+        raise WindowTrackEvalError(f"{event_id}: frozen source event manifest hash check failed")
+    source_payload = _read_json(source_manifest)
+    if (
+        source_payload.get("event_id") != event_id
+        or source_payload.get("sequence") != sequence
+        or int(source_payload.get("event_frame", -1)) != int(event.get("event_frame", -2))
+        or source_payload.get("runtime_future_gt_used") is not False
+        or source_payload.get("runtime_gt_read") is not False
+    ):
+        raise WindowTrackEvalError(f"{event_id}: frozen source event manifest metadata is inconsistent")
+
+    return {
+        "event_id": event_id,
+        "sequence": sequence,
+        "requested_split": requested_split,
+        "requested_directory": str(requested_dir),
+        "resolved_split": "train",
+        "resolved_directory": str(train_dir),
+        "gt_path": str(train_gt),
+        "seqinfo_path": str(train_seqinfo),
+        "resolution": "VALIDATION_LABEL_RESOLVED_TO_FROZEN_TRAIN_SOURCE",
+        "evidence": {
+            "requested_gt_exists": False,
+            "requested_seqinfo_exists": False,
+            "fallback_used": True,
+            "frozen_n72r6_gt_audit": str(audit_path),
+            "frozen_n72r6_gt_audit_sha256": sha256_file(audit_path),
+            "frozen_n72r6_event_root_cause": audit_event.get("root_cause"),
+            "recorded_train_gt_sha256": recorded_gt_hash,
+            "actual_train_gt_sha256": actual_gt_hash,
+            "frozen_source_event_manifest": str(source_manifest),
+            "frozen_source_event_manifest_sha256": source_manifest_hash,
+        },
+    }
 
 
 def build_protocol(
     sources: Mapping[str, Any], *, output_root: Path, source_branch: str, source_commit: str,
     trackeval_root: Path, data_root: Path, events: Sequence[Mapping[str, Any]], mode: str,
+    gt_source_resolutions: Sequence[Mapping[str, Any]] | None = None,
 ) -> dict[str, Any]:
     return {
         "schema_version": "N72R11R5_WINDOW_TRACKEVAL_V1",
@@ -585,6 +734,10 @@ def build_protocol(
         "trackeval_root": str(trackeval_root),
         "trackeval_commit": None,
         "data_root": str(data_root),
+        "gt_source_resolution": {
+            "policy": "use_requested_physical_split; validation may resolve only to the frozen train source after exact N72R6 hash and N72R7 manifest checks",
+            "records": [dict(item) for item in (gt_source_resolutions or [])],
+        },
         "horizons": list(HORIZONS),
         "event_count": len(events),
         "event_ids": [event["event_id"] for event in events],
@@ -617,12 +770,13 @@ def export_windows(
     *, root: Path | str, data_root: Path | str, source_branch: str, source_commit: str,
     trackeval_root: Path | str, event_ids: Iterable[str] | None = None, mode: str = "full",
     project_root: Path | str | None = None,
+    metrics_paths: Mapping[str, Path | str] | None = None,
 ) -> dict[str, Any]:
     output_root = Path(root).resolve()
     dataset_root = Path(data_root).resolve()
     trackeval_path = Path(trackeval_root).resolve()
     source_root = Path(project_root).resolve() if project_root is not None else output_root.parent.parent
-    frozen = load_frozen_sources(source_root)
+    frozen = load_frozen_sources(source_root, metrics_paths=metrics_paths)
     wanted = set(event_ids) if event_ids is not None else None
     events = [event for event in frozen["events"] if wanted is None or event["event_id"] in wanted]
     if wanted is not None and len(events) != len(wanted):
@@ -686,10 +840,19 @@ def export_windows(
             "post-hoc export cannot repair or omit them"
         )
 
+    source_resolutions = [
+        resolve_source_gt_and_seqinfo(dataset_root, event, project_root=source_root)
+        for event in events
+    ]
+    source_resolutions_by_event = {
+        str(item["event_id"]): item for item in source_resolutions
+    }
+
     protocol = build_protocol(
         frozen["sources"], output_root=output_root, source_branch=source_branch,
         source_commit=source_commit, trackeval_root=trackeval_path,
         data_root=dataset_root, events=events, mode=mode,
+        gt_source_resolutions=source_resolutions,
     )
     try:
         protocol["trackeval_commit"] = subprocess.check_output(
@@ -703,7 +866,9 @@ def export_windows(
     window_records: list[dict[str, Any]] = []
     sequence_maps: dict[int, list[str]] = {horizon: [] for horizon in HORIZONS}
     for event in events:
-        gt_source, seqinfo_source = _source_gt_and_seqinfo(dataset_root, event)
+        source_resolution = source_resolutions_by_event[event["event_id"]]
+        gt_source = Path(source_resolution["gt_path"])
+        seqinfo_source = Path(source_resolution["seqinfo_path"])
         for horizon in HORIZONS:
             pseudo = _pseudo_name(event["event_id"], horizon)
             gt_lines = _gt_window_lines(
@@ -725,6 +890,11 @@ def export_windows(
                     "original_end_frame": event["event_frame"] + horizon,
                     "gt_path": str(gt_dir / "gt" / "gt.txt"),
                     "seqinfo_path": str(gt_dir / "seqinfo.ini"),
+                    "gt_source_path": str(gt_source),
+                    "seqinfo_source_path": str(seqinfo_source),
+                    "gt_source_split_requested": source_resolution["requested_split"],
+                    "gt_source_split_resolved": source_resolution["resolved_split"],
+                    "gt_source_resolution": source_resolution["resolution"],
                     "gt_sha256": sha256_file(gt_dir / "gt" / "gt.txt"),
                 }
             )
@@ -774,6 +944,9 @@ def export_windows(
         "evaluation_scope": "INTERACTION_WINDOW_DIAGNOSTIC",
         "official_dancetrack_benchmark_score": False,
         "source_protocol_sha256": frozen["protocol_sha256"],
+        "source_e1a_metrics": str(frozen["sources"]["E1A_V3"]["metrics_path"]),
+        "source_e1b_metrics": str(frozen["sources"]["E1B_PCTIS"]["metrics_path"]),
+        "gt_source_resolution": protocol["gt_source_resolution"],
         "source_events": len(events),
         "independent_sequence_count": len({event["sequence"] for event in events}),
         "horizons": list(HORIZONS),

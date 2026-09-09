@@ -10,11 +10,14 @@ metric aggregator remains the sole implementation of causal scoring.
 from __future__ import annotations
 
 from datetime import datetime, timezone
+import argparse
 import hashlib
 import json
 import math
+import os
 from pathlib import Path
 import sys
+import tempfile
 from typing import Any, Mapping, Sequence
 
 import numpy as np
@@ -52,12 +55,22 @@ def sha256_file(path: Path) -> str:
 
 def atomic_json(path: Path, value: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    temporary = path.with_name(f".{path.name}.tmp")
-    temporary.write_text(
-        json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True, allow_nan=False) + "\n",
-        encoding="utf-8",
-    )
-    temporary.replace(path)
+    fd, temporary_name = tempfile.mkstemp(prefix=f".{path.name}.", suffix=".tmp", dir=str(path.parent))
+    temporary = Path(temporary_name)
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as handle:
+            handle.write(json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True, allow_nan=False) + "\n")
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(temporary, path)
+        directory_fd = os.open(path.parent, os.O_DIRECTORY)
+        try:
+            os.fsync(directory_fd)
+        finally:
+            os.close(directory_fd)
+    finally:
+        if temporary.exists():
+            temporary.unlink()
 
 
 def read_json(path: Path) -> dict[str, Any]:
