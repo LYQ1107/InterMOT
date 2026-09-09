@@ -133,6 +133,73 @@ def _normalize(
     return normalized
 
 
+def _apply_geometry_policy(
+    candidates: Sequence[Mapping[str, Any]],
+    *,
+    require_positive_geometry: bool,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    """Apply solver eligibility without changing a normalized candidate.
+
+    ``_normalize`` intentionally keeps finite but zero-area source rows so the
+    source audit can explain why they were rejected.  The opt-in policy is
+    applied only after normalization and never repairs a box or renumbers a
+    candidate.
+    """
+
+    normalized = [dict(candidate) for candidate in candidates]
+    invalid = [candidate for candidate in normalized if candidate.get("geometry_valid") is not True]
+    if not require_positive_geometry:
+        return normalized, invalid
+    eligible = [candidate for candidate in normalized if candidate.get("geometry_valid") is True]
+    return eligible, invalid
+
+
+def _geometry_rejection_record(candidate: Mapping[str, Any]) -> dict[str, Any]:
+    """Return bounded provenance for a candidate rejected by geometry policy."""
+
+    return {
+        "candidate_uid": candidate.get("candidate_uid"),
+        "candidate_source": candidate.get("candidate_source"),
+        "candidate_index": candidate.get("candidate_index"),
+        "box_xyxy": list(candidate.get("box_xyxy", [])),
+        "geometry_valid": candidate.get("geometry_valid"),
+        "official_raw_sam_id": candidate.get("official_raw_sam_id"),
+        "native_scope": candidate.get("native_scope"),
+    }
+
+
+def _geometry_audit(
+    *,
+    candidates: Sequence[Mapping[str, Any]],
+    invalid: Sequence[Mapping[str, Any]],
+    require_positive_geometry: bool,
+    input_main_count: int,
+    input_target_count: int,
+    input_requery_count: int = 0,
+    main_count: int,
+    target_count: int,
+    requery_count: int = 0,
+) -> dict[str, Any]:
+    return {
+        "geometry_policy": (
+            "POSITIVE_AREA_REQUIRED_BEFORE_MODEL_AND_SOLVER"
+            if require_positive_geometry
+            else "HISTORICAL_FINITE_ONLY"
+        ),
+        "require_positive_geometry": bool(require_positive_geometry),
+        "input_candidate_count": int(input_main_count + input_target_count + input_requery_count),
+        "eligible_candidate_count": int(len(candidates)),
+        "invalid_geometry_candidate_count": int(len(invalid)),
+        "invalid_geometry_candidates": [_geometry_rejection_record(item) for item in invalid],
+        "input_main_b0_candidate_count": int(input_main_count),
+        "input_target_session_candidate_count": int(input_target_count),
+        "input_target_session_requery_candidate_count": int(input_requery_count),
+        "main_b0_candidate_count": int(main_count),
+        "target_session_candidate_count": int(target_count),
+        "target_session_requery_candidate_count": int(requery_count),
+    }
+
+
 def build_candidate_pool(
     main_candidates: Sequence[Mapping[str, Any]],
     target_candidates: Sequence[Mapping[str, Any]] = (),
@@ -140,10 +207,11 @@ def build_candidate_pool(
     sequence: str,
     frame: int,
     include_target_session: bool,
+    require_positive_geometry: bool = False,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     """Normalize the complete current pool without assigning public IDs."""
 
-    main = [
+    main_all = [
         _normalize(
             item,
             source_kind=MAIN_B0_CANDIDATE,
@@ -153,20 +221,26 @@ def build_candidate_pool(
         )
         for index, item in enumerate(main_candidates)
     ]
-    target = []
+    target_all: list[dict[str, Any]] = []
     if include_target_session:
         if len(target_candidates) > 1:
             raise ValueError(f"target-session pool is expected to contain at most one row: {sequence}:{frame}")
-        target = [
+        target_all = [
             _normalize(
                 item,
                 source_kind=TARGET_SESSION_CURRENT_RAW,
                 sequence=str(sequence),
                 frame=int(frame),
-                candidate_index=len(main) + index,
+                candidate_index=len(main_all) + index,
             )
             for index, item in enumerate(target_candidates)
         ]
+    main, rejected_main = _apply_geometry_policy(
+        main_all, require_positive_geometry=require_positive_geometry
+    )
+    target, rejected_target = _apply_geometry_policy(
+        target_all, require_positive_geometry=require_positive_geometry
+    )
     candidates = main + target
     uids = [str(item["candidate_uid"]) for item in candidates]
     if len(uids) != len(set(uids)):
@@ -186,6 +260,17 @@ def build_candidate_pool(
         "runtime_gt_read": False,
         "posthoc_gt_used": False,
     }
+    audit.update(
+        _geometry_audit(
+            candidates=candidates,
+            invalid=[*rejected_main, *rejected_target],
+            require_positive_geometry=require_positive_geometry,
+            input_main_count=len(main_all),
+            input_target_count=len(target_all),
+            main_count=len(main),
+            target_count=len(target),
+        )
+    )
     return candidates, audit
 
 
@@ -196,6 +281,7 @@ def build_candidate_pool_with_requery(
     *,
     sequence: str,
     frame: int,
+    require_positive_geometry: bool = False,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     """Build a pool with the frozen current target row plus re-query rows.
 
@@ -206,7 +292,7 @@ def build_candidate_pool_with_requery(
     the exact solver remains the only assignment authority.
     """
 
-    main = [
+    main_all = [
         _normalize(
             item,
             source_kind=MAIN_B0_CANDIDATE,
@@ -220,26 +306,35 @@ def build_candidate_pool_with_requery(
         raise ValueError(
             f"current target-session pool is expected to contain at most one row: {sequence}:{frame}"
         )
-    current = [
+    current_all = [
         _normalize(
             item,
             source_kind=TARGET_SESSION_CURRENT_RAW,
             sequence=str(sequence),
             frame=int(frame),
-            candidate_index=len(main) + index,
+            candidate_index=len(main_all) + index,
         )
         for index, item in enumerate(target_candidates)
     ]
-    requery = [
+    requery_all = [
         _normalize(
             item,
             source_kind=TARGET_SESSION_REQUERY,
             sequence=str(sequence),
             frame=int(frame),
-            candidate_index=len(main) + len(current) + index,
+            candidate_index=len(main_all) + len(current_all) + index,
         )
         for index, item in enumerate(requery_candidates)
     ]
+    main, rejected_main = _apply_geometry_policy(
+        main_all, require_positive_geometry=require_positive_geometry
+    )
+    current, rejected_current = _apply_geometry_policy(
+        current_all, require_positive_geometry=require_positive_geometry
+    )
+    requery, rejected_requery = _apply_geometry_policy(
+        requery_all, require_positive_geometry=require_positive_geometry
+    )
     candidates = main + current + requery
     uids = [str(item["candidate_uid"]) for item in candidates]
     if len(uids) != len(set(uids)):
@@ -262,6 +357,19 @@ def build_candidate_pool_with_requery(
         "runtime_gt_read": False,
         "posthoc_gt_used": False,
     }
+    audit.update(
+        _geometry_audit(
+            candidates=candidates,
+            invalid=[*rejected_main, *rejected_current, *rejected_requery],
+            require_positive_geometry=require_positive_geometry,
+            input_main_count=len(main_all),
+            input_target_count=len(current_all),
+            input_requery_count=len(requery_all),
+            main_count=len(main),
+            target_count=len(current),
+            requery_count=len(requery),
+        )
+    )
     return candidates, audit
 
 
@@ -272,6 +380,7 @@ def build_candidate_pool_with_future_requery(
     *,
     sequence: str,
     frame: int,
+    require_positive_geometry: bool = False,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     """Build one frame's pool with a genuinely fresh future-frame query.
 
@@ -282,7 +391,7 @@ def build_candidate_pool_with_future_requery(
     assigns an identity.
     """
 
-    main = [
+    main_all = [
         _normalize(
             item,
             source_kind=MAIN_B0_CANDIDATE,
@@ -296,26 +405,35 @@ def build_candidate_pool_with_future_requery(
         raise ValueError(
             f"current target-session pool is expected to contain at most one row: {sequence}:{frame}"
         )
-    current = [
+    current_all = [
         _normalize(
             item,
             source_kind=TARGET_SESSION_CURRENT_RAW,
             sequence=str(sequence),
             frame=int(frame),
-            candidate_index=len(main) + index,
+            candidate_index=len(main_all) + index,
         )
         for index, item in enumerate(target_candidates)
     ]
-    future = [
+    future_all = [
         _normalize(
             item,
             source_kind=FUTURE_FRAME_REQUERY,
             sequence=str(sequence),
             frame=int(frame),
-            candidate_index=len(main) + len(current) + index,
+            candidate_index=len(main_all) + len(current_all) + index,
         )
         for index, item in enumerate(future_requery_candidates)
     ]
+    main, rejected_main = _apply_geometry_policy(
+        main_all, require_positive_geometry=require_positive_geometry
+    )
+    current, rejected_current = _apply_geometry_policy(
+        current_all, require_positive_geometry=require_positive_geometry
+    )
+    future, rejected_future = _apply_geometry_policy(
+        future_all, require_positive_geometry=require_positive_geometry
+    )
     candidates = main + current + future
     uids = [str(item["candidate_uid"]) for item in candidates]
     if len(uids) != len(set(uids)):
@@ -338,6 +456,19 @@ def build_candidate_pool_with_future_requery(
         "runtime_gt_read": False,
         "posthoc_gt_used": False,
     }
+    audit.update(
+        _geometry_audit(
+            candidates=candidates,
+            invalid=[*rejected_main, *rejected_current, *rejected_future],
+            require_positive_geometry=require_positive_geometry,
+            input_main_count=len(main_all),
+            input_target_count=len(current_all),
+            input_requery_count=len(future_all),
+            main_count=len(main),
+            target_count=len(current),
+            requery_count=len(future),
+        )
+    )
     return candidates, audit
 
 

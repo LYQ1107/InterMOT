@@ -538,6 +538,17 @@ def _validate_runtime_rows(rows: Sequence[Mapping[str, Any]], inputs: Mapping[st
             raise RuntimeError(f"{variant}:{row.get('frame')} candidate UID order/collision")
         if any(item.get("public_id") is not None for item in pool_rows):
             raise RuntimeError(f"{variant}:{row.get('frame')} source pool carries public authority")
+        if bool(inputs.get("require_positive_geometry", False)):
+            if pool.get("require_positive_geometry") is not True or pool.get("geometry_policy") != "POSITIVE_AREA_REQUIRED_BEFORE_MODEL_AND_SOLVER":
+                raise RuntimeError(f"{variant}:{row.get('frame')} positive geometry policy is not sealed")
+            if any(item.get("geometry_valid") is not True for item in pool_rows):
+                raise RuntimeError(f"{variant}:{row.get('frame')} invalid geometry entered solver pool")
+            if any(item.get("geometry_valid") is not True for item in output_rows):
+                raise RuntimeError(f"{variant}:{row.get('frame')} invalid geometry entered solver output")
+            for item in output_rows:
+                box = np.asarray(item.get("box_xyxy", []), dtype=np.float64).reshape(-1)
+                if box.size != 4 or not np.all(np.isfinite(box)) or box[2] <= box[0] or box[3] <= box[1]:
+                    raise RuntimeError(f"{variant}:{row.get('frame')} solver output has non-positive geometry")
         score_audit = row.get("score_audit")
         if not isinstance(score_audit, Mapping):
             raise RuntimeError(f"{variant}:{row.get('frame')} score audit missing")
@@ -551,7 +562,14 @@ def _validate_runtime_rows(rows: Sequence[Mapping[str, Any]], inputs: Mapping[st
             raise RuntimeError(f"{variant}:{row.get('frame')} solver audit failed")
 
 
-def _run_variant(inputs: Mapping[str, Any], variant: str, model: torch.nn.Module | None, device: torch.device) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+def _run_variant(
+    inputs: Mapping[str, Any],
+    variant: str,
+    model: torch.nn.Module | None,
+    device: torch.device,
+    *,
+    require_positive_geometry: bool = False,
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     event_frame = int(inputs["event_frame"])
     target_public = int(inputs["target_public_id"])
     rows: list[dict[str, Any]] = [
@@ -602,6 +620,7 @@ def _run_variant(inputs: Mapping[str, Any], variant: str, model: torch.nn.Module
     requery_applied = 0
     model_score_changed = 0
     assignment_count = 0
+    geometry_audits: list[Mapping[str, Any]] = []
     for frame in range(event_frame + 1, event_frame + HORIZON + 1):
         c0 = inputs["rows"]["c0_source"][frame]
         c1 = inputs["rows"]["c1_source"][frame]
@@ -609,9 +628,24 @@ def _run_variant(inputs: Mapping[str, Any], variant: str, model: torch.nn.Module
         main = list(c0.get("candidate_rows", []))
         target = list(target_row.get("candidate_rows", []))
         if variant == "BASELINE_B0":
-            pool, pool_audit = build_candidate_pool(main, (), sequence=str(inputs["sequence"]), frame=frame, include_target_session=False)
+            pool, pool_audit = build_candidate_pool(
+                main,
+                (),
+                sequence=str(inputs["sequence"]),
+                frame=frame,
+                include_target_session=False,
+                require_positive_geometry=require_positive_geometry,
+            )
         else:
-            pool, pool_audit = build_candidate_pool(main, target, sequence=str(inputs["sequence"]), frame=frame, include_target_session=True)
+            pool, pool_audit = build_candidate_pool(
+                main,
+                target,
+                sequence=str(inputs["sequence"]),
+                frame=frame,
+                include_target_session=True,
+                require_positive_geometry=require_positive_geometry,
+            )
+        geometry_audits.append(pool_audit)
         replay_pairs, base_vectors = _base_vectors(inputs, frame, pool)
         state_objects = _state_objects(replay_pairs)
         state_axis = [pair[0] for pair in replay_pairs]
@@ -641,7 +675,15 @@ def _run_variant(inputs: Mapping[str, Any], variant: str, model: torch.nn.Module
             requery_triggers += 1
             requery_rows = list(inputs["rows"]["requery_source"][frame].get("candidate_rows", []))
             if requery_rows:
-                pool, pool_audit = build_candidate_pool_with_requery(main, target, requery_rows, sequence=str(inputs["sequence"]), frame=frame)
+                pool, pool_audit = build_candidate_pool_with_requery(
+                    main,
+                    target,
+                    requery_rows,
+                    sequence=str(inputs["sequence"]),
+                    frame=frame,
+                    require_positive_geometry=require_positive_geometry,
+                )
+                geometry_audits.append(pool_audit)
                 replay_pairs, base_vectors = _base_vectors(inputs, frame, pool)
                 state_objects = _state_objects(replay_pairs)
                 state_axis = [pair[0] for pair in replay_pairs]
@@ -811,9 +853,41 @@ def _run_variant(inputs: Mapping[str, Any], variant: str, model: torch.nn.Module
         "requery_applied_count": requery_applied,
         "model_score_changed_frame_count": model_score_changed,
         "target_assigned_frame_count": assignment_count,
+        "geometry_policy": (
+            "POSITIVE_AREA_REQUIRED_BEFORE_MODEL_AND_SOLVER"
+            if require_positive_geometry
+            else "HISTORICAL_FINITE_ONLY"
+        ),
+        "require_positive_geometry": bool(require_positive_geometry),
+        "geometry_filtered_candidate_count": int(
+            sum(int(audit.get("invalid_geometry_candidate_count", 0)) for audit in geometry_audits)
+        ),
+        "geometry_filtered_frames": int(
+            sum(int(audit.get("invalid_geometry_candidate_count", 0)) > 0 for audit in geometry_audits)
+        ),
+        "geometry_filtered_candidate_count_by_source": {
+            source: int(
+                sum(
+                    sum(
+                        1
+                        for item in audit.get("invalid_geometry_candidates", [])
+                        if item.get("candidate_source") == source
+                    )
+                    for audit in geometry_audits
+                )
+            )
+            for source in (
+                "MAIN_B0_CANDIDATE",
+                "TARGET_SESSION_CURRENT_RAW",
+                "TARGET_SESSION_REQUERY",
+                "FUTURE_FRAME_REQUERY",
+            )
+        },
         "runtime_future_gt_used": False,
     }
-    _validate_runtime_rows(rows, inputs, variant)
+    inputs_for_validation = dict(inputs)
+    inputs_for_validation["require_positive_geometry"] = bool(require_positive_geometry)
+    _validate_runtime_rows(rows, inputs_for_validation, variant)
     return rows, stats
 
 

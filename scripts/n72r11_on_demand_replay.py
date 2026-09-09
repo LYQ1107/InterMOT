@@ -715,6 +715,15 @@ def _event_frame_row(inputs: Mapping[str, Any], variant: str) -> dict[str, Any]:
         "posthoc_gt_used": False,
         "public_id_inference": False,
         "public_id_immutable": True,
+        "geometry_policy": (
+            "POSITIVE_AREA_REQUIRED_BEFORE_MODEL_AND_SOLVER"
+            if bool(inputs.get("require_positive_geometry", False))
+            else "HISTORICAL_FINITE_ONLY"
+        ),
+        "require_positive_geometry": bool(inputs.get("require_positive_geometry", False)),
+        "baseline_regenerated_from_frozen_sources": bool(
+            inputs.get("baseline_regenerated_from_frozen_sources", False)
+        ),
     }
 
 
@@ -734,6 +743,7 @@ def _run_temporal_variant(
     device: torch.device,
     enable_live: bool,
     force_trigger: bool,
+    require_positive_geometry: bool = False,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     mode_by_variant = {
         "E1_V3_LEGACY_INJECTION": EDGE_MODE_LEGACY_INJECTION,
@@ -775,7 +785,22 @@ def _run_temporal_variant(
         "assignment_changed_from_pre_rescue_count": 0,
         "trusted_memory_admission_count": 0,
         "distractor_admission_count": 0,
+        "geometry_policy": (
+            "POSITIVE_AREA_REQUIRED_BEFORE_MODEL_AND_SOLVER"
+            if require_positive_geometry
+            else "HISTORICAL_FINITE_ONLY"
+        ),
+        "require_positive_geometry": bool(require_positive_geometry),
+        "geometry_filtered_candidate_count": 0,
+        "geometry_filtered_frames": 0,
+        "geometry_filtered_candidate_count_by_source": {
+            MAIN_B0_CANDIDATE: 0,
+            TARGET_SESSION_CURRENT_RAW: 0,
+            "TARGET_SESSION_REQUERY": 0,
+            FUTURE_FRAME_REQUERY: 0,
+        },
     }
+    geometry_audits: list[Mapping[str, Any]] = []
     try:
         for frame in range(event_frame + 1, event_frame + horizon + 1):
             c0_row = inputs["rows"]["c0_source"][frame]
@@ -785,8 +810,14 @@ def _run_temporal_variant(
             if len(current_candidates) > 1:
                 raise RuntimeError(f"target stream is not singleton at {inputs['event_id']}:{frame}")
             pre_pool, pre_pool_audit = build_candidate_pool(
-                main_candidates, current_candidates, sequence=str(inputs["sequence"]), frame=frame, include_target_session=True
+                main_candidates,
+                current_candidates,
+                sequence=str(inputs["sequence"]),
+                frame=frame,
+                include_target_session=True,
+                require_positive_geometry=require_positive_geometry,
             )
+            geometry_audits.append(pre_pool_audit)
             pre = _score_pool(inputs, frame, pre_pool, model, bridge, device, state, EDGE_MODE_BASE)
             base_matrix = pre["base_matrix"]
             target_col = [int(value) for value in pre["public_axis"]].index(target_public)
@@ -816,8 +847,14 @@ def _run_temporal_variant(
                 )
                 stats["probe_candidate_count"] += len(probe_rows)
                 probe_pool, _probe_pool_audit = build_candidate_pool_with_future_requery(
-                    main_candidates, current_candidates, probe_rows, sequence=str(inputs["sequence"]), frame=frame
+                    main_candidates,
+                    current_candidates,
+                    probe_rows,
+                    sequence=str(inputs["sequence"]),
+                    frame=frame,
+                    require_positive_geometry=require_positive_geometry,
                 )
+                geometry_audits.append(_probe_pool_audit)
                 probe = _score_pool(inputs, frame, probe_pool, model, bridge, device, state, edge_mode)
                 probe_target_uid = probe["target_uid"]
                 fresh = next(
@@ -851,8 +888,14 @@ def _run_temporal_variant(
             stats["live_future_candidate_rows"] += len(active_rows)
             if active_rows:
                 pool, pool_audit = build_candidate_pool_with_future_requery(
-                    main_candidates, current_candidates, active_rows, sequence=str(inputs["sequence"]), frame=frame
+                    main_candidates,
+                    current_candidates,
+                    active_rows,
+                    sequence=str(inputs["sequence"]),
+                    frame=frame,
+                    require_positive_geometry=require_positive_geometry,
                 )
+                geometry_audits.append(pool_audit)
             else:
                 pool, pool_audit = pre_pool, pre_pool_audit
             scored = _score_pool(inputs, frame, pool, model, bridge, device, state, edge_mode)
@@ -974,6 +1017,23 @@ def _run_temporal_variant(
         gc.collect()
         if torch.cuda.is_available():
             torch.cuda.empty_cache()
+    stats["geometry_filtered_candidate_count"] = int(
+        sum(int(audit.get("invalid_geometry_candidate_count", 0)) for audit in geometry_audits)
+    )
+    stats["geometry_filtered_frames"] = int(
+        sum(int(audit.get("invalid_geometry_candidate_count", 0)) > 0 for audit in geometry_audits)
+    )
+    for source in stats["geometry_filtered_candidate_count_by_source"]:
+        stats["geometry_filtered_candidate_count_by_source"][source] = int(
+            sum(
+                sum(
+                    1
+                    for item in audit.get("invalid_geometry_candidates", [])
+                    if item.get("candidate_source") == source
+                )
+                for audit in geometry_audits
+            )
+        )
     _validate_runtime(rows, inputs, variant)
     stats["runtime_future_gt_used"] = False
     stats["controller_audit"] = controller_audit
@@ -1030,6 +1090,17 @@ def _validate_runtime(rows: Sequence[Mapping[str, Any]], inputs: Mapping[str, An
             errors.append(f"{variant}/{row.get('frame')}:pool_boundary")
         if any(item.get("public_id") is not None or item.get("public_id_authority") is not None for item in pool_rows):
             errors.append(f"{variant}/{row.get('frame')}:source_authority")
+        if bool(inputs.get("require_positive_geometry", False)):
+            if pool.get("require_positive_geometry") is not True or pool.get("geometry_policy") != "POSITIVE_AREA_REQUIRED_BEFORE_MODEL_AND_SOLVER":
+                errors.append(f"{variant}/{row.get('frame')}:positive_geometry_policy")
+            if any(item.get("geometry_valid") is not True for item in pool_rows):
+                errors.append(f"{variant}/{row.get('frame')}:invalid_pool_geometry")
+            if any(item.get("geometry_valid") is not True for item in output_rows):
+                errors.append(f"{variant}/{row.get('frame')}:invalid_output_geometry")
+            for item in output_rows:
+                box = np.asarray(item.get("box_xyxy", []), dtype=np.float64).reshape(-1)
+                if box.size != 4 or not np.all(np.isfinite(box)) or box[2] <= box[0] or box[3] <= box[1]:
+                    errors.append(f"{variant}/{row.get('frame')}:non_positive_output_geometry")
         matrix = np.asarray(score.get("fused_score_matrix", []), dtype=np.float64)
         state_axis = list(score.get("association_state_axis", []))
         public_axis = list(score.get("public_id_axis", []))
@@ -1204,8 +1275,13 @@ def run_event(
     allow_legacy_checkpoint_schema: bool = False,
     variants: Sequence[str] | None = None,
     scorer_kind: str = "v3",
+    require_positive_geometry: bool = False,
+    rebuild_baseline_geometry: bool = False,
 ) -> dict[str, Any]:
     inputs = _load_inputs(event, horizon=horizon)
+    inputs = dict(inputs)
+    inputs["require_positive_geometry"] = bool(require_positive_geometry)
+    inputs["baseline_regenerated_from_frozen_sources"] = bool(rebuild_baseline_geometry)
     event_dir = output_root / str(inputs["event_id"])
     done_path = event_dir / "done.json"
     if done_path.exists():
@@ -1237,7 +1313,23 @@ def run_event(
         allow_legacy_schema=allow_legacy_checkpoint_schema,
     ) if model_checkpoint is not None else None
     bridge = None if smoke and bridge_checkpoint is None else _load_bridge_checkpoint(bridge_checkpoint, device_obj) if bridge_checkpoint is not None else None
-    baseline_rows = _strip_runtime_rows(inputs["baseline_rows"], horizon)
+    if require_positive_geometry and not rebuild_baseline_geometry:
+        raise RuntimeError("positive geometry replay requires baseline regeneration from frozen sources")
+    baseline_geometry_stats: dict[str, Any] | None = None
+    if rebuild_baseline_geometry:
+        if int(horizon) != HORIZON:
+            raise RuntimeError("baseline geometry regeneration is only defined for the formal H100 horizon")
+        baseline_rows, baseline_geometry_stats = legacy._run_variant(
+            inputs,
+            "BASELINE_B0",
+            None,
+            torch.device("cpu"),
+            require_positive_geometry=True,
+        )
+        inputs["baseline_rows"] = baseline_rows
+    else:
+        baseline_rows = _strip_runtime_rows(inputs["baseline_rows"], horizon)
+    legacy._validate_runtime_rows(baseline_rows, inputs, "BASELINE_B0")
     if baseline_rows[0].get("candidate_rows") != []:
         raise RuntimeError("frozen E0 event frame is not empty")
     started = now_utc()
@@ -1254,6 +1346,7 @@ def run_event(
             device=device_obj,
             enable_live=bool(enable_live and variant in {"E3_V3_CORRECTED_BRIDGE_LIVE", "E2_PCTIS_LIVE"}),
             force_trigger=bool(force_trigger),
+            require_positive_geometry=bool(require_positive_geometry),
         )
         runtime_rows[variant] = rows
         stats[variant] = variant_stats
@@ -1277,6 +1370,23 @@ def run_event(
             "posthoc_gt_used": False,
             "interaction_source": "simulated_from_gt",
             "not_real_human_evidence": True,
+            "geometry_policy": (
+                "POSITIVE_AREA_REQUIRED_BEFORE_MODEL_AND_SOLVER"
+                if require_positive_geometry
+                else "HISTORICAL_FINITE_ONLY"
+            ),
+            "require_positive_geometry": bool(require_positive_geometry),
+            "baseline_regenerated_from_frozen_sources": bool(rebuild_baseline_geometry),
+            "geometry_filtered_candidate_count": int(
+                (baseline_geometry_stats or {}).get("geometry_filtered_candidate_count", 0)
+                if variant == "E0_BASELINE_B0"
+                else stats.get(variant, {}).get("geometry_filtered_candidate_count", 0)
+            ),
+            "geometry_filtered_frames": int(
+                (baseline_geometry_stats or {}).get("geometry_filtered_frames", 0)
+                if variant == "E0_BASELINE_B0"
+                else stats.get(variant, {}).get("geometry_filtered_frames", 0)
+            ),
         }
         atomic_json(event_dir / variant / "runtime_manifest.json", manifests[variant])
     seal = {
@@ -1290,6 +1400,13 @@ def run_event(
         "runtime_gt_read": False,
         "posthoc_gt_used": False,
         "gt_loaded": False,
+        "geometry_policy": (
+            "POSITIVE_AREA_REQUIRED_BEFORE_MODEL_AND_SOLVER"
+            if require_positive_geometry
+            else "HISTORICAL_FINITE_ONLY"
+        ),
+        "require_positive_geometry": bool(require_positive_geometry),
+        "baseline_regenerated_from_frozen_sources": bool(rebuild_baseline_geometry),
         "created_at_utc": now_utc(),
     }
     seal_path = event_dir / "runtime_event_sealed.json"
@@ -1306,9 +1423,17 @@ def run_event(
         "posthoc": str(posthoc_path),
         "posthoc_sha256": sha256_file(posthoc_path),
         "stats": stats,
+        "baseline_geometry_stats": baseline_geometry_stats,
         "model_checkpoint": None if model_checkpoint is None else str(model_checkpoint),
         "bridge_checkpoint": None if bridge_checkpoint is None else str(bridge_checkpoint),
         "scorer_kind": str(scorer_kind),
+        "geometry_policy": (
+            "POSITIVE_AREA_REQUIRED_BEFORE_MODEL_AND_SOLVER"
+            if require_positive_geometry
+            else "HISTORICAL_FINITE_ONLY"
+        ),
+        "require_positive_geometry": bool(require_positive_geometry),
+        "baseline_regenerated_from_frozen_sources": bool(rebuild_baseline_geometry),
         "allow_legacy_checkpoint_schema": bool(allow_legacy_checkpoint_schema),
         "treatment_variants": list(treatment_variants),
         "horizon": int(horizon),
@@ -1338,6 +1463,8 @@ def main() -> int:
     parser.add_argument("--force-trigger", action="store_true")
     parser.add_argument("--smoke", action="store_true")
     parser.add_argument("--allow-legacy-checkpoint-schema", action="store_true")
+    parser.add_argument("--require-positive-geometry", action="store_true")
+    parser.add_argument("--rebuild-baseline-geometry", action="store_true")
     parser.add_argument(
         "--variants",
         nargs="+",
@@ -1372,6 +1499,8 @@ def main() -> int:
             allow_legacy_checkpoint_schema=bool(args.allow_legacy_checkpoint_schema),
             variants=args.variants,
             scorer_kind=str(args.scorer_kind),
+            require_positive_geometry=bool(args.require_positive_geometry),
+            rebuild_baseline_geometry=bool(args.rebuild_baseline_geometry),
         )
         print(json.dumps({"status": result["status"], "event_id": result["event_id"], "output": str(output_root / str(args.event_id))}, sort_keys=True))
         return 0
