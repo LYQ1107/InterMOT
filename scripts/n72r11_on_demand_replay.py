@@ -40,6 +40,13 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from sam3_intermot.association.effect_assignment import solve_effect_assignment  # noqa: E402
+from sam3_intermot.reacquisition.public_competition_features import (  # noqa: E402
+    build_public_competition_feature,
+)
+from sam3_intermot.reacquisition.temporal_scorer_adapter import (  # noqa: E402
+    PublicCompetitionScorerAdapter,
+    V3TemporalScorerAdapter,
+)
 from sam3_intermot.association.target_edge_bridge import (  # noqa: E402
     TargetEdgeBridge,
     build_target_edge_feature,
@@ -352,6 +359,7 @@ def _model_values(
     base_matrix: np.ndarray,
     public_axis: Sequence[int],
     state: TemporalIdentityState,
+    base_target_uid: str | None,
 ) -> dict[str, Any]:
     width, height = legacy._dimensions(str(inputs["sequence"]), int(frame))
     target_public = int(inputs["target_public_id"])
@@ -365,9 +373,9 @@ def _model_values(
                 candidate,
                 anchor_feature=inputs["anchor"],
                 anchor_box=inputs["anchor_box"],
-                    predicted_box=state.predicted_box,
-                    previous_raw_sam_id=state.previous_raw_sam_id,
-                    previous_native_scope=state.previous_native_scope,
+                predicted_box=state.predicted_box,
+                previous_raw_sam_id=state.previous_raw_sam_id,
+                previous_native_scope=state.previous_native_scope,
                 image_width=width,
                 image_height=height,
                 candidate_count=len(pool),
@@ -407,6 +415,36 @@ def _model_values(
         has_future_requery=any(str(candidate["candidate_source"]) == FUTURE_FRAME_REQUERY for candidate in pool),
     )
     source_values = np.stack([_source_vector(str(candidate["candidate_source"])) for candidate in pool], axis=0).astype(np.float32)
+    motion_iou = np.asarray(
+        [legacy._box_iou(candidate["box_xyxy"], state.predicted_box) for candidate in pool],
+        dtype=np.float32,
+    )
+    best_other_scores = np.asarray(
+        [
+            max(
+                (float(base_matrix[index, column]) for column in range(base_matrix.shape[1]) if column != target_col),
+                default=0.0,
+            )
+            for index in range(len(pool))
+        ],
+        dtype=np.float64,
+    )
+    competition_values = np.stack(
+        [
+            build_public_competition_feature(
+                candidate,
+                candidate_uid=str(candidate["candidate_uid"]),
+                target_public_id=target_public,
+                legacy_target_score=float(base_scores[index]),
+                legacy_best_other_score=float(best_other_scores[index]),
+                base_target_uid=base_target_uid,
+            )
+            for index, candidate in enumerate(pool)
+        ],
+        axis=0,
+    ).astype(np.float32)
+    if competition_values.shape != (len(pool), 6) or not np.isfinite(competition_values).all():
+        raise RuntimeError("public competition feature matrix is invalid")
     return {
         "candidate_values": candidate_values,
         "source_values": source_values,
@@ -419,7 +457,11 @@ def _model_values(
         "distractor_mask": distractor_mask,
         "neighbor": neighbor,
         "temporal": temporal,
+        "motion_iou": motion_iou,
         "base_scores": base_scores,
+        "legacy_best_other_scores": best_other_scores,
+        "competition_values": competition_values,
+        "base_target_uid": None if base_target_uid is None else str(base_target_uid),
         "causal_scores": causal_scores,
         "causal_order": order,
         "causal_margin": margin,
@@ -438,30 +480,34 @@ def _heuristic_logits(values: Mapping[str, Any], pool: Sequence[Mapping[str, Any
 
 
 def _model_logits(
-    model: torch.nn.Module | None,
+    scorer: Any | None,
     values: Mapping[str, Any],
     pool: Sequence[Mapping[str, Any]],
     device: torch.device,
     anchor: np.ndarray,
 ) -> tuple[np.ndarray, float]:
-    if model is None:
+    if scorer is None:
         return _heuristic_logits(values, pool, anchor)
-    tensors = (
-        torch.as_tensor(values["candidate_values"][None], dtype=torch.float32, device=device),
-        torch.ones((1, len(pool)), dtype=torch.bool, device=device),
-        torch.as_tensor(values["source_values"][None], dtype=torch.float32, device=device),
-        torch.as_tensor(values["human_anchor"][None], dtype=torch.float32, device=device),
-        torch.as_tensor(values["recent_array"][None], dtype=torch.float32, device=device),
-        torch.as_tensor(values["recent_mask"][None], dtype=torch.bool, device=device),
-        torch.as_tensor(values["long_array"][None], dtype=torch.float32, device=device),
-        torch.as_tensor(values["long_mask"][None], dtype=torch.bool, device=device),
-        torch.as_tensor(values["distractor_array"][None], dtype=torch.float32, device=device),
-        torch.as_tensor(values["distractor_mask"][None], dtype=torch.bool, device=device),
-        torch.as_tensor(values["neighbor"][None], dtype=torch.float32, device=device),
-        torch.as_tensor(values["temporal"][None], dtype=torch.float32, device=device),
-    )
-    with torch.no_grad():
-        logits = model(*tensors)[0].detach().float().cpu().numpy()
+    if not hasattr(scorer, "score"):
+        raise TypeError("formal replay requires a TemporalScorerAdapter")
+    logits = np.asarray(
+        scorer.score(
+            candidate_features=values["candidate_values"][None],
+            candidate_mask=np.ones((1, len(pool)), dtype=np.bool_),
+            source_features=values["source_values"][None],
+            public_competition_features=values["competition_values"][None],
+            human_anchor=values["human_anchor"][None],
+            recent_trusted_memory=values["recent_array"][None],
+            recent_trusted_mask=values["recent_mask"][None],
+            long_term_trusted_memory=values["long_array"][None],
+            long_term_trusted_mask=values["long_mask"][None],
+            distractor_memory=values["distractor_array"][None],
+            distractor_mask=values["distractor_mask"][None],
+            neighbor_feature=values["neighbor"][None],
+            temporal_features=values["temporal"][None],
+        ),
+        dtype=np.float64,
+    ).reshape(-1)
     candidate_logits = np.asarray(logits[: len(pool)], dtype=np.float64)
     none_logit = _finite(logits[len(pool)], "none_logit")
     if candidate_logits.shape != (len(pool),) or not np.isfinite(candidate_logits).all():
@@ -473,7 +519,7 @@ def _score_pool(
     inputs: Mapping[str, Any],
     frame: int,
     pool: Sequence[Mapping[str, Any]],
-    model: torch.nn.Module | None,
+    model: Any | None,
     bridge: TargetEdgeBridge | None,
     device: torch.device,
     state: TemporalIdentityState,
@@ -484,6 +530,15 @@ def _score_pool(
     pairs, base_matrix = _base_for_pool(inputs, frame, pool)
     state_axis = [int(pair[0]) for pair in pairs]
     public_axis = [int(pair[1]) for pair in pairs]
+    base_solver = solve_effect_assignment(
+        candidate_rows=pool,
+        persistent_states=_state_objects(pairs),
+        fused_state_candidate_scores=base_matrix.T,
+        source_run_id=f"n72r11:base:{frame}:{inputs['event_id']}",
+        session_id=f"n72r11:{inputs['event_id']}",
+        none_score=0.0,
+    )
+    base_target_uid = _find_target_uid(base_solver, int(inputs["target_public_id"]))
     values = _model_values(
         inputs,
         frame,
@@ -491,6 +546,7 @@ def _score_pool(
         base_matrix,
         public_axis,
         state,
+        base_target_uid,
     )
     logits, none_logit = _model_logits(model, values, pool, device, _unit(inputs["anchor"], "anchor"))
     selection = select_candidate_from_logits(
@@ -571,6 +627,8 @@ def _score_pool(
         "state_axis": state_axis,
         "public_axis": public_axis,
         "base_matrix": base_matrix,
+        "base_solver": base_solver,
+        "base_target_uid": base_target_uid,
         "fused_matrix": fused,
         "values": values,
         "logits": logits,
@@ -671,7 +729,7 @@ def _run_temporal_variant(
     inputs: Mapping[str, Any],
     *,
     variant: str,
-    model: torch.nn.Module | None,
+    model: Any | None,
     bridge: TargetEdgeBridge | None,
     device: torch.device,
     enable_live: bool,
@@ -679,6 +737,9 @@ def _run_temporal_variant(
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     mode_by_variant = {
         "E1_V3_LEGACY_INJECTION": EDGE_MODE_LEGACY_INJECTION,
+        "E1A_EXACT_ONPOLICY_V3_LEGACY": EDGE_MODE_LEGACY_INJECTION,
+        "E1B_PCTIS_LEGACY": EDGE_MODE_LEGACY_INJECTION,
+        "E2_PCTIS_LIVE": EDGE_MODE_LEGACY_INJECTION,
         "E2_V3_CORRECTED_BRIDGE": EDGE_MODE_BRIDGE,
         "E3_V3_CORRECTED_BRIDGE_LIVE": EDGE_MODE_BRIDGE,
     }
@@ -699,7 +760,7 @@ def _run_temporal_variant(
         previous_native_scope=None if initial_scope is None else str(initial_scope),
     )
     live_controller = None
-    use_live = variant == "E3_V3_CORRECTED_BRIDGE_LIVE" and bool(enable_live)
+    use_live = variant in {"E3_V3_CORRECTED_BRIDGE_LIVE", "E2_PCTIS_LIVE"} and bool(enable_live)
     if use_live:
         live_controller = _make_live_controller(inputs, end_frame=event_frame + horizon, device=str(device))
     stats: dict[str, Any] = {
@@ -734,16 +795,7 @@ def _run_temporal_variant(
             base_top = float(base_target_scores[base_order[0]]) if base_order else 0.0
             base_second = float(base_target_scores[base_order[1]]) if len(base_order) > 1 else 0.0
             base_margin = float(base_top - base_second)
-            base_target_uid = _find_target_uid(
-                solve_effect_assignment(
-                    candidate_rows=pre_pool,
-                    persistent_states=_state_objects(pre["pairs"]),
-                    fused_state_candidate_scores=base_matrix.T,
-                    source_run_id=f"n72r11r3:pre:{inputs['event_id']}:{frame}",
-                    session_id=f"n72r11r3:pre:{inputs['event_id']}",
-                    none_score=0.0,
-                ), target_public
-            )
+            base_target_uid = pre["base_target_uid"]
             uncertain = bool(base_target_uid is None or base_margin < UNCERTAINTY_MARGIN)
             triggered = False
             applied = False
@@ -989,7 +1041,7 @@ def _validate_runtime(rows: Sequence[Mapping[str, Any]], inputs: Mapping[str, An
         requery = row.get("requery")
         if isinstance(requery, Mapping) and requery.get("applied") and str(requery.get("source")) != FUTURE_FRAME_REQUERY:
             errors.append(f"{variant}/{row.get('frame')}:requery_source")
-        if variant != "E3_V3_CORRECTED_BRIDGE_LIVE" and isinstance(requery, Mapping) and requery.get("applied"):
+        if variant not in {"E3_V3_CORRECTED_BRIDGE_LIVE", "E2_PCTIS_LIVE"} and isinstance(requery, Mapping) and requery.get("applied"):
             errors.append(f"{variant}/{row.get('frame')}:live_source_in_E1")
     if errors:
         raise RuntimeError("runtime validation failed: " + "; ".join(sorted(set(errors))[:16]))
@@ -1022,6 +1074,29 @@ def _load_v3_checkpoint(path: Path, device: torch.device, *, allow_legacy_schema
     model.to(device)
     model.eval()
     return model
+
+
+def _load_scorer_adapter(
+    path: Path,
+    device: torch.device,
+    *,
+    scorer_kind: str,
+    allow_legacy_schema: bool = False,
+) -> Any:
+    """Load a model behind the shared replay adapter protocol."""
+
+    if str(scorer_kind) == "v3":
+        return V3TemporalScorerAdapter(
+            _load_v3_checkpoint(path, device, allow_legacy_schema=allow_legacy_schema),
+            device,
+        )
+    if str(scorer_kind) == "pctis":
+        from sam3_intermot.reacquisition.models.n72r11r4_public_competition_temporal import (  # noqa: PLC0415
+            load_pctis_checkpoint,
+        )
+
+        return PublicCompetitionScorerAdapter(load_pctis_checkpoint(path, device), device)
+    raise ValueError(f"unknown scorer kind: {scorer_kind}")
 
 
 def _load_bridge_checkpoint(path: Path, device: torch.device) -> TargetEdgeBridge:
@@ -1071,6 +1146,11 @@ def _posthoc_score(inputs: Mapping[str, Any], runtime_rows: Mapping[str, Sequenc
     }
     comparison_specs = (
         ("E1_vs_E0", ("E0_BASELINE_B0", "E1_V3_LEGACY_INJECTION")),
+        ("E1A_vs_E0", ("E0_BASELINE_B0", "E1A_EXACT_ONPOLICY_V3_LEGACY")),
+        ("E1B_vs_E1A", ("E1A_EXACT_ONPOLICY_V3_LEGACY", "E1B_PCTIS_LEGACY")),
+        ("E1B_vs_E0", ("E0_BASELINE_B0", "E1B_PCTIS_LEGACY")),
+        ("E2_vs_E1B", ("E1B_PCTIS_LEGACY", "E2_PCTIS_LIVE")),
+        ("E2_vs_E0", ("E0_BASELINE_B0", "E2_PCTIS_LIVE")),
         ("E2_vs_E1", ("E1_V3_LEGACY_INJECTION", "E2_V3_CORRECTED_BRIDGE")),
         ("E3_vs_E2", ("E2_V3_CORRECTED_BRIDGE", "E3_V3_CORRECTED_BRIDGE_LIVE")),
         ("E3_vs_E0", ("E0_BASELINE_B0", "E3_V3_CORRECTED_BRIDGE_LIVE")),
@@ -1123,6 +1203,7 @@ def run_event(
     smoke: bool,
     allow_legacy_checkpoint_schema: bool = False,
     variants: Sequence[str] | None = None,
+    scorer_kind: str = "v3",
 ) -> dict[str, Any]:
     inputs = _load_inputs(event, horizon=horizon)
     event_dir = output_root / str(inputs["event_id"])
@@ -1141,12 +1222,20 @@ def run_event(
         raise ValueError("variants must be a non-empty list of unique treatment variant names")
     unknown = sorted(set(treatment_variants) - {
         "E1_V3_LEGACY_INJECTION",
+        "E1A_EXACT_ONPOLICY_V3_LEGACY",
+        "E1B_PCTIS_LEGACY",
+        "E2_PCTIS_LIVE",
         "E2_V3_CORRECTED_BRIDGE",
         "E3_V3_CORRECTED_BRIDGE_LIVE",
     })
     if unknown:
         raise ValueError(f"unknown N72R11R3 treatment variants: {unknown}")
-    model = None if smoke and model_checkpoint is None else _load_v3_checkpoint(model_checkpoint, device_obj, allow_legacy_schema=allow_legacy_checkpoint_schema) if model_checkpoint is not None else None
+    model = None if smoke and model_checkpoint is None else _load_scorer_adapter(
+        model_checkpoint,
+        device_obj,
+        scorer_kind=str(scorer_kind),
+        allow_legacy_schema=allow_legacy_checkpoint_schema,
+    ) if model_checkpoint is not None else None
     bridge = None if smoke and bridge_checkpoint is None else _load_bridge_checkpoint(bridge_checkpoint, device_obj) if bridge_checkpoint is not None else None
     baseline_rows = _strip_runtime_rows(inputs["baseline_rows"], horizon)
     if baseline_rows[0].get("candidate_rows") != []:
@@ -1163,7 +1252,7 @@ def run_event(
             model=model,
             bridge=bridge,
             device=device_obj,
-            enable_live=bool(enable_live and variant == "E3_V3_CORRECTED_BRIDGE_LIVE"),
+            enable_live=bool(enable_live and variant in {"E3_V3_CORRECTED_BRIDGE_LIVE", "E2_PCTIS_LIVE"}),
             force_trigger=bool(force_trigger),
         )
         runtime_rows[variant] = rows
@@ -1219,6 +1308,7 @@ def run_event(
         "stats": stats,
         "model_checkpoint": None if model_checkpoint is None else str(model_checkpoint),
         "bridge_checkpoint": None if bridge_checkpoint is None else str(bridge_checkpoint),
+        "scorer_kind": str(scorer_kind),
         "allow_legacy_checkpoint_schema": bool(allow_legacy_checkpoint_schema),
         "treatment_variants": list(treatment_variants),
         "horizon": int(horizon),
@@ -1242,6 +1332,7 @@ def main() -> int:
     parser.add_argument("--device", default="cuda:1")
     parser.add_argument("--model-checkpoint", type=Path, default=None)
     parser.add_argument("--bridge-checkpoint", type=Path, default=None)
+    parser.add_argument("--scorer-kind", choices=("v3", "pctis"), default="v3")
     parser.add_argument("--horizon", type=int, default=HORIZON)
     parser.add_argument("--enable-live", action="store_true")
     parser.add_argument("--force-trigger", action="store_true")
@@ -1250,7 +1341,14 @@ def main() -> int:
     parser.add_argument(
         "--variants",
         nargs="+",
-        choices=("E1_V3_LEGACY_INJECTION", "E2_V3_CORRECTED_BRIDGE", "E3_V3_CORRECTED_BRIDGE_LIVE"),
+        choices=(
+            "E1_V3_LEGACY_INJECTION",
+            "E1A_EXACT_ONPOLICY_V3_LEGACY",
+            "E1B_PCTIS_LEGACY",
+            "E2_PCTIS_LIVE",
+            "E2_V3_CORRECTED_BRIDGE",
+            "E3_V3_CORRECTED_BRIDGE_LIVE",
+        ),
         default=None,
         help="optional treatment subset for component-isolated development replay",
     )
@@ -1273,6 +1371,7 @@ def main() -> int:
             smoke=bool(args.smoke),
             allow_legacy_checkpoint_schema=bool(args.allow_legacy_checkpoint_schema),
             variants=args.variants,
+            scorer_kind=str(args.scorer_kind),
         )
         print(json.dumps({"status": result["status"], "event_id": result["event_id"], "output": str(output_root / str(args.event_id))}, sort_keys=True))
         return 0

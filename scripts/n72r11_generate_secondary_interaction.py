@@ -42,6 +42,12 @@ if str(ROOT) not in sys.path:
 
 from sam3_intermot.association.effect_assignment import solve_effect_assignment  # noqa: E402
 from sam3_intermot.association.target_edge_bridge import SOURCE_NAMES  # noqa: E402
+from sam3_intermot.association.secondary_public_score import (  # noqa: E402
+    TARGET_PUBLIC_EDGE_CURRENT,
+    TARGET_PUBLIC_EDGE_FUTURE,
+    build_secondary_public_score_frame,
+    supplemental_target_edge,
+)
 from sam3_intermot.interaction.target_correction_session import TargetScopedCorrectionSession  # noqa: E402
 from sam3_intermot.reacquisition.frozen_feature_materializer import (  # noqa: E402
     FrozenOSNetFeatureMaterializer,
@@ -70,8 +76,7 @@ SCHEDULE_PATH = ROOT / "outputs/N72R11/secondary_event_manifest.json"
 DEFAULT_OUTPUT_ROOT = ROOT / "outputs/N72R11/secondary_interactions"
 HORIZON = 100
 UNCERTAINTY_MARGIN = 0.25
-TARGET_PUBLIC_EDGE_BASE = 4.50
-TARGET_PUBLIC_EDGE_CURRENT = 4.00
+TARGET_PUBLIC_EDGE_BASE = TARGET_PUBLIC_EDGE_FUTURE
 
 
 @dataclass(frozen=True)
@@ -398,16 +403,14 @@ def _bootstrap_edge(
     predicted_box: Sequence[float],
     current: bool,
 ) -> float:
-    feature = candidate.get("feature")
-    cosine = 0.0 if feature is None else float(np.dot(_unit(feature, "candidate feature"), anchor))
-    presence = float(candidate.get("presence_score", candidate.get("confidence", 0.0)) or 0.0)
-    if not math.isfinite(presence):
-        raise ValueError("candidate presence is non-finite")
-    return float(
-        (TARGET_PUBLIC_EDGE_CURRENT if current else TARGET_PUBLIC_EDGE_BASE)
-        + 1.0 * cosine
-        + 0.20 * float(np.clip(presence, 0.0, 1.0))
-        + 0.20 * _box_iou(candidate["box_xyxy"], predicted_box)
+    expected_source = "TARGET_SESSION_CURRENT_RAW" if current else FUTURE_FRAME_REQUERY
+    if str(source) != expected_source:
+        raise ValueError(f"bootstrap edge source/current mismatch: {source} current={current}")
+    return supplemental_target_edge(
+        candidate,
+        anchor_feature=anchor,
+        predicted_box=predicted_box,
+        source=str(source),
     )
 
 
@@ -422,71 +425,21 @@ def _bootstrap_selection(
     event_id: str,
     frame: int,
 ) -> dict[str, Any]:
-    # The top-level row keeps the persistent registry (including LOST IDs),
-    # while base_score_matrix is defined on the solver's active public/state
-    # axis.  Use the exact solver axis; silently padding a matrix with LOST
-    # identities would change the frozen association protocol.
-    solver_record = c0_row.get("solver", {})
-    public_axis = [int(value) for value in solver_record.get("public_id_axis", [])]
-    state_axis = [int(value) for value in solver_record.get("association_state_axis", [])]
-    base = np.asarray(c0_row.get("base_score_matrix"), dtype=np.float64)
-    if base.ndim != 2 or base.shape != (len(main_rows), len(public_axis)):
-        raise RuntimeError(
-            f"C0 base matrix shape mismatch at {event_id}:{frame}: {base.shape} "
-            f"expected {(len(main_rows), len(public_axis))}"
-        )
-    if len(state_axis) != len(public_axis):
-        raise RuntimeError(f"C0 public/state axis invalid at {event_id}:{frame}")
-    if target_public_id not in public_axis:
-        # C0's active solver axis can omit a LOST public identity.  The
-        # persistent registry still carries its explicit state/public pair;
-        # append that authority with a zero base column, matching the frozen
-        # target-session rebind convention without inventing an ID.
-        identity_rows = c0_row.get("identity_rows", [])
-        target_identity = next(
-            (
-                value
-                for value in identity_rows
-                if value.get("public_id") is not None
-                and int(value["public_id"]) == int(target_public_id)
-                and value.get("association_state_id") is not None
-            ),
-            None,
-        )
-        if target_identity is None:
-            raise RuntimeError(f"C0 target public authority is absent at {event_id}:{frame}")
-        target_state = int(target_identity["association_state_id"])
-        if target_state in state_axis:
-            raise RuntimeError(f"C0 target state collides at {event_id}:{frame}")
-        public_axis.append(int(target_public_id))
-        state_axis.append(target_state)
-        base = np.concatenate([base, np.zeros((base.shape[0], 1), dtype=np.float64)], axis=1)
-    if base.shape != (len(main_rows), len(public_axis)):
-        raise RuntimeError(
-            f"C0 base matrix shape mismatch after axis closure at {event_id}:{frame}: {base.shape} "
-            f"expected {(len(main_rows), len(public_axis))}"
-        )
-    target_col = public_axis.index(int(target_public_id))
-    by_uid = {str(row["candidate_uid"]): index for index, row in enumerate(main_rows)}
-    matrix = np.zeros((len(pool), len(public_axis)), dtype=np.float64)
-    target_edges: dict[str, float] = {}
-    for index, candidate in enumerate(pool):
-        uid = str(candidate["candidate_uid"])
-        main_index = by_uid.get(uid)
-        if main_index is not None:
-            matrix[index] = base[main_index]
-        elif str(candidate["candidate_source"]) == "TARGET_SESSION_CURRENT_RAW":
-            edge = _bootstrap_edge(candidate, source=str(candidate["candidate_source"]), anchor=anchor, predicted_box=predicted_box, current=True)
-            matrix[index, target_col] = edge
-            target_edges[uid] = edge
-        elif str(candidate["candidate_source"]) == FUTURE_FRAME_REQUERY:
-            edge = _bootstrap_edge(candidate, source=str(candidate["candidate_source"]), anchor=anchor, predicted_box=predicted_box, current=False)
-            matrix[index, target_col] = edge
-            target_edges[uid] = edge
-        else:
-            raise RuntimeError(f"unexpected secondary candidate source: {candidate.get('candidate_source')}")
-    if not np.isfinite(matrix).all():
-        raise RuntimeError("bootstrap solver matrix is non-finite")
+    score_frame = build_secondary_public_score_frame(
+        c0_row=c0_row,
+        main_candidates=main_rows,
+        pool=pool,
+        target_public_id=int(target_public_id),
+        anchor_feature=anchor,
+        predicted_box=predicted_box,
+        event_id=str(event_id),
+        frame=int(frame),
+    )
+    state_axis = score_frame.state_axis
+    public_axis = score_frame.public_axis
+    target_col = score_frame.target_column
+    matrix = score_frame.matrix
+    target_edges = score_frame.target_edge_by_uid
     states = [
         type(
             "N72R11SecondaryState",
