@@ -1,0 +1,21 @@
+# Machine-independent template for the frozen Human Identity Representation Probe.
+stage: N72R16
+goal: Human Identity Representation Probe
+central_question: Can one human-confirmed identity observation reliably recognize the same person against hard competing identities over future frames?
+dataset_root: /path/to/dancetrack
+assets_root: /path/to/n72r16-assets
+checkpoint_path: /path/to/n72r16-assets/checkpoints/osnet_x1_0_market1501.pth
+embedding_output_dir: /path/to/n72r16-assets/outputs/N72R16/embeddings
+results_output_dir: /path/to/n72r16-assets/outputs/N72R16
+encoder: osnet_x1_0_market1501
+input_size: [256, 128]
+embedding_dim: 512
+crop_context: 1.0
+horizons: [20, 50, 100]
+min_future_observations: 20
+bootstrap_repetitions: 2000
+bootstrap_seed: 7216
+sam3_required: false
+mot_evaluation_required: false
+training_required: false
+next_association_stage_authorized: false
