@@ -154,16 +154,24 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     expected_osnet_sha = manifest["frozen_identity_assets"]["osnet_x1_0_market1501"].get("sha256")
     if expected_osnet_sha and sha256(osnet) != expected_osnet_sha:
         raise ValueError("OSNet checkpoint SHA256 does not match the frozen asset manifest")
-    if args.split != "train":
-        raise ValueError("N72R20 smoke is train-only; val is reserved for frozen evaluation")
-    if not 100 <= int(args.max_frames) <= 200:
-        raise ValueError("smoke frame count must be between 100 and 200")
+    if args.split not in {"train", "val"}:
+        raise ValueError("N72R20 candidate generation supports only train or val")
+    if args.split == "train":
+        if args.frozen_eval:
+            raise ValueError("--frozen-eval is reserved for the val split")
+        if not 100 <= int(args.max_frames) <= 200:
+            raise ValueError("train smoke frame count must be between 100 and 200")
+    else:
+        if not args.frozen_eval:
+            raise ValueError("val candidate generation requires explicit --frozen-eval")
+        if int(args.max_frames) != 0:
+            raise ValueError("frozen val candidate generation must use --max-frames 0 for the full sequence")
 
     sequence_dir = dataset_root / args.split / args.sequence
     paths = image_files(sequence_dir)
     if not paths:
         raise FileNotFoundError(f"no image frames under {sequence_dir / 'img1'}")
-    frame_count = min(len(paths), int(args.max_frames))
+    frame_count = len(paths) if int(args.max_frames) == 0 else min(len(paths), int(args.max_frames))
     sequence_out = output_root / "candidates" / args.sequence
     final_meta = sequence_out / "metadata.jsonl.zst"
     final_embeddings = sequence_out / "embeddings.f16"
@@ -390,6 +398,7 @@ def main() -> int:
     parser.add_argument("--sequence", required=True)
     parser.add_argument("--split", default="train")
     parser.add_argument("--max-frames", type=int, default=160)
+    parser.add_argument("--frozen-eval", action="store_true")
     parser.add_argument("--dataset-root", type=Path)
     parser.add_argument("--checkpoint", type=Path)
     parser.add_argument("--osnet-checkpoint", type=Path)

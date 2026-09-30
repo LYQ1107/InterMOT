@@ -18,6 +18,8 @@ Audit status: completed before SAM3 execution. The local official `sam3.1_multip
 | `scripts/n72r7_candidate_generator_requery.py` | Reuse causal provenance conventions and OSNet crop extraction pattern | Its target-session requery protocol is event-specific and is not the N72R20 all-candidate stream definition. |
 | `scripts/n72r15_candidate_coverage_posthoc.py` | Reuse IoU `>= 0.50` coverage decomposition and GT-posthoc boundary | Keep `candidate unavailable` separate from `identity discrimination failure`; do not reuse N72R15 outputs as N72R20 evidence. |
 | `scripts/n72r20_candidate_stream_smoke.py` / `scripts/n72r20_run_candidate_smoke.py` | New thin N72R20 path-portable wrapper around the existing backend/export contract | The worker reads image frames only, uses the frozen OSNet checkpoint, stores compact metadata plus float16 features, and is deliberately not an identity associator. It must be run only after the checkpoint audit passes. |
+| `scripts/n72r20_identity_bridge_eval.py` / `scripts/n72r20_aggregate_identity_bridge.py` | New target-centric evaluation layer over the cache | It replays every post-anchor frame causally, uses GT only after candidate generation for target/other-identity labels, and reports coverage separately from identity discrimination. It does not run MOT or global assignment. |
+| `scripts/n72r20_run_streaming_val_bridge.py` | Bounded val fallback | If the train projection exceeds 25 GiB, it generates/evaluates one val sequence at a time and only deletes the explicitly generated sequence cache after both policies finish successfully. |
 | `sam3_intermot/identity_probe/dataset.py` | Reuse sequence/GT parsing and validation concepts | The frozen N72R17 protocol and the N72R20 asset manifest are the authority for paths and anchors. GT is evaluation truth only after runtime rows are produced. |
 | `sam3_intermot/identity_memory/selective.py::load_frozen_n72r18_gru` | Reuse strict frozen N72R18 GRU loader | The N72R20 core comparison is frozen GRU versus immutable human-anchor baseline. N72R19/R1 selector models are not promoted into this stage. |
 | `sam3_intermot/identity_memory/updater.py` | Reuse the already serialized GRU architecture/state contract | No new memory architecture or training is authorized. |
@@ -29,6 +31,9 @@ Audit status: completed before SAM3 execution. The local official `sam3.1_multip
 - The target must first be evaluated against the complete real SAM3 candidate set. Candidate absence is not scored as an identity-ranking error.
 - B0 is immutable human anchor only; B1 is EMA(0.90); B2 is the frozen N72R18 GRU. Oracle-correct updates are diagnostic only.
 - Immediate update versus two-frame confirmation is an engineering contamination diagnostic, not a new selector research direction.
+- The two-frame margin threshold must be frozen from train-only B2 records before val; a val-derived threshold is prohibited.
+- A candidate row matching no target or other visible identity is not silently promoted to a hard negative; hard negatives require IoU `>= 0.50` with another visible GT identity.
+- Runtime memory updates are replayed over every frame after the anchor, including target-not-visible frames. Those frames are retained for causal state evolution but excluded from target-visible coverage/ranking denominators.
 - Candidate data is streamed or split by sequence; no monolithic cache, crop PNG archive, dense mask cache, or raw SAM tensor dump is allowed.
 
 ## Blocker and next permitted action

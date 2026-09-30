@@ -18,6 +18,17 @@ ROOT = Path(__file__).resolve().parents[1]
 WORKER = ROOT / "scripts" / "n72r20_candidate_stream_smoke.py"
 
 
+def count_sequence_frames(dataset_root: Path, split: str, sequence: str) -> int:
+    image_dir = dataset_root / split / sequence / "img1"
+    if not image_dir.is_dir():
+        raise FileNotFoundError(f"missing image directory: {image_dir}")
+    return sum(
+        1
+        for path in image_dir.iterdir()
+        if path.is_file() and path.suffix.lower() in {".jpg", ".jpeg", ".png"}
+    )
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--sequences", help="comma-separated; defaults to the first two frozen train protocol sequences")
@@ -31,6 +42,7 @@ def main() -> int:
     args = parser.parse_args()
     manifest = json.loads(args.asset_manifest.read_text(encoding="utf-8"))
     protocol = json.loads((ROOT / "outputs/N72R20/protocol.json").read_text(encoding="utf-8"))
+    dataset_root = (args.dataset_root or Path(manifest["DANCETRACK_ROOT"])).expanduser().resolve()
     sequences = (
         [item.strip() for item in args.sequences.split(",") if item.strip()]
         if args.sequences
@@ -95,6 +107,19 @@ def main() -> int:
         results.append(result)
     profiles = [item["profile"] for item in results if isinstance(item.get("profile"), dict)]
     free_bytes = shutil.disk_usage(output_root).free
+    val_frame_count = sum(
+        count_sequence_frames(dataset_root, "val", sequence)
+        for sequence in protocol["val_evaluation_sequences"]
+    )
+    smoke_frames = sum(int(item["frames"]) for item in profiles)
+    smoke_bytes = sum(int(item["total_bytes"]) for item in profiles)
+    estimated_bytes_per_frame = smoke_bytes / smoke_frames if smoke_frames else None
+    projected_val_bytes = (
+        int(round(estimated_bytes_per_frame * val_frame_count))
+        if estimated_bytes_per_frame is not None
+        else None
+    )
+    safety_reserve_bytes = 100 * (1024**3)
     profile = {
         "stage": "N72R20",
         "status": "PASS_N72R20_TWO_SEQUENCE_SMOKE" if len(profiles) == 2 else "FAIL_N72R20_TWO_SEQUENCE_SMOKE",
@@ -125,13 +150,21 @@ def main() -> int:
         "free_space_gib_after_smoke": free_bytes / (1024**3),
         "hard_stop_triggered": free_bytes < 80 * (1024**3),
         "warning_below_normal_target": free_bytes < 100 * (1024**3),
-        "projected_full_val_cache_allowed": False,
+        "val_sequence_count": len(protocol["val_evaluation_sequences"]),
+        "val_frame_count": val_frame_count,
+        "estimated_candidate_bytes_per_frame": estimated_bytes_per_frame,
+        "projected_full_val_cache_bytes": projected_val_bytes,
+        "storage_safety_reserve_bytes": safety_reserve_bytes,
+        "projected_full_val_cache_allowed": bool(
+            projected_val_bytes is not None
+            and free_bytes >= projected_val_bytes + safety_reserve_bytes
+        ),
         "runtime_future_gt_used": False,
         "runtime_gt_read": False,
         "started_at_utc": started,
         "finished_at_utc": datetime.now(timezone.utc).isoformat(),
         "asset_manifest": str(args.asset_manifest),
-        "dataset_root": manifest.get("DANCETRACK_ROOT"),
+        "dataset_root": str(dataset_root),
     }
     output = ROOT / "outputs/N72R20/candidate_storage_profile.json"
     output.write_text(json.dumps(profile, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
