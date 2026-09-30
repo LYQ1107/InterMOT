@@ -1,0 +1,30 @@
+{
+  "stage": "N72R20",
+  "captured_at_utc": "2026-09-30T07:52:36.378032+00:00",
+  "expected_checkpoint": "sam3.1_multiplex.pt",
+  "search_roots": [
+    "/data3/liuyeqiang",
+    "/data2",
+    "/data1",
+    "/home"
+  ],
+  "checkpoint_paths_found": [],
+  "candidate_cache_paths_found": [],
+  "candidate_asset_root_paths_found": [],
+  "nas_candidate_path": "/home/Valadmin/A100",
+  "nas_path_visible_locally": false,
+  "huggingface_cli": "unavailable_in_current_shell",
+  "download_started_this_audit": false,
+  "proxy_changed": false,
+  "free_space_bytes": 202991472640,
+  "minimum_assets": {
+    "source_code": "present",
+    "frozen_n72r18_gru": "present",
+    "frozen_osnet": "present",
+    "dancetrack_train_val": "present_and_complete",
+    "frozen_protocol": "present",
+    "sam3_checkpoint": "missing",
+    "real_candidate_cache": "not_generated"
+  },
+  "blocker": "authenticated official SAM3 checkpoint access is required before any real candidate-stream execution"
+}

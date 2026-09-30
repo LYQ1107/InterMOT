@@ -9,7 +9,7 @@
   "next_association_stage_authorized": false,
   "dataset_policy": "DanceTrack train and val only; DanceTrack test and all other datasets are out of scope.",
   "goal_frozen": true,
-  "last_update": "2026-09-30T07:50:14.303397+00:00",
+  "last_update": "2026-09-30T07:54:58.822655+00:00",
   "dataset_ready": true,
   "DANCETRACK_ROOT": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset",
   "dataset_discovery_ref": "/data3/liuyeqiang/InterMOT/outputs/N72R20/dataset_discovery.json",
@@ -18,8 +18,8 @@
   "cleanup_performed": false,
   "software_verification": {
     "targeted": "16 passed",
-    "n72r20_bridge": "6 passed",
-    "full": "231 passed, 4 failed",
+    "n72r20_bridge": "8 passed",
+    "full": "233 passed, 4 failed",
     "full_failure_class": "fixed TrackEval 12c8791 CLI parses SEQMAP_FILE as a one-element list but dataset loader expects a path; no N72R20 code or third_party code changed"
   },
   "bridge_implementation": {
@@ -28,6 +28,7 @@
     "identity_bridge_aggregator": "prepared_not_run",
     "streaming_val_fallback": "prepared_not_run",
     "confirmation_threshold_freezer": "prepared_not_run",
+    "checkpoint_access_audit": "outputs/N72R20/checkpoint_access_audit.json",
     "confirmation_threshold_manifest": "missing_until_train_candidate_records_exist",
     "runtime_future_gt_used": false,
     "val_tuning_used": false

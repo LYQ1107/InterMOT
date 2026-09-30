@@ -32,6 +32,7 @@ The executable bridge is prepared but not run: the worker generates a GT-free pe
 - Lineage: `N72R16_NEW_ASSET_LINEAGE`.
 - Frozen N72R18 GRU and frozen N72R16 OSNet checkpoint are present and SHA-recorded in `outputs/N72R20/asset_manifest.json`.
 - DanceTrack was not downloaded or copied, no proxy was used, and DanceTrack test was not downloaded.
+- The current checkpoint/cache recheck is recorded in [`outputs/N72R20/checkpoint_access_audit.json`](/data3/liuyeqiang/InterMOT/outputs/N72R20/checkpoint_access_audit.json): no local SAM3 checkpoint or candidate cache was found, and the NAS path is not locally visible.
 
 ## Current blocker
 
@@ -42,8 +43,8 @@ The missing threshold manifest is a downstream dependency, not an independent bl
 ## Software verification
 
 - Targeted N72R18/R1/backend checks: `16 passed`.
-- N72R20 bridge and aggregation tests: `6 passed`.
-- Full suite with the project `.venv` on PATH: `231 passed, 4 failed`.
+- N72R20 bridge and aggregation tests: `8 passed`.
+- Full suite with the project `.venv` on PATH: `233 passed, 4 failed`.
 - All four failures reach the same fixed TrackEval `12c8791` interface defect: the CLI supplies `SEQMAP_FILE` as a one-element list while `mot_challenge_2d_box.py` calls `os.path.isfile` on it. This is a third-party/legacy test infrastructure issue, not an N72R20 dataset or research-code failure. The prohibited TrackEval/full-MOT path was not modified.
 
 ## Software prepared but not executed

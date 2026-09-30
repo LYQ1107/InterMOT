@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import argparse
 from collections import defaultdict
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -70,6 +71,14 @@ def load_json(path: Path) -> dict[str, Any]:
     return value
 
 
+def sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for block in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
 def source_protocol_path(protocol: dict[str, Any], split: str) -> Path:
     source = protocol.get("protocol_sources", {}).get(split, {})
     path = source.get("path") if isinstance(source, dict) else None
@@ -98,6 +107,8 @@ def read_zstd_jsonl(path: Path) -> dict[int, list[dict[str, Any]]]:
                 continue
             row = json.loads(line)
             frame = int(row["frame"])
+            if frame in by_frame:
+                raise ValueError(f"duplicate candidate metadata frame {frame}: {path}:{line_number}")
             candidates = [dict(item) for item in row.get("candidates", []) if bool(item.get("valid", True))]
             by_frame[frame] = candidates
     finally:
@@ -107,6 +118,24 @@ def read_zstd_jsonl(path: Path) -> dict[int, list[dict[str, Any]]]:
     if return_code != 0:
         raise RuntimeError(f"zstd failed for {path} with code {return_code}: {stderr[-2000:]}")
     return by_frame
+
+
+def validate_candidate_index(candidate_dir: Path, metadata_path: Path, embeddings_path: Path) -> dict[str, Any]:
+    index_path = candidate_dir / "index.json"
+    if not index_path.is_file():
+        raise FileNotFoundError(f"missing candidate index: {index_path}")
+    index = load_json(index_path)
+    if index.get("stage") != "N72R20":
+        raise ValueError(f"candidate index is not N72R20: {index_path}")
+    if not bool(index.get("runtime_gt_read") is False and index.get("runtime_future_gt_used") is False):
+        raise ValueError(f"candidate index violates the GT-free runtime contract: {index_path}")
+    expected_metadata_sha = index.get("metadata_sha256")
+    expected_embeddings_sha = index.get("embeddings_sha256")
+    if expected_metadata_sha and sha256(metadata_path) != expected_metadata_sha:
+        raise ValueError(f"candidate metadata SHA256 mismatch: {metadata_path}")
+    if expected_embeddings_sha and sha256(embeddings_path) != expected_embeddings_sha:
+        raise ValueError(f"candidate embeddings SHA256 mismatch: {embeddings_path}")
+    return index
 
 
 def load_feature_matrix(candidate_dir: Path) -> np.memmap:
@@ -536,8 +565,20 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     if not anchors:
         raise ValueError(f"no frozen anchors for {args.split}:{sequence_name}")
     candidate_dir = candidate_root / "candidates" / sequence_name
-    candidates = read_zstd_jsonl(candidate_dir / "metadata.jsonl.zst")
+    metadata_path = candidate_dir / "metadata.jsonl.zst"
+    embeddings_path = candidate_dir / "embeddings.f16"
+    index = validate_candidate_index(candidate_dir, metadata_path, embeddings_path)
+    candidates = read_zstd_jsonl(metadata_path)
     feature_matrix = load_feature_matrix(candidate_dir)
+    if int(index.get("frame_count", len(candidates))) != len(candidates):
+        raise ValueError(f"candidate frame count mismatch between index and metadata: {candidate_dir}")
+    expected_frames = set(range(int(index.get("frame_count", len(candidates)))))
+    if set(candidates) != expected_frames:
+        missing = sorted(expected_frames - set(candidates))[:8]
+        extra = sorted(set(candidates) - expected_frames)[:8]
+        raise ValueError(f"candidate frame coverage mismatch: missing={missing}, extra={extra}")
+    if int(index.get("embedding_count", len(feature_matrix))) != len(feature_matrix):
+        raise ValueError(f"candidate embedding count mismatch between index and embeddings: {candidate_dir}")
     attach_features(candidates, feature_matrix)
     encoder = load_anchor_encoder(osnet_path, args.anchor_device)
     gru = load_frozen_gru(gru_path, args.anchor_device)
@@ -589,6 +630,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "records": str(records_path),
         "candidate_metadata": str(candidate_dir / "metadata.jsonl.zst"),
         "candidate_embeddings": str(candidate_dir / "embeddings.f16"),
+        "candidate_index": str(candidate_dir / "index.json"),
         "frozen_protocol_source": str(source_path),
         "frozen_n72r18_gru": str(gru_path),
         "frozen_osnet": str(osnet_path),
