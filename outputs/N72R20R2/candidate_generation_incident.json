@@ -1,0 +1,22 @@
+{
+  "stage": "N72R20R2",
+  "status": "RECOVERED_RUNTIME_MEMORY_POLICY",
+  "initial_attempt": {
+    "runtime_memory_policy": "official_video_cpu_offload_plus_adapter_output_offload_process_isolation",
+    "trim_past_non_cond_mem_for_eval": false,
+    "failure": "CUDA_OUT_OF_MEMORY_DURING_FULL_SEQUENCE_SAM3_PROPAGATION",
+    "example": "dancetrack0057 at frame 560/622",
+    "not_a_scientific_result": true
+  },
+  "recovery": {
+    "trim_past_non_cond_mem_for_eval": true,
+    "implementation": "pinned Sam3Backend official adapter option",
+    "candidate_generation_semantics_changed": false,
+    "candidate_schema_unchanged": true,
+    "identity_memory_changed": false,
+    "candidate_matcher_changed": false,
+    "association_changed": false
+  },
+  "quarantined_attempt_root": "/data3/liuyeqiang/InterMOT_N72R20R2_assets/attempts/no_trim_runner",
+  "runtime_future_gt_used": false
+}

@@ -1,0 +1,37 @@
+{
+  "stage": "N72R20R2",
+  "goal_reference": "outputs/N72R20R2/FINAL_GOAL.json",
+  "decision": "FAIL_RUNTIME_MEMORY_COMMIT",
+  "scan_reference": "outputs/N72R20R2/commit_policy_scan.json",
+  "dev_sequences": [
+    "dancetrack0001",
+    "dancetrack0002",
+    "dancetrack0023",
+    "dancetrack0024",
+    "dancetrack0039",
+    "dancetrack0057",
+    "dancetrack0062",
+    "dancetrack0072"
+  ],
+  "gate": {
+    "wrong_write_rate_max": 0.02,
+    "correct_write_retention_min_vs_c0": 0.60
+  },
+  "policy_summary": [
+    {"policy": "C0", "margin_threshold": 0.0, "accepted_writes": 6889, "correct_writes": 4889, "wrong_writes": 2000, "wrong_write_rate": 0.2903178981, "retention_vs_c0": 1.0, "safety_pass": false, "usefulness_pass": true},
+    {"policy": "C1", "margin_threshold": 0.0, "accepted_writes": 4558, "correct_writes": 3448, "wrong_writes": 1110, "wrong_write_rate": 0.2435278631, "retention_vs_c0": 0.7052566987, "safety_pass": false, "usefulness_pass": true},
+    {"policy": "C2", "margin_threshold": 0.0, "accepted_writes": 4558, "correct_writes": 3448, "wrong_writes": 1110, "wrong_write_rate": 0.2435278631, "retention_vs_c0": 0.7052566987, "safety_pass": false, "usefulness_pass": true},
+    {"policy": "C2", "margin_threshold": 0.02, "accepted_writes": 3729, "correct_writes": 2874, "wrong_writes": 855, "wrong_write_rate": 0.2292839903, "retention_vs_c0": 0.5878502761, "safety_pass": false, "usefulness_pass": false},
+    {"policy": "C2", "margin_threshold": 0.04, "accepted_writes": 2333, "correct_writes": 1801, "wrong_writes": 532, "wrong_write_rate": 0.2280325761, "retention_vs_c0": 0.3683779914, "safety_pass": false, "usefulness_pass": false},
+    {"policy": "C2", "margin_threshold": 0.06, "accepted_writes": 1649, "correct_writes": 1204, "wrong_writes": 445, "wrong_write_rate": 0.2698605215, "retention_vs_c0": 0.2462671303, "safety_pass": false, "usefulness_pass": false},
+    {"policy": "C2", "margin_threshold": 0.08, "accepted_writes": 1216, "correct_writes": 1051, "wrong_writes": 165, "wrong_write_rate": 0.1356907895, "retention_vs_c0": 0.2149723870, "safety_pass": false, "usefulness_pass": false},
+    {"policy": "C2", "margin_threshold": 0.10, "accepted_writes": 870, "correct_writes": 803, "wrong_writes": 67, "wrong_write_rate": 0.0770114943, "retention_vs_c0": 0.1642462671, "safety_pass": false, "usefulness_pass": false},
+    {"policy": "C2", "margin_threshold": 0.15, "accepted_writes": 290, "correct_writes": 265, "wrong_writes": 25, "wrong_write_rate": 0.0862068966, "retention_vs_c0": 0.0542033136, "safety_pass": false, "usefulness_pass": false},
+    {"policy": "C3", "margin_threshold": 0.0, "accepted_writes": 3438, "correct_writes": 2725, "wrong_writes": 713, "wrong_write_rate": 0.2073880163, "retention_vs_c0": 0.5573736961, "safety_pass": false, "usefulness_pass": false}
+  ],
+  "passing_policy_count": 0,
+  "runtime_future_gt_used": false,
+  "posthoc_gt_used": true,
+  "rescue_authorized": false,
+  "val_authorized": false
+}

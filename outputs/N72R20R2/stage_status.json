@@ -1,0 +1,98 @@
+{
+  "stage": "N72R20R2",
+  "goal_reference": "outputs/N72R20R2/FINAL_GOAL.json",
+  "goal": "Trusted Identity Memory Commit and Association Rescue",
+  "central_question": "Can runtime learned-identity evidence prevent unsafe machine observations from entering persistent identity memory and selectively rescue ambiguous or incorrect public-ID associations while the candidate stream, exact assignment solver, public-ID authority, frozen N72R18 memory and interaction protocol remain unchanged?",
+  "goal_frozen": true,
+  "status": "FAIL_RUNTIME_MEMORY_COMMIT",
+  "phase": "PHASE_1_TRUSTED_COMMIT_GATE_STOP",
+  "historical_n72r20_status": "BLOCKED_NOT_RECOVERED",
+  "previous_r1_status": "FAIL_MEMORY_CONTAMINATION",
+  "previous_results_modified": false,
+  "dataset": {
+    "split": "train",
+    "sequence_count": 8,
+    "sequences": [
+      "dancetrack0001",
+      "dancetrack0002",
+      "dancetrack0023",
+      "dancetrack0024",
+      "dancetrack0039",
+      "dancetrack0057",
+      "dancetrack0062",
+      "dancetrack0072"
+    ],
+    "val_opened": false,
+    "test_used_or_downloaded": false
+  },
+  "candidate_generation": {
+    "status": "PASS_N72R20R2_CANDIDATE_TAPE_VALIDATION",
+    "validation_reference": "outputs/N72R20R2/candidate_tape_validation.json",
+    "frames": 8422,
+    "candidate_rows": 49202,
+    "bytes": 53998226,
+    "runtime_future_gt_used": false,
+    "candidate_stream_shared_across_policies": true
+  },
+  "storage": {
+    "before": "outputs/N72R20R2/storage_audit_before.json",
+    "after": "outputs/N72R20R2/storage_audit_after.json",
+    "after_status": "OK",
+    "after_free_gib": 118.85005950927734,
+    "after_safe_budget_gb": 27.61427968
+  },
+  "base_score_tape": {
+    "status": "PASS_N72R20R2_BASE_SCORE_TAPE",
+    "reference": "outputs/N72R20R2/base_score_dev_run.json",
+    "exact_solver_changed": false,
+    "runtime_future_gt_used": false
+  },
+  "commit_policy_gate": {
+    "reference": "outputs/N72R20R2/commit_policy_scan.json",
+    "status": "PASS_N72R20R2_COMMIT_POLICY_SCAN",
+    "policies_evaluated": 10,
+    "dev_sequence_count": 8,
+    "c0_correct_write_denominator": 4889,
+    "wrong_write_rate_max": 0.02,
+    "correct_write_retention_min_vs_c0": 0.60,
+    "passing_policies": 0,
+    "runtime_future_gt_used": false,
+    "posthoc_gt_used": true
+  },
+  "rescue": {
+    "started": false,
+    "reason": "Commit safety gate failed; rescue is authorized only after commit safety and usefulness both pass.",
+    "exact_solver_changed": false
+  },
+  "val": {
+    "started": false,
+    "trackeval_started": false,
+    "reason": "Dev commit gate failed."
+  },
+  "training": {
+    "started": false,
+    "new_trainable_model": false
+  },
+  "tests": {
+    "targeted_r2": "31_PASS",
+    "full_suite": "282_PASS_4_KNOWN_THIRD_PARTY_TRACKEVAL_FAILURES",
+    "known_failures": [
+      "tests/test_n6_identity_namespace.py::test_single_person_wrong_id_correction_restores_public_id",
+      "tests/test_n6_identity_namespace.py::test_trackeval_synthetic_regression",
+      "tests/test_n7_baseline_preservation.py::test_n7_t12_correction_adds_no_idsw_to_others",
+      "tests/test_n8_temporal_observer.py::test_n8_t15_trackeval_idsw_drops_after_correction"
+    ],
+    "failure_class": "fixed TrackEval submodule CLI passes SEQMAP_FILE as a one-element list; the R2 code and tests pass"
+  },
+  "runtime_future_gt_used": false,
+  "next_association_stage_authorized": false,
+  "final_decision": "FAIL_RUNTIME_MEMORY_COMMIT",
+  "final_result_path": "outputs/N72R20R2/FINAL_RESULT.json",
+  "final_report_path": "outputs/N72R20R2/FINAL_REPORT.md",
+  "stop_rule_applied": true,
+  "notes": [
+    "No commit policy satisfied both wrong-write rate <= 2% and correct-write retention >= 60% on the exact eight-sequence dev set.",
+    "The failed initial no-trim SAM3 attempt and the old runner-overlap attempts remain quarantined outside the formal candidate lineage.",
+    "No DanceTrack val or test evaluation was opened, and no MOT/TrackEval result was generated in this stage."
+  ]
+}

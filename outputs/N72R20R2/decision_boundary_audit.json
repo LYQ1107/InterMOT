@@ -1,0 +1,104 @@
+{
+  "all_frame_base_assignment_margin": {
+    "count": 318,
+    "max": 4.626039981842041,
+    "mean": 4.154912903623761,
+    "median": 4.335167706012726,
+    "min": 2.5908615589141846,
+    "p75": 4.461900025606155,
+    "p90": 4.508692872524262,
+    "p95": 4.540460759401321
+  },
+  "base_scorer": {
+    "ema": 0.9,
+    "native_bonus": 3.0,
+    "positive_bonus": 5.0,
+    "reid_weights": {
+      "gap": 0.1,
+      "iou": 1.0,
+      "native": 0.5,
+      "sim": 1.5
+    }
+  },
+  "base_target_column_score_range": {
+    "count": 21145,
+    "max": 5.99427604675293,
+    "mean": 1.808152393111948,
+    "median": 1.2992323637008667,
+    "min": 0.6853559017181396,
+    "p75": 1.4048603773117065,
+    "p90": 5.268299865722658,
+    "p95": 5.790388965606689
+  },
+  "c01_recoverable_frame_count": 2,
+  "c01_required_target_column_delta": {
+    "count": 2,
+    "max": 6.746230363845825,
+    "mean": 6.634254038333893,
+    "median": 6.634254038333893,
+    "min": 6.5222777128219604,
+    "p75": 6.690242201089859,
+    "p90": 6.7238350987434385,
+    "p95": 6.735032731294632
+  },
+  "c01_rows": [
+    {
+      "base_assignment_margin": 2.6672704219818115,
+      "base_target_score": 4.914663314819336,
+      "category": "C01",
+      "frame": 61,
+      "learned_margin": 0.17326772212982178,
+      "learned_relative_delta_max": 0.33376893917190437,
+      "learned_relative_delta_min": -0.11336843079706006,
+      "learned_top1_score": 0.471571147441864,
+      "learned_top2_score": 0.29830342531204224,
+      "required_target_column_delta_for_learned_top1": 6.5222777128219604,
+      "sequence": "dancetrack0002"
+    },
+    {
+      "base_assignment_margin": 3.070462226867676,
+      "base_target_score": 5.2089762687683105,
+      "category": "C01",
+      "frame": 158,
+      "learned_margin": 0.0228082537651062,
+      "learned_relative_delta_max": 0.2132796694867101,
+      "learned_relative_delta_min": -0.01963027105972908,
+      "learned_top1_score": 0.35339027643203735,
+      "learned_top2_score": 0.33058202266693115,
+      "required_target_column_delta_for_learned_top1": 6.746230363845825,
+      "sequence": "dancetrack0002"
+    }
+  ],
+  "interpretation": "Required delta is an offline probe using the existing exact solver; it is not a new solver or a runtime rule.",
+  "learned_edge": {
+    "implementation": "build_learned_identity_state_edge_matrix",
+    "relative_delta": "tanh(relative)",
+    "row_max_preservation": true,
+    "state_edge_scale": 1.0
+  },
+  "learned_identity_score_range": {
+    "count": 2613,
+    "max": 0.9804496765136719,
+    "mean": 0.20176842674567377,
+    "median": 0.19069871306419373,
+    "min": -0.21650922298431396,
+    "p75": 0.28380006551742554,
+    "p90": 0.3909433364868164,
+    "p95": 0.455703091621399
+  },
+  "learned_relative_delta_range": {
+    "count": 21145,
+    "max": 0.4816262643688165,
+    "mean": -0.00019018916665716783,
+    "median": -0.010452462692017366,
+    "min": -0.24511287447029836,
+    "p75": -0.0044811928983495815,
+    "p90": 0.007388623350825057,
+    "p95": 0.10083217301564908
+  },
+  "posthoc_gt_used": true,
+  "runtime_future_gt_used": false,
+  "source_stage": "N72R20R1",
+  "stage": "N72R20R2",
+  "status": "PASS_N72R20R2_DECISION_BOUNDARY_AUDIT"
+}

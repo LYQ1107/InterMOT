@@ -1,0 +1,51 @@
+{
+  "stage": "N72R20R2",
+  "source_stage": "N72R20R1",
+  "fresh_lineage": true,
+  "DANCETRACK_ROOT": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset",
+  "dataset": {
+    "train_sequences": [
+      "dancetrack0001",
+      "dancetrack0002",
+      "dancetrack0023",
+      "dancetrack0024",
+      "dancetrack0039",
+      "dancetrack0057",
+      "dancetrack0062",
+      "dancetrack0072"
+    ],
+    "split": "train",
+    "val_sequences": "the 25 existing DanceTrack val sequences; not opened in the dev phase",
+    "test_present_or_used": false,
+    "runtime_future_gt_used": false
+  },
+  "sam3_checkpoint": {
+    "path": "/data3/liuyeqiang/InterMOT_N72R20_assets/checkpoints/sam3.1_multiplex.pt",
+    "sha256": "0567debeec80ba4ac6369540c6c248025283cb3ff2b92827509e57e2b3541cb6"
+  },
+  "frozen_identity_assets": {
+    "osnet_x1_0_market1501": {
+      "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/checkpoints/osnet_x1_0_market1501.pth",
+      "sha256": "2809d3227f7d078f6045f7feb874a34d0684f0e0057b264b99adccf7d4519154"
+    },
+    "n72r18_gru": {
+      "path": "/data3/liuyeqiang/InterMOT/outputs/N72R18/checkpoints/identity_memory_gru.pt",
+      "sha256": "94ba9c44e177b254ee54984195e839f37c78a648c010ffc723dd3f1d553976a2"
+    }
+  },
+  "protocol": {
+    "event_frame": 0,
+    "human_anchor": "simulated_from_gt_only_during_event_preparation",
+    "runtime_future_gt_used": false,
+    "sam3_runtime_memory_policy": {
+      "offload_video_to_cpu": true,
+      "offload_output_to_cpu_for_eval": true,
+      "trim_past_non_cond_mem_for_eval": true,
+      "candidate_schema_unchanged": true
+    },
+    "candidate_stream_shared_across_policies": true,
+    "base_scorer": "sam3_intermot.association.online_associator.score_matrix_pairwise",
+    "assignment_solver": "solve_effect_assignment_then_solve_exact_public_assignment",
+    "public_id_authority": "frozen_existing_public_assignment_output"
+  }
+}
