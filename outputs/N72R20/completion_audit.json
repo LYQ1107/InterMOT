@@ -1,0 +1,55 @@
+{
+  "stage": "N72R20",
+  "captured_at_utc": "2026-09-30T07:59:29.126627+00:00",
+  "final_goal_ref": "outputs/N72R20/FINAL_GOAL.json",
+  "central_question": "Can a single human identity initialization, together with the frozen learned identity memory from N72R18, reliably recover and maintain the same identity from a real SAM3 candidate stream over future frames?",
+  "overall_status": "BLOCKED_EXTERNAL_SAM3_CHECKPOINT",
+  "final_scientific_decision": null,
+  "next_interactive_mot_stage_authorized": false,
+  "requirements": {
+    "allowed_dancetrack_train_val_audited": {
+      "status": "VERIFIED",
+      "evidence": "outputs/N72R20/dataset_discovery.json",
+      "detail": "train 40/40 and val 25/25 complete; no test asset used"
+    },
+    "storage_and_protection_audited": {
+      "status": "VERIFIED",
+      "evidence": "outputs/N72R20/storage_audit_after_cleanup.json and outputs/N72R20/PROTECTED_ASSETS.json"
+    },
+    "frozen_n72r18_assets_present": {
+      "status": "VERIFIED",
+      "evidence": "outputs/N72R20/asset_manifest.json"
+    },
+    "real_sam3_checkpoint": {
+      "status": "BLOCKED_EXTERNAL",
+      "evidence": "outputs/N72R20/checkpoint_access_audit.json",
+      "detail": "sam3.1_multiplex.pt not found locally; NAS path is not visible; no authenticated official access"
+    },
+    "candidate_stream_smoke": {
+      "status": "NOT_EXECUTED",
+      "evidence": "outputs/N72R20/stage_status.json",
+      "detail": "requires real SAM3 checkpoint"
+    },
+    "identity_bridge_and_gate_code": {
+      "status": "PREPARED_NOT_EXECUTED",
+      "evidence": "scripts/n72r20_identity_bridge_eval.py, scripts/n72r20_aggregate_identity_bridge.py, scripts/n72r20_run_streaming_val_bridge.py"
+    },
+    "val_candidate_coverage_and_identity_metrics": {
+      "status": "NOT_MEASURED",
+      "evidence": null
+    },
+    "frozen_n72r20_decision": {
+      "status": "NOT_ISSUED",
+      "evidence": null
+    },
+    "downstream_mot_work": {
+      "status": "CORRECTLY_NOT_STARTED",
+      "evidence": "outputs/N72R20/FINAL_GOAL.json"
+    },
+    "software_regression": {
+      "status": "VERIFIED_WITH_KNOWN_THIRD_PARTY_FAILURES",
+      "evidence": "234 passed, 4 failed; all four are the fixed TrackEval SEQMAP_FILE list/path defect"
+    }
+  },
+  "required_external_change": "Place or authenticate one official SHA-verifiable sam3.1_multiplex.pt checkpoint, then rerun the checkpoint audit before train smoke."
+}

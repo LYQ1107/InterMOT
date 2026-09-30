@@ -4,6 +4,8 @@ Does the learned identity memory transfer from offline GT replay to a real SAM3 
 
 This report is governed by [`outputs/N72R20/FINAL_GOAL.json`](/data3/liuyeqiang/InterMOT/outputs/N72R20/FINAL_GOAL.json). The Final Goal and central question are frozen; this document is an in-progress report until the real SAM3 candidate-stream probe is run.
 
+The requirement-by-requirement completion audit is recorded in [`docs/N72R20_COMPLETION_AUDIT.md`](/data3/liuyeqiang/InterMOT/docs/N72R20_COMPLETION_AUDIT.md). It leaves the scientific decision unissued because the official SAM3 checkpoint is an external prerequisite.
+
 ## Current status
 
 `DATASET_READY_SAM3_CHECKPOINT_MISSING`
