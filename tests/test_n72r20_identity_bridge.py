@@ -13,6 +13,8 @@ from scripts.n72r20_identity_bridge_eval import (
     evaluate_anchor,
     normalize,
     read_zstd_jsonl,
+    sha256,
+    validate_candidate_index,
 )
 from sam3_intermot.identity_probe.dataset import GTBox
 
@@ -148,8 +150,61 @@ def test_runtime_replay_updates_on_target_not_visible_frames():
 def test_zstd_metadata_reader_reports_decompression_errors_and_rows(tmp_path):
     source = tmp_path / "metadata.jsonl"
     compressed = tmp_path / "metadata.jsonl.zst"
-    source.write_text(json.dumps({"frame": 0, "candidates": []}) + "\n", encoding="utf-8")
+    source.write_text(
+        json.dumps(
+            {
+                "frame": 0,
+                "candidates": [],
+                "runtime_gt_read": False,
+                "runtime_future_gt_used": False,
+            }
+        )
+        + "\n",
+        encoding="utf-8",
+    )
     with compressed.open("wb") as handle:
         subprocess.run(["zstd", "-q", "-c", str(source)], stdout=handle, check=True)
 
     assert read_zstd_jsonl(compressed) == {0: []}
+
+
+@pytest.mark.skipif(shutil.which("zstd") is None, reason="zstd is required by the candidate cache contract")
+def test_candidate_index_and_gt_free_contract_are_verified(tmp_path):
+    candidate_dir = tmp_path / "candidates" / "synthetic"
+    candidate_dir.mkdir(parents=True)
+    metadata = candidate_dir / "metadata.jsonl.zst"
+    embeddings = candidate_dir / "embeddings.f16"
+    metadata_source = tmp_path / "metadata.jsonl"
+    metadata_source.write_text(
+        json.dumps(
+            {
+                "frame": 0,
+                "candidates": [],
+                "runtime_gt_read": False,
+                "runtime_future_gt_used": False,
+            }
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    with metadata.open("wb") as handle:
+        subprocess.run(["zstd", "-q", "-c", str(metadata_source)], stdout=handle, check=True)
+    np.zeros((0, 512), dtype=np.float16).tofile(embeddings)
+    (candidate_dir / "index.json").write_text(
+        json.dumps(
+            {
+                "stage": "N72R20",
+                "sequence": "synthetic",
+                "frame_count": 1,
+                "embedding_count": 0,
+                "runtime_gt_read": False,
+                "runtime_future_gt_used": False,
+                "metadata_sha256": sha256(metadata),
+                "embeddings_sha256": sha256(embeddings),
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    index = validate_candidate_index(candidate_dir, metadata, embeddings)
+    assert index["sequence"] == "synthetic"

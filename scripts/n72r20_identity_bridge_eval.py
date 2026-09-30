@@ -107,6 +107,8 @@ def read_zstd_jsonl(path: Path) -> dict[int, list[dict[str, Any]]]:
                 continue
             row = json.loads(line)
             frame = int(row["frame"])
+            if row.get("runtime_gt_read") is not False or row.get("runtime_future_gt_used") is not False:
+                raise ValueError(f"candidate metadata violates the GT-free runtime contract: {path}:{line_number}")
             if frame in by_frame:
                 raise ValueError(f"duplicate candidate metadata frame {frame}: {path}:{line_number}")
             candidates = [dict(item) for item in row.get("candidates", []) if bool(item.get("valid", True))]
@@ -127,6 +129,8 @@ def validate_candidate_index(candidate_dir: Path, metadata_path: Path, embedding
     index = load_json(index_path)
     if index.get("stage") != "N72R20":
         raise ValueError(f"candidate index is not N72R20: {index_path}")
+    if index.get("sequence") != candidate_dir.name:
+        raise ValueError(f"candidate index sequence does not match its directory: {index_path}")
     if not bool(index.get("runtime_gt_read") is False and index.get("runtime_future_gt_used") is False):
         raise ValueError(f"candidate index violates the GT-free runtime contract: {index_path}")
     expected_metadata_sha = index.get("metadata_sha256")
