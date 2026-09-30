@@ -1,0 +1,45 @@
+{
+  "stage": "N72R20",
+  "goal": "Learned Identity Memory Integration into InterMOT",
+  "central_question": "Does the N72R18 learned identity memory, initialized once by a human correction, improve future public-ID association in the existing InterMOT runtime when candidate generation, assignment solver, public-ID authority, and interaction protocol are held fixed?",
+  "primary_endpoint": "H100_AssA",
+  "secondary_endpoints": [
+    "H20_AssA",
+    "H50_AssA",
+    "H100_HOTA",
+    "H100_IDF1",
+    "H100_IDSW",
+    "H100_MOTA",
+    "H100_DetA",
+    "correct_public_assignment",
+    "candidate_coverage",
+    "wrong_memory_writes",
+    "memory_update_count"
+  ],
+  "horizons": [20, 50, 100],
+  "fixed_components": [
+    "SAM3 candidate generation",
+    "assignment solver",
+    "public-ID authority",
+    "human interaction protocol"
+  ],
+  "variants": [
+    "E0_BASELINE_B0",
+    "E1J_TRUSTED_GLOBAL_RELATIVE_STATE",
+    "E2_N72R20_LEARNED_IDENTITY_TRUSTED",
+    "N72R20_LEARNED_IDENTITY_SHADOW"
+  ],
+  "sam3_required": false,
+  "mot_evaluation_required": true,
+  "training_required": false,
+  "next_full_interactive_mot_stage_authorized": false,
+  "allowed_final_decisions": [
+    "PASS_LEARNED_MEMORY_INTERMOT_INTEGRATION",
+    "FAIL_FEATURE_LINEAGE_COMPATIBILITY",
+    "FAIL_LEARNED_MEMORY_CANDIDATE_SIGNAL",
+    "FAIL_LEARNED_MEMORY_DECISION_INACTIVE",
+    "FAIL_LEARNED_MEMORY_ASSOCIATION_GAIN",
+    "FAIL_MEMORY_CONTAMINATION"
+  ],
+  "goal_frozen": true
+}

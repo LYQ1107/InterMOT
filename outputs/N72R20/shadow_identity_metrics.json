@@ -1,0 +1,103 @@
+{
+  "candidate_iou_threshold": 0.5,
+  "checkpoint": "/data3/liuyeqiang/InterMOT/outputs/N72R18/checkpoints/identity_memory_gru.pt",
+  "checkpoint_sha256": "94ba9c44e177b254ee54984195e839f37c78a648c010ffc723dd3f1d553976a2",
+  "diagnostic": "FEATURE_LEVEL_SHADOW",
+  "encoder_sha256": "2809d3227f7d078f6045f7feb874a34d0684f0e0057b264b99adccf7d4519154",
+  "formal_variant": false,
+  "goal": "Learned Identity Memory Integration into InterMOT",
+  "horizons": [
+    20,
+    50,
+    100
+  ],
+  "interaction_source": "simulated_from_gt",
+  "posthoc_gt_used": true,
+  "runtime_future_gt_used": false,
+  "sequences": [
+    {
+      "horizons": {
+        "H100": {
+          "auc": 0.6033653846153846,
+          "candidate_coverage": 0.8971428571428571,
+          "hard_negative_win_rate": 0.2945859872611465,
+          "identity_evaluable": 628,
+          "machine_update_count": 700,
+          "mean_margin": -0.09747122191663855,
+          "rank_1_accuracy": 0.2929936305732484,
+          "records": 700,
+          "wrong_memory_write_count": 516
+        },
+        "H20": {
+          "auc": 0.8577023498694517,
+          "candidate_coverage": 0.9642857142857143,
+          "hard_negative_win_rate": 0.7185185185185186,
+          "identity_evaluable": 135,
+          "machine_update_count": 140,
+          "mean_margin": 0.06436986363044492,
+          "rank_1_accuracy": 0.7185185185185186,
+          "records": 140,
+          "wrong_memory_write_count": 43
+        },
+        "H50": {
+          "auc": 0.712,
+          "candidate_coverage": 0.9171428571428571,
+          "hard_negative_win_rate": 0.4517133956386293,
+          "identity_evaluable": 321,
+          "machine_update_count": 350,
+          "mean_margin": -0.038018400360165724,
+          "rank_1_accuracy": 0.4517133956386293,
+          "records": 350,
+          "wrong_memory_write_count": 205
+        }
+      },
+      "records": 700,
+      "sequence": "dancetrack0001",
+      "target_count": 7
+    },
+    {
+      "horizons": {
+        "H100": {
+          "auc": 0.7043062200956938,
+          "candidate_coverage": 0.8619824341279799,
+          "hard_negative_win_rate": 0.3930131004366812,
+          "identity_evaluable": 687,
+          "machine_update_count": 797,
+          "mean_margin": -0.04930325333039877,
+          "rank_1_accuracy": 0.3915574963609898,
+          "records": 797,
+          "wrong_memory_write_count": 519
+        },
+        "H20": {
+          "auc": 0.915158371040724,
+          "candidate_coverage": 0.8875,
+          "hard_negative_win_rate": 0.7816901408450704,
+          "identity_evaluable": 142,
+          "machine_update_count": 160,
+          "mean_margin": 0.08011533731830792,
+          "rank_1_accuracy": 0.7816901408450704,
+          "records": 160,
+          "wrong_memory_write_count": 49
+        },
+        "H50": {
+          "auc": 0.8555776892430279,
+          "candidate_coverage": 0.8475,
+          "hard_negative_win_rate": 0.6017699115044248,
+          "identity_evaluable": 339,
+          "machine_update_count": 400,
+          "mean_margin": 0.031783467120213495,
+          "rank_1_accuracy": 0.5988200589970502,
+          "records": 400,
+          "wrong_memory_write_count": 195
+        }
+      },
+      "records": 797,
+      "sequence": "dancetrack0002",
+      "target_count": 8
+    }
+  ],
+  "source": "existing real-SAM3 train candidate tapes plus historical B2 trace",
+  "stage": "N72R20",
+  "status": "PASS_FEATURE_LEVEL_SIGNAL_DETECTED",
+  "update_policy": "historical B2 machine selection replay for shadow only; not formal N72R20 consensus replay"
+}

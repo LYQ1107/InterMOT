@@ -1,0 +1,81 @@
+{
+  "stage": "N72R20",
+  "goal": "Learned Identity Memory Integration into InterMOT",
+  "central_question": "Does the N72R18 learned identity memory, initialized once by a human correction, improve future public-ID association in the existing InterMOT runtime when candidate generation, assignment solver, public-ID authority, and interaction protocol are held fixed?",
+  "feature_lineage_compatible": true,
+  "decision": "FEATURE_LINEAGE_COMPATIBLE",
+  "comparison": {
+    "embedding_dim": {
+      "n72r18": 512,
+      "n72r20_candidate_stream": 512,
+      "match": true
+    },
+    "normalization": {
+      "n72r18": "L2-normalized frozen OSNet output",
+      "n72r20_candidate_stream": "L2-normalized frozen OSNet output",
+      "match": true
+    },
+    "encoder": {
+      "n72r18": "sam3_intermot/identity_probe/encoders.py::OSNetEncoder",
+      "n72r20_candidate_stream": "same OSNetEncoder implementation via machine-box crop pipeline",
+      "match": true
+    },
+    "checkpoint": {
+      "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/checkpoints/osnet_x1_0_market1501.pth",
+      "sha256": "2809d3227f7d078f6045f7feb874a34d0684f0e0057b264b99adccf7d4519154",
+      "match": true
+    },
+    "preprocessing": {
+      "n72r18": "machine crop: RGB, /255, bilinear resize to 256x128, ImageNet mean/std",
+      "n72r20_candidate_stream": "same RGB crop, /255, bilinear resize to 256x128, ImageNet mean/std",
+      "match": true
+    },
+    "feature_dtype": {
+      "n72r18": "float32 in model/cache contract",
+      "n72r20_candidate_stream": "float16 on disk, promoted to float32 before model arithmetic",
+      "match": true,
+      "risk": "The tape is quantized to float16 for storage; report this provenance and do not mix it with an unquantized baseline without using the same tape."
+    }
+  },
+  "learned_memory": {
+    "checkpoint": "/data3/liuyeqiang/InterMOT/outputs/N72R18/checkpoints/identity_memory_gru.pt",
+    "sha256": "94ba9c44e177b254ee54984195e839f37c78a648c010ffc723dd3f1d553976a2",
+    "variant": "GRU_MEMORY",
+    "contract": "score current observation against current state, then update state; current-frame write is visible only from the next frame"
+  },
+  "candidate_streams": [
+    {
+      "sequence": "dancetrack0001",
+      "split": "train",
+      "root": "/data3/liuyeqiang/InterMOT_N72R20_assets/candidates/dancetrack0001",
+      "frames": 160,
+      "candidates": 1193,
+      "embedding_dim": 512,
+      "embedding_dtype": "float16",
+      "embedding_sha256": "2d72a6635a8757387282fea0466e100d97714b78988f9e41cc28dc7ce3d9550c",
+      "candidate_set_source": "official_sam3_full_vg_post_nms_propagation",
+      "embedding_source": "frozen_osnet_x1_0_market1501_machine_box_crop",
+      "runtime_future_gt_used": false,
+      "runtime_gt_read": false
+    },
+    {
+      "sequence": "dancetrack0002",
+      "split": "train",
+      "root": "/data3/liuyeqiang/InterMOT_N72R20_assets/candidates/dancetrack0002",
+      "frames": 160,
+      "candidates": 1436,
+      "embedding_dim": 512,
+      "embedding_dtype": "float16",
+      "embedding_sha256": "b37e8258354bc0b1c2cd845b56d3dd0ed987ee585b56eec5b7ae7fb8f487fffc",
+      "candidate_set_source": "official_sam3_full_vg_post_nms_propagation",
+      "embedding_source": "frozen_osnet_x1_0_market1501_machine_box_crop",
+      "runtime_future_gt_used": false,
+      "runtime_gt_read": false
+    }
+  ],
+  "caveats": [
+    "N72R18 was trained/evaluated on frozen feature caches; this audit establishes feature-space compatibility, not scientific transfer success.",
+    "The two current real-SAM3 candidate tapes are train development assets only; no val conclusion is authorized from them.",
+    "The identity memory checkpoint is frozen for N72R20 and must not be retrained or selected using association results."
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "stage": "N72R20",
+  "goal": "Learned Identity Memory Integration into InterMOT",
+  "central_question": "Does the N72R18 learned identity memory, initialized once by a human correction, improve future public-ID association in the existing InterMOT runtime when candidate generation, assignment solver, public-ID authority, and interaction protocol are held fixed?",
+  "status": "FEATURE_SHADOW_PASS_ASSIGNMENT_SHADOW_BLOCKED",
+  "goal_frozen": true,
+  "audits": {
+    "current_runtime_audit": "PASS_WRITTEN",
+    "reference_audit": "PASS_WRITTEN",
+    "feature_lineage_audit": "FEATURE_LINEAGE_COMPATIBLE",
+    "storage_audit_before": "PASS_WRITTEN_STORAGE_OK_NEAR_WARNING",
+    "storage_audit_after": "PASS_WRITTEN_STORAGE_OK_NEAR_WARNING",
+    "feature_level_shadow": "PASS_FEATURE_LEVEL_SIGNAL_DETECTED",
+    "assignment_shadow": "BLOCKED_MISSING_FROZEN_N72R15_RUNTIME_TAPE"
+  },
+  "assets": {
+    "dataset": "DanceTrack train/val present under N72R16 asset lineage; no copy made",
+    "candidate_stream": "N72R20 real-SAM3 train smoke tapes for dancetrack0001 and dancetrack0002",
+    "n72r18_memory": "frozen GRU checkpoint present",
+    "sam3_checkpoint": "present and SHA256 verified; no new inference launched"
+  },
+  "fixed": [
+    "candidate generation",
+    "assignment solver",
+    "public-ID authority",
+    "human interaction protocol",
+    "N72R18 GRU checkpoint"
+  ],
+  "integration_code": {
+    "learned_memory_bank": "IMPLEMENTED_AND_UNIT_TESTED",
+    "learned_state_edge": "IMPLEMENTED_AND_UNIT_TESTED",
+    "targeted_tests": "34_PASS",
+    "full_tests": "236_PASS_4_KNOWN_INFRASTRUCTURE_FAILURES",
+    "exact_solver": "UNCHANGED",
+    "public_authority": "UNCHANGED",
+    "candidate_generation": "UNCHANGED",
+    "training": "NOT_RUN"
+  },
+  "next_association_stage_authorized": false,
+  "next_action": "Recover only the missing frozen N72R15 runtime/base-score tape, then run the assignment shadow and causal E2 replay before TrackEval."
+}

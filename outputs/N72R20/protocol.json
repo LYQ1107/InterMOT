@@ -1,0 +1,108 @@
+{
+  "stage": "N72R20",
+  "final_goal_ref": "outputs/N72R20/FINAL_GOAL.json",
+  "goal": "Learned Identity Memory Integration into InterMOT",
+  "central_question": "Does the N72R18 learned identity memory, initialized once by a human correction, improve future public-ID association in the existing InterMOT runtime when candidate generation, assignment solver, public-ID authority, and interaction protocol are held fixed?",
+  "dataset_root": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset",
+  "DANCETRACK_ROOT": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset",
+  "dataset_scope": {
+    "train": "development_and_smoke_only",
+    "val": "frozen_final_evaluation_only",
+    "test": "forbidden"
+  },
+  "split_counts": {
+    "train": 40,
+    "val": 25,
+    "test_downloaded": false
+  },
+  "train_dev_sequences": [
+    "dancetrack0001",
+    "dancetrack0002"
+  ],
+  "val_evaluation_sequences": [
+    "dancetrack0004",
+    "dancetrack0005",
+    "dancetrack0007",
+    "dancetrack0010",
+    "dancetrack0014",
+    "dancetrack0018",
+    "dancetrack0019",
+    "dancetrack0025",
+    "dancetrack0026",
+    "dancetrack0030",
+    "dancetrack0034",
+    "dancetrack0035",
+    "dancetrack0041",
+    "dancetrack0043",
+    "dancetrack0047",
+    "dancetrack0058",
+    "dancetrack0063",
+    "dancetrack0065",
+    "dancetrack0073",
+    "dancetrack0077",
+    "dancetrack0079",
+    "dancetrack0081",
+    "dancetrack0090",
+    "dancetrack0094",
+    "dancetrack0097"
+  ],
+  "anchor_rule": "Frozen N72R17 earliest eligible anchor; no embedding, learned score, or future similarity is used to select the anchor.",
+  "anchor_source": "frozen N72R17 protocol; interaction_source=simulated_from_gt",
+  "interaction_source": "simulated_from_gt",
+  "future_gt_runtime_input": false,
+  "gt_use": "posthoc evaluation truth only: candidate coverage, identity/rank diagnostics, assignment changes, and memory contamination audit",
+  "horizons": [
+    20,
+    50,
+    100
+  ],
+  "candidate_iou_threshold": 0.5,
+  "variants": [
+    "E0_BASELINE_B0",
+    "E1J_TRUSTED_GLOBAL_RELATIVE_STATE",
+    "N72R20_LEARNED_IDENTITY_TRUSTED",
+    "N72R20_LEARNED_IDENTITY_SHADOW"
+  ],
+  "learned_memory": {
+    "checkpoint": "/data3/liuyeqiang/InterMOT/outputs/N72R18/checkpoints/identity_memory_gru.pt",
+    "checkpoint_sha256": "94ba9c44e177b254ee54984195e839f37c78a648c010ffc723dd3f1d553976a2",
+    "encoder": "osnet_x1_0_market1501",
+    "encoder_checkpoint_sha256": "2809d3227f7d078f6045f7feb874a34d0684f0e0057b264b99adccf7d4519154",
+    "update_rule": "score -> global exact public assignment -> base/treatment consensus -> frozen N72R18 GRU update",
+    "missing_or_none_policy": "state unchanged",
+    "human_anchor_policy": "immutable single initialization; no real-human claim"
+  },
+  "fixed_components": {
+    "candidate_generation": "existing frozen candidate rows; no SAM3 rerun during replay",
+    "assignment_solver": "sam3_intermot.association.effect_assignment.solve_effect_assignment -> solve_exact_public_assignment",
+    "public_id_authority": "SequencePersistentIdentityRuntime/PublicAuthorityBridge",
+    "interaction_protocol": "simulated_from_gt with frozen N72R17 anchor selection",
+    "motion_and_native_continuity": "frozen existing base/state edge components"
+  },
+  "trackeval": {
+    "required": true,
+    "commit": "12c8791b303e0a0b50f753af204249e622d0281a",
+    "horizons": [
+      20,
+      50,
+      100
+    ],
+    "primary_endpoint": "H100_AssA",
+    "comparisons": [
+      "N72R20_LEARNED_IDENTITY_TRUSTED vs E0_BASELINE_B0",
+      "N72R20_LEARNED_IDENTITY_TRUSTED vs E1J_TRUSTED_GLOBAL_RELATIVE_STATE"
+    ]
+  },
+  "bootstrap": {
+    "unit": "sequence_cluster",
+    "replicates": 2000,
+    "seed": 72020,
+    "required_for_pass": true
+  },
+  "val_tuning_allowed": false,
+  "sam3_rerun": false,
+  "training": false,
+  "test_downloaded": false,
+  "next_full_interactive_mot_stage_authorized": false,
+  "goal_frozen": true
+}

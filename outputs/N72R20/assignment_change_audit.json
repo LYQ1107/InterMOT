@@ -1,0 +1,14 @@
+{
+  "stage": "N72R20",
+  "variant": "N72R20_LEARNED_IDENTITY_TRUSTED",
+  "status": "BLOCKED_MISSING_FROZEN_N72R15_RUNTIME_TAPE",
+  "formal_replay_run": false,
+  "reason": "The local host contains the two real-SAM3 train candidate tapes and N72R16/N72R17 identity assets, but no recovered N72R15 runtime_frames/base-score tape with the frozen candidate and public/state axes.",
+  "required_asset": "N72R15 formal replay runtime rows or an equivalent frozen source tape containing candidate_rows, public/state axes, and the original base candidate×state score matrix.",
+  "safe_policy": "Do not fabricate a base matrix from GT, candidate embeddings, or a new matcher; do not declare decision-inactive from an unrun shadow.",
+  "candidate_generation_changed": false,
+  "assignment_solver_changed": false,
+  "public_id_authority_changed": false,
+  "runtime_future_gt_used": false,
+  "next_action": "Recover only the missing frozen runtime tape if available; then run scripts/n72r20_learned_memory_integration_replay.py before any TrackEval replay."
+}
