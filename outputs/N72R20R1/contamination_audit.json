@@ -1,0 +1,399 @@
+{
+  "final_decision_compatible": "FAIL_MEMORY_CONTAMINATION",
+  "fresh_tape_manifest_sealed": true,
+  "gt_role": "posthoc_classification_of_recorded_writes_only",
+  "historical_n72r15_used": false,
+  "manifest_checks": {
+    "fresh_manifest_runtime_gt_clean": true,
+    "fresh_tape_manifest_sealed": true,
+    "historical_n72r15_not_used": true,
+    "replay_manifest_historical_n72r15_not_used": true,
+    "replay_manifest_runtime_gt_clean": true
+  },
+  "per_sequence": {
+    "dancetrack0001": {
+      "expected_future_frame_axis_matches_writes": true,
+      "expected_future_frames": 159,
+      "human_anchor_hash_matches_event": true,
+      "human_anchor_hashes": [
+        "243910c31fce7ceb7e46f4d2762125693d13575b3a0d194f452a92b27f2d707b"
+      ],
+      "target_iou_mean": 0.9266743629512122,
+      "target_iou_min": 0.24971349311488547,
+      "write_count": 159,
+      "wrong_memory_write_count": 5
+    },
+    "dancetrack0002": {
+      "expected_future_frame_axis_matches_writes": true,
+      "expected_future_frames": 159,
+      "human_anchor_hash_matches_event": true,
+      "human_anchor_hashes": [
+        "9e78e6c29008dde3939d7e88fb8515a6d63056011019b43b42f95d17a119256e"
+      ],
+      "target_iou_mean": 0.822962998408918,
+      "target_iou_min": 0.11425387929771025,
+      "write_count": 159,
+      "wrong_memory_write_count": 28
+    }
+  },
+  "posthoc_gt_used": true,
+  "posthoc_target_iou_threshold": 0.5,
+  "posthoc_wrong_memory_writes": [
+    {
+      "candidate_uid": "dancetrack0001:18:2:2",
+      "frame": 18,
+      "public_id": 100003,
+      "reason": "posthoc_target_iou_below_0.50",
+      "sequence": "dancetrack0001",
+      "target_gt_id": 0,
+      "target_iou": 0.405263078919418
+    },
+    {
+      "candidate_uid": "dancetrack0001:22:2:2",
+      "frame": 22,
+      "public_id": 100003,
+      "reason": "posthoc_target_iou_below_0.50",
+      "sequence": "dancetrack0001",
+      "target_gt_id": 0,
+      "target_iou": 0.3815479647688519
+    },
+    {
+      "candidate_uid": "dancetrack0001:31:2:2",
+      "frame": 31,
+      "public_id": 100003,
+      "reason": "posthoc_target_iou_below_0.50",
+      "sequence": "dancetrack0001",
+      "target_gt_id": 0,
+      "target_iou": 0.4770159549440193
+    },
+    {
+      "candidate_uid": "dancetrack0001:34:2:2",
+      "frame": 34,
+      "public_id": 100003,
+      "reason": "posthoc_target_iou_below_0.50",
+      "sequence": "dancetrack0001",
+      "target_gt_id": 0,
+      "target_iou": 0.24971349311488547
+    },
+    {
+      "candidate_uid": "dancetrack0001:122:2:2",
+      "frame": 122,
+      "public_id": 100003,
+      "reason": "posthoc_target_iou_below_0.50",
+      "sequence": "dancetrack0001",
+      "target_gt_id": 0,
+      "target_iou": 0.49586482120029834
+    },
+    {
+      "candidate_uid": "dancetrack0002:5:3:3",
+      "frame": 5,
+      "public_id": 100004,
+      "reason": "posthoc_target_iou_below_0.50",
+      "sequence": "dancetrack0002",
+      "target_gt_id": 0,
+      "target_iou": 0.422937122593181
+    },
+    {
+      "candidate_uid": "dancetrack0002:10:3:3",
+      "frame": 10,
+      "public_id": 100004,
+      "reason": "posthoc_target_iou_below_0.50",
+      "sequence": "dancetrack0002",
+      "target_gt_id": 0,
+      "target_iou": 0.4127239379824456
+    },
+    {
+      "candidate_uid": "dancetrack0002:61:3:3",
+      "frame": 61,
+      "public_id": 100004,
+      "reason": "posthoc_target_iou_below_0.50",
+      "sequence": "dancetrack0002",
+      "target_gt_id": 0,
+      "target_iou": 0.3228261198451602
+    },
+    {
+      "candidate_uid": "dancetrack0002:62:3:3",
+      "frame": 62,
+      "public_id": 100004,
+      "reason": "posthoc_target_iou_below_0.50",
+      "sequence": "dancetrack0002",
+      "target_gt_id": 0,
+      "target_iou": 0.33398305710516685
+    },
+    {
+      "candidate_uid": "dancetrack0002:66:3:3",
+      "frame": 66,
+      "public_id": 100004,
+      "reason": "posthoc_target_iou_below_0.50",
+      "sequence": "dancetrack0002",
+      "target_gt_id": 0,
+      "target_iou": 0.4222017731889249
+    },
+    {
+      "candidate_uid": "dancetrack0002:68:3:3",
+      "frame": 68,
+      "public_id": 100004,
+      "reason": "posthoc_target_iou_below_0.50",
+      "sequence": "dancetrack0002",
+      "target_gt_id": 0,
+      "target_iou": 0.43550204070398857
+    },
+    {
+      "candidate_uid": "dancetrack0002:69:3:3",
+      "frame": 69,
+      "public_id": 100004,
+      "reason": "posthoc_target_iou_below_0.50",
+      "sequence": "dancetrack0002",
+      "target_gt_id": 0,
+      "target_iou": 0.41472881998311406
+    },
+    {
+      "candidate_uid": "dancetrack0002:77:3:3",
+      "frame": 77,
+      "public_id": 100004,
+      "reason": "posthoc_target_iou_below_0.50",
+      "sequence": "dancetrack0002",
+      "target_gt_id": 0,
+      "target_iou": 0.35076063104311617
+    },
+    {
+      "candidate_uid": "dancetrack0002:78:3:3",
+      "frame": 78,
+      "public_id": 100004,
+      "reason": "posthoc_target_iou_below_0.50",
+      "sequence": "dancetrack0002",
+      "target_gt_id": 0,
+      "target_iou": 0.357949736732194
+    },
+    {
+      "candidate_uid": "dancetrack0002:79:3:3",
+      "frame": 79,
+      "public_id": 100004,
+      "reason": "posthoc_target_iou_below_0.50",
+      "sequence": "dancetrack0002",
+      "target_gt_id": 0,
+      "target_iou": 0.3392185652474439
+    },
+    {
+      "candidate_uid": "dancetrack0002:94:3:3",
+      "frame": 94,
+      "public_id": 100004,
+      "reason": "posthoc_target_iou_below_0.50",
+      "sequence": "dancetrack0002",
+      "target_gt_id": 0,
+      "target_iou": 0.11425387929771025
+    },
+    {
+      "candidate_uid": "dancetrack0002:97:3:3",
+      "frame": 97,
+      "public_id": 100004,
+      "reason": "posthoc_target_iou_below_0.50",
+      "sequence": "dancetrack0002",
+      "target_gt_id": 0,
+      "target_iou": 0.2720364342294379
+    },
+    {
+      "candidate_uid": "dancetrack0002:99:3:3",
+      "frame": 99,
+      "public_id": 100004,
+      "reason": "posthoc_target_iou_below_0.50",
+      "sequence": "dancetrack0002",
+      "target_gt_id": 0,
+      "target_iou": 0.31141102565907036
+    },
+    {
+      "candidate_uid": "dancetrack0002:101:3:3",
+      "frame": 101,
+      "public_id": 100004,
+      "reason": "posthoc_target_iou_below_0.50",
+      "sequence": "dancetrack0002",
+      "target_gt_id": 0,
+      "target_iou": 0.3569108089300969
+    },
+    {
+      "candidate_uid": "dancetrack0002:107:3:3",
+      "frame": 107,
+      "public_id": 100004,
+      "reason": "posthoc_target_iou_below_0.50",
+      "sequence": "dancetrack0002",
+      "target_gt_id": 0,
+      "target_iou": 0.4485233016335276
+    },
+    {
+      "candidate_uid": "dancetrack0002:108:3:3",
+      "frame": 108,
+      "public_id": 100004,
+      "reason": "posthoc_target_iou_below_0.50",
+      "sequence": "dancetrack0002",
+      "target_gt_id": 0,
+      "target_iou": 0.41242149501941217
+    },
+    {
+      "candidate_uid": "dancetrack0002:110:3:3",
+      "frame": 110,
+      "public_id": 100004,
+      "reason": "posthoc_target_iou_below_0.50",
+      "sequence": "dancetrack0002",
+      "target_gt_id": 0,
+      "target_iou": 0.3547000659289679
+    },
+    {
+      "candidate_uid": "dancetrack0002:111:3:3",
+      "frame": 111,
+      "public_id": 100004,
+      "reason": "posthoc_target_iou_below_0.50",
+      "sequence": "dancetrack0002",
+      "target_gt_id": 0,
+      "target_iou": 0.32269064860960844
+    },
+    {
+      "candidate_uid": "dancetrack0002:122:3:3",
+      "frame": 122,
+      "public_id": 100004,
+      "reason": "posthoc_target_iou_below_0.50",
+      "sequence": "dancetrack0002",
+      "target_gt_id": 0,
+      "target_iou": 0.40097903907652804
+    },
+    {
+      "candidate_uid": "dancetrack0002:124:3:3",
+      "frame": 124,
+      "public_id": 100004,
+      "reason": "posthoc_target_iou_below_0.50",
+      "sequence": "dancetrack0002",
+      "target_gt_id": 0,
+      "target_iou": 0.37787327933931114
+    },
+    {
+      "candidate_uid": "dancetrack0002:125:3:3",
+      "frame": 125,
+      "public_id": 100004,
+      "reason": "posthoc_target_iou_below_0.50",
+      "sequence": "dancetrack0002",
+      "target_gt_id": 0,
+      "target_iou": 0.37339761955124406
+    },
+    {
+      "candidate_uid": "dancetrack0002:127:3:3",
+      "frame": 127,
+      "public_id": 100004,
+      "reason": "posthoc_target_iou_below_0.50",
+      "sequence": "dancetrack0002",
+      "target_gt_id": 0,
+      "target_iou": 0.2401234312269025
+    },
+    {
+      "candidate_uid": "dancetrack0002:128:3:3",
+      "frame": 128,
+      "public_id": 100004,
+      "reason": "posthoc_target_iou_below_0.50",
+      "sequence": "dancetrack0002",
+      "target_gt_id": 0,
+      "target_iou": 0.33858158250783177
+    },
+    {
+      "candidate_uid": "dancetrack0002:130:3:3",
+      "frame": 130,
+      "public_id": 100004,
+      "reason": "posthoc_target_iou_below_0.50",
+      "sequence": "dancetrack0002",
+      "target_gt_id": 0,
+      "target_iou": 0.24800601061967759
+    },
+    {
+      "candidate_uid": "dancetrack0002:132:3:3",
+      "frame": 132,
+      "public_id": 100004,
+      "reason": "posthoc_target_iou_below_0.50",
+      "sequence": "dancetrack0002",
+      "target_gt_id": 0,
+      "target_iou": 0.20478643115703593
+    },
+    {
+      "candidate_uid": "dancetrack0002:142:3:3",
+      "frame": 142,
+      "public_id": 100004,
+      "reason": "posthoc_target_iou_below_0.50",
+      "sequence": "dancetrack0002",
+      "target_gt_id": 0,
+      "target_iou": 0.484856409775857
+    },
+    {
+      "candidate_uid": "dancetrack0002:155:3:3",
+      "frame": 155,
+      "public_id": 100004,
+      "reason": "posthoc_target_iou_below_0.50",
+      "sequence": "dancetrack0002",
+      "target_gt_id": 0,
+      "target_iou": 0.47241750961168116
+    },
+    {
+      "candidate_uid": "dancetrack0002:158:3:3",
+      "frame": 158,
+      "public_id": 100004,
+      "reason": "posthoc_target_iou_below_0.50",
+      "sequence": "dancetrack0002",
+      "target_gt_id": 0,
+      "target_iou": 0.3806512603994093
+    }
+  ],
+  "replay_checks": [
+    {
+      "all_checks_pass": true,
+      "checks": {
+        "base_matrix_hashes_identical": true,
+        "candidate_axes_identical": true,
+        "e2_assignment_changes_zero": true,
+        "e2_none_changes_zero": true,
+        "event_frame_memory_read_false": true,
+        "event_frame_present": true,
+        "public_axes_immutable": true,
+        "runtime_gt_flags_clean": true,
+        "state_axes_immutable": true,
+        "variant_frame_counts_equal": true
+      },
+      "frame_count": 160,
+      "sequence": "dancetrack0001"
+    },
+    {
+      "all_checks_pass": true,
+      "checks": {
+        "base_matrix_hashes_identical": true,
+        "candidate_axes_identical": true,
+        "e2_assignment_changes_zero": true,
+        "e2_none_changes_zero": true,
+        "event_frame_memory_read_false": true,
+        "event_frame_present": true,
+        "public_axes_immutable": true,
+        "runtime_gt_flags_clean": true,
+        "state_axes_immutable": true,
+        "variant_frame_counts_equal": true
+      },
+      "frame_count": 160,
+      "sequence": "dancetrack0002"
+    }
+  ],
+  "runtime_future_gt_used": false,
+  "stage": "N72R20R1",
+  "status": "FAIL_MEMORY_CONTAMINATION",
+  "write_checks": {
+    "all_consensus": true,
+    "all_non_none": true,
+    "all_variant_e2": true,
+    "anchor_hash_immutable_per_sequence": true,
+    "base_treatment_public_equal": true,
+    "base_treatment_uid_equal": true,
+    "candidate_feature_lineage_fixed": true,
+    "checkpoint_lineage_fixed": true,
+    "encoder_lineage_fixed": true,
+    "expected_write_count": true,
+    "future_write_frame_axes_exact": true,
+    "no_none_assignment_status": true,
+    "required_write_fields_complete": true,
+    "runtime_gt_flags_clean": true,
+    "unique_sequence_public_frame": true,
+    "wrong_memory_write_count_zero": false
+  },
+  "write_count": 318,
+  "wrong_write_definition": "candidate box IoU with the labeled target GT box is below 0.50"
+}

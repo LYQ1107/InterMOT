@@ -6,13 +6,14 @@ Fresh-Lineage Learned Identity Memory Integration
 CENTRAL QUESTION:
 “在当前可获得的 InterMOT 代码、DanceTrack 数据、冻结 SAM3、N72R18 OSNet encoder 和 N72R18 learned identity memory 上，重新生成并冻结一条新的 candidate/base-score lineage 后，learned identity memory 是否能够改善未来 public-ID association？”
 
-# Decision
+# Final decision
 
-`FAIL_LEARNED_MEMORY_DECISION_INACTIVE`
+`FAIL_MEMORY_CONTAMINATION`
 
-The fresh-lineage identity shadow was strongly positive, but the learned
-signal did not cross the frozen exact public-ID assignment boundary on any
-future smoke frame. This is not an association gain, so the stage stops here.
+The fresh-lineage identity signal was positive, but the exact public-ID
+assignment shadow was inactive and the recorded exploratory machine updates
+failed the independent post-hoc contamination gate. Therefore this stage does
+not establish an association improvement and cannot authorize the next stage.
 
 # Evidence
 
@@ -52,8 +53,27 @@ IDs and candidate-vs-NONE changes were also `0`. Row-max preservation had
 `0` failures. This directly triggers the frozen inactive-decision stop rule.
 
 The formal primary endpoint, H100 `AssA(E2-E0)`, is therefore **not
-estimated**. Formal VAL candidate generation, TrackEval, bootstrap aggregation
-and downstream interactive MOT authorization were not started.
+estimated**. Formal VAL candidate generation, TrackEval and bootstrap
+aggregation were not authorized.
+
+## Independent contamination audit
+
+The existing exploratory train-smoke causal replay artifact recorded 318
+consensus-only E2 machine writes. The audit
+`outputs/N72R20R1/contamination_audit.json` used DanceTrack GT only
+post-hoc, with the frozen target-candidate criterion `IoU >= 0.50`:
+
+| Sequence | Writes | Writes below target IoU 0.50 | Minimum IoU | Mean IoU |
+|---|---:|---:|---:|---:|
+| dancetrack0001 | 159 | 5 | 0.2497 | 0.9267 |
+| dancetrack0002 | 159 | 28 | 0.1143 | 0.8230 |
+| **Total** | **318** | **33** | — | — |
+
+The audit also verified that candidate feature hashes, checkpoint/encoder
+lineage, anchor hashes, base/treatment candidate and public assignments, and
+runtime GT flags were otherwise consistent. The 33 below-threshold writes are
+the terminal contamination failure; they are not silently reclassified as
+association gains.
 
 # Provenance and safeguards
 
@@ -63,6 +83,8 @@ and downstream interactive MOT authorization were not started.
   selector, new matcher, SAM3 source change or solver change was made.
 - Learned memory followed score → fuse → exact assign → consensus update.
 - Human initialization is marked `simulated_from_gt`; future GT was used only
-  by post-hoc identity metrics.
+  by post-hoc metrics and the contamination audit.
+- Formal VAL, TrackEval, full causal evaluation and downstream interactive MOT
+  remain unauthorized.
 
 `next_full_interactive_mot_stage_authorized=false`.

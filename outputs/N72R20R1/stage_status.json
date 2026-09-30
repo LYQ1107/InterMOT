@@ -4,8 +4,8 @@
   "central_question": "Can the N72R18 learned identity memory improve future public-ID association when evaluated on a newly generated provenance-complete frozen candidate/base-score lineage under the current InterMOT runtime?",
   "final_goal_path": "outputs/N72R20R1/FINAL_GOAL.json",
   "goal_frozen": true,
-  "status": "FAIL_LEARNED_MEMORY_DECISION_INACTIVE",
-  "phase": "PHASE_3_ASSIGNMENT_SHADOW_STOP",
+  "status": "FAIL_MEMORY_CONTAMINATION",
+  "phase": "PHASE_3_ASSIGNMENT_SHADOW_STOP_POSTHOC_CONTAMINATION_FAIL",
   "historical_n72r20_status": "BLOCKED_NOT_RECOVERED",
   "historical_n72r20_modified": false,
   "fresh_lineage": true,
@@ -19,18 +19,27 @@
   "val_config_frozen": false,
   "next_full_interactive_mot_stage_authorized": false,
   "runtime_future_gt_used": false,
-  "final_decision": "FAIL_LEARNED_MEMORY_DECISION_INACTIVE",
+  "final_decision": "FAIL_MEMORY_CONTAMINATION",
   "final_result_path": "outputs/N72R20R1/FINAL_RESULT.json",
   "final_report_path": "outputs/N72R20R1/FINAL_REPORT.md",
   "storage_audit_after": "outputs/N72R20R1/storage_audit_after.json",
-  "targeted_tests": "48_PASS",
+  "targeted_tests": "49_PASS",
   "formal_causal_replay_authorized": false,
   "val_formal_authorized": false,
+  "contamination_audit_path": "outputs/N72R20R1/contamination_audit.json",
+  "contamination_audit_status": "FAIL_MEMORY_CONTAMINATION",
+  "memory_write_count": 318,
+  "wrong_memory_write_count": 33,
+  "wrong_memory_writes_by_sequence": {
+    "dancetrack0001": 5,
+    "dancetrack0002": 28
+  },
   "notes": [
     "Current SAM3, dataset, OSNet and N72R18 GRU assets are present.",
     "Old N72R20 candidate tapes are diagnostic only and are not R1 formal inputs.",
     "Fresh train-smoke candidate and base-score tapes are sealed and shared by E0/E1/E2.",
-    "Shadow identity signal passed, but learned score activity did not change exact public assignment on any future smoke frame.",
-    "Frozen stop rule triggered; no val, TrackEval, full formal causal replay, training, or LoRA was started."
+    "Shadow identity signal passed, but learned score activity did not change exact public assignment on any future smoke frame; this is the intermediate inactive-decision stop.",
+    "An exploratory train-smoke causal replay artifact was present even though formal causal replay was not authorized by the final stop; the independent post-hoc contamination audit found 33 of 318 consensus writes below target IoU 0.50.",
+    "Terminal decision is FAIL_MEMORY_CONTAMINATION; no formal VAL, TrackEval, training, LoRA, or next interactive MOT stage is authorized."
   ]
 }

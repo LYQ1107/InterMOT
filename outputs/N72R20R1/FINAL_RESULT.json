@@ -2,8 +2,8 @@
   "stage": "N72R20R1",
   "goal": "Fresh-Lineage Learned Identity Memory Integration",
   "central_question": "Can the N72R18 learned identity memory improve future public-ID association when evaluated on a newly generated provenance-complete frozen candidate/base-score lineage under the current InterMOT runtime?",
-  "final_decision": "FAIL_LEARNED_MEMORY_DECISION_INACTIVE",
-  "decision_scope": "two-sequence train development smoke assignment-shadow gate",
+  "final_decision": "FAIL_MEMORY_CONTAMINATION",
+  "decision_scope": "two-sequence train development smoke posthoc contamination gate",
   "historical_n72r15_reproduction": false,
   "historical_n72r20_status": "BLOCKED_NOT_RECOVERED",
   "fresh_tape_sealed": true,
@@ -39,6 +39,22 @@
     "e2_candidate_none_change_count": 0,
     "row_max_preservation_failures": 0,
     "stop_rule_triggered": true
+  },
+  "contamination_audit": {
+    "status": "FAIL_MEMORY_CONTAMINATION",
+    "path": "outputs/N72R20R1/contamination_audit.json",
+    "runtime_future_gt_used": false,
+    "posthoc_gt_used": true,
+    "posthoc_target_iou_threshold": 0.5,
+    "memory_write_count": 318,
+    "wrong_memory_write_count": 33,
+    "wrong_memory_writes_by_sequence": {
+      "dancetrack0001": 5,
+      "dancetrack0002": 28
+    },
+    "candidate_feature_lineage_fixed": true,
+    "runtime_invariants_clean": true,
+    "reason": "33 consensus machine writes selected candidate boxes with posthoc target IoU below 0.50."
   },
   "primary_endpoint": {
     "name": "H100_AssA_E2_MINUS_E0",

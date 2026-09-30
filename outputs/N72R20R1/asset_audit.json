@@ -65,6 +65,12 @@
     "will_contain": ["fresh candidate tape", "fresh base-score tape", "per-sequence manifests"]
   },
   "storage_audit_after": "outputs/N72R20R1/storage_audit_after.json",
+  "contamination_audit": {
+    "path": "outputs/N72R20R1/contamination_audit.json",
+    "status": "FAIL_MEMORY_CONTAMINATION",
+    "memory_write_count": 318,
+    "wrong_memory_write_count": 33
+  },
   "missing_for_formal_r1": [
     "formal VAL candidate/base tape (not started because assignment-shadow stop rule fired)",
     "formal VAL TrackEval metrics (not authorized)",

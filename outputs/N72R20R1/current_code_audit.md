@@ -146,3 +146,17 @@ promotion.
   matrices, exact solver, NONE score and public axes.
 - Assignment-shadow gate:
   `outputs/N72R20R1/assignment_shadow/train_smoke_summary.json`.
+
+## Terminal contamination audit
+
+The assignment-shadow result remains the intermediate
+`FAIL_LEARNED_MEMORY_DECISION_INACTIVE` gate: learned scores changed on all
+318 future smoke frames, while exact public assignments changed on zero
+frames. An independent post-hoc audit then examined the exploratory causal
+replay write log without changing runtime outputs. It verified frozen feature
+lineage, anchor immutability, consensus/non-`NONE` writes, and
+`runtime_future_gt_used=false`, but found 33 of 318 recorded writes with
+target-candidate IoU below 0.50 (5 in `dancetrack0001`, 28 in
+`dancetrack0002`). The terminal R1 decision is therefore
+`FAIL_MEMORY_CONTAMINATION`; formal VAL, TrackEval and downstream integration
+remain unauthorized.

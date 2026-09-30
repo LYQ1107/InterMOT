@@ -185,3 +185,19 @@ def test_r1_feature_lineage_mismatch_fails_closed() -> None:
             expected_encoder_sha256=ENCODER_SHA,
             expected_checkpoint_sha256="wrong-checkpoint-sha",
         )
+
+
+def test_r1_contamination_audit_is_terminal_and_posthoc_only() -> None:
+    audit = json.loads((ROOT / "outputs/N72R20R1/contamination_audit.json").read_text())
+    result = json.loads((ROOT / "outputs/N72R20R1/FINAL_RESULT.json").read_text())
+    status = json.loads((ROOT / "outputs/N72R20R1/stage_status.json").read_text())
+    assert audit["status"] == "FAIL_MEMORY_CONTAMINATION"
+    assert audit["runtime_future_gt_used"] is False
+    assert audit["posthoc_gt_used"] is True
+    assert audit["write_checks"]["candidate_feature_lineage_fixed"] is True
+    assert audit["write_checks"]["runtime_gt_flags_clean"] is True
+    assert audit["write_checks"]["wrong_memory_write_count_zero"] is False
+    assert len(audit["posthoc_wrong_memory_writes"]) == 33
+    assert result["final_decision"] == "FAIL_MEMORY_CONTAMINATION"
+    assert status["final_decision"] == "FAIL_MEMORY_CONTAMINATION"
+    assert status["next_full_interactive_mot_stage_authorized"] is False
