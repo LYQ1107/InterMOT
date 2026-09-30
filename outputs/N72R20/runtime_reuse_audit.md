@@ -6,7 +6,7 @@ Central question: Can one human initialization be recognized reliably in future 
 
 Formal question: Can a single human identity initialization, together with the frozen learned identity memory from N72R18, reliably recover and maintain the same identity from a real SAM3 candidate stream over future frames?
 
-Audit status: completed before SAM3 execution. The local official `sam3.1_multiplex.pt` checkpoint is not present and the local Hugging Face client is not authenticated, so no candidate stream was started.
+Audit status: checkpoint restored and train-only smoke completed. The official endpoint was gated; a SHA256-verified public mirror was used. Frozen val remains unauthorized.
 
 ## Reuse decisions
 
@@ -41,4 +41,4 @@ Audit status: completed before SAM3 execution. The local official `sam3.1_multip
 
 ## Blocker and next permitted action
 
-The dataset and frozen identity assets are ready. The only missing minimum runtime asset is the authenticated official SAM3.1 multiplex checkpoint. Once the user authenticates the official Hugging Face access or places a SHA-verified checkpoint at a configured path, the next action is the two-train-sequence smoke test only; full val is not authorized until storage projection and candidate coverage gates are passed.
+The dataset, frozen identity assets, checkpoint, and train-only smoke are ready. The next action, if separately authorized, is frozen DanceTrack val; no val/MOT/association work is authorized in the current task.

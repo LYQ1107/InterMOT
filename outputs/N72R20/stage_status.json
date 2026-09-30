@@ -5,17 +5,17 @@
   "central_question": "Can one human initialization be recognized reliably in future real SAM3 candidates?",
   "central_question_formal": "Can a single human identity initialization, together with the frozen learned identity memory from N72R18, reliably recover and maintain the same identity from a real SAM3 candidate stream over future frames?",
   "primary_endpoint": "VAL_H100_HARD_NEGATIVE_IDENTITY_WIN_RATE",
-  "status": "DATASET_READY_SAM3_CHECKPOINT_MISSING",
-  "current_stage": "STAGE_2_SAM3_CHECKPOINT_AUDIT",
+  "status": "BLOCKED_VAL_NOT_AUTHORIZED",
+  "current_stage": "STAGE_3_TRAIN_ONLY_SMOKE_COMPLETE",
   "next_association_stage_authorized": false,
   "dataset_policy": "DanceTrack train and val only; DanceTrack test and all other datasets are out of scope.",
   "goal_frozen": true,
-  "last_update": "2026-09-30T13:09:22+00:00",
+  "last_update": "2026-09-30T13:37:16+00:00",
   "dataset_ready": true,
   "DANCETRACK_ROOT": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset",
   "dataset_discovery_ref": "/data3/liuyeqiang/InterMOT/outputs/N72R20/dataset_discovery.json",
   "download_required": false,
-  "sam3_checkpoint_status": "missing_locally_and_requires_authenticated_official_access",
+  "sam3_checkpoint_status": "present_sha256_verified_loader_smoke_passed",
   "cleanup_performed": false,
   "software_verification": {
     "targeted": "16 passed",
@@ -24,9 +24,9 @@
     "full_failure_class": "fixed TrackEval 12c8791 CLI parses SEQMAP_FILE as a one-element list but dataset loader expects a path; no N72R20 code or third_party code changed"
   },
   "bridge_implementation": {
-    "candidate_stream_worker": "prepared_not_run",
+    "candidate_stream_worker": "train_smoke_complete_dancetrack0001_0002_only",
     "candidate_identity_matcher": "prepared_not_run; unit-tested lightweight connector",
-    "identity_bridge_evaluator": "prepared_not_run",
+    "identity_bridge_evaluator": "not_run_by_scope_after_train_smoke",
     "identity_bridge_aggregator": "prepared_not_run",
     "streaming_val_fallback": "prepared_not_run",
     "confirmation_threshold_freezer": "prepared_not_run",
@@ -36,7 +36,10 @@
     "val_tuning_used": false
   },
   "completion_audit_ref": "docs/N72R20_COMPLETION_AUDIT.md",
-  "completion_audit_status": "BLOCKED_EXTERNAL_SAM3_CHECKPOINT",
+  "completion_audit_status": "BLOCKED_VAL_NOT_AUTHORIZED",
+  "checkpoint_loader_smoke_ref": "outputs/N72R20/checkpoint_loader_smoke.json",
+  "train_smoke_report_ref": "outputs/N72R20/smoke_report.md",
+  "train_smoke_decision_ref": "outputs/N72R20/N72R20_SMOKE_DECISION.md",
   "history_context_ref": "outputs/N72R20/history_context.md",
   "module_reuse_audit_ref": "outputs/N72R20/module_reuse_audit.md"
 }

@@ -1,10 +1,10 @@
 {
   "stage": "N72R20",
-  "captured_at_utc": "2026-09-30T13:09:22+00:00",
+  "captured_at_utc": "2026-09-30T13:37:16+00:00",
   "final_goal_ref": "outputs/N72R20/FINAL_GOAL.json",
   "central_question": "Can one human initialization be recognized reliably in future real SAM3 candidates?",
   "central_question_formal": "Can a single human identity initialization, together with the frozen learned identity memory from N72R18, reliably recover and maintain the same identity from a real SAM3 candidate stream over future frames?",
-  "overall_status": "BLOCKED_EXTERNAL_SAM3_CHECKPOINT",
+  "overall_status": "BLOCKED_VAL_NOT_AUTHORIZED",
   "final_scientific_decision": null,
   "next_interactive_mot_stage_authorized": false,
   "requirements": {
@@ -22,14 +22,14 @@
       "evidence": "outputs/N72R20/asset_manifest.json"
     },
     "real_sam3_checkpoint": {
-      "status": "BLOCKED_EXTERNAL",
-      "evidence": "outputs/N72R20/checkpoint_access_audit.json",
-      "detail": "sam3.1_multiplex.pt not found locally; NAS path is not visible; no authenticated official access"
+      "status": "VERIFIED_SHA256_AND_LOADER_SMOKE",
+      "evidence": "outputs/N72R20/checkpoint_access_audit.json and outputs/N72R20/checkpoint_loader_smoke.json",
+      "detail": "3,502,755,717 bytes; SHA256 0567debeec80ba4ac6369540c6c248025283cb3ff2b92827509e57e2b3541cb6; pinned multiplex loader constructed successfully"
     },
     "candidate_stream_smoke": {
-      "status": "NOT_EXECUTED",
-      "evidence": "outputs/N72R20/stage_status.json",
-      "detail": "requires real SAM3 checkpoint"
+      "status": "PASS_TRAIN_ONLY_TWO_SEQUENCE_SMOKE",
+      "evidence": "outputs/N72R20/candidate_storage_profile.json, outputs/N72R20/smoke_report.md",
+      "detail": "dancetrack0001/0002, 160 frames each, 2,629 candidates total; no GT runtime input"
     },
     "identity_bridge_and_gate_code": {
       "status": "PREPARED_NOT_EXECUTED",
@@ -48,8 +48,8 @@
       "evidence": null
     },
     "frozen_n72r20_decision": {
-      "status": "NOT_ISSUED",
-      "evidence": null
+      "status": "NOT_ISSUED_VAL_NOT_AUTHORIZED",
+      "evidence": "outputs/N72R20/N72R20_SMOKE_DECISION.md"
     },
     "downstream_mot_work": {
       "status": "CORRECTLY_NOT_STARTED",
@@ -60,5 +60,5 @@
       "evidence": "238 passed, 4 failed; all four are the fixed TrackEval SEQMAP_FILE list/path defect"
     }
   },
-  "required_external_change": "Place or authenticate one official SHA-verifiable sam3.1_multiplex.pt checkpoint, then rerun the checkpoint audit before train smoke."
+  "required_next_authorization": "Explicit authorization for frozen DanceTrack val; no val/MOT/association work is authorized by this task."
 }

@@ -1,0 +1,25 @@
+{
+  "stage": "N72R20",
+  "status": "PASS_LOADER_CONSTRUCTED_WITH_EXPECTED_NONSTRICT_WARNINGS",
+  "checkpoint_path": "/data3/liuyeqiang/InterMOT_N72R20_assets/checkpoints/sam3.1_multiplex.pt",
+  "checkpoint_source": "https://huggingface.co/AEmotionStudio/sam3.1/resolve/main/sam3.1_multiplex.pt",
+  "checkpoint_bytes": 3502755717,
+  "checkpoint_sha256": "0567debeec80ba4ac6369540c6c248025283cb3ff2b92827509e57e2b3541cb6",
+  "pinned_sam3_commit": "4cbac146c1b5a1e3a7f5c6a894901090b4dfd65b",
+  "loader": "sam3_intermot.backend.sam3_backend.Sam3Backend._ensure_model",
+  "cuda_visible_devices": "1",
+  "gpu": "NVIDIA A100-SXM4-40GB",
+  "load_seconds": 25.19,
+  "peak_memory_allocated_bytes": 3926040576,
+  "model_type": "Sam3MultiplexTrackingWithInteractivity",
+  "is_multiplex": true,
+  "strict_state_dict_loading": false,
+  "unexpected_keys_observed": false,
+  "missing_key_warning": {
+    "present": true,
+    "classification": "pinned multiplex builder non-strict nested tracker load plus 64 derived RoPE buffers; builder returned a multiplex model"
+  },
+  "video_session_started": false,
+  "runtime_future_gt_used": false,
+  "runtime_gt_read": false
+}

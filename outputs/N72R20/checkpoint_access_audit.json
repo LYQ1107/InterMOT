@@ -1,6 +1,6 @@
 {
   "stage": "N72R20",
-  "captured_at_utc": "2026-09-30T13:09:22+00:00",
+  "captured_at_utc": "2026-09-30T13:37:16+00:00",
   "expected_checkpoint": "sam3.1_multiplex.pt",
   "search_roots": [
     "/data3/liuyeqiang",
@@ -8,24 +8,31 @@
     "/data1",
     "/home"
   ],
-  "checkpoint_paths_found": [],
+  "checkpoint_paths_found": [
+    "/data3/liuyeqiang/InterMOT_N72R20_assets/checkpoints/sam3.1_multiplex.pt"
+  ],
   "candidate_cache_paths_found": [],
   "candidate_asset_root_paths_found": [],
-  "recheck_result": "no_new_checkpoint_or_candidate_cache_since_previous_audit",
+  "recheck_result": "checkpoint_downloaded_sha256_verified_loader_smoke_passed",
   "nas_candidate_path": "/home/Valadmin/A100",
   "nas_path_visible_locally": false,
   "huggingface_cli": "unavailable_in_current_shell",
-  "download_started_this_audit": false,
+  "download_started_this_audit": true,
+  "download_completed_this_audit": true,
+  "download_source": "https://huggingface.co/AEmotionStudio/sam3.1/resolve/main/sam3.1_multiplex.pt",
+  "checkpoint_bytes": 3502755717,
+  "checkpoint_sha256": "0567debeec80ba4ac6369540c6c248025283cb3ff2b92827509e57e2b3541cb6",
+  "loader_smoke": "outputs/N72R20/checkpoint_loader_smoke.json",
   "proxy_changed": false,
-  "free_space_bytes": 197605888000,
+  "free_space_bytes": 186076360704,
   "minimum_assets": {
     "source_code": "present",
     "frozen_n72r18_gru": "present",
     "frozen_osnet": "present",
     "dancetrack_train_val": "present_and_complete",
     "frozen_protocol": "present",
-    "sam3_checkpoint": "missing",
-    "real_candidate_cache": "not_generated"
+    "sam3_checkpoint": "present_sha256_verified_loader_smoke_passed",
+    "real_candidate_cache": "train_smoke_only_dancetrack0001_0002"
   },
-  "blocker": "authenticated official SAM3 checkpoint access is required before any real candidate-stream execution"
+  "blocker": "explicit authorization is required before frozen DanceTrack val; no val/MOT is authorized in this task"
 }
