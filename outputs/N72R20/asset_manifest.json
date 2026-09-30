@@ -1,0 +1,108 @@
+{
+  "stage": "N72R20",
+  "final_goal_ref": "outputs/N72R20/FINAL_GOAL.json",
+  "asset_lineage": "N72R16_NEW_ASSET_LINEAGE",
+  "DANCETRACK_ROOT": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset",
+  "canonical_asset_root": "/data3/liuyeqiang/InterMOT_N72R20_assets/",
+  "canonical_asset_root_exists": false,
+  "dataset": {
+    "root": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset",
+    "train_sequences": 40,
+    "val_sequences": 25,
+    "train_bytes": 6988647747,
+    "val_bytes": 4289202609,
+    "discovery_file": "/data3/liuyeqiang/InterMOT/outputs/N72R20/dataset_discovery.json",
+    "discovery_sha256": "ed009b27459ea9b3e578676fcf5ccfb573274bfd5dc5b8bd353fabd0efa58d38",
+    "copied": false,
+    "downloaded_this_stage": false,
+    "test_present_or_used": false
+  },
+  "frozen_identity_assets": {
+    "n72r18_gru": {
+      "role": "frozen N72R18 identity memory",
+      "path": "/data3/liuyeqiang/InterMOT/outputs/N72R18/checkpoints/identity_memory_gru.pt",
+      "exists": true,
+      "bytes": 6309333,
+      "sha256": "94ba9c44e177b254ee54984195e839f37c78a648c010ffc723dd3f1d553976a2"
+    },
+    "osnet_x1_0_market1501": {
+      "role": "frozen N72R16 OSNet crop encoder",
+      "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/checkpoints/osnet_x1_0_market1501.pth",
+      "exists": true,
+      "bytes": 10399605,
+      "sha256": "2809d3227f7d078f6045f7feb874a34d0684f0e0057b264b99adccf7d4519154"
+    }
+  },
+  "sam3_checkpoint": {
+    "expected_name": "sam3.1_multiplex.pt",
+    "path": null,
+    "exists": false,
+    "status": "not_found_locally; official Hugging Face access requires authenticated checkpoint access",
+    "downloaded_this_stage": false
+  },
+  "historical_source_archives": [
+    {
+      "name": "train1.zip",
+      "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/archives/train1.zip",
+      "exists": false,
+      "bytes": 3606300312,
+      "sha256": "70a66f10d8d71df94d03059fc4f966cb719e61e8e7136d2886fd6345ed1ff6dd",
+      "sha256_matches_previous_manifest": true,
+      "status": "historical_verified_source_archive; not re-downloaded"
+    },
+    {
+      "name": "train2.zip",
+      "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/archives/train2.zip",
+      "exists": false,
+      "bytes": 3299320948,
+      "sha256": "f676e8c6ac2a2d7566f1702d588311eafd4c90cc5416bb70f36a192d1e365af4",
+      "sha256_matches_previous_manifest": true,
+      "status": "historical_verified_source_archive; not re-downloaded"
+    },
+    {
+      "name": "val.zip",
+      "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/archives/val.zip",
+      "exists": false,
+      "bytes": 4209785614,
+      "sha256": "90ba30973761ce0b81a9654c11086d87537392475ac8bc666d842e645641277c",
+      "sha256_matches_previous_manifest": true,
+      "status": "historical_verified_source_archive; not re-downloaded"
+    }
+  ],
+  "minimum_assets": {
+    "source_code": {
+      "status": "present",
+      "path": "/data3/liuyeqiang/InterMOT"
+    },
+    "base_identity_memory": {
+      "status": "present",
+      "path": "/data3/liuyeqiang/InterMOT/outputs/N72R18/checkpoints/identity_memory_gru.pt"
+    },
+    "osnet_encoder": {
+      "status": "present",
+      "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/checkpoints/osnet_x1_0_market1501.pth"
+    },
+    "dancetrack_train_val": {
+      "status": "present_and_complete",
+      "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset"
+    },
+    "frozen_protocol": {
+      "status": "present",
+      "path": "/data3/liuyeqiang/InterMOT/outputs/N72R20/protocol.json"
+    },
+    "sam3_checkpoint": {
+      "status": "missing",
+      "path": null
+    }
+  },
+  "download_policy": {
+    "dataset_download_performed": false,
+    "proxy_used": false,
+    "test_downloaded": false,
+    "duplicate_dataset_created": false,
+    "historical_baidu_status": "BAIDU_HEADLESS_VERIFICATION_BLOCKED during the N72R16 attempt; no N72R20 Baidu attempt was needed because the complete lineage was reused",
+    "metadata_compression_command": "zstd (system executable; streaming worker requirement)"
+  },
+  "captured_at_utc": "2026-09-30T07:11:33.918939+00:00",
+  "free_space_bytes_at_capture": 200298156032
+}

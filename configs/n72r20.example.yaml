@@ -1,0 +1,33 @@
+# N72R20 path-portable configuration template.
+# Resolve the dataset and checkpoint through the environment or CLI; do not
+# replace these with machine-specific paths in source code.
+stage: N72R20
+final_goal_ref: outputs/N72R20/FINAL_GOAL.json
+asset_manifest: outputs/N72R20/asset_manifest.json
+
+dataset:
+  root_env: DANCETRACK_ROOT
+  split: train
+  smoke_sequences_from_protocol: true
+  smoke_frame_count: 160
+  val_is_frozen_evaluation_only: true
+
+sam3:
+  checkpoint_env: SAM3_CHECKPOINT
+  max_num_objects: 16
+  multiplex_count: 16
+  output_prob_thresh: 0.30
+  compile: false
+  warm_up: false
+  use_fa3: false
+  use_rope_real: true
+  trim_past_non_cond_mem_for_eval: false
+
+candidate_storage:
+  asset_root_env: N72R20_ASSET_ROOT
+  metadata_format: jsonl.zst
+  embedding_dtype: float16
+  embedding_dim: 512
+  save_dense_masks: false
+  save_crop_images: false
+  save_raw_feature_maps: false

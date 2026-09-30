@@ -1,0 +1,92 @@
+{
+  "stage": "N72R20",
+  "final_goal_ref": "outputs/N72R20/FINAL_GOAL.json",
+  "dataset_root": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset",
+  "DANCETRACK_ROOT": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset",
+  "dataset_scope": {
+    "train": "development_and_smoke_only",
+    "val": "frozen_final_evaluation_only",
+    "test": "forbidden"
+  },
+  "split_counts": {
+    "train": 40,
+    "val": 25
+  },
+  "train_dev_sequences": [
+    "dancetrack0001",
+    "dancetrack0002"
+  ],
+  "val_evaluation_sequences": [
+    "dancetrack0004",
+    "dancetrack0005",
+    "dancetrack0007",
+    "dancetrack0010",
+    "dancetrack0014",
+    "dancetrack0018",
+    "dancetrack0019",
+    "dancetrack0025",
+    "dancetrack0026",
+    "dancetrack0030",
+    "dancetrack0034",
+    "dancetrack0035",
+    "dancetrack0041",
+    "dancetrack0043",
+    "dancetrack0047",
+    "dancetrack0058",
+    "dancetrack0063",
+    "dancetrack0065",
+    "dancetrack0073",
+    "dancetrack0077",
+    "dancetrack0079",
+    "dancetrack0081",
+    "dancetrack0090",
+    "dancetrack0094",
+    "dancetrack0097"
+  ],
+  "anchor_rule": "For each sequence and identity, choose the earliest GT anchor frame whose next H100 contains at least 20 same-ID observations and at least one competing identity; selection uses no embedding or future similarity score.",
+  "anchor_source": "frozen N72R17 earliest eligible anchor; simulated_from_gt",
+  "interaction_source": "simulated_from_gt",
+  "future_gt_runtime_input": false,
+  "gt_use": "offline evaluation truth only: candidate availability, rank, discrimination, memory write and recovery",
+  "horizons": [
+    20,
+    50,
+    100
+  ],
+  "candidate_iou_threshold": 0.5,
+  "primary_comparison": "FROZEN_N72R18_GRU_VS_HUMAN_ANCHOR_ONLY_ON_IDENTICAL_REAL_SAM3_CANDIDATES",
+  "secondary_comparison": "FROZEN_N72R18_GRU_VS_EMA_0.90",
+  "memory_variants": [
+    "B0_HUMAN_ANCHOR_ONLY",
+    "B1_EMA_0.90_MACHINE_SELECTED_UPDATE",
+    "B2_FROZEN_N72R18_GRU_MACHINE_SELECTED_UPDATE",
+    "ORACLE_CORRECT_UPDATE_OFFLINE_ORACLE_DIAGNOSTIC"
+  ],
+  "update_diagnostic": [
+    "IMMEDIATE_UPDATE",
+    "2_FRAME_CONFIRMED_UPDATE"
+  ],
+  "val_tuning_allowed": false,
+  "paired_bootstrap": {
+    "unit": "sequence_cluster",
+    "replicates": 2000,
+    "seed": 72020
+  },
+  "protocol_sources": {
+    "train": {
+      "role": "frozen N72R17 train protocol",
+      "path": "/data3/liuyeqiang/InterMOT_N72R17_assets/outputs/N72R17/protocol_train.json",
+      "exists": true,
+      "bytes": 231791481,
+      "sha256": "4a659496fae61e09c5579838bfb7879ed8af3467e5abec43fb228a9e5d5f7941"
+    },
+    "val": {
+      "role": "frozen N72R17 val protocol",
+      "path": "/data3/liuyeqiang/InterMOT_N72R17_assets/outputs/N72R17/protocol_val.json",
+      "exists": true,
+      "bytes": 98495599,
+      "sha256": "5b6e82887eb2613a1b39fb171412894c06f01d8bd7b75696d9c2a9b000f3739c"
+    }
+  },
+  "test_downloaded": false
+}

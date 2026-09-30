@@ -1,0 +1,23 @@
+{
+  "stage": "N72R20",
+  "final_goal_ref": "outputs/N72R20/FINAL_GOAL.json",
+  "goal": "Human-Initialized Identity Memory in Real Candidate Streams",
+  "central_question": "Can a single human identity initialization, together with the frozen learned identity memory from N72R18, reliably recover and maintain the same identity from a real SAM3 candidate stream over future frames?",
+  "status": "DATASET_READY_SAM3_CHECKPOINT_MISSING",
+  "current_stage": "STAGE_2_SAM3_CHECKPOINT_AUDIT",
+  "next_association_stage_authorized": false,
+  "dataset_policy": "DanceTrack train and val only; DanceTrack test and all other datasets are out of scope.",
+  "goal_frozen": true,
+  "last_update": "2026-09-30T07:11:33.918939+00:00",
+  "dataset_ready": true,
+  "DANCETRACK_ROOT": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset",
+  "dataset_discovery_ref": "/data3/liuyeqiang/InterMOT/outputs/N72R20/dataset_discovery.json",
+  "download_required": false,
+  "sam3_checkpoint_status": "missing_locally_and_requires_authenticated_official_access",
+  "cleanup_performed": false,
+  "software_verification": {
+    "targeted": "16 passed",
+    "full": "225 passed, 4 failed",
+    "full_failure_class": "fixed TrackEval 12c8791 CLI parses SEQMAP_FILE as a one-element list but dataset loader expects a path; no N72R20 code or third_party code changed"
+  }
+}

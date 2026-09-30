@@ -1,0 +1,18 @@
+{
+  "stage": "N72R20",
+  "goal": "Human-Initialized Identity Memory in Real Candidate Streams",
+  "central_question": "Can a single human identity initialization, together with the frozen learned identity memory from N72R18, reliably recover and maintain the same identity from a real SAM3 candidate stream over future frames?",
+  "central_question_zh": "一次人工身份确认后，N72R18 已验证的长期身份记忆，能否在真实 SAM3 候选流中持续找到并保持同一个人的身份？",
+  "primary_comparison": "FROZEN_N72R18_GRU_VS_HUMAN_ANCHOR_ONLY_ON_IDENTICAL_REAL_SAM3_CANDIDATES",
+  "dataset_scope": {
+    "allowed": ["DanceTrack train", "DanceTrack val"],
+    "forbidden": ["DanceTrack test", "MOT17", "MOT20", "BDD100K", "TAO", "SportsMOT", "CrowdHuman", "other ReID datasets"]
+  },
+  "horizons": [20, 50, 100],
+  "interaction_source": "simulated_from_gt",
+  "sam3_required": true,
+  "mot_evaluation_required": false,
+  "training_required": false,
+  "next_association_stage_authorized": false,
+  "goal_frozen": true
+}

@@ -1,0 +1,16 @@
+{
+  "stage": "N72R20",
+  "policy": "Do not delete or overwrite listed assets; verify provenance before any cleanup.",
+  "protected": [
+    {"path": "/data3/liuyeqiang/InterMOT", "reason": "InterMOT repository", "must_preserve": true},
+    {"path": "/data3/liuyeqiang/InterMOT/third_party/sam3", "reason": "SAM3 submodule", "must_preserve": true},
+    {"path": "/data3/liuyeqiang/InterMOT_N72R16_assets/outputs/N72R16/embeddings_train", "reason": "frozen N72R16 train embeddings", "must_preserve": true},
+    {"path": "/data3/liuyeqiang/InterMOT_N72R16_assets/outputs/N72R16/embeddings_val", "reason": "frozen N72R16 val embeddings", "must_preserve": true},
+    {"path": "/data3/liuyeqiang/InterMOT_N72R17_assets/outputs/N72R17/protocol_train.json", "reason": "frozen N72R17 train protocol", "must_preserve": true},
+    {"path": "/data3/liuyeqiang/InterMOT_N72R17_assets/outputs/N72R17/protocol_val.json", "reason": "frozen N72R17 val protocol", "must_preserve": true},
+    {"path": "/data3/liuyeqiang/InterMOT_N72R18_assets/outputs/N72R18/identity_memory_gru.pt", "reason": "frozen N72R18 identity memory", "must_preserve": true},
+    {"path": "/data3/liuyeqiang/InterMOT_N72R20_assets", "reason": "N72R20 canonical assets if present", "must_preserve": true},
+    {"path": "DanceTrack train and val", "reason": "raw images and GT required by N72R20", "must_preserve": true},
+    {"path": "sam3.1_multiplex.pt", "reason": "reuse any SHA-verified checkpoint; no duplicate download", "must_preserve": true}
+  ]
+}

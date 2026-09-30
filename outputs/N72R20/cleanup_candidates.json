@@ -1,0 +1,30 @@
+{
+  "stage": "N72R20",
+  "cleanup_performed": false,
+  "candidates": [
+    {
+      "path": "/data3/liuyeqiang/.cache/pip",
+      "size_bytes": 2598804445,
+      "reason": "pip cache is not required to reuse the already installed N72R20 environment",
+      "reproducible": true,
+      "protected": false,
+      "proposed_action": "retain_this_turn; no cleanup needed while free space is above 100 GiB; require explicit approval before deletion"
+    },
+    {
+      "path": "/data3/liuyeqiang/InterMOT/outputs/N72R19R1",
+      "size_bytes": 10569801455,
+      "reason": "historical N72R19R1 result and evidence",
+      "reproducible": false,
+      "protected": true,
+      "proposed_action": "retain; protected by N72R20 PROTECTED_ASSETS"
+    },
+    {
+      "path": "/data3/liuyeqiang/InterMOT_N72R16_assets",
+      "size_bytes": 12537819346,
+      "reason": "contains the reused raw dataset, frozen encoder and historical manifest",
+      "reproducible": false,
+      "protected": true,
+      "proposed_action": "retain; protected by N72R20 PROTECTED_ASSETS"
+    }
+  ]
+}
