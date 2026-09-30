@@ -2,6 +2,10 @@
 
 This audit is governed by [`outputs/N72R20/FINAL_GOAL.json`](/data3/liuyeqiang/InterMOT/outputs/N72R20/FINAL_GOAL.json).
 
+FINAL GOAL: **Human-Initialized Identity Memory in Real Candidate Streams**
+
+CENTRAL QUESTION: **Can one human initialization be recognized reliably in future real SAM3 candidates?**
+
 ## Current conclusion
 
 `BLOCKED_EXTERNAL_SAM3_CHECKPOINT`
@@ -19,11 +23,12 @@ The scientific decision is intentionally unissued. The required official `sam3.1
 | Official SAM3 checkpoint | `checkpoint_access_audit.json` | Blocked: missing external asset |
 | Two-sequence real SAM3 smoke | `stage_status.json` | Not executed |
 | Candidate coverage gate | No candidate cache | Not measured |
-| B0/B1/B2/Oracle bridge | N72R20 scripts and 9 bridge tests | Prepared, not executed on real stream |
+| B0/B1/B2/Oracle bridge | N72R20 scripts and 13 bridge/connector tests | Prepared, not executed on real stream |
+| Candidate-to-identity connector | `sam3_intermot/identity_memory/candidate_identity_matcher.py` and targeted unit tests | Prepared and unit-tested; no real stream execution |
 | Frozen val H20/H50/H100 decision | No val records | Not issued |
 | Downstream MOT/TrackEval | Goal and stage status | Correctly not started |
 
-The full software suite is `234 passed, 4 failed`; all four failures are the known fixed TrackEval `SEQMAP_FILE` list/path defect and are outside N72R20 runtime code.
+The full software suite is `238 passed, 4 failed`; all four failures are the known fixed TrackEval `SEQMAP_FILE` list/path defect and are outside N72R20 runtime code.
 
 ## Only required external change
 

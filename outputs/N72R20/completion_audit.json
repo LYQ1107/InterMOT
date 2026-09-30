@@ -1,8 +1,9 @@
 {
   "stage": "N72R20",
-  "captured_at_utc": "2026-09-30T07:59:29.126627+00:00",
+  "captured_at_utc": "2026-09-30T13:09:22+00:00",
   "final_goal_ref": "outputs/N72R20/FINAL_GOAL.json",
-  "central_question": "Can a single human identity initialization, together with the frozen learned identity memory from N72R18, reliably recover and maintain the same identity from a real SAM3 candidate stream over future frames?",
+  "central_question": "Can one human initialization be recognized reliably in future real SAM3 candidates?",
+  "central_question_formal": "Can a single human identity initialization, together with the frozen learned identity memory from N72R18, reliably recover and maintain the same identity from a real SAM3 candidate stream over future frames?",
   "overall_status": "BLOCKED_EXTERNAL_SAM3_CHECKPOINT",
   "final_scientific_decision": null,
   "next_interactive_mot_stage_authorized": false,
@@ -34,6 +35,14 @@
       "status": "PREPARED_NOT_EXECUTED",
       "evidence": "scripts/n72r20_identity_bridge_eval.py, scripts/n72r20_aggregate_identity_bridge.py, scripts/n72r20_run_streaming_val_bridge.py"
     },
+    "candidate_identity_matcher": {
+      "status": "PREPARED_AND_UNIT_TESTED_NOT_EXECUTED",
+      "evidence": "sam3_intermot/identity_memory/candidate_identity_matcher.py and tests/test_n72r20_candidate_identity_matcher.py"
+    },
+    "historical_context_and_reuse_audit": {
+      "status": "VERIFIED",
+      "evidence": "outputs/N72R20/history_context.md and outputs/N72R20/module_reuse_audit.md"
+    },
     "val_candidate_coverage_and_identity_metrics": {
       "status": "NOT_MEASURED",
       "evidence": null
@@ -48,7 +57,7 @@
     },
     "software_regression": {
       "status": "VERIFIED_WITH_KNOWN_THIRD_PARTY_FAILURES",
-      "evidence": "234 passed, 4 failed; all four are the fixed TrackEval SEQMAP_FILE list/path defect"
+      "evidence": "238 passed, 4 failed; all four are the fixed TrackEval SEQMAP_FILE list/path defect"
     }
   },
   "required_external_change": "Place or authenticate one official SHA-verifiable sam3.1_multiplex.pt checkpoint, then rerun the checkpoint audit before train smoke."

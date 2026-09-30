@@ -2,7 +2,9 @@
 
 Final Goal: `outputs/N72R20/FINAL_GOAL.json`
 
-Central question: Can a single human identity initialization, together with the frozen learned identity memory from N72R18, reliably recover and maintain the same identity from a real SAM3 candidate stream over future frames?
+Central question: Can one human initialization be recognized reliably in future real SAM3 candidates?
+
+Formal question: Can a single human identity initialization, together with the frozen learned identity memory from N72R18, reliably recover and maintain the same identity from a real SAM3 candidate stream over future frames?
 
 Audit status: completed before SAM3 execution. The local official `sam3.1_multiplex.pt` checkpoint is not present and the local Hugging Face client is not authenticated, so no candidate stream was started.
 
@@ -23,6 +25,7 @@ Audit status: completed before SAM3 execution. The local official `sam3.1_multip
 | `sam3_intermot/identity_probe/dataset.py` | Reuse sequence/GT parsing and validation concepts | The frozen N72R17 protocol and the N72R20 asset manifest are the authority for paths and anchors. GT is evaluation truth only after runtime rows are produced. |
 | `sam3_intermot/identity_memory/selective.py::load_frozen_n72r18_gru` | Reuse strict frozen N72R18 GRU loader | The N72R20 core comparison is frozen GRU versus immutable human-anchor baseline. N72R19/R1 selector models are not promoted into this stage. |
 | `sam3_intermot/identity_memory/updater.py` | Reuse the already serialized GRU architecture/state contract | No new memory architecture or training is authorized. |
+| `sam3_intermot/identity_memory/candidate_identity_matcher.py` | Use the new thin candidate-to-identity connector for frozen feature scoring/ranking | It is not a selector, tracker, SAM3 modification, or training path. |
 
 ## N72R20 causal contract
 

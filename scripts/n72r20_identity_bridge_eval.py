@@ -27,6 +27,8 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from sam3_intermot.identity_memory.candidate_identity_matcher import CandidateIdentityMatcher
+
 HORIZONS = (20, 50, 100)
 TIME_BINS = ((1, 5, "1_5"), (6, 20, "6_20"), (21, 50, "21_50"), (51, 100, "51_100"))
 METHODS = (
@@ -37,6 +39,7 @@ METHODS = (
 )
 IOU_THRESHOLD = 0.50
 CONFIRMATION_CONTINUITY_IOU = 0.10
+CANDIDATE_IDENTITY_MATCHER = CandidateIdentityMatcher()
 
 
 def normalize(vector: np.ndarray) -> np.ndarray:
@@ -242,7 +245,11 @@ def _method_record(
         and any(box_iou_xyxy(candidate_image_box(row), box) >= IOU_THRESHOLD for box in competitor_boxes)
     ]
     features = np.asarray([row["_feature"] for row in rows], dtype=np.float32) if rows else np.empty((0, 512), dtype=np.float32)
-    scores = features @ normalize(state) if len(rows) else np.empty((0,), dtype=np.float32)
+    scores = (
+        CANDIDATE_IDENTITY_MATCHER.score_candidates(state, features).detach().cpu().numpy()
+        if len(rows)
+        else np.empty((0,), dtype=np.float32)
+    )
     selected_index = _top_index(scores) if len(rows) else None
     update_index = selected_index
     update_source = "machine_selected_top1" if selected_index is not None else None

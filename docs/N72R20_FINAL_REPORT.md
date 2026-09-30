@@ -1,4 +1,6 @@
-Does the learned identity memory transfer from offline GT replay to a real SAM3 candidate stream after only one human initialization?
+FINAL GOAL: **Human-Initialized Identity Memory in Real Candidate Streams**
+
+CENTRAL QUESTION: **Can one human initialization be recognized reliably in future real SAM3 candidates?**
 
 # InterMOT N72R20 Final Report
 
@@ -17,13 +19,16 @@ The executable bridge is prepared but not run: the worker generates a GT-free pe
 ## Frozen goal
 
 - Goal: Human-Initialized Identity Memory in Real Candidate Streams.
-- Central question: Can a single human identity initialization, together with the frozen learned identity memory from N72R18, reliably recover and maintain the same identity from a real SAM3 candidate stream over future frames?
+- Central question: Can one human initialization be recognized reliably in future real SAM3 candidates?
+- Formal question: Can a single human identity initialization, together with the frozen learned identity memory from N72R18, reliably recover and maintain the same identity from a real SAM3 candidate stream over future frames?
 - Primary comparison: Frozen N72R18 GRU versus Human Anchor Only on identical real SAM3 candidates.
 - Horizons: H20, H50, H100.
 - Interaction source: `simulated_from_gt`; this is not real-human evidence.
 - Next interactive MOT stage: not authorized.
 - Memory variants: B0 human anchor only, B1 EMA(0.90), frozen N72R18 GRU B2, and explicitly labeled `ORACLE_CORRECT_UPDATE_OFFLINE_ORACLE_DIAGNOSTIC`.
 - Update diagnostic: immediate machine update versus 2-frame confirmation. The confirmation margin must be frozen from train records before val; no val threshold tuning is allowed.
+
+Historical context is recorded in [`outputs/N72R20/history_context.md`](/data3/liuyeqiang/InterMOT/outputs/N72R20/history_context.md). The module boundary and reuse decisions are recorded in [`outputs/N72R20/module_reuse_audit.md`](/data3/liuyeqiang/InterMOT/outputs/N72R20/module_reuse_audit.md).
 
 ## Assets resolved
 
@@ -45,8 +50,8 @@ The missing threshold manifest is a downstream dependency, not an independent bl
 ## Software verification
 
 - Targeted N72R18/R1/backend checks: `16 passed`.
-- N72R20 bridge and aggregation tests: `9 passed`.
-- Full suite with the project `.venv` on PATH: `234 passed, 4 failed`.
+- N72R20 bridge, aggregation, and candidate-connector tests: `13 passed`.
+- Full suite with the project `.venv` on PATH: `238 passed, 4 failed`.
 - All four failures reach the same fixed TrackEval `12c8791` interface defect: the CLI supplies `SEQMAP_FILE` as a one-element list while `mot_challenge_2d_box.py` calls `os.path.isfile` on it. This is a third-party/legacy test infrastructure issue, not an N72R20 dataset or research-code failure. The prohibited TrackEval/full-MOT path was not modified.
 
 ## Software prepared but not executed
