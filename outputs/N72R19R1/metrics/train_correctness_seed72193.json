@@ -1,0 +1,244 @@
+{
+  "checkpoint": "/data3/liuyeqiang/InterMOT/outputs/N72R19R1/checkpoints/selector_correctness_seed72193.pt",
+  "config": {
+    "base_checkpoint": "/data3/liuyeqiang/InterMOT/outputs/N72R18/checkpoints/identity_memory_gru.pt",
+    "central_question": "Can selective observation updates preserve the strong learned identity memory while preventing corrupted observations from damaging future identity recognition?",
+    "epochs_per_phase": 3,
+    "feature_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "feature_names": [
+      "memory_similarity",
+      "anchor_similarity",
+      "assigned_score",
+      "best_competitor_score",
+      "competition_margin",
+      "top1_top2_margin",
+      "assigned_rank_normalized",
+      "competition_entropy",
+      "prospective_state_change",
+      "anchor_drift_candidate",
+      "temporal_gap_normalized",
+      "memory_age_normalized",
+      "recent_state_stability"
+    ],
+    "goal": "Selective Identity Memory Update",
+    "hidden_dims": [
+      64,
+      32
+    ],
+    "lambda_preservation": 0.1,
+    "lambda_selection": 0.5,
+    "lambda_utility": 1.0,
+    "learning_rate": 0.001,
+    "manifest": "/data3/liuyeqiang/InterMOT/outputs/N72R19R1/corruption_manifest.json",
+    "mode": "correctness",
+    "parameter_count": 3009,
+    "run_name": "correctness",
+    "seed": 72193,
+    "stage": "N72R19R1",
+    "train_protocol": "/data3/liuyeqiang/InterMOT_N72R17_assets/outputs/N72R17/protocol_train.json",
+    "train_sequences": [
+      "dancetrack0006",
+      "dancetrack0008",
+      "dancetrack0012",
+      "dancetrack0015",
+      "dancetrack0016",
+      "dancetrack0020",
+      "dancetrack0027",
+      "dancetrack0029",
+      "dancetrack0032",
+      "dancetrack0033",
+      "dancetrack0037",
+      "dancetrack0044",
+      "dancetrack0045",
+      "dancetrack0049",
+      "dancetrack0051",
+      "dancetrack0052",
+      "dancetrack0053",
+      "dancetrack0055",
+      "dancetrack0061",
+      "dancetrack0066",
+      "dancetrack0068",
+      "dancetrack0069",
+      "dancetrack0074",
+      "dancetrack0075",
+      "dancetrack0080",
+      "dancetrack0082",
+      "dancetrack0083",
+      "dancetrack0086",
+      "dancetrack0087",
+      "dancetrack0096",
+      "dancetrack0098",
+      "dancetrack0099"
+    ],
+    "uses_corruption_label_as_inference_feature": false,
+    "uses_future_utility_as_inference_feature": false,
+    "utility_scale": 0.05,
+    "weight_decay": 0.0001
+  },
+  "history": [
+    {
+      "batches": 23.0,
+      "conditions": [
+        "clean_0p00",
+        "wrong_identity_0p10",
+        "hard_negative_0p10"
+      ],
+      "epoch": 1,
+      "loss": 28.555658506310504,
+      "phase": 1,
+      "preservation_count": 32960.0,
+      "selection_count": 35421.0,
+      "utility_count": 0.0
+    },
+    {
+      "batches": 23.0,
+      "conditions": [
+        "clean_0p00",
+        "wrong_identity_0p10",
+        "hard_negative_0p10"
+      ],
+      "epoch": 2,
+      "loss": 18.751283977342688,
+      "phase": 1,
+      "preservation_count": 33071.0,
+      "selection_count": 35421.0,
+      "utility_count": 0.0
+    },
+    {
+      "batches": 23.0,
+      "conditions": [
+        "clean_0p00",
+        "wrong_identity_0p10",
+        "hard_negative_0p10"
+      ],
+      "epoch": 3,
+      "loss": 12.134755549223527,
+      "phase": 1,
+      "preservation_count": 33103.0,
+      "selection_count": 35421.0,
+      "utility_count": 0.0
+    },
+    {
+      "batches": 23.0,
+      "conditions": [
+        "clean_0p00",
+        "wrong_identity_0p10",
+        "hard_negative_0p10",
+        "wrong_identity_0p20",
+        "hard_negative_0p20",
+        "wrong_identity_0p30",
+        "hard_negative_0p30"
+      ],
+      "epoch": 4,
+      "loss": 23.690763991812002,
+      "phase": 2,
+      "preservation_count": 29097.0,
+      "selection_count": 35421.0,
+      "utility_count": 0.0
+    },
+    {
+      "batches": 23.0,
+      "conditions": [
+        "clean_0p00",
+        "wrong_identity_0p10",
+        "hard_negative_0p10",
+        "wrong_identity_0p20",
+        "hard_negative_0p20",
+        "wrong_identity_0p30",
+        "hard_negative_0p30"
+      ],
+      "epoch": 5,
+      "loss": 20.86464017370473,
+      "phase": 2,
+      "preservation_count": 28915.0,
+      "selection_count": 35421.0,
+      "utility_count": 0.0
+    },
+    {
+      "batches": 23.0,
+      "conditions": [
+        "clean_0p00",
+        "wrong_identity_0p10",
+        "hard_negative_0p10",
+        "wrong_identity_0p20",
+        "hard_negative_0p20",
+        "wrong_identity_0p30",
+        "hard_negative_0p30"
+      ],
+      "epoch": 6,
+      "loss": 18.035040212714154,
+      "phase": 2,
+      "preservation_count": 29341.0,
+      "selection_count": 35421.0,
+      "utility_count": 0.0
+    },
+    {
+      "batches": 23.0,
+      "conditions": [
+        "clean_0p00",
+        "wrong_identity_0p10",
+        "hard_negative_0p10",
+        "wrong_identity_0p20",
+        "hard_negative_0p20",
+        "wrong_identity_0p30",
+        "hard_negative_0p30"
+      ],
+      "epoch": 7,
+      "loss": 14.73562358773273,
+      "phase": 3,
+      "preservation_count": 29615.0,
+      "selection_count": 35421.0,
+      "utility_count": 0.0
+    },
+    {
+      "batches": 23.0,
+      "conditions": [
+        "clean_0p00",
+        "wrong_identity_0p10",
+        "hard_negative_0p10",
+        "wrong_identity_0p20",
+        "hard_negative_0p20",
+        "wrong_identity_0p30",
+        "hard_negative_0p30"
+      ],
+      "epoch": 8,
+      "loss": 12.973460249278856,
+      "phase": 3,
+      "preservation_count": 29559.0,
+      "selection_count": 35421.0,
+      "utility_count": 0.0
+    },
+    {
+      "batches": 23.0,
+      "conditions": [
+        "clean_0p00",
+        "wrong_identity_0p10",
+        "hard_negative_0p10",
+        "wrong_identity_0p20",
+        "hard_negative_0p20",
+        "wrong_identity_0p30",
+        "hard_negative_0p30"
+      ],
+      "epoch": 9,
+      "loss": 12.062480397846388,
+      "phase": 3,
+      "preservation_count": 29296.0,
+      "selection_count": 35421.0,
+      "utility_count": 0.0
+    }
+  ]
+}

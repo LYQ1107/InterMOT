@@ -1,0 +1,42 @@
+{
+  "stage": "N72R19R1",
+  "goal_reference": "outputs/N72R19R1/FINAL_GOAL.json",
+  "goal": "Selective Identity Memory Update",
+  "central_question": "Can selective observation updates preserve the strong learned identity memory while preventing corrupted observations from damaging future identity recognition?",
+  "goal_frozen": true,
+  "base_memory": "frozen_N72R18_GRU",
+  "sam3_required": false,
+  "mot_required": false,
+  "new_encoder_training": false,
+  "next_candidate_stream_stage_authorized": false,
+  "next_association_stage_authorized": false,
+  "status": "COMPLETE_FAIL_CLEAN_PRESERVATION",
+  "preservation_gate": "PASS_B2_CLEAN_H100_0.9135832326",
+  "selector_training": {
+    "modes": ["correctness", "future_utility"],
+    "seeds": [72191, 72192, 72193],
+    "epochs_per_phase": 3,
+    "phase_count": 3,
+    "training_sequences": 32,
+    "validation_sequences_accessed": false
+  },
+  "dev_frozen_selection": {
+    "selector_threshold": 0.2,
+    "b3_similarity_threshold": 0.35,
+    "proposed_method": "B5_FUTURE_UTILITY_SELECTOR",
+    "proposed_seed": 72193,
+    "dev_primary_macro": 0.731404,
+    "dev_clean_h100": 0.971206
+  },
+  "final_decision": "FAIL_CLEAN_PRESERVATION",
+  "selective_identity_memory_validated": false,
+  "final_val_reference": "outputs/N72R19R1/metrics/final_val_all.json",
+  "final_result_reference": "outputs/N72R19R1/FINAL_RESULT.json",
+  "final_report_reference": "docs/N72R19R1_FINAL_REPORT.md",
+  "val_sequence_count": 25,
+  "val_bootstrap_reps": 2000,
+  "next_candidate_stream_stage_authorized": false,
+  "next_association_stage_authorized": false,
+  "stop_rule_applied": true,
+  "branch": "codex/n72r19r1-selective-memory-update"
+}

@@ -1,0 +1,27 @@
+{
+  "stage": "N72R19R1",
+  "goal": "Selective Identity Memory Update",
+  "goal_reference": "outputs/N72R19R1/FINAL_GOAL.json",
+  "test": "clean_preservation_gate",
+  "method": "B2_FROZEN_GRU",
+  "condition": "clean_0p00",
+  "protocol": "frozen N72R18 GRU, score-before-update, validation split",
+  "bootstrap": {
+    "unit": "sequence",
+    "reps": 2000,
+    "seed": 72191,
+    "h100_sequence_cluster_ci": [
+      0.8773681602,
+      0.9472664101
+    ]
+  },
+  "horizons": {
+    "H20": 0.9279488669,
+    "H50": 0.9158380960,
+    "H100": 0.9135832325675131
+  },
+  "h100_median_positive_minus_hard_negative_margin": 0.08429983258,
+  "mrr": 0.9481872783,
+  "preserved": true,
+  "note": "Point estimate matches the inherited N72R18 clean GRU result; this is a gate, not the selective-update result."
+}

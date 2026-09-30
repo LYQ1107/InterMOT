@@ -1,0 +1,214 @@
+{
+  "central_question": "Can selective observation updates preserve the strong learned identity memory while preventing corrupted observations from damaging future identity recognition?",
+  "dev": {
+    "competitive_frame_count": 5001,
+    "competitors_per_frame": {
+      "frame_count": 5001,
+      "histogram": {
+        "1": 2,
+        "2": 6,
+        "3": 177,
+        "4": 1962,
+        "5": 523,
+        "6": 721,
+        "7": 1304,
+        "8": 306
+      },
+      "summary": {
+        "mean": 5.380923815236953,
+        "median": 5.0,
+        "p10": 4.0,
+        "p25": 4.0,
+        "p75": 7.0,
+        "p90": 7.0
+      }
+    },
+    "episode_count": 52,
+    "observations_per_identity": {
+      "mean": 96.17307692307692,
+      "median": 100.0,
+      "p10": 90.60000000000001,
+      "p25": 99.5,
+      "p75": 100.0,
+      "p90": 100.0
+    },
+    "real_observations": {
+      "competitive_future_observations": 5001,
+      "same_identity_future_observations": 5001
+    },
+    "sequence_count": 8,
+    "split": "dev_8_sequences",
+    "synthetic_corruption_instances": {
+      "applied_by_condition": {
+        "hard_negative_0p10": 475,
+        "hard_negative_0p20": 1058,
+        "hard_negative_0p30": 1544,
+        "hard_negative_0p50": 2498,
+        "missing_observation_0p10": 513,
+        "missing_observation_0p20": 1037,
+        "missing_observation_0p30": 1455,
+        "missing_observation_0p50": 2525,
+        "wrong_identity_0p10": 487,
+        "wrong_identity_0p20": 1037,
+        "wrong_identity_0p30": 1488,
+        "wrong_identity_0p50": 2542
+      },
+      "note": "Synthetic instances are repeated perturbations of real observations, not independent data.",
+      "total_applied_across_conditions": 16659
+    },
+    "unique_eligible_identity_count": 52
+  },
+  "goal": "Selective Identity Memory Update",
+  "goal_reference": "outputs/N72R19R1/FINAL_GOAL.json",
+  "protocol_reference": "outputs/N72R19R1/protocol.json",
+  "stage": "N72R19R1",
+  "synthetic_corruption_definition": "Each manifest condition is a deterministic replay over the same frozen real observation; it must not be counted as a new identity or new frame.",
+  "train": {
+    "competitive_frame_count": 35421,
+    "competitors_per_frame": {
+      "frame_count": 35421,
+      "histogram": {
+        "10": 2539,
+        "11": 833,
+        "12": 808,
+        "13": 957,
+        "14": 159,
+        "15": 1963,
+        "2": 45,
+        "23": 2400,
+        "24": 2500,
+        "29": 4,
+        "3": 634,
+        "30": 4,
+        "31": 531,
+        "32": 417,
+        "33": 774,
+        "34": 1220,
+        "35": 527,
+        "36": 170,
+        "37": 80,
+        "38": 624,
+        "39": 3280,
+        "4": 2842,
+        "5": 2666,
+        "6": 1995,
+        "7": 2580,
+        "8": 3111,
+        "9": 1758
+      },
+      "summary": {
+        "mean": 16.29572852262782,
+        "median": 10.0,
+        "p10": 5.0,
+        "p25": 7.0,
+        "p75": 24.0,
+        "p90": 38.0
+      }
+    },
+    "episode_count": 365,
+    "observations_per_identity": {
+      "mean": 97.04383561643836,
+      "median": 100.0,
+      "p10": 90.4,
+      "p25": 100.0,
+      "p75": 100.0,
+      "p90": 100.0
+    },
+    "real_observations": {
+      "competitive_future_observations": 35421,
+      "same_identity_future_observations": 35421
+    },
+    "sequence_count": 32,
+    "split": "train_32_sequences",
+    "synthetic_corruption_instances": {
+      "applied_by_condition": {
+        "hard_negative_0p10": 3494,
+        "hard_negative_0p20": 7189,
+        "hard_negative_0p30": 10701,
+        "hard_negative_0p50": 17660,
+        "missing_observation_0p10": 3633,
+        "missing_observation_0p20": 7105,
+        "missing_observation_0p30": 10628,
+        "missing_observation_0p50": 17690,
+        "wrong_identity_0p10": 3564,
+        "wrong_identity_0p20": 7143,
+        "wrong_identity_0p30": 10641,
+        "wrong_identity_0p50": 17617
+      },
+      "note": "Synthetic instances are repeated perturbations of real observations, not independent data.",
+      "total_applied_across_conditions": 117065
+    },
+    "unique_eligible_identity_count": 365
+  },
+  "val": {
+    "competitive_frame_count": 24810,
+    "competitors_per_frame": {
+      "frame_count": 24810,
+      "histogram": {
+        "10": 889,
+        "11": 1326,
+        "12": 1353,
+        "13": 1282,
+        "14": 757,
+        "15": 840,
+        "16": 752,
+        "17": 1540,
+        "18": 862,
+        "19": 963,
+        "2": 39,
+        "20": 84,
+        "21": 61,
+        "22": 21,
+        "3": 1180,
+        "4": 545,
+        "5": 1791,
+        "6": 2353,
+        "7": 2774,
+        "8": 4328,
+        "9": 1070
+      },
+      "summary": {
+        "mean": 9.97851672712616,
+        "median": 8.0,
+        "p10": 5.0,
+        "p25": 7.0,
+        "p75": 13.0,
+        "p90": 17.0
+      }
+    },
+    "episode_count": 273,
+    "observations_per_identity": {
+      "mean": 90.87912087912088,
+      "median": 100.0,
+      "p10": 65.4,
+      "p25": 92.0,
+      "p75": 100.0,
+      "p90": 100.0
+    },
+    "real_observations": {
+      "competitive_future_observations": 24810,
+      "same_identity_future_observations": 24810
+    },
+    "sequence_count": 25,
+    "split": "val_25_sequences",
+    "synthetic_corruption_instances": {
+      "applied_by_condition": {
+        "hard_negative_0p10": 2520,
+        "hard_negative_0p20": 4896,
+        "hard_negative_0p30": 7487,
+        "hard_negative_0p50": 12389,
+        "missing_observation_0p10": 2520,
+        "missing_observation_0p20": 5004,
+        "missing_observation_0p30": 7346,
+        "missing_observation_0p50": 12267,
+        "wrong_identity_0p10": 2420,
+        "wrong_identity_0p20": 4993,
+        "wrong_identity_0p30": 7411,
+        "wrong_identity_0p50": 12460
+      },
+      "note": "Synthetic instances are repeated perturbations of real observations, not independent data.",
+      "total_applied_across_conditions": 81713
+    },
+    "unique_eligible_identity_count": 273
+  }
+}

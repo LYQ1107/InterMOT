@@ -1,0 +1,83 @@
+{
+  "stage": "N72R19R1",
+  "goal": "Selective Identity Memory Update",
+  "goal_reference": "outputs/N72R19R1/FINAL_GOAL.json",
+  "central_question": "Can selective observation updates preserve the strong learned identity memory while preventing corrupted observations from damaging future identity recognition?",
+  "decision": "FAIL_CLEAN_PRESERVATION",
+  "selective_identity_memory_validated": false,
+  "next_candidate_stream_stage_authorized": false,
+  "next_association_stage_authorized": false,
+  "protocol": {
+    "val_sequences": 25,
+    "val_episodes": 273,
+    "val_real_observations": 24810,
+    "corruption_manifest": "outputs/N72R19R1/corruption_manifest.json",
+    "same_manifest_for_all_methods": true,
+    "bootstrap_reps": 2000,
+    "bootstrap_unit": "sequence",
+    "bootstrap_seed": 72191
+  },
+  "dev_frozen_selection": {
+    "selector_threshold": 0.2,
+    "b3_similarity_threshold": 0.35,
+    "proposed_method": "B5_FUTURE_UTILITY_SELECTOR",
+    "selected_seed": 72193,
+    "selector_threshold_candidates": [0.2, 0.3, 0.35, 0.4, 0.45, 0.5],
+    "b3_threshold_candidates": [0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95],
+    "val_used_for_selection": false
+  },
+  "preservation_gate": {
+    "method": "B2_FROZEN_GRU",
+    "condition": "clean_0p00",
+    "H20": 0.9279488669378269,
+    "H50": 0.9158380959837157,
+    "H100": 0.9135832325675131,
+    "H100_sequence_cluster_ci95": [0.8773681602122567, 0.9472664100937854],
+    "inherited_n72r18_point_match": true
+  },
+  "proposed_selected_seed": {
+    "method": "B5_FUTURE_UTILITY_SELECTOR",
+    "seed": 72193,
+    "clean_H100": 0.8970173317210802,
+    "clean_H100_regression_vs_b2": -0.0165659008464329,
+    "primary_robust_H100_macro": 0.6759572752697238,
+    "primary_robust_H100_macro_b2": 0.6899838770137626,
+    "primary_macro_delta_vs_b2": -0.014026601744038,
+    "primary_macro_delta_ci95": [-0.026178468317498947, -0.002031143655649903],
+    "primary_cell_H100": {
+      "wrong_identity_20": 0.7268843208383716,
+      "wrong_identity_30": 0.6448609431680774,
+      "hard_negative_20": 0.7147521160822249,
+      "hard_negative_30": 0.6173317210802096
+    },
+    "stress_H100": {
+      "wrong_identity_50": 0.4646110439338976,
+      "hard_negative_50": 0.451068117694478
+    }
+  },
+  "proposed_three_seed_mean_std": {
+    "clean_H100": {"mean": 0.8955797393524118, "std": 0.0025934928902122093},
+    "primary_robust_H100_macro": {"mean": 0.6638049173720274, "std": 0.01105320977419483},
+    "wrong_identity_20_H100": {"mean": 0.7135563616821173, "std": 0.013459712058530065},
+    "wrong_identity_30_H100": {"mean": 0.6352142953110306, "std": 0.008969966822755311},
+    "hard_negative_20_H100": {"mean": 0.7008195620045682, "std": 0.012196969862051724},
+    "hard_negative_30_H100": {"mean": 0.6056294504903936, "std": 0.009764138076353622}
+  },
+  "selection_and_diagnostics": {
+    "selected_seed_primary_wrong20_good_acceptance": 0.8995811676843114,
+    "selected_seed_primary_wrong20_bad_acceptance": 0.5501702383336672,
+    "selected_seed_primary_wrong20_bad_rejection": 0.4498297616663329,
+    "selected_seed_primary_wrong20_roc_auc": 0.8811686818224123,
+    "selected_seed_primary_wrong20_pr_auc": 0.9713018849817532,
+    "selected_seed_primary_hard20_good_acceptance": 0.9510394697197951,
+    "selected_seed_primary_hard20_bad_acceptance": 0.9236111111111112,
+    "selected_seed_primary_hard20_bad_rejection": 0.0763888888888889,
+    "catastrophic_damage_threshold": 0.05,
+    "diagnostic_label": "selection and memory-damage diagnostics; not deployment validation"
+  },
+  "ablation_reference": "outputs/N72R19R1/metrics/dev_ablations.json",
+  "final_val_reference": "outputs/N72R19R1/metrics/final_val_all.json",
+  "leakage_audit": "outputs/N72R19R1/leakage_audit.md",
+  "stop_rule_applied": true,
+  "no_downstream_mot_or_sam3_started": true
+}

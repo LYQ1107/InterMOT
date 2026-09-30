@@ -1,0 +1,13 @@
+{
+  "stage": "N72R19R1",
+  "goal": "Selective Identity Memory Update",
+  "central_question": "Can selective observation updates preserve the strong learned identity memory while preventing corrupted observations from damaging future identity recognition?",
+  "base_memory": "frozen_N72R18_GRU",
+  "primary_goal": "preserve_clean_identity_memory_and_reduce_corruption_damage",
+  "primary_endpoint": "VAL_H100_HARD_NEGATIVE_IDENTITY_WIN_RATE",
+  "horizons": [20, 50, 100],
+  "sam3_required": false,
+  "mot_required": false,
+  "new_encoder_training": false,
+  "goal_frozen": true
+}

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Iterable
+from typing import Iterable, Collection
 
 import numpy as np
 import torch
@@ -30,12 +30,23 @@ class FrozenIdentityEpisodeDataset:
     offline same-identity ground-truth observation for the causal replay.
     """
 
-    def __init__(self, protocol_path: str | Path, store_root: str | Path, split: str):
+    def __init__(
+        self,
+        protocol_path: str | Path,
+        store_root: str | Path,
+        split: str,
+        sequence_filter: Collection[str] | None = None,
+    ):
         self.protocol_path = str(Path(protocol_path).resolve())
         self.store_root = str(Path(store_root).resolve())
         self.split = split
         self.document = read_frozen_protocol(self.protocol_path)
-        self.anchors = tuple(iter_anchors(self.document))
+        anchors = tuple(iter_anchors(self.document))
+        if sequence_filter is not None:
+            allowed = frozenset(str(item) for item in sequence_filter)
+            anchors = tuple(anchor for anchor in anchors if anchor.sequence in allowed)
+        self.sequence_filter = None if sequence_filter is None else frozenset(str(item) for item in sequence_filter)
+        self.anchors = anchors
         self.store = EmbeddingStore(self.store_root, split=split)
         if int(self.store.info.get("dimension", -1)) != FEATURE_DIMENSION:
             raise ValueError("N72R18 requires the inherited 512-D OSNet embedding store")
