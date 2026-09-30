@@ -1,0 +1,25 @@
+{
+  "stage": "N72R20R1",
+  "fresh_lineage": true,
+  "DANCETRACK_ROOT": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset",
+  "dataset": {
+    "train_sequences": ["dancetrack0001", "dancetrack0002"],
+    "val_sequences": "the 25 existing DanceTrack val sequences",
+    "test_present_or_used": false
+  },
+  "sam3_checkpoint": {
+    "path": "/data3/liuyeqiang/InterMOT_N72R20_assets/checkpoints/sam3.1_multiplex.pt",
+    "sha256": "0567debeec80ba4ac6369540c6c248025283cb3ff2b92827509e57e2b3541cb6"
+  },
+  "frozen_identity_assets": {
+    "osnet_x1_0_market1501": {
+      "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/checkpoints/osnet_x1_0_market1501.pth",
+      "sha256": "2809d3227f7d078f6045f7feb874a34d0684f0e0057b264b99adccf7d4519154"
+    },
+    "n72r18_gru": {
+      "path": "/data3/liuyeqiang/InterMOT/outputs/N72R18/checkpoints/identity_memory_gru.pt",
+      "sha256": "94ba9c44e177b254ee54984195e839f37c78a648c010ffc723dd3f1d553976a2"
+    }
+  },
+  "runtime_future_gt_used": false
+}

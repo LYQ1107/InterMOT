@@ -1,0 +1,85 @@
+{
+  "stage": "N72R20R1",
+  "goal": "Fresh-Lineage Learned Identity Memory Integration",
+  "central_question": "Can the N72R18 learned identity memory improve future public-ID association when evaluated on a newly generated provenance-complete frozen candidate/base-score lineage under the current InterMOT runtime?",
+  "historical_n72r15_reproduction": false,
+  "development_sequences": ["dancetrack0001", "dancetrack0002"],
+  "formal_split": "val",
+  "formal_val_sequence_count": 25,
+  "val_tuning_allowed": false,
+  "horizons": [20, 50, 100],
+  "variants": [
+    "FRESH_BASELINE_B0",
+    "FRESH_TRUSTED_RELATIVE_STATE",
+    "FRESH_LEARNED_IDENTITY_TRUSTED"
+  ],
+  "shared_across_variants": [
+    "candidate tape",
+    "512-D OSNet features",
+    "candidate UID axis",
+    "association state axis",
+    "public ID axis",
+    "fresh base score matrix",
+    "human event timing",
+    "exact solver",
+    "explicit NONE score",
+    "public authority",
+    "post-hoc evaluation truth"
+  ],
+  "primary_endpoint": "H100_AssA_E2_MINUS_E0",
+  "secondary_endpoints": [
+    "H20_AssA",
+    "H50_AssA",
+    "H100_HOTA",
+    "H100_IDF1",
+    "H100_IDSW",
+    "H100_DetA",
+    "target_assignment_correctness",
+    "candidate_coverage",
+    "memory_writes",
+    "wrong_memory_writes",
+    "score_changed_frames",
+    "solver_changed_frames",
+    "rank1",
+    "MRR",
+    "margin",
+    "hard_negative_win"
+  ],
+  "bootstrap": {
+    "unit": "sequence cluster",
+    "replicates": 2000,
+    "seed": 720201,
+    "paired_delta": "E2 minus E0"
+  },
+  "runtime_rules": {
+    "runtime_future_gt_used": false,
+    "gt_role": "post-hoc evaluation truth only",
+    "sam3_source": "current Sam3Backend and candidate bridge",
+    "assignment_solver": "solve_effect_assignment -> solve_exact_public_assignment",
+    "public_authority": "SequencePersistentIdentityRuntime + PublicAuthorityBridge",
+    "memory_order": "score -> fuse -> assign -> trusted commit -> memory update",
+    "state_edge": "row-max-preserving fusion; candidate-vs-NONE boundary unchanged",
+    "training_required": false
+  },
+  "phase_order": [
+    "asset audit",
+    "two-sequence candidate smoke",
+    "two-sequence fresh E0",
+    "two-sequence assignment shadow",
+    "train/dev integration",
+    "freeze VAL_CONFIG_FROZEN=true",
+    "val formal"
+  ],
+  "stop_rules": [
+    "FAIL_LEARNED_MEMORY_CANDIDATE_SIGNAL",
+    "FAIL_LEARNED_MEMORY_DECISION_INACTIVE",
+    "FAIL_LEARNED_MEMORY_ASSOCIATION_GAIN",
+    "FAIL_MEMORY_CONTAMINATION"
+  ],
+  "fresh_tape_sealed": true,
+  "fresh_tape_manifest": "outputs/N72R20R1/fresh_tape_manifest.json",
+  "train_smoke_assignment_shadow": "outputs/N72R20R1/assignment_shadow/train_smoke_summary.json",
+  "formal_causal_replay_authorized": false,
+  "val_formal_authorized": false,
+  "next_full_interactive_mot_stage_authorized": false
+}

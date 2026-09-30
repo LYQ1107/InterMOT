@@ -1,0 +1,74 @@
+{
+  "stage": "N72R20R1",
+  "final_goal_path": "outputs/N72R20R1/FINAL_GOAL.json",
+  "historical_n72r20": {
+    "path": "outputs/N72R20/frozen_tape_recovery_audit.json",
+    "status": "BLOCKED_NOT_RECOVERED",
+    "modified": false,
+    "formal_input_for_r1": false,
+    "sha256": "59e6c65b1622f172ca3757d9f3a2ccc0ab0fdc7a6da8af2e6f4edf69f069f3f8"
+  },
+  "dataset": {
+    "root": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset",
+    "allowed_splits": ["train", "val"],
+    "train_sequence_count": 40,
+    "val_sequence_count": 25,
+    "test_directory_present": false,
+    "all_train_img1_nonempty": true,
+    "all_val_img1_nonempty": true,
+    "all_train_gt_readable": true,
+    "all_val_gt_readable": true,
+    "train_image_count": 41796,
+    "val_image_count": 25508,
+    "train_size_reported": "6.6G",
+    "val_size_reported": "4.1G",
+    "lineage": "DanceTrack train+val inherited from N72R16 and used by N72R18/N72R19 identity protocols",
+    "downloaded_for_r1": false
+  },
+  "checkpoints": {
+    "sam3": {
+      "path": "/data3/liuyeqiang/InterMOT_N72R20_assets/checkpoints/sam3.1_multiplex.pt",
+      "exists": true,
+      "bytes": 3502755717,
+      "sha256": "0567debeec80ba4ac6369540c6c248025283cb3ff2b92827509e57e2b3541cb6",
+      "role": "frozen current SAM3 candidate generator"
+    },
+    "osnet": {
+      "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/checkpoints/osnet_x1_0_market1501.pth",
+      "exists": true,
+      "bytes": 10399605,
+      "sha256": "2809d3227f7d078f6045f7feb874a34d0684f0e0057b264b99adccf7d4519154",
+      "role": "frozen N72R18-compatible OSNet feature encoder"
+    },
+    "n72r18_gru": {
+      "path": "outputs/N72R18/checkpoints/identity_memory_gru.pt",
+      "exists": true,
+      "bytes": 6309333,
+      "sha256": "94ba9c44e177b254ee54984195e839f37c78a648c010ffc723dd3f1d553976a2",
+      "role": "frozen N72R18 GRU_MEMORY updater"
+    }
+  },
+  "old_candidate_assets": {
+    "path": "/data3/liuyeqiang/InterMOT_N72R20_assets/candidates",
+    "present": true,
+    "sequences": ["dancetrack0001", "dancetrack0002"],
+    "role": "historical N72R20 diagnostic only; not an R1 formal tape"
+  },
+  "r1_fresh_asset_root": {
+    "path": "/data3/liuyeqiang/InterMOT_N72R20R1_assets",
+    "created": true,
+    "candidate_sequences": ["dancetrack0001", "dancetrack0002"],
+    "base_score_sequences": ["dancetrack0001", "dancetrack0002"],
+    "interaction_protocol": "interaction_events.json",
+    "fresh_tape_manifest": "outputs/N72R20R1/fresh_tape_manifest.json",
+    "candidate_validation": "outputs/N72R20R1/candidate_tape_validation.json",
+    "will_contain": ["fresh candidate tape", "fresh base-score tape", "per-sequence manifests"]
+  },
+  "storage_audit_after": "outputs/N72R20R1/storage_audit_after.json",
+  "missing_for_formal_r1": [
+    "formal VAL candidate/base tape (not started because assignment-shadow stop rule fired)",
+    "formal VAL TrackEval metrics (not authorized)",
+    "formal VAL bootstrap (not authorized)"
+  ],
+  "runtime_future_gt_used": false
+}

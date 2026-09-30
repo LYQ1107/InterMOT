@@ -1,0 +1,99 @@
+{
+  "stage": "N72R20R1",
+  "status": "PASS_N72R20R1_TWO_SEQUENCE_SMOKE",
+  "sequences": [
+    "dancetrack0001",
+    "dancetrack0002"
+  ],
+  "completed_profiles": [
+    {
+      "bytes_per_candidate": 1092.6269907795474,
+      "bytes_per_frame": 8146.9,
+      "candidates": 1193,
+      "embedding_bytes": 1221632,
+      "frames": 160,
+      "metadata_bytes": 81872,
+      "runtime_future_gt_used": false,
+      "runtime_gt_read": false,
+      "sequence": "dancetrack0001",
+      "split": "train",
+      "stage": "N72R20R1",
+      "total_bytes": 1303504
+    },
+    {
+      "bytes_per_candidate": 1095.908077994429,
+      "bytes_per_frame": 9835.775,
+      "candidates": 1436,
+      "embedding_bytes": 1470464,
+      "frames": 160,
+      "metadata_bytes": 103260,
+      "runtime_future_gt_used": false,
+      "runtime_gt_read": false,
+      "sequence": "dancetrack0002",
+      "split": "train",
+      "stage": "N72R20R1",
+      "total_bytes": 1573724
+    }
+  ],
+  "child_results": [
+    {
+      "sequence": "dancetrack0001",
+      "returncode": 0,
+      "log": "/data3/liuyeqiang/InterMOT/outputs/N72R20R1/smoke_logs/dancetrack0001.log",
+      "stdout_tail": "entation_head.cross_attend_prompt.out_proj.weight', 'detector.segmentation_head.cross_attend_prompt.out_proj.bias', 'detector.segmentation_head.cross_attn_norm.weight', 'detector.segmentation_head.cross_attn_norm.bias', 'detector.segmentation_head.semantic_seg_head.weight', 'detector.segmentation_head.semantic_seg_head.bias', 'detector.segmentation_head.instance_seg_head.weight', 'detector.segmentation_head.instance_seg_head.bias', 'detector.dot_prod_scoring.prompt_mlp.layers.0.weight', 'detector.dot_prod_scoring.prompt_mlp.layers.0.bias', 'detector.dot_prod_scoring.prompt_mlp.layers.1.weight', 'detector.dot_prod_scoring.prompt_mlp.layers.1.bias', 'detector.dot_prod_scoring.prompt_mlp.out_norm.weight', 'detector.dot_prod_scoring.prompt_mlp.out_norm.bias', 'detector.dot_prod_scoring.prompt_proj.weight', 'detector.dot_prod_scoring.prompt_proj.bias', 'detector.dot_prod_scoring.hs_proj.weight', 'detector.dot_prod_scoring.hs_proj.bias']\nMissing keys (64): ['detector.backbone.vision_backbone.trunk.blocks.0.attn.freqs_cis_real', 'detector.backbone.vision_backbone.trunk.blocks.0.attn.freqs_cis_imag', 'detector.backbone.vision_backbone.trunk.blocks.1.attn.freqs_cis_real', 'detector.backbone.vision_backbone.trunk.blocks.1.attn.freqs_cis_imag', 'detector.backbone.vision_backbone.trunk.blocks.2.attn.freqs_cis_real', 'detector.backbone.vision_backbone.trunk.blocks.2.attn.freqs_cis_imag', 'detector.backbone.vision_backbone.trunk.blocks.3.attn.freqs_cis_real', 'detector.backbone.vision_backbone.trunk.blocks.3.attn.freqs_cis_imag', 'detector.backbone.vision_backbone.trunk.blocks.4.attn.freqs_cis_real', 'detector.backbone.vision_backbone.trunk.blocks.4.attn.freqs_cis_imag']...\n{\"bytes_per_candidate\": 1092.6269907795474, \"bytes_per_frame\": 8146.9, \"candidates\": 1193, \"embedding_bytes\": 1221632, \"frames\": 160, \"metadata_bytes\": 81872, \"runtime_future_gt_used\": false, \"runtime_gt_read\": false, \"sequence\": \"dancetrack0001\", \"split\": \"train\", \"stage\": \"N72R20R1\", \"total_bytes\": 1303504}\n",
+      "stderr_tail": " [00:13<01:21,  7.72it/s]\npropagate_in_video:  11%|█         | 76/703 [00:13<01:10,  8.91it/s]\npropagate_in_video:  11%|█         | 78/703 [00:13<01:01, 10.10it/s]\npropagate_in_video:  11%|█▏        | 80/703 [00:14<01:58,  5.27it/s]\npropagate_in_video:  12%|█▏        | 82/703 [00:15<03:34,  2.90it/s]\npropagate_in_video:  12%|█▏        | 84/703 [00:15<02:43,  3.78it/s]\npropagate_in_video:  12%|█▏        | 85/703 [00:16<02:26,  4.23it/s]\npropagate_in_video:  12%|█▏        | 87/703 [00:16<01:54,  5.40it/s]\npropagate_in_video:  13%|█▎        | 89/703 [00:16<01:45,  5.85it/s]\npropagate_in_video:  13%|█▎        | 91/703 [00:16<01:24,  7.20it/s]\npropagate_in_video:  13%|█▎        | 93/703 [00:16<01:10,  8.60it/s]\npropagate_in_video:  14%|█▎        | 95/703 [00:16<01:01,  9.81it/s]\npropagate_in_video:  14%|█▍        | 97/703 [00:19<04:00,  2.52it/s]\npropagate_in_video:  14%|█▍        | 99/703 [00:19<03:00,  3.36it/s]\npropagate_in_video:  14%|█▍        | 101/703 [00:19<02:18,  4.34it/s]\npropagate_in_video:  15%|█▍        | 103/703 [00:19<01:51,  5.37it/s]\npropagate_in_video:  15%|█▍        | 105/703 [00:19<01:31,  6.55it/s]\npropagate_in_video:  15%|█▌        | 107/703 [00:19<01:17,  7.67it/s]\npropagate_in_video:  16%|█▌        | 109/703 [00:19<01:09,  8.60it/s]\npropagate_in_video:  16%|█▌        | 111/703 [00:20<01:03,  9.34it/s]\npropagate_in_video:  16%|█▌        | 113/703 [00:22<03:52,  2.54it/s]\npropagate_in_video:  16%|█▋        | 115/703 [00:22<02:55,  3.35it/s]\npropagate_in_video:  17%|█▋        | 117/703 [00:22<02:14,  4.34it/s]\npropagate_in_video:  17%|█▋        | 119/703 [00:22<01:46,  5.47it/s]\npropagate_in_video:  17%|█▋        | 121/703 [00:22<01:27,  6.65it/s]\npropagate_in_video:  17%|█▋        | 123/703 [00:23<01:14,  7.78it/s]\npropagate_in_video:  18%|█▊        | 125/703 [00:23<01:05,  8.87it/s]\npropagate_in_video:  18%|█▊        | 127/703 [00:23<00:59,  9.73it/s]\npropagate_in_video:  18%|█▊        | 129/703 [00:25<03:53,  2.46it/s]\npropagate_in_video:  19%|█▊        | 131/703 [00:25<02:56,  3.24it/s]\npropagate_in_video:  19%|█▉        | 133/703 [00:25<02:16,  4.17it/s]\npropagate_in_video:  19%|█▉        | 135/703 [00:26<01:48,  5.23it/s]\npropagate_in_video:  19%|█▉        | 137/703 [00:26<01:28,  6.36it/s]\npropagate_in_video:  20%|█▉        | 139/703 [00:26<01:15,  7.43it/s]\npropagate_in_video:  20%|██        | 141/703 [00:26<01:08,  8.20it/s]\npropagate_in_video:  20%|██        | 143/703 [00:26<01:01,  9.08it/s]\npropagate_in_video:  21%|██        | 145/703 [00:28<03:44,  2.49it/s]\npropagate_in_video:  21%|██        | 146/703 [00:29<03:16,  2.84it/s]\npropagate_in_video:  21%|██        | 147/703 [00:29<02:50,  3.26it/s]\npropagate_in_video:  21%|██        | 149/703 [00:29<02:05,  4.41it/s]\npropagate_in_video:  21%|██▏       | 151/703 [00:29<01:38,  5.61it/s]\npropagate_in_video:  22%|██▏       | 153/703 [00:29<01:21,  6.75it/s]\npropagate_in_video:  22%|██▏       | 155/703 [00:29<01:11,  7.71it/s]\npropagate_in_video:  22%|██▏       | 157/703 [00:30<01:03,  8.62it/s]\npropagate_in_video:  23%|██▎       | 159/703 [00:30<00:57,  9.41it/s]\npropagate_in_video:  23%|██▎       | 161/703 [00:32<03:45,  2.41it/s]\npropagate_in_video:  23%|██▎       | 163/703 [00:32<02:51,  3.15it/s]\npropagate_in_video:  23%|██▎       | 165/703 [00:32<02:13,  4.04it/s]\npropagate_in_video:  24%|██▍       | 167/703 [00:32<01:47,  5.00it/s]\npropagate_in_video:  24%|██▍       | 169/703 [00:33<01:28,  6.01it/s]\npropagate_in_video:  24%|██▍       | 171/703 [00:33<01:16,  6.93it/s]\npropagate_in_video:  25%|██▍       | 173/703 [00:33<01:07,  7.81it/s]\npropagate_in_video:  25%|██▍       | 175/703 [00:33<01:02,  8.46it/s]\npropagate_in_video:  25%|██▍       | 175/703 [00:33<01:42,  5.17it/s]\n\u001b[0m\u001b[32mINFO 2026-10-01 01:45:05,107 2511131 sam3_base_predictor.py: 305:\u001b[0m propagation ended in session 8339cae5-21e3-44bb-9be1-a07045980b3f\n\u001b[0m\u001b[32mINFO 2026-10-01 01:45:05,735 2511131 sam3_base_predictor.py: 408:\u001b[0m removed session 8339cae5-21e3-44bb-9be1-a07045980b3f\n",
+      "profile": {
+        "bytes_per_candidate": 1092.6269907795474,
+        "bytes_per_frame": 8146.9,
+        "candidates": 1193,
+        "embedding_bytes": 1221632,
+        "frames": 160,
+        "metadata_bytes": 81872,
+        "runtime_future_gt_used": false,
+        "runtime_gt_read": false,
+        "sequence": "dancetrack0001",
+        "split": "train",
+        "stage": "N72R20R1",
+        "total_bytes": 1303504
+      }
+    },
+    {
+      "sequence": "dancetrack0002",
+      "returncode": 0,
+      "log": "/data3/liuyeqiang/InterMOT/outputs/N72R20R1/smoke_logs/dancetrack0002.log",
+      "stdout_tail": "tation_head.cross_attend_prompt.out_proj.weight', 'detector.segmentation_head.cross_attend_prompt.out_proj.bias', 'detector.segmentation_head.cross_attn_norm.weight', 'detector.segmentation_head.cross_attn_norm.bias', 'detector.segmentation_head.semantic_seg_head.weight', 'detector.segmentation_head.semantic_seg_head.bias', 'detector.segmentation_head.instance_seg_head.weight', 'detector.segmentation_head.instance_seg_head.bias', 'detector.dot_prod_scoring.prompt_mlp.layers.0.weight', 'detector.dot_prod_scoring.prompt_mlp.layers.0.bias', 'detector.dot_prod_scoring.prompt_mlp.layers.1.weight', 'detector.dot_prod_scoring.prompt_mlp.layers.1.bias', 'detector.dot_prod_scoring.prompt_mlp.out_norm.weight', 'detector.dot_prod_scoring.prompt_mlp.out_norm.bias', 'detector.dot_prod_scoring.prompt_proj.weight', 'detector.dot_prod_scoring.prompt_proj.bias', 'detector.dot_prod_scoring.hs_proj.weight', 'detector.dot_prod_scoring.hs_proj.bias']\nMissing keys (64): ['detector.backbone.vision_backbone.trunk.blocks.0.attn.freqs_cis_real', 'detector.backbone.vision_backbone.trunk.blocks.0.attn.freqs_cis_imag', 'detector.backbone.vision_backbone.trunk.blocks.1.attn.freqs_cis_real', 'detector.backbone.vision_backbone.trunk.blocks.1.attn.freqs_cis_imag', 'detector.backbone.vision_backbone.trunk.blocks.2.attn.freqs_cis_real', 'detector.backbone.vision_backbone.trunk.blocks.2.attn.freqs_cis_imag', 'detector.backbone.vision_backbone.trunk.blocks.3.attn.freqs_cis_real', 'detector.backbone.vision_backbone.trunk.blocks.3.attn.freqs_cis_imag', 'detector.backbone.vision_backbone.trunk.blocks.4.attn.freqs_cis_real', 'detector.backbone.vision_backbone.trunk.blocks.4.attn.freqs_cis_imag']...\n{\"bytes_per_candidate\": 1095.908077994429, \"bytes_per_frame\": 9835.775, \"candidates\": 1436, \"embedding_bytes\": 1470464, \"frames\": 160, \"metadata_bytes\": 103260, \"runtime_future_gt_used\": false, \"runtime_gt_read\": false, \"sequence\": \"dancetrack0002\", \"split\": \"train\", \"stage\": \"N72R20R1\", \"total_bytes\": 1573724}\n",
+      "stderr_tail": " | 89/1203 [00:18<02:54,  6.37it/s]\npropagate_in_video:   8%|▊         | 91/1203 [00:18<02:35,  7.14it/s]\npropagate_in_video:   8%|▊         | 93/1203 [00:18<02:20,  7.90it/s]\npropagate_in_video:   8%|▊         | 95/1203 [00:19<02:08,  8.60it/s]\npropagate_in_video:   8%|▊         | 97/1203 [00:21<08:08,  2.26it/s]\npropagate_in_video:   8%|▊         | 99/1203 [00:21<06:07,  3.00it/s]\npropagate_in_video:   8%|▊         | 101/1203 [00:21<04:43,  3.89it/s]\npropagate_in_video:   9%|▊         | 103/1203 [00:22<03:49,  4.79it/s]\npropagate_in_video:   9%|▊         | 105/1203 [00:22<03:07,  5.84it/s]\npropagate_in_video:   9%|▉         | 107/1203 [00:22<02:37,  6.95it/s]\npropagate_in_video:   9%|▉         | 109/1203 [00:22<02:17,  7.96it/s]\npropagate_in_video:   9%|▉         | 111/1203 [00:22<02:02,  8.92it/s]\npropagate_in_video:   9%|▉         | 113/1203 [00:25<07:42,  2.35it/s]\npropagate_in_video:  10%|▉         | 115/1203 [00:25<05:51,  3.09it/s]\npropagate_in_video:  10%|▉         | 117/1203 [00:25<05:05,  3.55it/s]\npropagate_in_video:  10%|▉         | 119/1203 [00:25<04:00,  4.50it/s]\npropagate_in_video:  10%|█         | 121/1203 [00:25<03:14,  5.55it/s]\npropagate_in_video:  10%|█         | 123/1203 [00:26<02:42,  6.63it/s]\npropagate_in_video:  10%|█         | 125/1203 [00:26<02:22,  7.59it/s]\npropagate_in_video:  11%|█         | 127/1203 [00:26<02:07,  8.47it/s]\npropagate_in_video:  11%|█         | 129/1203 [00:28<07:56,  2.26it/s]\npropagate_in_video:  11%|█         | 130/1203 [00:29<07:05,  2.52it/s]\npropagate_in_video:  11%|█         | 131/1203 [00:29<06:12,  2.88it/s]\npropagate_in_video:  11%|█         | 133/1203 [00:29<04:31,  3.94it/s]\npropagate_in_video:  11%|█         | 135/1203 [00:29<03:31,  5.06it/s]\npropagate_in_video:  11%|█▏        | 137/1203 [00:29<02:58,  5.96it/s]\npropagate_in_video:  12%|█▏        | 139/1203 [00:29<02:36,  6.80it/s]\npropagate_in_video:  12%|█▏        | 140/1203 [00:30<02:29,  7.11it/s]\npropagate_in_video:  12%|█▏        | 142/1203 [00:30<02:12,  8.00it/s]\npropagate_in_video:  12%|█▏        | 144/1203 [00:31<04:34,  3.86it/s]\npropagate_in_video:  12%|█▏        | 145/1203 [00:32<08:28,  2.08it/s]\npropagate_in_video:  12%|█▏        | 147/1203 [00:32<06:01,  2.92it/s]\npropagate_in_video:  12%|█▏        | 149/1203 [00:33<04:32,  3.87it/s]\npropagate_in_video:  13%|█▎        | 151/1203 [00:33<03:36,  4.86it/s]\npropagate_in_video:  13%|█▎        | 153/1203 [00:33<02:59,  5.86it/s]\npropagate_in_video:  13%|█▎        | 155/1203 [00:33<02:34,  6.78it/s]\npropagate_in_video:  13%|█▎        | 157/1203 [00:33<02:22,  7.37it/s]\npropagate_in_video:  13%|█▎        | 159/1203 [00:34<02:09,  8.09it/s]\npropagate_in_video:  13%|█▎        | 160/1203 [00:35<04:59,  3.49it/s]\npropagate_in_video:  13%|█▎        | 161/1203 [00:36<09:02,  1.92it/s]\npropagate_in_video:  13%|█▎        | 162/1203 [00:36<07:24,  2.34it/s]\npropagate_in_video:  14%|█▎        | 163/1203 [00:36<06:01,  2.88it/s]\npropagate_in_video:  14%|█▎        | 165/1203 [00:36<04:15,  4.06it/s]\npropagate_in_video:  14%|█▍        | 166/1203 [00:37<03:46,  4.59it/s]\npropagate_in_video:  14%|█▍        | 167/1203 [00:37<03:23,  5.08it/s]\npropagate_in_video:  14%|█▍        | 168/1203 [00:37<02:58,  5.79it/s]\npropagate_in_video:  14%|█▍        | 169/1203 [00:37<02:41,  6.38it/s]\npropagate_in_video:  14%|█▍        | 171/1203 [00:37<02:15,  7.60it/s]\npropagate_in_video:  14%|█▍        | 172/1203 [00:37<02:08,  8.04it/s]\npropagate_in_video:  14%|█▍        | 173/1203 [00:37<02:03,  8.37it/s]\npropagate_in_video:  14%|█▍        | 174/1203 [00:37<01:58,  8.69it/s]\npropagate_in_video:  15%|█▍        | 175/1203 [00:38<01:54,  9.00it/s]\npropagate_in_video:  15%|█▍        | 175/1203 [00:38<03:45,  4.57it/s]\n\u001b[0m\u001b[32mINFO 2026-10-01 01:47:20,444 2513220 sam3_base_predictor.py: 305:\u001b[0m propagation ended in session 36894972-7b39-4606-bb95-f59966546c11\n\u001b[0m\u001b[32mINFO 2026-10-01 01:47:21,404 2513220 sam3_base_predictor.py: 408:\u001b[0m removed session 36894972-7b39-4606-bb95-f59966546c11\n",
+      "profile": {
+        "bytes_per_candidate": 1095.908077994429,
+        "bytes_per_frame": 9835.775,
+        "candidates": 1436,
+        "embedding_bytes": 1470464,
+        "frames": 160,
+        "metadata_bytes": 103260,
+        "runtime_future_gt_used": false,
+        "runtime_gt_read": false,
+        "sequence": "dancetrack0002",
+        "split": "train",
+        "stage": "N72R20R1",
+        "total_bytes": 1573724
+      }
+    }
+  ],
+  "frames": 320,
+  "candidates": 2629,
+  "bytes": 2877228,
+  "bytes_per_frame": 8991.3375,
+  "bytes_per_candidate": 1094.4191707873715,
+  "projected_10000_frames_bytes": 89913375.0,
+  "free_space_bytes_after_smoke": 128323264512,
+  "free_space_gib_after_smoke": 119.5103530883789,
+  "hard_stop_triggered": false,
+  "warning_below_normal_target": false,
+  "projected_full_val_cache_allowed": false,
+  "runtime_future_gt_used": false,
+  "runtime_gt_read": false,
+  "started_at_utc": "2026-09-30T17:43:27.734172+00:00",
+  "finished_at_utc": "2026-09-30T17:47:23.314029+00:00",
+  "asset_manifest": "/data3/liuyeqiang/InterMOT/outputs/N72R20R1/asset_manifest.json",
+  "dataset_root": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset"
+}

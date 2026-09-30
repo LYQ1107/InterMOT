@@ -1,0 +1,219 @@
+{
+  "asset_root": "/data3/liuyeqiang/InterMOT_N72R20R1_assets",
+  "base_score_tapes": {
+    "dancetrack0001": {
+      "base_scores.jsonl.zst": {
+        "bytes": 240959,
+        "path": "/data3/liuyeqiang/InterMOT_N72R20R1_assets/base_scores/dancetrack0001/base_scores.jsonl.zst",
+        "sha256": "a5857da388ee97fb648611e41f5fea0c3bda92526e67c50a9b5252d4e766d8da"
+      },
+      "done.json": {
+        "bytes": 503,
+        "path": "/data3/liuyeqiang/InterMOT_N72R20R1_assets/base_scores/dancetrack0001/done.json",
+        "sha256": "b41850fbb2ea3a48b0fbbaf564c7c6cf6ccbebbb3638ba95ea1e824df830edbf"
+      },
+      "index.json": {
+        "bytes": 801,
+        "path": "/data3/liuyeqiang/InterMOT_N72R20R1_assets/base_scores/dancetrack0001/index.json",
+        "sha256": "5803d6536f03c468071c4d90b8e840cdc8c9c38fc5b1640d0ea01ff5124d5971"
+      }
+    },
+    "dancetrack0002": {
+      "base_scores.jsonl.zst": {
+        "bytes": 318535,
+        "path": "/data3/liuyeqiang/InterMOT_N72R20R1_assets/base_scores/dancetrack0002/base_scores.jsonl.zst",
+        "sha256": "e280a6b9b3a7e8b227aede9c80ac0393d26488359d8ef61d404417521b8c6d2d"
+      },
+      "done.json": {
+        "bytes": 503,
+        "path": "/data3/liuyeqiang/InterMOT_N72R20R1_assets/base_scores/dancetrack0002/done.json",
+        "sha256": "4cbf145ee3ceb21862794fe11a795cd794f37f28bb0680441275379fc420b941"
+      },
+      "index.json": {
+        "bytes": 839,
+        "path": "/data3/liuyeqiang/InterMOT_N72R20R1_assets/base_scores/dancetrack0002/index.json",
+        "sha256": "c2b0c40ca81674d46c40f488e12d12bb4016a7183ad4370f4f5b5f41aa606d2d"
+      }
+    }
+  },
+  "base_scorer": {
+    "code": [
+      {
+        "path": "scripts/n72r20r1_build_base_score_tape.py",
+        "sha256": "e265e91bef9a0e3fd20aebe0dfe6fa10cb8e806043c05940829482e84ca77c03"
+      },
+      {
+        "path": "sam3_intermot/association/online_associator.py",
+        "sha256": "a87e2baf03e748dd1f568a95cd6800a2c5ac1ded847b1a3c7faf62f862eeacd4"
+      },
+      {
+        "path": "sam3_intermot/association/identity_state.py",
+        "sha256": "6e1d0d703aadb213d88ff1fdbecc277354742a226046fefb52cba7ba75318563"
+      }
+    ],
+    "ema": 0.9,
+    "gt_used": false,
+    "implementation": "sam3_intermot.association.online_associator.score_matrix_pairwise",
+    "native_bonus": 3.0,
+    "positive_bonus": 5.0,
+    "reid_weights": {
+      "gap": 0.1,
+      "iou": 1.0,
+      "native": 0.5,
+      "sim": 1.5
+    }
+  },
+  "candidate_generator": {
+    "code": [
+      {
+        "path": "scripts/n72r20r1_candidate_stream_smoke.py",
+        "sha256": "e6ddf8831980f4038dff3f62544880411e84cd10b477b2b5f20f2ba4da806c84"
+      },
+      {
+        "path": "sam3_intermot/backend/sam3_backend.py",
+        "sha256": "b88390d9aa9814e473f02e5b4de9bdd5924dcc82d5ac75abb646081737bf1f22"
+      },
+      {
+        "path": "sam3_intermot/adaptation/sam3_loader.py",
+        "sha256": "6407f66f7c889c64308c92ac902bb4db4747be145e9266e03a828989fbf4957c"
+      },
+      {
+        "path": "sam3_intermot/association/decoder_candidate_bridge.py",
+        "sha256": "513c63c14200595d8975e4656940dc5d329af6b3608e51883600aac18a92f269"
+      }
+    ],
+    "feature_encoder_sha256": "2809d3227f7d078f6045f7feb874a34d0684f0e0057b264b99adccf7d4519154",
+    "implementation": "current Sam3Backend plus export_frame_candidates; one process/sequence",
+    "sam3_checkpoint_sha256": "0567debeec80ba4ac6369540c6c248025283cb3ff2b92827509e57e2b3541cb6"
+  },
+  "candidate_tapes": {
+    "dancetrack0001": {
+      "done.json": {
+        "bytes": 1489,
+        "path": "/data3/liuyeqiang/InterMOT_N72R20R1_assets/candidates/dancetrack0001/done.json",
+        "sha256": "f9b0b89ebb5b97195855952c99c903d080c2702dd885b80eb1712eb4c49c60e6"
+      },
+      "embeddings.f16": {
+        "bytes": 1221632,
+        "path": "/data3/liuyeqiang/InterMOT_N72R20R1_assets/candidates/dancetrack0001/embeddings.f16",
+        "sha256": "2d72a6635a8757387282fea0466e100d97714b78988f9e41cc28dc7ce3d9550c"
+      },
+      "index.json": {
+        "bytes": 19456,
+        "path": "/data3/liuyeqiang/InterMOT_N72R20R1_assets/candidates/dancetrack0001/index.json",
+        "sha256": "9cea72cda3c96fe856652ea70219f65c923ab4c43f7d5bbe70a0ae3f1baa092c"
+      },
+      "metadata.jsonl.zst": {
+        "bytes": 81872,
+        "path": "/data3/liuyeqiang/InterMOT_N72R20R1_assets/candidates/dancetrack0001/metadata.jsonl.zst",
+        "sha256": "97637baf3bb95172a2a6c2503ed5dfcf32fff821462f32726fee6d0ff554ff20"
+      }
+    },
+    "dancetrack0002": {
+      "done.json": {
+        "bytes": 1492,
+        "path": "/data3/liuyeqiang/InterMOT_N72R20R1_assets/candidates/dancetrack0002/done.json",
+        "sha256": "1d6da3190b27f085126bdfe6b28006f352a2bf66beb592aedb93a79020a7a302"
+      },
+      "embeddings.f16": {
+        "bytes": 1470464,
+        "path": "/data3/liuyeqiang/InterMOT_N72R20R1_assets/candidates/dancetrack0002/embeddings.f16",
+        "sha256": "b37e8258354bc0b1c2cd845b56d3dd0ed987ee585b56eec5b7ae7fb8f487fffc"
+      },
+      "index.json": {
+        "bytes": 19483,
+        "path": "/data3/liuyeqiang/InterMOT_N72R20R1_assets/candidates/dancetrack0002/index.json",
+        "sha256": "665c17b34964eb1888917e767d7134752fa5d07a9bfd20b5b48b877d82b4b105"
+      },
+      "metadata.jsonl.zst": {
+        "bytes": 103260,
+        "path": "/data3/liuyeqiang/InterMOT_N72R20R1_assets/candidates/dancetrack0002/metadata.jsonl.zst",
+        "sha256": "925a20423cc9f6deacb4b41fc01a282f68222459b032e7a9ee51272692e50d87"
+      }
+    }
+  },
+  "dataset_provenance": {
+    "root": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset",
+    "sequences": [
+      "dancetrack0001",
+      "dancetrack0002"
+    ],
+    "split": "train",
+    "storage_audit": {
+      "bytes": 40985,
+      "path": "/data3/liuyeqiang/InterMOT/outputs/N72R20R1/storage_audit_before.json",
+      "sha256": "9796e77a1a67d5610c44617a8bcc03e11fbbe8ea7e8116544af0e70c9018a9e2"
+    },
+    "test_downloaded_or_used": false
+  },
+  "formal_val_requires_separate_lineage": true,
+  "fresh_lineage": true,
+  "fresh_tape_sealed": true,
+  "frozen_components": {
+    "assignment_solver_code": [
+      {
+        "path": "sam3_intermot/association/effect_assignment.py",
+        "sha256": "916ceb6ad0ebcb8637f44ec94a7e29f9c8e9a95e517ec4f604847a04963533ca"
+      },
+      {
+        "path": "sam3_intermot/association/public_assignment.py",
+        "sha256": "722785406fc94c21cd4dd05c8dac0eb7dfb35e87d532c97f5fbabbcee3869313"
+      }
+    ],
+    "learned_memory_code": [
+      {
+        "path": "sam3_intermot/association/learned_identity_memory.py",
+        "sha256": "4f73379c3f5ea7febb336a45eb99afc1a5efaa126937020a5b0b280c4c2368c1"
+      },
+      {
+        "path": "sam3_intermot/association/learned_identity_state_edge.py",
+        "sha256": "64922744a1a3e277b7bbce04b489da79194ab415b0db2075b9447b6e3bb872a9"
+      }
+    ],
+    "n72r18_gru_checkpoint_sha256": "94ba9c44e177b254ee54984195e839f37c78a648c010ffc723dd3f1d553976a2",
+    "osnet_checkpoint_sha256": "2809d3227f7d078f6045f7feb874a34d0684f0e0057b264b99adccf7d4519154",
+    "public_authority_code": [
+      {
+        "path": "sam3_intermot/identity/public_authority.py",
+        "sha256": "c97e12cf64a304f4e3918cf8602069609b7a9b552b44504e3f0d7262f3376933"
+      },
+      {
+        "path": "sam3_intermot/identity/persistent_runtime.py",
+        "sha256": "132f5dcf1ccb7bf863d4ec517c06cd812700473b0c056518aca87fb93554eab1"
+      }
+    ]
+  },
+  "historical_n72r15_reproduction": false,
+  "historical_n72r15_used": false,
+  "historical_n72r20_status": "BLOCKED_NOT_RECOVERED",
+  "interaction_protocol": {
+    "events": {
+      "bytes": 33841,
+      "path": "/data3/liuyeqiang/InterMOT_N72R20R1_assets/interaction_events.json",
+      "sha256": "f2b6076e4e5120b5d3ea8ea544a41d0b572e0aa7a3fc605c96eeb454373c25a2"
+    },
+    "interaction_source": "simulated_from_gt",
+    "posthoc_labels": {
+      "bytes": 1410,
+      "path": "/data3/liuyeqiang/InterMOT_N72R20R1_assets/posthoc_event_labels.json",
+      "sha256": "0f3464b9f84299907468831640541d57f98c02683ec36eed18b6869b6ff8acbf"
+    },
+    "runtime_consumes_gt": false,
+    "target_event_frame": 0
+  },
+  "manifest_sha256": "c73d8b7976f8d43904dc4344c2c991b8d18abc32ff5ce05f782b571d27b06314",
+  "runtime_future_gt_used": false,
+  "seal_scope": "train_smoke_development",
+  "shared_by_e0_e1_e2": [
+    "candidate tape",
+    "512-D OSNet feature payload",
+    "candidate UID axis",
+    "association state axis",
+    "public ID axis",
+    "fresh base-score matrix",
+    "explicit NONE score 0.0",
+    "exact public assignment solver",
+    "public authority axis"
+  ],
+  "stage": "N72R20R1"
+}

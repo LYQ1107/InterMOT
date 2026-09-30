@@ -1,0 +1,37 @@
+{
+  "stage": "N72R20R1",
+  "status": "PASS_FRESH_OSNET_TO_N72R18_GRU_LINEAGE",
+  "contract": {
+    "encoder": "osnet_x1_0_market1501",
+    "architecture": "same OSNet implementation as N72R18/N72R16 identity probe",
+    "checkpoint": "/data3/liuyeqiang/InterMOT_N72R16_assets/checkpoints/osnet_x1_0_market1501.pth",
+    "checkpoint_sha256": "2809d3227f7d078f6045f7feb874a34d0684f0e0057b264b99adccf7d4519154",
+    "input": "RGB machine box crop, resize 256x128, ImageNet mean/std normalization",
+    "output_dimension": 512,
+    "normalization": "L2",
+    "dtype_at_tape": "float16 storage, float32 computation",
+    "weights_frozen": true
+  },
+  "memory": {
+    "stage": "N72R18",
+    "variant": "GRU_MEMORY",
+    "checkpoint": "outputs/N72R18/checkpoints/identity_memory_gru.pt",
+    "checkpoint_sha256": "94ba9c44e177b254ee54984195e839f37c78a648c010ffc723dd3f1d553976a2",
+    "strict_state_dict_load": true,
+    "feature_dimension": 512,
+    "human_anchor_immutable": true,
+    "score_before_update": true,
+    "consensus_only_machine_update": true
+  },
+  "forbidden_lineages": [
+    "FrozenMachineOSNetN72R5",
+    "new OSNet/ReID training",
+    "N72R19/R1 selector checkpoint",
+    "runtime future-GT features"
+  ],
+  "candidate_features": {
+    "source": "current Sam3Backend candidate box -> same frozen OSNet crop encoder",
+    "feature_sha256_recorded_per_candidate": true,
+    "runtime_future_gt_used": false
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "stage": "N72R20R1",
+  "goal": "Fresh-Lineage Learned Identity Memory Integration",
+  "central_question": "Can the N72R18 learned identity memory improve future public-ID association when evaluated on a newly generated provenance-complete frozen candidate/base-score lineage under the current InterMOT runtime?",
+  "final_decision": "FAIL_LEARNED_MEMORY_DECISION_INACTIVE",
+  "decision_scope": "two-sequence train development smoke assignment-shadow gate",
+  "historical_n72r15_reproduction": false,
+  "historical_n72r20_status": "BLOCKED_NOT_RECOVERED",
+  "fresh_tape_sealed": true,
+  "fresh_tape_manifest": "outputs/N72R20R1/fresh_tape_manifest.json",
+  "candidate_tape": {
+    "status": "PASS_N72R20R1_CANDIDATE_TAPE_VALIDATION",
+    "sequences": {
+      "dancetrack0001": {"frames": 160, "candidates": 1193},
+      "dancetrack0002": {"frames": 160, "candidates": 1436}
+    },
+    "runtime_future_gt_used": false
+  },
+  "identity_shadow": {
+    "status": "PASS_LEARNED_MEMORY_CANDIDATE_SIGNAL",
+    "h100_hard_negative_win_rate": {
+      "human_anchor_only": 0.391304347826087,
+      "learned_memory_shadow": 0.9239130434782609,
+      "delta": 0.5326086956521738,
+      "sequence_cluster_ci95": {"lower": 0.38636363636363635, "upper": 0.6666666666666666, "clusters": 2, "reps": 2000, "seed": 720201}
+    },
+    "h100_rank1_delta": 0.5271739130434783,
+    "h100_mrr_delta": 0.34206780538302295,
+    "h100_mean_margin_delta": 0.14889420383690816,
+    "gt_role": "posthoc_evaluation_truth_only"
+  },
+  "assignment_shadow": {
+    "status": "FAIL_LEARNED_MEMORY_DECISION_INACTIVE",
+    "future_frames": 318,
+    "e2_score_changed_frames": 318,
+    "e2_score_changed_cells": 4549,
+    "e2_solver_changed_frames": 0,
+    "e2_changed_public_id_count": 0,
+    "e2_candidate_none_change_count": 0,
+    "row_max_preservation_failures": 0,
+    "stop_rule_triggered": true
+  },
+  "primary_endpoint": {
+    "name": "H100_AssA_E2_MINUS_E0",
+    "status": "NOT_ESTIMATED",
+    "reason": "Frozen assignment-inactive stop rule fired before formal VAL/TrackEval."
+  },
+  "authorization": {
+    "formal_causal_replay_authorized": false,
+    "val_formal_authorized": false,
+    "next_full_interactive_mot_stage_authorized": false
+  },
+  "training": false,
+  "sam3_source": "current Sam3Backend fresh train smoke",
+  "test_dataset_downloaded_or_used": false,
+  "runtime_future_gt_used": false
+}

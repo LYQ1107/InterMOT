@@ -1,0 +1,58 @@
+{
+  "base_score_tape_shared": true,
+  "candidate_tape_shared": true,
+  "decision_scope": "train_smoke_assignment_shadow_gate",
+  "exact_solver_unchanged": true,
+  "formal_causal_replay_authorized": false,
+  "interpretation": "The learned identity signal is non-trivial in the fresh tape shadow, but the current exact public-ID decision boundary is inactive; this is not association gain.",
+  "learned_score_activity_rate": 1.0,
+  "learned_solver_activity_rate": 0.0,
+  "next_action": "STOP_BEFORE_FORMAL_CAUSAL_REPLAY_AND_VAL",
+  "public_authority_unchanged": true,
+  "runtime_future_gt_used": false,
+  "shadow_status": "PASS_LEARNED_MEMORY_CANDIDATE_SIGNAL",
+  "stage": "N72R20R1",
+  "status": "FAIL_LEARNED_MEMORY_DECISION_INACTIVE",
+  "stop_rule": {
+    "rule": "if learned scores change materially but exact public assignment is nearly unchanged, stop",
+    "score_activity_threshold": 0.1,
+    "solver_activity_threshold": 0.01,
+    "triggered": true
+  },
+  "val_formal_authorized": false,
+  "variants": {
+    "FRESH_BASELINE_B0": {
+      "candidate_none_change_count": 0,
+      "changed_public_id_count": 0,
+      "frames": 320,
+      "future_frames": 318,
+      "memory_write_count": 0,
+      "row_max_preservation_failures": 0,
+      "score_changed_cells": 0,
+      "score_changed_frames": 0,
+      "solver_changed_frames": 0
+    },
+    "FRESH_LEARNED_IDENTITY_TRUSTED": {
+      "candidate_none_change_count": 0,
+      "changed_public_id_count": 0,
+      "frames": 320,
+      "future_frames": 318,
+      "memory_write_count": 318,
+      "row_max_preservation_failures": 0,
+      "score_changed_cells": 4549,
+      "score_changed_frames": 318,
+      "solver_changed_frames": 0
+    },
+    "FRESH_TRUSTED_RELATIVE_STATE": {
+      "candidate_none_change_count": 0,
+      "changed_public_id_count": 0,
+      "frames": 320,
+      "future_frames": 318,
+      "memory_write_count": 0,
+      "row_max_preservation_failures": 0,
+      "score_changed_cells": 18560,
+      "score_changed_frames": 318,
+      "solver_changed_frames": 0
+    }
+  }
+}

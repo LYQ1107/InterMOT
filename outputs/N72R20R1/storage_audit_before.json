@@ -1,0 +1,991 @@
+{
+  "checkpoints": [
+    {
+      "bytes": 3502755717,
+      "exists": true,
+      "kind": "file",
+      "path": "/data3/liuyeqiang/InterMOT_N72R20_assets/checkpoints/sam3.1_multiplex.pt",
+      "sha256": "0567debeec80ba4ac6369540c6c248025283cb3ff2b92827509e57e2b3541cb6"
+    },
+    {
+      "bytes": 10399605,
+      "exists": true,
+      "kind": "file",
+      "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/checkpoints/osnet_x1_0_market1501.pth",
+      "sha256": "2809d3227f7d078f6045f7feb874a34d0684f0e0057b264b99adccf7d4519154"
+    },
+    {
+      "bytes": 6309333,
+      "exists": true,
+      "kind": "file",
+      "path": "/data3/liuyeqiang/InterMOT/outputs/N72R18/checkpoints/identity_memory_gru.pt",
+      "sha256": "94ba9c44e177b254ee54984195e839f37c78a648c010ffc723dd3f1d553976a2"
+    }
+  ],
+  "dataset": {
+    "root": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset",
+    "test_directory_present": false,
+    "train": {
+      "all_gt_readable": true,
+      "all_img1_nonempty": true,
+      "count_matches_expected": true,
+      "expected_sequence_count": 40,
+      "image_count": 41796,
+      "root": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train",
+      "sequence_count": 40,
+      "sequences": [
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0001/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "0b8053212b4aa657cdc9834491c6f156af5ff7c8aad88ab152981b3950d840cc",
+          "image_count": 703,
+          "img1_nonempty": true,
+          "last_frame": 703,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0001",
+          "readable": true,
+          "sequence": "dancetrack0001"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0002/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "3f8d49f7bd61e9fcaffdcac9cf488375f7a50b489467ac66ec84414ab51d80f2",
+          "image_count": 1203,
+          "img1_nonempty": true,
+          "last_frame": 1203,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0002",
+          "readable": true,
+          "sequence": "dancetrack0002"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0006/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "61468c844f10f9d3966be88850b62a6df541d194836ba4ff399b6529433a97a5",
+          "image_count": 1202,
+          "img1_nonempty": true,
+          "last_frame": 1202,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0006",
+          "readable": true,
+          "sequence": "dancetrack0006"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0008/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "7a2ec4354287fe0d4ba477ddbe1f29c8c19a5fc5cefc6bcf8eecb963e175f2df",
+          "image_count": 883,
+          "img1_nonempty": true,
+          "last_frame": 883,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0008",
+          "readable": true,
+          "sequence": "dancetrack0008"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0012/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "b8f0e4e45424449161b04113b636e4b8f0dd81ce5c46df3843034e11e88405a6",
+          "image_count": 1203,
+          "img1_nonempty": true,
+          "last_frame": 1203,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0012",
+          "readable": true,
+          "sequence": "dancetrack0012"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0015/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "13f67eda2c11e6f9eba23b6ce4eae387f257886ec7da719cb52478e4ffd9ffd9",
+          "image_count": 1203,
+          "img1_nonempty": true,
+          "last_frame": 1203,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0015",
+          "readable": true,
+          "sequence": "dancetrack0015"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0016/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "7cd790923e3f0ee03c50e1223164268a3d5b24b23cd97fc0e2de4d4c043a6088",
+          "image_count": 2163,
+          "img1_nonempty": true,
+          "last_frame": 2163,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0016",
+          "readable": true,
+          "sequence": "dancetrack0016"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0020/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "c0a33bc598c91f87c86d78464d68af92eba5799e6f54d0e434e7adfc72eee19f",
+          "image_count": 583,
+          "img1_nonempty": true,
+          "last_frame": 583,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0020",
+          "readable": true,
+          "sequence": "dancetrack0020"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0023/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "b09986f5e18f3cdfa5357129dd84168321db9bf22c435ddedb0555e366fba4c5",
+          "image_count": 1483,
+          "img1_nonempty": true,
+          "last_frame": 1483,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0023",
+          "readable": true,
+          "sequence": "dancetrack0023"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0024/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "879c7fe5f9af4717edc6fed89d04bf65270740d2271bdf9a78a16d9fa6ef7e74",
+          "image_count": 763,
+          "img1_nonempty": true,
+          "last_frame": 763,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0024",
+          "readable": true,
+          "sequence": "dancetrack0024"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0027/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "e6673b03656c29691ece6b871bb7968b4393e9ce3f1c22b4c997a093bc7e1ed5",
+          "image_count": 403,
+          "img1_nonempty": true,
+          "last_frame": 403,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0027",
+          "readable": true,
+          "sequence": "dancetrack0027"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0029/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "edfbf784e478659a4496edfd8f6521245f5ce56c2575b9b4fb2110bcb2ee0719",
+          "image_count": 1263,
+          "img1_nonempty": true,
+          "last_frame": 1263,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0029",
+          "readable": true,
+          "sequence": "dancetrack0029"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0032/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "557251cbbaeb8819adecbe8f2117ed4e15c86ab1f5e2e6b60bbeeecfdf374461",
+          "image_count": 604,
+          "img1_nonempty": true,
+          "last_frame": 604,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0032",
+          "readable": true,
+          "sequence": "dancetrack0032"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0033/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "1c640d70c5c64eac046276bdb2dc27a9ab15317fd616467133e92634a0923114",
+          "image_count": 803,
+          "img1_nonempty": true,
+          "last_frame": 803,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0033",
+          "readable": true,
+          "sequence": "dancetrack0033"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0037/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "f3bb39a3ba9a8692c6f107f579b16b89b2b1621d7c5093e540f2b3355471d607",
+          "image_count": 1203,
+          "img1_nonempty": true,
+          "last_frame": 1203,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0037",
+          "readable": true,
+          "sequence": "dancetrack0037"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0039/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "689beaf2dc58480e69aa809978ddb4f26078ed03e79f908ef6095160799e3b08",
+          "image_count": 1242,
+          "img1_nonempty": true,
+          "last_frame": 1242,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0039",
+          "readable": true,
+          "sequence": "dancetrack0039"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0044/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "9f7eb4db67ed1c469e6afef589db12c74e1d083e144475cb0ba15c0ccee1589f",
+          "image_count": 1203,
+          "img1_nonempty": true,
+          "last_frame": 1203,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0044",
+          "readable": true,
+          "sequence": "dancetrack0044"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0045/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "ee43fccdfc0b6ea213a55d6bc5bc9f7a046e5d0cd08e36b8beaf61bdc8276495",
+          "image_count": 1203,
+          "img1_nonempty": true,
+          "last_frame": 1203,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0045",
+          "readable": true,
+          "sequence": "dancetrack0045"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0049/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "af38e2c8617b865a19f932856ee6797c1ebe718272b583fa21a340d18b1baf70",
+          "image_count": 1203,
+          "img1_nonempty": true,
+          "last_frame": 1203,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0049",
+          "readable": true,
+          "sequence": "dancetrack0049"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0051/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "232a11fc95f5e66d62eb4627e9b975b7b0a12343853067c620a9272152daf1d0",
+          "image_count": 1203,
+          "img1_nonempty": true,
+          "last_frame": 1203,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0051",
+          "readable": true,
+          "sequence": "dancetrack0051"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0052/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "5a9ff69e1ace07862d6d94a189b82887d12391ecfa9e79a17dffe5bc0befa452",
+          "image_count": 1203,
+          "img1_nonempty": true,
+          "last_frame": 1203,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0052",
+          "readable": true,
+          "sequence": "dancetrack0052"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0053/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "0f79ce4d07c40af19290d32631d152cdaf2d10c3ab7ddfb4c36ccf0547d45e08",
+          "image_count": 1204,
+          "img1_nonempty": true,
+          "last_frame": 1204,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0053",
+          "readable": true,
+          "sequence": "dancetrack0053"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0055/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "bde33152b4bbc1e5290cbabc5b04f7200c9187a9e7a99214dab278ac9dbc9dd2",
+          "image_count": 1203,
+          "img1_nonempty": true,
+          "last_frame": 1203,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0055",
+          "readable": true,
+          "sequence": "dancetrack0055"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0057/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "6f463a9bb5ba6ab6cd7a74e665689edd71e5ada16641d1c90993221b0b9232b9",
+          "image_count": 622,
+          "img1_nonempty": true,
+          "last_frame": 622,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0057",
+          "readable": true,
+          "sequence": "dancetrack0057"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0061/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "fe2f29fd02249c6af350b77705a8be7b908a3165319062906abc0f30c5419107",
+          "image_count": 1203,
+          "img1_nonempty": true,
+          "last_frame": 1203,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0061",
+          "readable": true,
+          "sequence": "dancetrack0061"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0062/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "b0e351e6bb2e7c0d1204c8a3bfadaf0e23bcc6949d98a75d73d047ef31c217d9",
+          "image_count": 1203,
+          "img1_nonempty": true,
+          "last_frame": 1203,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0062",
+          "readable": true,
+          "sequence": "dancetrack0062"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0066/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "29dc5182a8fed3fdf92b42da47636c58ab258430a05c5db338f21d23ec4f7900",
+          "image_count": 1202,
+          "img1_nonempty": true,
+          "last_frame": 1202,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0066",
+          "readable": true,
+          "sequence": "dancetrack0066"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0068/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "20d652746c32cf04f57751ecc30f41a727f14901985da3d8aab14238e6931010",
+          "image_count": 1203,
+          "img1_nonempty": true,
+          "last_frame": 1203,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0068",
+          "readable": true,
+          "sequence": "dancetrack0068"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0069/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "8a5b4563310113c20dad1038e1916950e12b30bc76195c1bf477ac9cf8d1a537",
+          "image_count": 1403,
+          "img1_nonempty": true,
+          "last_frame": 1403,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0069",
+          "readable": true,
+          "sequence": "dancetrack0069"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0072/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "eec2d1a848c062f994ec2b34b1b5c45bf00e56b0f2409b888ac13f698e175287",
+          "image_count": 1203,
+          "img1_nonempty": true,
+          "last_frame": 1203,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0072",
+          "readable": true,
+          "sequence": "dancetrack0072"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0074/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "0cee01618509b900354aadd67fd833a821f7a9166b0b788d6cda85544d46a1fe",
+          "image_count": 1203,
+          "img1_nonempty": true,
+          "last_frame": 1203,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0074",
+          "readable": true,
+          "sequence": "dancetrack0074"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0075/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "01a731a6f8b3076908cc6c38c558da8144dad6717f8379053a08ad9222f3fce4",
+          "image_count": 803,
+          "img1_nonempty": true,
+          "last_frame": 803,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0075",
+          "readable": true,
+          "sequence": "dancetrack0075"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0080/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "88157a55197c4943f85ee1525309c0e0a986b444577c76f1654b2e5343afabcc",
+          "image_count": 1201,
+          "img1_nonempty": true,
+          "last_frame": 1201,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0080",
+          "readable": true,
+          "sequence": "dancetrack0080"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0082/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "143d5333a3f79b28cc774f551955c81566165cd93d73c4057dc9684e98125843",
+          "image_count": 603,
+          "img1_nonempty": true,
+          "last_frame": 603,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0082",
+          "readable": true,
+          "sequence": "dancetrack0082"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0083/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "9303fbbb9048536d32a313172fc87a9e08080c8da8c4983860703fdb8db2c13d",
+          "image_count": 603,
+          "img1_nonempty": true,
+          "last_frame": 603,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0083",
+          "readable": true,
+          "sequence": "dancetrack0083"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0086/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "9f52ec7225974e80916fd22856fbbb656b2810594aede1f9a69302b6b45da0b7",
+          "image_count": 603,
+          "img1_nonempty": true,
+          "last_frame": 603,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0086",
+          "readable": true,
+          "sequence": "dancetrack0086"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0087/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "1ed5d362e443873a3dd8276e36ededf645c297fdf05cad6c963448482996a677",
+          "image_count": 1003,
+          "img1_nonempty": true,
+          "last_frame": 1003,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0087",
+          "readable": true,
+          "sequence": "dancetrack0087"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0096/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "b5d000b95f2a7be6ee519cd394c01473d7f4144787406009b78552686cce347a",
+          "image_count": 603,
+          "img1_nonempty": true,
+          "last_frame": 603,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0096",
+          "readable": true,
+          "sequence": "dancetrack0096"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0098/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "fc4ab4b00fa765db1e989e797cc62414cfb9d93a7360e6ff80ecb2f172e8d89a",
+          "image_count": 1203,
+          "img1_nonempty": true,
+          "last_frame": 1203,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0098",
+          "readable": true,
+          "sequence": "dancetrack0098"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0099/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "ab6f2dc7dbcde9e8acfc82d5d35392da350c026c11d810da7234b451af804e33",
+          "image_count": 603,
+          "img1_nonempty": true,
+          "last_frame": 603,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train/dancetrack0099",
+          "readable": true,
+          "sequence": "dancetrack0099"
+        }
+      ]
+    },
+    "val": {
+      "all_gt_readable": true,
+      "all_img1_nonempty": true,
+      "count_matches_expected": true,
+      "expected_sequence_count": 25,
+      "image_count": 25508,
+      "root": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val",
+      "sequence_count": 25,
+      "sequences": [
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0004/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "a6ce73e1eedb04f299943f92231aa4b6b7ce177af500f3862cd12a690b86fc86",
+          "image_count": 1203,
+          "img1_nonempty": true,
+          "last_frame": 1203,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0004",
+          "readable": true,
+          "sequence": "dancetrack0004"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0005/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "994864664feeb88f9ae51ea5248f0f9631a4f209fcfdc04492912748943734aa",
+          "image_count": 1203,
+          "img1_nonempty": true,
+          "last_frame": 1203,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0005",
+          "readable": true,
+          "sequence": "dancetrack0005"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0007/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "83771c676ef958e726ad073d219170bb48d2269698b8a92cd982ec2d369160cc",
+          "image_count": 1203,
+          "img1_nonempty": true,
+          "last_frame": 1203,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0007",
+          "readable": true,
+          "sequence": "dancetrack0007"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0010/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "71fa468ecc9feaa1afe45bce7c173c300ead8879eaf231f860168353154ac09a",
+          "image_count": 1203,
+          "img1_nonempty": true,
+          "last_frame": 1203,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0010",
+          "readable": true,
+          "sequence": "dancetrack0010"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0014/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "05ea3b15c4172fc9f5b4559d5a084e0140e90ef05ee8e3c5271624db9ad54dc8",
+          "image_count": 1203,
+          "img1_nonempty": true,
+          "last_frame": 1203,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0014",
+          "readable": true,
+          "sequence": "dancetrack0014"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0018/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "40afe0df566f65fcd1e1630eb0a8322e0af7049397e3635c8ad090256a774637",
+          "image_count": 503,
+          "img1_nonempty": true,
+          "last_frame": 503,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0018",
+          "readable": true,
+          "sequence": "dancetrack0018"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0019/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "eef3d602c3a515d37eeb88c6f401de01646fd5b569dae584535de57431dbcd72",
+          "image_count": 2402,
+          "img1_nonempty": true,
+          "last_frame": 2402,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0019",
+          "readable": true,
+          "sequence": "dancetrack0019"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0025/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "600911ec4dd1974656913d9839d7a3a509289970746acef51eccfa1974e43659",
+          "image_count": 803,
+          "img1_nonempty": true,
+          "last_frame": 803,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0025",
+          "readable": true,
+          "sequence": "dancetrack0025"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0026/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "cd8aaa7953ad174c7bf874b05488210408e4905637d4282f7a08d0933da6e836",
+          "image_count": 302,
+          "img1_nonempty": true,
+          "last_frame": 302,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0026",
+          "readable": true,
+          "sequence": "dancetrack0026"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0030/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "dd091b6ad1c4cdb54737582ed0d0850ceacae5a5b64efafc046be8330177cf41",
+          "image_count": 1263,
+          "img1_nonempty": true,
+          "last_frame": 1263,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0030",
+          "readable": true,
+          "sequence": "dancetrack0030"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0034/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "0e487ba2f4c6996af629a896aab7d615f87b56a741a71c076dcb4c549c608923",
+          "image_count": 923,
+          "img1_nonempty": true,
+          "last_frame": 923,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0034",
+          "readable": true,
+          "sequence": "dancetrack0034"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0035/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "89c5e9773e3b619e9deb90783fb51121f02aa6315ebb6ffb8c130aa01eb1e279",
+          "image_count": 703,
+          "img1_nonempty": true,
+          "last_frame": 703,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0035",
+          "readable": true,
+          "sequence": "dancetrack0035"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0041/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "91c75f56f96a83d9d0b817ee9450706d2f8fcb8eb9a4cdb5fd86414e24b2990c",
+          "image_count": 1003,
+          "img1_nonempty": true,
+          "last_frame": 1003,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0041",
+          "readable": true,
+          "sequence": "dancetrack0041"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0043/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "bbbc5a7da20df53b630041e9f3d6fb7273630251639518e1f8a87eaeaa36e9fc",
+          "image_count": 183,
+          "img1_nonempty": true,
+          "last_frame": 183,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0043",
+          "readable": true,
+          "sequence": "dancetrack0043"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0047/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "7bc317e6cfd4069bc96a94619ed2e109ad956f0669c9188d87fc40805f469a45",
+          "image_count": 1203,
+          "img1_nonempty": true,
+          "last_frame": 1203,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0047",
+          "readable": true,
+          "sequence": "dancetrack0047"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0058/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "b4f0e6ffd926afcf8f00ebd41b925c407cf699dbb91f0304898619092b9aa179",
+          "image_count": 1601,
+          "img1_nonempty": true,
+          "last_frame": 1601,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0058",
+          "readable": true,
+          "sequence": "dancetrack0058"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0063/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "cdbe63f53b65fc9f817623488119ce7e5887ab2b98bdfee4ef405ec0ada9d51c",
+          "image_count": 1000,
+          "img1_nonempty": true,
+          "last_frame": 1000,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0063",
+          "readable": true,
+          "sequence": "dancetrack0063"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0065/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "8ef8182cd5a68b7fcf639e48e8c34031fd3de7fdd44a0dca8b9ee610370bd918",
+          "image_count": 702,
+          "img1_nonempty": true,
+          "last_frame": 702,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0065",
+          "readable": true,
+          "sequence": "dancetrack0065"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0073/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "e4666c17a91307fbb7d0a319997fdab81bb3fe4bb216a078a08450d6443810ea",
+          "image_count": 703,
+          "img1_nonempty": true,
+          "last_frame": 703,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0073",
+          "readable": true,
+          "sequence": "dancetrack0073"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0077/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "f27f5e43e743d49903ca06d46aceebb987d807015fd3200380d37f1e86da5071",
+          "image_count": 1203,
+          "img1_nonempty": true,
+          "last_frame": 1203,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0077",
+          "readable": true,
+          "sequence": "dancetrack0077"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0079/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "fa3c330b143d05a267025a0b0438600b2fc2661d45336e67cafb7fe692ae0e8b",
+          "image_count": 1202,
+          "img1_nonempty": true,
+          "last_frame": 1202,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0079",
+          "readable": true,
+          "sequence": "dancetrack0079"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0081/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "210a8e080f9a51df802452650a3897e4a69546629cb819b0aec94147ac68251a",
+          "image_count": 984,
+          "img1_nonempty": true,
+          "last_frame": 984,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0081",
+          "readable": true,
+          "sequence": "dancetrack0081"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0090/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "0568cc5b0c52cdc42e96acb00b8e334902982c23cdc7c79d9933320ed3c24688",
+          "image_count": 1004,
+          "img1_nonempty": true,
+          "last_frame": 1004,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0090",
+          "readable": true,
+          "sequence": "dancetrack0090"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0094/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "6ce8a8e56860d094dd8c1fa9735019a38c2b7218355ae2003a1423c9fa6587d2",
+          "image_count": 603,
+          "img1_nonempty": true,
+          "last_frame": 603,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0094",
+          "readable": true,
+          "sequence": "dancetrack0094"
+        },
+        {
+          "first_frame": 1,
+          "gt_path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0097/gt/gt.txt",
+          "gt_readable": true,
+          "gt_sha256": "5a5b518c51612761abaaae90e2452c89437fad28e7bb7f71129047b80645de2d",
+          "image_count": 1203,
+          "img1_nonempty": true,
+          "last_frame": 1203,
+          "path": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/val/dancetrack0097",
+          "readable": true,
+          "sequence": "dancetrack0097"
+        }
+      ]
+    }
+  },
+  "filesystem": {
+    "df_h_output": "Filesystem      Size  Used Avail Use% Mounted on\n/dev/loop10    1007G  837G  120G  88% /data3/liuyeqiang\n",
+    "free_bytes": 128348172288,
+    "free_gb_decimal": 128.348172288,
+    "free_gib": 119.53355026245117,
+    "path": "/data3/liuyeqiang/InterMOT",
+    "quota": "none reported by quota -s",
+    "storage_status": "OK",
+    "total_bytes": 1081101176832,
+    "used_bytes": 897760649216
+  },
+  "generated_utc": "2026-09-30T17:41:11.017975+00:00",
+  "known_roots": [
+    {
+      "bytes": 19801796656,
+      "exists": true,
+      "kind": "directory",
+      "path": "/data3/liuyeqiang/InterMOT"
+    },
+    {
+      "bytes": 12537819346,
+      "exists": true,
+      "kind": "directory",
+      "path": "/data3/liuyeqiang/InterMOT_N72R16_assets"
+    },
+    {
+      "bytes": 1716887367,
+      "exists": true,
+      "kind": "directory",
+      "path": "/data3/liuyeqiang/InterMOT_N72R17_assets"
+    },
+    {
+      "bytes": 3513307102,
+      "exists": true,
+      "kind": "directory",
+      "path": "/data3/liuyeqiang/InterMOT_N72R20_assets"
+    },
+    {
+      "exists": false,
+      "kind": "missing",
+      "path": "/data3/liuyeqiang/InterMOT_N72R20R1_assets"
+    },
+    {
+      "bytes": 765249924,
+      "exists": true,
+      "kind": "directory",
+      "path": "/data3/liuyeqiang/research_references/N72R20"
+    },
+    {
+      "bytes": 10928231256,
+      "exists": true,
+      "kind": "directory",
+      "path": "/data3/liuyeqiang/.cache"
+    },
+    {
+      "bytes": 5745269060,
+      "exists": true,
+      "kind": "directory",
+      "path": "/data3/liuyeqiang/.codex"
+    }
+  ],
+  "next_action": "Run only the bounded dancetrack0001/dancetrack0002 train candidate smoke if storage status is not HARD_STOP.",
+  "policy": {
+    "deletion_performed": false,
+    "download_performed": false,
+    "hard_stop_free_bytes": 100000000000,
+    "new_asset_budget_bytes": 15000000000,
+    "test_download_allowed": false,
+    "warning_free_bytes": 120000000000
+  },
+  "r1_existing_output_bytes": 21231,
+  "read_only": true,
+  "reference_clones": [
+    {
+      "actual_sha": "ffc0e905ac196a603027eca8d18fb0dff48c8bcc",
+      "bytes": 3243772,
+      "expected_sha": "ffc0e905ac196a603027eca8d18fb0dff48c8bcc",
+      "name": "MOTIP",
+      "path": "/data3/liuyeqiang/research_references/N72R20/MOTIP",
+      "sha_matches": true
+    },
+    {
+      "actual_sha": "eb7a177b9cbcb89742ec69b2545ab3af2ea31a80",
+      "bytes": 59649923,
+      "expected_sha": "eb7a177b9cbcb89742ec69b2545ab3af2ea31a80",
+      "name": "MeMOTR",
+      "path": "/data3/liuyeqiang/research_references/N72R20/MeMOTR",
+      "sha_matches": true
+    },
+    {
+      "actual_sha": "ee7f1c5fcbdcac48ed8bfab38d52c0006bf304da",
+      "bytes": 44346488,
+      "expected_sha": "ee7f1c5fcbdcac48ed8bfab38d52c0006bf304da",
+      "name": "TrackTrack",
+      "path": "/data3/liuyeqiang/research_references/N72R20/TrackTrack",
+      "sha_matches": true
+    },
+    {
+      "actual_sha": "dbb727bfb63eddd28e97b1f64462cbf7df1413c6",
+      "bytes": 21049399,
+      "expected_sha": "dbb727bfb63eddd28e97b1f64462cbf7df1413c6",
+      "name": "GeneralTrack",
+      "path": "/data3/liuyeqiang/research_references/N72R20/GeneralTrack",
+      "sha_matches": true
+    },
+    {
+      "actual_sha": "eada72e74e54c153b30674d277b97882edc568b8",
+      "bytes": 65432609,
+      "expected_sha": "eada72e74e54c153b30674d277b97882edc568b8",
+      "name": "DiffMOT",
+      "path": "/data3/liuyeqiang/research_references/N72R20/DiffMOT",
+      "sha_matches": true
+    },
+    {
+      "actual_sha": "c5472b9c7615f35abdf1188cb1a0c5408fe50d66",
+      "bytes": 131888921,
+      "expected_sha": "c5472b9c7615f35abdf1188cb1a0c5408fe50d66",
+      "name": "MASA",
+      "path": "/data3/liuyeqiang/research_references/N72R20/MASA",
+      "sha_matches": true
+    },
+    {
+      "actual_sha": "fb5bfc3a8f067476565e753b3a73df4d757c9d03",
+      "bytes": 93818323,
+      "expected_sha": "fb5bfc3a8f067476565e753b3a73df4d757c9d03",
+      "name": "BoostTrack",
+      "path": "/data3/liuyeqiang/research_references/N72R20/BoostTrack",
+      "sha_matches": true
+    },
+    {
+      "actual_sha": "251985436d6712aaf682aaaf5f71edb4987224bd",
+      "bytes": 128702042,
+      "expected_sha": "251985436d6712aaf682aaaf5f71edb4987224bd",
+      "name": "BoT-SORT",
+      "path": "/data3/liuyeqiang/research_references/N72R20/BoT-SORT",
+      "sha_matches": true
+    },
+    {
+      "actual_sha": "8462e7e729a93ccd3bd995c0a79a890336cb3a0b",
+      "bytes": 99539310,
+      "expected_sha": "8462e7e729a93ccd3bd995c0a79a890336cb3a0b",
+      "name": "OC_SORT",
+      "path": "/data3/liuyeqiang/research_references/N72R20/OC_SORT",
+      "sha_matches": true
+    },
+    {
+      "actual_sha": "183218eb1624027a1991586c931b242dd08d3a35",
+      "bytes": 117579137,
+      "expected_sha": "183218eb1624027a1991586c931b242dd08d3a35",
+      "name": "CKP",
+      "path": "/data3/liuyeqiang/research_references/N72R20/CKP",
+      "sha_matches": true
+    }
+  ],
+  "runtime_future_gt_used": false,
+  "stage": "N72R20R1",
+  "temporary_files_under_old_asset_root": [
+    "/data3/liuyeqiang/InterMOT_N72R20_assets/aborted_streaming_val_20260930/dancetrack0004/.embeddings.f16.2379525.tmp",
+    "/data3/liuyeqiang/InterMOT_N72R20_assets/aborted_streaming_val_20260930/dancetrack0004/.metadata.jsonl.zst.2379525.tmp"
+  ]
+}
