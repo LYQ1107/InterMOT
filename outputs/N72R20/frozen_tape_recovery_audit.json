@@ -33,7 +33,26 @@
     "candidate_alias": "nas57",
     "read_only_ssh_alias_result": "HOSTNAME_UNRESOLVED",
     "read_only_ssh_ip_result": "CONNECTION_TIMEOUT",
+    "network_interface_state": {
+      "private_interface": "eno2np1",
+      "private_interface_state": "DOWN",
+      "current_ipv4": "202.205.84.80/24",
+      "route_to_candidate": "via 202.205.84.1 dev eno1np0",
+      "nfs_2049": "UNREACHABLE",
+      "smb_445": "UNREACHABLE"
+    },
     "copied_or_mounted": false
+  },
+  "additional_recovery_checks": {
+    "local_backup_roots_checked": [
+      "/data3/liuyeqiang/datasets/codex-backup",
+      "/data3/liuyeqiang/.codex/recovery-backups",
+      "/data3/liuyeqiang/.codex/archived_sessions"
+    ],
+    "backup_tape_match": false,
+    "remote_git_refs_checked": true,
+    "remote_git_ref_contains_frozen_tape": false,
+    "network_configuration_changed": false
   },
   "safe_policy": "Do not fabricate the frozen base matrix from GT, candidate embeddings, or a new matcher. Do not run formal assignment shadow, causal E2, TrackEval, or emit a final scientific decision until the source tape is recovered and its hashes/schema are verified.",
   "formal_replay_run": false,
