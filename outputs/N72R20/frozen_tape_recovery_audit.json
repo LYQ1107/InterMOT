@@ -1,0 +1,41 @@
+{
+  "stage": "N72R20",
+  "audit_date": "2026-10-01",
+  "status": "BLOCKED_NOT_RECOVERED",
+  "required_asset": "Frozen N72R15 formal runtime tape containing candidate rows, public/state axes, and the original base candidate-by-state score matrix.",
+  "required_for": "Formal N72R20 assignment shadow and causal E2 replay.",
+  "local_search": {
+    "roots": [
+      "/data3",
+      "/data1",
+      "/home"
+    ],
+    "filenames_checked": [
+      "formal_manifest.json",
+      "runtime_frames.jsonl"
+    ],
+    "n72r15_path_filtered_matches": 0,
+    "all_root_matches": 0,
+    "current_data2_path_checked": "/data2/usr_for_deadline/SAM3_InterMOT_N72R5/worktree/outputs/N72R15/formal_attempt_04",
+    "current_data2_path_present": false
+  },
+  "historical_provenance": {
+    "source": "旧会话历史与其 N72R15 收口记录",
+    "historical_worktree": "/data2/usr_for_deadline/SAM3_InterMOT_N72R5/worktree",
+    "historical_artifact": "outputs/N72R15/formal_attempt_04/formal_manifest.json",
+    "historical_runtime_rows": 9696,
+    "historical_event_count": 32,
+    "historical_variants": 3,
+    "historical_artifact_recovered": false
+  },
+  "nas_check": {
+    "candidate_host": "192.168.31.57",
+    "candidate_alias": "nas57",
+    "read_only_ssh_alias_result": "HOSTNAME_UNRESOLVED",
+    "read_only_ssh_ip_result": "CONNECTION_TIMEOUT",
+    "copied_or_mounted": false
+  },
+  "safe_policy": "Do not fabricate the frozen base matrix from GT, candidate embeddings, or a new matcher. Do not run formal assignment shadow, causal E2, TrackEval, or emit a final scientific decision until the source tape is recovered and its hashes/schema are verified.",
+  "formal_replay_run": false,
+  "next_action": "Restore or expose the historical N72R15 artifact/worktree or a verified equivalent source tape, then run the existing N72R20 replay script without changing fixed components."
+}

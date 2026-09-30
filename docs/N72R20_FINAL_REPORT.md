@@ -50,3 +50,14 @@ updates; it is therefore a diagnostic gate only and is not evidence for the
 formal E2 treatment. No base score is fabricated from GT or embeddings, and
 no TrackEval conclusion is emitted. Until the assignment/causal replay is
 complete, `next_full_interactive_mot_stage_authorized` is **false**.
+
+## Frozen N72R15 tape recovery status
+
+The old-session handoff identifies the historical source as
+`/data2/usr_for_deadline/SAM3_InterMOT_N72R5/worktree/outputs/N72R15/formal_attempt_04`,
+with 32 events, 3 variants, and 9,696 runtime rows. That path is not present on
+the current host. A read-only search of the available local roots found no
+`formal_manifest.json` or `runtime_frames.jsonl`; the recorded NAS candidates
+were also not reachable from this host. The evidence is preserved in
+`outputs/N72R20/frozen_tape_recovery_audit.json`. This is an asset-recovery
+blocker, not a scientific PASS/FAIL result.

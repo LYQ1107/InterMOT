@@ -11,6 +11,7 @@
     "storage_audit_before": "PASS_WRITTEN_STORAGE_OK_NEAR_WARNING",
     "storage_audit_after": "PASS_WRITTEN_STORAGE_OK_NEAR_WARNING",
     "feature_level_shadow": "PASS_FEATURE_LEVEL_SIGNAL_DETECTED",
+    "frozen_tape_recovery": "BLOCKED_NOT_RECOVERED_HISTORICAL_N72R15_PATH_UNAVAILABLE",
     "assignment_shadow": "BLOCKED_MISSING_FROZEN_N72R15_RUNTIME_TAPE"
   },
   "assets": {
@@ -37,5 +38,5 @@
     "training": "NOT_RUN"
   },
   "next_association_stage_authorized": false,
-  "next_action": "Recover only the missing frozen N72R15 runtime/base-score tape, then run the assignment shadow and causal E2 replay before TrackEval."
+  "next_action": "Recover only the missing frozen N72R15 runtime/base-score tape; provenance is recorded in outputs/N72R20/frozen_tape_recovery_audit.json. Then run the assignment shadow and causal E2 replay before TrackEval."
 }
