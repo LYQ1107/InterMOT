@@ -2,16 +2,16 @@
   "stage": "N72R20",
   "captured_at_utc": "2026-09-30T13:37:16+00:00",
   "final_goal_ref": "outputs/N72R20/FINAL_GOAL.json",
-  "central_question": "Can one human initialization be recognized reliably in future real SAM3 candidates?",
-  "central_question_formal": "Can a single human identity initialization, together with the frozen learned identity memory from N72R18, reliably recover and maintain the same identity from a real SAM3 candidate stream over future frames?",
-  "overall_status": "BLOCKED_VAL_NOT_AUTHORIZED",
+  "central_question": "When a human corrects a tracking error, can the system learn from this correction and improve future identity tracking?",
+  "ultimate_application": "Interactive Multi-Object Tracking",
+  "overall_status": "PASS_TRAIN_CORRECTION_EVENTS",
   "final_scientific_decision": null,
   "next_interactive_mot_stage_authorized": false,
   "requirements": {
-    "allowed_dancetrack_train_val_audited": {
+    "allowed_dancetrack_train_audited": {
       "status": "VERIFIED",
       "evidence": "outputs/N72R20/dataset_discovery.json",
-      "detail": "train 40/40 and val 25/25 complete; no test asset used"
+      "detail": "train lineage is present; current correction-event scope uses only dancetrack0001/0002 smoke frames"
     },
     "storage_and_protection_audited": {
       "status": "VERIFIED",
@@ -32,24 +32,37 @@
       "detail": "dancetrack0001/0002, 160 frames each, 2,629 candidates total; no GT runtime input"
     },
     "identity_bridge_and_gate_code": {
-      "status": "PREPARED_NOT_EXECUTED",
-      "evidence": "scripts/n72r20_identity_bridge_eval.py, scripts/n72r20_aggregate_identity_bridge.py, scripts/n72r20_run_streaming_val_bridge.py"
+      "status": "PRESERVED_HISTORICAL_TRAIN_RECORDS",
+      "evidence": "scripts/n72r20_identity_bridge_eval.py and external train_identity_records"
     },
     "candidate_identity_matcher": {
-      "status": "PREPARED_AND_UNIT_TESTED_NOT_EXECUTED",
+      "status": "PRESERVED_AND_UNIT_TESTED",
       "evidence": "sam3_intermot/identity_memory/candidate_identity_matcher.py and tests/test_n72r20_candidate_identity_matcher.py"
     },
     "historical_context_and_reuse_audit": {
       "status": "VERIFIED",
       "evidence": "outputs/N72R20/history_context.md and outputs/N72R20/module_reuse_audit.md"
     },
+    "correction_event_schema": {
+      "status": "VERIFIED",
+      "evidence": "sam3_intermot/interaction/correction_event.py and tests/test_n72r20_correction_events.py"
+    },
+    "correction_event_generation": {
+      "status": "PASS_TRAIN_CORRECTION_EVENTS",
+      "evidence": "outputs/N72R20/correction_events/correction_event_summary.json",
+      "detail": "1043 simulated events from 1497 train correction opportunities across two smoke sequences"
+    },
+    "correction_memory_update": {
+      "status": "RECORD_ONLY_NO_MEMORY_MUTATION",
+      "evidence": "sam3_intermot/identity_memory/correction_update.py"
+    },
     "val_candidate_coverage_and_identity_metrics": {
-      "status": "NOT_MEASURED",
-      "evidence": null
+      "status": "OUT_OF_SCOPE_AFTER_GOAL_CORRECTION",
+      "evidence": "outputs/N72R20/FINAL_GOAL.json"
     },
     "frozen_n72r20_decision": {
-      "status": "NOT_ISSUED_VAL_NOT_AUTHORIZED",
-      "evidence": "outputs/N72R20/N72R20_SMOKE_DECISION.md"
+      "status": "NOT_A_CURRENT_STAGE_ENDPOINT",
+      "evidence": "outputs/N72R20/FINAL_GOAL.json"
     },
     "downstream_mot_work": {
       "status": "CORRECTLY_NOT_STARTED",
@@ -57,8 +70,8 @@
     },
     "software_regression": {
       "status": "VERIFIED_WITH_KNOWN_THIRD_PARTY_FAILURES",
-      "evidence": "238 passed, 4 failed; all four are the fixed TrackEval SEQMAP_FILE list/path defect"
+      "evidence": "241 passed, 4 failed; all four are the fixed TrackEval SEQMAP_FILE list/path defect; three new correction-event tests pass"
     }
   },
-  "required_next_authorization": "Explicit authorization for frozen DanceTrack val; no val/MOT/association work is authorized by this task."
+  "required_next_authorization": "Complete artifact validation and stop; N72R21 must separately authorize learned correction-memory updates."
 }

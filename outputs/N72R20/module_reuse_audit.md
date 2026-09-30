@@ -1,6 +1,7 @@
 # N72R20 Module Reuse Audit
 
-This audit is governed by [`FINAL_GOAL.json`](FINAL_GOAL.json). The only new
+This audit is governed by [`FINAL_GOAL.json`](FINAL_GOAL.json). The current
+N72R20 goal is Human Correction Driven Persistent Identity Adaptation. The new
 runtime connection module is
 [`sam3_intermot/identity_memory/candidate_identity_matcher.py`](../../sam3_intermot/identity_memory/candidate_identity_matcher.py).
 
@@ -23,9 +24,11 @@ one identity state, and returns a stable descending rank. It does not save
 images, masks, decoder tensors, or dense feature maps. It rejects GT/public
 identity fields in runtime candidate records.
 
-Memory writes remain in the existing N72R20 bridge/evaluator, where the frozen
-N72R18 GRU and the explicit immediate/2-frame diagnostics are controlled. The
-new connector is not a selector, tracker, Hungarian assignment, or training
+The current-stage correction event generator reuses the frozen B2 bridge
+records only as an error-discovery source. `HumanCorrectionEvent` stores the
+wrong prediction, simulated correction, and compact candidate context;
+`CorrectionMemoryUpdater` is record-only and never mutates memory. The new
+components are not a selector, tracker, Hungarian assignment, or training
 path.
 
 ## Not modified

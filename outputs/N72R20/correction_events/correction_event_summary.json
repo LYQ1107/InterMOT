@@ -1,0 +1,83 @@
+{
+  "stage": "N72R20",
+  "final_goal_ref": "outputs/N72R20/FINAL_GOAL.json",
+  "goal": "Human Correction Driven Persistent Identity Adaptation",
+  "central_question": "When a human corrects a tracking error, can the system learn from this correction and improve future identity tracking?",
+  "status": "PASS_N72R20_TRAIN_CORRECTION_EVENTS",
+  "split": "train",
+  "sequences": [
+    "dancetrack0001",
+    "dancetrack0002"
+  ],
+  "sequence_count": 2,
+  "method": "B2_FROZEN_N72R18_GRU",
+  "candidate_stream": "real SAM3 candidate caches generated without GT",
+  "error_discovery": "offline GT comparison only",
+  "interaction_source": "simulated_from_gt",
+  "runtime_future_gt_used": false,
+  "runtime_gt_read": false,
+  "training_performed": false,
+  "memory_updated": false,
+  "events": 1043,
+  "event_files": {
+    "dancetrack0001": "/data3/liuyeqiang/InterMOT/outputs/N72R20/correction_events/dancetrack0001.jsonl",
+    "dancetrack0002": "/data3/liuyeqiang/InterMOT/outputs/N72R20/correction_events/dancetrack0002.jsonl"
+  },
+  "statistics": {
+    "total_error_count": 1043,
+    "identity_switch_count": 773,
+    "missed_identity_count": 182,
+    "wrong_recovery_count": 88,
+    "correction_opportunity_count": 1497,
+    "correction_opportunity_by_sequence": {
+      "dancetrack0001": 700,
+      "dancetrack0002": 797
+    },
+    "error_rate_per_opportunity": 0.6967267869071476,
+    "hard_negative_count": 1028,
+    "hard_negative_proportion": 0.9856184084372004,
+    "identity_error_hard_negative_proportion": 0.9872241579558653,
+    "error_interval_frames": {
+      "count": 1028,
+      "median": 1.0,
+      "p10": 1.0,
+      "p90": 1.0
+    },
+    "by_sequence": {
+      "dancetrack0001": {
+        "correction_opportunities": 700,
+        "total_error_count": 516,
+        "identity_switch_count": 397,
+        "missed_identity_count": 72,
+        "wrong_recovery_count": 47,
+        "hard_negative_count": 503,
+        "error_rate_per_opportunity": 0.7371428571428571,
+        "error_interval_frames": {
+          "count": 509,
+          "median": 1.0,
+          "p10": 1.0,
+          "p90": 1.0
+        }
+      },
+      "dancetrack0002": {
+        "correction_opportunities": 797,
+        "total_error_count": 527,
+        "identity_switch_count": 376,
+        "missed_identity_count": 110,
+        "wrong_recovery_count": 41,
+        "hard_negative_count": 525,
+        "error_rate_per_opportunity": 0.6612296110414053,
+        "error_interval_frames": {
+          "count": 519,
+          "median": 1.0,
+          "p10": 1.0,
+          "p90": 1.0
+        }
+      }
+    }
+  },
+  "candidate_identity_matcher": "preserved frozen connector",
+  "frozen_n72r18_gru": "/data3/liuyeqiang/InterMOT/outputs/N72R18/checkpoints/identity_memory_gru.pt",
+  "frozen_osnet": "/data3/liuyeqiang/InterMOT_N72R16_assets/checkpoints/osnet_x1_0_market1501.pth",
+  "generated_at_utc": "2026-09-30T14:03:24.847203+00:00"
+}

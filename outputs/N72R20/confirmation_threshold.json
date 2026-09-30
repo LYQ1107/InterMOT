@@ -1,0 +1,19 @@
+{
+  "stage": "N72R20",
+  "split": "train",
+  "frozen": true,
+  "confirmation_margin_threshold": 0.05669059753417969,
+  "selection_margin_definition": "top1 cosine score minus top2 cosine score on the machine candidate pool",
+  "freeze_rule": "10th percentile of eligible correct-top1 train margins; no val records used",
+  "train_quantile": 0.1,
+  "eligible_margin_count": 462,
+  "train_sequences_observed": [
+    "dancetrack0001",
+    "dancetrack0002"
+  ],
+  "source_records": [
+    "/data3/liuyeqiang/InterMOT_N72R20_assets/train_identity_records/dancetrack0001.immediate.jsonl",
+    "/data3/liuyeqiang/InterMOT_N72R20_assets/train_identity_records/dancetrack0002.immediate.jsonl"
+  ],
+  "val_tuning_used": false
+}

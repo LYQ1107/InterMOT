@@ -1,13 +1,15 @@
 # N72R20 Train Smoke Report
 
-FINAL GOAL: **Human-Initialized Identity Memory in Real Candidate Streams**
+FINAL GOAL: **Human Correction Driven Persistent Identity Adaptation**
 
-CENTRAL QUESTION: **Can one human initialization be recognized reliably in future real SAM3 candidates?**
+CENTRAL QUESTION: **When a human corrects a tracking error, can the system learn from this correction and improve future identity tracking?**
 
-This is a train-only runtime smoke, not the frozen N72R20 validation result.
+This is a train-only runtime smoke for constructing the N72R20 correction
+environment, not a learned correction-benefit result.
 The checkpoint and loader audit is recorded in
-[`checkpoint_loader_smoke.json`](checkpoint_loader_smoke.json). No val or MOT
-command was started.
+[`checkpoint_loader_smoke.json`](checkpoint_loader_smoke.json). No completed
+val or MOT result is part of this report; a superseded val attempt was
+interrupted and quarantined after the Goal correction.
 
 | Sequence | Frames written | Candidates | Candidates/frame | Cache bytes | Wall seconds | Approx. FPS |
 |---|---:|---:|---:|---:|---:|---:|
@@ -26,5 +28,6 @@ Runtime observations:
   is outside Git at `/data3/liuyeqiang/InterMOT_N72R20_assets/candidates/`.
 
 The smoke demonstrates SAM3 candidate generation and frozen OSNet embedding
-materialization. It does not measure target coverage, identity rank, memory
-contamination, or the H20/H50/H100 endpoint.
+materialization. The follow-up correction-event report uses GT only offline
+for error discovery; it does not update memory or measure future correction
+benefit.

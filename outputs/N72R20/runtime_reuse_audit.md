@@ -2,11 +2,15 @@
 
 Final Goal: `outputs/N72R20/FINAL_GOAL.json`
 
-Central question: Can one human initialization be recognized reliably in future real SAM3 candidates?
+Central question: When a human corrects a tracking error, can the system learn from this correction and improve future identity tracking?
 
-Formal question: Can a single human identity initialization, together with the frozen learned identity memory from N72R18, reliably recover and maintain the same identity from a real SAM3 candidate stream over future frames?
+Current role: construct a train-only interactive correction environment; GT is
+offline error-discovery truth and never a runtime input.
 
-Audit status: checkpoint restored and train-only smoke completed. The official endpoint was gated; a SHA256-verified public mirror was used. Frozen val remains unauthorized.
+Audit status: checkpoint restored, train-only smoke completed, and correction
+events generated for the two bounded train sequences. The official endpoint
+was gated; a SHA256-verified public mirror was used. Val was stopped and its
+partial cache quarantined after the Goal correction.
 
 ## Reuse decisions
 
@@ -20,8 +24,10 @@ Audit status: checkpoint restored and train-only smoke completed. The official e
 | `scripts/n72r7_candidate_generator_requery.py` | Reuse causal provenance conventions and OSNet crop extraction pattern | Its target-session requery protocol is event-specific and is not the N72R20 all-candidate stream definition. |
 | `scripts/n72r15_candidate_coverage_posthoc.py` | Reuse IoU `>= 0.50` coverage decomposition and GT-posthoc boundary | Keep `candidate unavailable` separate from `identity discrimination failure`; do not reuse N72R15 outputs as N72R20 evidence. |
 | `scripts/n72r20_candidate_stream_smoke.py` / `scripts/n72r20_run_candidate_smoke.py` | New thin N72R20 path-portable wrapper around the existing backend/export contract | The worker reads image frames only, uses the frozen OSNet checkpoint, stores compact metadata plus float16 features, and is deliberately not an identity associator. It must be run only after the checkpoint audit passes. |
-| `scripts/n72r20_identity_bridge_eval.py` / `scripts/n72r20_aggregate_identity_bridge.py` | New target-centric evaluation layer over the cache | It replays every post-anchor frame causally, uses GT only after candidate generation for target/other-identity labels, and reports coverage separately from identity discrimination. It does not run MOT or global assignment. |
-| `scripts/n72r20_run_streaming_val_bridge.py` | Bounded val fallback | If the train projection exceeds 25 GiB, it generates/evaluates one val sequence at a time and only deletes the explicitly generated sequence cache after both policies finish successfully. |
+| `scripts/n72r20_identity_bridge_eval.py` / `scripts/n72r20_aggregate_identity_bridge.py` | Preserved historical identity-probe layer | Its train records are an error-discovery source; the old val endpoint is superseded and not a current-stage result. |
+| `scripts/n72r20_generate_correction_events.py` | Current N72R20 error-discovery adapter | Reads GT only after GT-free train candidate records exist, classifies identity switch/missed target/wrong recovery, and writes compact simulated human correction events. |
+| `sam3_intermot/interaction/correction_event.py` | Current event data contract | Stores candidate ids, pre-correction state, corrected embedding, and candidate context; no image or dense tensor persistence. |
+| `sam3_intermot/identity_memory/correction_update.py` | Future update boundary | Record-only dummy adapter; it returns memory unchanged and reserves learning for N72R21. |
 | `sam3_intermot/identity_probe/dataset.py` | Reuse sequence/GT parsing and validation concepts | The frozen N72R17 protocol and the N72R20 asset manifest are the authority for paths and anchors. GT is evaluation truth only after runtime rows are produced. |
 | `sam3_intermot/identity_memory/selective.py::load_frozen_n72r18_gru` | Reuse strict frozen N72R18 GRU loader | The N72R20 core comparison is frozen GRU versus immutable human-anchor baseline. N72R19/R1 selector models are not promoted into this stage. |
 | `sam3_intermot/identity_memory/updater.py` | Reuse the already serialized GRU architecture/state contract | No new memory architecture or training is authorized. |
@@ -39,6 +45,8 @@ Audit status: checkpoint restored and train-only smoke completed. The official e
 - Runtime memory updates are replayed over every frame after the anchor, including target-not-visible frames. Those frames are retained for causal state evolution but excluded from target-visible coverage/ranking denominators.
 - Candidate data is streamed or split by sequence; no monolithic cache, crop PNG archive, dense mask cache, or raw SAM tensor dump is allowed.
 
-## Blocker and next permitted action
+## Current boundary and next permitted action
 
-The dataset, frozen identity assets, checkpoint, and train-only smoke are ready. The next action, if separately authorized, is frozen DanceTrack val; no val/MOT/association work is authorized in the current task.
+The dataset, frozen identity assets, checkpoint, train-only smoke, and train
+correction events are ready. Stop after validating the event artifacts. No
+val/MOT/association work or training is authorized in the current task.

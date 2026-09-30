@@ -1,10 +1,14 @@
 # N72R20 Historical Context
 
 This file is governed by [`FINAL_GOAL.json`](FINAL_GOAL.json). It records the
-prior identity-memory evidence without changing the N72R20 question:
+prior identity-memory evidence as preserved provenance. The current N72R20
+question is now:
 
-> Can one human initialization be recognized reliably in future real SAM3
-> candidates?
+> When a human corrects a tracking error, can the system learn from this
+> correction and improve future identity tracking?
+
+The earlier identity-probe question is superseded and is not the current
+N72R20 endpoint.
 
 The earlier results were produced under the offline GT replay protocol. They
 are motivation and frozen-memory provenance, not evidence that the memory has
@@ -28,9 +32,11 @@ already transferred to a real SAM3 candidate stream.
 - N72R19R1 reported `FAIL_CLEAN_PRESERVATION` for its selective-update design;
   the frozen N72R18 GRU remains the N72R20 B2 reference.
 
-N72R20 therefore tests transfer to real SAM3 candidates using the same frozen
-OSNet and N72R18 GRU assets. It does not retrain identity models, modify SAM3,
-or promote the N72R19R1 selector.
+The current N72R20 correction environment reuses real SAM3 candidate streams
+and the same frozen OSNet/N72R18 GRU assets to discover train-only prediction
+errors offline and write simulated human correction events. It does not
+retrain identity models, modify SAM3, update memory, or promote the N72R19R1
+selector. Learned correction updates are reserved for N72R21.
 
 ## Source reports
 

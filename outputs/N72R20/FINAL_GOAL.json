@@ -1,31 +1,40 @@
 {
   "stage": "N72R20",
-  "goal": "Human-Initialized Identity Memory in Real Candidate Streams",
-  "central_question": "Can one human initialization be recognized reliably in future real SAM3 candidates?",
-  "main_hypothesis": "A frozen learned identity memory initialized by one human confirmation can rank correct SAM3 candidates above competing candidates over future frames.",
-  "central_question_formal": "Can a single human identity initialization, together with the frozen learned identity memory from N72R18, reliably recover and maintain the same identity from a real SAM3 candidate stream over future frames?",
-  "central_question_zh": "一次人工身份确认后，N72R18 已验证的长期身份记忆，能否在真实 SAM3 候选流中持续找到并保持同一个人的身份？",
-  "primary_endpoint": "VAL_H100_HARD_NEGATIVE_IDENTITY_WIN_RATE",
-  "primary_comparison": "FROZEN_N72R18_GRU_VS_HUMAN_ANCHOR_ONLY_ON_IDENTICAL_REAL_SAM3_CANDIDATES",
-  "dataset_scope": {
-    "allowed": ["DanceTrack train", "DanceTrack val"],
-    "forbidden": ["DanceTrack test", "MOT17", "MOT20", "BDD100K", "TAO", "SportsMOT", "CrowdHuman", "other ReID datasets"]
+  "goal": "Human Correction Driven Persistent Identity Adaptation",
+  "central_question": "When a human corrects a tracking error, can the system learn from this correction and improve future identity tracking?",
+  "ultimate_application": "Interactive Multi-Object Tracking",
+  "sam3_role": "candidate and error generation environment",
+  "identity_memory_role": "persistent identity knowledge storage",
+  "current_stage": "Interactive Correction Environment Construction",
+  "current_scope": {
+    "candidate_stream": "real SAM3 candidates",
+    "error_discovery": "offline GT comparison only",
+    "correction_events": "simulated human correction events",
+    "training": false,
+    "mot_evaluation": false,
+    "trackeval": false,
+    "val_evaluation": false,
+    "datasets": ["DanceTrack train"],
+    "forbidden_datasets": ["DanceTrack test", "DanceTrack val", "MOT17", "MOT20", "BDD100K", "TAO", "SportsMOT", "CrowdHuman", "other ReID datasets"]
   },
-  "horizons": [20, 50, 100],
-  "memory_variants": [
-    "B0_HUMAN_ANCHOR_ONLY",
-    "B1_EMA_0.90_MACHINE_SELECTED_UPDATE",
-    "B2_FROZEN_N72R18_GRU_MACHINE_SELECTED_UPDATE",
-    "ORACLE_CORRECT_UPDATE_OFFLINE_ORACLE_DIAGNOSTIC"
+  "preserved_foundations": [
+    "SAM3 checkpoint recovery and loader smoke",
+    "real SAM3 candidate generation",
+    "frozen N72R16 OSNet pipeline",
+    "frozen N72R18 GRU",
+    "CandidateIdentityMatcher"
   ],
-  "update_diagnostic": ["IMMEDIATE_UPDATE", "2_FRAME_CONFIRMED_UPDATE"],
-  "interaction_source": "simulated_from_gt",
+  "correction_event_types": [
+    "identity_switch",
+    "missed_target",
+    "wrong_recovery"
+  ],
+  "next_stage": "N72R21 Learned Correction Memory Update",
+  "next_association_stage_authorized": false,
   "sam3_required": true,
   "sam3_modified": false,
   "identity_memory_modified": false,
   "training_allowed": false,
   "mot_evaluation_required": false,
-  "training_required": false,
-  "next_association_stage_authorized": false,
   "goal_frozen": true
 }
