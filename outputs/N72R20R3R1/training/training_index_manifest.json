@@ -1,0 +1,108 @@
+{
+  "anchor_vectors": "/data3/liuyeqiang/InterMOT/outputs/N72R20R3R1/training/anchor_vectors.float32.npy",
+  "asset_root": "/data3/liuyeqiang/InterMOT_N72R20R2_assets",
+  "candidate_feature_reference": "sealed per-sequence embeddings.f16 via embedding_offset",
+  "candidate_features_copied": false,
+  "candidate_label_definition": "max target IoU >= 0.50; otherwise NONE",
+  "dataset_root": "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset",
+  "fold_count": 8,
+  "future_frames": 8414,
+  "label_counts": {
+    "CANDIDATE": 6595,
+    "NONE": 1819
+  },
+  "posthoc_gt_used": true,
+  "rows": 16828,
+  "runtime_future_gt_used": false,
+  "runtime_missing_state_hash_examples": [
+    {
+      "condition": "S0_HUMAN_ANCHOR_ONLY",
+      "frame": 378,
+      "reason": "NO_CANDIDATES",
+      "sequence": "dancetrack0062"
+    },
+    {
+      "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+      "frame": 378,
+      "reason": "NO_CANDIDATES",
+      "sequence": "dancetrack0062"
+    },
+    {
+      "condition": "S0_HUMAN_ANCHOR_ONLY",
+      "frame": 383,
+      "reason": "NO_CANDIDATES",
+      "sequence": "dancetrack0062"
+    },
+    {
+      "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+      "frame": 383,
+      "reason": "NO_CANDIDATES",
+      "sequence": "dancetrack0062"
+    },
+    {
+      "condition": "S0_HUMAN_ANCHOR_ONLY",
+      "frame": 384,
+      "reason": "NO_CANDIDATES",
+      "sequence": "dancetrack0062"
+    },
+    {
+      "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+      "frame": 384,
+      "reason": "NO_CANDIDATES",
+      "sequence": "dancetrack0062"
+    },
+    {
+      "condition": "S0_HUMAN_ANCHOR_ONLY",
+      "frame": 385,
+      "reason": "NO_CANDIDATES",
+      "sequence": "dancetrack0062"
+    },
+    {
+      "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+      "frame": 385,
+      "reason": "NO_CANDIDATES",
+      "sequence": "dancetrack0062"
+    },
+    {
+      "condition": "S0_HUMAN_ANCHOR_ONLY",
+      "frame": 386,
+      "reason": "NO_CANDIDATES",
+      "sequence": "dancetrack0062"
+    },
+    {
+      "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+      "frame": 386,
+      "reason": "NO_CANDIDATES",
+      "sequence": "dancetrack0062"
+    }
+  ],
+  "runtime_missing_state_hash_rows": 170,
+  "sequences": [
+    "dancetrack0001",
+    "dancetrack0002",
+    "dancetrack0023",
+    "dancetrack0024",
+    "dancetrack0039",
+    "dancetrack0057",
+    "dancetrack0062",
+    "dancetrack0072"
+  ],
+  "source_stage": "N72R20R3",
+  "stage": "N72R20R3R1",
+  "state_conditions": [
+    "S0_HUMAN_ANCHOR_ONLY",
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE"
+  ],
+  "state_hash_checks": 16828,
+  "state_vectors": "/data3/liuyeqiang/InterMOT/outputs/N72R20R3R1/training/state_vectors.float32.npy",
+  "status": "PASS_R3R1_TRAINING_INDEX_COMPLETE",
+  "taxonomy_counts": {
+    "P0_TARGET_ABSENT": 154,
+    "P1a_BEST_AVAILABLE_LOCALIZATION": 439,
+    "P1b_WRONG_AVAILABLE_OBJECT": 1226,
+    "P2_TARGET_AVAILABLE_ASSOCIATION_WRONG": 1706,
+    "P3_TARGET_AVAILABLE_ASSOCIATION_CORRECT": 4889
+  },
+  "tie_policy": "max target IoU, then lexicographically largest candidate UID (frozen R3 rule)",
+  "training_index": "/data3/liuyeqiang/InterMOT/outputs/N72R20R3R1/training/training_index.jsonl"
+}

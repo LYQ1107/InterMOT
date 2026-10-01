@@ -145,7 +145,8 @@ def main() -> int:
         destination = final_models / source.name
         if source.exists():
             shutil.copy2(source, destination)
-            record["canonical_path"] = str(destination)
+            record["canonical_path"] = str(destination.relative_to(args.root.parent.parent))
+            record.pop("path", None)
     _write_json(args.root / "training" / "checkpoint_manifest.json", {"stage": "N72R20R3R1", "records": checkpoints, "runtime_future_gt_used": False})
     print(json.dumps({"status": "PASS_FORMAL_LOSO_COMPLETE", "selected_model": selected_name, "static_gate": selected_report["static_gate"], "metrics": {key: selected_report.get(key) for key in ("false_present_rate", "open_set_correct_identification_recall", "macro_false_present_rate", "macro_open_set_correct_identification_recall")}}, sort_keys=True))
     return 0

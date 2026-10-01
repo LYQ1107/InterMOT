@@ -1,0 +1,1062 @@
+{
+  "R3_FINAL_DECISION_UNCHANGED": true,
+  "corrected_candidate_coverage": {
+    "aggregate_comparison": [
+      {
+        "candidate_coverage_delta": 0.17953803386403844,
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.8496732142384871,
+        "old_candidate_coverage": 0.6701351803744486,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B0_ALWAYS_PRESENT"
+      },
+      {
+        "candidate_coverage_delta": 0.17953803386403844,
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.8496732142384871,
+        "old_candidate_coverage": 0.6701351803744486,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B1_ABSOLUTE_SCORE"
+      },
+      {
+        "candidate_coverage_delta": 0.17953803386403844,
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.8496732142384871,
+        "old_candidate_coverage": 0.6701351803744486,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B2_ABSOLUTE_MARGIN"
+      },
+      {
+        "candidate_coverage_delta": 0.17953803386403844,
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.8496732142384871,
+        "old_candidate_coverage": 0.6701351803744486,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_mean"
+      },
+      {
+        "candidate_coverage_delta": 0.17953803386403844,
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.8496732142384871,
+        "old_candidate_coverage": 0.6701351803744486,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_median"
+      },
+      {
+        "candidate_coverage_delta": 0.17953803386403844,
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.8496732142384871,
+        "old_candidate_coverage": 0.6701351803744486,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_zscore"
+      },
+      {
+        "candidate_coverage_delta": 0.17953803386403844,
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.8496732142384871,
+        "old_candidate_coverage": 0.6701351803744486,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B4_LOGISTIC_PRESENCE"
+      },
+      {
+        "candidate_coverage_delta": 0.17953803386403844,
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.8496732142384871,
+        "old_candidate_coverage": 0.6701351803744486,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B0_ALWAYS_PRESENT"
+      },
+      {
+        "candidate_coverage_delta": 0.17953803386403844,
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.8496732142384871,
+        "old_candidate_coverage": 0.6701351803744486,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B1_ABSOLUTE_SCORE"
+      },
+      {
+        "candidate_coverage_delta": 0.17953803386403844,
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.8496732142384871,
+        "old_candidate_coverage": 0.6701351803744486,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B2_ABSOLUTE_MARGIN"
+      },
+      {
+        "candidate_coverage_delta": 0.17953803386403844,
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.8496732142384871,
+        "old_candidate_coverage": 0.6701351803744486,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_mean"
+      },
+      {
+        "candidate_coverage_delta": 0.17953803386403844,
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.8496732142384871,
+        "old_candidate_coverage": 0.6701351803744486,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_median"
+      },
+      {
+        "candidate_coverage_delta": 0.17953803386403844,
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.8496732142384871,
+        "old_candidate_coverage": 0.6701351803744486,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_zscore"
+      },
+      {
+        "candidate_coverage_delta": 0.17953803386403844,
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.8496732142384871,
+        "old_candidate_coverage": 0.6701351803744486,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B4_LOGISTIC_PRESENCE"
+      }
+    ],
+    "b4_training_features_affected": false,
+    "corrected_candidate_coverage_definition": "candidate_set_present among frames where target_gt_present is true",
+    "gate_metric_max_absolute_deltas": {
+      "conditional_candidate_accuracy_given_present": 0.0,
+      "false_present_rate": 0.0,
+      "open_set_correct_identification_recall": 0.0,
+      "p0_false_present_rate": 0.0,
+      "p1_false_present_rate": 0.0,
+      "presence_recall": 0.0
+    },
+    "loso_policy_calibration_changed": false,
+    "max_gate_metric_absolute_delta": 0.0,
+    "old_candidate_coverage_source": "outputs/N72R20R3/presence/loso_results.json",
+    "old_records_and_corrected_records": [
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.9583333333333334,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0001",
+        "old_candidate_coverage": 0.9583333333333334,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B0_ALWAYS_PRESENT"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.9583333333333334,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0001",
+        "old_candidate_coverage": 0.9583333333333334,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B1_ABSOLUTE_SCORE"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.9583333333333334,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0001",
+        "old_candidate_coverage": 0.9583333333333334,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B2_ABSOLUTE_MARGIN"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.9583333333333334,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0001",
+        "old_candidate_coverage": 0.9583333333333334,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_mean"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.9583333333333334,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0001",
+        "old_candidate_coverage": 0.9583333333333334,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_median"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.9583333333333334,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0001",
+        "old_candidate_coverage": 0.9583333333333334,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_zscore"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.8252508361204013,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0002",
+        "old_candidate_coverage": 0.8252508361204013,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B0_ALWAYS_PRESENT"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.8252508361204013,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0002",
+        "old_candidate_coverage": 0.8252508361204013,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B1_ABSOLUTE_SCORE"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.8252508361204013,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0002",
+        "old_candidate_coverage": 0.8252508361204013,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B2_ABSOLUTE_MARGIN"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.8252508361204013,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0002",
+        "old_candidate_coverage": 0.8252508361204013,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_mean"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.8252508361204013,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0002",
+        "old_candidate_coverage": 0.8252508361204013,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_median"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.8252508361204013,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0002",
+        "old_candidate_coverage": 0.8252508361204013,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_zscore"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.7578659370725034,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0023",
+        "old_candidate_coverage": 0.7578659370725034,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B0_ALWAYS_PRESENT"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.7578659370725034,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0023",
+        "old_candidate_coverage": 0.7578659370725034,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B1_ABSOLUTE_SCORE"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.7578659370725034,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0023",
+        "old_candidate_coverage": 0.7578659370725034,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B2_ABSOLUTE_MARGIN"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.7578659370725034,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0023",
+        "old_candidate_coverage": 0.7578659370725034,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_mean"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.7578659370725034,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0023",
+        "old_candidate_coverage": 0.7578659370725034,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_median"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.7578659370725034,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0023",
+        "old_candidate_coverage": 0.7578659370725034,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_zscore"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.9367588932806324,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0024",
+        "old_candidate_coverage": 0.9367588932806324,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B0_ALWAYS_PRESENT"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.9367588932806324,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0024",
+        "old_candidate_coverage": 0.9367588932806324,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B1_ABSOLUTE_SCORE"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.9367588932806324,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0024",
+        "old_candidate_coverage": 0.9367588932806324,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B2_ABSOLUTE_MARGIN"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.9367588932806324,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0024",
+        "old_candidate_coverage": 0.9367588932806324,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_mean"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.9367588932806324,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0024",
+        "old_candidate_coverage": 0.9367588932806324,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_median"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.9367588932806324,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0024",
+        "old_candidate_coverage": 0.9367588932806324,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_zscore"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.9933333333333333,
+        "delta": 0.9933333333333333,
+        "heldout_sequence": "dancetrack0039",
+        "old_candidate_coverage": 0.0,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B0_ALWAYS_PRESENT"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.9933333333333333,
+        "delta": 0.9933333333333333,
+        "heldout_sequence": "dancetrack0039",
+        "old_candidate_coverage": 0.0,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B1_ABSOLUTE_SCORE"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.9933333333333333,
+        "delta": 0.9933333333333333,
+        "heldout_sequence": "dancetrack0039",
+        "old_candidate_coverage": 0.0,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B2_ABSOLUTE_MARGIN"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.9933333333333333,
+        "delta": 0.9933333333333333,
+        "heldout_sequence": "dancetrack0039",
+        "old_candidate_coverage": 0.0,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_mean"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.9933333333333333,
+        "delta": 0.9933333333333333,
+        "heldout_sequence": "dancetrack0039",
+        "old_candidate_coverage": 0.0,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_median"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.9933333333333333,
+        "delta": 0.9933333333333333,
+        "heldout_sequence": "dancetrack0039",
+        "old_candidate_coverage": 0.0,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_zscore"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.965742251223491,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0057",
+        "old_candidate_coverage": 0.965742251223491,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B0_ALWAYS_PRESENT"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.965742251223491,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0057",
+        "old_candidate_coverage": 0.965742251223491,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B1_ABSOLUTE_SCORE"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.965742251223491,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0057",
+        "old_candidate_coverage": 0.965742251223491,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B2_ABSOLUTE_MARGIN"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.965742251223491,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0057",
+        "old_candidate_coverage": 0.965742251223491,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_mean"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.965742251223491,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0057",
+        "old_candidate_coverage": 0.965742251223491,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_median"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.965742251223491,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0057",
+        "old_candidate_coverage": 0.965742251223491,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_zscore"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.7945091514143094,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0062",
+        "old_candidate_coverage": 0.7945091514143094,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B0_ALWAYS_PRESENT"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.7945091514143094,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0062",
+        "old_candidate_coverage": 0.7945091514143094,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B1_ABSOLUTE_SCORE"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.7945091514143094,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0062",
+        "old_candidate_coverage": 0.7945091514143094,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B2_ABSOLUTE_MARGIN"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.7945091514143094,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0062",
+        "old_candidate_coverage": 0.7945091514143094,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_mean"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.7945091514143094,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0062",
+        "old_candidate_coverage": 0.7945091514143094,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_median"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.7945091514143094,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0062",
+        "old_candidate_coverage": 0.7945091514143094,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_zscore"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.338339222614841,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0072",
+        "old_candidate_coverage": 0.338339222614841,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B0_ALWAYS_PRESENT"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.338339222614841,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0072",
+        "old_candidate_coverage": 0.338339222614841,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B1_ABSOLUTE_SCORE"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.338339222614841,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0072",
+        "old_candidate_coverage": 0.338339222614841,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B2_ABSOLUTE_MARGIN"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.338339222614841,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0072",
+        "old_candidate_coverage": 0.338339222614841,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_mean"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.338339222614841,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0072",
+        "old_candidate_coverage": 0.338339222614841,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_median"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.338339222614841,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0072",
+        "old_candidate_coverage": 0.338339222614841,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_zscore"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.9583333333333334,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0001",
+        "old_candidate_coverage": 0.9583333333333334,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B0_ALWAYS_PRESENT"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.9583333333333334,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0001",
+        "old_candidate_coverage": 0.9583333333333334,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B1_ABSOLUTE_SCORE"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.9583333333333334,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0001",
+        "old_candidate_coverage": 0.9583333333333334,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B2_ABSOLUTE_MARGIN"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.9583333333333334,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0001",
+        "old_candidate_coverage": 0.9583333333333334,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_mean"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.9583333333333334,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0001",
+        "old_candidate_coverage": 0.9583333333333334,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_median"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.9583333333333334,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0001",
+        "old_candidate_coverage": 0.9583333333333334,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_zscore"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.8252508361204013,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0002",
+        "old_candidate_coverage": 0.8252508361204013,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B0_ALWAYS_PRESENT"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.8252508361204013,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0002",
+        "old_candidate_coverage": 0.8252508361204013,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B1_ABSOLUTE_SCORE"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.8252508361204013,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0002",
+        "old_candidate_coverage": 0.8252508361204013,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B2_ABSOLUTE_MARGIN"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.8252508361204013,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0002",
+        "old_candidate_coverage": 0.8252508361204013,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_mean"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.8252508361204013,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0002",
+        "old_candidate_coverage": 0.8252508361204013,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_median"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.8252508361204013,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0002",
+        "old_candidate_coverage": 0.8252508361204013,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_zscore"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.7578659370725034,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0023",
+        "old_candidate_coverage": 0.7578659370725034,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B0_ALWAYS_PRESENT"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.7578659370725034,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0023",
+        "old_candidate_coverage": 0.7578659370725034,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B1_ABSOLUTE_SCORE"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.7578659370725034,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0023",
+        "old_candidate_coverage": 0.7578659370725034,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B2_ABSOLUTE_MARGIN"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.7578659370725034,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0023",
+        "old_candidate_coverage": 0.7578659370725034,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_mean"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.7578659370725034,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0023",
+        "old_candidate_coverage": 0.7578659370725034,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_median"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.7578659370725034,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0023",
+        "old_candidate_coverage": 0.7578659370725034,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_zscore"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.9367588932806324,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0024",
+        "old_candidate_coverage": 0.9367588932806324,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B0_ALWAYS_PRESENT"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.9367588932806324,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0024",
+        "old_candidate_coverage": 0.9367588932806324,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B1_ABSOLUTE_SCORE"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.9367588932806324,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0024",
+        "old_candidate_coverage": 0.9367588932806324,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B2_ABSOLUTE_MARGIN"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.9367588932806324,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0024",
+        "old_candidate_coverage": 0.9367588932806324,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_mean"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.9367588932806324,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0024",
+        "old_candidate_coverage": 0.9367588932806324,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_median"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.9367588932806324,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0024",
+        "old_candidate_coverage": 0.9367588932806324,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_zscore"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.9933333333333333,
+        "delta": 0.9933333333333333,
+        "heldout_sequence": "dancetrack0039",
+        "old_candidate_coverage": 0.0,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B0_ALWAYS_PRESENT"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.9933333333333333,
+        "delta": 0.9933333333333333,
+        "heldout_sequence": "dancetrack0039",
+        "old_candidate_coverage": 0.0,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B1_ABSOLUTE_SCORE"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.9933333333333333,
+        "delta": 0.9933333333333333,
+        "heldout_sequence": "dancetrack0039",
+        "old_candidate_coverage": 0.0,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B2_ABSOLUTE_MARGIN"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.9933333333333333,
+        "delta": 0.9933333333333333,
+        "heldout_sequence": "dancetrack0039",
+        "old_candidate_coverage": 0.0,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_mean"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.9933333333333333,
+        "delta": 0.9933333333333333,
+        "heldout_sequence": "dancetrack0039",
+        "old_candidate_coverage": 0.0,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_median"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.9933333333333333,
+        "delta": 0.9933333333333333,
+        "heldout_sequence": "dancetrack0039",
+        "old_candidate_coverage": 0.0,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_zscore"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.965742251223491,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0057",
+        "old_candidate_coverage": 0.965742251223491,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B0_ALWAYS_PRESENT"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.965742251223491,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0057",
+        "old_candidate_coverage": 0.965742251223491,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B1_ABSOLUTE_SCORE"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.965742251223491,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0057",
+        "old_candidate_coverage": 0.965742251223491,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B2_ABSOLUTE_MARGIN"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.965742251223491,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0057",
+        "old_candidate_coverage": 0.965742251223491,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_mean"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.965742251223491,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0057",
+        "old_candidate_coverage": 0.965742251223491,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_median"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.965742251223491,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0057",
+        "old_candidate_coverage": 0.965742251223491,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_zscore"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.7945091514143094,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0062",
+        "old_candidate_coverage": 0.7945091514143094,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B0_ALWAYS_PRESENT"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.7945091514143094,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0062",
+        "old_candidate_coverage": 0.7945091514143094,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B1_ABSOLUTE_SCORE"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.7945091514143094,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0062",
+        "old_candidate_coverage": 0.7945091514143094,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B2_ABSOLUTE_MARGIN"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.7945091514143094,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0062",
+        "old_candidate_coverage": 0.7945091514143094,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_mean"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.7945091514143094,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0062",
+        "old_candidate_coverage": 0.7945091514143094,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_median"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.7945091514143094,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0062",
+        "old_candidate_coverage": 0.7945091514143094,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_zscore"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.338339222614841,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0072",
+        "old_candidate_coverage": 0.338339222614841,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B0_ALWAYS_PRESENT"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.338339222614841,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0072",
+        "old_candidate_coverage": 0.338339222614841,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B1_ABSOLUTE_SCORE"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.338339222614841,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0072",
+        "old_candidate_coverage": 0.338339222614841,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B2_ABSOLUTE_MARGIN"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.338339222614841,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0072",
+        "old_candidate_coverage": 0.338339222614841,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_mean"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.338339222614841,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0072",
+        "old_candidate_coverage": 0.338339222614841,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_median"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.338339222614841,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0072",
+        "old_candidate_coverage": 0.338339222614841,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_zscore"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.9583333333333334,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0001",
+        "old_candidate_coverage": 0.9583333333333334,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B4_LOGISTIC_PRESENCE"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.8252508361204013,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0002",
+        "old_candidate_coverage": 0.8252508361204013,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B4_LOGISTIC_PRESENCE"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.7578659370725034,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0023",
+        "old_candidate_coverage": 0.7578659370725034,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B4_LOGISTIC_PRESENCE"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.9367588932806324,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0024",
+        "old_candidate_coverage": 0.9367588932806324,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B4_LOGISTIC_PRESENCE"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.9933333333333333,
+        "delta": 0.9933333333333333,
+        "heldout_sequence": "dancetrack0039",
+        "old_candidate_coverage": 0.0,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B4_LOGISTIC_PRESENCE"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.965742251223491,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0057",
+        "old_candidate_coverage": 0.965742251223491,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B4_LOGISTIC_PRESENCE"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.7945091514143094,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0062",
+        "old_candidate_coverage": 0.7945091514143094,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B4_LOGISTIC_PRESENCE"
+      },
+      {
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "corrected_candidate_coverage": 0.338339222614841,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0072",
+        "old_candidate_coverage": 0.338339222614841,
+        "policy_id": "S0_HUMAN_ANCHOR_ONLY:B4_LOGISTIC_PRESENCE"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.9583333333333334,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0001",
+        "old_candidate_coverage": 0.9583333333333334,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B4_LOGISTIC_PRESENCE"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.8252508361204013,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0002",
+        "old_candidate_coverage": 0.8252508361204013,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B4_LOGISTIC_PRESENCE"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.7578659370725034,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0023",
+        "old_candidate_coverage": 0.7578659370725034,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B4_LOGISTIC_PRESENCE"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.9367588932806324,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0024",
+        "old_candidate_coverage": 0.9367588932806324,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B4_LOGISTIC_PRESENCE"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.9933333333333333,
+        "delta": 0.9933333333333333,
+        "heldout_sequence": "dancetrack0039",
+        "old_candidate_coverage": 0.0,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B4_LOGISTIC_PRESENCE"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.965742251223491,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0057",
+        "old_candidate_coverage": 0.965742251223491,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B4_LOGISTIC_PRESENCE"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.7945091514143094,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0062",
+        "old_candidate_coverage": 0.7945091514143094,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B4_LOGISTIC_PRESENCE"
+      },
+      {
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "corrected_candidate_coverage": 0.338339222614841,
+        "delta": 0.0,
+        "heldout_sequence": "dancetrack0072",
+        "old_candidate_coverage": 0.338339222614841,
+        "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B4_LOGISTIC_PRESENCE"
+      }
+    ],
+    "record_count": 112,
+    "selected_policy_changed": false
+  },
+  "corrected_candidate_presence_diagnostic": {
+    "by_condition": {
+      "S0_HUMAN_ANCHOR_ONLY": {
+        "changed": 6889,
+        "rows": 8414,
+        "true_count": 6889
+      },
+      "S1_R2_STYLE_CAUSAL_LEARNED_STATE": {
+        "changed": 6889,
+        "rows": 8414,
+        "true_count": 6889
+      }
+    },
+    "changed_row_count": 13778,
+    "definition": "public-ID-resolved base_target_candidate_uid exists on the sealed candidate UID axis",
+    "rows": 16828,
+    "true_count": 13778
+  },
+  "gate_relevant_metric_changed": false,
+  "historical_r3_outputs_overwritten": false,
+  "old_candidate_coverage": "outputs/N72R20R3/presence/loso_results.json",
+  "old_candidate_presence_diagnostic": {
+    "by_condition": {
+      "S0_HUMAN_ANCHOR_ONLY": {
+        "changed": 6889,
+        "rows": 8414,
+        "true_count": 0
+      },
+      "S1_R2_STYLE_CAUSAL_LEARNED_STATE": {
+        "changed": 6889,
+        "rows": 8414,
+        "true_count": 0
+      }
+    },
+    "changed_row_count": 13778,
+    "definition": "candidate_presence_of_base_candidate from sealed R3 runtime artifact",
+    "rows": 16828,
+    "true_count": 0
+  },
+  "posthoc_gt_used": true,
+  "r3_final_decision": "FAIL_OPEN_SET_CROSS_SEQUENCE_GENERALIZATION",
+  "runtime_future_gt_used": false,
+  "source_stage": "N72R20R3",
+  "stage": "N72R20R3R1"
+}

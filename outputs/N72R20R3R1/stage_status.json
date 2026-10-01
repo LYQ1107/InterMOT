@@ -1,0 +1,77 @@
+{
+  "R3_FINAL_DECISION_UNCHANGED": true,
+  "causal_commit_replay_authorized": false,
+  "causal_replay": "NOT_RUN_STATIC_GATE_FAILED",
+  "formal_loso": "PASS_FORMAL_LOSO_COMPLETE",
+  "goal": "Explicit-NONE Identity Verification",
+  "goal_frozen": true,
+  "goal_reference": "outputs/N72R20R3R1/FINAL_GOAL.json",
+  "last_artifact": "outputs/N72R20R3R1/FINAL_RESULT.json",
+  "next_association_authority_stage_authorized": false,
+  "phase": "STATIC_FAIL",
+  "runtime_future_gt_used": false,
+  "sam3_rerun": false,
+  "stage": "N72R20R3R1",
+  "static_gate": {
+    "catastrophic_sequences": [
+      "dancetrack0001",
+      "dancetrack0002",
+      "dancetrack0024",
+      "dancetrack0039",
+      "dancetrack0062",
+      "dancetrack0072"
+    ],
+    "checks": {
+      "S1_pooled_negative_fpr_le_0.02": false,
+      "S2_pooled_open_recall_ge_0.60": false,
+      "S3_macro_recall_ge_0.40": false,
+      "S4_macro_fpr_le_0.05": false,
+      "S5_runtime_gt_false": true,
+      "S6_all_eight_sequences_reported": true,
+      "S7_no_candidate_creation": true
+    },
+    "cross_sequence_warning": true,
+    "pass": false
+  },
+  "status": "FAIL_EXPLICIT_NONE_CROSS_SEQUENCE_VERIFICATION",
+  "storage_audit_after": {
+    "authorization": {
+      "development_generation_allowed": true,
+      "development_generation_must_remain_below_bytes": 23205652480,
+      "r2_target_sequences": 8,
+      "runtime_future_gt_used": false
+    },
+    "existing_assets": {
+      "dataset_asset_bytes": 12537819346,
+      "r1_fresh_asset_bytes": 3516539,
+      "reference_bytes": 765249924
+    },
+    "filesystem": {
+      "df_h_output": "Filesystem      Size  Used Avail Use% Mounted on\n/dev/loop10    1007G  841G  115G  88% /data3/liuyeqiang\n",
+      "free_bytes": 123205652480,
+      "free_gb_decimal": 123.20565248,
+      "free_gib": 114.74420547485352,
+      "path": "/data3/liuyeqiang/InterMOT",
+      "safe_generation_budget_bytes_before_hard_stop": 23205652480,
+      "storage_status": "OK",
+      "target_budget_fits_hard_stop_headroom": false,
+      "total_bytes": 1081101176832,
+      "used_bytes": 902903169024
+    },
+    "generated_utc": "2026-10-01T07:01:48.829299+00:00",
+    "policy": {
+      "deletion_performed": false,
+      "download_performed": false,
+      "hard_stop_free_bytes": 100000000000,
+      "target_new_storage_bytes": 25000000000,
+      "test_dataset_allowed": false,
+      "warning_free_bytes": 120000000000
+    },
+    "read_only": true,
+    "stage": "N72R20R2"
+  },
+  "test_accessed": false,
+  "tests": "46 focused passed; full pytest 370 passed, 4 failed",
+  "training_index": "PASS_R3R1_TRAINING_INDEX_COMPLETE",
+  "val_accessed": false
+}
