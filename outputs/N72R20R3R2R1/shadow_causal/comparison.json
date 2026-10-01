@@ -1,0 +1,73 @@
+{
+  "association_authority_stage_authorized": 0,
+  "diagnostic_only": true,
+  "policies": {
+    "frontier": {
+      "accepted_identity_decisions": 1630,
+      "association_authority_started": false,
+      "candidate_created": false,
+      "correct_write_retention": 0.15375284306292647,
+      "correct_writes": 1014,
+      "eligible_writes": 1549,
+      "first_wrong_write": {
+        "frame": 306,
+        "sequence": "dancetrack0001"
+      },
+      "max_wrong_write_cascade": 34,
+      "policy": "frontier_D0_CONFORMAL",
+      "runtime_future_gt_used": false,
+      "state_divergence": {
+        "accepted_write_count": 1549,
+        "score_tape_state_is_sealed": true,
+        "wrong_write_count": 535
+      },
+      "wrong_write_rate": 0.34538411878631375,
+      "wrong_writes": 535
+    },
+    "safest": {
+      "accepted_identity_decisions": 324,
+      "association_authority_started": false,
+      "candidate_created": false,
+      "correct_write_retention": 0.04518574677786202,
+      "correct_writes": 298,
+      "eligible_writes": 318,
+      "first_wrong_write": {
+        "frame": 181,
+        "sequence": "dancetrack0001"
+      },
+      "max_wrong_write_cascade": 3,
+      "policy": "safest_E0_MULTITASK",
+      "runtime_future_gt_used": false,
+      "state_divergence": {
+        "accepted_write_count": 318,
+        "score_tape_state_is_sealed": true,
+        "wrong_write_count": 20
+      },
+      "wrong_write_rate": 0.06289308176100629,
+      "wrong_writes": 20
+    },
+    "selected": {
+      "accepted_identity_decisions": 2102,
+      "association_authority_started": false,
+      "candidate_created": false,
+      "correct_write_retention": 0.21986353297952996,
+      "correct_writes": 1450,
+      "eligible_writes": 1823,
+      "first_wrong_write": {
+        "frame": 78,
+        "sequence": "dancetrack0002"
+      },
+      "max_wrong_write_cascade": 14,
+      "policy": "combined_selected",
+      "runtime_future_gt_used": false,
+      "state_divergence": {
+        "accepted_write_count": 1823,
+        "score_tape_state_is_sealed": true,
+        "wrong_write_count": 373
+      },
+      "wrong_write_rate": 0.20460778935820076,
+      "wrong_writes": 373
+    }
+  },
+  "stage": "N72R20R3R2R1"
+}

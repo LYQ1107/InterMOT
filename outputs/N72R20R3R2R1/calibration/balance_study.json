@@ -1,0 +1,1901 @@
+{
+  "best_two_families_selected_by_inner_counts": [
+    "B2_AFFINE",
+    "D0_CONFORMAL"
+  ],
+  "ratios": [
+    [
+      2,
+      1
+    ],
+    [
+      1,
+      1
+    ],
+    [
+      1,
+      2
+    ]
+  ],
+  "records": {
+    "B2_AFFINE:1:1": {
+      "aggregate": {
+        "P0_fpr": 0.032467532467532464,
+        "P1_fpr": 0.08228228228228228,
+        "ece": 0.09632315611063971,
+        "macro_negative_fpr": 0.047343747338218806,
+        "macro_open_set_correct_id_recall": 0.14452080794943784,
+        "negative_fpr": 0.07806487080813634,
+        "none_rows": 1819,
+        "open_set_correct_id_recall": 0.1564821834723275,
+        "per_sequence": {
+          "dancetrack0001": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.0,
+            "negative_fpr": 0.0,
+            "none_rows": 35,
+            "open_set_correct_id_recall": 0.1409295352323838,
+            "presence_recall": 0.1409295352323838,
+            "present_rows": 667,
+            "rows": 702,
+            "sequence": "dancetrack0001"
+          },
+          "dancetrack0002": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.0,
+            "negative_fpr": 0.0,
+            "none_rows": 215,
+            "open_set_correct_id_recall": 0.0010131712259371835,
+            "presence_recall": 0.0010131712259371835,
+            "present_rows": 987,
+            "rows": 1202,
+            "sequence": "dancetrack0002"
+          },
+          "dancetrack0023": {
+            "P0_fpr": 0.15,
+            "P1_fpr": 0.3107344632768362,
+            "negative_fpr": 0.30213903743315507,
+            "none_rows": 374,
+            "open_set_correct_id_recall": 0.5469314079422383,
+            "presence_recall": 0.6344765342960289,
+            "present_rows": 1108,
+            "rows": 1482,
+            "sequence": "dancetrack0023"
+          },
+          "dancetrack0024": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.0,
+            "negative_fpr": 0.0,
+            "none_rows": 51,
+            "open_set_correct_id_recall": 0.07313642756680731,
+            "presence_recall": 0.07313642756680731,
+            "present_rows": 711,
+            "rows": 762,
+            "sequence": "dancetrack0024"
+          },
+          "dancetrack0039": {
+            "P0_fpr": 0.04878048780487805,
+            "P1_fpr": 0.0,
+            "negative_fpr": 0.04081632653061224,
+            "none_rows": 49,
+            "open_set_correct_id_recall": 0.09899328859060402,
+            "presence_recall": 0.10067114093959731,
+            "present_rows": 1192,
+            "rows": 1241,
+            "sequence": "dancetrack0039"
+          },
+          "dancetrack0057": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.0,
+            "negative_fpr": 0.0,
+            "none_rows": 29,
+            "open_set_correct_id_recall": 0.08614864864864864,
+            "presence_recall": 0.09628378378378379,
+            "present_rows": 592,
+            "rows": 621,
+            "sequence": "dancetrack0057"
+          },
+          "dancetrack0062": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.004048582995951417,
+            "negative_fpr": 0.004048582995951417,
+            "none_rows": 247,
+            "open_set_correct_id_recall": 0.05235602094240838,
+            "presence_recall": 0.06387434554973823,
+            "present_rows": 955,
+            "rows": 1202,
+            "sequence": "dancetrack0062"
+          },
+          "dancetrack0072": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.03471295060080107,
+            "negative_fpr": 0.031746031746031744,
+            "none_rows": 819,
+            "open_set_correct_id_recall": 0.1566579634464752,
+            "presence_recall": 0.22715404699738903,
+            "present_rows": 383,
+            "rows": 1202,
+            "sequence": "dancetrack0072"
+          }
+        },
+        "presence_recall": 0.17816527672479152,
+        "present_rows": 6595,
+        "rows": 8414
+      },
+      "family": "B2_AFFINE",
+      "folds": [
+        {
+          "family": "B2_AFFINE",
+          "heldout_sequence": "dancetrack0001",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.019138755980861243,
+            "accepted_count": 53,
+            "correct_id_count": 28,
+            "ece": 0.47124697213989414,
+            "false_positive_count": 4,
+            "negative_fpr": 0.018604651162790697,
+            "none_rows": 215,
+            "open_set_correct_id_recall": 0.028368794326241134,
+            "presence_recall": 0.04964539007092199,
+            "present_rows": 987,
+            "rows": 1202,
+            "threshold": 0.9539226369299132
+          },
+          "inner_threshold": 0.9539226369299132,
+          "ratio_present_to_absent": [
+            1,
+            1
+          ]
+        },
+        {
+          "family": "B2_AFFINE",
+          "heldout_sequence": "dancetrack0002",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.01977401129943503,
+            "accepted_count": 209,
+            "correct_id_count": 188,
+            "ece": 0.18580624026817702,
+            "false_positive_count": 7,
+            "negative_fpr": 0.01871657754010695,
+            "none_rows": 374,
+            "open_set_correct_id_recall": 0.16967509025270758,
+            "presence_recall": 0.18231046931407943,
+            "present_rows": 1108,
+            "rows": 1482,
+            "threshold": 0.9850199744253341
+          },
+          "inner_threshold": 0.9850199744253341,
+          "ratio_present_to_absent": [
+            1,
+            1
+          ]
+        },
+        {
+          "family": "B2_AFFINE",
+          "heldout_sequence": "dancetrack0023",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.020833333333333332,
+            "accepted_count": 159,
+            "correct_id_count": 157,
+            "ece": 0.05210254172329698,
+            "false_positive_count": 1,
+            "negative_fpr": 0.0196078431372549,
+            "none_rows": 51,
+            "open_set_correct_id_recall": 0.22081575246132207,
+            "presence_recall": 0.2222222222222222,
+            "present_rows": 711,
+            "rows": 762,
+            "threshold": 0.942658321163673
+          },
+          "inner_threshold": 0.942658321163673,
+          "ratio_present_to_absent": [
+            1,
+            1
+          ]
+        },
+        {
+          "family": "B2_AFFINE",
+          "heldout_sequence": "dancetrack0024",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.0,
+            "accepted_count": 44,
+            "correct_id_count": 44,
+            "ece": 0.15579188407002328,
+            "false_positive_count": 0,
+            "negative_fpr": 0.0,
+            "none_rows": 49,
+            "open_set_correct_id_recall": 0.03691275167785235,
+            "presence_recall": 0.03691275167785235,
+            "present_rows": 1192,
+            "rows": 1241,
+            "threshold": 0.9702595483841462
+          },
+          "inner_threshold": 0.9702595483841462,
+          "ratio_present_to_absent": [
+            1,
+            1
+          ]
+        },
+        {
+          "family": "B2_AFFINE",
+          "heldout_sequence": "dancetrack0039",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.0,
+            "accepted_count": 38,
+            "correct_id_count": 31,
+            "ece": 0.13367726263447374,
+            "false_positive_count": 0,
+            "negative_fpr": 0.0,
+            "none_rows": 29,
+            "open_set_correct_id_recall": 0.052364864864864864,
+            "presence_recall": 0.06418918918918919,
+            "present_rows": 592,
+            "rows": 621,
+            "threshold": 0.9520515110642058
+          },
+          "inner_threshold": 0.9520515110642058,
+          "ratio_present_to_absent": [
+            1,
+            1
+          ]
+        },
+        {
+          "family": "B2_AFFINE",
+          "heldout_sequence": "dancetrack0057",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.016194331983805668,
+            "accepted_count": 154,
+            "correct_id_count": 110,
+            "ece": 0.023527181558874694,
+            "false_positive_count": 4,
+            "negative_fpr": 0.016194331983805668,
+            "none_rows": 247,
+            "open_set_correct_id_recall": 0.11518324607329843,
+            "presence_recall": 0.15706806282722513,
+            "present_rows": 955,
+            "rows": 1202,
+            "threshold": 0.95698034127824
+          },
+          "inner_threshold": 0.95698034127824,
+          "ratio_present_to_absent": [
+            1,
+            1
+          ]
+        },
+        {
+          "family": "B2_AFFINE",
+          "heldout_sequence": "dancetrack0062",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.021361815754339118,
+            "accepted_count": 64,
+            "correct_id_count": 35,
+            "ece": 0.27069820735802597,
+            "false_positive_count": 16,
+            "negative_fpr": 0.019536019536019536,
+            "none_rows": 819,
+            "open_set_correct_id_recall": 0.09138381201044386,
+            "presence_recall": 0.12532637075718014,
+            "present_rows": 383,
+            "rows": 1202,
+            "threshold": 0.9757300562810153
+          },
+          "inner_threshold": 0.9757300562810153,
+          "ratio_present_to_absent": [
+            1,
+            1
+          ]
+        },
+        {
+          "family": "B2_AFFINE",
+          "heldout_sequence": "dancetrack0072",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.0,
+            "accepted_count": 136,
+            "correct_id_count": 136,
+            "ece": 0.060800948095317685,
+            "false_positive_count": 0,
+            "negative_fpr": 0.0,
+            "none_rows": 35,
+            "open_set_correct_id_recall": 0.20389805097451275,
+            "presence_recall": 0.20389805097451275,
+            "present_rows": 667,
+            "rows": 702,
+            "threshold": 0.9633991405560195
+          },
+          "inner_threshold": 0.9633991405560195,
+          "ratio_present_to_absent": [
+            1,
+            1
+          ]
+        }
+      ],
+      "ratio": [
+        1,
+        1
+      ],
+      "stratified_P0_P1_policy": 1
+    },
+    "B2_AFFINE:1:2": {
+      "aggregate": {
+        "P0_fpr": 0.025974025974025976,
+        "P1_fpr": 0.08348348348348349,
+        "ece": 0.11362780144809227,
+        "macro_negative_fpr": 0.04730502187379675,
+        "macro_open_set_correct_id_recall": 0.1415097690436668,
+        "negative_fpr": 0.07861462341946124,
+        "none_rows": 1819,
+        "open_set_correct_id_recall": 0.15420773313115996,
+        "per_sequence": {
+          "dancetrack0001": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.0,
+            "negative_fpr": 0.0,
+            "none_rows": 35,
+            "open_set_correct_id_recall": 0.1184407796101949,
+            "presence_recall": 0.1184407796101949,
+            "present_rows": 667,
+            "rows": 702,
+            "sequence": "dancetrack0001"
+          },
+          "dancetrack0002": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.0,
+            "negative_fpr": 0.0,
+            "none_rows": 215,
+            "open_set_correct_id_recall": 0.0010131712259371835,
+            "presence_recall": 0.0010131712259371835,
+            "present_rows": 987,
+            "rows": 1202,
+            "sequence": "dancetrack0002"
+          },
+          "dancetrack0023": {
+            "P0_fpr": 0.1,
+            "P1_fpr": 0.3050847457627119,
+            "negative_fpr": 0.29411764705882354,
+            "none_rows": 374,
+            "open_set_correct_id_recall": 0.5315884476534296,
+            "presence_recall": 0.6128158844765343,
+            "present_rows": 1108,
+            "rows": 1482,
+            "sequence": "dancetrack0023"
+          },
+          "dancetrack0024": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.0,
+            "negative_fpr": 0.0,
+            "none_rows": 51,
+            "open_set_correct_id_recall": 0.08438818565400844,
+            "presence_recall": 0.08438818565400844,
+            "present_rows": 711,
+            "rows": 762,
+            "sequence": "dancetrack0024"
+          },
+          "dancetrack0039": {
+            "P0_fpr": 0.04878048780487805,
+            "P1_fpr": 0.0,
+            "negative_fpr": 0.04081632653061224,
+            "none_rows": 49,
+            "open_set_correct_id_recall": 0.11073825503355705,
+            "presence_recall": 0.1115771812080537,
+            "present_rows": 1192,
+            "rows": 1241,
+            "sequence": "dancetrack0039"
+          },
+          "dancetrack0057": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.0,
+            "negative_fpr": 0.0,
+            "none_rows": 29,
+            "open_set_correct_id_recall": 0.05912162162162162,
+            "presence_recall": 0.06756756756756757,
+            "present_rows": 592,
+            "rows": 621,
+            "sequence": "dancetrack0057"
+          },
+          "dancetrack0062": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.008097165991902834,
+            "negative_fpr": 0.008097165991902834,
+            "none_rows": 247,
+            "open_set_correct_id_recall": 0.05968586387434555,
+            "presence_recall": 0.07643979057591622,
+            "present_rows": 955,
+            "rows": 1202,
+            "sequence": "dancetrack0062"
+          },
+          "dancetrack0072": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.03871829105473965,
+            "negative_fpr": 0.03540903540903541,
+            "none_rows": 819,
+            "open_set_correct_id_recall": 0.1671018276762402,
+            "presence_recall": 0.2454308093994778,
+            "present_rows": 383,
+            "rows": 1202,
+            "sequence": "dancetrack0072"
+          }
+        },
+        "presence_recall": 0.17573919636087945,
+        "present_rows": 6595,
+        "rows": 8414
+      },
+      "family": "B2_AFFINE",
+      "folds": [
+        {
+          "family": "B2_AFFINE",
+          "heldout_sequence": "dancetrack0001",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.019138755980861243,
+            "accepted_count": 55,
+            "correct_id_count": 27,
+            "ece": 0.4525791966213109,
+            "false_positive_count": 4,
+            "negative_fpr": 0.018604651162790697,
+            "none_rows": 215,
+            "open_set_correct_id_recall": 0.02735562310030395,
+            "presence_recall": 0.05167173252279635,
+            "present_rows": 987,
+            "rows": 1202,
+            "threshold": 0.9128482847679745
+          },
+          "inner_threshold": 0.9128482847679745,
+          "ratio_present_to_absent": [
+            1,
+            2
+          ]
+        },
+        {
+          "family": "B2_AFFINE",
+          "heldout_sequence": "dancetrack0002",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.01977401129943503,
+            "accepted_count": 222,
+            "correct_id_count": 200,
+            "ece": 0.13286075933499944,
+            "false_positive_count": 7,
+            "negative_fpr": 0.01871657754010695,
+            "none_rows": 374,
+            "open_set_correct_id_recall": 0.18050541516245489,
+            "presence_recall": 0.194043321299639,
+            "present_rows": 1108,
+            "rows": 1482,
+            "threshold": 0.9693433089102004
+          },
+          "inner_threshold": 0.9693433089102004,
+          "ratio_present_to_absent": [
+            1,
+            2
+          ]
+        },
+        {
+          "family": "B2_AFFINE",
+          "heldout_sequence": "dancetrack0023",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.020833333333333332,
+            "accepted_count": 164,
+            "correct_id_count": 162,
+            "ece": 0.13676869591872132,
+            "false_positive_count": 1,
+            "negative_fpr": 0.0196078431372549,
+            "none_rows": 51,
+            "open_set_correct_id_recall": 0.22784810126582278,
+            "presence_recall": 0.22925457102672292,
+            "present_rows": 711,
+            "rows": 762,
+            "threshold": 0.890354492698703
+          },
+          "inner_threshold": 0.890354492698703,
+          "ratio_present_to_absent": [
+            1,
+            2
+          ]
+        },
+        {
+          "family": "B2_AFFINE",
+          "heldout_sequence": "dancetrack0024",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.0,
+            "accepted_count": 47,
+            "correct_id_count": 47,
+            "ece": 0.2560376332545236,
+            "false_positive_count": 0,
+            "negative_fpr": 0.0,
+            "none_rows": 49,
+            "open_set_correct_id_recall": 0.03942953020134228,
+            "presence_recall": 0.03942953020134228,
+            "present_rows": 1192,
+            "rows": 1241,
+            "threshold": 0.9381567028081603
+          },
+          "inner_threshold": 0.9381567028081603,
+          "ratio_present_to_absent": [
+            1,
+            2
+          ]
+        },
+        {
+          "family": "B2_AFFINE",
+          "heldout_sequence": "dancetrack0039",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.0,
+            "accepted_count": 39,
+            "correct_id_count": 32,
+            "ece": 0.24580149357414474,
+            "false_positive_count": 0,
+            "negative_fpr": 0.0,
+            "none_rows": 29,
+            "open_set_correct_id_recall": 0.05405405405405406,
+            "presence_recall": 0.06587837837837837,
+            "present_rows": 592,
+            "rows": 621,
+            "threshold": 0.9079067071684593
+          },
+          "inner_threshold": 0.9079067071684593,
+          "ratio_present_to_absent": [
+            1,
+            2
+          ]
+        },
+        {
+          "family": "B2_AFFINE",
+          "heldout_sequence": "dancetrack0057",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.012145748987854251,
+            "accepted_count": 145,
+            "correct_id_count": 102,
+            "ece": 0.0694710203426454,
+            "false_positive_count": 3,
+            "negative_fpr": 0.012145748987854251,
+            "none_rows": 247,
+            "open_set_correct_id_recall": 0.1068062827225131,
+            "presence_recall": 0.1486910994764398,
+            "present_rows": 955,
+            "rows": 1202,
+            "threshold": 0.9268002357836251
+          },
+          "inner_threshold": 0.9268002357836251,
+          "ratio_present_to_absent": [
+            1,
+            2
+          ]
+        },
+        {
+          "family": "B2_AFFINE",
+          "heldout_sequence": "dancetrack0062",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.021361815754339118,
+            "accepted_count": 61,
+            "correct_id_count": 32,
+            "ece": 0.1629433431212021,
+            "false_positive_count": 16,
+            "negative_fpr": 0.019536019536019536,
+            "none_rows": 819,
+            "open_set_correct_id_recall": 0.0835509138381201,
+            "presence_recall": 0.1174934725848564,
+            "present_rows": 383,
+            "rows": 1202,
+            "threshold": 0.9535409875005825
+          },
+          "inner_threshold": 0.9535409875005825,
+          "ratio_present_to_absent": [
+            1,
+            2
+          ]
+        },
+        {
+          "family": "B2_AFFINE",
+          "heldout_sequence": "dancetrack0072",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.0,
+            "accepted_count": 150,
+            "correct_id_count": 150,
+            "ece": 0.15319934099305357,
+            "false_positive_count": 0,
+            "negative_fpr": 0.0,
+            "none_rows": 35,
+            "open_set_correct_id_recall": 0.22488755622188905,
+            "presence_recall": 0.22488755622188905,
+            "present_rows": 667,
+            "rows": 702,
+            "threshold": 0.9202978716336015
+          },
+          "inner_threshold": 0.9202978716336015,
+          "ratio_present_to_absent": [
+            1,
+            2
+          ]
+        }
+      ],
+      "ratio": [
+        1,
+        2
+      ],
+      "stratified_P0_P1_policy": 1
+    },
+    "B2_AFFINE:2:1": {
+      "aggregate": {
+        "P0_fpr": 0.03896103896103896,
+        "P1_fpr": 0.08528528528528528,
+        "ece": 0.117009505776413,
+        "macro_negative_fpr": 0.06164065451037953,
+        "macro_open_set_correct_id_recall": 0.14676997329811037,
+        "negative_fpr": 0.08136338647608576,
+        "none_rows": 1819,
+        "open_set_correct_id_recall": 0.15875663381349508,
+        "per_sequence": {
+          "dancetrack0001": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.0,
+            "negative_fpr": 0.0,
+            "none_rows": 35,
+            "open_set_correct_id_recall": 0.16041979010494753,
+            "presence_recall": 0.16041979010494753,
+            "present_rows": 667,
+            "rows": 702,
+            "sequence": "dancetrack0001"
+          },
+          "dancetrack0002": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.0,
+            "negative_fpr": 0.0,
+            "none_rows": 215,
+            "open_set_correct_id_recall": 0.00303951367781155,
+            "presence_recall": 0.00303951367781155,
+            "present_rows": 987,
+            "rows": 1202,
+            "sequence": "dancetrack0002"
+          },
+          "dancetrack0023": {
+            "P0_fpr": 0.2,
+            "P1_fpr": 0.3220338983050847,
+            "negative_fpr": 0.3155080213903743,
+            "none_rows": 374,
+            "open_set_correct_id_recall": 0.5767148014440433,
+            "presence_recall": 0.6696750902527075,
+            "present_rows": 1108,
+            "rows": 1482,
+            "sequence": "dancetrack0023"
+          },
+          "dancetrack0024": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.0,
+            "negative_fpr": 0.0,
+            "none_rows": 51,
+            "open_set_correct_id_recall": 0.06610407876230662,
+            "presence_recall": 0.06610407876230662,
+            "present_rows": 711,
+            "rows": 762,
+            "sequence": "dancetrack0024"
+          },
+          "dancetrack0039": {
+            "P0_fpr": 0.04878048780487805,
+            "P1_fpr": 0.0,
+            "negative_fpr": 0.04081632653061224,
+            "none_rows": 49,
+            "open_set_correct_id_recall": 0.08221476510067115,
+            "presence_recall": 0.08389261744966443,
+            "present_rows": 1192,
+            "rows": 1241,
+            "sequence": "dancetrack0039"
+          },
+          "dancetrack0057": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.14285714285714285,
+            "negative_fpr": 0.10344827586206896,
+            "none_rows": 29,
+            "open_set_correct_id_recall": 0.09966216216216216,
+            "presence_recall": 0.11486486486486487,
+            "present_rows": 592,
+            "rows": 621,
+            "sequence": "dancetrack0057"
+          },
+          "dancetrack0062": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.004048582995951417,
+            "negative_fpr": 0.004048582995951417,
+            "none_rows": 247,
+            "open_set_correct_id_recall": 0.039790575916230364,
+            "presence_recall": 0.048167539267015703,
+            "present_rows": 955,
+            "rows": 1202,
+            "sequence": "dancetrack0062"
+          },
+          "dancetrack0072": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.03204272363150868,
+            "negative_fpr": 0.029304029304029304,
+            "none_rows": 819,
+            "open_set_correct_id_recall": 0.1462140992167102,
+            "presence_recall": 0.20365535248041775,
+            "present_rows": 383,
+            "rows": 1202,
+            "sequence": "dancetrack0072"
+          }
+        },
+        "presence_recall": 0.18059135708870355,
+        "present_rows": 6595,
+        "rows": 8414
+      },
+      "family": "B2_AFFINE",
+      "folds": [
+        {
+          "family": "B2_AFFINE",
+          "heldout_sequence": "dancetrack0001",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.019138755980861243,
+            "accepted_count": 52,
+            "correct_id_count": 28,
+            "ece": 0.4689827973009144,
+            "false_positive_count": 4,
+            "negative_fpr": 0.018604651162790697,
+            "none_rows": 215,
+            "open_set_correct_id_recall": 0.028368794326241134,
+            "presence_recall": 0.0486322188449848,
+            "present_rows": 987,
+            "rows": 1202,
+            "threshold": 0.9763224625970678
+          },
+          "inner_threshold": 0.9763224625970678,
+          "ratio_present_to_absent": [
+            2,
+            1
+          ]
+        },
+        {
+          "family": "B2_AFFINE",
+          "heldout_sequence": "dancetrack0002",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.01977401129943503,
+            "accepted_count": 216,
+            "correct_id_count": 195,
+            "ece": 0.21602804773363582,
+            "false_positive_count": 7,
+            "negative_fpr": 0.01871657754010695,
+            "none_rows": 374,
+            "open_set_correct_id_recall": 0.1759927797833935,
+            "presence_recall": 0.18862815884476533,
+            "present_rows": 1108,
+            "rows": 1482,
+            "threshold": 0.9925312110500119
+          },
+          "inner_threshold": 0.9925312110500119,
+          "ratio_present_to_absent": [
+            2,
+            1
+          ]
+        },
+        {
+          "family": "B2_AFFINE",
+          "heldout_sequence": "dancetrack0023",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.020833333333333332,
+            "accepted_count": 158,
+            "correct_id_count": 156,
+            "ece": 0.005769909232283156,
+            "false_positive_count": 1,
+            "negative_fpr": 0.0196078431372549,
+            "none_rows": 51,
+            "open_set_correct_id_recall": 0.21940928270042195,
+            "presence_recall": 0.22081575246132207,
+            "present_rows": 711,
+            "rows": 762,
+            "threshold": 0.9704039652372565
+          },
+          "inner_threshold": 0.9704039652372565,
+          "ratio_present_to_absent": [
+            2,
+            1
+          ]
+        },
+        {
+          "family": "B2_AFFINE",
+          "heldout_sequence": "dancetrack0024",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.0,
+            "accepted_count": 41,
+            "correct_id_count": 41,
+            "ece": 0.08489347287374946,
+            "false_positive_count": 0,
+            "negative_fpr": 0.0,
+            "none_rows": 49,
+            "open_set_correct_id_recall": 0.034395973154362415,
+            "presence_recall": 0.034395973154362415,
+            "present_rows": 1192,
+            "rows": 1241,
+            "threshold": 0.9852178366317865
+          },
+          "inner_threshold": 0.9852178366317865,
+          "ratio_present_to_absent": [
+            2,
+            1
+          ]
+        },
+        {
+          "family": "B2_AFFINE",
+          "heldout_sequence": "dancetrack0039",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.0,
+            "accepted_count": 39,
+            "correct_id_count": 32,
+            "ece": 0.057081088443302445,
+            "false_positive_count": 0,
+            "negative_fpr": 0.0,
+            "none_rows": 29,
+            "open_set_correct_id_recall": 0.05405405405405406,
+            "presence_recall": 0.06587837837837837,
+            "present_rows": 592,
+            "rows": 621,
+            "threshold": 0.9757965976984159
+          },
+          "inner_threshold": 0.9757965976984159,
+          "ratio_present_to_absent": [
+            2,
+            1
+          ]
+        },
+        {
+          "family": "B2_AFFINE",
+          "heldout_sequence": "dancetrack0057",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.016194331983805668,
+            "accepted_count": 148,
+            "correct_id_count": 109,
+            "ece": 0.041512389473822284,
+            "false_positive_count": 4,
+            "negative_fpr": 0.016194331983805668,
+            "none_rows": 247,
+            "open_set_correct_id_recall": 0.11413612565445026,
+            "presence_recall": 0.15078534031413612,
+            "present_rows": 955,
+            "rows": 1202,
+            "threshold": 0.9763350873072183
+          },
+          "inner_threshold": 0.9763350873072183,
+          "ratio_present_to_absent": [
+            2,
+            1
+          ]
+        },
+        {
+          "family": "B2_AFFINE",
+          "heldout_sequence": "dancetrack0062",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.021361815754339118,
+            "accepted_count": 64,
+            "correct_id_count": 36,
+            "ece": 0.3898415055341451,
+            "false_positive_count": 16,
+            "negative_fpr": 0.019536019536019536,
+            "none_rows": 819,
+            "open_set_correct_id_recall": 0.09399477806788512,
+            "presence_recall": 0.12532637075718014,
+            "present_rows": 383,
+            "rows": 1202,
+            "threshold": 0.9879928781530416
+          },
+          "inner_threshold": 0.9879928781530416,
+          "ratio_present_to_absent": [
+            2,
+            1
+          ]
+        },
+        {
+          "family": "B2_AFFINE",
+          "heldout_sequence": "dancetrack0072",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.0,
+            "accepted_count": 126,
+            "correct_id_count": 126,
+            "ece": 0.005706136381674198,
+            "false_positive_count": 0,
+            "negative_fpr": 0.0,
+            "none_rows": 35,
+            "open_set_correct_id_recall": 0.1889055472263868,
+            "presence_recall": 0.1889055472263868,
+            "present_rows": 667,
+            "rows": 702,
+            "threshold": 0.9836240469121473
+          },
+          "inner_threshold": 0.9836240469121473,
+          "ratio_present_to_absent": [
+            2,
+            1
+          ]
+        }
+      ],
+      "ratio": [
+        2,
+        1
+      ],
+      "stratified_P0_P1_policy": 1
+    },
+    "D0_CONFORMAL:1:1": {
+      "aggregate": {
+        "P0_fpr": 0.01948051948051948,
+        "P1_fpr": 0.043243243243243246,
+        "ece": 0.4622032026272575,
+        "macro_negative_fpr": 0.047710151414264636,
+        "macro_open_set_correct_id_recall": 0.1305930015265031,
+        "negative_fpr": 0.04123144584936778,
+        "none_rows": 1819,
+        "open_set_correct_id_recall": 0.15815011372251706,
+        "per_sequence": {
+          "dancetrack0001": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.06896551724137931,
+            "negative_fpr": 0.05714285714285714,
+            "none_rows": 35,
+            "open_set_correct_id_recall": 0.17841079460269865,
+            "presence_recall": 0.17991004497751126,
+            "present_rows": 667,
+            "rows": 702,
+            "sequence": "dancetrack0001"
+          },
+          "dancetrack0002": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.0,
+            "negative_fpr": 0.0,
+            "none_rows": 215,
+            "open_set_correct_id_recall": 0.0,
+            "presence_recall": 0.0010131712259371835,
+            "present_rows": 987,
+            "rows": 1202,
+            "sequence": "dancetrack0002"
+          },
+          "dancetrack0023": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.022598870056497175,
+            "negative_fpr": 0.0213903743315508,
+            "none_rows": 374,
+            "open_set_correct_id_recall": 0.061371841155234655,
+            "presence_recall": 0.06407942238267147,
+            "present_rows": 1108,
+            "rows": 1482,
+            "sequence": "dancetrack0023"
+          },
+          "dancetrack0024": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.0,
+            "negative_fpr": 0.0,
+            "none_rows": 51,
+            "open_set_correct_id_recall": 0.009845288326300985,
+            "presence_recall": 0.009845288326300985,
+            "present_rows": 711,
+            "rows": 762,
+            "sequence": "dancetrack0024"
+          },
+          "dancetrack0039": {
+            "P0_fpr": 0.07317073170731707,
+            "P1_fpr": 0.125,
+            "negative_fpr": 0.08163265306122448,
+            "none_rows": 49,
+            "open_set_correct_id_recall": 0.49580536912751677,
+            "presence_recall": 0.50251677852349,
+            "present_rows": 1192,
+            "rows": 1241,
+            "sequence": "dancetrack0039"
+          },
+          "dancetrack0057": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.0,
+            "negative_fpr": 0.0,
+            "none_rows": 29,
+            "open_set_correct_id_recall": 0.006756756756756757,
+            "presence_recall": 0.006756756756756757,
+            "present_rows": 592,
+            "rows": 621,
+            "sequence": "dancetrack0057"
+          },
+          "dancetrack0062": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.21052631578947367,
+            "negative_fpr": 0.21052631578947367,
+            "none_rows": 247,
+            "open_set_correct_id_recall": 0.2481675392670157,
+            "presence_recall": 0.762303664921466,
+            "present_rows": 955,
+            "rows": 1202,
+            "sequence": "dancetrack0062"
+          },
+          "dancetrack0072": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.012016021361815754,
+            "negative_fpr": 0.01098901098901099,
+            "none_rows": 819,
+            "open_set_correct_id_recall": 0.044386422976501305,
+            "presence_recall": 0.06527415143603134,
+            "present_rows": 383,
+            "rows": 1202,
+            "sequence": "dancetrack0072"
+          }
+        },
+        "presence_recall": 0.2357846853677028,
+        "present_rows": 6595,
+        "rows": 8414
+      },
+      "family": "D0_CONFORMAL",
+      "folds": [
+        {
+          "family": "D0_CONFORMAL",
+          "heldout_sequence": "dancetrack0001",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.014354066985645933,
+            "accepted_count": 11,
+            "correct_id_count": 2,
+            "ece": 0.6289890985788475,
+            "false_positive_count": 3,
+            "negative_fpr": 0.013953488372093023,
+            "none_rows": 215,
+            "open_set_correct_id_recall": 0.002026342451874367,
+            "presence_recall": 0.008105369807497468,
+            "present_rows": 987,
+            "rows": 1202,
+            "threshold": 0.4300155756932633
+          },
+          "inner_threshold": 0.4300155756932633,
+          "ratio_present_to_absent": [
+            1,
+            1
+          ]
+        },
+        {
+          "family": "D0_CONFORMAL",
+          "heldout_sequence": "dancetrack0002",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.01977401129943503,
+            "accepted_count": 66,
+            "correct_id_count": 56,
+            "ece": 0.4163618407224358,
+            "false_positive_count": 7,
+            "negative_fpr": 0.01871657754010695,
+            "none_rows": 374,
+            "open_set_correct_id_recall": 0.05054151624548736,
+            "presence_recall": 0.05324909747292419,
+            "present_rows": 1108,
+            "rows": 1482,
+            "threshold": 0.5142533563044974
+          },
+          "inner_threshold": 0.5142533563044974,
+          "ratio_present_to_absent": [
+            1,
+            1
+          ]
+        },
+        {
+          "family": "D0_CONFORMAL",
+          "heldout_sequence": "dancetrack0023",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.020833333333333332,
+            "accepted_count": 22,
+            "correct_id_count": 21,
+            "ece": 0.5688957021719286,
+            "false_positive_count": 1,
+            "negative_fpr": 0.0196078431372549,
+            "none_rows": 51,
+            "open_set_correct_id_recall": 0.029535864978902954,
+            "presence_recall": 0.029535864978902954,
+            "present_rows": 711,
+            "rows": 762,
+            "threshold": 0.518808971374551
+          },
+          "inner_threshold": 0.518808971374551,
+          "ratio_present_to_absent": [
+            1,
+            1
+          ]
+        },
+        {
+          "family": "D0_CONFORMAL",
+          "heldout_sequence": "dancetrack0024",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.0,
+            "accepted_count": 205,
+            "correct_id_count": 205,
+            "ece": 0.5026789792666132,
+            "false_positive_count": 0,
+            "negative_fpr": 0.0,
+            "none_rows": 49,
+            "open_set_correct_id_recall": 0.17197986577181207,
+            "presence_recall": 0.17197986577181207,
+            "present_rows": 1192,
+            "rows": 1241,
+            "threshold": 0.5601791285905889
+          },
+          "inner_threshold": 0.5601791285905889,
+          "ratio_present_to_absent": [
+            1,
+            1
+          ]
+        },
+        {
+          "family": "D0_CONFORMAL",
+          "heldout_sequence": "dancetrack0039",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.0,
+            "accepted_count": 79,
+            "correct_id_count": 77,
+            "ece": 0.5804433815812992,
+            "false_positive_count": 0,
+            "negative_fpr": 0.0,
+            "none_rows": 29,
+            "open_set_correct_id_recall": 0.13006756756756757,
+            "presence_recall": 0.13344594594594594,
+            "present_rows": 592,
+            "rows": 621,
+            "threshold": 0.4696255709929864
+          },
+          "inner_threshold": 0.4696255709929864,
+          "ratio_present_to_absent": [
+            1,
+            1
+          ]
+        },
+        {
+          "family": "D0_CONFORMAL",
+          "heldout_sequence": "dancetrack0057",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.016194331983805668,
+            "accepted_count": 131,
+            "correct_id_count": 51,
+            "ece": 0.3530573218323661,
+            "false_positive_count": 4,
+            "negative_fpr": 0.016194331983805668,
+            "none_rows": 247,
+            "open_set_correct_id_recall": 0.05340314136125655,
+            "presence_recall": 0.13298429319371727,
+            "present_rows": 955,
+            "rows": 1202,
+            "threshold": 0.5704862204551855
+          },
+          "inner_threshold": 0.5704862204551855,
+          "ratio_present_to_absent": [
+            1,
+            1
+          ]
+        },
+        {
+          "family": "D0_CONFORMAL",
+          "heldout_sequence": "dancetrack0062",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.014285714285714285,
+            "P1_fpr": 0.020026702269692925,
+            "accepted_count": 66,
+            "correct_id_count": 29,
+            "ece": 0.20947679950141254,
+            "false_positive_count": 16,
+            "negative_fpr": 0.019536019536019536,
+            "none_rows": 819,
+            "open_set_correct_id_recall": 0.07571801566579635,
+            "presence_recall": 0.13054830287206268,
+            "present_rows": 383,
+            "rows": 1202,
+            "threshold": 0.4376752998790019
+          },
+          "inner_threshold": 0.4376752998790019,
+          "ratio_present_to_absent": [
+            1,
+            1
+          ]
+        },
+        {
+          "family": "D0_CONFORMAL",
+          "heldout_sequence": "dancetrack0072",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.0,
+            "accepted_count": 71,
+            "correct_id_count": 70,
+            "ece": 0.6994410028773634,
+            "false_positive_count": 0,
+            "negative_fpr": 0.0,
+            "none_rows": 35,
+            "open_set_correct_id_recall": 0.10494752623688156,
+            "presence_recall": 0.10644677661169415,
+            "present_rows": 667,
+            "rows": 702,
+            "threshold": 0.4411063790365325
+          },
+          "inner_threshold": 0.4411063790365325,
+          "ratio_present_to_absent": [
+            1,
+            1
+          ]
+        }
+      ],
+      "ratio": [
+        1,
+        1
+      ],
+      "stratified_P0_P1_policy": 1
+    },
+    "D0_CONFORMAL:1:2": {
+      "aggregate": {
+        "P0_fpr": 0.01948051948051948,
+        "P1_fpr": 0.043243243243243246,
+        "ece": 0.4622032026272575,
+        "macro_negative_fpr": 0.047710151414264636,
+        "macro_open_set_correct_id_recall": 0.1305930015265031,
+        "negative_fpr": 0.04123144584936778,
+        "none_rows": 1819,
+        "open_set_correct_id_recall": 0.15815011372251706,
+        "per_sequence": {
+          "dancetrack0001": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.06896551724137931,
+            "negative_fpr": 0.05714285714285714,
+            "none_rows": 35,
+            "open_set_correct_id_recall": 0.17841079460269865,
+            "presence_recall": 0.17991004497751126,
+            "present_rows": 667,
+            "rows": 702,
+            "sequence": "dancetrack0001"
+          },
+          "dancetrack0002": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.0,
+            "negative_fpr": 0.0,
+            "none_rows": 215,
+            "open_set_correct_id_recall": 0.0,
+            "presence_recall": 0.0010131712259371835,
+            "present_rows": 987,
+            "rows": 1202,
+            "sequence": "dancetrack0002"
+          },
+          "dancetrack0023": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.022598870056497175,
+            "negative_fpr": 0.0213903743315508,
+            "none_rows": 374,
+            "open_set_correct_id_recall": 0.061371841155234655,
+            "presence_recall": 0.06407942238267147,
+            "present_rows": 1108,
+            "rows": 1482,
+            "sequence": "dancetrack0023"
+          },
+          "dancetrack0024": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.0,
+            "negative_fpr": 0.0,
+            "none_rows": 51,
+            "open_set_correct_id_recall": 0.009845288326300985,
+            "presence_recall": 0.009845288326300985,
+            "present_rows": 711,
+            "rows": 762,
+            "sequence": "dancetrack0024"
+          },
+          "dancetrack0039": {
+            "P0_fpr": 0.07317073170731707,
+            "P1_fpr": 0.125,
+            "negative_fpr": 0.08163265306122448,
+            "none_rows": 49,
+            "open_set_correct_id_recall": 0.49580536912751677,
+            "presence_recall": 0.50251677852349,
+            "present_rows": 1192,
+            "rows": 1241,
+            "sequence": "dancetrack0039"
+          },
+          "dancetrack0057": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.0,
+            "negative_fpr": 0.0,
+            "none_rows": 29,
+            "open_set_correct_id_recall": 0.006756756756756757,
+            "presence_recall": 0.006756756756756757,
+            "present_rows": 592,
+            "rows": 621,
+            "sequence": "dancetrack0057"
+          },
+          "dancetrack0062": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.21052631578947367,
+            "negative_fpr": 0.21052631578947367,
+            "none_rows": 247,
+            "open_set_correct_id_recall": 0.2481675392670157,
+            "presence_recall": 0.762303664921466,
+            "present_rows": 955,
+            "rows": 1202,
+            "sequence": "dancetrack0062"
+          },
+          "dancetrack0072": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.012016021361815754,
+            "negative_fpr": 0.01098901098901099,
+            "none_rows": 819,
+            "open_set_correct_id_recall": 0.044386422976501305,
+            "presence_recall": 0.06527415143603134,
+            "present_rows": 383,
+            "rows": 1202,
+            "sequence": "dancetrack0072"
+          }
+        },
+        "presence_recall": 0.2357846853677028,
+        "present_rows": 6595,
+        "rows": 8414
+      },
+      "family": "D0_CONFORMAL",
+      "folds": [
+        {
+          "family": "D0_CONFORMAL",
+          "heldout_sequence": "dancetrack0001",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.014354066985645933,
+            "accepted_count": 11,
+            "correct_id_count": 2,
+            "ece": 0.6289890985788475,
+            "false_positive_count": 3,
+            "negative_fpr": 0.013953488372093023,
+            "none_rows": 215,
+            "open_set_correct_id_recall": 0.002026342451874367,
+            "presence_recall": 0.008105369807497468,
+            "present_rows": 987,
+            "rows": 1202,
+            "threshold": 0.4300155756932633
+          },
+          "inner_threshold": 0.4300155756932633,
+          "ratio_present_to_absent": [
+            1,
+            2
+          ]
+        },
+        {
+          "family": "D0_CONFORMAL",
+          "heldout_sequence": "dancetrack0002",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.01977401129943503,
+            "accepted_count": 66,
+            "correct_id_count": 56,
+            "ece": 0.4163618407224358,
+            "false_positive_count": 7,
+            "negative_fpr": 0.01871657754010695,
+            "none_rows": 374,
+            "open_set_correct_id_recall": 0.05054151624548736,
+            "presence_recall": 0.05324909747292419,
+            "present_rows": 1108,
+            "rows": 1482,
+            "threshold": 0.5142533563044974
+          },
+          "inner_threshold": 0.5142533563044974,
+          "ratio_present_to_absent": [
+            1,
+            2
+          ]
+        },
+        {
+          "family": "D0_CONFORMAL",
+          "heldout_sequence": "dancetrack0023",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.020833333333333332,
+            "accepted_count": 22,
+            "correct_id_count": 21,
+            "ece": 0.5688957021719286,
+            "false_positive_count": 1,
+            "negative_fpr": 0.0196078431372549,
+            "none_rows": 51,
+            "open_set_correct_id_recall": 0.029535864978902954,
+            "presence_recall": 0.029535864978902954,
+            "present_rows": 711,
+            "rows": 762,
+            "threshold": 0.518808971374551
+          },
+          "inner_threshold": 0.518808971374551,
+          "ratio_present_to_absent": [
+            1,
+            2
+          ]
+        },
+        {
+          "family": "D0_CONFORMAL",
+          "heldout_sequence": "dancetrack0024",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.0,
+            "accepted_count": 205,
+            "correct_id_count": 205,
+            "ece": 0.5026789792666132,
+            "false_positive_count": 0,
+            "negative_fpr": 0.0,
+            "none_rows": 49,
+            "open_set_correct_id_recall": 0.17197986577181207,
+            "presence_recall": 0.17197986577181207,
+            "present_rows": 1192,
+            "rows": 1241,
+            "threshold": 0.5601791285905889
+          },
+          "inner_threshold": 0.5601791285905889,
+          "ratio_present_to_absent": [
+            1,
+            2
+          ]
+        },
+        {
+          "family": "D0_CONFORMAL",
+          "heldout_sequence": "dancetrack0039",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.0,
+            "accepted_count": 79,
+            "correct_id_count": 77,
+            "ece": 0.5804433815812992,
+            "false_positive_count": 0,
+            "negative_fpr": 0.0,
+            "none_rows": 29,
+            "open_set_correct_id_recall": 0.13006756756756757,
+            "presence_recall": 0.13344594594594594,
+            "present_rows": 592,
+            "rows": 621,
+            "threshold": 0.4696255709929864
+          },
+          "inner_threshold": 0.4696255709929864,
+          "ratio_present_to_absent": [
+            1,
+            2
+          ]
+        },
+        {
+          "family": "D0_CONFORMAL",
+          "heldout_sequence": "dancetrack0057",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.016194331983805668,
+            "accepted_count": 131,
+            "correct_id_count": 51,
+            "ece": 0.3530573218323661,
+            "false_positive_count": 4,
+            "negative_fpr": 0.016194331983805668,
+            "none_rows": 247,
+            "open_set_correct_id_recall": 0.05340314136125655,
+            "presence_recall": 0.13298429319371727,
+            "present_rows": 955,
+            "rows": 1202,
+            "threshold": 0.5704862204551855
+          },
+          "inner_threshold": 0.5704862204551855,
+          "ratio_present_to_absent": [
+            1,
+            2
+          ]
+        },
+        {
+          "family": "D0_CONFORMAL",
+          "heldout_sequence": "dancetrack0062",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.014285714285714285,
+            "P1_fpr": 0.020026702269692925,
+            "accepted_count": 66,
+            "correct_id_count": 29,
+            "ece": 0.20947679950141254,
+            "false_positive_count": 16,
+            "negative_fpr": 0.019536019536019536,
+            "none_rows": 819,
+            "open_set_correct_id_recall": 0.07571801566579635,
+            "presence_recall": 0.13054830287206268,
+            "present_rows": 383,
+            "rows": 1202,
+            "threshold": 0.4376752998790019
+          },
+          "inner_threshold": 0.4376752998790019,
+          "ratio_present_to_absent": [
+            1,
+            2
+          ]
+        },
+        {
+          "family": "D0_CONFORMAL",
+          "heldout_sequence": "dancetrack0072",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.0,
+            "accepted_count": 71,
+            "correct_id_count": 70,
+            "ece": 0.6994410028773634,
+            "false_positive_count": 0,
+            "negative_fpr": 0.0,
+            "none_rows": 35,
+            "open_set_correct_id_recall": 0.10494752623688156,
+            "presence_recall": 0.10644677661169415,
+            "present_rows": 667,
+            "rows": 702,
+            "threshold": 0.4411063790365325
+          },
+          "inner_threshold": 0.4411063790365325,
+          "ratio_present_to_absent": [
+            1,
+            2
+          ]
+        }
+      ],
+      "ratio": [
+        1,
+        2
+      ],
+      "stratified_P0_P1_policy": 1
+    },
+    "D0_CONFORMAL:2:1": {
+      "aggregate": {
+        "P0_fpr": 0.01948051948051948,
+        "P1_fpr": 0.043243243243243246,
+        "ece": 0.4622032026272575,
+        "macro_negative_fpr": 0.047710151414264636,
+        "macro_open_set_correct_id_recall": 0.1305930015265031,
+        "negative_fpr": 0.04123144584936778,
+        "none_rows": 1819,
+        "open_set_correct_id_recall": 0.15815011372251706,
+        "per_sequence": {
+          "dancetrack0001": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.06896551724137931,
+            "negative_fpr": 0.05714285714285714,
+            "none_rows": 35,
+            "open_set_correct_id_recall": 0.17841079460269865,
+            "presence_recall": 0.17991004497751126,
+            "present_rows": 667,
+            "rows": 702,
+            "sequence": "dancetrack0001"
+          },
+          "dancetrack0002": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.0,
+            "negative_fpr": 0.0,
+            "none_rows": 215,
+            "open_set_correct_id_recall": 0.0,
+            "presence_recall": 0.0010131712259371835,
+            "present_rows": 987,
+            "rows": 1202,
+            "sequence": "dancetrack0002"
+          },
+          "dancetrack0023": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.022598870056497175,
+            "negative_fpr": 0.0213903743315508,
+            "none_rows": 374,
+            "open_set_correct_id_recall": 0.061371841155234655,
+            "presence_recall": 0.06407942238267147,
+            "present_rows": 1108,
+            "rows": 1482,
+            "sequence": "dancetrack0023"
+          },
+          "dancetrack0024": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.0,
+            "negative_fpr": 0.0,
+            "none_rows": 51,
+            "open_set_correct_id_recall": 0.009845288326300985,
+            "presence_recall": 0.009845288326300985,
+            "present_rows": 711,
+            "rows": 762,
+            "sequence": "dancetrack0024"
+          },
+          "dancetrack0039": {
+            "P0_fpr": 0.07317073170731707,
+            "P1_fpr": 0.125,
+            "negative_fpr": 0.08163265306122448,
+            "none_rows": 49,
+            "open_set_correct_id_recall": 0.49580536912751677,
+            "presence_recall": 0.50251677852349,
+            "present_rows": 1192,
+            "rows": 1241,
+            "sequence": "dancetrack0039"
+          },
+          "dancetrack0057": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.0,
+            "negative_fpr": 0.0,
+            "none_rows": 29,
+            "open_set_correct_id_recall": 0.006756756756756757,
+            "presence_recall": 0.006756756756756757,
+            "present_rows": 592,
+            "rows": 621,
+            "sequence": "dancetrack0057"
+          },
+          "dancetrack0062": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.21052631578947367,
+            "negative_fpr": 0.21052631578947367,
+            "none_rows": 247,
+            "open_set_correct_id_recall": 0.2481675392670157,
+            "presence_recall": 0.762303664921466,
+            "present_rows": 955,
+            "rows": 1202,
+            "sequence": "dancetrack0062"
+          },
+          "dancetrack0072": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.012016021361815754,
+            "negative_fpr": 0.01098901098901099,
+            "none_rows": 819,
+            "open_set_correct_id_recall": 0.044386422976501305,
+            "presence_recall": 0.06527415143603134,
+            "present_rows": 383,
+            "rows": 1202,
+            "sequence": "dancetrack0072"
+          }
+        },
+        "presence_recall": 0.2357846853677028,
+        "present_rows": 6595,
+        "rows": 8414
+      },
+      "family": "D0_CONFORMAL",
+      "folds": [
+        {
+          "family": "D0_CONFORMAL",
+          "heldout_sequence": "dancetrack0001",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.014354066985645933,
+            "accepted_count": 11,
+            "correct_id_count": 2,
+            "ece": 0.6289890985788475,
+            "false_positive_count": 3,
+            "negative_fpr": 0.013953488372093023,
+            "none_rows": 215,
+            "open_set_correct_id_recall": 0.002026342451874367,
+            "presence_recall": 0.008105369807497468,
+            "present_rows": 987,
+            "rows": 1202,
+            "threshold": 0.4300155756932633
+          },
+          "inner_threshold": 0.4300155756932633,
+          "ratio_present_to_absent": [
+            2,
+            1
+          ]
+        },
+        {
+          "family": "D0_CONFORMAL",
+          "heldout_sequence": "dancetrack0002",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.01977401129943503,
+            "accepted_count": 66,
+            "correct_id_count": 56,
+            "ece": 0.4163618407224358,
+            "false_positive_count": 7,
+            "negative_fpr": 0.01871657754010695,
+            "none_rows": 374,
+            "open_set_correct_id_recall": 0.05054151624548736,
+            "presence_recall": 0.05324909747292419,
+            "present_rows": 1108,
+            "rows": 1482,
+            "threshold": 0.5142533563044974
+          },
+          "inner_threshold": 0.5142533563044974,
+          "ratio_present_to_absent": [
+            2,
+            1
+          ]
+        },
+        {
+          "family": "D0_CONFORMAL",
+          "heldout_sequence": "dancetrack0023",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.020833333333333332,
+            "accepted_count": 22,
+            "correct_id_count": 21,
+            "ece": 0.5688957021719286,
+            "false_positive_count": 1,
+            "negative_fpr": 0.0196078431372549,
+            "none_rows": 51,
+            "open_set_correct_id_recall": 0.029535864978902954,
+            "presence_recall": 0.029535864978902954,
+            "present_rows": 711,
+            "rows": 762,
+            "threshold": 0.518808971374551
+          },
+          "inner_threshold": 0.518808971374551,
+          "ratio_present_to_absent": [
+            2,
+            1
+          ]
+        },
+        {
+          "family": "D0_CONFORMAL",
+          "heldout_sequence": "dancetrack0024",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.0,
+            "accepted_count": 205,
+            "correct_id_count": 205,
+            "ece": 0.5026789792666132,
+            "false_positive_count": 0,
+            "negative_fpr": 0.0,
+            "none_rows": 49,
+            "open_set_correct_id_recall": 0.17197986577181207,
+            "presence_recall": 0.17197986577181207,
+            "present_rows": 1192,
+            "rows": 1241,
+            "threshold": 0.5601791285905889
+          },
+          "inner_threshold": 0.5601791285905889,
+          "ratio_present_to_absent": [
+            2,
+            1
+          ]
+        },
+        {
+          "family": "D0_CONFORMAL",
+          "heldout_sequence": "dancetrack0039",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.0,
+            "accepted_count": 79,
+            "correct_id_count": 77,
+            "ece": 0.5804433815812992,
+            "false_positive_count": 0,
+            "negative_fpr": 0.0,
+            "none_rows": 29,
+            "open_set_correct_id_recall": 0.13006756756756757,
+            "presence_recall": 0.13344594594594594,
+            "present_rows": 592,
+            "rows": 621,
+            "threshold": 0.4696255709929864
+          },
+          "inner_threshold": 0.4696255709929864,
+          "ratio_present_to_absent": [
+            2,
+            1
+          ]
+        },
+        {
+          "family": "D0_CONFORMAL",
+          "heldout_sequence": "dancetrack0057",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.016194331983805668,
+            "accepted_count": 131,
+            "correct_id_count": 51,
+            "ece": 0.3530573218323661,
+            "false_positive_count": 4,
+            "negative_fpr": 0.016194331983805668,
+            "none_rows": 247,
+            "open_set_correct_id_recall": 0.05340314136125655,
+            "presence_recall": 0.13298429319371727,
+            "present_rows": 955,
+            "rows": 1202,
+            "threshold": 0.5704862204551855
+          },
+          "inner_threshold": 0.5704862204551855,
+          "ratio_present_to_absent": [
+            2,
+            1
+          ]
+        },
+        {
+          "family": "D0_CONFORMAL",
+          "heldout_sequence": "dancetrack0062",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.014285714285714285,
+            "P1_fpr": 0.020026702269692925,
+            "accepted_count": 66,
+            "correct_id_count": 29,
+            "ece": 0.20947679950141254,
+            "false_positive_count": 16,
+            "negative_fpr": 0.019536019536019536,
+            "none_rows": 819,
+            "open_set_correct_id_recall": 0.07571801566579635,
+            "presence_recall": 0.13054830287206268,
+            "present_rows": 383,
+            "rows": 1202,
+            "threshold": 0.4376752998790019
+          },
+          "inner_threshold": 0.4376752998790019,
+          "ratio_present_to_absent": [
+            2,
+            1
+          ]
+        },
+        {
+          "family": "D0_CONFORMAL",
+          "heldout_sequence": "dancetrack0072",
+          "inner_gate_infeasible": false,
+          "inner_metrics": {
+            "P0_fpr": 0.0,
+            "P1_fpr": 0.0,
+            "accepted_count": 71,
+            "correct_id_count": 70,
+            "ece": 0.6994410028773634,
+            "false_positive_count": 0,
+            "negative_fpr": 0.0,
+            "none_rows": 35,
+            "open_set_correct_id_recall": 0.10494752623688156,
+            "presence_recall": 0.10644677661169415,
+            "present_rows": 667,
+            "rows": 702,
+            "threshold": 0.4411063790365325
+          },
+          "inner_threshold": 0.4411063790365325,
+          "ratio_present_to_absent": [
+            2,
+            1
+          ]
+        }
+      ],
+      "ratio": [
+        2,
+        1
+      ],
+      "stratified_P0_P1_policy": 1
+    }
+  },
+  "stage": "N72R20R3R2R1"
+}
