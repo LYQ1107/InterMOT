@@ -1,0 +1,1488 @@
+{
+  "answer": "No reliable cross-sequence open-set runtime policy was established: raw presence-related signal exists, but no LOSO policy met both the required safety and correct-identification gates on all eight held-out sequences.",
+  "artifact_generation_commit": "b2abc90fd90bc5eb36b31f753561ea0aa3da900b",
+  "artifact_paths": {
+    "causal_stop": "outputs/N72R20R3/causal/causal_replay.json",
+    "loso": "outputs/N72R20R3/presence/loso_results.json",
+    "posthoc_labels": "outputs/N72R20R3/presence/frame_posthoc_labels.jsonl.zst",
+    "runtime_features": "outputs/N72R20R3/presence/frame_runtime_features.jsonl.zst"
+  },
+  "association_rescue": false,
+  "b4_authorization": {
+    "authorized": true,
+    "simple_baselines_limited": true,
+    "usable_separation": true
+  },
+  "best_presence_method": null,
+  "branch": "codex/n72r20r3-open-set-identity",
+  "candidate_axis_unchanged": true,
+  "candidate_creation_forbidden": true,
+  "candidates": 49202,
+  "causal_correct_write_retention": null,
+  "causal_replay": "NOT_RUN_STATIC_PRESENCE_GATE_FAILED",
+  "causal_wrong_write_rate": null,
+  "central_question": "Can a human-initialized persistent identity memory determine whether the target identity is represented in the current candidate set, abstain when it is not, and identify the correct candidate when it is present?",
+  "false_present_rate": null,
+  "final_decision": "FAIL_OPEN_SET_CROSS_SEQUENCE_GENERALIZATION",
+  "frames": 8414,
+  "future_association_headroom": {
+    "artifact": "outputs/N72R20R3/future_association_headroom.json",
+    "assignment_changed": false,
+    "learned_top1_correct_count": 84,
+    "p2_frames": 1706
+  },
+  "goal": "Open-Set Persistent Identity Recognition",
+  "goal_reference": "outputs/N72R20R3/FINAL_GOAL.json",
+  "historical_r2_c0_correct_write_count": 4889,
+  "historical_r2_wrong_write_count": 2000,
+  "historical_r2_wrong_write_reclassification": {
+    "P0_target_absent": 68,
+    "P1_target_candidate_unavailable": 817,
+    "P1a_localization_gray": 439,
+    "P1b_wrong_available_object": 378,
+    "P2_true_candidate_association_error": 1115,
+    "other_insufficient_evidence": 0
+  },
+  "human_anchor_immutable": true,
+  "loso_macro_metrics": [
+    {
+      "condition": "S0_HUMAN_ANCHOR_ONLY",
+      "negative_fpr": 0.9615786260523103,
+      "open_set_correct_identification_recall": 0.27610575296050927,
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B0_ALWAYS_PRESENT"
+    },
+    {
+      "condition": "S0_HUMAN_ANCHOR_ONLY",
+      "negative_fpr": 0.0354251012145749,
+      "open_set_correct_identification_recall": 0.03817894974197543,
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B1_ABSOLUTE_SCORE"
+    },
+    {
+      "condition": "S0_HUMAN_ANCHOR_ONLY",
+      "negative_fpr": 0.04030910609857978,
+      "open_set_correct_identification_recall": 0.03850532049915558,
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B2_ABSOLUTE_MARGIN"
+    },
+    {
+      "condition": "S0_HUMAN_ANCHOR_ONLY",
+      "negative_fpr": 0.018603975969499312,
+      "open_set_correct_identification_recall": 0.007012472584300222,
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_mean"
+    },
+    {
+      "condition": "S0_HUMAN_ANCHOR_ONLY",
+      "negative_fpr": 0.015590073338497065,
+      "open_set_correct_identification_recall": 0.010951795056628534,
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_median"
+    },
+    {
+      "condition": "S0_HUMAN_ANCHOR_ONLY",
+      "negative_fpr": 0.01941611739833354,
+      "open_set_correct_identification_recall": 0.0031952709132914373,
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_zscore"
+    },
+    {
+      "condition": "S0_HUMAN_ANCHOR_ONLY",
+      "negative_fpr": 0.06802548307279964,
+      "open_set_correct_identification_recall": 0.0520668260217846,
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B4_LOGISTIC_PRESENCE"
+    },
+    {
+      "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+      "negative_fpr": 0.9615786260523103,
+      "open_set_correct_identification_recall": 0.7053750397925508,
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B0_ALWAYS_PRESENT"
+    },
+    {
+      "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+      "negative_fpr": 0.0,
+      "open_set_correct_identification_recall": 0.00010486577181208053,
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B1_ABSOLUTE_SCORE"
+    },
+    {
+      "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+      "negative_fpr": 0.0,
+      "open_set_correct_identification_recall": 0.00010486577181208053,
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B2_ABSOLUTE_MARGIN"
+    },
+    {
+      "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+      "negative_fpr": 0.05406976744186046,
+      "open_set_correct_identification_recall": 0.00037993920972644377,
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_mean"
+    },
+    {
+      "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+      "negative_fpr": 0.0029069767441860465,
+      "open_set_correct_identification_recall": 0.0,
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_median"
+    },
+    {
+      "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+      "negative_fpr": 0.04341406427589738,
+      "open_set_correct_identification_recall": 0.02956433820879192,
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_zscore"
+    },
+    {
+      "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+      "negative_fpr": 0.06588201100585002,
+      "open_set_correct_identification_recall": 0.19399817216661397,
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B4_LOGISTIC_PRESENCE"
+    }
+  ],
+  "loso_per_sequence_metrics": "embedded in each item of loso_pooled_metrics.per_sequence",
+  "loso_pooled_metrics": [
+    {
+      "condition": "S0_HUMAN_ANCHOR_ONLY",
+      "macro": {
+        "negative_fpr": 0.9615786260523103,
+        "open_set_correct_identification_recall": 0.27610575296050927
+      },
+      "per_sequence": {
+        "dancetrack0001": {
+          "correct_write_retention_diagnostic": 0.4855403348554033,
+          "fpr": 1.0,
+          "negative_count": 35,
+          "open_set_correct_identification_recall": 0.49325337331334335,
+          "positive_count": 667,
+          "wrong_write_rate_diagnostic": 0.003125
+        },
+        "dancetrack0002": {
+          "correct_write_retention_diagnostic": 0.17343173431734318,
+          "fpr": 1.0,
+          "negative_count": 215,
+          "open_set_correct_identification_recall": 0.14488348530901723,
+          "positive_count": 987,
+          "wrong_write_rate_diagnostic": 0.14545454545454545
+        },
+        "dancetrack0023": {
+          "correct_write_retention_diagnostic": 0.2,
+          "fpr": 1.0,
+          "negative_count": 374,
+          "open_set_correct_identification_recall": 0.20126353790613719,
+          "positive_count": 1108,
+          "wrong_write_rate_diagnostic": 0.2480916030534351
+        },
+        "dancetrack0024": {
+          "correct_write_retention_diagnostic": 0.15211267605633802,
+          "fpr": 1.0,
+          "negative_count": 51,
+          "open_set_correct_identification_recall": 0.16033755274261605,
+          "positive_count": 711,
+          "wrong_write_rate_diagnostic": 0.05263157894736842
+        },
+        "dancetrack0039": {
+          "correct_write_retention_diagnostic": 0.3539373412362405,
+          "fpr": 1.0,
+          "negative_count": 49,
+          "open_set_correct_identification_recall": 0.3548657718120805,
+          "positive_count": 1192,
+          "wrong_write_rate_diagnostic": 0.05429864253393665
+        },
+        "dancetrack0057": {
+          "correct_write_retention_diagnostic": 0.1576271186440678,
+          "fpr": 1.0,
+          "negative_count": 29,
+          "open_set_correct_identification_recall": 0.16554054054054054,
+          "positive_count": 592,
+          "wrong_write_rate_diagnostic": 0.07920792079207921
+        },
+        "dancetrack0062": {
+          "correct_write_retention_diagnostic": 0.7230215827338129,
+          "fpr": 0.708502024291498,
+          "negative_count": 247,
+          "open_set_correct_identification_recall": 0.37277486910994767,
+          "positive_count": 955,
+          "wrong_write_rate_diagnostic": 0.569593147751606
+        },
+        "dancetrack0072": {
+          "correct_write_retention_diagnostic": 0.3225806451612903,
+          "fpr": 0.9841269841269841,
+          "negative_count": 819,
+          "open_set_correct_identification_recall": 0.31592689295039167,
+          "positive_count": 383,
+          "wrong_write_rate_diagnostic": 0.35185185185185186
+        }
+      },
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B0_ALWAYS_PRESENT",
+      "pooled": {
+        "conditional_candidate_accuracy": 0.23391621732065135,
+        "correct_write_retention_diagnostic": 0.2971977909592964,
+        "cross_sequence_gate_pass": false,
+        "negative_fpr": 0.9532710280373832,
+        "open_set_correct_identification_recall": 0.27399545109931767,
+        "p0_fpr": 1.0,
+        "p1_fpr": 0.948948948948949,
+        "presence_gate_pass": false,
+        "presence_recall": 1.0,
+        "wrong_write_rate_diagnostic": 0.2225789192081327
+      },
+      "trainable_parameters": 0
+    },
+    {
+      "condition": "S0_HUMAN_ANCHOR_ONLY",
+      "macro": {
+        "negative_fpr": 0.0354251012145749,
+        "open_set_correct_identification_recall": 0.03817894974197543
+      },
+      "per_sequence": {
+        "dancetrack0001": {
+          "correct_write_retention_diagnostic": 0.0060882800608828,
+          "fpr": 0.0,
+          "negative_count": 35,
+          "open_set_correct_identification_recall": 0.005997001499250375,
+          "positive_count": 667,
+          "wrong_write_rate_diagnostic": 0.0
+        },
+        "dancetrack0002": {
+          "correct_write_retention_diagnostic": 0.02952029520295203,
+          "fpr": 0.0,
+          "negative_count": 215,
+          "open_set_correct_identification_recall": 0.008105369807497468,
+          "positive_count": 987,
+          "wrong_write_rate_diagnostic": 0.0
+        },
+        "dancetrack0023": {
+          "correct_write_retention_diagnostic": 0.0040609137055837565,
+          "fpr": 0.0,
+          "negative_count": 374,
+          "open_set_correct_identification_recall": 0.0036101083032490976,
+          "positive_count": 1108,
+          "wrong_write_rate_diagnostic": 0.0
+        },
+        "dancetrack0024": {
+          "correct_write_retention_diagnostic": 0.0,
+          "fpr": 0.0,
+          "negative_count": 51,
+          "open_set_correct_identification_recall": 0.0,
+          "positive_count": 711,
+          "wrong_write_rate_diagnostic": null
+        },
+        "dancetrack0039": {
+          "correct_write_retention_diagnostic": 0.0279424216765453,
+          "fpr": 0.0,
+          "negative_count": 49,
+          "open_set_correct_identification_recall": 0.027684563758389263,
+          "positive_count": 1192,
+          "wrong_write_rate_diagnostic": 0.0
+        },
+        "dancetrack0057": {
+          "correct_write_retention_diagnostic": 0.005084745762711864,
+          "fpr": 0.0,
+          "negative_count": 29,
+          "open_set_correct_identification_recall": 0.005067567567567568,
+          "positive_count": 592,
+          "wrong_write_rate_diagnostic": 0.0
+        },
+        "dancetrack0062": {
+          "correct_write_retention_diagnostic": 0.45323741007194246,
+          "fpr": 0.2834008097165992,
+          "negative_count": 247,
+          "open_set_correct_identification_recall": 0.2523560209424084,
+          "positive_count": 955,
+          "wrong_write_rate_diagnostic": 0.5841584158415841
+        },
+        "dancetrack0072": {
+          "correct_write_retention_diagnostic": 0.004608294930875576,
+          "fpr": 0.0,
+          "negative_count": 819,
+          "open_set_correct_identification_recall": 0.0026109660574412533,
+          "positive_count": 383,
+          "wrong_write_rate_diagnostic": 0.0
+        }
+      },
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B1_ABSOLUTE_SCORE",
+      "pooled": {
+        "conditional_candidate_accuracy": 0.7884142391026953,
+        "correct_write_retention_diagnostic": 0.03661280425444876,
+        "cross_sequence_gate_pass": false,
+        "negative_fpr": 0.038482682792743264,
+        "open_set_correct_identification_recall": 0.044579226686884,
+        "p0_fpr": 0.0,
+        "p1_fpr": 0.042042042042042045,
+        "presence_gate_pass": false,
+        "presence_recall": 0.11175132676269901,
+        "wrong_write_rate_diagnostic": 0.49719101123595505
+      },
+      "trainable_parameters": 0
+    },
+    {
+      "condition": "S0_HUMAN_ANCHOR_ONLY",
+      "macro": {
+        "negative_fpr": 0.04030910609857978,
+        "open_set_correct_identification_recall": 0.03850532049915558
+      },
+      "per_sequence": {
+        "dancetrack0001": {
+          "correct_write_retention_diagnostic": 0.0060882800608828,
+          "fpr": 0.0,
+          "negative_count": 35,
+          "open_set_correct_identification_recall": 0.005997001499250375,
+          "positive_count": 667,
+          "wrong_write_rate_diagnostic": 0.0
+        },
+        "dancetrack0002": {
+          "correct_write_retention_diagnostic": 0.02952029520295203,
+          "fpr": 0.0,
+          "negative_count": 215,
+          "open_set_correct_identification_recall": 0.008105369807497468,
+          "positive_count": 987,
+          "wrong_write_rate_diagnostic": 0.0
+        },
+        "dancetrack0023": {
+          "correct_write_retention_diagnostic": 0.0040609137055837565,
+          "fpr": 0.0,
+          "negative_count": 374,
+          "open_set_correct_identification_recall": 0.0036101083032490976,
+          "positive_count": 1108,
+          "wrong_write_rate_diagnostic": 0.0
+        },
+        "dancetrack0024": {
+          "correct_write_retention_diagnostic": 0.0,
+          "fpr": 0.0,
+          "negative_count": 51,
+          "open_set_correct_identification_recall": 0.0,
+          "positive_count": 711,
+          "wrong_write_rate_diagnostic": null
+        },
+        "dancetrack0039": {
+          "correct_write_retention_diagnostic": 0.0279424216765453,
+          "fpr": 0.0,
+          "negative_count": 49,
+          "open_set_correct_identification_recall": 0.027684563758389263,
+          "positive_count": 1192,
+          "wrong_write_rate_diagnostic": 0.0
+        },
+        "dancetrack0057": {
+          "correct_write_retention_diagnostic": 0.005084745762711864,
+          "fpr": 0.0,
+          "negative_count": 29,
+          "open_set_correct_identification_recall": 0.005067567567567568,
+          "positive_count": 592,
+          "wrong_write_rate_diagnostic": 0.0
+        },
+        "dancetrack0062": {
+          "correct_write_retention_diagnostic": 0.45323741007194246,
+          "fpr": 0.2834008097165992,
+          "negative_count": 247,
+          "open_set_correct_identification_recall": 0.2523560209424084,
+          "positive_count": 955,
+          "wrong_write_rate_diagnostic": 0.5841584158415841
+        },
+        "dancetrack0072": {
+          "correct_write_retention_diagnostic": 0.004608294930875576,
+          "fpr": 0.03907203907203907,
+          "negative_count": 819,
+          "open_set_correct_identification_recall": 0.005221932114882507,
+          "positive_count": 383,
+          "wrong_write_rate_diagnostic": 0.0
+        }
+      },
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B2_ABSOLUTE_MARGIN",
+      "pooled": {
+        "conditional_candidate_accuracy": 0.7334790916732339,
+        "correct_write_retention_diagnostic": 0.03661280425444876,
+        "cross_sequence_gate_pass": false,
+        "negative_fpr": 0.056074766355140186,
+        "open_set_correct_identification_recall": 0.04473085670962851,
+        "p0_fpr": 0.006493506493506494,
+        "p1_fpr": 0.06066066066066066,
+        "presence_gate_pass": false,
+        "presence_recall": 0.11235784685367703,
+        "wrong_write_rate_diagnostic": 0.49719101123595505
+      },
+      "trainable_parameters": 0
+    },
+    {
+      "condition": "S0_HUMAN_ANCHOR_ONLY",
+      "macro": {
+        "negative_fpr": 0.018603975969499312,
+        "open_set_correct_identification_recall": 0.007012472584300222
+      },
+      "per_sequence": {
+        "dancetrack0001": {
+          "correct_write_retention_diagnostic": 0.0,
+          "fpr": 0.0,
+          "negative_count": 35,
+          "open_set_correct_identification_recall": 0.0,
+          "positive_count": 667,
+          "wrong_write_rate_diagnostic": null
+        },
+        "dancetrack0002": {
+          "correct_write_retention_diagnostic": 0.01845018450184502,
+          "fpr": 0.0,
+          "negative_count": 215,
+          "open_set_correct_identification_recall": 0.005065856129685917,
+          "positive_count": 987,
+          "wrong_write_rate_diagnostic": 0.0
+        },
+        "dancetrack0023": {
+          "correct_write_retention_diagnostic": 0.0,
+          "fpr": 0.016042780748663103,
+          "negative_count": 374,
+          "open_set_correct_identification_recall": 0.0,
+          "positive_count": 1108,
+          "wrong_write_rate_diagnostic": 1.0
+        },
+        "dancetrack0024": {
+          "correct_write_retention_diagnostic": 0.0014084507042253522,
+          "fpr": 0.0,
+          "negative_count": 51,
+          "open_set_correct_identification_recall": 0.0014064697609001407,
+          "positive_count": 711,
+          "wrong_write_rate_diagnostic": 0.0
+        },
+        "dancetrack0039": {
+          "correct_write_retention_diagnostic": 0.014394580863674851,
+          "fpr": 0.02040816326530612,
+          "negative_count": 49,
+          "open_set_correct_identification_recall": 0.014261744966442953,
+          "positive_count": 1192,
+          "wrong_write_rate_diagnostic": 0.0
+        },
+        "dancetrack0057": {
+          "correct_write_retention_diagnostic": 0.005084745762711864,
+          "fpr": 0.10344827586206896,
+          "negative_count": 29,
+          "open_set_correct_identification_recall": 0.005067567567567568,
+          "positive_count": 592,
+          "wrong_write_rate_diagnostic": 0.5
+        },
+        "dancetrack0062": {
+          "correct_write_retention_diagnostic": 0.014388489208633094,
+          "fpr": 0.004048582995951417,
+          "negative_count": 247,
+          "open_set_correct_identification_recall": 0.004188481675392671,
+          "positive_count": 955,
+          "wrong_write_rate_diagnostic": 0.6
+        },
+        "dancetrack0072": {
+          "correct_write_retention_diagnostic": 0.03686635944700461,
+          "fpr": 0.004884004884004884,
+          "negative_count": 819,
+          "open_set_correct_identification_recall": 0.02610966057441253,
+          "positive_count": 383,
+          "wrong_write_rate_diagnostic": 0.1111111111111111
+        }
+      },
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_mean",
+      "pooled": {
+        "conditional_candidate_accuracy": 0.5061073203605425,
+        "correct_write_retention_diagnostic": 0.007772550623849458,
+        "cross_sequence_gate_pass": false,
+        "negative_fpr": 0.008246289169873557,
+        "open_set_correct_identification_recall": 0.006065200909780136,
+        "p0_fpr": 0.012987012987012988,
+        "p1_fpr": 0.007807807807807808,
+        "presence_gate_pass": false,
+        "presence_recall": 0.009704321455648219,
+        "wrong_write_rate_diagnostic": 0.2692307692307692
+      },
+      "trainable_parameters": 0
+    },
+    {
+      "condition": "S0_HUMAN_ANCHOR_ONLY",
+      "macro": {
+        "negative_fpr": 0.015590073338497065,
+        "open_set_correct_identification_recall": 0.010951795056628534
+      },
+      "per_sequence": {
+        "dancetrack0001": {
+          "correct_write_retention_diagnostic": 0.0,
+          "fpr": 0.0,
+          "negative_count": 35,
+          "open_set_correct_identification_recall": 0.0,
+          "positive_count": 667,
+          "wrong_write_rate_diagnostic": null
+        },
+        "dancetrack0002": {
+          "correct_write_retention_diagnostic": 0.0036900369003690036,
+          "fpr": 0.004651162790697674,
+          "negative_count": 215,
+          "open_set_correct_identification_recall": 0.0010131712259371835,
+          "positive_count": 987,
+          "wrong_write_rate_diagnostic": 0.0
+        },
+        "dancetrack0023": {
+          "correct_write_retention_diagnostic": 0.0040609137055837565,
+          "fpr": 0.0427807486631016,
+          "negative_count": 374,
+          "open_set_correct_identification_recall": 0.0036101083032490976,
+          "positive_count": 1108,
+          "wrong_write_rate_diagnostic": 0.6666666666666666
+        },
+        "dancetrack0024": {
+          "correct_write_retention_diagnostic": 0.0014084507042253522,
+          "fpr": 0.0196078431372549,
+          "negative_count": 51,
+          "open_set_correct_identification_recall": 0.0014064697609001407,
+          "positive_count": 711,
+          "wrong_write_rate_diagnostic": 0.0
+        },
+        "dancetrack0039": {
+          "correct_write_retention_diagnostic": 0.023708721422523286,
+          "fpr": 0.02040816326530612,
+          "negative_count": 49,
+          "open_set_correct_identification_recall": 0.02348993288590604,
+          "positive_count": 1192,
+          "wrong_write_rate_diagnostic": 0.0
+        },
+        "dancetrack0057": {
+          "correct_write_retention_diagnostic": 0.0,
+          "fpr": 0.0,
+          "negative_count": 29,
+          "open_set_correct_identification_recall": 0.0,
+          "positive_count": 592,
+          "wrong_write_rate_diagnostic": null
+        },
+        "dancetrack0062": {
+          "correct_write_retention_diagnostic": 0.16906474820143885,
+          "fpr": 0.032388663967611336,
+          "negative_count": 247,
+          "open_set_correct_identification_recall": 0.050261780104712044,
+          "positive_count": 955,
+          "wrong_write_rate_diagnostic": 0.17543859649122806
+        },
+        "dancetrack0072": {
+          "correct_write_retention_diagnostic": 0.013824884792626729,
+          "fpr": 0.004884004884004884,
+          "negative_count": 819,
+          "open_set_correct_identification_recall": 0.007832898172323759,
+          "positive_count": 383,
+          "wrong_write_rate_diagnostic": 0.4
+        }
+      },
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_median",
+      "pooled": {
+        "conditional_candidate_accuracy": 0.3292242678520832,
+        "correct_write_retention_diagnostic": 0.017181427694825117,
+        "cross_sequence_gate_pass": false,
+        "negative_fpr": 0.017042330951072014,
+        "open_set_correct_identification_recall": 0.01288855193328279,
+        "p0_fpr": 0.01948051948051948,
+        "p1_fpr": 0.016816816816816817,
+        "presence_gate_pass": false,
+        "presence_recall": 0.02562547384382108,
+        "wrong_write_rate_diagnostic": 0.19230769230769232
+      },
+      "trainable_parameters": 0
+    },
+    {
+      "condition": "S0_HUMAN_ANCHOR_ONLY",
+      "macro": {
+        "negative_fpr": 0.01941611739833354,
+        "open_set_correct_identification_recall": 0.0031952709132914373
+      },
+      "per_sequence": {
+        "dancetrack0001": {
+          "correct_write_retention_diagnostic": 0.0015220700152207,
+          "fpr": 0.0,
+          "negative_count": 35,
+          "open_set_correct_identification_recall": 0.0014992503748125937,
+          "positive_count": 667,
+          "wrong_write_rate_diagnostic": 0.0
+        },
+        "dancetrack0002": {
+          "correct_write_retention_diagnostic": 0.0036900369003690036,
+          "fpr": 0.06976744186046512,
+          "negative_count": 215,
+          "open_set_correct_identification_recall": 0.00911854103343465,
+          "positive_count": 987,
+          "wrong_write_rate_diagnostic": 0.75
+        },
+        "dancetrack0023": {
+          "correct_write_retention_diagnostic": 0.014213197969543147,
+          "fpr": 0.0855614973262032,
+          "negative_count": 374,
+          "open_set_correct_identification_recall": 0.013537906137184115,
+          "positive_count": 1108,
+          "wrong_write_rate_diagnostic": 0.391304347826087
+        },
+        "dancetrack0024": {
+          "correct_write_retention_diagnostic": 0.0014084507042253522,
+          "fpr": 0.0,
+          "negative_count": 51,
+          "open_set_correct_identification_recall": 0.0014064697609001407,
+          "positive_count": 711,
+          "wrong_write_rate_diagnostic": 0.0
+        },
+        "dancetrack0039": {
+          "correct_write_retention_diagnostic": 0.0,
+          "fpr": 0.0,
+          "negative_count": 49,
+          "open_set_correct_identification_recall": 0.0,
+          "positive_count": 1192,
+          "wrong_write_rate_diagnostic": null
+        },
+        "dancetrack0057": {
+          "correct_write_retention_diagnostic": 0.0,
+          "fpr": 0.0,
+          "negative_count": 29,
+          "open_set_correct_identification_recall": 0.0,
+          "positive_count": 592,
+          "wrong_write_rate_diagnostic": null
+        },
+        "dancetrack0062": {
+          "correct_write_retention_diagnostic": 0.0,
+          "fpr": 0.0,
+          "negative_count": 247,
+          "open_set_correct_identification_recall": 0.0,
+          "positive_count": 955,
+          "wrong_write_rate_diagnostic": null
+        },
+        "dancetrack0072": {
+          "correct_write_retention_diagnostic": 0.0,
+          "fpr": 0.0,
+          "negative_count": 819,
+          "open_set_correct_identification_recall": 0.0,
+          "positive_count": 383,
+          "wrong_write_rate_diagnostic": null
+        }
+      },
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_zscore",
+      "pooled": {
+        "conditional_candidate_accuracy": 0.17448719685565445,
+        "correct_write_retention_diagnostic": 0.0034771937001431786,
+        "cross_sequence_gate_pass": false,
+        "negative_fpr": 0.02583837273227048,
+        "open_set_correct_identification_recall": 0.003942380591357089,
+        "p0_fpr": 0.012987012987012988,
+        "p1_fpr": 0.02702702702702703,
+        "presence_gate_pass": false,
+        "presence_recall": 0.025018953752843062,
+        "wrong_write_rate_diagnostic": 0.41379310344827586
+      },
+      "trainable_parameters": 0
+    },
+    {
+      "condition": "S0_HUMAN_ANCHOR_ONLY",
+      "macro": {
+        "negative_fpr": 0.06802548307279964,
+        "open_set_correct_identification_recall": 0.0520668260217846
+      },
+      "per_sequence": {
+        "dancetrack0001": {
+          "correct_write_retention_diagnostic": 0.1248097412480974,
+          "fpr": 0.11428571428571428,
+          "negative_count": 35,
+          "open_set_correct_identification_recall": 0.12293853073463268,
+          "positive_count": 667,
+          "wrong_write_rate_diagnostic": 0.0
+        },
+        "dancetrack0002": {
+          "correct_write_retention_diagnostic": 0.08118081180811808,
+          "fpr": 0.0,
+          "negative_count": 215,
+          "open_set_correct_identification_recall": 0.022289766970618033,
+          "positive_count": 987,
+          "wrong_write_rate_diagnostic": 0.0
+        },
+        "dancetrack0023": {
+          "correct_write_retention_diagnostic": 0.17055837563451776,
+          "fpr": 0.3181818181818182,
+          "negative_count": 374,
+          "open_set_correct_identification_recall": 0.1624548736462094,
+          "positive_count": 1108,
+          "wrong_write_rate_diagnostic": 0.21495327102803738
+        },
+        "dancetrack0024": {
+          "correct_write_retention_diagnostic": 0.0,
+          "fpr": 0.0,
+          "negative_count": 51,
+          "open_set_correct_identification_recall": 0.0,
+          "positive_count": 711,
+          "wrong_write_rate_diagnostic": null
+        },
+        "dancetrack0039": {
+          "correct_write_retention_diagnostic": 0.009314140558848433,
+          "fpr": 0.04081632653061224,
+          "negative_count": 49,
+          "open_set_correct_identification_recall": 0.009228187919463088,
+          "positive_count": 1192,
+          "wrong_write_rate_diagnostic": 0.08333333333333333
+        },
+        "dancetrack0057": {
+          "correct_write_retention_diagnostic": 0.06440677966101695,
+          "fpr": 0.034482758620689655,
+          "negative_count": 29,
+          "open_set_correct_identification_recall": 0.06925675675675676,
+          "positive_count": 592,
+          "wrong_write_rate_diagnostic": 0.02564102564102564
+        },
+        "dancetrack0062": {
+          "correct_write_retention_diagnostic": 0.050359712230215826,
+          "fpr": 0.03643724696356275,
+          "negative_count": 247,
+          "open_set_correct_identification_recall": 0.030366492146596858,
+          "positive_count": 955,
+          "wrong_write_rate_diagnostic": 0.6888888888888889
+        },
+        "dancetrack0072": {
+          "correct_write_retention_diagnostic": 0.0,
+          "fpr": 0.0,
+          "negative_count": 819,
+          "open_set_correct_identification_recall": 0.0,
+          "positive_count": 383,
+          "wrong_write_rate_diagnostic": null
+        }
+      },
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B4_LOGISTIC_PRESENCE",
+      "pooled": {
+        "conditional_candidate_accuracy": 0.29418741139511223,
+        "correct_write_retention_diagnostic": 0.06852116997340969,
+        "cross_sequence_gate_pass": false,
+        "negative_fpr": 0.07421660252886202,
+        "open_set_correct_identification_recall": 0.05534495830174375,
+        "p0_fpr": 0.05194805194805195,
+        "p1_fpr": 0.07627627627627627,
+        "presence_gate_pass": false,
+        "presence_recall": 0.2272934040940106,
+        "wrong_write_rate_diagnostic": 0.19082125603864733
+      },
+      "trainable_parameters": 11
+    },
+    {
+      "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+      "macro": {
+        "negative_fpr": 0.9615786260523103,
+        "open_set_correct_identification_recall": 0.7053750397925508
+      },
+      "per_sequence": {
+        "dancetrack0001": {
+          "correct_write_retention_diagnostic": 0.9193302891933028,
+          "fpr": 1.0,
+          "negative_count": 35,
+          "open_set_correct_identification_recall": 0.9115442278860569,
+          "positive_count": 667,
+          "wrong_write_rate_diagnostic": 0.04126984126984127
+        },
+        "dancetrack0002": {
+          "correct_write_retention_diagnostic": 0.7822878228782287,
+          "fpr": 1.0,
+          "negative_count": 215,
+          "open_set_correct_identification_recall": 0.23404255319148937,
+          "positive_count": 987,
+          "wrong_write_rate_diagnostic": 0.596958174904943
+        },
+        "dancetrack0023": {
+          "correct_write_retention_diagnostic": 0.9116751269035533,
+          "fpr": 1.0,
+          "negative_count": 374,
+          "open_set_correct_identification_recall": 0.8203971119133574,
+          "positive_count": 1108,
+          "wrong_write_rate_diagnostic": 0.1931716082659479
+        },
+        "dancetrack0024": {
+          "correct_write_retention_diagnostic": 0.9591549295774648,
+          "fpr": 1.0,
+          "negative_count": 51,
+          "open_set_correct_identification_recall": 0.9648382559774965,
+          "positive_count": 711,
+          "wrong_write_rate_diagnostic": 0.05416666666666667
+        },
+        "dancetrack0039": {
+          "correct_write_retention_diagnostic": 0.9881456392887383,
+          "fpr": 1.0,
+          "negative_count": 49,
+          "open_set_correct_identification_recall": 0.9840604026845637,
+          "positive_count": 1192,
+          "wrong_write_rate_diagnostic": 0.03712871287128713
+        },
+        "dancetrack0057": {
+          "correct_write_retention_diagnostic": 0.9220338983050848,
+          "fpr": 1.0,
+          "negative_count": 29,
+          "open_set_correct_identification_recall": 0.9341216216216216,
+          "positive_count": 592,
+          "wrong_write_rate_diagnostic": 0.030303030303030304
+        },
+        "dancetrack0062": {
+          "correct_write_retention_diagnostic": 0.9136690647482014,
+          "fpr": 0.708502024291498,
+          "negative_count": 247,
+          "open_set_correct_identification_recall": 0.30052356020942406,
+          "positive_count": 955,
+          "wrong_write_rate_diagnostic": 0.7462537462537463
+        },
+        "dancetrack0072": {
+          "correct_write_retention_diagnostic": 0.7603686635944701,
+          "fpr": 0.9841269841269841,
+          "negative_count": 819,
+          "open_set_correct_identification_recall": 0.4934725848563969,
+          "positive_count": 383,
+          "wrong_write_rate_diagnostic": 0.5132743362831859
+        }
+      },
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B0_ALWAYS_PRESENT",
+      "pooled": {
+        "conditional_candidate_accuracy": 0.6132451783517058,
+        "correct_write_retention_diagnostic": 0.9255471466557578,
+        "cross_sequence_gate_pass": false,
+        "negative_fpr": 0.9532710280373832,
+        "open_set_correct_identification_recall": 0.7029567854435178,
+        "p0_fpr": 1.0,
+        "p1_fpr": 0.948948948948949,
+        "presence_gate_pass": false,
+        "presence_recall": 1.0,
+        "wrong_write_rate_diagnostic": 0.2584398557849885
+      },
+      "trainable_parameters": 0
+    },
+    {
+      "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+      "macro": {
+        "negative_fpr": 0.0,
+        "open_set_correct_identification_recall": 0.00010486577181208053
+      },
+      "per_sequence": {
+        "dancetrack0001": {
+          "correct_write_retention_diagnostic": 0.0,
+          "fpr": 0.0,
+          "negative_count": 35,
+          "open_set_correct_identification_recall": 0.0,
+          "positive_count": 667,
+          "wrong_write_rate_diagnostic": null
+        },
+        "dancetrack0002": {
+          "correct_write_retention_diagnostic": 0.0,
+          "fpr": 0.0,
+          "negative_count": 215,
+          "open_set_correct_identification_recall": 0.0,
+          "positive_count": 987,
+          "wrong_write_rate_diagnostic": null
+        },
+        "dancetrack0023": {
+          "correct_write_retention_diagnostic": 0.0,
+          "fpr": 0.0,
+          "negative_count": 374,
+          "open_set_correct_identification_recall": 0.0,
+          "positive_count": 1108,
+          "wrong_write_rate_diagnostic": null
+        },
+        "dancetrack0024": {
+          "correct_write_retention_diagnostic": 0.0,
+          "fpr": 0.0,
+          "negative_count": 51,
+          "open_set_correct_identification_recall": 0.0,
+          "positive_count": 711,
+          "wrong_write_rate_diagnostic": null
+        },
+        "dancetrack0039": {
+          "correct_write_retention_diagnostic": 0.000846740050804403,
+          "fpr": 0.0,
+          "negative_count": 49,
+          "open_set_correct_identification_recall": 0.0008389261744966443,
+          "positive_count": 1192,
+          "wrong_write_rate_diagnostic": 0.0
+        },
+        "dancetrack0057": {
+          "correct_write_retention_diagnostic": 0.0,
+          "fpr": 0.0,
+          "negative_count": 29,
+          "open_set_correct_identification_recall": 0.0,
+          "positive_count": 592,
+          "wrong_write_rate_diagnostic": null
+        },
+        "dancetrack0062": {
+          "correct_write_retention_diagnostic": 0.0,
+          "fpr": 0.0,
+          "negative_count": 247,
+          "open_set_correct_identification_recall": 0.0,
+          "positive_count": 955,
+          "wrong_write_rate_diagnostic": null
+        },
+        "dancetrack0072": {
+          "correct_write_retention_diagnostic": 0.0,
+          "fpr": 0.0,
+          "negative_count": 819,
+          "open_set_correct_identification_recall": 0.0,
+          "positive_count": 383,
+          "wrong_write_rate_diagnostic": null
+        }
+      },
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B1_ABSOLUTE_SCORE",
+      "pooled": {
+        "conditional_candidate_accuracy": 0.18074298711144807,
+        "correct_write_retention_diagnostic": 0.00020454080589077522,
+        "cross_sequence_gate_pass": false,
+        "negative_fpr": 0.0,
+        "open_set_correct_identification_recall": 0.00015163002274450342,
+        "p0_fpr": 0.0,
+        "p1_fpr": 0.0,
+        "presence_gate_pass": false,
+        "presence_recall": 0.00015163002274450342,
+        "wrong_write_rate_diagnostic": 0.0
+      },
+      "trainable_parameters": 0
+    },
+    {
+      "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+      "macro": {
+        "negative_fpr": 0.0,
+        "open_set_correct_identification_recall": 0.00010486577181208053
+      },
+      "per_sequence": {
+        "dancetrack0001": {
+          "correct_write_retention_diagnostic": 0.0,
+          "fpr": 0.0,
+          "negative_count": 35,
+          "open_set_correct_identification_recall": 0.0,
+          "positive_count": 667,
+          "wrong_write_rate_diagnostic": null
+        },
+        "dancetrack0002": {
+          "correct_write_retention_diagnostic": 0.0,
+          "fpr": 0.0,
+          "negative_count": 215,
+          "open_set_correct_identification_recall": 0.0,
+          "positive_count": 987,
+          "wrong_write_rate_diagnostic": null
+        },
+        "dancetrack0023": {
+          "correct_write_retention_diagnostic": 0.0,
+          "fpr": 0.0,
+          "negative_count": 374,
+          "open_set_correct_identification_recall": 0.0,
+          "positive_count": 1108,
+          "wrong_write_rate_diagnostic": null
+        },
+        "dancetrack0024": {
+          "correct_write_retention_diagnostic": 0.0,
+          "fpr": 0.0,
+          "negative_count": 51,
+          "open_set_correct_identification_recall": 0.0,
+          "positive_count": 711,
+          "wrong_write_rate_diagnostic": null
+        },
+        "dancetrack0039": {
+          "correct_write_retention_diagnostic": 0.000846740050804403,
+          "fpr": 0.0,
+          "negative_count": 49,
+          "open_set_correct_identification_recall": 0.0008389261744966443,
+          "positive_count": 1192,
+          "wrong_write_rate_diagnostic": 0.0
+        },
+        "dancetrack0057": {
+          "correct_write_retention_diagnostic": 0.0,
+          "fpr": 0.0,
+          "negative_count": 29,
+          "open_set_correct_identification_recall": 0.0,
+          "positive_count": 592,
+          "wrong_write_rate_diagnostic": null
+        },
+        "dancetrack0062": {
+          "correct_write_retention_diagnostic": 0.0,
+          "fpr": 0.0,
+          "negative_count": 247,
+          "open_set_correct_identification_recall": 0.0,
+          "positive_count": 955,
+          "wrong_write_rate_diagnostic": null
+        },
+        "dancetrack0072": {
+          "correct_write_retention_diagnostic": 0.0,
+          "fpr": 0.0,
+          "negative_count": 819,
+          "open_set_correct_identification_recall": 0.0,
+          "positive_count": 383,
+          "wrong_write_rate_diagnostic": null
+        }
+      },
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B2_ABSOLUTE_MARGIN",
+      "pooled": {
+        "conditional_candidate_accuracy": 0.18074298711144807,
+        "correct_write_retention_diagnostic": 0.00020454080589077522,
+        "cross_sequence_gate_pass": false,
+        "negative_fpr": 0.0,
+        "open_set_correct_identification_recall": 0.00015163002274450342,
+        "p0_fpr": 0.0,
+        "p1_fpr": 0.0,
+        "presence_gate_pass": false,
+        "presence_recall": 0.00015163002274450342,
+        "wrong_write_rate_diagnostic": 0.0
+      },
+      "trainable_parameters": 0
+    },
+    {
+      "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+      "macro": {
+        "negative_fpr": 0.05406976744186046,
+        "open_set_correct_identification_recall": 0.00037993920972644377
+      },
+      "per_sequence": {
+        "dancetrack0001": {
+          "correct_write_retention_diagnostic": 0.0,
+          "fpr": 0.0,
+          "negative_count": 35,
+          "open_set_correct_identification_recall": 0.0,
+          "positive_count": 667,
+          "wrong_write_rate_diagnostic": null
+        },
+        "dancetrack0002": {
+          "correct_write_retention_diagnostic": 0.01107011070110701,
+          "fpr": 0.4325581395348837,
+          "negative_count": 215,
+          "open_set_correct_identification_recall": 0.00303951367781155,
+          "positive_count": 987,
+          "wrong_write_rate_diagnostic": 0.9813664596273292
+        },
+        "dancetrack0023": {
+          "correct_write_retention_diagnostic": 0.0,
+          "fpr": 0.0,
+          "negative_count": 374,
+          "open_set_correct_identification_recall": 0.0,
+          "positive_count": 1108,
+          "wrong_write_rate_diagnostic": null
+        },
+        "dancetrack0024": {
+          "correct_write_retention_diagnostic": 0.0,
+          "fpr": 0.0,
+          "negative_count": 51,
+          "open_set_correct_identification_recall": 0.0,
+          "positive_count": 711,
+          "wrong_write_rate_diagnostic": null
+        },
+        "dancetrack0039": {
+          "correct_write_retention_diagnostic": 0.0,
+          "fpr": 0.0,
+          "negative_count": 49,
+          "open_set_correct_identification_recall": 0.0,
+          "positive_count": 1192,
+          "wrong_write_rate_diagnostic": null
+        },
+        "dancetrack0057": {
+          "correct_write_retention_diagnostic": 0.0,
+          "fpr": 0.0,
+          "negative_count": 29,
+          "open_set_correct_identification_recall": 0.0,
+          "positive_count": 592,
+          "wrong_write_rate_diagnostic": null
+        },
+        "dancetrack0062": {
+          "correct_write_retention_diagnostic": 0.0,
+          "fpr": 0.0,
+          "negative_count": 247,
+          "open_set_correct_identification_recall": 0.0,
+          "positive_count": 955,
+          "wrong_write_rate_diagnostic": null
+        },
+        "dancetrack0072": {
+          "correct_write_retention_diagnostic": 0.0,
+          "fpr": 0.0,
+          "negative_count": 819,
+          "open_set_correct_identification_recall": 0.0,
+          "positive_count": 383,
+          "wrong_write_rate_diagnostic": null
+        }
+      },
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_mean",
+      "pooled": {
+        "conditional_candidate_accuracy": 0.002625593551733769,
+        "correct_write_retention_diagnostic": 0.0006136224176723256,
+        "cross_sequence_gate_pass": false,
+        "negative_fpr": 0.05112699285321605,
+        "open_set_correct_identification_recall": 0.0004548900682335102,
+        "p0_fpr": 0.006493506493506494,
+        "p1_fpr": 0.05525525525525526,
+        "presence_gate_pass": false,
+        "presence_recall": 0.011827141774071267,
+        "wrong_write_rate_diagnostic": 0.9813664596273292
+      },
+      "trainable_parameters": 0
+    },
+    {
+      "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+      "macro": {
+        "negative_fpr": 0.0029069767441860465,
+        "open_set_correct_identification_recall": 0.0
+      },
+      "per_sequence": {
+        "dancetrack0001": {
+          "correct_write_retention_diagnostic": 0.0,
+          "fpr": 0.0,
+          "negative_count": 35,
+          "open_set_correct_identification_recall": 0.0,
+          "positive_count": 667,
+          "wrong_write_rate_diagnostic": null
+        },
+        "dancetrack0002": {
+          "correct_write_retention_diagnostic": 0.0,
+          "fpr": 0.023255813953488372,
+          "negative_count": 215,
+          "open_set_correct_identification_recall": 0.0,
+          "positive_count": 987,
+          "wrong_write_rate_diagnostic": 1.0
+        },
+        "dancetrack0023": {
+          "correct_write_retention_diagnostic": 0.0,
+          "fpr": 0.0,
+          "negative_count": 374,
+          "open_set_correct_identification_recall": 0.0,
+          "positive_count": 1108,
+          "wrong_write_rate_diagnostic": null
+        },
+        "dancetrack0024": {
+          "correct_write_retention_diagnostic": 0.0,
+          "fpr": 0.0,
+          "negative_count": 51,
+          "open_set_correct_identification_recall": 0.0,
+          "positive_count": 711,
+          "wrong_write_rate_diagnostic": null
+        },
+        "dancetrack0039": {
+          "correct_write_retention_diagnostic": 0.0,
+          "fpr": 0.0,
+          "negative_count": 49,
+          "open_set_correct_identification_recall": 0.0,
+          "positive_count": 1192,
+          "wrong_write_rate_diagnostic": null
+        },
+        "dancetrack0057": {
+          "correct_write_retention_diagnostic": 0.0,
+          "fpr": 0.0,
+          "negative_count": 29,
+          "open_set_correct_identification_recall": 0.0,
+          "positive_count": 592,
+          "wrong_write_rate_diagnostic": null
+        },
+        "dancetrack0062": {
+          "correct_write_retention_diagnostic": 0.0,
+          "fpr": 0.0,
+          "negative_count": 247,
+          "open_set_correct_identification_recall": 0.0,
+          "positive_count": 955,
+          "wrong_write_rate_diagnostic": null
+        },
+        "dancetrack0072": {
+          "correct_write_retention_diagnostic": 0.0,
+          "fpr": 0.0,
+          "negative_count": 819,
+          "open_set_correct_identification_recall": 0.0,
+          "positive_count": 383,
+          "wrong_write_rate_diagnostic": null
+        }
+      },
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_median",
+      "pooled": {
+        "conditional_candidate_accuracy": 0.0,
+        "correct_write_retention_diagnostic": 0.0,
+        "cross_sequence_gate_pass": false,
+        "negative_fpr": 0.002748763056624519,
+        "open_set_correct_identification_recall": 0.0,
+        "p0_fpr": 0.0,
+        "p1_fpr": 0.003003003003003003,
+        "presence_gate_pass": false,
+        "presence_recall": 0.002577710386656558,
+        "wrong_write_rate_diagnostic": 1.0
+      },
+      "trainable_parameters": 0
+    },
+    {
+      "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+      "macro": {
+        "negative_fpr": 0.04341406427589738,
+        "open_set_correct_identification_recall": 0.02956433820879192
+      },
+      "per_sequence": {
+        "dancetrack0001": {
+          "correct_write_retention_diagnostic": 0.0136986301369863,
+          "fpr": 0.05714285714285714,
+          "negative_count": 35,
+          "open_set_correct_identification_recall": 0.013493253373313344,
+          "positive_count": 667,
+          "wrong_write_rate_diagnostic": 0.35714285714285715
+        },
+        "dancetrack0002": {
+          "correct_write_retention_diagnostic": 0.13653136531365315,
+          "fpr": 0.2651162790697674,
+          "negative_count": 215,
+          "open_set_correct_identification_recall": 0.037487335359675786,
+          "positive_count": 987,
+          "wrong_write_rate_diagnostic": 0.7465753424657534
+        },
+        "dancetrack0023": {
+          "correct_write_retention_diagnostic": 0.19695431472081218,
+          "fpr": 0.0213903743315508,
+          "negative_count": 374,
+          "open_set_correct_identification_recall": 0.17509025270758122,
+          "positive_count": 1108,
+          "wrong_write_rate_diagnostic": 0.0673076923076923
+        },
+        "dancetrack0024": {
+          "correct_write_retention_diagnostic": 0.0,
+          "fpr": 0.0,
+          "negative_count": 51,
+          "open_set_correct_identification_recall": 0.0,
+          "positive_count": 711,
+          "wrong_write_rate_diagnostic": null
+        },
+        "dancetrack0039": {
+          "correct_write_retention_diagnostic": 0.0,
+          "fpr": 0.0,
+          "negative_count": 49,
+          "open_set_correct_identification_recall": 0.0,
+          "positive_count": 1192,
+          "wrong_write_rate_diagnostic": null
+        },
+        "dancetrack0057": {
+          "correct_write_retention_diagnostic": 0.0,
+          "fpr": 0.0,
+          "negative_count": 29,
+          "open_set_correct_identification_recall": 0.0,
+          "positive_count": 592,
+          "wrong_write_rate_diagnostic": null
+        },
+        "dancetrack0062": {
+          "correct_write_retention_diagnostic": 0.0,
+          "fpr": 0.0,
+          "negative_count": 247,
+          "open_set_correct_identification_recall": 0.0,
+          "positive_count": 955,
+          "wrong_write_rate_diagnostic": null
+        },
+        "dancetrack0072": {
+          "correct_write_retention_diagnostic": 0.018433179723502304,
+          "fpr": 0.003663003663003663,
+          "negative_count": 819,
+          "open_set_correct_identification_recall": 0.010443864229765013,
+          "positive_count": 383,
+          "wrong_write_rate_diagnostic": 0.0
+        }
+      },
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_zscore",
+      "pooled": {
+        "conditional_candidate_accuracy": 0.2710602361209777,
+        "correct_write_retention_diagnostic": 0.04990795663734915,
+        "cross_sequence_gate_pass": false,
+        "negative_fpr": 0.03848268279274326,
+        "open_set_correct_identification_recall": 0.036997725549658834,
+        "p0_fpr": 0.012987012987012988,
+        "p1_fpr": 0.04084084084084084,
+        "presence_gate_pass": false,
+        "presence_recall": 0.06307808946171342,
+        "wrong_write_rate_diagnostic": 0.34408602150537637
+      },
+      "trainable_parameters": 0
+    },
+    {
+      "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+      "macro": {
+        "negative_fpr": 0.06588201100585002,
+        "open_set_correct_identification_recall": 0.19399817216661397
+      },
+      "per_sequence": {
+        "dancetrack0001": {
+          "correct_write_retention_diagnostic": 0.7290715372907154,
+          "fpr": 0.02857142857142857,
+          "negative_count": 35,
+          "open_set_correct_identification_recall": 0.7181409295352323,
+          "positive_count": 667,
+          "wrong_write_rate_diagnostic": 0.006224066390041493
+        },
+        "dancetrack0002": {
+          "correct_write_retention_diagnostic": 0.1033210332103321,
+          "fpr": 0.0,
+          "negative_count": 215,
+          "open_set_correct_identification_recall": 0.028368794326241134,
+          "positive_count": 987,
+          "wrong_write_rate_diagnostic": 0.0
+        },
+        "dancetrack0023": {
+          "correct_write_retention_diagnostic": 0.7614213197969543,
+          "fpr": 0.12299465240641712,
+          "negative_count": 374,
+          "open_set_correct_identification_recall": 0.6768953068592057,
+          "positive_count": 1108,
+          "wrong_write_rate_diagnostic": 0.06832298136645963
+        },
+        "dancetrack0024": {
+          "correct_write_retention_diagnostic": 0.004225352112676056,
+          "fpr": 0.0,
+          "negative_count": 51,
+          "open_set_correct_identification_recall": 0.004219409282700422,
+          "positive_count": 711,
+          "wrong_write_rate_diagnostic": 0.0
+        },
+        "dancetrack0039": {
+          "correct_write_retention_diagnostic": 0.024555461473327687,
+          "fpr": 0.0,
+          "negative_count": 49,
+          "open_set_correct_identification_recall": 0.024328859060402684,
+          "positive_count": 1192,
+          "wrong_write_rate_diagnostic": 0.0
+        },
+        "dancetrack0057": {
+          "correct_write_retention_diagnostic": 0.030508474576271188,
+          "fpr": 0.0,
+          "negative_count": 29,
+          "open_set_correct_identification_recall": 0.030405405405405407,
+          "positive_count": 592,
+          "wrong_write_rate_diagnostic": 0.0
+        },
+        "dancetrack0062": {
+          "correct_write_retention_diagnostic": 0.2014388489208633,
+          "fpr": 0.032388663967611336,
+          "negative_count": 247,
+          "open_set_correct_identification_recall": 0.06701570680628273,
+          "positive_count": 955,
+          "wrong_write_rate_diagnostic": 0.7637130801687764
+        },
+        "dancetrack0072": {
+          "correct_write_retention_diagnostic": 0.004608294930875576,
+          "fpr": 0.3431013431013431,
+          "negative_count": 819,
+          "open_set_correct_identification_recall": 0.0026109660574412533,
+          "positive_count": 383,
+          "wrong_write_rate_diagnostic": 0.0
+        }
+      },
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B4_LOGISTIC_PRESENCE",
+      "pooled": {
+        "conditional_candidate_accuracy": 0.7946955394437546,
+        "correct_write_retention_diagnostic": 0.2789936592350174,
+        "cross_sequence_gate_pass": false,
+        "negative_fpr": 0.18471687740516768,
+        "open_set_correct_identification_recall": 0.2080363912054587,
+        "p0_fpr": 0.4155844155844156,
+        "p1_fpr": 0.16336336336336335,
+        "presence_gate_pass": false,
+        "presence_recall": 0.244275966641395,
+        "wrong_write_rate_diagnostic": 0.14909544603867747
+      },
+      "trainable_parameters": 11
+    }
+  ],
+  "loso_protocol": {
+    "fold_count": 8,
+    "frame_level_random_split": false,
+    "heldout_sequences": [
+      "dancetrack0001",
+      "dancetrack0002",
+      "dancetrack0023",
+      "dancetrack0024",
+      "dancetrack0039",
+      "dancetrack0057",
+      "dancetrack0062",
+      "dancetrack0072"
+    ],
+    "sequence_cluster_bootstrap": "outputs/N72R20R3/presence/bootstrap_results.json"
+  },
+  "next_association_authority_stage_authorized": false,
+  "open_set_correct_identification_recall": null,
+  "p0_false_present_rate": null,
+  "p1_false_present_rate": null,
+  "presence_features": {
+    "S2_ORACLE_CLEAN": "posthoc_oracle_only_not_eligible_for_final_runtime",
+    "max_pooled_audit_auroc": 0.7660916705798405,
+    "runtime_conditions": [
+      "S0_HUMAN_ANCHOR_ONLY",
+      "S1_R2_STYLE_CAUSAL_LEARNED_STATE"
+    ],
+    "top_diagnostic_features": [
+      {
+        "auroc": 0.7660916705798405,
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "feature": "human_anchor_top1_score"
+      },
+      {
+        "auroc": 0.7660916705798405,
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "feature": "learned_score_max"
+      },
+      {
+        "auroc": 0.7660916705798405,
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "feature": "learned_top1_score"
+      },
+      {
+        "auroc": 0.7660916705798405,
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "feature": "human_anchor_top1_score"
+      },
+      {
+        "auroc": 0.7513033711009267,
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "feature": "learned_score_mean"
+      },
+      {
+        "auroc": 0.7466577122754734,
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "feature": "learned_score_median"
+      },
+      {
+        "auroc": 0.7296615082727557,
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "feature": "learned_top1_minus_median"
+      },
+      {
+        "auroc": 0.7234317354467096,
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "feature": "learned_top1_minus_mean"
+      },
+      {
+        "auroc": 0.7079613590939374,
+        "condition": "S0_HUMAN_ANCHOR_ONLY",
+        "feature": "predicted_motion_iou_of_base_candidate"
+      },
+      {
+        "auroc": 0.7079613590939374,
+        "condition": "S1_R2_STYLE_CAUSAL_LEARNED_STATE",
+        "feature": "predicted_motion_iou_of_base_candidate"
+      }
+    ]
+  },
+  "primary_gate": {
+    "any_pooled_and_all_sequence_policy_passed": false,
+    "negative_fpr_max": 0.02,
+    "open_set_correct_identification_recall_min": 0.6,
+    "static_gate_passed": false
+  },
+  "public_id_immutable": true,
+  "r2_artifacts_unchanged": true,
+  "runtime_future_gt_used": false,
+  "sam3_rerun": false,
+  "selected_static_policy": null,
+  "sequences": [
+    "dancetrack0001",
+    "dancetrack0002",
+    "dancetrack0023",
+    "dancetrack0024",
+    "dancetrack0039",
+    "dancetrack0057",
+    "dancetrack0062",
+    "dancetrack0072"
+  ],
+  "source_commit": "b2abc90fd90bc5eb36b31f753561ea0aa3da900b",
+  "source_stage": "N72R20R2",
+  "stage": "N72R20R3",
+  "taxonomy_summary": {
+    "candidate_set_absent": 1819,
+    "candidate_set_present": 6595,
+    "future_frames": 8414,
+    "p0": 154,
+    "p1": 1665,
+    "p1a": 439,
+    "p1b": 1226,
+    "p2": 1706,
+    "p3": 4889
+  },
+  "test_accessed": false,
+  "tests": {
+    "full_suite": {
+      "failed": 4,
+      "known_trackeval_cli_failures": 4,
+      "passed": 324
+    },
+    "known_failure": "Pinned TrackEval CLI receives SEQMAP_FILE as a list and passes it to os.path.isfile; no R3 code is exercised.",
+    "r3_targeted": {
+      "failed": 0,
+      "passed": 42
+    }
+  },
+  "trainable_parameters": {
+    "B0_B3": 0,
+    "B4_LOGISTIC_PRESENCE": 11,
+    "selected_runtime_policy": 0
+  },
+  "training_started": false,
+  "val_accessed": false
+}

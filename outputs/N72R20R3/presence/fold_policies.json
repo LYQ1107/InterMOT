@@ -1,0 +1,3302 @@
+{
+  "policies": {
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0001|S0_HUMAN_ANCHOR_ONLY:B0_ALWAYS_PRESENT": {
+      "calibration_sequences": [
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0001",
+      "method": "B0_ALWAYS_PRESENT",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B0_ALWAYS_PRESENT",
+      "policy_version": "N72R20R3_B0_V1"
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0001|S0_HUMAN_ANCHOR_ONLY:B1_ABSOLUTE_SCORE": {
+      "calibration": {
+        "threshold_key": "tau_abs",
+        "train_fpr": 0.01569506726457399,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.03171390013495277,
+        "train_presence_recall": 0.07236842105263158
+      },
+      "calibration_sequences": [
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0001",
+      "method": "B1_ABSOLUTE_SCORE",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B1_ABSOLUTE_SCORE",
+      "policy_version": "N72R20R3_B1_V1",
+      "tau_abs": 0.9275203847885133
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0001|S0_HUMAN_ANCHOR_ONLY:B2_ABSOLUTE_MARGIN": {
+      "calibration": {
+        "train_fpr": 0.01569506726457399,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.03171390013495277,
+        "train_presence_recall": 0.07236842105263158
+      },
+      "calibration_sequences": [
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0001",
+      "method": "B2_ABSOLUTE_MARGIN",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B2_ABSOLUTE_MARGIN",
+      "policy_version": "N72R20R3_B2_V1",
+      "tau_abs": 0.9275203847885133,
+      "tau_margin": 0.0
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0001|S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_mean": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.01233183856502242,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.012651821862348178,
+        "train_presence_recall": 0.02007422402159244
+      },
+      "calibration_sequences": [
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0001",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_mean",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_minus_mean",
+      "tau_distribution": 0.16542617797851564
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0001|S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_median": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.010089686098654708,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.011977058029689609,
+        "train_presence_recall": 0.020748987854251014
+      },
+      "calibration_sequences": [
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0001",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_median",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_minus_median",
+      "tau_distribution": 0.1818811082839966
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0001|S0_HUMAN_ANCHOR_ONLY:B3_top1_zscore": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.013452914798206279,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.003205128205128205,
+        "train_presence_recall": 0.019399460188933872
+      },
+      "calibration_sequences": [
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0001",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_zscore",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_zscore",
+      "tau_distribution": 1.9949715373903087
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0001|S0_HUMAN_ANCHOR_ONLY:B4_LOGISTIC_PRESENCE": {
+      "calibration": {
+        "threshold_key": "operating_threshold",
+        "train_fpr": 0.01905829596412556,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.039979757085020245,
+        "train_presence_recall": 0.2002361673414305
+      },
+      "calibration_sequences": [
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "feature_names": [
+        "learned_top1_score",
+        "learned_top2_score",
+        "learned_margin",
+        "learned_top1_minus_mean",
+        "learned_score_std",
+        "human_anchor_top1_score",
+        "learned_state_human_anchor_cosine",
+        "candidate_count",
+        "predicted_motion_iou_of_base_candidate",
+        "frames_since_last_memory_write"
+      ],
+      "heldout_sequence": "dancetrack0001",
+      "intercept": 1.4431937591425472,
+      "method": "LOGISTIC_PRESENCE",
+      "operating_threshold": 0.9536477861620813,
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B4_LOGISTIC_PRESENCE",
+      "policy_version": "N72R20R3_B4_LOGISTIC_V1",
+      "scaler_mean": [
+        0.7913310325692922,
+        0.7125072018417271,
+        0.032666363181445855,
+        0.0736354317407885,
+        0.05685423160755825,
+        0.7913310325692922,
+        0.9889782792366887,
+        5.656379668049793,
+        0.636480940509423,
+        580.6096991701245
+      ],
+      "scaler_scale": [
+        0.12955783917346586,
+        0.23549651970098895,
+        0.03569015288401714,
+        0.040149512845288365,
+        0.03131631228223697,
+        0.12955783917346586,
+        0.10440453009226805,
+        2.2009229875057827,
+        0.37123587415774806,
+        371.1513576558
+      ],
+      "trainable_parameters": 11,
+      "weights": [
+        0.1976188862040389,
+        1.3957715990994546,
+        0.015679265682455548,
+        0.05386646481007638,
+        -0.5731821945123934,
+        0.1976188862040389,
+        0.08326120136659698,
+        0.24394179274911754,
+        0.6588375818067527,
+        -0.2346824153313012
+      ]
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0002|S0_HUMAN_ANCHOR_ONLY:B0_ALWAYS_PRESENT": {
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0002",
+      "method": "B0_ALWAYS_PRESENT",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B0_ALWAYS_PRESENT",
+      "policy_version": "N72R20R3_B0_V1"
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0002|S0_HUMAN_ANCHOR_ONLY:B1_ABSOLUTE_SCORE": {
+      "calibration": {
+        "threshold_key": "tau_abs",
+        "train_fpr": 0.01683291770573566,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.03191868758915835,
+        "train_presence_recall": 0.07132667617689016
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0002",
+      "method": "B1_ABSOLUTE_SCORE",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B1_ABSOLUTE_SCORE",
+      "policy_version": "N72R20R3_B1_V1",
+      "tau_abs": 0.9295203542709352
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0002|S0_HUMAN_ANCHOR_ONLY:B2_ABSOLUTE_MARGIN": {
+      "calibration": {
+        "train_fpr": 0.01683291770573566,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.03191868758915835,
+        "train_presence_recall": 0.07132667617689016
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0002",
+      "method": "B2_ABSOLUTE_MARGIN",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B2_ABSOLUTE_MARGIN",
+      "policy_version": "N72R20R3_B2_V1",
+      "tau_abs": 0.9295203542709352,
+      "tau_margin": 0.0
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0002|S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_mean": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.012468827930174564,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.012125534950071327,
+        "train_presence_recall": 0.019793152639087017
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0002",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_mean",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_minus_mean",
+      "tau_distribution": 0.16598403930664063
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0002|S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_median": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.01059850374064838,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.011947218259629102,
+        "train_presence_recall": 0.020328102710413694
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0002",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_median",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_minus_median",
+      "tau_distribution": 0.18300186395645154
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0002|S0_HUMAN_ANCHOR_ONLY:B3_top1_zscore": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.01683291770573566,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.006419400855920114,
+        "train_presence_recall": 0.01818830242510699
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0002",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_zscore",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_zscore",
+      "tau_distribution": 1.9363878200548115
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0002|S0_HUMAN_ANCHOR_ONLY:B4_LOGISTIC_PRESENCE": {
+      "calibration": {
+        "threshold_key": "operating_threshold",
+        "train_fpr": 0.018703241895261846,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.05920114122681883,
+        "train_presence_recall": 0.24893009985734665
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "feature_names": [
+        "learned_top1_score",
+        "learned_top2_score",
+        "learned_margin",
+        "learned_top1_minus_mean",
+        "learned_score_std",
+        "human_anchor_top1_score",
+        "learned_state_human_anchor_cosine",
+        "candidate_count",
+        "predicted_motion_iou_of_base_candidate",
+        "frames_since_last_memory_write"
+      ],
+      "heldout_sequence": "dancetrack0002",
+      "intercept": 1.7151194826098421,
+      "method": "LOGISTIC_PRESENCE",
+      "operating_threshold": 0.9715907777431012,
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B4_LOGISTIC_PRESENCE",
+      "policy_version": "N72R20R3_B4_LOGISTIC_V1",
+      "scaler_mean": [
+        0.803198058829662,
+        0.7205712753314477,
+        0.03326926967185931,
+        0.07653487491495267,
+        0.061083922545666816,
+        0.803198058829662,
+        0.9882141671045847,
+        5.5714087631724905,
+        0.6957725945508427,
+        554.8269550748752
+      ],
+      "scaler_scale": [
+        0.13514901163455864,
+        0.24670441977996627,
+        0.036331855441676116,
+        0.04094665596290409,
+        0.0326139525030702,
+        0.13514901163455864,
+        0.10792129776483837,
+        2.2438127317156824,
+        0.33729987751970236,
+        368.24742776940286
+      ],
+      "trainable_parameters": 11,
+      "weights": [
+        0.22499653433691238,
+        1.2745532315090184,
+        -0.03442695476457103,
+        -0.033224506919542235,
+        -0.3422508285527535,
+        0.22499653433691238,
+        0.0698228109646645,
+        -0.024331297354701603,
+        1.3073654748092194,
+        -0.38205281768114063
+      ]
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0023|S0_HUMAN_ANCHOR_ONLY:B0_ALWAYS_PRESENT": {
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0023",
+      "method": "B0_ALWAYS_PRESENT",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B0_ALWAYS_PRESENT",
+      "policy_version": "N72R20R3_B0_V1"
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0023|S0_HUMAN_ANCHOR_ONLY:B1_ABSOLUTE_SCORE": {
+      "calibration": {
+        "threshold_key": "tau_abs",
+        "train_fpr": 0.018685121107266434,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.03171131765992345,
+        "train_presence_recall": 0.06998359759431383
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0023",
+      "method": "B1_ABSOLUTE_SCORE",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B1_ABSOLUTE_SCORE",
+      "policy_version": "N72R20R3_B1_V1",
+      "tau_abs": 0.931153769493103
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0023|S0_HUMAN_ANCHOR_ONLY:B2_ABSOLUTE_MARGIN": {
+      "calibration": {
+        "train_fpr": 0.018685121107266434,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.03171131765992345,
+        "train_presence_recall": 0.06998359759431383
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0023",
+      "method": "B2_ABSOLUTE_MARGIN",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B2_ABSOLUTE_MARGIN",
+      "policy_version": "N72R20R3_B2_V1",
+      "tau_abs": 0.931153769493103,
+      "tau_margin": 0.0
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0023|S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_mean": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.008996539792387544,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.012757426644796793,
+        "train_presence_recall": 0.020411882631674868
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0023",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_mean",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_minus_mean",
+      "tau_distribution": 0.1667539119720458
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0023|S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_median": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.018685121107266434,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.020229633679606344,
+        "train_presence_recall": 0.04064151631128121
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0023",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_median",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_minus_median",
+      "tau_distribution": 0.15867881774902348
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0023|S0_HUMAN_ANCHOR_ONLY:B3_top1_zscore": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.01453287197231834,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.01202843083652269,
+        "train_presence_recall": 0.04100601421541826
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0023",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_zscore",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_zscore",
+      "tau_distribution": 1.8855828334378513
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0023|S0_HUMAN_ANCHOR_ONLY:B4_LOGISTIC_PRESENCE": {
+      "calibration": {
+        "threshold_key": "operating_threshold",
+        "train_fpr": 0.017993079584775088,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.0825587752870421,
+        "train_presence_recall": 0.1950063787133224
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "feature_names": [
+        "learned_top1_score",
+        "learned_top2_score",
+        "learned_margin",
+        "learned_top1_minus_mean",
+        "learned_score_std",
+        "human_anchor_top1_score",
+        "learned_state_human_anchor_cosine",
+        "candidate_count",
+        "predicted_motion_iou_of_base_candidate",
+        "frames_since_last_memory_write"
+      ],
+      "heldout_sequence": "dancetrack0023",
+      "intercept": 1.6510365563647005,
+      "method": "LOGISTIC_PRESENCE",
+      "operating_threshold": 0.9633381878598651,
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B4_LOGISTIC_PRESENCE",
+      "policy_version": "N72R20R3_B4_LOGISTIC_V1",
+      "scaler_mean": [
+        0.7871655814577511,
+        0.702622464671516,
+        0.03319193535004471,
+        0.07413256002414867,
+        0.05937741174409891,
+        0.7871655814577511,
+        0.9877380837406372,
+        5.411569532602424,
+        0.6469757895455036,
+        523.0109636468552
+      ],
+      "scaler_scale": [
+        0.13470121392440873,
+        0.24553247312195828,
+        0.03647043993868086,
+        0.041422232534003275,
+        0.03356950599086757,
+        0.13470121392440873,
+        0.11005280035550022,
+        2.1013278618437656,
+        0.3702034608789989,
+        338.7430806133328
+      ],
+      "trainable_parameters": 11,
+      "weights": [
+        0.2803617465741074,
+        1.517269370095266,
+        -0.04483197357971623,
+        0.22803496011121732,
+        -0.685567494943982,
+        0.2803617465741074,
+        0.019827711332883084,
+        0.3502741277119851,
+        0.6832179376413969,
+        0.3525984997140708
+      ]
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0024|S0_HUMAN_ANCHOR_ONLY:B0_ALWAYS_PRESENT": {
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0024",
+      "method": "B0_ALWAYS_PRESENT",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B0_ALWAYS_PRESENT",
+      "policy_version": "N72R20R3_B0_V1"
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0024|S0_HUMAN_ANCHOR_ONLY:B1_ABSOLUTE_SCORE": {
+      "calibration": {
+        "threshold_key": "tau_abs",
+        "train_fpr": 0.01583710407239819,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.03263086335825969,
+        "train_presence_recall": 0.07239972807613868
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0024",
+      "method": "B1_ABSOLUTE_SCORE",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B1_ABSOLUTE_SCORE",
+      "policy_version": "N72R20R3_B1_V1",
+      "tau_abs": 0.928153866529465
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0024|S0_HUMAN_ANCHOR_ONLY:B2_ABSOLUTE_MARGIN": {
+      "calibration": {
+        "train_fpr": 0.01583710407239819,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.03263086335825969,
+        "train_presence_recall": 0.07239972807613868
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0024",
+      "method": "B2_ABSOLUTE_MARGIN",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B2_ABSOLUTE_MARGIN",
+      "policy_version": "N72R20R3_B2_V1",
+      "tau_abs": 0.928153866529465,
+      "tau_margin": 0.0
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0024|S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_mean": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.011877828054298642,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.012406526172671652,
+        "train_presence_recall": 0.020054384772263765
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0024",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_mean",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_minus_mean",
+      "tau_distribution": 0.16549348592758165
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0024|S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_median": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.009615384615384616,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.011896668932698844,
+        "train_presence_recall": 0.020904146838885113
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0024",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_median",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_minus_median",
+      "tau_distribution": 0.1818873333930969
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0024|S0_HUMAN_ANCHOR_ONLY:B3_top1_zscore": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.013574660633484163,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.003399048266485384,
+        "train_presence_recall": 0.01937457511896669
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0024",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_zscore",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_zscore",
+      "tau_distribution": 1.9947059821521327
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0024|S0_HUMAN_ANCHOR_ONLY:B4_LOGISTIC_PRESENCE": {
+      "calibration": {
+        "threshold_key": "operating_threshold",
+        "train_fpr": 0.01753393665158371,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.04656696125084976,
+        "train_presence_recall": 0.20054384772263767
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "feature_names": [
+        "learned_top1_score",
+        "learned_top2_score",
+        "learned_margin",
+        "learned_top1_minus_mean",
+        "learned_score_std",
+        "human_anchor_top1_score",
+        "learned_state_human_anchor_cosine",
+        "candidate_count",
+        "predicted_motion_iou_of_base_candidate",
+        "frames_since_last_memory_write"
+      ],
+      "heldout_sequence": "dancetrack0024",
+      "intercept": 1.438396139764312,
+      "method": "LOGISTIC_PRESENCE",
+      "operating_threshold": 0.956689609651364,
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B4_LOGISTIC_PRESENCE",
+      "policy_version": "N72R20R3_B4_LOGISTIC_V1",
+      "scaler_mean": [
+        0.8053406613912497,
+        0.7266826672519431,
+        0.032138601860729615,
+        0.07550162964165055,
+        0.05954061095202142,
+        0.8053406613912497,
+        0.9888918560272851,
+        5.826319916361736,
+        0.634264641120331,
+        579.4187140616832
+      ],
+      "scaler_scale": [
+        0.1296339858120224,
+        0.23950901684876713,
+        0.03563501918475401,
+        0.04053051248473805,
+        0.03258985391210115,
+        0.1296339858120224,
+        0.10480847361827225,
+        2.3029839041187463,
+        0.37293770245369023,
+        372.3557398152466
+      ],
+      "trainable_parameters": 11,
+      "weights": [
+        0.38688937926068606,
+        1.296699916175369,
+        0.04310181782076816,
+        -0.06818058704328209,
+        -0.4916533425809411,
+        0.38688937926068606,
+        0.019558346455554668,
+        0.30751680732277314,
+        0.5564558431416746,
+        -0.20374921653147107
+      ]
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0039|S0_HUMAN_ANCHOR_ONLY:B0_ALWAYS_PRESENT": {
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0039",
+      "method": "B0_ALWAYS_PRESENT",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B0_ALWAYS_PRESENT",
+      "policy_version": "N72R20R3_B0_V1"
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0039|S0_HUMAN_ANCHOR_ONLY:B1_ABSOLUTE_SCORE": {
+      "calibration": {
+        "threshold_key": "tau_abs",
+        "train_fpr": 0.015819209039548022,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.029428095502498614,
+        "train_presence_recall": 0.07347769757542107
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0039",
+      "method": "B1_ABSOLUTE_SCORE",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B1_ABSOLUTE_SCORE",
+      "policy_version": "N72R20R3_B1_V1",
+      "tau_abs": 0.927665605545044
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0039|S0_HUMAN_ANCHOR_ONLY:B2_ABSOLUTE_MARGIN": {
+      "calibration": {
+        "train_fpr": 0.015819209039548022,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.029428095502498614,
+        "train_presence_recall": 0.07347769757542107
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0039",
+      "method": "B2_ABSOLUTE_MARGIN",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B2_ABSOLUTE_MARGIN",
+      "policy_version": "N72R20R3_B2_V1",
+      "tau_abs": 0.927665605545044,
+      "tau_margin": 0.0
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0039|S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_mean": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.011864406779661017,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.01110494169905608,
+        "train_presence_recall": 0.020173977419951878
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0039",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_mean",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_minus_mean",
+      "tau_distribution": 0.16423221826553333
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0039|S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_median": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.012994350282485875,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.008883953359244865,
+        "train_presence_recall": 0.01980381269665001
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0039",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_median",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_minus_median",
+      "tau_distribution": 0.17482287526130666
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0039|S0_HUMAN_ANCHOR_ONLY:B3_top1_zscore": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.011864406779661017,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.003331482509716824,
+        "train_presence_recall": 0.01980381269665001
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0039",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_zscore",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_zscore",
+      "tau_distribution": 2.0099828369710218
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0039|S0_HUMAN_ANCHOR_ONLY:B4_LOGISTIC_PRESENCE": {
+      "calibration": {
+        "threshold_key": "operating_threshold",
+        "train_fpr": 0.01807909604519774,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.05108273181565797,
+        "train_presence_recall": 0.23024245789376271
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "feature_names": [
+        "learned_top1_score",
+        "learned_top2_score",
+        "learned_margin",
+        "learned_top1_minus_mean",
+        "learned_score_std",
+        "human_anchor_top1_score",
+        "learned_state_human_anchor_cosine",
+        "candidate_count",
+        "predicted_motion_iou_of_base_candidate",
+        "frames_since_last_memory_write"
+      ],
+      "heldout_sequence": "dancetrack0039",
+      "intercept": 1.3138323116450905,
+      "method": "LOGISTIC_PRESENCE",
+      "operating_threshold": 0.9482564710876008,
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B4_LOGISTIC_PRESENCE",
+      "policy_version": "N72R20R3_B4_LOGISTIC_V1",
+      "scaler_mean": [
+        0.793722171198785,
+        0.7153858015988639,
+        0.028710496225367692,
+        0.07325999335100607,
+        0.058966359985577095,
+        0.793722171198785,
+        0.9881500662511551,
+        5.988289418653284,
+        0.6186870609628933,
+        551.1994981179423
+      ],
+      "scaler_scale": [
+        0.1346887200424898,
+        0.245935069034345,
+        0.03301532351834648,
+        0.040546046127511254,
+        0.03333176027451447,
+        0.1346887200424898,
+        0.10821077626360096,
+        2.3482826454936596,
+        0.3791555814434112,
+        365.93643942174765
+      ],
+      "trainable_parameters": 11,
+      "weights": [
+        0.2608688157887423,
+        1.3122993672496732,
+        -4.373722054852288e-05,
+        -0.1857544801899418,
+        -0.3717581778562627,
+        0.2608688157887423,
+        0.06703508724826295,
+        0.4739813284823786,
+        0.49531010360978284,
+        -0.33599654931219847
+      ]
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0057|S0_HUMAN_ANCHOR_ONLY:B0_ALWAYS_PRESENT": {
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0057",
+      "method": "B0_ALWAYS_PRESENT",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B0_ALWAYS_PRESENT",
+      "policy_version": "N72R20R3_B0_V1"
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0057|S0_HUMAN_ANCHOR_ONLY:B1_ABSOLUTE_SCORE": {
+      "calibration": {
+        "threshold_key": "tau_abs",
+        "train_fpr": 0.01564245810055866,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.03181742462102282,
+        "train_presence_recall": 0.07229718474096285
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0057",
+      "method": "B1_ABSOLUTE_SCORE",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B1_ABSOLUTE_SCORE",
+      "policy_version": "N72R20R3_B1_V1",
+      "tau_abs": 0.9274205255508423
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0057|S0_HUMAN_ANCHOR_ONLY:B2_ABSOLUTE_MARGIN": {
+      "calibration": {
+        "train_fpr": 0.01564245810055866,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.03181742462102282,
+        "train_presence_recall": 0.07229718474096285
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0057",
+      "method": "B2_ABSOLUTE_MARGIN",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B2_ABSOLUTE_MARGIN",
+      "policy_version": "N72R20R3_B2_V1",
+      "tau_abs": 0.9274205255508423,
+      "tau_margin": 0.0
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0057|S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_mean": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.010614525139664804,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.012327169748459104,
+        "train_presence_recall": 0.02048975512243878
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0057",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_mean",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_minus_mean",
+      "tau_distribution": 0.16416411161422725
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0057|S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_median": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.01005586592178771,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.011827419623521573,
+        "train_presence_recall": 0.020656338497417957
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0057",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_median",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_minus_median",
+      "tau_distribution": 0.181852650642395
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0057|S0_HUMAN_ANCHOR_ONLY:B3_top1_zscore": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.013407821229050279,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.0034982508745627187,
+        "train_presence_recall": 0.019490254872563718
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0057",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_zscore",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_zscore",
+      "tau_distribution": 1.99475051101078
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0057|S0_HUMAN_ANCHOR_ONLY:B4_LOGISTIC_PRESENCE": {
+      "calibration": {
+        "threshold_key": "operating_threshold",
+        "train_fpr": 0.01675977653631285,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.0421455938697318,
+        "train_presence_recall": 0.17491254372813594
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "feature_names": [
+        "learned_top1_score",
+        "learned_top2_score",
+        "learned_margin",
+        "learned_top1_minus_mean",
+        "learned_score_std",
+        "human_anchor_top1_score",
+        "learned_state_human_anchor_cosine",
+        "candidate_count",
+        "predicted_motion_iou_of_base_candidate",
+        "frames_since_last_memory_write"
+      ],
+      "heldout_sequence": "dancetrack0057",
+      "intercept": 1.4505782573639767,
+      "method": "LOGISTIC_PRESENCE",
+      "operating_threshold": 0.9550472891522744,
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B4_LOGISTIC_PRESENCE",
+      "policy_version": "N72R20R3_B4_LOGISTIC_V1",
+      "scaler_mean": [
+        0.7928851395596838,
+        0.7151445866158849,
+        0.032062843497414714,
+        0.07610627184718194,
+        0.059608059975426286,
+        0.7928851395596838,
+        0.989092839616232,
+        5.92172462466316,
+        0.6404577475290666,
+        581.4556653406904
+      ],
+      "scaler_scale": [
+        0.12953655316914678,
+        0.2352946173811911,
+        0.03535103984682949,
+        0.0396639268686256,
+        0.031329066029524594,
+        0.12953655316914678,
+        0.10386654073643507,
+        2.256213230627013,
+        0.37244023221125544,
+        369.31741062726263
+      ],
+      "trainable_parameters": 11,
+      "weights": [
+        0.2011137914774256,
+        1.3486311178411237,
+        0.033138753101629496,
+        0.0007000826361029882,
+        -0.5196624012242556,
+        0.2011137914774256,
+        0.07748531917482195,
+        0.3032290071996834,
+        0.677751925675079,
+        -0.21312345055174525
+      ]
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0062|S0_HUMAN_ANCHOR_ONLY:B0_ALWAYS_PRESENT": {
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0062",
+      "method": "B0_ALWAYS_PRESENT",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B0_ALWAYS_PRESENT",
+      "policy_version": "N72R20R3_B0_V1"
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0062|S0_HUMAN_ANCHOR_ONLY:B1_ABSOLUTE_SCORE": {
+      "calibration": {
+        "threshold_key": "tau_abs",
+        "train_fpr": 0.01717557251908397,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.03900709219858156,
+        "train_presence_recall": 0.0973404255319149
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0062",
+      "method": "B1_ABSOLUTE_SCORE",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B1_ABSOLUTE_SCORE",
+      "policy_version": "N72R20R3_B1_V1",
+      "tau_abs": 0.8945809030532836
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0062|S0_HUMAN_ANCHOR_ONLY:B2_ABSOLUTE_MARGIN": {
+      "calibration": {
+        "train_fpr": 0.01717557251908397,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.03900709219858156,
+        "train_presence_recall": 0.0973404255319149
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0062",
+      "method": "B2_ABSOLUTE_MARGIN",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B2_ABSOLUTE_MARGIN",
+      "policy_version": "N72R20R3_B2_V1",
+      "tau_abs": 0.8945809030532836,
+      "tau_margin": 0.0
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0062|S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_mean": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.0,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.0,
+        "train_presence_recall": 0.0
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0062",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_mean",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_minus_mean",
+      "tau_distribution": 0.2111848459968567
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0062|S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_median": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.019083969465648856,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.009929078014184398,
+        "train_presence_recall": 0.01826241134751773
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0062",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_median",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_minus_median",
+      "tau_distribution": 0.16275148272514345
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0062|S0_HUMAN_ANCHOR_ONLY:B3_top1_zscore": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.014631043256997456,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.0031914893617021275,
+        "train_presence_recall": 0.019326241134751773
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0062",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_zscore",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_zscore",
+      "tau_distribution": 2.0046108521791397
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0062|S0_HUMAN_ANCHOR_ONLY:B4_LOGISTIC_PRESENCE": {
+      "calibration": {
+        "threshold_key": "operating_threshold",
+        "train_fpr": 0.018447837150127225,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.04875886524822695,
+        "train_presence_recall": 0.224645390070922
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0072"
+      ],
+      "feature_names": [
+        "learned_top1_score",
+        "learned_top2_score",
+        "learned_margin",
+        "learned_top1_minus_mean",
+        "learned_score_std",
+        "human_anchor_top1_score",
+        "learned_state_human_anchor_cosine",
+        "candidate_count",
+        "predicted_motion_iou_of_base_candidate",
+        "frames_since_last_memory_write"
+      ],
+      "heldout_sequence": "dancetrack0062",
+      "intercept": 1.612089008415322,
+      "method": "LOGISTIC_PRESENCE",
+      "operating_threshold": 0.9575996660147557,
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B4_LOGISTIC_PRESENCE",
+      "policy_version": "N72R20R3_B4_LOGISTIC_V1",
+      "scaler_mean": [
+        0.7925856871880628,
+        0.71743557070337,
+        0.02915252036044681,
+        0.07225030532527221,
+        0.05617210138186242,
+        0.7925856871880628,
+        0.9981975281694765,
+        6.116749861342208,
+        0.6425199034187504,
+        559.0855518580145
+      ],
+      "scaler_scale": [
+        0.09583350873288203,
+        0.22032820898911754,
+        0.030493248792338407,
+        0.0363184260519745,
+        0.0284098863931554,
+        0.09583350873288203,
+        0.04241818476423638,
+        2.1697798557458103,
+        0.37643963582801165,
+        364.2636084732058
+      ],
+      "trainable_parameters": 11,
+      "weights": [
+        0.1248539479578439,
+        1.283189689232746,
+        0.16056972757119234,
+        -0.18140428124490032,
+        -0.5150260132944432,
+        0.1248539479578439,
+        0.04160339732783088,
+        0.34885407110219874,
+        0.747554104292133,
+        -0.2672007248304796
+      ]
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0072|S0_HUMAN_ANCHOR_ONLY:B0_ALWAYS_PRESENT": {
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062"
+      ],
+      "heldout_sequence": "dancetrack0072",
+      "method": "B0_ALWAYS_PRESENT",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B0_ALWAYS_PRESENT",
+      "policy_version": "N72R20R3_B0_V1"
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0072|S0_HUMAN_ANCHOR_ONLY:B1_ABSOLUTE_SCORE": {
+      "calibration": {
+        "threshold_key": "tau_abs",
+        "train_fpr": 0.016,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.02012234385061172,
+        "train_presence_recall": 0.04346426271732132
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062"
+      ],
+      "heldout_sequence": "dancetrack0072",
+      "method": "B1_ABSOLUTE_SCORE",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B1_ABSOLUTE_SCORE",
+      "policy_version": "N72R20R3_B1_V1",
+      "tau_abs": 0.9405152654647827
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0072|S0_HUMAN_ANCHOR_ONLY:B2_ABSOLUTE_MARGIN": {
+      "calibration": {
+        "train_fpr": 0.02,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.023341918866709593,
+        "train_presence_recall": 0.04072762395363812
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062"
+      ],
+      "heldout_sequence": "dancetrack0072",
+      "method": "B2_ABSOLUTE_MARGIN",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B2_ABSOLUTE_MARGIN",
+      "policy_version": "N72R20R3_B2_V1",
+      "tau_abs": 0.7920013499259949,
+      "tau_margin": 0.1
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0072|S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_mean": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.019,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.011912427559562138,
+        "train_presence_recall": 0.01980038634900193
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062"
+      ],
+      "heldout_sequence": "dancetrack0072",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_mean",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_minus_mean",
+      "tau_distribution": 0.16126716136932373
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0072|S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_median": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.018,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.011107533805537669,
+        "train_presence_recall": 0.019961365099806824
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062"
+      ],
+      "heldout_sequence": "dancetrack0072",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_minus_median",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_minus_median",
+      "tau_distribution": 0.17754740953445436
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0072|S0_HUMAN_ANCHOR_ONLY:B3_top1_zscore": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.0,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.0,
+        "train_presence_recall": 0.0
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062"
+      ],
+      "heldout_sequence": "dancetrack0072",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B3_top1_zscore",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_zscore",
+      "tau_distribution": 2.7558684938016182
+    },
+    "S0_HUMAN_ANCHOR_ONLY|dancetrack0072|S0_HUMAN_ANCHOR_ONLY:B4_LOGISTIC_PRESENCE": {
+      "calibration": {
+        "threshold_key": "operating_threshold",
+        "train_fpr": 0.018,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.038795878943979394,
+        "train_presence_recall": 0.18110109465550547
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062"
+      ],
+      "feature_names": [
+        "learned_top1_score",
+        "learned_top2_score",
+        "learned_margin",
+        "learned_top1_minus_mean",
+        "learned_score_std",
+        "human_anchor_top1_score",
+        "learned_state_human_anchor_cosine",
+        "candidate_count",
+        "predicted_motion_iou_of_base_candidate",
+        "frames_since_last_memory_write"
+      ],
+      "heldout_sequence": "dancetrack0072",
+      "intercept": 2.145664654076796,
+      "method": "LOGISTIC_PRESENCE",
+      "operating_threshold": 0.9600440115297953,
+      "policy_id": "S0_HUMAN_ANCHOR_ONLY:B4_LOGISTIC_PRESENCE",
+      "policy_version": "N72R20R3_B4_LOGISTIC_V1",
+      "scaler_mean": [
+        0.8187521667329721,
+        0.7825022999546426,
+        0.03288994907622065,
+        0.07968963986790584,
+        0.06240331240608375,
+        0.8187521667329721,
+        0.9900167184079679,
+        6.232529118136439,
+        0.7236392758021618,
+        556.7726012201886
+      ],
+      "scaler_scale": [
+        0.11268466159204557,
+        0.12608661455628414,
+        0.03331255272675028,
+        0.034276724973866975,
+        0.02764249701235347,
+        0.11268466159204557,
+        0.09941677501083951,
+        1.7577594659428577,
+        0.31927092751141445,
+        368.1831298681725
+      ],
+      "trainable_parameters": 11,
+      "weights": [
+        0.06914033563971432,
+        0.8200554400472977,
+        0.0758507622697482,
+        0.007127457538884319,
+        -0.4544710344649114,
+        0.06914033563971432,
+        0.14735035294795845,
+        0.150439931401106,
+        0.5465675979219276,
+        -0.28012028739688716
+      ]
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0001|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B0_ALWAYS_PRESENT": {
+      "calibration_sequences": [
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0001",
+      "method": "B0_ALWAYS_PRESENT",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B0_ALWAYS_PRESENT",
+      "policy_version": "N72R20R3_B0_V1"
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0001|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B1_ABSOLUTE_SCORE": {
+      "calibration": {
+        "threshold_key": "tau_abs",
+        "train_fpr": 0.0,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.00016869095816464237,
+        "train_presence_recall": 0.00016869095816464237
+      },
+      "calibration_sequences": [
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0001",
+      "method": "B1_ABSOLUTE_SCORE",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B1_ABSOLUTE_SCORE",
+      "policy_version": "N72R20R3_B1_V1",
+      "tau_abs": 0.9954981803894043
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0001|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B2_ABSOLUTE_MARGIN": {
+      "calibration": {
+        "train_fpr": 0.0,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.00016869095816464237,
+        "train_presence_recall": 0.00016869095816464237
+      },
+      "calibration_sequences": [
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0001",
+      "method": "B2_ABSOLUTE_MARGIN",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B2_ABSOLUTE_MARGIN",
+      "policy_version": "N72R20R3_B2_V1",
+      "tau_abs": 0.9954981803894043,
+      "tau_margin": 0.0
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0001|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_mean": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.0,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.0,
+        "train_presence_recall": 0.00016869095816464237
+      },
+      "calibration_sequences": [
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0001",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_mean",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_minus_mean",
+      "tau_distribution": 0.5859484001994133
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0001|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_median": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.0,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.0,
+        "train_presence_recall": 0.00016869095816464237
+      },
+      "calibration_sequences": [
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0001",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_median",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_minus_median",
+      "tau_distribution": 0.6752023994922638
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0001|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_zscore": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.007847533632286996,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.03323211875843455,
+        "train_presence_recall": 0.04436572199730095
+      },
+      "calibration_sequences": [
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0001",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_zscore",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_zscore",
+      "tau_distribution": 2.414768774993007
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0001|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B4_LOGISTIC_PRESENCE": {
+      "calibration": {
+        "threshold_key": "operating_threshold",
+        "train_fpr": 0.017376681614349777,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.1440620782726046,
+        "train_presence_recall": 0.17493252361673414
+      },
+      "calibration_sequences": [
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "feature_names": [
+        "learned_top1_score",
+        "learned_top2_score",
+        "learned_margin",
+        "learned_top1_minus_mean",
+        "learned_score_std",
+        "human_anchor_top1_score",
+        "learned_state_human_anchor_cosine",
+        "candidate_count",
+        "predicted_motion_iou_of_base_candidate",
+        "frames_since_last_memory_write"
+      ],
+      "heldout_sequence": "dancetrack0001",
+      "intercept": 1.5884569108540734,
+      "method": "LOGISTIC_PRESENCE",
+      "operating_threshold": 0.9598341791531184,
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B4_LOGISTIC_PRESENCE",
+      "policy_version": "N72R20R3_B4_LOGISTIC_V1",
+      "scaler_mean": [
+        0.4115457975377048,
+        0.26008511139737484,
+        0.13789303920984594,
+        0.1913691733900573,
+        0.10956998362594296,
+        0.7913310325692922,
+        0.16384840470492232,
+        5.656379668049793,
+        0.636480940509423,
+        56.019320539419084
+      ],
+      "scaler_scale": [
+        0.1552690763368195,
+        0.14666160359941233,
+        0.11280499396004488,
+        0.10876565885338216,
+        0.055037072328369976,
+        0.12955783917346586,
+        0.13942962333233155,
+        2.2009229875057827,
+        0.37123587415774806,
+        143.2685995367888
+      ],
+      "trainable_parameters": 11,
+      "weights": [
+        -1.5052275585533321,
+        0.7553719155696439,
+        0.9948506261011726,
+        -0.3253335468387539,
+        -0.06927563296492008,
+        0.7326235164654143,
+        0.3822315023120618,
+        0.8136306421070669,
+        1.25797180470281,
+        0.20243615166745602
+      ]
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0002|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B0_ALWAYS_PRESENT": {
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0002",
+      "method": "B0_ALWAYS_PRESENT",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B0_ALWAYS_PRESENT",
+      "policy_version": "N72R20R3_B0_V1"
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0002|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B1_ABSOLUTE_SCORE": {
+      "calibration": {
+        "threshold_key": "tau_abs",
+        "train_fpr": 0.0,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.0001783166904422254,
+        "train_presence_recall": 0.0001783166904422254
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0002",
+      "method": "B1_ABSOLUTE_SCORE",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B1_ABSOLUTE_SCORE",
+      "policy_version": "N72R20R3_B1_V1",
+      "tau_abs": 0.9954981803894043
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0002|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B2_ABSOLUTE_MARGIN": {
+      "calibration": {
+        "train_fpr": 0.0,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.0001783166904422254,
+        "train_presence_recall": 0.0001783166904422254
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0002",
+      "method": "B2_ABSOLUTE_MARGIN",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B2_ABSOLUTE_MARGIN",
+      "policy_version": "N72R20R3_B2_V1",
+      "tau_abs": 0.9954981803894043,
+      "tau_margin": 0.0
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0002|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_mean": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.018703241895261846,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.017118402282453638,
+        "train_presence_recall": 0.018009985734664766
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0002",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_mean",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_minus_mean",
+      "tau_distribution": 0.37167501270771025
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0002|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_median": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.0,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.0,
+        "train_presence_recall": 0.0
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0002",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_median",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_minus_median",
+      "tau_distribution": 0.5950772922875583
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0002|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_zscore": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.0199501246882793,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.08202567760342368,
+        "train_presence_recall": 0.08577032810271042
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0002",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_zscore",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_zscore",
+      "tau_distribution": 2.2175225374151633
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0002|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B4_LOGISTIC_PRESENCE": {
+      "calibration": {
+        "threshold_key": "operating_threshold",
+        "train_fpr": 0.0199501246882793,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.19846647646219687,
+        "train_presence_recall": 0.2485734664764622
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "feature_names": [
+        "learned_top1_score",
+        "learned_top2_score",
+        "learned_margin",
+        "learned_top1_minus_mean",
+        "learned_score_std",
+        "human_anchor_top1_score",
+        "learned_state_human_anchor_cosine",
+        "candidate_count",
+        "predicted_motion_iou_of_base_candidate",
+        "frames_since_last_memory_write"
+      ],
+      "heldout_sequence": "dancetrack0002",
+      "intercept": 1.6096541843242211,
+      "method": "LOGISTIC_PRESENCE",
+      "operating_threshold": 0.9629827499835283,
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B4_LOGISTIC_PRESENCE",
+      "policy_version": "N72R20R3_B4_LOGISTIC_V1",
+      "scaler_mean": [
+        0.42992161387663913,
+        0.2772713938693883,
+        0.1381419430899057,
+        0.19286875329023648,
+        0.11149450103598386,
+        0.803198058829662,
+        0.18930860670671876,
+        5.5714087631724905,
+        0.6957725945508427,
+        37.89767054908486
+      ],
+      "scaler_scale": [
+        0.1323158926888718,
+        0.13413738507595882,
+        0.10459115185041047,
+        0.10128133708892495,
+        0.05263345586920501,
+        0.13514901163455864,
+        0.12671888600060127,
+        2.2438127317156824,
+        0.33729987751970236,
+        124.8937721009501
+      ],
+      "trainable_parameters": 11,
+      "weights": [
+        -0.8286103362451996,
+        0.5775581365458805,
+        0.447938116147458,
+        0.4681759433578883,
+        -0.47450051632512574,
+        0.6195493596790903,
+        0.21325194901469424,
+        -0.021856529760675147,
+        1.371943246138468,
+        -1.0532979883055373
+      ]
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0023|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B0_ALWAYS_PRESENT": {
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0023",
+      "method": "B0_ALWAYS_PRESENT",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B0_ALWAYS_PRESENT",
+      "policy_version": "N72R20R3_B0_V1"
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0023|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B1_ABSOLUTE_SCORE": {
+      "calibration": {
+        "threshold_key": "tau_abs",
+        "train_fpr": 0.0,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.00018224895206852561,
+        "train_presence_recall": 0.00018224895206852561
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0023",
+      "method": "B1_ABSOLUTE_SCORE",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B1_ABSOLUTE_SCORE",
+      "policy_version": "N72R20R3_B1_V1",
+      "tau_abs": 0.9954981803894043
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0023|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B2_ABSOLUTE_MARGIN": {
+      "calibration": {
+        "train_fpr": 0.0,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.00018224895206852561,
+        "train_presence_recall": 0.00018224895206852561
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0023",
+      "method": "B2_ABSOLUTE_MARGIN",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B2_ABSOLUTE_MARGIN",
+      "policy_version": "N72R20R3_B2_V1",
+      "tau_abs": 0.9954981803894043,
+      "tau_margin": 0.0
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0023|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_mean": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.0,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.0,
+        "train_presence_recall": 0.00018224895206852561
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0023",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_mean",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_minus_mean",
+      "tau_distribution": 0.5859484001994133
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0023|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_median": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.0,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.0,
+        "train_presence_recall": 0.00018224895206852561
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0023",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_median",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_minus_median",
+      "tau_distribution": 0.6752023994922638
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0023|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_zscore": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.010380622837370242,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.005285219609987243,
+        "train_presence_recall": 0.019682886823400764
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0023",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_zscore",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_zscore",
+      "tau_distribution": 2.398474419378949
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0023|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B4_LOGISTIC_PRESENCE": {
+      "calibration": {
+        "threshold_key": "operating_threshold",
+        "train_fpr": 0.01591695501730104,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.14725715327136868,
+        "train_presence_recall": 0.19555312556952797
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "feature_names": [
+        "learned_top1_score",
+        "learned_top2_score",
+        "learned_margin",
+        "learned_top1_minus_mean",
+        "learned_score_std",
+        "human_anchor_top1_score",
+        "learned_state_human_anchor_cosine",
+        "candidate_count",
+        "predicted_motion_iou_of_base_candidate",
+        "frames_since_last_memory_write"
+      ],
+      "heldout_sequence": "dancetrack0023",
+      "intercept": 1.786202534744667,
+      "method": "LOGISTIC_PRESENCE",
+      "operating_threshold": 0.9683535849071421,
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B4_LOGISTIC_PRESENCE",
+      "policy_version": "N72R20R3_B4_LOGISTIC_V1",
+      "scaler_mean": [
+        0.40245041032737566,
+        0.2506233531184265,
+        0.13673275641150356,
+        0.1861719048163989,
+        0.10849485547183457,
+        0.7871655814577511,
+        0.17153482197294714,
+        5.411569532602424,
+        0.6469757895455036,
+        60.35213502596653
+      ],
+      "scaler_scale": [
+        0.15992903933282268,
+        0.14783875847450648,
+        0.11347125512206063,
+        0.10853050908344852,
+        0.05669651267959993,
+        0.13470121392440873,
+        0.14204134634764884,
+        2.1013278618437656,
+        0.3702034608789989,
+        149.93916800649723
+      ],
+      "trainable_parameters": 11,
+      "weights": [
+        -1.2114459324772144,
+        0.7157921522364706,
+        0.8916801041084864,
+        -0.46699417398163867,
+        -0.1200499174919905,
+        0.9646372719834162,
+        0.2541849766018889,
+        1.006477058956228,
+        1.1506357244786003,
+        0.20775564067684713
+      ]
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0024|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B0_ALWAYS_PRESENT": {
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0024",
+      "method": "B0_ALWAYS_PRESENT",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B0_ALWAYS_PRESENT",
+      "policy_version": "N72R20R3_B0_V1"
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0024|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B1_ABSOLUTE_SCORE": {
+      "calibration": {
+        "threshold_key": "tau_abs",
+        "train_fpr": 0.0,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.0001699524133242692,
+        "train_presence_recall": 0.0001699524133242692
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0024",
+      "method": "B1_ABSOLUTE_SCORE",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B1_ABSOLUTE_SCORE",
+      "policy_version": "N72R20R3_B1_V1",
+      "tau_abs": 0.9954981803894043
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0024|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B2_ABSOLUTE_MARGIN": {
+      "calibration": {
+        "train_fpr": 0.0,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.0001699524133242692,
+        "train_presence_recall": 0.0001699524133242692
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0024",
+      "method": "B2_ABSOLUTE_MARGIN",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B2_ABSOLUTE_MARGIN",
+      "policy_version": "N72R20R3_B2_V1",
+      "tau_abs": 0.9954981803894043,
+      "tau_margin": 0.0
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0024|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_mean": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.0,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.0,
+        "train_presence_recall": 0.0001699524133242692
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0024",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_mean",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_minus_mean",
+      "tau_distribution": 0.5859484001994133
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0024|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_median": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.0,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.0,
+        "train_presence_recall": 0.0001699524133242692
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0024",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_median",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_minus_median",
+      "tau_distribution": 0.6752023994922638
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0024|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_zscore": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.008484162895927601,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.032970768184908225,
+        "train_presence_recall": 0.04401767505098572
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0024",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_zscore",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_zscore",
+      "tau_distribution": 2.422172096828956
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0024|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B4_LOGISTIC_PRESENCE": {
+      "calibration": {
+        "threshold_key": "operating_threshold",
+        "train_fpr": 0.01809954751131222,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.1954452753229096,
+        "train_presence_recall": 0.2262066621346023
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "feature_names": [
+        "learned_top1_score",
+        "learned_top2_score",
+        "learned_margin",
+        "learned_top1_minus_mean",
+        "learned_score_std",
+        "human_anchor_top1_score",
+        "learned_state_human_anchor_cosine",
+        "candidate_count",
+        "predicted_motion_iou_of_base_candidate",
+        "frames_since_last_memory_write"
+      ],
+      "heldout_sequence": "dancetrack0024",
+      "intercept": 1.6099790918379002,
+      "method": "LOGISTIC_PRESENCE",
+      "operating_threshold": 0.9605859262570318,
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B4_LOGISTIC_PRESENCE",
+      "policy_version": "N72R20R3_B4_LOGISTIC_V1",
+      "scaler_mean": [
+        0.4033501936292621,
+        0.2564110396794356,
+        0.1332651219153397,
+        0.19196261903321027,
+        0.11010981694382839,
+        0.8053406613912497,
+        0.16843667843532312,
+        5.826319916361736,
+        0.634264641120331,
+        56.45073183481443
+      ],
+      "scaler_scale": [
+        0.15360315899201982,
+        0.14527403719440543,
+        0.1102292631634018,
+        0.1084221567833917,
+        0.05514061343952201,
+        0.1296339858120224,
+        0.1376950541666056,
+        2.3029839041187463,
+        0.37293770245369023,
+        143.74600811562115
+      ],
+      "trainable_parameters": 11,
+      "weights": [
+        -1.4952806249045147,
+        0.618561598225702,
+        0.9393208561533702,
+        -0.31028422628535196,
+        0.06553648525437472,
+        1.0223807722238165,
+        0.450516305063205,
+        0.8079480438872081,
+        1.1356700705023144,
+        0.27993398097388184
+      ]
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0039|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B0_ALWAYS_PRESENT": {
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0039",
+      "method": "B0_ALWAYS_PRESENT",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B0_ALWAYS_PRESENT",
+      "policy_version": "N72R20R3_B0_V1"
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0039|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B1_ABSOLUTE_SCORE": {
+      "calibration": {
+        "threshold_key": "tau_abs",
+        "train_fpr": 0.0,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.00018508236165093466,
+        "train_presence_recall": 0.00018508236165093466
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0039",
+      "method": "B1_ABSOLUTE_SCORE",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B1_ABSOLUTE_SCORE",
+      "policy_version": "N72R20R3_B1_V1",
+      "tau_abs": 0.9939508438110352
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0039|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B2_ABSOLUTE_MARGIN": {
+      "calibration": {
+        "train_fpr": 0.0,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.00018508236165093466,
+        "train_presence_recall": 0.00018508236165093466
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0039",
+      "method": "B2_ABSOLUTE_MARGIN",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B2_ABSOLUTE_MARGIN",
+      "policy_version": "N72R20R3_B2_V1",
+      "tau_abs": 0.9939508438110352,
+      "tau_margin": 0.0
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0039|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_mean": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.0,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.0,
+        "train_presence_recall": 0.00018508236165093466
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0039",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_mean",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_minus_mean",
+      "tau_distribution": 0.5859484001994133
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0039|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_median": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.0,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.0,
+        "train_presence_recall": 0.00018508236165093466
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0039",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_median",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_minus_median",
+      "tau_distribution": 0.6752023994922638
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0039|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_zscore": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.01807909604519774,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.0464556727743846,
+        "train_presence_recall": 0.06477882657782713
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0039",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_zscore",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_zscore",
+      "tau_distribution": 2.3745712281266953
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0039|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B4_LOGISTIC_PRESENCE": {
+      "calibration": {
+        "threshold_key": "operating_threshold",
+        "train_fpr": 0.01751412429378531,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.2296872108088099,
+        "train_presence_recall": 0.2567092356098464
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "feature_names": [
+        "learned_top1_score",
+        "learned_top2_score",
+        "learned_margin",
+        "learned_top1_minus_mean",
+        "learned_score_std",
+        "human_anchor_top1_score",
+        "learned_state_human_anchor_cosine",
+        "candidate_count",
+        "predicted_motion_iou_of_base_candidate",
+        "frames_since_last_memory_write"
+      ],
+      "heldout_sequence": "dancetrack0039",
+      "intercept": 1.4873018269413556,
+      "method": "LOGISTIC_PRESENCE",
+      "operating_threshold": 0.9519083384523779,
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B4_LOGISTIC_PRESENCE",
+      "policy_version": "N72R20R3_B4_LOGISTIC_V1",
+      "scaler_mean": [
+        0.3966481777008469,
+        0.2607528260232504,
+        0.12130819245162512,
+        0.18595522058117994,
+        0.10686883298457125,
+        0.793722171198785,
+        0.1553481817319166,
+        5.988289418653284,
+        0.6186870609628933,
+        60.15363167433431
+      ],
+      "scaler_scale": [
+        0.15680293761305944,
+        0.15037219502300275,
+        0.10498761170758458,
+        0.10943365122183193,
+        0.05561806576178499,
+        0.1346887200424898,
+        0.138199260944461,
+        2.3482826454936596,
+        0.3791555814434112,
+        147.7284910027035
+      ],
+      "trainable_parameters": 11,
+      "weights": [
+        -1.5124966302429237,
+        0.8607289892125918,
+        0.8681605255163647,
+        -0.385349828649009,
+        -0.08030463462341095,
+        0.7317060419315737,
+        0.30992017619674084,
+        0.9557867643903449,
+        1.1813746686535345,
+        0.22239133461507127
+      ]
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0057|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B0_ALWAYS_PRESENT": {
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0057",
+      "method": "B0_ALWAYS_PRESENT",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B0_ALWAYS_PRESENT",
+      "policy_version": "N72R20R3_B0_V1"
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0057|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B1_ABSOLUTE_SCORE": {
+      "calibration": {
+        "threshold_key": "tau_abs",
+        "train_fpr": 0.0,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.0001665833749791771,
+        "train_presence_recall": 0.0001665833749791771
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0057",
+      "method": "B1_ABSOLUTE_SCORE",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B1_ABSOLUTE_SCORE",
+      "policy_version": "N72R20R3_B1_V1",
+      "tau_abs": 0.9954981803894043
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0057|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B2_ABSOLUTE_MARGIN": {
+      "calibration": {
+        "train_fpr": 0.0,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.0001665833749791771,
+        "train_presence_recall": 0.0001665833749791771
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0057",
+      "method": "B2_ABSOLUTE_MARGIN",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B2_ABSOLUTE_MARGIN",
+      "policy_version": "N72R20R3_B2_V1",
+      "tau_abs": 0.9954981803894043,
+      "tau_margin": 0.0
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0057|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_mean": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.0,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.0,
+        "train_presence_recall": 0.0001665833749791771
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0057",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_mean",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_minus_mean",
+      "tau_distribution": 0.5859484001994133
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0057|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_median": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.0,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.0,
+        "train_presence_recall": 0.0001665833749791771
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0057",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_median",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_minus_median",
+      "tau_distribution": 0.6752023994922638
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0057|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_zscore": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.008938547486033519,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.03315009162085624,
+        "train_presence_recall": 0.04397801099450275
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0057",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_zscore",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_zscore",
+      "tau_distribution": 2.419767854287609
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0057|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B4_LOGISTIC_PRESENCE": {
+      "calibration": {
+        "threshold_key": "operating_threshold",
+        "train_fpr": 0.01452513966480447,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.20606363484924203,
+        "train_presence_recall": 0.22688655672163918
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "feature_names": [
+        "learned_top1_score",
+        "learned_top2_score",
+        "learned_margin",
+        "learned_top1_minus_mean",
+        "learned_score_std",
+        "human_anchor_top1_score",
+        "learned_state_human_anchor_cosine",
+        "candidate_count",
+        "predicted_motion_iou_of_base_candidate",
+        "frames_since_last_memory_write"
+      ],
+      "heldout_sequence": "dancetrack0057",
+      "intercept": 1.6337608393644074,
+      "method": "LOGISTIC_PRESENCE",
+      "operating_threshold": 0.9586630481946357,
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B4_LOGISTIC_PRESENCE",
+      "policy_version": "N72R20R3_B4_LOGISTIC_V1",
+      "scaler_mean": [
+        0.4066354850522878,
+        0.2566798702769407,
+        0.13652898919753453,
+        0.19543526963850472,
+        0.11046355862151815,
+        0.7928851395596838,
+        0.1591553689014639,
+        5.92172462466316,
+        0.6404577475290666,
+        55.44745284229437
+      ],
+      "scaler_scale": [
+        0.15456127788181032,
+        0.1435908212204708,
+        0.1106056707735298,
+        0.10780127087748824,
+        0.05421797661539231,
+        0.12953655316914678,
+        0.13316655941586567,
+        2.256213230627013,
+        0.37244023221125544,
+        142.6312847851106
+      ],
+      "trainable_parameters": 11,
+      "weights": [
+        -1.4892553266997404,
+        0.753293541208816,
+        0.9717505592723689,
+        -0.28960887421514586,
+        -0.0944738659647025,
+        0.6247298942728351,
+        0.39864859521268453,
+        0.8804128693547076,
+        1.2314192805231836,
+        0.2085852635579331
+      ]
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0062|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B0_ALWAYS_PRESENT": {
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0062",
+      "method": "B0_ALWAYS_PRESENT",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B0_ALWAYS_PRESENT",
+      "policy_version": "N72R20R3_B0_V1"
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0062|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B1_ABSOLUTE_SCORE": {
+      "calibration": {
+        "threshold_key": "tau_abs",
+        "train_fpr": 0.0,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.0001773049645390071,
+        "train_presence_recall": 0.0001773049645390071
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0062",
+      "method": "B1_ABSOLUTE_SCORE",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B1_ABSOLUTE_SCORE",
+      "policy_version": "N72R20R3_B1_V1",
+      "tau_abs": 0.9954981803894043
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0062|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B2_ABSOLUTE_MARGIN": {
+      "calibration": {
+        "train_fpr": 0.0,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.0001773049645390071,
+        "train_presence_recall": 0.0001773049645390071
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0062",
+      "method": "B2_ABSOLUTE_MARGIN",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B2_ABSOLUTE_MARGIN",
+      "policy_version": "N72R20R3_B2_V1",
+      "tau_abs": 0.9954981803894043,
+      "tau_margin": 0.0
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0062|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_mean": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.0,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.0,
+        "train_presence_recall": 0.0001773049645390071
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0062",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_mean",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_minus_mean",
+      "tau_distribution": 0.5859484001994133
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0062|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_median": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.0,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.0,
+        "train_presence_recall": 0.0001773049645390071
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0062",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_median",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_minus_median",
+      "tau_distribution": 0.6752023994922638
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0062|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_zscore": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.009541984732824428,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.033156028368794326,
+        "train_presence_recall": 0.04397163120567376
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0072"
+      ],
+      "heldout_sequence": "dancetrack0062",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_zscore",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_zscore",
+      "tau_distribution": 2.426804526558278
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0062|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B4_LOGISTIC_PRESENCE": {
+      "calibration": {
+        "threshold_key": "operating_threshold",
+        "train_fpr": 0.018447837150127225,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.24148936170212765,
+        "train_presence_recall": 0.250177304964539
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0072"
+      ],
+      "feature_names": [
+        "learned_top1_score",
+        "learned_top2_score",
+        "learned_margin",
+        "learned_top1_minus_mean",
+        "learned_score_std",
+        "human_anchor_top1_score",
+        "learned_state_human_anchor_cosine",
+        "candidate_count",
+        "predicted_motion_iou_of_base_candidate",
+        "frames_since_last_memory_write"
+      ],
+      "heldout_sequence": "dancetrack0062",
+      "intercept": 1.7567988792140306,
+      "method": "LOGISTIC_PRESENCE",
+      "operating_threshold": 0.9556149629373356,
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B4_LOGISTIC_PRESENCE",
+      "policy_version": "N72R20R3_B4_LOGISTIC_V1",
+      "scaler_mean": [
+        0.4028455226766258,
+        0.24905246376585916,
+        0.14332702676438908,
+        0.2039617689522244,
+        0.11253163467961479,
+        0.7925856871880628,
+        0.1396258418340506,
+        6.116749861342208,
+        0.6425199034187504,
+        59.833749306711034
+      ],
+      "scaler_scale": [
+        0.1518740447441438,
+        0.13733396974177853,
+        0.11044942183443691,
+        0.10768425838628953,
+        0.05309676462903527,
+        0.09583350873288203,
+        0.11213733703219136,
+        2.1697798557458103,
+        0.37643963582801165,
+        147.39193361403517
+      ],
+      "trainable_parameters": 11,
+      "weights": [
+        -1.4951523678550271,
+        0.7439430807321951,
+        1.3072266021176806,
+        -0.896582231967622,
+        0.27535150676606057,
+        0.5472177823815534,
+        0.2117951680708118,
+        0.786692595235376,
+        1.3580507073660317,
+        0.2743900771185776
+      ]
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0072|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B0_ALWAYS_PRESENT": {
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062"
+      ],
+      "heldout_sequence": "dancetrack0072",
+      "method": "B0_ALWAYS_PRESENT",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B0_ALWAYS_PRESENT",
+      "policy_version": "N72R20R3_B0_V1"
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0072|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B1_ABSOLUTE_SCORE": {
+      "calibration": {
+        "threshold_key": "tau_abs",
+        "train_fpr": 0.0,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.00016097875080489375,
+        "train_presence_recall": 0.00016097875080489375
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062"
+      ],
+      "heldout_sequence": "dancetrack0072",
+      "method": "B1_ABSOLUTE_SCORE",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B1_ABSOLUTE_SCORE",
+      "policy_version": "N72R20R3_B1_V1",
+      "tau_abs": 0.9954981803894043
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0072|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B2_ABSOLUTE_MARGIN": {
+      "calibration": {
+        "train_fpr": 0.0,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.00016097875080489375,
+        "train_presence_recall": 0.00016097875080489375
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062"
+      ],
+      "heldout_sequence": "dancetrack0072",
+      "method": "B2_ABSOLUTE_MARGIN",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B2_ABSOLUTE_MARGIN",
+      "policy_version": "N72R20R3_B2_V1",
+      "tau_abs": 0.9954981803894043,
+      "tau_margin": 0.0
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0072|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_mean": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.0,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.0,
+        "train_presence_recall": 0.00016097875080489375
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062"
+      ],
+      "heldout_sequence": "dancetrack0072",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_mean",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_minus_mean",
+      "tau_distribution": 0.5859484001994133
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0072|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_median": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.0,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.0,
+        "train_presence_recall": 0.00016097875080489375
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062"
+      ],
+      "heldout_sequence": "dancetrack0072",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_minus_median",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_minus_median",
+      "tau_distribution": 0.6752023994922638
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0072|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_zscore": {
+      "calibration": {
+        "threshold_key": "tau_distribution",
+        "train_fpr": 0.013,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.03251770766258854,
+        "train_presence_recall": 0.04346426271732132
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062"
+      ],
+      "heldout_sequence": "dancetrack0072",
+      "method": "B3_DISTRIBUTION",
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B3_top1_zscore",
+      "policy_version": "N72R20R3_B3_V1",
+      "score_feature": "top1_zscore",
+      "tau_distribution": 2.414482800713914
+    },
+    "S1_R2_STYLE_CAUSAL_LEARNED_STATE|dancetrack0072|S1_R2_STYLE_CAUSAL_LEARNED_STATE:B4_LOGISTIC_PRESENCE": {
+      "calibration": {
+        "threshold_key": "operating_threshold",
+        "train_fpr": 0.016,
+        "train_gate_infeasible": false,
+        "train_open_recall": 0.11654861558274308,
+        "train_presence_recall": 0.18142305215711527
+      },
+      "calibration_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062"
+      ],
+      "feature_names": [
+        "learned_top1_score",
+        "learned_top2_score",
+        "learned_margin",
+        "learned_top1_minus_mean",
+        "learned_score_std",
+        "human_anchor_top1_score",
+        "learned_state_human_anchor_cosine",
+        "candidate_count",
+        "predicted_motion_iou_of_base_candidate",
+        "frames_since_last_memory_write"
+      ],
+      "heldout_sequence": "dancetrack0072",
+      "intercept": 2.383917369066434,
+      "method": "LOGISTIC_PRESENCE",
+      "operating_threshold": 0.9723732274478184,
+      "policy_id": "S1_R2_STYLE_CAUSAL_LEARNED_STATE:B4_LOGISTIC_PRESENCE",
+      "policy_version": "N72R20R3_B4_LOGISTIC_V1",
+      "scaler_mean": [
+        0.43392438999349686,
+        0.27949253274882635,
+        0.15038961247370294,
+        0.2118626833756545,
+        0.12000477071544151,
+        0.8187521667329721,
+        0.17048501231677543,
+        6.232529118136439,
+        0.7236392758021618,
+        24.721991125901276
+      ],
+      "scaler_scale": [
+        0.13514006169547935,
+        0.1287383335800062,
+        0.10812432489126735,
+        0.0946523950267417,
+        0.04561743476871651,
+        0.11268466159204557,
+        0.14115237687777624,
+        1.7577594659428577,
+        0.31927092751141445,
+        88.62572469792872
+      ],
+      "trainable_parameters": 11,
+      "weights": [
+        -1.2170263286605865,
+        0.341991560798179,
+        0.3321094262786324,
+        0.17778040148082108,
+        -0.3956025063590113,
+        0.512832845989267,
+        0.4218312259911041,
+        0.08677523162052835,
+        1.5079054808599133,
+        0.8966140193281013
+      ]
+    }
+  },
+  "runtime_future_gt_used": false,
+  "stage": "N72R20R3"
+}

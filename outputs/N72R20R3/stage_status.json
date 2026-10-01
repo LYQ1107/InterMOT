@@ -1,0 +1,102 @@
+{
+  "stage": "N72R20R3",
+  "goal_reference": "outputs/N72R20R3/FINAL_GOAL.json",
+  "goal": "Open-Set Persistent Identity Recognition",
+  "central_question": "Can a human-initialized persistent identity memory determine whether the target identity is represented in the current candidate set, abstain when it is not, and identify the correct candidate when it is present?",
+  "goal_frozen": true,
+  "source_stage": "N72R20R2",
+  "source_commit": "b2abc90fd90bc5eb36b31f753561ea0aa3da900b",
+  "source_branch": "codex/n72r20r2-memory-commit-rescue",
+  "branch": "codex/n72r20r3-open-set-identity",
+  "historical_results_preserved": {
+    "N72R20": "BLOCKED_NOT_RECOVERED",
+    "N72R20R1": "FAIL_MEMORY_CONTAMINATION",
+    "N72R20R2": "FAIL_RUNTIME_MEMORY_COMMIT"
+  },
+  "phase": "FAIL",
+  "last_completed_artifact": "outputs/N72R20R3/FINAL_REPORT.md",
+  "dataset": {
+    "split": "DanceTrack train",
+    "sequences": [
+      "dancetrack0001",
+      "dancetrack0002",
+      "dancetrack0023",
+      "dancetrack0024",
+      "dancetrack0039",
+      "dancetrack0057",
+      "dancetrack0062",
+      "dancetrack0072"
+    ],
+    "future_frames": 8414,
+    "candidate_rows": 49202,
+    "val_accessed": false,
+    "test_accessed": false
+  },
+  "constraints": {
+    "candidate_generation_frozen": true,
+    "sealed_dev_tapes_reused": true,
+    "sam3_rerun": false,
+    "exact_solver_frozen": true,
+    "public_id_authority_frozen": true,
+    "association_rescue": false,
+    "runtime_future_gt_used": false,
+    "training_started": false
+  },
+  "storage": {
+    "before_reference": "outputs/N72R20R3/storage_audit_before.json",
+    "after_reference": "outputs/N72R20R3/storage_audit_after.json",
+    "before_status": "OK",
+    "after_status": "OK",
+    "before_free_gib": 116.15011215209961,
+    "after_free_gib": 115.73504257202148,
+    "hard_stop_free_gib": 100.0,
+    "new_data_target_gb": 2.0,
+    "download_performed": false,
+    "deletion_performed": false
+  },
+  "taxonomy": {
+    "status": "PASS_N72R20R3_FAILURE_TAXONOMY",
+    "future_frames": 8414,
+    "p0": 154,
+    "p1": 1665,
+    "p1a": 439,
+    "p1b": 1226,
+    "p2": 1706,
+    "p3": 4889,
+    "posthoc_gt_used": true
+  },
+  "presence": {
+    "status": "PASS_N72R20R3_LOSO_COMPLETE",
+    "runtime_rows": 16828,
+    "loso_folds": 8,
+    "aggregate_policies": 14,
+    "b4_authorized": true,
+    "selected_static_policy": null,
+    "static_gate_passed": false,
+    "runtime_future_gt_used": false
+  },
+  "causal": {
+    "status": "NOT_RUN_STATIC_PRESENCE_GATE_FAILED",
+    "reference": "outputs/N72R20R3/causal/causal_replay.json",
+    "runtime_future_gt_used": false,
+    "association_rescue": false
+  },
+  "headroom": {
+    "status": "PASS_R3_HEADROOM",
+    "reference": "outputs/N72R20R3/future_association_headroom.json",
+    "assignment_changed": false
+  },
+  "r2_immutability": {
+    "status": "PASS",
+    "reference": "outputs/N72R20R3/r2_immutability_audit.json",
+    "all_unchanged": true
+  },
+  "tests": {
+    "status": "COMPLETE_WITH_KNOWN_THIRD_PARTY_FAILURES",
+    "r3_targeted": {"passed": 42, "failed": 0},
+    "full_suite": {"passed": 324, "failed": 4},
+    "known_failure": "Pinned TrackEval CLI receives SEQMAP_FILE as a list and passes it to os.path.isfile; no R3 code is exercised."
+  },
+  "final_decision": "FAIL_OPEN_SET_CROSS_SEQUENCE_GENERALIZATION",
+  "next_association_authority_stage_authorized": false
+}
