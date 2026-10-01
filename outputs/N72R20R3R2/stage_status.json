@@ -1,0 +1,54 @@
+{
+  "causal_gate": null,
+  "causal_started": false,
+  "decision": "FAIL_OPEN_SET_CALIBRATION_AFTER_REPRESENTATION",
+  "goal_frozen": true,
+  "goal_reference": "outputs/N72R20R3R2/FINAL_GOAL.json",
+  "last_completed_artifact": "outputs/N72R20R3R2/open_set/formal_loso.json",
+  "next_association_authority_stage_authorized": false,
+  "open_set_gate": {
+    "checks": {
+      "O1_pooled_negative_fpr_le_0.02": false,
+      "O2_pooled_open_set_correct_id_recall_ge_0.60": false,
+      "O3_macro_negative_fpr_le_0.05": false,
+      "O4_macro_open_set_correct_id_recall_ge_0.40": true,
+      "O5_runtime_future_gt_used_false": true,
+      "O6_runtime_gt_clean_true": true,
+      "O7_no_candidate_creation": true
+    },
+    "pass": false
+  },
+  "open_set_started": true,
+  "representation_gate": {
+    "checks": {
+      "R1_pooled_rank1_ge_0.60": true,
+      "R2_macro_sequence_rank1_ge_0.50": true,
+      "R3_pooled_mrr_ge_0.70": true,
+      "R4_paired_bootstrap_rank1_delta_lower_gt_0": true,
+      "R5_no_outer_supervision_leakage": true
+    },
+    "pass": true,
+    "primary_comparator": "FROZEN_LEARNED_STATE_BASELINE"
+  },
+  "runtime_future_gt_used": false,
+  "runtime_gt_clean": true,
+  "sam3_rerun": false,
+  "stage": "N72R20R3R2",
+  "status": "OPEN_SET_FAIL",
+  "storage_audit_after": {
+    "filesystem": {
+      "free_gib": 112.85919952392578,
+      "hard_stop_below_gib": 100.0,
+      "path": "/data3/liuyeqiang/InterMOT",
+      "storage_status": "OK",
+      "total_gib": 1006.853931427002,
+      "used_gib": 842.779109954834,
+      "warning_below_gib": 110.0
+    },
+    "stage": "N72R20R3R2",
+    "target_new_storage": "<5GB"
+  },
+  "test_accessed": false,
+  "tests": "R3R2 focused 36 passed; full pytest 452 passed, 4 known TrackEval SEQMAP_FILE CLI failures",
+  "val_accessed": false
+}

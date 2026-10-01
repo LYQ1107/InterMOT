@@ -1,0 +1,111 @@
+{
+  "GRU_frozen": true,
+  "MRR": 0.7868773842617663,
+  "OSNet_frozen": true,
+  "Rank2": 0.7807429871114481,
+  "Rank3": 0.8488248673237301,
+  "Rank5": 0.9435936315390447,
+  "SAM3_rerun": false,
+  "association_authority_started": false,
+  "bottleneck_classification": "BOTTLENECK_OPEN_SET_CALIBRATION",
+  "candidate_GTs_matched": 40014,
+  "candidate_generation_frozen": true,
+  "causal_gate": null,
+  "causal_metrics": null,
+  "decision": "FAIL_OPEN_SET_CALIBRATION_AFTER_REPRESENTATION",
+  "frozen_baseline_rank1": 0.3815011372251706,
+  "goal": "Cross-Scene Open-Set Identity Representation Learning",
+  "identity_episode_count": 39963,
+  "new_rank1": 0.6874905231235785,
+  "next_association_authority_stage_authorized": false,
+  "next_backbone_adaptation_stage_authorized": false,
+  "next_memory_state_learning_stage_authorized": false,
+  "open_set_gate": {
+    "checks": {
+      "O1_pooled_negative_fpr_le_0.02": false,
+      "O2_pooled_open_set_correct_id_recall_ge_0.60": false,
+      "O3_macro_negative_fpr_le_0.05": false,
+      "O4_macro_open_set_correct_id_recall_ge_0.40": true,
+      "O5_runtime_future_gt_used_false": true,
+      "O6_runtime_gt_clean_true": true,
+      "O7_no_candidate_creation": true
+    },
+    "pass": false
+  },
+  "open_set_metrics": {
+    "candidate_creation_count": 0,
+    "correct_id_count": 3511,
+    "false_positive_count": 427,
+    "negative_fpr": 0.23474436503573393,
+    "none_rows": 1819,
+    "open_set_correct_id_recall": 0.5323730098559515,
+    "posthoc_gt_used": true,
+    "present_rows": 6595,
+    "rows": 8414,
+    "runtime_future_gt_used": false,
+    "runtime_gt_clean": true
+  },
+  "oracle_clean_state_metrics": {
+    "MRR": 0.9441272849802038,
+    "mean_target_rank": 1.1589082638362396,
+    "posthoc_oracle_only": true,
+    "rank1": 0.9035633055344958,
+    "rank2": 0.9646702047005307,
+    "rank3": 0.9848369977255497,
+    "rank5": 0.9972706595905989,
+    "rows": 6595,
+    "runtime_future_gt_used": false,
+    "runtime_gt_clean": true
+  },
+  "paired_CI": [
+    0.15633034534356954,
+    0.4439950217797137
+  ],
+  "primary_model": "CrossSceneIdentityAdapter",
+  "rank1_delta": 0.3059893858984079,
+  "representation_gate": {
+    "checks": {
+      "R1_pooled_rank1_ge_0.60": true,
+      "R2_macro_sequence_rank1_ge_0.50": true,
+      "R3_pooled_mrr_ge_0.70": true,
+      "R4_paired_bootstrap_rank1_delta_lower_gt_0": true,
+      "R5_no_outer_supervision_leakage": true
+    },
+    "pass": true,
+    "primary_comparator": "FROZEN_LEARNED_STATE_BASELINE"
+  },
+  "runtime_future_gt_used": false,
+  "runtime_gt_clean": true,
+  "runtime_state_metrics": {
+    "MRR": 0.7868773842617663,
+    "mean_target_rank": 1.8752084912812736,
+    "posthoc_oracle_only": false,
+    "rank1": 0.6874905231235785,
+    "rank2": 0.7807429871114481,
+    "rank3": 0.8488248673237301,
+    "rank5": 0.9435936315390447,
+    "rows": 6595,
+    "runtime_future_gt_used": false,
+    "runtime_gt_clean": true
+  },
+  "source_commit": "90a141ad85b3b5c7fa2d611f3b3b96e9c182d44a",
+  "stage": "N72R20R3R2",
+  "storage_after": {
+    "filesystem": {
+      "free_gib": 112.85919952392578,
+      "hard_stop_below_gib": 100.0,
+      "path": "/data3/liuyeqiang/InterMOT",
+      "storage_status": "OK",
+      "total_gib": 1006.853931427002,
+      "used_gib": 842.779109954834,
+      "warning_below_gib": 110.0
+    },
+    "stage": "N72R20R3R2",
+    "target_new_storage": "<5GB"
+  },
+  "test_accessed": false,
+  "tests_summary": "R3R2 focused 36 passed; full pytest 452 passed, 4 known TrackEval SEQMAP_FILE CLI failures",
+  "trainable_parameters": 265472,
+  "training_identity_count": 51,
+  "val_accessed": false
+}
