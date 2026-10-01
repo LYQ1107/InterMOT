@@ -1,0 +1,42 @@
+{
+  "association_authority_started": false,
+  "causal_gate": {
+    "pass": false,
+    "retention_ge_0.60": true,
+    "static_gate_pass": false,
+    "wrong_write_rate_le_0.02": false
+  },
+  "decision": "FAIL_P1_LOCALIZATION_QUALITY",
+  "goal_frozen": true,
+  "goal_reference": "outputs/N72R20R3R2R2/FINAL_GOAL.json",
+  "last_completed_artifact": "outputs/N72R20R3R2R2/FINAL_REPORT.md",
+  "next_association_stage_authorized": false,
+  "runtime_future_gt_used": false,
+  "runtime_gt_clean": true,
+  "sam3_rerun": false,
+  "stage": "N72R20R3R2R2",
+  "static_gate": {
+    "macro_fpr_le_0.05": false,
+    "macro_recall_ge_0.40": false,
+    "no_candidate_creation": true,
+    "pooled_correct_id_recall_ge_0.60": false,
+    "pooled_negative_fpr_le_0.02": false,
+    "runtime_gt_clean": true
+  },
+  "status": "FAIL",
+  "storage_audit_after": {
+    "free_gib": 110.07004165649414,
+    "hard_stop_below_gib": 100.0,
+    "label": "after",
+    "path": "/data3/liuyeqiang/InterMOT",
+    "stage": "N72R20R3R2R2",
+    "storage_status": "OK",
+    "target_new_persistent_storage": "<8GB",
+    "total_gib": 1006.853931427002,
+    "used_gib": 845.5682678222656,
+    "warning_below_gib": 106.0
+  },
+  "test_accessed": false,
+  "tests_summary": "Focused R3R2R2 invariants: 50 passed; full pytest: 542 passed, 4 failed; default run n6 x2 could not resolve executable python, and explicit-venv rerun reached the pinned TrackEval SEQMAP_FILE list-vs-string TypeError in n6/n7/n8.",
+  "val_accessed": false
+}

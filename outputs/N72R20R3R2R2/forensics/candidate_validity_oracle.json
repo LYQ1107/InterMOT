@@ -1,0 +1,20 @@
+{
+  "classes": {
+    "O": "IoU < 0.10",
+    "V": "IoU >= 0.50",
+    "W": "0.10 <= IoU < 0.50"
+  },
+  "oracle_is_posthoc_only": true,
+  "runtime_feature_whitelist": [
+    "candidate_embedding",
+    "candidate_box_width",
+    "candidate_box_height",
+    "candidate_box_area_log",
+    "candidate_box_aspect",
+    "candidate_confidence",
+    "candidate_presence",
+    "candidate_count"
+  ],
+  "stage": "N72R20R3R2R2",
+  "training_validity_labels_gt_only": true
+}

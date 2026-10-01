@@ -1,0 +1,172 @@
+{
+  "effect_is_diagnostic_until_outer_gate": 1,
+  "formal_evaluation_contains_counterfactual": 0,
+  "with_counterfactual_J2": {
+    "MRR": 0.7629849453048846,
+    "P0_fpr": 0.14285714285714285,
+    "P1a_fpr": 0.035678889990089196,
+    "P1b_fpr": 0.0,
+    "Rank1": 0.6453373768006065,
+    "Rank2": 0.7716451857467779,
+    "Rank3": 0.8377558756633814,
+    "Rank5": 0.9407126611068992,
+    "accepted_rows": 1504,
+    "candidate_recall_at_FPR_2pct": 0.28617129562309146,
+    "candidate_valid_auprc": 0.4932285778284093,
+    "candidate_valid_auroc": 0.7814390136664291,
+    "correct_id_recall": 0.19620924943138743,
+    "correct_id_rows": 1294,
+    "formal_gate": {
+      "macro_fpr_le_0.05": false,
+      "macro_recall_ge_0.40": false,
+      "no_candidate_creation": true,
+      "pooled_correct_id_recall_ge_0.60": false,
+      "pooled_negative_fpr_le_0.02": false,
+      "runtime_gt_clean": true
+    },
+    "macro_correct_id_recall": 0.16626435998349098,
+    "macro_negative_fpr": 0.09264456331193147,
+    "mean_rank": 1.9445034116755118,
+    "negative_fpr": 0.03188565145684442,
+    "negative_rows": 1819,
+    "per_sequence": {
+      "dancetrack0001": {
+        "correct_id_recall": 0.005997001499250375,
+        "negative_fpr": 0.02857142857142857,
+        "present_rows": 667,
+        "rows": 702
+      },
+      "dancetrack0002": {
+        "correct_id_recall": 0.011144883485309016,
+        "negative_fpr": 0.037209302325581395,
+        "present_rows": 987,
+        "rows": 1202
+      },
+      "dancetrack0023": {
+        "correct_id_recall": 0.1164259927797834,
+        "negative_fpr": 0.013368983957219251,
+        "present_rows": 1108,
+        "rows": 1482
+      },
+      "dancetrack0024": {
+        "correct_id_recall": 0.015471167369901548,
+        "negative_fpr": 0.0,
+        "present_rows": 711,
+        "rows": 762
+      },
+      "dancetrack0039": {
+        "correct_id_recall": 0.7416107382550335,
+        "negative_fpr": 0.46938775510204084,
+        "present_rows": 1192,
+        "rows": 1241
+      },
+      "dancetrack0057": {
+        "correct_id_recall": 0.36317567567567566,
+        "negative_fpr": 0.13793103448275862,
+        "present_rows": 592,
+        "rows": 621
+      },
+      "dancetrack0062": {
+        "correct_id_recall": 0.018848167539267015,
+        "negative_fpr": 0.048582995951417005,
+        "present_rows": 955,
+        "rows": 1202
+      },
+      "dancetrack0072": {
+        "correct_id_recall": 0.057441253263707574,
+        "negative_fpr": 0.006105006105006105,
+        "present_rows": 383,
+        "rows": 1202
+      }
+    },
+    "present_rows": 6595,
+    "recall_at_FPR_2pct": 0.1369219105382866,
+    "rows": 8414,
+    "set_presence_auprc": 0.9169787785907152,
+    "set_presence_auroc": 0.7922787891771674
+  },
+  "without_counterfactual_J2": {
+    "MRR": 0.7623253547059461,
+    "P0_fpr": 0.2012987012987013,
+    "P1a_fpr": 0.28344895936570863,
+    "P1b_fpr": 0.025914634146341462,
+    "Rank1": 0.645489006823351,
+    "Rank2": 0.7707354056103108,
+    "Rank3": 0.8379075056861258,
+    "Rank5": 0.933434420015163,
+    "accepted_rows": 3931,
+    "candidate_recall_at_FPR_2pct": 0.28951577722844263,
+    "candidate_valid_auprc": 0.4904019424269757,
+    "candidate_valid_auroc": 0.7740605917598983,
+    "correct_id_recall": 0.4347232752084913,
+    "correct_id_rows": 2867,
+    "formal_gate": {
+      "macro_fpr_le_0.05": false,
+      "macro_recall_ge_0.40": true,
+      "no_candidate_creation": true,
+      "pooled_correct_id_recall_ge_0.60": false,
+      "pooled_negative_fpr_le_0.02": false,
+      "runtime_gt_clean": true
+    },
+    "macro_correct_id_recall": 0.409077147739156,
+    "macro_negative_fpr": 0.34457647337546715,
+    "mean_rank": 1.9652767247915086,
+    "negative_fpr": 0.18361737218251786,
+    "negative_rows": 1819,
+    "per_sequence": {
+      "dancetrack0001": {
+        "correct_id_recall": 0.34632683658170915,
+        "negative_fpr": 0.42857142857142855,
+        "present_rows": 667,
+        "rows": 702
+      },
+      "dancetrack0002": {
+        "correct_id_recall": 0.10233029381965553,
+        "negative_fpr": 0.4790697674418605,
+        "present_rows": 987,
+        "rows": 1202
+      },
+      "dancetrack0023": {
+        "correct_id_recall": 0.6155234657039711,
+        "negative_fpr": 0.2807486631016043,
+        "present_rows": 1108,
+        "rows": 1482
+      },
+      "dancetrack0024": {
+        "correct_id_recall": 0.4978902953586498,
+        "negative_fpr": 0.5686274509803921,
+        "present_rows": 711,
+        "rows": 762
+      },
+      "dancetrack0039": {
+        "correct_id_recall": 0.8053691275167785,
+        "negative_fpr": 0.5714285714285714,
+        "present_rows": 1192,
+        "rows": 1241
+      },
+      "dancetrack0057": {
+        "correct_id_recall": 0.625,
+        "negative_fpr": 0.27586206896551724,
+        "present_rows": 592,
+        "rows": 621
+      },
+      "dancetrack0062": {
+        "correct_id_recall": 0.10785340314136126,
+        "negative_fpr": 0.13765182186234817,
+        "present_rows": 955,
+        "rows": 1202
+      },
+      "dancetrack0072": {
+        "correct_id_recall": 0.17232375979112272,
+        "negative_fpr": 0.014652014652014652,
+        "present_rows": 383,
+        "rows": 1202
+      }
+    },
+    "present_rows": 6595,
+    "recall_at_FPR_2pct": 0.111144806671721,
+    "rows": 8414,
+    "set_presence_auprc": 0.9126158862225996,
+    "set_presence_auroc": 0.785160097213267
+  }
+}

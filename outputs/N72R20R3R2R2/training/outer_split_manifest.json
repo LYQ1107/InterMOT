@@ -1,0 +1,2831 @@
+{
+  "folds": [
+    {
+      "counterfactual_training_episode_count": 5933,
+      "heldout_observations_used_in_training": false,
+      "heldout_sequence": "dancetrack0001",
+      "inner_validation_sequence": "dancetrack0002",
+      "outer_heldout_absent_from_training": true,
+      "outer_labels_used_for_architecture_selection": false,
+      "parameter_fit_sequences": [
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "selected_family": "J4_ENERGY",
+      "thresholds": {
+        "J1_PAIRWISE": 0.841850757598877,
+        "J2_JOINT_ABSOLUTE": 0.8281243443489075,
+        "J3_SET_NOISY_OR": 0.46772870421409607,
+        "J4_ENERGY": 0.5063948035240173,
+        "J5_QUALITY_FUSION": 0.6873421669006348,
+        "J7_MULTITASK": 0.46946072578430176
+      },
+      "training_episode_count": 4433,
+      "training_identity_count": 36,
+      "validation_metrics": {
+        "J1_PAIRWISE": {
+          "metrics": {
+            "MRR": 0.417367845483347,
+            "P0_fpr": 0.0,
+            "P1a_fpr": 0.020942408376963352,
+            "P1b_fpr": 0.0,
+            "Rank1": 0.21175278622087132,
+            "Rank2": 0.3373860182370821,
+            "Rank3": 0.46403242147923,
+            "Rank5": 0.707193515704154,
+            "accepted_rows": 21,
+            "candidate_recall_at_FPR_2pct": 0.035576923076923075,
+            "candidate_valid_auprc": 0.13852648396059733,
+            "candidate_valid_auroc": 0.5255775777620438,
+            "correct_id_recall": 0.00911854103343465,
+            "correct_id_rows": 9,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.00911854103343465,
+            "macro_negative_fpr": 0.018604651162790697,
+            "mean_rank": 3.8196555217831816,
+            "negative_fpr": 0.018604651162790697,
+            "negative_rows": 215,
+            "per_sequence": {
+              "dancetrack0002": {
+                "correct_id_recall": 0.00911854103343465,
+                "negative_fpr": 0.018604651162790697,
+                "present_rows": 987,
+                "rows": 1202
+              }
+            },
+            "present_rows": 987,
+            "recall_at_FPR_2pct": 0.017223910840932118,
+            "rows": 1202,
+            "set_presence_auprc": 0.7353631711296069,
+            "set_presence_auroc": 0.2678259230461111
+          },
+          "threshold_selection": {
+            "candidate_count": 1204,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 21,
+              "correct_id_recall": 0.04285714285714286,
+              "negative_fpr": 0.018604651162790697,
+              "threshold": 0.841850757598877
+            }
+          }
+        },
+        "J2_JOINT_ABSOLUTE": {
+          "metrics": {
+            "MRR": 0.3972258406908863,
+            "P0_fpr": 0.0,
+            "P1a_fpr": 0.015706806282722512,
+            "P1b_fpr": 0.0,
+            "Rank1": 0.20871327254305977,
+            "Rank2": 0.3009118541033435,
+            "Rank3": 0.4012158054711246,
+            "Rank5": 0.6545086119554204,
+            "accepted_rows": 28,
+            "candidate_recall_at_FPR_2pct": 0.03653846153846154,
+            "candidate_valid_auprc": 0.13066331163362152,
+            "candidate_valid_auroc": 0.4819830654782111,
+            "correct_id_recall": 0.002026342451874367,
+            "correct_id_rows": 2,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.002026342451874367,
+            "macro_negative_fpr": 0.013953488372093023,
+            "mean_rank": 4.130699088145897,
+            "negative_fpr": 0.013953488372093023,
+            "negative_rows": 215,
+            "per_sequence": {
+              "dancetrack0002": {
+                "correct_id_recall": 0.002026342451874367,
+                "negative_fpr": 0.013953488372093023,
+                "present_rows": 987,
+                "rows": 1202
+              }
+            },
+            "present_rows": 987,
+            "recall_at_FPR_2pct": 0.025329280648429583,
+            "rows": 1202,
+            "set_presence_auprc": 0.736389400255441,
+            "set_presence_auroc": 0.2613981762917933
+          },
+          "threshold_selection": {
+            "candidate_count": 1204,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 28,
+              "correct_id_recall": 0.009523809523809525,
+              "negative_fpr": 0.013953488372093023,
+              "threshold": 0.8281243443489075
+            }
+          }
+        },
+        "J3_SET_NOISY_OR": {
+          "metrics": {
+            "MRR": 0.417367845483347,
+            "P0_fpr": 0.0,
+            "P1a_fpr": 0.020942408376963352,
+            "P1b_fpr": 0.0,
+            "Rank1": 0.21175278622087132,
+            "Rank2": 0.3373860182370821,
+            "Rank3": 0.46403242147923,
+            "Rank5": 0.707193515704154,
+            "accepted_rows": 36,
+            "candidate_recall_at_FPR_2pct": 0.035576923076923075,
+            "candidate_valid_auprc": 0.13852648396059733,
+            "candidate_valid_auroc": 0.5255775777620438,
+            "correct_id_recall": 0.0070921985815602835,
+            "correct_id_rows": 7,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.0070921985815602835,
+            "macro_negative_fpr": 0.018604651162790697,
+            "mean_rank": 3.8196555217831816,
+            "negative_fpr": 0.018604651162790697,
+            "negative_rows": 215,
+            "per_sequence": {
+              "dancetrack0002": {
+                "correct_id_recall": 0.0070921985815602835,
+                "negative_fpr": 0.018604651162790697,
+                "present_rows": 987,
+                "rows": 1202
+              }
+            },
+            "present_rows": 987,
+            "recall_at_FPR_2pct": 0.03242147922998987,
+            "rows": 1202,
+            "set_presence_auprc": 0.8013504749225411,
+            "set_presence_auroc": 0.4377182441507033
+          },
+          "threshold_selection": {
+            "candidate_count": 1195,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 36,
+              "correct_id_recall": 0.03333333333333333,
+              "negative_fpr": 0.018604651162790697,
+              "threshold": 0.46772870421409607
+            }
+          }
+        },
+        "J4_ENERGY": {
+          "metrics": {
+            "MRR": 0.417367845483347,
+            "P0_fpr": 0.0,
+            "P1a_fpr": 0.015706806282722512,
+            "P1b_fpr": 0.0,
+            "Rank1": 0.21175278622087132,
+            "Rank2": 0.3373860182370821,
+            "Rank3": 0.46403242147923,
+            "Rank5": 0.707193515704154,
+            "accepted_rows": 28,
+            "candidate_recall_at_FPR_2pct": 0.035576923076923075,
+            "candidate_valid_auprc": 0.13852648396059733,
+            "candidate_valid_auroc": 0.5255775777620438,
+            "correct_id_recall": 0.020263424518743668,
+            "correct_id_rows": 20,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.020263424518743668,
+            "macro_negative_fpr": 0.013953488372093023,
+            "mean_rank": 3.8196555217831816,
+            "negative_fpr": 0.013953488372093023,
+            "negative_rows": 215,
+            "per_sequence": {
+              "dancetrack0002": {
+                "correct_id_recall": 0.020263424518743668,
+                "negative_fpr": 0.013953488372093023,
+                "present_rows": 987,
+                "rows": 1202
+              }
+            },
+            "present_rows": 987,
+            "recall_at_FPR_2pct": 0.025329280648429583,
+            "rows": 1202,
+            "set_presence_auprc": 0.7807853064743389,
+            "set_presence_auroc": 0.3408920619212554
+          },
+          "threshold_selection": {
+            "candidate_count": 1204,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 28,
+              "correct_id_recall": 0.09523809523809523,
+              "negative_fpr": 0.013953488372093023,
+              "threshold": 0.5063948035240173
+            }
+          }
+        },
+        "J5_QUALITY_FUSION": {
+          "metrics": {
+            "MRR": 0.417367845483347,
+            "P0_fpr": 0.0,
+            "P1a_fpr": 0.015706806282722512,
+            "P1b_fpr": 0.0,
+            "Rank1": 0.21175278622087132,
+            "Rank2": 0.3373860182370821,
+            "Rank3": 0.46403242147923,
+            "Rank5": 0.707193515704154,
+            "accepted_rows": 41,
+            "candidate_recall_at_FPR_2pct": 0.06634615384615385,
+            "candidate_valid_auprc": 0.17421312102366146,
+            "candidate_valid_auroc": 0.5783803575065711,
+            "correct_id_recall": 0.020263424518743668,
+            "correct_id_rows": 20,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.020263424518743668,
+            "macro_negative_fpr": 0.013953488372093023,
+            "mean_rank": 3.8196555217831816,
+            "negative_fpr": 0.013953488372093023,
+            "negative_rows": 215,
+            "per_sequence": {
+              "dancetrack0002": {
+                "correct_id_recall": 0.020263424518743668,
+                "negative_fpr": 0.013953488372093023,
+                "present_rows": 987,
+                "rows": 1202
+              }
+            },
+            "present_rows": 987,
+            "recall_at_FPR_2pct": 0.03850050658561297,
+            "rows": 1202,
+            "set_presence_auprc": 0.8163171754887967,
+            "set_presence_auroc": 0.45054546311349875
+          },
+          "threshold_selection": {
+            "candidate_count": 1204,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 41,
+              "correct_id_recall": 0.0796812749003984,
+              "negative_fpr": 0.013953488372093023,
+              "threshold": 0.6873421669006348
+            }
+          }
+        },
+        "J7_MULTITASK": {
+          "metrics": {
+            "MRR": 0.3972258406908863,
+            "P0_fpr": 0.0,
+            "P1a_fpr": 0.0,
+            "P1b_fpr": 0.0,
+            "Rank1": 0.20871327254305977,
+            "Rank2": 0.3009118541033435,
+            "Rank3": 0.4012158054711246,
+            "Rank5": 0.6545086119554204,
+            "accepted_rows": 9,
+            "candidate_recall_at_FPR_2pct": 0.03653846153846154,
+            "candidate_valid_auprc": 0.13066331163362152,
+            "candidate_valid_auroc": 0.4819830654782111,
+            "correct_id_recall": 0.0,
+            "correct_id_rows": 0,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.0,
+            "macro_negative_fpr": 0.0,
+            "mean_rank": 4.130699088145897,
+            "negative_fpr": 0.0,
+            "negative_rows": 215,
+            "per_sequence": {
+              "dancetrack0002": {
+                "correct_id_recall": 0.0,
+                "negative_fpr": 0.0,
+                "present_rows": 987,
+                "rows": 1202
+              }
+            },
+            "present_rows": 987,
+            "recall_at_FPR_2pct": 0.016210739614994935,
+            "rows": 1202,
+            "set_presence_auprc": 0.7448804322759957,
+            "set_presence_auroc": 0.36656534954407294
+          },
+          "threshold_selection": {
+            "candidate_count": 1175,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 9,
+              "correct_id_recall": 0.0,
+              "negative_fpr": 0.0,
+              "threshold": 0.46946072578430176
+            }
+          }
+        }
+      }
+    },
+    {
+      "counterfactual_training_episode_count": 5620,
+      "heldout_observations_used_in_training": false,
+      "heldout_sequence": "dancetrack0002",
+      "inner_validation_sequence": "dancetrack0023",
+      "outer_heldout_absent_from_training": true,
+      "outer_labels_used_for_architecture_selection": false,
+      "parameter_fit_sequences": [
+        "dancetrack0001",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "selected_family": "J5_QUALITY_FUSION",
+      "thresholds": {
+        "J1_PAIRWISE": 0.7140355706214905,
+        "J2_JOINT_ABSOLUTE": 0.8071445822715759,
+        "J3_SET_NOISY_OR": 0.47298064827919006,
+        "J4_ENERGY": 0.5038551688194275,
+        "J5_QUALITY_FUSION": 0.6052982807159424,
+        "J7_MULTITASK": 0.4759652614593506
+      },
+      "training_episode_count": 4120,
+      "training_identity_count": 34,
+      "validation_metrics": {
+        "J1_PAIRWISE": {
+          "metrics": {
+            "MRR": 0.8603342931637156,
+            "P0_fpr": 0.0,
+            "P1a_fpr": 0.019886363636363636,
+            "P1b_fpr": 0.0,
+            "Rank1": 0.7987364620938628,
+            "Rank2": 0.8592057761732852,
+            "Rank3": 0.8998194945848376,
+            "Rank5": 0.9422382671480144,
+            "accepted_rows": 134,
+            "candidate_recall_at_FPR_2pct": 0.4195501730103806,
+            "candidate_valid_auprc": 0.5475564998627785,
+            "candidate_valid_auroc": 0.8499613973785866,
+            "correct_id_recall": 0.09657039711191336,
+            "correct_id_rows": 107,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.09657039711191336,
+            "macro_negative_fpr": 0.01871657754010695,
+            "mean_rank": 1.6471119133574008,
+            "negative_fpr": 0.01871657754010695,
+            "negative_rows": 374,
+            "per_sequence": {
+              "dancetrack0023": {
+                "correct_id_recall": 0.09657039711191336,
+                "negative_fpr": 0.01871657754010695,
+                "present_rows": 1108,
+                "rows": 1482
+              }
+            },
+            "present_rows": 1108,
+            "recall_at_FPR_2pct": 0.11462093862815885,
+            "rows": 1482,
+            "set_presence_auprc": 0.8993739253249569,
+            "set_presence_auroc": 0.7846676576767891
+          },
+          "threshold_selection": {
+            "candidate_count": 1484,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 134,
+              "correct_id_recall": 0.12677725118483413,
+              "negative_fpr": 0.01871657754010695,
+              "threshold": 0.7140355706214905
+            }
+          }
+        },
+        "J2_JOINT_ABSOLUTE": {
+          "metrics": {
+            "MRR": 0.8417902269210933,
+            "P0_fpr": 0.0,
+            "P1a_fpr": 0.019886363636363636,
+            "P1b_fpr": 0.0,
+            "Rank1": 0.7617328519855595,
+            "Rank2": 0.8546931407942239,
+            "Rank3": 0.8998194945848376,
+            "Rank5": 0.9494584837545126,
+            "accepted_rows": 73,
+            "candidate_recall_at_FPR_2pct": 0.4100346020761246,
+            "candidate_valid_auprc": 0.5589616918319114,
+            "candidate_valid_auroc": 0.8665855279944098,
+            "correct_id_recall": 0.05324909747292419,
+            "correct_id_rows": 59,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.05324909747292419,
+            "macro_negative_fpr": 0.01871657754010695,
+            "mean_rank": 1.651624548736462,
+            "negative_fpr": 0.01871657754010695,
+            "negative_rows": 374,
+            "per_sequence": {
+              "dancetrack0023": {
+                "correct_id_recall": 0.05324909747292419,
+                "negative_fpr": 0.01871657754010695,
+                "present_rows": 1108,
+                "rows": 1482
+              }
+            },
+            "present_rows": 1108,
+            "recall_at_FPR_2pct": 0.05956678700361011,
+            "rows": 1482,
+            "set_presence_auprc": 0.8860993009017992,
+            "set_presence_auroc": 0.7657145890847313
+          },
+          "threshold_selection": {
+            "candidate_count": 1484,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 73,
+              "correct_id_recall": 0.07007125890736342,
+              "negative_fpr": 0.01871657754010695,
+              "threshold": 0.8071445822715759
+            }
+          }
+        },
+        "J3_SET_NOISY_OR": {
+          "metrics": {
+            "MRR": 0.8603342931637156,
+            "P0_fpr": 0.0,
+            "P1a_fpr": 0.011363636363636364,
+            "P1b_fpr": 0.0,
+            "Rank1": 0.7987364620938628,
+            "Rank2": 0.8592057761732852,
+            "Rank3": 0.8998194945848376,
+            "Rank5": 0.9422382671480144,
+            "accepted_rows": 13,
+            "candidate_recall_at_FPR_2pct": 0.4195501730103806,
+            "candidate_valid_auprc": 0.5475564998627785,
+            "candidate_valid_auroc": 0.8499613973785866,
+            "correct_id_recall": 0.002707581227436823,
+            "correct_id_rows": 3,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.002707581227436823,
+            "macro_negative_fpr": 0.0106951871657754,
+            "mean_rank": 1.6471119133574008,
+            "negative_fpr": 0.0106951871657754,
+            "negative_rows": 374,
+            "per_sequence": {
+              "dancetrack0023": {
+                "correct_id_recall": 0.002707581227436823,
+                "negative_fpr": 0.0106951871657754,
+                "present_rows": 1108,
+                "rows": 1482
+              }
+            },
+            "present_rows": 1108,
+            "recall_at_FPR_2pct": 0.008122743682310469,
+            "rows": 1482,
+            "set_presence_auprc": 0.6542030439991408,
+            "set_presence_auroc": 0.321533716867121
+          },
+          "threshold_selection": {
+            "candidate_count": 1479,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 13,
+              "correct_id_recall": 0.0035545023696682463,
+              "negative_fpr": 0.0106951871657754,
+              "threshold": 0.47298064827919006
+            }
+          }
+        },
+        "J4_ENERGY": {
+          "metrics": {
+            "MRR": 0.8603342931637156,
+            "P0_fpr": 0.0,
+            "P1a_fpr": 0.019886363636363636,
+            "P1b_fpr": 0.0,
+            "Rank1": 0.7987364620938628,
+            "Rank2": 0.8592057761732852,
+            "Rank3": 0.8998194945848376,
+            "Rank5": 0.9422382671480144,
+            "accepted_rows": 133,
+            "candidate_recall_at_FPR_2pct": 0.4195501730103806,
+            "candidate_valid_auprc": 0.5475564998627785,
+            "candidate_valid_auroc": 0.8499613973785866,
+            "correct_id_recall": 0.1055956678700361,
+            "correct_id_rows": 117,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.1055956678700361,
+            "macro_negative_fpr": 0.01871657754010695,
+            "mean_rank": 1.6471119133574008,
+            "negative_fpr": 0.01871657754010695,
+            "negative_rows": 374,
+            "per_sequence": {
+              "dancetrack0023": {
+                "correct_id_recall": 0.1055956678700361,
+                "negative_fpr": 0.01871657754010695,
+                "present_rows": 1108,
+                "rows": 1482
+              }
+            },
+            "present_rows": 1108,
+            "recall_at_FPR_2pct": 0.11371841155234658,
+            "rows": 1482,
+            "set_presence_auprc": 0.9130427654634765,
+            "set_presence_auroc": 0.8224724415529258
+          },
+          "threshold_selection": {
+            "candidate_count": 1484,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 133,
+              "correct_id_recall": 0.1386255924170616,
+              "negative_fpr": 0.01871657754010695,
+              "threshold": 0.5038551688194275
+            }
+          }
+        },
+        "J5_QUALITY_FUSION": {
+          "metrics": {
+            "MRR": 0.8603342931637156,
+            "P0_fpr": 0.0,
+            "P1a_fpr": 0.019886363636363636,
+            "P1b_fpr": 0.0,
+            "Rank1": 0.7987364620938628,
+            "Rank2": 0.8592057761732852,
+            "Rank3": 0.8998194945848376,
+            "Rank5": 0.9422382671480144,
+            "accepted_rows": 218,
+            "candidate_recall_at_FPR_2pct": 0.4835640138408305,
+            "candidate_valid_auprc": 0.6024600784263445,
+            "candidate_valid_auroc": 0.8624830711248761,
+            "correct_id_recall": 0.17779783393501805,
+            "correct_id_rows": 197,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.17779783393501805,
+            "macro_negative_fpr": 0.01871657754010695,
+            "mean_rank": 1.6471119133574008,
+            "negative_fpr": 0.01871657754010695,
+            "negative_rows": 374,
+            "per_sequence": {
+              "dancetrack0023": {
+                "correct_id_recall": 0.17779783393501805,
+                "negative_fpr": 0.01871657754010695,
+                "present_rows": 1108,
+                "rows": 1482
+              }
+            },
+            "present_rows": 1108,
+            "recall_at_FPR_2pct": 0.19043321299638988,
+            "rows": 1482,
+            "set_presence_auprc": 0.9288356389070697,
+            "set_presence_auroc": 0.844461283036352
+          },
+          "threshold_selection": {
+            "candidate_count": 1484,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 218,
+              "correct_id_recall": 0.22722029988465975,
+              "negative_fpr": 0.01871657754010695,
+              "threshold": 0.6052982807159424
+            }
+          }
+        },
+        "J7_MULTITASK": {
+          "metrics": {
+            "MRR": 0.8417902269210933,
+            "P0_fpr": 0.0,
+            "P1a_fpr": 0.019886363636363636,
+            "P1b_fpr": 0.0,
+            "Rank1": 0.7617328519855595,
+            "Rank2": 0.8546931407942239,
+            "Rank3": 0.8998194945848376,
+            "Rank5": 0.9494584837545126,
+            "accepted_rows": 58,
+            "candidate_recall_at_FPR_2pct": 0.4100346020761246,
+            "candidate_valid_auprc": 0.5589616918319114,
+            "candidate_valid_auroc": 0.8665855279944098,
+            "correct_id_recall": 0.039711191335740074,
+            "correct_id_rows": 44,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.039711191335740074,
+            "macro_negative_fpr": 0.01871657754010695,
+            "mean_rank": 1.651624548736462,
+            "negative_fpr": 0.01871657754010695,
+            "negative_rows": 374,
+            "per_sequence": {
+              "dancetrack0023": {
+                "correct_id_recall": 0.039711191335740074,
+                "negative_fpr": 0.01871657754010695,
+                "present_rows": 1108,
+                "rows": 1482
+              }
+            },
+            "present_rows": 1108,
+            "recall_at_FPR_2pct": 0.046028880866425995,
+            "rows": 1482,
+            "set_presence_auprc": 0.7819221106908107,
+            "set_presence_auroc": 0.509418618120041
+          },
+          "threshold_selection": {
+            "candidate_count": 1479,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 58,
+              "correct_id_recall": 0.052256532066508314,
+              "negative_fpr": 0.01871657754010695,
+              "threshold": 0.4759652614593506
+            }
+          }
+        }
+      }
+    },
+    {
+      "counterfactual_training_episode_count": 5921,
+      "heldout_observations_used_in_training": false,
+      "heldout_sequence": "dancetrack0023",
+      "inner_validation_sequence": "dancetrack0024",
+      "outer_heldout_absent_from_training": true,
+      "outer_labels_used_for_architecture_selection": false,
+      "parameter_fit_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "selected_family": "J5_QUALITY_FUSION",
+      "thresholds": {
+        "J1_PAIRWISE": 0.8351993560791016,
+        "J2_JOINT_ABSOLUTE": 0.8391801714897156,
+        "J3_SET_NOISY_OR": 0.46686065196990967,
+        "J4_ENERGY": 1.0,
+        "J5_QUALITY_FUSION": 0.7008476257324219,
+        "J7_MULTITASK": 1.0
+      },
+      "training_episode_count": 4421,
+      "training_identity_count": 36,
+      "validation_metrics": {
+        "J1_PAIRWISE": {
+          "metrics": {
+            "MRR": 0.9509610876699485,
+            "P0_fpr": 0.3333333333333333,
+            "P1a_fpr": 0.0,
+            "P1b_fpr": 0.0,
+            "Rank1": 0.9156118143459916,
+            "Rank2": 0.9676511954992968,
+            "Rank3": 0.9873417721518988,
+            "Rank5": 0.9985935302390999,
+            "accepted_rows": 83,
+            "candidate_recall_at_FPR_2pct": 0.2423841059602649,
+            "candidate_valid_auprc": 0.5582050196232548,
+            "candidate_valid_auroc": 0.8636706174880278,
+            "correct_id_recall": 0.09423347398030943,
+            "correct_id_rows": 67,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.09423347398030943,
+            "macro_negative_fpr": 0.0196078431372549,
+            "mean_rank": 1.1378340365682138,
+            "negative_fpr": 0.0196078431372549,
+            "negative_rows": 51,
+            "per_sequence": {
+              "dancetrack0024": {
+                "correct_id_recall": 0.09423347398030943,
+                "negative_fpr": 0.0196078431372549,
+                "present_rows": 711,
+                "rows": 762
+              }
+            },
+            "present_rows": 711,
+            "recall_at_FPR_2pct": 0.11533052039381153,
+            "rows": 762,
+            "set_presence_auprc": 0.9641045347309849,
+            "set_presence_auroc": 0.6714652105567965
+          },
+          "threshold_selection": {
+            "candidate_count": 764,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 83,
+              "correct_id_recall": 0.1135593220338983,
+              "negative_fpr": 0.0196078431372549,
+              "threshold": 0.8351993560791016
+            }
+          }
+        },
+        "J2_JOINT_ABSOLUTE": {
+          "metrics": {
+            "MRR": 0.904453820909517,
+            "P0_fpr": 0.3333333333333333,
+            "P1a_fpr": 0.0,
+            "P1b_fpr": 0.0,
+            "Rank1": 0.8312236286919831,
+            "Rank2": 0.9423347398030942,
+            "Rank3": 0.9845288326300985,
+            "Rank5": 0.9985935302390999,
+            "accepted_rows": 20,
+            "candidate_recall_at_FPR_2pct": 0.2847682119205298,
+            "candidate_valid_auprc": 0.6200845435156713,
+            "candidate_valid_auroc": 0.883312091735919,
+            "correct_id_recall": 0.02531645569620253,
+            "correct_id_rows": 18,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.02531645569620253,
+            "macro_negative_fpr": 0.0196078431372549,
+            "mean_rank": 1.2475386779184248,
+            "negative_fpr": 0.0196078431372549,
+            "negative_rows": 51,
+            "per_sequence": {
+              "dancetrack0024": {
+                "correct_id_recall": 0.02531645569620253,
+                "negative_fpr": 0.0196078431372549,
+                "present_rows": 711,
+                "rows": 762
+              }
+            },
+            "present_rows": 711,
+            "recall_at_FPR_2pct": 0.026722925457102673,
+            "rows": 762,
+            "set_presence_auprc": 0.9339505102040601,
+            "set_presence_auroc": 0.48352224152670914
+          },
+          "threshold_selection": {
+            "candidate_count": 764,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 20,
+              "correct_id_recall": 0.03035413153456998,
+              "negative_fpr": 0.0196078431372549,
+              "threshold": 0.8391801714897156
+            }
+          }
+        },
+        "J3_SET_NOISY_OR": {
+          "metrics": {
+            "MRR": 0.9509610876699485,
+            "P0_fpr": 0.0,
+            "P1a_fpr": 0.020833333333333332,
+            "P1b_fpr": 0.0,
+            "Rank1": 0.9156118143459916,
+            "Rank2": 0.9676511954992968,
+            "Rank3": 0.9873417721518988,
+            "Rank5": 0.9985935302390999,
+            "accepted_rows": 28,
+            "candidate_recall_at_FPR_2pct": 0.2423841059602649,
+            "candidate_valid_auprc": 0.5582050196232548,
+            "candidate_valid_auroc": 0.8636706174880278,
+            "correct_id_recall": 0.029535864978902954,
+            "correct_id_rows": 21,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.029535864978902954,
+            "macro_negative_fpr": 0.0196078431372549,
+            "mean_rank": 1.1378340365682138,
+            "negative_fpr": 0.0196078431372549,
+            "negative_rows": 51,
+            "per_sequence": {
+              "dancetrack0024": {
+                "correct_id_recall": 0.029535864978902954,
+                "negative_fpr": 0.0196078431372549,
+                "present_rows": 711,
+                "rows": 762
+              }
+            },
+            "present_rows": 711,
+            "recall_at_FPR_2pct": 0.0379746835443038,
+            "rows": 762,
+            "set_presence_auprc": 0.9519651032502451,
+            "set_presence_auroc": 0.6407159206861366
+          },
+          "threshold_selection": {
+            "candidate_count": 763,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 28,
+              "correct_id_recall": 0.03559322033898305,
+              "negative_fpr": 0.0196078431372549,
+              "threshold": 0.46686065196990967
+            }
+          }
+        },
+        "J4_ENERGY": {
+          "metrics": {
+            "MRR": 0.9509610876699485,
+            "P0_fpr": 0.0,
+            "P1a_fpr": 0.0,
+            "P1b_fpr": 0.0,
+            "Rank1": 0.9156118143459916,
+            "Rank2": 0.9676511954992968,
+            "Rank3": 0.9873417721518988,
+            "Rank5": 0.9985935302390999,
+            "accepted_rows": 0,
+            "candidate_recall_at_FPR_2pct": 0.2423841059602649,
+            "candidate_valid_auprc": 0.5582050196232548,
+            "candidate_valid_auroc": 0.8636706174880278,
+            "correct_id_recall": 0.0,
+            "correct_id_rows": 0,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.0,
+            "macro_negative_fpr": 0.0,
+            "mean_rank": 1.1378340365682138,
+            "negative_fpr": 0.0,
+            "negative_rows": 51,
+            "per_sequence": {
+              "dancetrack0024": {
+                "correct_id_recall": 0.0,
+                "negative_fpr": 0.0,
+                "present_rows": 711,
+                "rows": 762
+              }
+            },
+            "present_rows": 711,
+            "recall_at_FPR_2pct": 0.0,
+            "rows": 762,
+            "set_presence_auprc": 0.8928086390047111,
+            "set_presence_auroc": 0.2924629767518822
+          },
+          "threshold_selection": {
+            "candidate_count": 764,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 0,
+              "correct_id_recall": 0.0,
+              "negative_fpr": 0.0,
+              "threshold": 1.0
+            }
+          }
+        },
+        "J5_QUALITY_FUSION": {
+          "metrics": {
+            "MRR": 0.9509610876699485,
+            "P0_fpr": 0.0,
+            "P1a_fpr": 0.020833333333333332,
+            "P1b_fpr": 0.0,
+            "Rank1": 0.9156118143459916,
+            "Rank2": 0.9676511954992968,
+            "Rank3": 0.9873417721518988,
+            "Rank5": 0.9985935302390999,
+            "accepted_rows": 205,
+            "candidate_recall_at_FPR_2pct": 0.36688741721854307,
+            "candidate_valid_auprc": 0.6621334245587973,
+            "candidate_valid_auroc": 0.8805533465065964,
+            "correct_id_recall": 0.2742616033755274,
+            "correct_id_rows": 195,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.2742616033755274,
+            "macro_negative_fpr": 0.0196078431372549,
+            "mean_rank": 1.1378340365682138,
+            "negative_fpr": 0.0196078431372549,
+            "negative_rows": 51,
+            "per_sequence": {
+              "dancetrack0024": {
+                "correct_id_recall": 0.2742616033755274,
+                "negative_fpr": 0.0196078431372549,
+                "present_rows": 711,
+                "rows": 762
+              }
+            },
+            "present_rows": 711,
+            "recall_at_FPR_2pct": 0.2869198312236287,
+            "rows": 762,
+            "set_presence_auprc": 0.9798048667571119,
+            "set_presence_auroc": 0.7778880891315738
+          },
+          "threshold_selection": {
+            "candidate_count": 764,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 205,
+              "correct_id_recall": 0.3051643192488263,
+              "negative_fpr": 0.0196078431372549,
+              "threshold": 0.7008476257324219
+            }
+          }
+        },
+        "J7_MULTITASK": {
+          "metrics": {
+            "MRR": 0.904453820909517,
+            "P0_fpr": 0.0,
+            "P1a_fpr": 0.0,
+            "P1b_fpr": 0.0,
+            "Rank1": 0.8312236286919831,
+            "Rank2": 0.9423347398030942,
+            "Rank3": 0.9845288326300985,
+            "Rank5": 0.9985935302390999,
+            "accepted_rows": 0,
+            "candidate_recall_at_FPR_2pct": 0.2847682119205298,
+            "candidate_valid_auprc": 0.6200845435156713,
+            "candidate_valid_auroc": 0.883312091735919,
+            "correct_id_recall": 0.0,
+            "correct_id_rows": 0,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.0,
+            "macro_negative_fpr": 0.0,
+            "mean_rank": 1.2475386779184248,
+            "negative_fpr": 0.0,
+            "negative_rows": 51,
+            "per_sequence": {
+              "dancetrack0024": {
+                "correct_id_recall": 0.0,
+                "negative_fpr": 0.0,
+                "present_rows": 711,
+                "rows": 762
+              }
+            },
+            "present_rows": 711,
+            "recall_at_FPR_2pct": 0.0,
+            "rows": 762,
+            "set_presence_auprc": 0.9253649037202224,
+            "set_presence_auroc": 0.5729571716168886
+          },
+          "threshold_selection": {
+            "candidate_count": 763,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 0,
+              "correct_id_recall": 0.0,
+              "negative_fpr": 0.0,
+              "threshold": 1.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "counterfactual_training_episode_count": 6000,
+      "heldout_observations_used_in_training": false,
+      "heldout_sequence": "dancetrack0024",
+      "inner_validation_sequence": "dancetrack0039",
+      "outer_heldout_absent_from_training": true,
+      "outer_labels_used_for_architecture_selection": false,
+      "parameter_fit_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0057",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "selected_family": "J2_JOINT_ABSOLUTE",
+      "thresholds": {
+        "J1_PAIRWISE": 0.9489176273345947,
+        "J2_JOINT_ABSOLUTE": 0.8564909100532532,
+        "J3_SET_NOISY_OR": 1.0,
+        "J4_ENERGY": 0.49643340706825256,
+        "J5_QUALITY_FUSION": 0.9236807823181152,
+        "J7_MULTITASK": 1.0
+      },
+      "training_episode_count": 4500,
+      "training_identity_count": 40,
+      "validation_metrics": {
+        "J1_PAIRWISE": {
+          "metrics": {
+            "MRR": 0.9785374720357942,
+            "P0_fpr": 0.0,
+            "P1a_fpr": 0.0,
+            "P1b_fpr": 0.0,
+            "Rank1": 0.9605704697986577,
+            "Rank2": 0.9916107382550335,
+            "Rank3": 0.9958053691275168,
+            "Rank5": 1.0,
+            "accepted_rows": 36,
+            "candidate_recall_at_FPR_2pct": 0.2934179222839017,
+            "candidate_valid_auprc": 0.6619978576633031,
+            "candidate_valid_auroc": 0.8790803778681971,
+            "correct_id_recall": 0.024328859060402684,
+            "correct_id_rows": 29,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.024328859060402684,
+            "macro_negative_fpr": 0.0,
+            "mean_rank": 1.0520134228187918,
+            "negative_fpr": 0.0,
+            "negative_rows": 49,
+            "per_sequence": {
+              "dancetrack0039": {
+                "correct_id_recall": 0.024328859060402684,
+                "negative_fpr": 0.0,
+                "present_rows": 1192,
+                "rows": 1241
+              }
+            },
+            "present_rows": 1192,
+            "recall_at_FPR_2pct": 0.030201342281879196,
+            "rows": 1241,
+            "set_presence_auprc": 0.9836227780171689,
+            "set_presence_auroc": 0.7433057115463635
+          },
+          "threshold_selection": {
+            "candidate_count": 1243,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 36,
+              "correct_id_recall": 0.028265107212475632,
+              "negative_fpr": 0.0,
+              "threshold": 0.9489176273345947
+            }
+          }
+        },
+        "J2_JOINT_ABSOLUTE": {
+          "metrics": {
+            "MRR": 0.9634927293064877,
+            "P0_fpr": 0.0,
+            "P1a_fpr": 0.0,
+            "P1b_fpr": 0.0,
+            "Rank1": 0.9337248322147651,
+            "Rank2": 0.9823825503355704,
+            "Rank3": 0.9958053691275168,
+            "Rank5": 1.0,
+            "accepted_rows": 423,
+            "candidate_recall_at_FPR_2pct": 0.711340206185567,
+            "candidate_valid_auprc": 0.87329926453437,
+            "candidate_valid_auroc": 0.9351490958961584,
+            "correct_id_recall": 0.3523489932885906,
+            "correct_id_rows": 420,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.3523489932885906,
+            "macro_negative_fpr": 0.0,
+            "mean_rank": 1.0897651006711409,
+            "negative_fpr": 0.0,
+            "negative_rows": 49,
+            "per_sequence": {
+              "dancetrack0039": {
+                "correct_id_recall": 0.3523489932885906,
+                "negative_fpr": 0.0,
+                "present_rows": 1192,
+                "rows": 1241
+              }
+            },
+            "present_rows": 1192,
+            "recall_at_FPR_2pct": 0.3548657718120805,
+            "rows": 1241,
+            "set_presence_auprc": 0.9947167684333407,
+            "set_presence_auroc": 0.8930112313381728
+          },
+          "threshold_selection": {
+            "candidate_count": 1243,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 423,
+              "correct_id_recall": 0.3736654804270463,
+              "negative_fpr": 0.0,
+              "threshold": 0.8564909100532532
+            }
+          }
+        },
+        "J3_SET_NOISY_OR": {
+          "metrics": {
+            "MRR": 0.9785374720357942,
+            "P0_fpr": 0.0,
+            "P1a_fpr": 0.0,
+            "P1b_fpr": 0.0,
+            "Rank1": 0.9605704697986577,
+            "Rank2": 0.9916107382550335,
+            "Rank3": 0.9958053691275168,
+            "Rank5": 1.0,
+            "accepted_rows": 0,
+            "candidate_recall_at_FPR_2pct": 0.2934179222839017,
+            "candidate_valid_auprc": 0.6619978576633031,
+            "candidate_valid_auroc": 0.8790803778681971,
+            "correct_id_recall": 0.0,
+            "correct_id_rows": 0,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.0,
+            "macro_negative_fpr": 0.0,
+            "mean_rank": 1.0520134228187918,
+            "negative_fpr": 0.0,
+            "negative_rows": 49,
+            "per_sequence": {
+              "dancetrack0039": {
+                "correct_id_recall": 0.0,
+                "negative_fpr": 0.0,
+                "present_rows": 1192,
+                "rows": 1241
+              }
+            },
+            "present_rows": 1192,
+            "recall_at_FPR_2pct": 0.0,
+            "rows": 1241,
+            "set_presence_auprc": 0.9532241650620497,
+            "set_presence_auroc": 0.46243665251335436
+          },
+          "threshold_selection": {
+            "candidate_count": 1237,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 0,
+              "correct_id_recall": 0.0,
+              "negative_fpr": 0.0,
+              "threshold": 1.0
+            }
+          }
+        },
+        "J4_ENERGY": {
+          "metrics": {
+            "MRR": 0.9785374720357942,
+            "P0_fpr": 0.0,
+            "P1a_fpr": 0.0,
+            "P1b_fpr": 0.0,
+            "Rank1": 0.9605704697986577,
+            "Rank2": 0.9916107382550335,
+            "Rank3": 0.9958053691275168,
+            "Rank5": 1.0,
+            "accepted_rows": 10,
+            "candidate_recall_at_FPR_2pct": 0.2934179222839017,
+            "candidate_valid_auprc": 0.6619978576633031,
+            "candidate_valid_auroc": 0.8790803778681971,
+            "correct_id_recall": 0.008389261744966443,
+            "correct_id_rows": 10,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.008389261744966443,
+            "macro_negative_fpr": 0.0,
+            "mean_rank": 1.0520134228187918,
+            "negative_fpr": 0.0,
+            "negative_rows": 49,
+            "per_sequence": {
+              "dancetrack0039": {
+                "correct_id_recall": 0.008389261744966443,
+                "negative_fpr": 0.0,
+                "present_rows": 1192,
+                "rows": 1241
+              }
+            },
+            "present_rows": 1192,
+            "recall_at_FPR_2pct": 0.008389261744966443,
+            "rows": 1241,
+            "set_presence_auprc": 0.9703134204668167,
+            "set_presence_auroc": 0.660491713463909
+          },
+          "threshold_selection": {
+            "candidate_count": 1243,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 10,
+              "correct_id_recall": 0.009746588693957114,
+              "negative_fpr": 0.0,
+              "threshold": 0.49643340706825256
+            }
+          }
+        },
+        "J5_QUALITY_FUSION": {
+          "metrics": {
+            "MRR": 0.9785374720357942,
+            "P0_fpr": 0.0,
+            "P1a_fpr": 0.0,
+            "P1b_fpr": 0.0,
+            "Rank1": 0.9605704697986577,
+            "Rank2": 0.9916107382550335,
+            "Rank3": 0.9958053691275168,
+            "Rank5": 1.0,
+            "accepted_rows": 286,
+            "candidate_recall_at_FPR_2pct": 0.5590800951625694,
+            "candidate_valid_auprc": 0.8191996744868468,
+            "candidate_valid_auroc": 0.9258422981268986,
+            "correct_id_recall": 0.23657718120805368,
+            "correct_id_rows": 282,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.23657718120805368,
+            "macro_negative_fpr": 0.0,
+            "mean_rank": 1.0520134228187918,
+            "negative_fpr": 0.0,
+            "negative_rows": 49,
+            "per_sequence": {
+              "dancetrack0039": {
+                "correct_id_recall": 0.23657718120805368,
+                "negative_fpr": 0.0,
+                "present_rows": 1192,
+                "rows": 1241
+              }
+            },
+            "present_rows": 1192,
+            "recall_at_FPR_2pct": 0.23993288590604026,
+            "rows": 1241,
+            "set_presence_auprc": 0.990430747728644,
+            "set_presence_auroc": 0.8278660457471579
+          },
+          "threshold_selection": {
+            "candidate_count": 1243,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 286,
+              "correct_id_recall": 0.24845814977973568,
+              "negative_fpr": 0.0,
+              "threshold": 0.9236807823181152
+            }
+          }
+        },
+        "J7_MULTITASK": {
+          "metrics": {
+            "MRR": 0.9634927293064877,
+            "P0_fpr": 0.0,
+            "P1a_fpr": 0.0,
+            "P1b_fpr": 0.0,
+            "Rank1": 0.9337248322147651,
+            "Rank2": 0.9823825503355704,
+            "Rank3": 0.9958053691275168,
+            "Rank5": 1.0,
+            "accepted_rows": 0,
+            "candidate_recall_at_FPR_2pct": 0.711340206185567,
+            "candidate_valid_auprc": 0.87329926453437,
+            "candidate_valid_auroc": 0.9351490958961584,
+            "correct_id_recall": 0.0,
+            "correct_id_rows": 0,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.0,
+            "macro_negative_fpr": 0.0,
+            "mean_rank": 1.0897651006711409,
+            "negative_fpr": 0.0,
+            "negative_rows": 49,
+            "per_sequence": {
+              "dancetrack0039": {
+                "correct_id_recall": 0.0,
+                "negative_fpr": 0.0,
+                "present_rows": 1192,
+                "rows": 1241
+              }
+            },
+            "present_rows": 1192,
+            "recall_at_FPR_2pct": 0.0,
+            "rows": 1241,
+            "set_presence_auprc": 0.9256044880598802,
+            "set_presence_auroc": 0.3069442542117518
+          },
+          "threshold_selection": {
+            "candidate_count": 1240,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 0,
+              "correct_id_recall": 0.0,
+              "negative_fpr": 0.0,
+              "threshold": 1.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "counterfactual_training_episode_count": 6000,
+      "heldout_observations_used_in_training": false,
+      "heldout_sequence": "dancetrack0039",
+      "inner_validation_sequence": "dancetrack0057",
+      "outer_heldout_absent_from_training": true,
+      "outer_labels_used_for_architecture_selection": false,
+      "parameter_fit_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0062",
+        "dancetrack0072"
+      ],
+      "selected_family": "J2_JOINT_ABSOLUTE",
+      "thresholds": {
+        "J1_PAIRWISE": 0.887431800365448,
+        "J2_JOINT_ABSOLUTE": 0.512071430683136,
+        "J3_SET_NOISY_OR": 0.4649392366409302,
+        "J4_ENERGY": 0.5179686546325684,
+        "J5_QUALITY_FUSION": 0.8344388008117676,
+        "J7_MULTITASK": 0.4620206654071808
+      },
+      "training_episode_count": 4500,
+      "training_identity_count": 41,
+      "validation_metrics": {
+        "J1_PAIRWISE": {
+          "metrics": {
+            "MRR": 0.9463119369369369,
+            "P0_fpr": 0.0,
+            "P1a_fpr": 0.0,
+            "P1b_fpr": 0.0,
+            "Rank1": 0.9054054054054054,
+            "Rank2": 0.9679054054054054,
+            "Rank3": 0.9915540540540541,
+            "Rank5": 1.0,
+            "accepted_rows": 116,
+            "candidate_recall_at_FPR_2pct": 0.42096774193548386,
+            "candidate_valid_auprc": 0.7673450307897411,
+            "candidate_valid_auroc": 0.9140012719203291,
+            "correct_id_recall": 0.18074324324324326,
+            "correct_id_rows": 107,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.18074324324324326,
+            "macro_negative_fpr": 0.0,
+            "mean_rank": 1.1418918918918919,
+            "negative_fpr": 0.0,
+            "negative_rows": 29,
+            "per_sequence": {
+              "dancetrack0057": {
+                "correct_id_recall": 0.18074324324324326,
+                "negative_fpr": 0.0,
+                "present_rows": 592,
+                "rows": 621
+              }
+            },
+            "present_rows": 592,
+            "recall_at_FPR_2pct": 0.19594594594594594,
+            "rows": 621,
+            "set_presence_auprc": 0.985660338882822,
+            "set_presence_auroc": 0.7863466915191053
+          },
+          "threshold_selection": {
+            "candidate_count": 623,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 116,
+              "correct_id_recall": 0.20736434108527133,
+              "negative_fpr": 0.0,
+              "threshold": 0.887431800365448
+            }
+          }
+        },
+        "J2_JOINT_ABSOLUTE": {
+          "metrics": {
+            "MRR": 0.9217623873873875,
+            "P0_fpr": 0.0,
+            "P1a_fpr": 0.0,
+            "P1b_fpr": 0.0,
+            "Rank1": 0.8682432432432432,
+            "Rank2": 0.9442567567567568,
+            "Rank3": 0.9679054054054054,
+            "Rank5": 0.9983108108108109,
+            "accepted_rows": 174,
+            "candidate_recall_at_FPR_2pct": 0.25,
+            "candidate_valid_auprc": 0.6147407393827714,
+            "candidate_valid_auroc": 0.856501677852349,
+            "correct_id_recall": 0.26182432432432434,
+            "correct_id_rows": 155,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.26182432432432434,
+            "macro_negative_fpr": 0.0,
+            "mean_rank": 1.2280405405405406,
+            "negative_fpr": 0.0,
+            "negative_rows": 29,
+            "per_sequence": {
+              "dancetrack0057": {
+                "correct_id_recall": 0.26182432432432434,
+                "negative_fpr": 0.0,
+                "present_rows": 592,
+                "rows": 621
+              }
+            },
+            "present_rows": 592,
+            "recall_at_FPR_2pct": 0.2939189189189189,
+            "rows": 621,
+            "set_presence_auprc": 0.9815936384470489,
+            "set_presence_auroc": 0.7207595526561044
+          },
+          "threshold_selection": {
+            "candidate_count": 623,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 174,
+              "correct_id_recall": 0.3003875968992248,
+              "negative_fpr": 0.0,
+              "threshold": 0.512071430683136
+            }
+          }
+        },
+        "J3_SET_NOISY_OR": {
+          "metrics": {
+            "MRR": 0.9463119369369369,
+            "P0_fpr": 0.0,
+            "P1a_fpr": 0.0,
+            "P1b_fpr": 0.0,
+            "Rank1": 0.9054054054054054,
+            "Rank2": 0.9679054054054054,
+            "Rank3": 0.9915540540540541,
+            "Rank5": 1.0,
+            "accepted_rows": 38,
+            "candidate_recall_at_FPR_2pct": 0.42096774193548386,
+            "candidate_valid_auprc": 0.7673450307897411,
+            "candidate_valid_auroc": 0.9140012719203291,
+            "correct_id_recall": 0.05574324324324324,
+            "correct_id_rows": 33,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.05574324324324324,
+            "macro_negative_fpr": 0.0,
+            "mean_rank": 1.1418918918918919,
+            "negative_fpr": 0.0,
+            "negative_rows": 29,
+            "per_sequence": {
+              "dancetrack0057": {
+                "correct_id_recall": 0.05574324324324324,
+                "negative_fpr": 0.0,
+                "present_rows": 592,
+                "rows": 621
+              }
+            },
+            "present_rows": 592,
+            "recall_at_FPR_2pct": 0.06418918918918919,
+            "rows": 621,
+            "set_presence_auprc": 0.9571086111856996,
+            "set_presence_auroc": 0.5479962721342032
+          },
+          "threshold_selection": {
+            "candidate_count": 621,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 38,
+              "correct_id_recall": 0.06395348837209303,
+              "negative_fpr": 0.0,
+              "threshold": 0.4649392366409302
+            }
+          }
+        },
+        "J4_ENERGY": {
+          "metrics": {
+            "MRR": 0.9463119369369369,
+            "P0_fpr": 0.0,
+            "P1a_fpr": 0.0,
+            "P1b_fpr": 0.0,
+            "Rank1": 0.9054054054054054,
+            "Rank2": 0.9679054054054054,
+            "Rank3": 0.9915540540540541,
+            "Rank5": 1.0,
+            "accepted_rows": 20,
+            "candidate_recall_at_FPR_2pct": 0.42096774193548386,
+            "candidate_valid_auprc": 0.7673450307897411,
+            "candidate_valid_auroc": 0.9140012719203291,
+            "correct_id_recall": 0.033783783783783786,
+            "correct_id_rows": 20,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.033783783783783786,
+            "macro_negative_fpr": 0.0,
+            "mean_rank": 1.1418918918918919,
+            "negative_fpr": 0.0,
+            "negative_rows": 29,
+            "per_sequence": {
+              "dancetrack0057": {
+                "correct_id_recall": 0.033783783783783786,
+                "negative_fpr": 0.0,
+                "present_rows": 592,
+                "rows": 621
+              }
+            },
+            "present_rows": 592,
+            "recall_at_FPR_2pct": 0.033783783783783786,
+            "rows": 621,
+            "set_presence_auprc": 0.9477615000400824,
+            "set_presence_auroc": 0.45363466915191053
+          },
+          "threshold_selection": {
+            "candidate_count": 623,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 20,
+              "correct_id_recall": 0.03875968992248062,
+              "negative_fpr": 0.0,
+              "threshold": 0.5179686546325684
+            }
+          }
+        },
+        "J5_QUALITY_FUSION": {
+          "metrics": {
+            "MRR": 0.9463119369369369,
+            "P0_fpr": 0.0,
+            "P1a_fpr": 0.0,
+            "P1b_fpr": 0.0,
+            "Rank1": 0.9054054054054054,
+            "Rank2": 0.9679054054054054,
+            "Rank3": 0.9915540540540541,
+            "Rank5": 1.0,
+            "accepted_rows": 158,
+            "candidate_recall_at_FPR_2pct": 0.4306451612903226,
+            "candidate_valid_auprc": 0.7869211489949903,
+            "candidate_valid_auroc": 0.929762935700368,
+            "correct_id_recall": 0.2533783783783784,
+            "correct_id_rows": 150,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.2533783783783784,
+            "macro_negative_fpr": 0.0,
+            "mean_rank": 1.1418918918918919,
+            "negative_fpr": 0.0,
+            "negative_rows": 29,
+            "per_sequence": {
+              "dancetrack0057": {
+                "correct_id_recall": 0.2533783783783784,
+                "negative_fpr": 0.0,
+                "present_rows": 592,
+                "rows": 621
+              }
+            },
+            "present_rows": 592,
+            "recall_at_FPR_2pct": 0.2668918918918919,
+            "rows": 621,
+            "set_presence_auprc": 0.9909586502934189,
+            "set_presence_auroc": 0.858690587138863
+          },
+          "threshold_selection": {
+            "candidate_count": 623,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 158,
+              "correct_id_recall": 0.2824858757062147,
+              "negative_fpr": 0.0,
+              "threshold": 0.8344388008117676
+            }
+          }
+        },
+        "J7_MULTITASK": {
+          "metrics": {
+            "MRR": 0.9217623873873875,
+            "P0_fpr": 0.0,
+            "P1a_fpr": 0.0,
+            "P1b_fpr": 0.0,
+            "Rank1": 0.8682432432432432,
+            "Rank2": 0.9442567567567568,
+            "Rank3": 0.9679054054054054,
+            "Rank5": 0.9983108108108109,
+            "accepted_rows": 23,
+            "candidate_recall_at_FPR_2pct": 0.25,
+            "candidate_valid_auprc": 0.6147407393827714,
+            "candidate_valid_auroc": 0.856501677852349,
+            "correct_id_recall": 0.037162162162162164,
+            "correct_id_rows": 22,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.037162162162162164,
+            "macro_negative_fpr": 0.0,
+            "mean_rank": 1.2280405405405406,
+            "negative_fpr": 0.0,
+            "negative_rows": 29,
+            "per_sequence": {
+              "dancetrack0057": {
+                "correct_id_recall": 0.037162162162162164,
+                "negative_fpr": 0.0,
+                "present_rows": 592,
+                "rows": 621
+              }
+            },
+            "present_rows": 592,
+            "recall_at_FPR_2pct": 0.03885135135135135,
+            "rows": 621,
+            "set_presence_auprc": 0.9544052303799685,
+            "set_presence_auroc": 0.5090866728797764
+          },
+          "threshold_selection": {
+            "candidate_count": 623,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 23,
+              "correct_id_recall": 0.04263565891472868,
+              "negative_fpr": 0.0,
+              "threshold": 0.4620206654071808
+            }
+          }
+        }
+      }
+    },
+    {
+      "counterfactual_training_episode_count": 5492,
+      "heldout_observations_used_in_training": false,
+      "heldout_sequence": "dancetrack0057",
+      "inner_validation_sequence": "dancetrack0062",
+      "outer_heldout_absent_from_training": true,
+      "outer_labels_used_for_architecture_selection": false,
+      "parameter_fit_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0072"
+      ],
+      "selected_family": "J4_ENERGY",
+      "thresholds": {
+        "J1_PAIRWISE": 0.8823334574699402,
+        "J2_JOINT_ABSOLUTE": 0.6154438853263855,
+        "J3_SET_NOISY_OR": 1.0,
+        "J4_ENERGY": 0.5018062591552734,
+        "J5_QUALITY_FUSION": 0.8240286707878113,
+        "J7_MULTITASK": 0.47612830996513367
+      },
+      "training_episode_count": 3992,
+      "training_identity_count": 40,
+      "validation_metrics": {
+        "J1_PAIRWISE": {
+          "metrics": {
+            "MRR": 0.5636823734729494,
+            "P0_fpr": 0.0,
+            "P1a_fpr": 0.02830188679245283,
+            "P1b_fpr": 0.0070921985815602835,
+            "Rank1": 0.32146596858638743,
+            "Rank2": 0.5790575916230366,
+            "Rank3": 0.7476439790575916,
+            "Rank5": 1.0,
+            "accepted_rows": 119,
+            "candidate_recall_at_FPR_2pct": 0.02383419689119171,
+            "candidate_valid_auprc": 0.2576305938785858,
+            "candidate_valid_auroc": 0.6226371314189615,
+            "correct_id_recall": 0.033507853403141365,
+            "correct_id_rows": 32,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.033507853403141365,
+            "macro_negative_fpr": 0.016194331983805668,
+            "mean_rank": 2.469109947643979,
+            "negative_fpr": 0.016194331983805668,
+            "negative_rows": 247,
+            "per_sequence": {
+              "dancetrack0062": {
+                "correct_id_recall": 0.033507853403141365,
+                "negative_fpr": 0.016194331983805668,
+                "present_rows": 955,
+                "rows": 1202
+              }
+            },
+            "present_rows": 955,
+            "recall_at_FPR_2pct": 0.12041884816753927,
+            "rows": 1202,
+            "set_presence_auprc": 0.945709515345449,
+            "set_presence_auroc": 0.8603726392097845
+          },
+          "threshold_selection": {
+            "candidate_count": 1132,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 119,
+              "correct_id_recall": 0.10031347962382445,
+              "negative_fpr": 0.016194331983805668,
+              "threshold": 0.8823334574699402
+            }
+          }
+        },
+        "J2_JOINT_ABSOLUTE": {
+          "metrics": {
+            "MRR": 0.5581500872600349,
+            "P0_fpr": 0.0,
+            "P1a_fpr": 0.03773584905660377,
+            "P1b_fpr": 0.0,
+            "Rank1": 0.3193717277486911,
+            "Rank2": 0.5612565445026177,
+            "Rank3": 0.7319371727748691,
+            "Rank5": 1.0,
+            "accepted_rows": 111,
+            "candidate_recall_at_FPR_2pct": 0.019689119170984457,
+            "candidate_valid_auprc": 0.23650014907506386,
+            "candidate_valid_auroc": 0.6037369814359442,
+            "correct_id_recall": 0.02198952879581152,
+            "correct_id_rows": 21,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.02198952879581152,
+            "macro_negative_fpr": 0.016194331983805668,
+            "mean_rank": 2.5089005235602095,
+            "negative_fpr": 0.016194331983805668,
+            "negative_rows": 247,
+            "per_sequence": {
+              "dancetrack0062": {
+                "correct_id_recall": 0.02198952879581152,
+                "negative_fpr": 0.016194331983805668,
+                "present_rows": 955,
+                "rows": 1202
+              }
+            },
+            "present_rows": 955,
+            "recall_at_FPR_2pct": 0.11204188481675392,
+            "rows": 1202,
+            "set_presence_auprc": 0.9197712782140967,
+            "set_presence_auroc": 0.7908726710049389
+          },
+          "threshold_selection": {
+            "candidate_count": 1132,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 111,
+              "correct_id_recall": 0.0695364238410596,
+              "negative_fpr": 0.016194331983805668,
+              "threshold": 0.6154438853263855
+            }
+          }
+        },
+        "J3_SET_NOISY_OR": {
+          "metrics": {
+            "MRR": 0.5636823734729494,
+            "P0_fpr": 0.0,
+            "P1a_fpr": 0.0,
+            "P1b_fpr": 0.0,
+            "Rank1": 0.32146596858638743,
+            "Rank2": 0.5790575916230366,
+            "Rank3": 0.7476439790575916,
+            "Rank5": 1.0,
+            "accepted_rows": 0,
+            "candidate_recall_at_FPR_2pct": 0.02383419689119171,
+            "candidate_valid_auprc": 0.2576305938785858,
+            "candidate_valid_auroc": 0.6226371314189615,
+            "correct_id_recall": 0.0,
+            "correct_id_rows": 0,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.0,
+            "macro_negative_fpr": 0.0,
+            "mean_rank": 2.469109947643979,
+            "negative_fpr": 0.0,
+            "negative_rows": 247,
+            "per_sequence": {
+              "dancetrack0062": {
+                "correct_id_recall": 0.0,
+                "negative_fpr": 0.0,
+                "present_rows": 955,
+                "rows": 1202
+              }
+            },
+            "present_rows": 955,
+            "recall_at_FPR_2pct": 0.0,
+            "rows": 1202,
+            "set_presence_auprc": 0.628627930539668,
+            "set_presence_auroc": 0.15569875151026982
+          },
+          "threshold_selection": {
+            "candidate_count": 1146,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 0,
+              "correct_id_recall": 0.0,
+              "negative_fpr": 0.0,
+              "threshold": 1.0
+            }
+          }
+        },
+        "J4_ENERGY": {
+          "metrics": {
+            "MRR": 0.5636823734729494,
+            "P0_fpr": 0.0,
+            "P1a_fpr": 0.03773584905660377,
+            "P1b_fpr": 0.0,
+            "Rank1": 0.32146596858638743,
+            "Rank2": 0.5790575916230366,
+            "Rank3": 0.7476439790575916,
+            "Rank5": 1.0,
+            "accepted_rows": 111,
+            "candidate_recall_at_FPR_2pct": 0.02383419689119171,
+            "candidate_valid_auprc": 0.2576305938785858,
+            "candidate_valid_auroc": 0.6226371314189615,
+            "correct_id_recall": 0.10052356020942409,
+            "correct_id_rows": 96,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.10052356020942409,
+            "macro_negative_fpr": 0.016194331983805668,
+            "mean_rank": 2.469109947643979,
+            "negative_fpr": 0.016194331983805668,
+            "negative_rows": 247,
+            "per_sequence": {
+              "dancetrack0062": {
+                "correct_id_recall": 0.10052356020942409,
+                "negative_fpr": 0.016194331983805668,
+                "present_rows": 955,
+                "rows": 1202
+              }
+            },
+            "present_rows": 955,
+            "recall_at_FPR_2pct": 0.11204188481675392,
+            "rows": 1202,
+            "set_presence_auprc": 0.7859224863196133,
+            "set_presence_auroc": 0.35264217733217457
+          },
+          "threshold_selection": {
+            "candidate_count": 1204,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 111,
+              "correct_id_recall": 0.30094043887147337,
+              "negative_fpr": 0.016194331983805668,
+              "threshold": 0.5018062591552734
+            }
+          }
+        },
+        "J5_QUALITY_FUSION": {
+          "metrics": {
+            "MRR": 0.5636823734729494,
+            "P0_fpr": 0.0,
+            "P1a_fpr": 0.018867924528301886,
+            "P1b_fpr": 0.0,
+            "Rank1": 0.32146596858638743,
+            "Rank2": 0.5790575916230366,
+            "Rank3": 0.7476439790575916,
+            "Rank5": 1.0,
+            "accepted_rows": 103,
+            "candidate_recall_at_FPR_2pct": 0.03316062176165803,
+            "candidate_valid_auprc": 0.2624449787994652,
+            "candidate_valid_auroc": 0.646752466959848,
+            "correct_id_recall": 0.031413612565445025,
+            "correct_id_rows": 30,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.031413612565445025,
+            "macro_negative_fpr": 0.008097165991902834,
+            "mean_rank": 2.469109947643979,
+            "negative_fpr": 0.008097165991902834,
+            "negative_rows": 247,
+            "per_sequence": {
+              "dancetrack0062": {
+                "correct_id_recall": 0.031413612565445025,
+                "negative_fpr": 0.008097165991902834,
+                "present_rows": 955,
+                "rows": 1202
+              }
+            },
+            "present_rows": 955,
+            "recall_at_FPR_2pct": 0.1068062827225131,
+            "rows": 1202,
+            "set_presence_auprc": 0.9536872188169147,
+            "set_presence_auroc": 0.8946817305042711
+          },
+          "threshold_selection": {
+            "candidate_count": 1132,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 103,
+              "correct_id_recall": 0.09803921568627451,
+              "negative_fpr": 0.008097165991902834,
+              "threshold": 0.8240286707878113
+            }
+          }
+        },
+        "J7_MULTITASK": {
+          "metrics": {
+            "MRR": 0.5581500872600349,
+            "P0_fpr": 0.0,
+            "P1a_fpr": 0.02830188679245283,
+            "P1b_fpr": 0.0070921985815602835,
+            "Rank1": 0.3193717277486911,
+            "Rank2": 0.5612565445026177,
+            "Rank3": 0.7319371727748691,
+            "Rank5": 1.0,
+            "accepted_rows": 15,
+            "candidate_recall_at_FPR_2pct": 0.019689119170984457,
+            "candidate_valid_auprc": 0.23650014907506386,
+            "candidate_valid_auroc": 0.6037369814359442,
+            "correct_id_recall": 0.0010471204188481676,
+            "correct_id_rows": 1,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.0010471204188481676,
+            "macro_negative_fpr": 0.016194331983805668,
+            "mean_rank": 2.5089005235602095,
+            "negative_fpr": 0.016194331983805668,
+            "negative_rows": 247,
+            "per_sequence": {
+              "dancetrack0062": {
+                "correct_id_recall": 0.0010471204188481676,
+                "negative_fpr": 0.016194331983805668,
+                "present_rows": 955,
+                "rows": 1202
+              }
+            },
+            "present_rows": 955,
+            "recall_at_FPR_2pct": 0.011518324607329843,
+            "rows": 1202,
+            "set_presence_auprc": 0.6512190051029493,
+            "set_presence_auroc": 0.19902918795175614
+          },
+          "threshold_selection": {
+            "candidate_count": 1140,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 15,
+              "correct_id_recall": 0.0033112582781456954,
+              "negative_fpr": 0.016194331983805668,
+              "threshold": 0.47612830996513367
+            }
+          }
+        }
+      }
+    },
+    {
+      "counterfactual_training_episode_count": 5499,
+      "heldout_observations_used_in_training": false,
+      "heldout_sequence": "dancetrack0062",
+      "inner_validation_sequence": "dancetrack0072",
+      "outer_heldout_absent_from_training": true,
+      "outer_labels_used_for_architecture_selection": false,
+      "parameter_fit_sequences": [
+        "dancetrack0001",
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057"
+      ],
+      "selected_family": "J5_QUALITY_FUSION",
+      "thresholds": {
+        "J1_PAIRWISE": 0.8375419974327087,
+        "J2_JOINT_ABSOLUTE": 0.841270387172699,
+        "J3_SET_NOISY_OR": 1.0,
+        "J4_ENERGY": 0.5020840764045715,
+        "J5_QUALITY_FUSION": 0.680598258972168,
+        "J7_MULTITASK": 0.4773900508880615
+      },
+      "training_episode_count": 3999,
+      "training_identity_count": 40,
+      "validation_metrics": {
+        "J1_PAIRWISE": {
+          "metrics": {
+            "MRR": 0.6491918438393635,
+            "P0_fpr": 0.0,
+            "P1a_fpr": 0.05905511811023622,
+            "P1b_fpr": 0.00202020202020202,
+            "Rank1": 0.4751958224543081,
+            "Rank2": 0.6292428198433421,
+            "Rank3": 0.7728459530026109,
+            "Rank5": 0.9530026109660574,
+            "accepted_rows": 93,
+            "candidate_recall_at_FPR_2pct": 0.115,
+            "candidate_valid_auprc": 0.2410593530859689,
+            "candidate_valid_auroc": 0.717869445174862,
+            "correct_id_recall": 0.10182767624020887,
+            "correct_id_rows": 39,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.10182767624020887,
+            "macro_negative_fpr": 0.019536019536019536,
+            "mean_rank": 2.300261096605744,
+            "negative_fpr": 0.019536019536019536,
+            "negative_rows": 819,
+            "per_sequence": {
+              "dancetrack0072": {
+                "correct_id_recall": 0.10182767624020887,
+                "negative_fpr": 0.019536019536019536,
+                "present_rows": 383,
+                "rows": 1202
+              }
+            },
+            "present_rows": 383,
+            "recall_at_FPR_2pct": 0.2010443864229765,
+            "rows": 1202,
+            "set_presence_auprc": 0.7518185126452185,
+            "set_presence_auroc": 0.8901130781026343
+          },
+          "threshold_selection": {
+            "candidate_count": 1189,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 93,
+              "correct_id_recall": 0.21910112359550563,
+              "negative_fpr": 0.019536019536019536,
+              "threshold": 0.8375419974327087
+            }
+          }
+        },
+        "J2_JOINT_ABSOLUTE": {
+          "metrics": {
+            "MRR": 0.6630423971155041,
+            "P0_fpr": 0.04285714285714286,
+            "P1a_fpr": 0.03937007874015748,
+            "P1b_fpr": 0.006060606060606061,
+            "Rank1": 0.4908616187989556,
+            "Rank2": 0.6553524804177546,
+            "Rank3": 0.8015665796344648,
+            "Rank5": 0.9425587467362925,
+            "accepted_rows": 63,
+            "candidate_recall_at_FPR_2pct": 0.1125,
+            "candidate_valid_auprc": 0.23907408366423716,
+            "candidate_valid_auroc": 0.7226071522482251,
+            "correct_id_recall": 0.06266318537859007,
+            "correct_id_rows": 24,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.06266318537859007,
+            "macro_negative_fpr": 0.019536019536019536,
+            "mean_rank": 2.255874673629243,
+            "negative_fpr": 0.019536019536019536,
+            "negative_rows": 819,
+            "per_sequence": {
+              "dancetrack0072": {
+                "correct_id_recall": 0.06266318537859007,
+                "negative_fpr": 0.019536019536019536,
+                "present_rows": 383,
+                "rows": 1202
+              }
+            },
+            "present_rows": 383,
+            "recall_at_FPR_2pct": 0.1227154046997389,
+            "rows": 1202,
+            "set_presence_auprc": 0.6781072867791034,
+            "set_presence_auroc": 0.8641723811436605
+          },
+          "threshold_selection": {
+            "candidate_count": 1189,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 63,
+              "correct_id_recall": 0.12903225806451613,
+              "negative_fpr": 0.019536019536019536,
+              "threshold": 0.841270387172699
+            }
+          }
+        },
+        "J3_SET_NOISY_OR": {
+          "metrics": {
+            "MRR": 0.6491918438393635,
+            "P0_fpr": 0.0,
+            "P1a_fpr": 0.0,
+            "P1b_fpr": 0.0,
+            "Rank1": 0.4751958224543081,
+            "Rank2": 0.6292428198433421,
+            "Rank3": 0.7728459530026109,
+            "Rank5": 0.9530026109660574,
+            "accepted_rows": 0,
+            "candidate_recall_at_FPR_2pct": 0.115,
+            "candidate_valid_auprc": 0.2410593530859689,
+            "candidate_valid_auroc": 0.717869445174862,
+            "correct_id_recall": 0.0,
+            "correct_id_rows": 0,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.0,
+            "macro_negative_fpr": 0.0,
+            "mean_rank": 2.300261096605744,
+            "negative_fpr": 0.0,
+            "negative_rows": 819,
+            "per_sequence": {
+              "dancetrack0072": {
+                "correct_id_recall": 0.0,
+                "negative_fpr": 0.0,
+                "present_rows": 383,
+                "rows": 1202
+              }
+            },
+            "present_rows": 383,
+            "recall_at_FPR_2pct": 0.0,
+            "rows": 1202,
+            "set_presence_auprc": 0.1891299247859849,
+            "set_presence_auroc": 0.09156233960411506
+          },
+          "threshold_selection": {
+            "candidate_count": 1177,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 0,
+              "correct_id_recall": 0.0,
+              "negative_fpr": 0.0,
+              "threshold": 1.0
+            }
+          }
+        },
+        "J4_ENERGY": {
+          "metrics": {
+            "MRR": 0.6491918438393635,
+            "P0_fpr": 0.0,
+            "P1a_fpr": 0.05511811023622047,
+            "P1b_fpr": 0.0,
+            "Rank1": 0.4751958224543081,
+            "Rank2": 0.6292428198433421,
+            "Rank3": 0.7728459530026109,
+            "Rank5": 0.9530026109660574,
+            "accepted_rows": 45,
+            "candidate_recall_at_FPR_2pct": 0.115,
+            "candidate_valid_auprc": 0.2410593530859689,
+            "candidate_valid_auroc": 0.717869445174862,
+            "correct_id_recall": 0.06005221932114883,
+            "correct_id_rows": 23,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.06005221932114883,
+            "macro_negative_fpr": 0.017094017094017096,
+            "mean_rank": 2.300261096605744,
+            "negative_fpr": 0.017094017094017096,
+            "negative_rows": 819,
+            "per_sequence": {
+              "dancetrack0072": {
+                "correct_id_recall": 0.06005221932114883,
+                "negative_fpr": 0.017094017094017096,
+                "present_rows": 383,
+                "rows": 1202
+              }
+            },
+            "present_rows": 383,
+            "recall_at_FPR_2pct": 0.08093994778067885,
+            "rows": 1202,
+            "set_presence_auprc": 0.74197633954767,
+            "set_presence_auroc": 0.916053775061608
+          },
+          "threshold_selection": {
+            "candidate_count": 1203,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 45,
+              "correct_id_recall": 0.12921348314606743,
+              "negative_fpr": 0.017094017094017096,
+              "threshold": 0.5020840764045715
+            }
+          }
+        },
+        "J5_QUALITY_FUSION": {
+          "metrics": {
+            "MRR": 0.6491918438393635,
+            "P0_fpr": 0.0,
+            "P1a_fpr": 0.06299212598425197,
+            "P1b_fpr": 0.0,
+            "Rank1": 0.4751958224543081,
+            "Rank2": 0.6292428198433421,
+            "Rank3": 0.7728459530026109,
+            "Rank5": 0.9530026109660574,
+            "accepted_rows": 129,
+            "candidate_recall_at_FPR_2pct": 0.255,
+            "candidate_valid_auprc": 0.35826848309939124,
+            "candidate_valid_auroc": 0.7287555876939259,
+            "correct_id_recall": 0.2402088772845953,
+            "correct_id_rows": 92,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.2402088772845953,
+            "macro_negative_fpr": 0.019536019536019536,
+            "mean_rank": 2.300261096605744,
+            "negative_fpr": 0.019536019536019536,
+            "negative_rows": 819,
+            "per_sequence": {
+              "dancetrack0072": {
+                "correct_id_recall": 0.2402088772845953,
+                "negative_fpr": 0.019536019536019536,
+                "present_rows": 383,
+                "rows": 1202
+              }
+            },
+            "present_rows": 383,
+            "recall_at_FPR_2pct": 0.2950391644908616,
+            "rows": 1202,
+            "set_presence_auprc": 0.7295262107929699,
+            "set_presence_auroc": 0.8446236096366645
+          },
+          "threshold_selection": {
+            "candidate_count": 1189,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 129,
+              "correct_id_recall": 0.4742268041237113,
+              "negative_fpr": 0.019536019536019536,
+              "threshold": 0.680598258972168
+            }
+          }
+        },
+        "J7_MULTITASK": {
+          "metrics": {
+            "MRR": 0.6630423971155041,
+            "P0_fpr": 0.0,
+            "P1a_fpr": 0.011811023622047244,
+            "P1b_fpr": 0.026262626262626262,
+            "Rank1": 0.4908616187989556,
+            "Rank2": 0.6553524804177546,
+            "Rank3": 0.8015665796344648,
+            "Rank5": 0.9425587467362925,
+            "accepted_rows": 17,
+            "candidate_recall_at_FPR_2pct": 0.1125,
+            "candidate_valid_auprc": 0.23907408366423716,
+            "candidate_valid_auroc": 0.7226071522482251,
+            "correct_id_recall": 0.0026109660574412533,
+            "correct_id_rows": 1,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.0026109660574412533,
+            "macro_negative_fpr": 0.019536019536019536,
+            "mean_rank": 2.255874673629243,
+            "negative_fpr": 0.019536019536019536,
+            "negative_rows": 819,
+            "per_sequence": {
+              "dancetrack0072": {
+                "correct_id_recall": 0.0026109660574412533,
+                "negative_fpr": 0.019536019536019536,
+                "present_rows": 383,
+                "rows": 1202
+              }
+            },
+            "present_rows": 383,
+            "recall_at_FPR_2pct": 0.0026109660574412533,
+            "rows": 1202,
+            "set_presence_auprc": 0.2519262561240114,
+            "set_presence_auroc": 0.24224919264083755
+          },
+          "threshold_selection": {
+            "candidate_count": 814,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 17,
+              "correct_id_recall": 0.005376344086021506,
+              "negative_fpr": 0.019536019536019536,
+              "threshold": 0.4773900508880615
+            }
+          }
+        }
+      }
+    },
+    {
+      "counterfactual_training_episode_count": 6000,
+      "heldout_observations_used_in_training": false,
+      "heldout_sequence": "dancetrack0072",
+      "inner_validation_sequence": "dancetrack0001",
+      "outer_heldout_absent_from_training": true,
+      "outer_labels_used_for_architecture_selection": false,
+      "parameter_fit_sequences": [
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062"
+      ],
+      "selected_family": "J5_QUALITY_FUSION",
+      "thresholds": {
+        "J1_PAIRWISE": 0.7848138213157654,
+        "J2_JOINT_ABSOLUTE": 0.6744677424430847,
+        "J3_SET_NOISY_OR": 1.0,
+        "J4_ENERGY": 0.4915572702884674,
+        "J5_QUALITY_FUSION": 0.649939775466919,
+        "J7_MULTITASK": 0.45963048934936523
+      },
+      "training_episode_count": 4500,
+      "training_identity_count": 39,
+      "validation_metrics": {
+        "J1_PAIRWISE": {
+          "metrics": {
+            "MRR": 0.886640608267295,
+            "P0_fpr": 0.0,
+            "P1a_fpr": 0.0,
+            "P1b_fpr": 0.0,
+            "Rank1": 0.8185907046476761,
+            "Rank2": 0.9070464767616192,
+            "Rank3": 0.9460269865067467,
+            "Rank5": 0.9805097451274363,
+            "accepted_rows": 94,
+            "candidate_recall_at_FPR_2pct": 0.2735294117647059,
+            "candidate_valid_auprc": 0.5500696878417658,
+            "candidate_valid_auroc": 0.8722116434202547,
+            "correct_id_recall": 0.12443778110944528,
+            "correct_id_rows": 83,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.12443778110944528,
+            "macro_negative_fpr": 0.0,
+            "mean_rank": 1.3973013493253372,
+            "negative_fpr": 0.0,
+            "negative_rows": 35,
+            "per_sequence": {
+              "dancetrack0001": {
+                "correct_id_recall": 0.12443778110944528,
+                "negative_fpr": 0.0,
+                "present_rows": 667,
+                "rows": 702
+              }
+            },
+            "present_rows": 667,
+            "recall_at_FPR_2pct": 0.1409295352323838,
+            "rows": 702,
+            "set_presence_auprc": 0.9672469219697696,
+            "set_presence_auroc": 0.6303705290212037
+          },
+          "threshold_selection": {
+            "candidate_count": 704,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 94,
+              "correct_id_recall": 0.162109375,
+              "negative_fpr": 0.0,
+              "threshold": 0.7848138213157654
+            }
+          }
+        },
+        "J2_JOINT_ABSOLUTE": {
+          "metrics": {
+            "MRR": 0.8949061183693868,
+            "P0_fpr": 0.0,
+            "P1a_fpr": 0.0,
+            "P1b_fpr": 0.0,
+            "Rank1": 0.8215892053973014,
+            "Rank2": 0.9325337331334332,
+            "Rank3": 0.9625187406296851,
+            "Rank5": 0.9865067466266867,
+            "accepted_rows": 80,
+            "candidate_recall_at_FPR_2pct": 0.2985294117647059,
+            "candidate_valid_auprc": 0.5869434480364576,
+            "candidate_valid_auroc": 0.8986525166767738,
+            "correct_id_recall": 0.10344827586206896,
+            "correct_id_rows": 69,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.10344827586206896,
+            "macro_negative_fpr": 0.0,
+            "mean_rank": 1.3268365817091454,
+            "negative_fpr": 0.0,
+            "negative_rows": 35,
+            "per_sequence": {
+              "dancetrack0001": {
+                "correct_id_recall": 0.10344827586206896,
+                "negative_fpr": 0.0,
+                "present_rows": 667,
+                "rows": 702
+              }
+            },
+            "present_rows": 667,
+            "recall_at_FPR_2pct": 0.1199400299850075,
+            "rows": 702,
+            "set_presence_auprc": 0.9633996655074383,
+            "set_presence_auroc": 0.5761833369029771
+          },
+          "threshold_selection": {
+            "candidate_count": 704,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 80,
+              "correct_id_recall": 0.12994350282485875,
+              "negative_fpr": 0.0,
+              "threshold": 0.6744677424430847
+            }
+          }
+        },
+        "J3_SET_NOISY_OR": {
+          "metrics": {
+            "MRR": 0.886640608267295,
+            "P0_fpr": 0.0,
+            "P1a_fpr": 0.0,
+            "P1b_fpr": 0.0,
+            "Rank1": 0.8185907046476761,
+            "Rank2": 0.9070464767616192,
+            "Rank3": 0.9460269865067467,
+            "Rank5": 0.9805097451274363,
+            "accepted_rows": 0,
+            "candidate_recall_at_FPR_2pct": 0.2735294117647059,
+            "candidate_valid_auprc": 0.5500696878417658,
+            "candidate_valid_auroc": 0.8722116434202547,
+            "correct_id_recall": 0.0,
+            "correct_id_rows": 0,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.0,
+            "macro_negative_fpr": 0.0,
+            "mean_rank": 1.3973013493253372,
+            "negative_fpr": 0.0,
+            "negative_rows": 35,
+            "per_sequence": {
+              "dancetrack0001": {
+                "correct_id_recall": 0.0,
+                "negative_fpr": 0.0,
+                "present_rows": 667,
+                "rows": 702
+              }
+            },
+            "present_rows": 667,
+            "recall_at_FPR_2pct": 0.0,
+            "rows": 702,
+            "set_presence_auprc": 0.9208874491263642,
+            "set_presence_auroc": 0.3449560933818805
+          },
+          "threshold_selection": {
+            "candidate_count": 703,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 0,
+              "correct_id_recall": 0.0,
+              "negative_fpr": 0.0,
+              "threshold": 1.0
+            }
+          }
+        },
+        "J4_ENERGY": {
+          "metrics": {
+            "MRR": 0.886640608267295,
+            "P0_fpr": 0.0,
+            "P1a_fpr": 0.0,
+            "P1b_fpr": 0.0,
+            "Rank1": 0.8185907046476761,
+            "Rank2": 0.9070464767616192,
+            "Rank3": 0.9460269865067467,
+            "Rank5": 0.9805097451274363,
+            "accepted_rows": 4,
+            "candidate_recall_at_FPR_2pct": 0.2735294117647059,
+            "candidate_valid_auprc": 0.5500696878417658,
+            "candidate_valid_auroc": 0.8722116434202547,
+            "correct_id_recall": 0.004497751124437781,
+            "correct_id_rows": 3,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.004497751124437781,
+            "macro_negative_fpr": 0.0,
+            "mean_rank": 1.3973013493253372,
+            "negative_fpr": 0.0,
+            "negative_rows": 35,
+            "per_sequence": {
+              "dancetrack0001": {
+                "correct_id_recall": 0.004497751124437781,
+                "negative_fpr": 0.0,
+                "present_rows": 667,
+                "rows": 702
+              }
+            },
+            "present_rows": 667,
+            "recall_at_FPR_2pct": 0.005997001499250375,
+            "rows": 702,
+            "set_presence_auprc": 0.951227791930302,
+            "set_presence_auroc": 0.5344613407581923
+          },
+          "threshold_selection": {
+            "candidate_count": 704,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 4,
+              "correct_id_recall": 0.005859375,
+              "negative_fpr": 0.0,
+              "threshold": 0.4915572702884674
+            }
+          }
+        },
+        "J5_QUALITY_FUSION": {
+          "metrics": {
+            "MRR": 0.886640608267295,
+            "P0_fpr": 0.0,
+            "P1a_fpr": 0.0,
+            "P1b_fpr": 0.0,
+            "Rank1": 0.8185907046476761,
+            "Rank2": 0.9070464767616192,
+            "Rank3": 0.9460269865067467,
+            "Rank5": 0.9805097451274363,
+            "accepted_rows": 155,
+            "candidate_recall_at_FPR_2pct": 0.4073529411764706,
+            "candidate_valid_auprc": 0.6471486305916723,
+            "candidate_valid_auroc": 0.9087668283808369,
+            "correct_id_recall": 0.21739130434782608,
+            "correct_id_rows": 145,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.21739130434782608,
+            "macro_negative_fpr": 0.0,
+            "mean_rank": 1.3973013493253372,
+            "negative_fpr": 0.0,
+            "negative_rows": 35,
+            "per_sequence": {
+              "dancetrack0001": {
+                "correct_id_recall": 0.21739130434782608,
+                "negative_fpr": 0.0,
+                "present_rows": 667,
+                "rows": 702
+              }
+            },
+            "present_rows": 667,
+            "recall_at_FPR_2pct": 0.23238380809595202,
+            "rows": 702,
+            "set_presence_auprc": 0.9858668988068034,
+            "set_presence_auroc": 0.8113943028485757
+          },
+          "threshold_selection": {
+            "candidate_count": 704,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 155,
+              "correct_id_recall": 0.26220614828209765,
+              "negative_fpr": 0.0,
+              "threshold": 0.649939775466919
+            }
+          }
+        },
+        "J7_MULTITASK": {
+          "metrics": {
+            "MRR": 0.8949061183693868,
+            "P0_fpr": 0.0,
+            "P1a_fpr": 0.0,
+            "P1b_fpr": 0.0,
+            "Rank1": 0.8215892053973014,
+            "Rank2": 0.9325337331334332,
+            "Rank3": 0.9625187406296851,
+            "Rank5": 0.9865067466266867,
+            "accepted_rows": 3,
+            "candidate_recall_at_FPR_2pct": 0.2985294117647059,
+            "candidate_valid_auprc": 0.5869434480364576,
+            "candidate_valid_auroc": 0.8986525166767738,
+            "correct_id_recall": 0.0029985007496251873,
+            "correct_id_rows": 2,
+            "formal_gate": {
+              "macro_fpr_le_0.05": true,
+              "macro_recall_ge_0.40": false,
+              "no_candidate_creation": true,
+              "pooled_correct_id_recall_ge_0.60": false,
+              "pooled_negative_fpr_le_0.02": true,
+              "runtime_gt_clean": true
+            },
+            "macro_correct_id_recall": 0.0029985007496251873,
+            "macro_negative_fpr": 0.0,
+            "mean_rank": 1.3268365817091454,
+            "negative_fpr": 0.0,
+            "negative_rows": 35,
+            "per_sequence": {
+              "dancetrack0001": {
+                "correct_id_recall": 0.0029985007496251873,
+                "negative_fpr": 0.0,
+                "present_rows": 667,
+                "rows": 702
+              }
+            },
+            "present_rows": 667,
+            "recall_at_FPR_2pct": 0.004497751124437781,
+            "rows": 702,
+            "set_presence_auprc": 0.9298990257994632,
+            "set_presence_auroc": 0.3918183765260227
+          },
+          "threshold_selection": {
+            "candidate_count": 703,
+            "inner_gate_infeasible": 0,
+            "selected": {
+              "accepted": 3,
+              "correct_id_recall": 0.003766478342749529,
+              "negative_fpr": 0.0,
+              "threshold": 0.45963048934936523
+            }
+          }
+        }
+      }
+    }
+  ],
+  "heldout_supervision_forbidden": 1,
+  "outer_fold_count": 8,
+  "stage": "N72R20R3R2R2"
+}

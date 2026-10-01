@@ -1,0 +1,48 @@
+{
+  "candidate_features": [
+    "candidate_embedding",
+    "candidate_box_width",
+    "candidate_box_height",
+    "candidate_box_area_log",
+    "candidate_box_aspect",
+    "candidate_confidence",
+    "candidate_presence",
+    "candidate_count"
+  ],
+  "excluded_unavailable_features": [
+    "last_trusted_target_box",
+    "predicted_motion",
+    "mask_quality",
+    "future_gt_box",
+    "target_iou",
+    "target_gt_present"
+  ],
+  "gt_fields_training_labels_only": [
+    "target_gt_present",
+    "candidate_iou",
+    "P0",
+    "P1a",
+    "P1b",
+    "VALID_TARGET",
+    "WEAK_TARGET_LOCALIZATION",
+    "OTHER"
+  ],
+  "quality_features": [
+    "candidate_confidence",
+    "candidate_presence",
+    "candidate_box_width",
+    "candidate_box_height",
+    "candidate_box_area_log",
+    "candidate_box_aspect"
+  ],
+  "query_features": [
+    "query_embedding",
+    "frames_since_human_initialization",
+    "frames_since_last_memory_write",
+    "anchor_state_cosine"
+  ],
+  "runtime_future_gt_used": false,
+  "runtime_gt_clean": true,
+  "stage": "N72R20R3R2R2",
+  "status": "FROZEN_RUNTIME_WHITELIST"
+}
