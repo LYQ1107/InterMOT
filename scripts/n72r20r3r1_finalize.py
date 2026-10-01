@@ -143,7 +143,7 @@ def _report_text(
         )
     for name in ("V1_PAIRWISE_THRESHOLD_NONE", "V2_ANCHOR_ONLY", "V2_LEARNED_STATE_ONLY", "V2_DUAL_STATE"):
         item = loso["reports"][name]
-        params = 39842 if name == "V2_DUAL_STATE" else 36626
+        params = 39842 if name in {"V1_PAIRWISE_THRESHOLD_NONE", "V2_DUAL_STATE"} else 36626
         lines.append(
             f"| {name} | {params} | {_f(item.get('false_present_rate'))} | {_f(item.get('p0_false_present_rate'))} | {_f(item.get('p1_false_present_rate'))} | {_f(item.get('open_set_correct_identification_recall'))} | {_f(item.get('macro_open_set_correct_identification_recall'))} | {_f(item.get('none_recall_on_absent'))} | {_f(item.get('candidate_top1_accuracy_on_present'))} | not run | not run |"
         )
