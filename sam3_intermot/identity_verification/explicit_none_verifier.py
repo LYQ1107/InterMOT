@@ -166,6 +166,16 @@ class ExplicitNoneVerifier(nn.Module):
         human_anchor = F.normalize(human_anchor, dim=-1, eps=1.0e-8)
         learned_state = F.normalize(learned_state, dim=-1, eps=1.0e-8)
         candidates = F.normalize(candidates, dim=-1, eps=1.0e-8)
+        # Enforce the preregistered ablation boundaries at the model boundary,
+        # not only in the training caller.  A0 cannot receive learned-state
+        # evidence or memory-update timing; A1 cannot receive human-anchor
+        # pairwise evidence or anchor/state drift.  Neutralized values keep
+        # the fixed model capacity and make accidental feature leakage fail
+        # closed for both training and runtime callers.
+        if self.state_variant == "A0_ANCHOR_ONLY":
+            learned_state = human_anchor
+        elif self.state_variant == "A1_LEARNED_STATE_ONLY":
+            human_anchor = learned_state
         relation, _ = self._target_relations(human_anchor, learned_state, candidates)
         candidate_logits = self.pairwise(relation).squeeze(-1)
         candidate_logits = candidate_logits.masked_fill(~candidate_mask, -1.0e9)
@@ -182,6 +192,13 @@ class ExplicitNoneVerifier(nn.Module):
                 if runtime_context.shape != (candidates.shape[0], 4):
                     raise ValueError("runtime_context must have shape [B,4]")
                 context = runtime_context.to(dtype=candidate_logits.dtype, device=candidates.device)
+            if self.state_variant == "A0_ANCHOR_ONLY":
+                context = context.clone()
+                context[:, 2] = 0.0
+                context[:, 3] = 1.0
+            elif self.state_variant == "A1_LEARNED_STATE_ONLY":
+                context = context.clone()
+                context[:, 3] = 1.0
             none_features = torch.stack(
                 [top1, top2, margin, mean, std, torch.log1p(count), context[:, 1], context[:, 2], 1.0 - context[:, 3]],
                 dim=1,

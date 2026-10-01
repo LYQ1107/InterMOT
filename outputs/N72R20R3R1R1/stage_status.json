@@ -1,0 +1,56 @@
+{
+  "association_rescue_run": false,
+  "canonical_index": "PASS_CANONICAL_ONE_FRAME_INDEX",
+  "causal_commit_replay_authorized": false,
+  "causal_replay": "NOT_RUN_STATIC_GATE_FAILED",
+  "central_question": "After correcting the duplicated-frame protocol, outer-heldout contamination, runtime-GT provenance semantics and experiment provenance, does an explicit-NONE verifier over the frozen human anchor and frozen N72R18 causal identity state provide safe and useful cross-sequence open-set identity verification?",
+  "formal_loso": "PASS_FORMAL_ONE_FRAME_LOSO_COMPLETE",
+  "goal": "Protocol-Corrected Explicit-NONE Identity Verification",
+  "goal_frozen": true,
+  "goal_reference": "outputs/N72R20R3R1R1/FINAL_GOAL.json",
+  "next_association_authority_stage_authorized": false,
+  "next_representation_learning_stage_authorized": true,
+  "phase": "STATIC_TERMINAL",
+  "primary_model": "V2_DUAL_STATE",
+  "runtime_future_gt_used": false,
+  "runtime_gt_clean": true,
+  "sam3_rerun": false,
+  "stage": "N72R20R3R1R1",
+  "static_gate": {
+    "catastrophic_sequences": [
+      "dancetrack0023",
+      "dancetrack0024",
+      "dancetrack0039",
+      "dancetrack0057"
+    ],
+    "checks": {
+      "S1_pooled_negative_fpr_le_0.02": false,
+      "S2_pooled_open_recall_ge_0.60": false,
+      "S3_macro_recall_ge_0.40": false,
+      "S4_macro_fpr_le_0.05": false,
+      "S5_runtime_future_gt_false": true,
+      "S5b_runtime_gt_clean": true,
+      "S6_all_eight_sequences_reported": true,
+      "S7_no_candidate_creation": true
+    },
+    "cross_sequence_warning": true,
+    "pass": false
+  },
+  "status": "FAIL_PROTOCOL_CORRECTED_EXPLICIT_NONE_GENERALIZATION",
+  "storage_audit_after": {
+    "filesystem": {
+      "free_gib": 113.79092788696289,
+      "hard_stop_below_gib": 100.0,
+      "path": "/data3/liuyeqiang/InterMOT",
+      "storage_status": "OK",
+      "total_gib": 1006.853931427002,
+      "used_gib": 841.8473815917969,
+      "warning_below_gib": 110.0
+    },
+    "stage": "N72R20R3R1R1",
+    "target_new_storage": "<3GB"
+  },
+  "test_accessed": false,
+  "tests": "R3R1R1 focused 46 passed; combined R3R1R1+R3R1 92 passed; full pytest 416 passed, 4 failed (fixed TrackEval SEQMAP_FILE CLI compatibility)",
+  "val_accessed": false
+}

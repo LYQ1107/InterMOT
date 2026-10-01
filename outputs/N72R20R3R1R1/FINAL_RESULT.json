@@ -1,0 +1,196 @@
+{
+  "association_rescue_run": false,
+  "bootstrap": {
+    "intervals_95": {
+      "closed_set_top1": [
+        0.17482407235555303,
+        0.3188124382233623
+      ],
+      "macro_recall": [
+        0.057513418859410255,
+        0.24741158629403706
+      ],
+      "negative_fpr": [
+        0.17593123209169054,
+        0.34600793347981107
+      ],
+      "open_recall": [
+        0.06018387413950119,
+        0.2287799716480425
+      ]
+    },
+    "means": {
+      "closed_set_top1": 0.23965820041691854,
+      "macro_recall": 0.14310700080173988,
+      "negative_fpr": 0.23433980521794584,
+      "open_recall": 0.13265871925616077
+    },
+    "repetitions": 2000,
+    "seed": 720312,
+    "stage": "N72R20R3R1R1",
+    "unit": "sequence cluster"
+  },
+  "bottleneck_classification": "BOTTLENECK_CANDIDATE_IDENTITY_REPRESENTATION",
+  "causal_commit_replay_authorized": false,
+  "causal_metrics": null,
+  "central_question": "After correcting the duplicated-frame protocol, outer-heldout contamination, runtime-GT provenance semantics and experiment provenance, does an explicit-NONE verifier over the frozen human anchor and frozen N72R18 causal identity state provide safe and useful cross-sequence open-set identity verification?",
+  "closed_set_MRR": 0.47608391398004735,
+  "closed_set_candidate_top1": 0.2360879454131918,
+  "corrected_negative_count": 1819,
+  "corrected_positive_count": 6595,
+  "corrected_row_count": 8414,
+  "decision": "FAIL_PROTOCOL_CORRECTED_EXPLICIT_NONE_GENERALIZATION",
+  "exact_solver_frozen": true,
+  "goal": "Protocol-Corrected Explicit-NONE Identity Verification",
+  "historical_negative_count": 3638,
+  "historical_positive_count": 13190,
+  "historical_r3r1_decision": "FAIL_EXPLICIT_NONE_CROSS_SEQUENCE_VERIFICATION",
+  "historical_reported_final_commit": "abbe3779ccbebf749a91fffa3c9c38168ae648e4",
+  "historical_row_count": 16828,
+  "historical_vs_corrected": {
+    "corrected_models": {
+      "V1_PAIRWISE_THRESHOLD_NONE": {
+        "closed_set_MRR": 0.38130378845314405,
+        "closed_set_candidate_top1_accuracy": 0.15860500379075057,
+        "ece": 0.6472488843367535,
+        "false_present_rate": 0.017592083562396922,
+        "nll": 1.7366478774868142,
+        "open_set_correct_identification_recall": 0.013646702047005308
+      },
+      "V2_ANCHOR_ONLY": {
+        "closed_set_MRR": 0.39339633199754503,
+        "closed_set_candidate_top1_accuracy": 0.1464746019711903,
+        "ece": 0.10697449973423766,
+        "false_present_rate": 0.5008246289169873,
+        "nll": 1.951685406039711,
+        "open_set_correct_identification_recall": 0.049734647460197116
+      },
+      "V2_DUAL_STATE": {
+        "closed_set_MRR": 0.47608391398004735,
+        "closed_set_candidate_top1_accuracy": 0.2360879454131918,
+        "ece": 0.09843513488704,
+        "false_present_rate": 0.22649807586586038,
+        "nll": 1.9125083596378027,
+        "open_set_correct_identification_recall": 0.13115996967399546
+      },
+      "V2_LEARNED_STATE_ONLY": {
+        "closed_set_MRR": 0.5907010481726176,
+        "closed_set_candidate_top1_accuracy": 0.3815011372251706,
+        "ece": 0.059506681313435436,
+        "false_present_rate": 0.434304562946674,
+        "nll": 1.7811492266190279,
+        "open_set_correct_identification_recall": 0.27763457164518573
+      }
+    },
+    "corrected_negative": 1819,
+    "corrected_positive": 6595,
+    "corrected_rows": 8414,
+    "historical_negative": 3638,
+    "historical_per_model": {
+      "V1_PAIRWISE_THRESHOLD_NONE": {
+        "candidate_top1_accuracy_on_present": 0.04078847611827142,
+        "ece": 0.5913563065382156,
+        "false_present_rate": 0.04288070368334249,
+        "nll": 2.242473596564101,
+        "open_set_correct_identification_recall": 0.04078847611827142
+      },
+      "V2_ANCHOR_ONLY": {
+        "candidate_top1_accuracy_on_present": 0.06906747536012131,
+        "ece": 0.1339281653475777,
+        "false_present_rate": 0.2902693787795492,
+        "nll": 2.101975995043031,
+        "open_set_correct_identification_recall": 0.06906747536012131
+      },
+      "V2_DUAL_STATE": {
+        "candidate_top1_accuracy_on_present": 0.1,
+        "ece": 0.0697116786826257,
+        "false_present_rate": 0.3001649257833975,
+        "nll": 1.9682319698898458,
+        "open_set_correct_identification_recall": 0.1
+      },
+      "V2_LEARNED_STATE_ONLY": {
+        "candidate_top1_accuracy_on_present": 0.11842304776345716,
+        "ece": 0.05884560205570949,
+        "false_present_rate": 0.36558548653106104,
+        "nll": 1.913489317256428,
+        "open_set_correct_identification_recall": 0.11842304776345716
+      }
+    },
+    "historical_positive": 13190,
+    "historical_primary": {
+      "candidate_top1_accuracy_on_present": 0.1,
+      "ece": 0.0697116786826257,
+      "false_present_rate": 0.3001649257833975,
+      "nll": 1.9682319698898458,
+      "open_set_correct_identification_recall": 0.1
+    },
+    "historical_rows": 16828,
+    "historical_stage": "N72R20R3R1",
+    "protocol_correction": "one real frame = one decision; outer-heldout architecture selection removed; provenance booleans corrected",
+    "stage": "N72R20R3R1R1"
+  },
+  "macro_FPR": 0.29894651638641284,
+  "macro_recall": 0.14275970144332548,
+  "n72r18_gru_frozen": true,
+  "negative_FPR": 0.22649807586586038,
+  "next_association_authority_stage_authorized": false,
+  "next_representation_learning_stage_authorized": true,
+  "open_set_correct_ID_recall": 0.13115996967399546,
+  "osnet_frozen": true,
+  "outer_leakage_removed": true,
+  "primary_model": "V2_DUAL_STATE",
+  "protocol_defects_confirmed": [
+    "A_DUPLICATED_FRAME_SAMPLES",
+    "B_OUTER_HELDOUT_SELECTION_CONTAMINATION",
+    "C_RUNTIME_GT_PROVENANCE_INVERSION",
+    "D_STALE_HISTORICAL_COMMIT_PROVENANCE",
+    "E_NON_PREREGISTERED_ARCHITECTURE_SELECTION"
+  ],
+  "public_id_authority_frozen": true,
+  "r3r1_immutability_all_unchanged": true,
+  "rank_1_identity_accuracy": 0.2360879454131918,
+  "rank_2_identity_accuracy": 0.4421531463229719,
+  "rank_3_identity_accuracy": 0.6157695223654284,
+  "runtime_future_gt_used": false,
+  "runtime_gt_clean": true,
+  "sam3_rerun": false,
+  "source_branch": "codex/n72r20r3r1r1-one-frame-protocol-repair",
+  "source_head": "e1c294597e53d743128f5ba24d9770e96a5b7be7",
+  "stage": "N72R20R3R1R1",
+  "static_gate": {
+    "catastrophic_sequences": [
+      "dancetrack0023",
+      "dancetrack0024",
+      "dancetrack0039",
+      "dancetrack0057"
+    ],
+    "checks": {
+      "S1_pooled_negative_fpr_le_0.02": false,
+      "S2_pooled_open_recall_ge_0.60": false,
+      "S3_macro_recall_ge_0.40": false,
+      "S4_macro_fpr_le_0.05": false,
+      "S5_runtime_future_gt_false": true,
+      "S5b_runtime_gt_clean": true,
+      "S6_all_eight_sequences_reported": true,
+      "S7_no_candidate_creation": true
+    },
+    "cross_sequence_warning": true,
+    "pass": false
+  },
+  "storage_after": {
+    "filesystem": {
+      "free_gib": 113.79092788696289,
+      "hard_stop_below_gib": 100.0,
+      "path": "/data3/liuyeqiang/InterMOT",
+      "storage_status": "OK",
+      "total_gib": 1006.853931427002,
+      "used_gib": 841.8473815917969,
+      "warning_below_gib": 110.0
+    },
+    "stage": "N72R20R3R1R1",
+    "target_new_storage": "<3GB"
+  },
+  "test_accessed": false,
+  "tests_summary": "R3R1R1 focused 46 passed; combined R3R1R1+R3R1 92 passed; full pytest 416 passed, 4 failed (fixed TrackEval SEQMAP_FILE CLI compatibility)",
+  "val_accessed": false
+}
