@@ -206,6 +206,7 @@ def evaluate_identity_presence(
     anchor_stats = _stats(anchor_scores)
     learned_margin = None if top2_score is None else top1_score - top2_score
     anchor_margin = None if anchor_top2_score is None else anchor_top1_score - anchor_top2_score
+    base_assignment_uid = _assignment_uid(base_assignment, public_id)
     features: dict[str, Any] = {
         "candidate_count": len(rows),
         "valid_feature_count": len(valid),
@@ -225,12 +226,12 @@ def evaluate_identity_presence(
         "human_anchor_top1_score": anchor_top1_score,
         "human_anchor_top2_score": anchor_top2_score,
         "human_anchor_margin": anchor_margin,
-        "base_target_candidate_uid": _assignment_uid(base_assignment, public_id),
+        "base_target_candidate_uid": base_assignment_uid,
         "base_assignment_margin": _finite_or_none(runtime_context.get("base_assignment_margin")),
         "learned_rank_of_base_candidate": None,
         "learned_score_of_base_candidate": None,
         "predicted_motion_iou_of_base_candidate": _finite_or_none(runtime_context.get("predicted_motion_iou_of_base_candidate")),
-        "candidate_presence_of_base_candidate": _assignment_uid(base_assignment) in set(uids),
+        "candidate_presence_of_base_candidate": base_assignment_uid in set(uids),
         "native_continuity_of_base_candidate": runtime_context.get("native_continuity_of_base_candidate"),
         "frames_since_human_initialization": int(runtime_context.get("frames_since_human_initialization", frame)),
         "frames_since_last_memory_write": int(runtime_context.get("frames_since_last_memory_write", frame)),

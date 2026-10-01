@@ -239,7 +239,14 @@ def metrics(joined: Sequence[Mapping[str, Any]], policy: Mapping[str, Any], sequ
         "p1_false_present_count": sum(predicted[index] for index in range(len(joined)) if p1[index]),
         "open_set_correct_identification_recall": _div(sum(correct_identification), pos_den),
         "conditional_candidate_accuracy_given_present": _div(sum(correct_identification), pred_count),
-        "candidate_coverage": _div(sum(positive[index] for index in range(len(joined)) if bool(item["label"]["target_gt_present"])), sum(bool(item["label"]["target_gt_present"]) for item in joined)),
+        "candidate_coverage": _div(
+            sum(
+                positive[index]
+                for index, item in enumerate(joined)
+                if bool(item["label"]["target_gt_present"])
+            ),
+            sum(bool(item["label"]["target_gt_present"]) for item in joined),
+        ),
         "accepted_writes": accepted_writes,
         "wrong_writes": wrong_writes,
         "correct_writes": correct_writes,
