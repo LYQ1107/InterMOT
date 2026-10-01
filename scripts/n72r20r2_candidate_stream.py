@@ -108,6 +108,13 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         embedding_handle = embedding_tmp.open("wb")
         from sam3_intermot.backend.sam3_backend import Sam3Backend
 
+        disable_trim = str(os.environ.get("N72R20R2_DISABLE_TRIM", "")).strip().lower() in {
+            "1",
+            "true",
+            "yes",
+            "on",
+        }
+
         def make_backend() -> Sam3Backend:
             return Sam3Backend(
                 checkpoint_path=str(checkpoint),
@@ -123,7 +130,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                 # memory trim for long eval videos.  It changes only the runtime
                 # memory policy, not the model weights, candidate threshold, or
                 # candidate export schema.
-                trim_past_non_cond_mem_for_eval=True,
+                trim_past_non_cond_mem_for_eval=not disable_trim,
                 device=str(args.device),
             )
 
@@ -304,6 +311,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             "frames": frame_records,
             "sam3_session_records": session_records,
             "sam3_chunk_size": chunk_size,
+            "sam3_trim_past_non_cond_mem_for_eval": not disable_trim,
             "sam3_session_strategy": "bounded_official_sessions_with_previous_runtime_box_rebind",
             "sam3_checkpoint_sha256": sha256(checkpoint),
             "osnet_checkpoint_sha256": sha256(osnet),
@@ -323,6 +331,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             "bytes_per_frame": (final_meta.stat().st_size + final_embeddings.stat().st_size) / max(frame_count, 1),
             "bytes_per_candidate": (final_meta.stat().st_size + final_embeddings.stat().st_size) / max(candidate_count, 1),
             "sam3_chunk_size": chunk_size,
+            "sam3_trim_past_non_cond_mem_for_eval": not disable_trim,
             "sam3_session_count": len(session_records),
             "runtime_future_gt_used": False,
             "runtime_gt_read": False,

@@ -1,0 +1,111 @@
+{
+  "association_policy": "inner-selected G0-G3 and lambda in {0.25,0.5,1.0,2.0}",
+  "candidate_pipeline": "inner-selected E0-E4",
+  "dev_gate": true,
+  "geometry_models": "outer inner-selected A0-A3",
+  "identity_model": "frozen N72R3R2 representation/base score tape",
+  "memory_policy": "association-selected candidate AND quality_probability >= 0.80 AND geometry_consistency >= 0.50",
+  "outer_folds": [
+    {
+      "geometry_variant": "A0_LAST_BOX",
+      "heldout": "dancetrack0001",
+      "quality_family": "B0_LINEAR",
+      "runtime_future_gt_used": false,
+      "selected": {
+        "association": "G0_ADDITIVE",
+        "lambda": 0.5,
+        "pipeline": "E3_SAM3"
+      },
+      "validation": "dancetrack0002"
+    },
+    {
+      "geometry_variant": "A0_LAST_BOX",
+      "heldout": "dancetrack0002",
+      "quality_family": "B0_LINEAR",
+      "runtime_future_gt_used": false,
+      "selected": {
+        "association": "G0_ADDITIVE",
+        "lambda": 0.5,
+        "pipeline": "E0_ORIGINAL"
+      },
+      "validation": "dancetrack0023"
+    },
+    {
+      "geometry_variant": "A0_LAST_BOX",
+      "heldout": "dancetrack0023",
+      "quality_family": "B0_LINEAR",
+      "runtime_future_gt_used": false,
+      "selected": {
+        "association": "G0_ADDITIVE",
+        "lambda": 0.5,
+        "pipeline": "E3_SAM3"
+      },
+      "validation": "dancetrack0024"
+    },
+    {
+      "geometry_variant": "A1_CONSTANT_VELOCITY",
+      "heldout": "dancetrack0024",
+      "quality_family": "B0_LINEAR",
+      "runtime_future_gt_used": false,
+      "selected": {
+        "association": "G0_ADDITIVE",
+        "lambda": 0.5,
+        "pipeline": "E3_SAM3"
+      },
+      "validation": "dancetrack0039"
+    },
+    {
+      "geometry_variant": "A0_LAST_BOX",
+      "heldout": "dancetrack0039",
+      "quality_family": "B0_LINEAR",
+      "runtime_future_gt_used": false,
+      "selected": {
+        "association": "G0_ADDITIVE",
+        "lambda": 0.5,
+        "pipeline": "E3_SAM3"
+      },
+      "validation": "dancetrack0057"
+    },
+    {
+      "geometry_variant": "A0_LAST_BOX",
+      "heldout": "dancetrack0057",
+      "quality_family": "B0_LINEAR",
+      "runtime_future_gt_used": false,
+      "selected": {
+        "association": "G0_ADDITIVE",
+        "lambda": 0.5,
+        "pipeline": "E3_SAM3"
+      },
+      "validation": "dancetrack0062"
+    },
+    {
+      "geometry_variant": "A0_LAST_BOX",
+      "heldout": "dancetrack0062",
+      "quality_family": "B0_LINEAR",
+      "runtime_future_gt_used": false,
+      "selected": {
+        "association": "G0_ADDITIVE",
+        "lambda": 0.5,
+        "pipeline": "E3_SAM3"
+      },
+      "validation": "dancetrack0072"
+    },
+    {
+      "geometry_variant": "A0_LAST_BOX",
+      "heldout": "dancetrack0072",
+      "quality_family": "B0_LINEAR",
+      "runtime_future_gt_used": false,
+      "selected": {
+        "association": "G0_ADDITIVE",
+        "lambda": 0.5,
+        "pipeline": "E3_SAM3"
+      },
+      "validation": "dancetrack0001"
+    }
+  ],
+  "quality_models": "outer-fit B0-B4 with inner family selection",
+  "runtime_future_gt_used": false,
+  "stage": "N72R20R3R2R3",
+  "test_used": false,
+  "val_tuning_forbidden": true
+}

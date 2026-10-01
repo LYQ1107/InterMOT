@@ -1,0 +1,18 @@
+{
+  "feature_dim": 16,
+  "frozen_osnet": "/data3/liuyeqiang/InterMOT_N72R16_assets/checkpoints/osnet_x1_0_market1501.pth",
+  "geometry_variants": [
+    "A0_LAST_BOX",
+    "A1_CONSTANT_VELOCITY",
+    "A2_KALMAN",
+    "A3_LEARNED_CAUSAL"
+  ],
+  "labels": {
+    "O": "IoU < 0.10",
+    "V": "IoU >= 0.50",
+    "W": "0.10 <= IoU < 0.50"
+  },
+  "outer_protocol": "8-fold LOSO; 6 fit + 1 inner validation; heldout absent from training and selection",
+  "runtime_future_gt_used": false,
+  "stage": "N72R20R3R2R3"
+}
