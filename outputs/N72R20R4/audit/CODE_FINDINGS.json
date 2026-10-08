@@ -1,0 +1,122 @@
+[
+  {
+    "actual_behavior": "sigmoid of sealed base_score_matrix[:,target], no CrossSceneIdentityAdapter inference",
+    "end_line": 215,
+    "file": "scripts/n72r20r3r2r3_pipeline.py",
+    "function": "base_identity_scores",
+    "impact": "Rank gains are not transferred into the actual score matrix",
+    "item": "M0-A",
+    "repair": "Strict SHA/axis-verified tower inference from branch-owned causal GRU state",
+    "start_line": 203,
+    "status": "FAIL_IDENTITY_ADAPTER_NOT_IN_ASSOCIATION",
+    "test_evidence": "PENDING_R4_REGRESSION_TESTS"
+  },
+  {
+    "actual_behavior": "plain linear_sum_assignment without explicit NONE; extracts target row, retains all other baseline public assignments",
+    "end_line": 843,
+    "file": "scripts/n72r20r3r2r3_pipeline.py",
+    "function": "rollout_sequence",
+    "impact": "candidate collisions, stolen observations and NONE recovery are not globally committed",
+    "item": "M0-B",
+    "repair": "Complete solve_exact_public_assignment output, hard candidate/public uniqueness checks",
+    "start_line": 758,
+    "status": "FAIL_TARGET_COLUMN_MERGE",
+    "test_evidence": "PENDING_R4_REGRESSION_TESTS"
+  },
+  {
+    "actual_behavior": "every frame reads sealed base_scores and frozen geometry; no treatment IdentityState update",
+    "end_line": 843,
+    "file": "scripts/n72r20r3r2r3_pipeline.py",
+    "function": "rollout_sequence",
+    "impact": "interventions cannot influence next-frame base scores, motion or appearance",
+    "item": "M0-C",
+    "repair": "Each tracker owns StateManager/IdentityState and recomputes current scores from prior branch state",
+    "start_line": 758,
+    "status": "FAIL_FROZEN_STATE_FEEDBACK",
+    "test_evidence": "PENDING_R4_REGRESSION_TESTS"
+  },
+  {
+    "actual_behavior": "pre-event continue skips trajectory append for all public IDs",
+    "end_line": 843,
+    "file": "scripts/n72r20r3r2r3_pipeline.py",
+    "function": "rollout_sequence",
+    "impact": "truncated non-target trajectories confound full-sequence evaluation when event_frame>0",
+    "item": "M0-D",
+    "repair": "ordinary online births/assignment outputs before click; residual visible only after event",
+    "start_line": 758,
+    "status": "FAIL_PRE_EVENT_TRAJECTORY_OMISSION",
+    "test_evidence": "PENDING_R4_REGRESSION_TESTS"
+  },
+  {
+    "actual_behavior": "new SAM3 identity copied from current max, quality=0.75, geometry=0.7",
+    "end_line": 843,
+    "file": "scripts/n72r20r3r2r3_pipeline.py",
+    "function": "rollout_sequence",
+    "impact": "localization benefit includes unsupported appearance/quality authority",
+    "item": "M0-E",
+    "repair": "R4 uses existing real OSNet candidates; new candidates disabled",
+    "start_line": 758,
+    "status": "FAIL_ASSUMED_NEW_CANDIDATE_IDENTITY",
+    "test_evidence": "PENDING_R4_REGRESSION_TESTS"
+  },
+  {
+    "actual_behavior": "local target IoU correction and threshold commit booleans, no GRU write or next-state rollout",
+    "end_line": 884,
+    "file": "scripts/n72r20r3r2r3_pipeline.py",
+    "function": "association_shadow",
+    "impact": "90 shadow N01 is not 90 IDSW repairs or actual accepted writes",
+    "item": "M5",
+    "repair": "pair complete global trajectories; future continuity and real memory updater audits",
+    "start_line": 874,
+    "status": "FAIL_SHADOW_IS_NOT_MEMORY_OR_TRACK_EFFECT",
+    "test_evidence": "PENDING_R4_REGRESSION_TESTS"
+  },
+  {
+    "actual_behavior": "sorts rows, clamps width/height to >=1; no cross-ID candidate uniqueness validation",
+    "end_line": 855,
+    "file": "scripts/n72r20r3r2r3_pipeline.py",
+    "function": "export_trajectory_tracker",
+    "impact": "writer does not repair underlying assignment semantics",
+    "item": "Export",
+    "repair": "validate geometry/uniqueness before export and hash exact trajectories",
+    "start_line": 846,
+    "status": "AUDIT_EXPORT_GEOMETRY",
+    "test_evidence": "PENDING_R4_REGRESSION_TESTS"
+  },
+  {
+    "actual_behavior": "exports exact sealed R2 public assignments; original tape builder does causally update states",
+    "end_line": 371,
+    "file": "scripts/n72r20r3r2r3_pipeline.py",
+    "function": "export_baseline",
+    "impact": "valid reference but no new online treatment state",
+    "item": "Native",
+    "repair": "reconstruct independently with same initialization and legacy lifecycle; compare frame assignments and SHA",
+    "start_line": 347,
+    "status": "SEALED_CAUSAL_BASELINE_SOURCE",
+    "test_evidence": "PENDING_R4_REGRESSION_TESTS"
+  },
+  {
+    "actual_behavior": "wrapper normalizes pinned CLI; shared config and full sequence GT",
+    "end_line": 401,
+    "file": "scripts/n72r20r3r2r3_pipeline.py",
+    "function": "run_trackeval_many",
+    "impact": "evaluator cannot turn malformed runtime into causal evidence",
+    "item": "Eval",
+    "repair": "reuse wrapper with identical input axes, frame range and split",
+    "start_line": 384,
+    "status": "VALID_PINNED_EVALUATOR",
+    "test_evidence": "PENDING_R4_REGRESSION_TESTS"
+  },
+  {
+    "actual_behavior": "dev schedule selects earliest posthoc P1a frame; real SAM3 prompts use causal boxes",
+    "end_line": 1011,
+    "file": "scripts/n72r20r3r2r3_pipeline.py",
+    "function": "targeted_sam3_refinement",
+    "impact": "posthoc scheduling is not a deployable trigger",
+    "item": "SAM",
+    "repair": "disabled in R4; no candidate regeneration",
+    "start_line": 909,
+    "status": "POSTHOC_DEV_SCHEDULE",
+    "test_evidence": "PENDING_R4_REGRESSION_TESTS"
+  }
+]
