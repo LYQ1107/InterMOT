@@ -1,0 +1,16 @@
+{
+  "stage": "N72R20R4R1",
+  "goal_file": "outputs/N72R20R4R1/FINAL_GOAL.json",
+  "scientific_protocol_changed": false,
+  "scope": "Bounded small result/manifest/ownership-delta writes only; no downloads, historical deletion, new candidate/backbone cache or additional training budget.",
+  "previous_lightweight_floor_gib": 99,
+  "lightweight_hard_floor_gib": 98,
+  "heavy_cache_forbidden_below_gib": 100,
+  "heavy_reservation_threshold_mib": 1,
+  "stage_external_asset_cap_mib": 48,
+  "observed_free_gib_before_amendment": 99.07688522338867,
+  "observed_new_stage_external_bytes": 10729547,
+  "reason": "The user specification recommends stopping NEW HEAVY caches below 100 GiB, not stopping all tiny results. The prior self-imposed 99 GiB tiny-write floor approaches despite the bounded 11 MiB external stage assets. Preserve a 98 GiB hard reserve and the existing 100 GiB heavy-cache prohibition. No cause is attributed to unmeasured filesystem writers.",
+  "scientific_parameters_thresholds_models_and_selection_unchanged": true,
+  "publicly_disclosed_before_application": true
+}

@@ -1,0 +1,11 @@
+{
+  "stage": "N72R20R4R1",
+  "goal_file": "outputs/N72R20R4R1/FINAL_GOAL.json",
+  "frozen_before_any_outer_rollout": true,
+  "rationale": "The family-level best_controller omitted native-only controls. Final selection must include all preregistered evaluated controls, without changing any completed family or joint freeze.",
+  "candidate_pool": "Every inner-selected C0-C6 family, native global/identity reliability control, and every already preregistered joint case. No new threshold, architecture or grid.",
+  "criterion": "Identical existing metric_key: DetA guard first, HOTA, AssA, fewer IDSW, memory safety, fewer wrong writes, greater correct retention, fewer approved actions.",
+  "heldout_use": "Each outer sequence receives its own immutable final selection file before opening its input. Outer or VAL labels/metrics cannot select or revise policies.",
+  "seed_diagnostics": "C5_L1 and C6_L0 individual seeds share the respective inner-selected ensemble approvals; no seed-specific outer tuning.",
+  "no_zero_write_safety_pass": true
+}

@@ -10,7 +10,7 @@ from scripts.n72r20r4r1_inner import metric_key
 
 
 def trace():
-    return [{"frame":0,"outputs":[{"public_id":1,"candidate_uid":"a","box_xyxy":[0,0,10,10],"confidence":1.},
+    return [{"frame":0,"state_after":"fixture-state","outputs":[{"public_id":1,"candidate_uid":"a","box_xyxy":[0,0,10,10],"confidence":1.},
         {"public_id":2,"candidate_uid":"b","box_xyxy":[20,0,30,10],"confidence":.8}]}]
 
 
@@ -24,7 +24,7 @@ def test_ownership_delta_reconstructs_exact_full_mot(tmp_path,monkeypatch,change
     if changed:
         treatment[0]["outputs"][0]["public_id"]=2;treatment[0]["outputs"][1]["public_id"]=1
     batch=evaluation.EvaluationBatch("fixture",["s"])
-    try:manifest=batch.add("v","s",treatment,{})
+    try:manifest=batch.add("v","s",treatment,{"committed_state_stream_sha256":hashlib.sha256(b"fixture-state").hexdigest()})
     finally:batch.close()
     assert evaluation.reconstruct_mot(manifest)==trajectory_text(treatment)
 

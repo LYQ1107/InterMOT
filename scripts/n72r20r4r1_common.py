@@ -31,7 +31,8 @@ def check_storage(reserve_mib: float=0) -> dict[str,Any]:
     free=shutil.disk_usage(ROOT).free
     owned=sum(p.stat().st_size for p in ASSETS.rglob("*") if p.is_file()) if ASSETS.exists() else 0
     amended=(OUT/"RESOURCE_POLICY_AMENDMENT_01.json").exists()
-    hard_floor=99 if amended else 100
+    bounded_amendment=OUT/'RESOURCE_POLICY_AMENDMENT_02.json'
+    hard_floor=read_json(bounded_amendment)['lightweight_hard_floor_gib'] if bounded_amendment.exists() else 99 if amended else 100
     if free-reserve_mib*(1<<20)<hard_floor*(1<<30) or (free<100*(1<<30) and reserve_mib>=1):
         raise RuntimeError(f"FAIL_ASSET_OR_STORAGE: {free/(1<<30):.4f} GiB free; no new heavy cache")
     if owned+reserve_mib*(1<<20)>48*(1<<20):

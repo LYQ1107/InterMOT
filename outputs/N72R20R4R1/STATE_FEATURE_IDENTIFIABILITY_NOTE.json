@@ -5,6 +5,8 @@
   "unidentifiable_auxiliary_state_covariates": ["anchor_query_agreement", "native_streak", "state_drift", "memory_updates"],
   "guard": "For action models only, if fitted normalization buffers confirm the source P0 constant value and clamped scale, zero that standardized column in forward computation. It cannot acquire authority from an untrained random coefficient during an updated-memory ablation.",
   "existing_checkpoint_weights_changed": false,
+  "training_transform": "RAW_FIT_NORMALIZATION; all already-running action fits use the original unguarded fitting computation. The executable fit helper explicitly preserves this computation for reproducibility.",
+  "deployment_transform": "GUARD_FIT_CONSTANT_P0_AUXILIARY_STATE_COLUMNS; fixed before any inner/outer treatment metrics and applied identically to all action-model comparisons. The guard is not a learned memory-reliability result.",
   "fold_normalization_only_no_outer_GT_or_metrics": true,
   "native_write_reliability_models_use_actual_evolving_P1_states": true,
   "structured_gain_damage_risk_component_supervision_retained": true,

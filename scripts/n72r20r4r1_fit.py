@@ -34,6 +34,12 @@ def causal_features(sequence,adapter,*,k=5,heldout=None,role="fit"):
         assert_fit_sequence(sequence,heldout)
     elif role=="inner":
         if heldout is None or sequence!=fold_split(heldout)[1]:raise ValueError("inner axis mismatch")
+    elif role=="posthoc_outer":
+        # This reader is unavailable until frozen formal runtime and official
+        # evaluation have completed; its outputs cannot feed model selection.
+        done=OUT/'authority/outer'/f'{heldout}.json'
+        if sequence!=heldout or not done.exists() or read_json(done).get('status')!='COMPLETE':raise ValueError('outer diagnostic requires completed frozen evaluation')
+        if read_json(done)['frozen_final_sha256']!=sha256(OUT/'authority/frozen_final'/f'{heldout}.json'):raise ValueError('outer freeze differs')
     else:raise ValueError("outer labels cannot enter feature or policy selection")
     er,actions,summary=decode_sequence(sequence);frames=load_frames(sequence)
     x=np.stack([r["feature"] for _,rows in frames for r in rows]);offsets=np.cumsum([0]+[len(rows) for _,rows in frames]);encoded=adapter.encode_candidates(x)
@@ -80,6 +86,10 @@ def tensors(examples):
 def fit_model(family,loss,examples,seed,epochs):
     torch.manual_seed(seed);np.random.seed(seed);random.seed(seed);torch.set_num_threads(1)
     x,y,c,g=tensors(examples);model=ActionValueModel(family,feature_dim=x.shape[1])
+    # Keep fitting identical to the already-started eight-fold trainer. The
+    # separately preregistered deployment transform only neutralizes source-
+    # P0 constant auxiliary columns when a memory ablation changes them.
+    model.guard_unidentifiable_state=False
     model.mean.copy_(x.mean(0));model.scale.copy_(x.std(0,unbiased=False).clamp_min(.05))
     optimizer=torch.optim.AdamW(model.parameters(),lr=.003,weight_decay=.0001)
     weights=[((len(y)-y[:,i].sum())/y[:,i].sum().clamp_min(1)).clamp(.1,100.) for i in range(2)]
@@ -117,7 +127,8 @@ def save_model(model,heldout,family,loss,seed,epochs,diagnostics,provenance):
     check_storage(reserve_mib=.03);path.parent.mkdir(parents=True,exist_ok=True)
     fit,inner=fold_split(heldout)
     checkpoint={"stage":STAGE,"family":family,"loss_family":loss,"feature_names":FEATURE_NAMES,"feature_dim":len(FEATURE_NAMES),"parameters":model.parameter_count,"state_dict":model.state_dict(),
-        "actual_training_sequences":fit,"forbidden_sequences":[inner,heldout],"seed":seed,"epochs":epochs,"training_provenance":provenance,"natural_positive_gate_passed":True,"frozen_GRU_sha256":MEMORY_SHA}
+        "actual_training_sequences":fit,"forbidden_sequences":[inner,heldout],"seed":seed,"epochs":epochs,"training_provenance":provenance,"natural_positive_gate_passed":True,"frozen_GRU_sha256":MEMORY_SHA,
+        "training_input_transform":"RAW_FIT_NORMALIZATION","runtime_input_transform":"GUARD_FIT_CONSTANT_P0_AUXILIARY_STATE_COLUMNS"}
     torch.save(checkpoint,path)
     record={"path":path,"sha256":sha256(path),"family":family,"loss":loss,"seed":seed,"epochs":epochs,"parameters":model.parameter_count,"fit_sequences":fit,"inner":inner,"outer":heldout,"diagnostics":diagnostics,"training_provenance":provenance}
     write_json(path.with_suffix(".json"),record);return plain(record)

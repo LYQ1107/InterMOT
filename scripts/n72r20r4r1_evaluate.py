@@ -60,7 +60,7 @@ def posthoc(sequence,frames,event,trace,baseline):
     gt=gt_by_frame(DATASET/"train"/sequence/"gt/gt.txt");truth=target_truth(event,gt)
     writes=[];margins=[];rank1=competitive=visible=covered=0;drift=[];funnel=Counter();takeovers=[]
     continuity_changes=0;previous_identity=None;recoveries=0;last_none=False
-    origins={};target_correct=[];baseline_correct=[];other_damage=[]
+    origins={};target_correct=[];baseline_correct=[];other_damage=[];N01=N10=changed_frames=state_changed=0
     for f,((_,rows),d,b) in enumerate(zip(frames,trace,baseline)):
         matched=match_frame(rows,gt.get(f,[]));by_uid={str(r["candidate_uid"]):r for r in rows}
         for output in b["outputs"]:
@@ -70,6 +70,9 @@ def posthoc(sequence,frames,event,trace,baseline):
         target=d["target_public_id"];origins[target]=truth
         uid=d["target_uid"];base_uid=b["target_uid"]
         correct=matched.get(uid)==truth;bc=matched.get(base_uid)==truth
+        N01+=int(correct and not bc);N10+=int(bc and not correct)
+        changed_frames+=int({r['candidate_uid']:r['public_id'] for r in d['outputs']}!={r['candidate_uid']:r['public_id'] for r in b['outputs']})
+        state_changed+=int(d['state_after']!=b['state_after'])
         target_correct.append((f,correct));baseline_correct.append((f,bc))
         identity=matched.get(uid)
         if previous_identity is not None and identity is not None:continuity_changes+=int(previous_identity!=identity)
@@ -101,7 +104,7 @@ def posthoc(sequence,frames,event,trace,baseline):
         persistent[f"H{h}"]={"eligible_corrections":len(eligible),"all_future_frames_persist":successes,"rate":successes/len(eligible) if eligible else None}
     memory_summary=memory_metrics(writes)
     return {"memory":memory_summary,"identity":{"competitive":competitive,"hard_negative_wins":rank1,"hard_negative_win_rate":rank1/competitive if competitive else None,"median_margin":float(np.median(margins)) if margins else None,"visible":visible,"covered":covered,"coverage":covered/visible if visible else None,"mean_state_drift":float(np.mean(drift)) if drift else None},
-        "target":{"strict_identity_correct_frames":sum(v for _,v in target_correct),"baseline_strict_correct_frames":sum(v for _,v in baseline_correct),"continuity_identity_changes":continuity_changes,"recoveries_from_NONE":recoveries,"non_target_correct_frame_damage":sum(other_damage),"persistent":persistent},
+        "target":{"strict_identity_correct_frames":sum(v for _,v in target_correct),"baseline_strict_correct_frames":sum(v for _,v in baseline_correct),"N01":N01,"N10":N10,"N01_minus_N10":N01-N10,"globally_changed_output_frames":changed_frames,"public_state_changed_frames":state_changed,"continuity_identity_changes":continuity_changes,"recoveries_from_NONE":recoveries,"non_target_correct_frame_damage":sum(other_damage),"persistent":persistent},
         "funnel":dict(funnel),"executed_interventions":takeovers,"GT_opened_only_after_runtime_sealed":True}
 
 
@@ -113,6 +116,11 @@ class EvaluationBatch:
         if sequence not in self.sequences:raise ValueError("evaluator sequence axis")
         if name not in self.names:self.names.append(name)
         b,manifest=baseline_trace(sequence);text=trajectory_text(trace);digest=hashlib.sha256(text.encode()).hexdigest()
+        expected_states=hashlib.sha256("".join(d["state_after"] for d in b).encode()).hexdigest()
+        source_state_match=None
+        if digest==manifest["trajectory_sha256"]:
+            source_state_match=profile.get("committed_state_stream_sha256")==expected_states
+            if not source_state_match:raise RuntimeError("identical MOT but source public-state stream differs")
         path=self.root/"trackers"/name/"data"/f"{sequence}.txt";path.parent.mkdir(parents=True,exist_ok=True);path.write_text(text)
         changes=[]
         for d,source in zip(trace,b):
@@ -122,7 +130,7 @@ class EvaluationBatch:
             if delta:changes.append({"frame":d["frame"],"changed_ownership":delta})
         artifact_path=ASSETS/"trajectories"/f"{digest}.jsonl.zst"
         artifact=stream_zstd(artifact_path,changes) if not artifact_path.exists() else {"path":str(artifact_path),"sha256":sha256(artifact_path),"rows":len(changes)}
-        audit={**profile,"sequence":sequence,"name":name,"trajectory_sha256":digest,"trajectory_rows":len(text.splitlines()),"delta":artifact,"base_trajectory_sha256":manifest["trajectory_sha256"],"base_trace_sha256":manifest["trace_sha256"],"base_trace_path":manifest["trace_path"],"complete_non_target_outputs":True,"delta_reconstruction_requires_only_existing_source_outputs_and_UID_public_changes":True}
+        audit={**profile,"sequence":sequence,"name":name,"trajectory_sha256":digest,"trajectory_rows":len(text.splitlines()),"delta":artifact,"base_trajectory_sha256":manifest["trajectory_sha256"],"base_trace_sha256":manifest["trace_sha256"],"base_trace_path":manifest["trace_path"],"source_state_stream_sha256":expected_states,"source_public_state_matches_when_MOT_is_identical":source_state_match,"complete_non_target_outputs":True,"delta_reconstruction_requires_only_existing_source_outputs_and_UID_public_changes":True}
         self.manifests.setdefault(name,{})[sequence]=audit
         return audit
     def evaluate(self):
@@ -135,6 +143,13 @@ class EvaluationBatch:
         log=stream_zstd(log_path,[{"stdout":Path(run["log"]).read_text()}])
         result={"metrics":metrics,"manifests":self.manifests,"command":run["command"],"returncode":run["returncode"],"log":log,"full_sequence":True,"same_evaluator_config_for_all_variants":True,"temporary_raw_MOT_copies_removed_after_sealing":True}
         write_json(OUT/"evaluations"/(self.group+".json"),result);return result
+    def add_existing(self,name,sequence,manifest):
+        """Reuse a sealed trajectory, not averaged per-fold HOTA numbers."""
+        if sequence not in self.sequences or not manifest.get('complete_non_target_outputs'):raise ValueError('incomplete full-sequence source')
+        text=reconstruct_mot(manifest)
+        if name not in self.names:self.names.append(name)
+        path=self.root/'trackers'/name/'data'/f'{sequence}.txt';path.parent.mkdir(parents=True,exist_ok=True);path.write_text(text)
+        self.manifests.setdefault(name,{})[sequence]={**manifest,'combined_reconstruction_SHA_verified':True}
     def close(self):self.temporary.cleanup()
 
 

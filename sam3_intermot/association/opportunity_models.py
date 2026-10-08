@@ -10,6 +10,7 @@ from .opportunity_tracker import FEATURE_NAMES
 class ActionValueModel(nn.Module):
     def __init__(self,family,feature_dim=len(FEATURE_NAMES)):
         super().__init__();self.family=family;self.feature_dim=feature_dim
+        self.guard_unidentifiable_state=True
         if family not in ("C2","C3","C4","C5","C6"):raise ValueError("not a learned action family")
         if family=="C2":
             if feature_dim!=len(FEATURE_NAMES):raise ValueError("scalar uses the action feature schema")
@@ -37,7 +38,7 @@ class ActionValueModel(nn.Module):
 
     def forward(self,features):
         x=(features-self.mean)/self.scale
-        if self.feature_dim==len(FEATURE_NAMES):
+        if self.guard_unidentifiable_state and self.feature_dim==len(FEATURE_NAMES):
             # The representation-independent supervision bank is P0. Its
             # query/anchor agreement, confirmation count, drift and update
             # count have no identifiable state variation. Do not let random
