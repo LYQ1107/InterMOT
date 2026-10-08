@@ -1,0 +1,877 @@
+{
+  "DEV": {
+    "baseline": {
+      "funnel": {
+        "eligible_frames": 8414,
+        "feasible_actions": 30806,
+        "predicted_beneficial_actions": 0,
+        "proposed_actions": 30806
+      },
+      "identity": {
+        "candidate_coverage": 0.7935835351089588,
+        "competitive": 6553,
+        "covered": 6555,
+        "hard_negative_win_rate": 0.22966580192278346,
+        "hard_negative_wins": 1505,
+        "per_sequence_mean_state_drift": {
+          "dancetrack0001": null,
+          "dancetrack0002": null,
+          "dancetrack0023": null,
+          "dancetrack0024": null,
+          "dancetrack0039": null,
+          "dancetrack0057": null,
+          "dancetrack0062": null,
+          "dancetrack0072": null
+        },
+        "per_sequence_median_margin": {
+          "dancetrack0001": -0.037309013307094574,
+          "dancetrack0002": -0.0889159170910716,
+          "dancetrack0023": -0.09355626255273819,
+          "dancetrack0024": -0.10344099998474121,
+          "dancetrack0039": -0.024288684129714966,
+          "dancetrack0057": -0.07334387302398682,
+          "dancetrack0062": -0.05185607075691223,
+          "dancetrack0072": -0.038291916251182556
+        },
+        "visible": 8260
+      },
+      "memory": {
+        "accepted_writes": 0,
+        "contamination_cascade_max_within_sequence": 0,
+        "correct_opportunities": 4873,
+        "correct_write_retention": 0.0,
+        "correct_writes": 0,
+        "eligible_write_opportunities": 7452,
+        "safety_pass": false,
+        "wrong_write_rate": null,
+        "wrong_writes": 0
+      },
+      "metrics": {
+        "AssA": 0.5433304753115834,
+        "DetA": 0.6230911682274578,
+        "FN": 12902.0,
+        "FP": 9157.0,
+        "HOTA": 0.5808919181126544,
+        "IDF1": 0.6175494256925472,
+        "IDSW": 250.0,
+        "LocA": 0.9010765894985205,
+        "MOTA": 0.5785506479767257,
+        "per_sequence": {
+          "dancetrack0001": {
+            "AssA": 0.8417261973770992,
+            "DetA": 0.7480983777932986,
+            "FN": 352.0,
+            "FP": 977.0,
+            "HOTA": 0.7935300609870402,
+            "IDF1": 0.8728107952914155,
+            "IDSW": 0.0,
+            "LocA": 0.9286530873496502,
+            "MOTA": 0.7294381107491856
+          },
+          "dancetrack0002": {
+            "AssA": 0.1778045257449533,
+            "DetA": 0.6084002707381235,
+            "FN": 2338.0,
+            "FP": 2061.0,
+            "HOTA": 0.3287472362880979,
+            "IDF1": 0.3420518725667599,
+            "IDSW": 90.0,
+            "LocA": 0.8893388529099466,
+            "MOTA": 0.5150696770011883
+          },
+          "dancetrack0023": {
+            "AssA": 0.37112627891455585,
+            "DetA": 0.5535793027232516,
+            "FN": 4035.0,
+            "FP": 2657.0,
+            "HOTA": 0.45243250050622374,
+            "IDF1": 0.5466115434500648,
+            "IDSW": 66.0,
+            "LocA": 0.857258561397597,
+            "MOTA": 0.48115163147792706
+          },
+          "dancetrack0024": {
+            "AssA": 0.8599236779801973,
+            "DetA": 0.8536343632765124,
+            "FN": 151.0,
+            "FP": 214.0,
+            "HOTA": 0.8567522738133547,
+            "IDF1": 0.9596126334323759,
+            "IDSW": 2.0,
+            "LocA": 0.9198801510359389,
+            "MOTA": 0.9186613475177305
+          },
+          "dancetrack0039": {
+            "AssA": 0.917798655316476,
+            "DetA": 0.9131167611945791,
+            "FN": 59.0,
+            "FP": 170.0,
+            "HOTA": 0.915434048115491,
+            "IDF1": 0.9800732004880033,
+            "IDSW": 4.0,
+            "LocA": 0.952682101699954,
+            "MOTA": 0.9617531188443861
+          },
+          "dancetrack0057": {
+            "AssA": 0.8413885272034443,
+            "DetA": 0.8036766329170778,
+            "FN": 263.0,
+            "FP": 268.0,
+            "HOTA": 0.8223158841445222,
+            "IDF1": 0.9113587227673374,
+            "IDSW": 1.0,
+            "LocA": 0.9294408620215295,
+            "MOTA": 0.8229027962716379
+          },
+          "dancetrack0062": {
+            "AssA": 0.3390642747805492,
+            "DetA": 0.6370096794287924,
+            "FN": 1709.0,
+            "FP": 525.0,
+            "HOTA": 0.4644991252184524,
+            "IDF1": 0.5456965394853593,
+            "IDSW": 17.0,
+            "LocA": 0.9076208602006244,
+            "MOTA": 0.6385097157539746
+          },
+          "dancetrack0072": {
+            "AssA": 0.09746463896188304,
+            "DetA": 0.24572245856549374,
+            "FN": 3995.0,
+            "FP": 2285.0,
+            "HOTA": 0.15468034267106398,
+            "IDF1": 0.1803960396039604,
+            "IDSW": 70.0,
+            "LocA": 0.8545143539497752,
+            "MOTA": -0.07535986452159187
+          }
+        },
+        "tracker": "BASELINE"
+      },
+      "paired_CI": {
+        "AssA": {
+          "CI95": [
+            0.0,
+            0.0
+          ],
+          "macro_delta": 0.0,
+          "official_combined_delta": 0.0,
+          "per_sequence_delta": {
+            "dancetrack0001": 0.0,
+            "dancetrack0002": 0.0,
+            "dancetrack0023": 0.0,
+            "dancetrack0024": 0.0,
+            "dancetrack0039": 0.0,
+            "dancetrack0057": 0.0,
+            "dancetrack0062": 0.0,
+            "dancetrack0072": 0.0
+          }
+        },
+        "DetA": {
+          "CI95": [
+            0.0,
+            0.0
+          ],
+          "macro_delta": 0.0,
+          "official_combined_delta": 0.0,
+          "per_sequence_delta": {
+            "dancetrack0001": 0.0,
+            "dancetrack0002": 0.0,
+            "dancetrack0023": 0.0,
+            "dancetrack0024": 0.0,
+            "dancetrack0039": 0.0,
+            "dancetrack0057": 0.0,
+            "dancetrack0062": 0.0,
+            "dancetrack0072": 0.0
+          }
+        },
+        "HOTA": {
+          "CI95": [
+            0.0,
+            0.0
+          ],
+          "macro_delta": 0.0,
+          "official_combined_delta": 0.0,
+          "per_sequence_delta": {
+            "dancetrack0001": 0.0,
+            "dancetrack0002": 0.0,
+            "dancetrack0023": 0.0,
+            "dancetrack0024": 0.0,
+            "dancetrack0039": 0.0,
+            "dancetrack0057": 0.0,
+            "dancetrack0062": 0.0,
+            "dancetrack0072": 0.0
+          }
+        },
+        "IDF1": {
+          "CI95": [
+            0.0,
+            0.0
+          ],
+          "macro_delta": 0.0,
+          "official_combined_delta": 0.0,
+          "per_sequence_delta": {
+            "dancetrack0001": 0.0,
+            "dancetrack0002": 0.0,
+            "dancetrack0023": 0.0,
+            "dancetrack0024": 0.0,
+            "dancetrack0039": 0.0,
+            "dancetrack0057": 0.0,
+            "dancetrack0062": 0.0,
+            "dancetrack0072": 0.0
+          }
+        },
+        "IDSW": {
+          "CI95": [
+            0.0,
+            0.0
+          ],
+          "macro_delta": 0.0,
+          "official_combined_delta": 0.0,
+          "per_sequence_delta": {
+            "dancetrack0001": 0.0,
+            "dancetrack0002": 0.0,
+            "dancetrack0023": 0.0,
+            "dancetrack0024": 0.0,
+            "dancetrack0039": 0.0,
+            "dancetrack0057": 0.0,
+            "dancetrack0062": 0.0,
+            "dancetrack0072": 0.0
+          }
+        }
+      },
+      "persistence": {
+        "H10": {
+          "all_future_frames_strictly_better_than_baseline": 0,
+          "correction_episode_onsets_with_full_horizon": 0,
+          "rate": null
+        },
+        "H30": {
+          "all_future_frames_strictly_better_than_baseline": 0,
+          "correction_episode_onsets_with_full_horizon": 0,
+          "rate": null
+        },
+        "H5": {
+          "all_future_frames_strictly_better_than_baseline": 0,
+          "correction_episode_onsets_with_full_horizon": 0,
+          "rate": null
+        }
+      },
+      "runtime": {
+        "cached_candidate_replay_CPU_only_not_live_SAM3_FPS": true,
+        "exact_policy_aliases_reuse_one_actual_runtime_measurement": true,
+        "frames": 8422,
+        "sum_seconds": 59.091642482999305
+      },
+      "target": {
+        "N01": 0,
+        "N10": 0,
+        "baseline_strict_correct_frames": 4873,
+        "continuity_identity_changes": 36,
+        "global_public_ownership_conflicts": 0,
+        "globally_changed_output_frames": 0,
+        "non_target_correct_frame_damage": 0,
+        "public_state_changed_frames": 0,
+        "recoveries_from_NONE": 0,
+        "same_preclick_outputs_as_R4": true,
+        "strict_identity_correct_frames": 4873
+      }
+    },
+    "final_selected": {
+      "funnel": {
+        "assignment_changed_frames": 6,
+        "authority_approved_frames": 6,
+        "correct_target_recovered_frames": 0,
+        "eligible_frames": 8414,
+        "feasible_actions": 31024,
+        "other_tracks_preserved_frames": 6,
+        "predicted_beneficial_actions": 6,
+        "proposed_actions": 31024
+      },
+      "identity": {
+        "candidate_coverage": 0.7935835351089588,
+        "competitive": 6553,
+        "covered": 6555,
+        "hard_negative_win_rate": 0.2623226003357241,
+        "hard_negative_wins": 1719,
+        "per_sequence_mean_state_drift": {
+          "dancetrack0001": null,
+          "dancetrack0002": null,
+          "dancetrack0023": null,
+          "dancetrack0024": 0.7903753746767819,
+          "dancetrack0039": null,
+          "dancetrack0057": null,
+          "dancetrack0062": null,
+          "dancetrack0072": null
+        },
+        "per_sequence_median_margin": {
+          "dancetrack0001": -0.037309013307094574,
+          "dancetrack0002": -0.0889159170910716,
+          "dancetrack0023": -0.09355626255273819,
+          "dancetrack0024": -0.02092086151242256,
+          "dancetrack0039": -0.024288684129714966,
+          "dancetrack0057": -0.07334387302398682,
+          "dancetrack0062": -0.05185607075691223,
+          "dancetrack0072": -0.038291916251182556
+        },
+        "visible": 8260
+      },
+      "memory": {
+        "accepted_writes": 260,
+        "contamination_cascade_max_within_sequence": 8,
+        "correct_opportunities": 5346,
+        "correct_write_retention": 0.045454545454545456,
+        "correct_writes": 243,
+        "eligible_write_opportunities": 7218,
+        "safety_pass": false,
+        "wrong_write_rate": 0.06538461538461539,
+        "wrong_writes": 17
+      },
+      "metrics": {
+        "AssA": 0.5551611832897211,
+        "DetA": 0.6231022794378103,
+        "FN": 12902.0,
+        "FP": 9157.0,
+        "HOTA": 0.5872323133193363,
+        "IDF1": 0.6277528078885266,
+        "IDSW": 254.0,
+        "LocA": 0.9010800971113206,
+        "MOTA": 0.5784750821778063,
+        "per_sequence": {
+          "dancetrack0001": {
+            "AssA": 0.8417261973770992,
+            "DetA": 0.7480983777932986,
+            "FN": 352.0,
+            "FP": 977.0,
+            "HOTA": 0.7935300609870402,
+            "IDF1": 0.8728107952914155,
+            "IDSW": 0.0,
+            "LocA": 0.9286530873496502,
+            "MOTA": 0.7294381107491856
+          },
+          "dancetrack0002": {
+            "AssA": 0.1778045257449533,
+            "DetA": 0.6084002707381235,
+            "FN": 2338.0,
+            "FP": 2061.0,
+            "HOTA": 0.3287472362880979,
+            "IDF1": 0.3420518725667599,
+            "IDSW": 90.0,
+            "LocA": 0.8893388529099466,
+            "MOTA": 0.5150696770011883
+          },
+          "dancetrack0023": {
+            "AssA": 0.37112627891455585,
+            "DetA": 0.5535793027232516,
+            "FN": 4035.0,
+            "FP": 2657.0,
+            "HOTA": 0.45243250050622374,
+            "IDF1": 0.5466115434500648,
+            "IDSW": 66.0,
+            "LocA": 0.857258561397597,
+            "MOTA": 0.48115163147792706
+          },
+          "dancetrack0024": {
+            "AssA": 0.8599236779801973,
+            "DetA": 0.8536343632765124,
+            "FN": 151.0,
+            "FP": 214.0,
+            "HOTA": 0.8567522738133547,
+            "IDF1": 0.9596126334323759,
+            "IDSW": 2.0,
+            "LocA": 0.9198801510359389,
+            "MOTA": 0.9186613475177305
+          },
+          "dancetrack0039": {
+            "AssA": 0.917798655316476,
+            "DetA": 0.9131167611945791,
+            "FN": 59.0,
+            "FP": 170.0,
+            "HOTA": 0.915434048115491,
+            "IDF1": 0.9800732004880033,
+            "IDSW": 4.0,
+            "LocA": 0.952682101699954,
+            "MOTA": 0.9617531188443861
+          },
+          "dancetrack0057": {
+            "AssA": 0.8413885272034443,
+            "DetA": 0.8036766329170778,
+            "FN": 263.0,
+            "FP": 268.0,
+            "HOTA": 0.8223158841445222,
+            "IDF1": 0.9113587227673374,
+            "IDSW": 1.0,
+            "LocA": 0.9294408620215295,
+            "MOTA": 0.8229027962716379
+          },
+          "dancetrack0062": {
+            "AssA": 0.44503424114771856,
+            "DetA": 0.6368945757989335,
+            "FN": 1709.0,
+            "FP": 525.0,
+            "HOTA": 0.5323098435579884,
+            "IDF1": 0.6395740905057675,
+            "IDSW": 16.0,
+            "LocA": 0.9076721925255874,
+            "MOTA": 0.6386703067287618
+          },
+          "dancetrack0072": {
+            "AssA": 0.09698835752952412,
+            "DetA": 0.24586094167473013,
+            "FN": 3995.0,
+            "FP": 2285.0,
+            "HOTA": 0.15433239118436506,
+            "IDF1": 0.1788118811881188,
+            "IDSW": 75.0,
+            "LocA": 0.8545047091265071,
+            "MOTA": -0.07620660457239628
+          }
+        },
+        "tracker": "FINAL_SELECTED"
+      },
+      "paired_CI": {
+        "AssA": {
+          "CI95": [
+            -0.00017860553713459557,
+            0.039738737387688516
+          ],
+          "macro_delta": 0.013186710616851307,
+          "official_combined_delta": 0.011830707978137678,
+          "per_sequence_delta": {
+            "dancetrack0001": 0.0,
+            "dancetrack0002": 0.0,
+            "dancetrack0023": 0.0,
+            "dancetrack0024": 0.0,
+            "dancetrack0039": 0.0,
+            "dancetrack0057": 0.0,
+            "dancetrack0062": 0.10596996636716938,
+            "dancetrack0072": -0.0004762814323589215
+          }
+        },
+        "DetA": {
+          "CI95": [
+            -4.316386119708471e-05,
+            5.193116596364719e-05
+          ],
+          "macro_delta": 2.9224349221874946e-06,
+          "official_combined_delta": 1.1111210352465761e-05,
+          "per_sequence_delta": {
+            "dancetrack0001": 0.0,
+            "dancetrack0002": 0.0,
+            "dancetrack0023": 0.0,
+            "dancetrack0024": 0.0,
+            "dancetrack0039": 0.0,
+            "dancetrack0057": 0.0,
+            "dancetrack0062": -0.00011510362985889255,
+            "dancetrack0072": 0.0001384831092363925
+          }
+        },
+        "HOTA": {
+          "CI95": [
+            -0.00013048180751209365,
+            0.025429019377326
+          ],
+          "macro_delta": 0.008432845856604636,
+          "official_combined_delta": 0.006340395206681948,
+          "per_sequence_delta": {
+            "dancetrack0001": 0.0,
+            "dancetrack0002": 0.0,
+            "dancetrack0023": 0.0,
+            "dancetrack0024": 0.0,
+            "dancetrack0039": 0.0,
+            "dancetrack0057": 0.0,
+            "dancetrack0062": 0.067810718339536,
+            "dancetrack0072": -0.0003479514866989164
+          }
+        },
+        "IDF1": {
+          "CI95": [
+            -0.0005940594059405946,
+            0.03520408163265307
+          ],
+          "macro_delta": 0.011536674075570824,
+          "official_combined_delta": 0.010203382195979382,
+          "per_sequence_delta": {
+            "dancetrack0001": 0.0,
+            "dancetrack0002": 0.0,
+            "dancetrack0023": 0.0,
+            "dancetrack0024": 0.0,
+            "dancetrack0039": 0.0,
+            "dancetrack0057": 0.0,
+            "dancetrack0062": 0.09387755102040818,
+            "dancetrack0072": -0.0015841584158415856
+          }
+        },
+        "IDSW": {
+          "CI95": [
+            -0.375,
+            1.875
+          ],
+          "macro_delta": 0.5,
+          "official_combined_delta": 4.0,
+          "per_sequence_delta": {
+            "dancetrack0001": 0.0,
+            "dancetrack0002": 0.0,
+            "dancetrack0023": 0.0,
+            "dancetrack0024": 0.0,
+            "dancetrack0039": 0.0,
+            "dancetrack0057": 0.0,
+            "dancetrack0062": -1.0,
+            "dancetrack0072": 5.0
+          }
+        }
+      },
+      "persistence": {
+        "H10": {
+          "all_future_frames_strictly_better_than_baseline": 8,
+          "correction_episode_onsets_with_full_horizon": 18,
+          "rate": 0.4444444444444444
+        },
+        "H30": {
+          "all_future_frames_strictly_better_than_baseline": 5,
+          "correction_episode_onsets_with_full_horizon": 18,
+          "rate": 0.2777777777777778
+        },
+        "H5": {
+          "all_future_frames_strictly_better_than_baseline": 10,
+          "correction_episode_onsets_with_full_horizon": 18,
+          "rate": 0.5555555555555556
+        }
+      },
+      "runtime": {
+        "cached_candidate_replay_CPU_only_not_live_SAM3_FPS": true,
+        "exact_policy_aliases_reuse_one_actual_runtime_measurement": true,
+        "frames": 8422,
+        "sum_seconds": 69.884406071993
+      },
+      "target": {
+        "N01": 489,
+        "N10": 16,
+        "baseline_strict_correct_frames": 4873,
+        "continuity_identity_changes": 33,
+        "global_public_ownership_conflicts": 0,
+        "globally_changed_output_frames": 1353,
+        "non_target_correct_frame_damage": 205,
+        "public_state_changed_frames": 1996,
+        "recoveries_from_NONE": 4,
+        "same_preclick_outputs_as_R4": true,
+        "strict_identity_correct_frames": 5346
+      }
+    },
+    "gate": {
+      "CI_lower_gt_zero": false,
+      "delta_AssA": 0.011830707978137678,
+      "delta_DetA": 1.1111210352465761e-05,
+      "delta_HOTA": 0.006340395206681948,
+      "macro_HOTA_CI95": [
+        -0.00013048180751209365,
+        0.025429019377326
+      ],
+      "numerical_DEVELOPMENT_gate_pass": true
+    }
+  },
+  "VAL": {
+    "historically_exposed_not_virgin": true,
+    "paired_bootstrap": {
+      "AssA": {
+        "CI95": [
+          -0.002715340068685891,
+          0.000511117860131552
+        ],
+        "macro_delta": -0.000667322567588824,
+        "official_combined_delta": -0.0014765374720405733
+      },
+      "DetA": {
+        "CI95": [
+          -9.602778479652785e-05,
+          1.1767012431993517e-05
+        ],
+        "macro_delta": -3.209666694160784e-05,
+        "official_combined_delta": -3.6102339839305664e-05
+      },
+      "HOTA": {
+        "CI95": [
+          -0.0014836671370684717,
+          0.0003238600903715939
+        ],
+        "macro_delta": -0.00034576933631618454,
+        "official_combined_delta": -0.0007190102829486844
+      },
+      "IDF1": {
+        "CI95": [
+          -0.00021642916479704732,
+          0.0007961655428026404
+        ],
+        "macro_delta": 0.00019401748871091583,
+        "official_combined_delta": 6.763399381148893e-05
+      },
+      "IDSW": {
+        "CI95": [
+          -0.2,
+          0.28
+        ],
+        "macro_delta": 0.04,
+        "official_combined_delta": 1.0
+      }
+    },
+    "policy_sha256": "28170a271fcdf566022500275ad2ac16f160062a47d27d38b0249902928f897d",
+    "summary": {
+      "BASELINE": {
+        "CPU_cached_replay_seconds": 300.9015651999798,
+        "N01": 0,
+        "N10": 0,
+        "frames": 25508,
+        "global_conflicts": 0,
+        "globally_changed_output_frames": 0,
+        "memory": {
+          "accepted_writes": 0,
+          "contamination_cascade_max_within_sequence": 0,
+          "correct_opportunities": 13215,
+          "correct_write_retention": 0.0,
+          "correct_writes": 0,
+          "eligible_write_opportunities": 20629,
+          "safety_pass": false,
+          "wrong_write_rate": null,
+          "wrong_writes": 0
+        },
+        "metrics": {
+          "AssA": 0.5118588672229311,
+          "DetA": 0.46917169533441927,
+          "FN": 91164.0,
+          "FP": 54861.0,
+          "HOTA": 0.4878651520620449,
+          "IDF1": 0.5211827253117807,
+          "IDSW": 1832.0,
+          "LocA": 0.8609944576195884,
+          "MOTA": 0.343289747188516
+        },
+        "non_target_damage_proxy": 0
+      },
+      "TREATMENT": {
+        "CPU_cached_replay_seconds": 514.2296710599985,
+        "N01": 35,
+        "N10": 0,
+        "frames": 25508,
+        "global_conflicts": 0,
+        "globally_changed_output_frames": 527,
+        "memory": {
+          "accepted_writes": 0,
+          "contamination_cascade_max_within_sequence": 0,
+          "correct_opportunities": 13250,
+          "correct_write_retention": 0.0,
+          "correct_writes": 0,
+          "eligible_write_opportunities": 20608,
+          "safety_pass": false,
+          "wrong_write_rate": null,
+          "wrong_writes": 0
+        },
+        "metrics": {
+          "AssA": 0.5103823297508905,
+          "DetA": 0.46913559299457996,
+          "FN": 91164.0,
+          "FP": 54861.0,
+          "HOTA": 0.4871461417790962,
+          "IDF1": 0.5212503593055922,
+          "IDSW": 1833.0,
+          "LocA": 0.8610015949098415,
+          "MOTA": 0.3432853056656066
+        },
+        "non_target_damage_proxy": 0
+      }
+    }
+  },
+  "VAL_ownership_audit_sha256": "433c22dd529e7b8146413f98dcc234faecea88d165fd6d62c3a1935254a3aa31",
+  "VAL_tuning": false,
+  "all_R0_R8_completed": true,
+  "checkpoint_manifest_sha256": "f912f6689600c8df22820832e3e7540f168c7b716623201ec230764fce20edc9",
+  "final_decision": "FAIL_VAL_GENERALIZATION",
+  "goal": "Global Counterfactual Association Opportunity Discovery and Safe Persistent Identity Intervention",
+  "goal_file": "outputs/N72R20R4R1/FINAL_GOAL.json",
+  "natural_training_events": {
+    "H10_H30_sha_stratified_not_population_estimate": true,
+    "horizons": {
+      "H1": {
+        "beneficial": 904,
+        "executed": 18667,
+        "harmful": 16811,
+        "mean_other_damage": 1.0035356511490867,
+        "mean_value": -3.902662452456206,
+        "positive_target_gain_but_global_harm": 110
+      },
+      "H10": {
+        "beneficial": 212,
+        "executed": 679,
+        "harmful": 310,
+        "mean_other_damage": 0.47393225331369654,
+        "mean_value": -1.567304860088365,
+        "positive_target_gain_but_global_harm": 2
+      },
+      "H30": {
+        "beneficial": 237,
+        "executed": 679,
+        "harmful": 317,
+        "mean_other_damage": 0.4756504663721159,
+        "mean_value": -1.5727049582719688,
+        "positive_target_gain_but_global_harm": 3
+      },
+      "H5": {
+        "beneficial": 997,
+        "executed": 18667,
+        "harmful": 16879,
+        "mean_other_damage": 1.0053570471955857,
+        "mean_value": -3.9022231745861675,
+        "positive_target_gain_but_global_harm": 113
+      }
+    },
+    "long_strata": {
+      "harmful": 306,
+      "neutral": 174,
+      "positive": 199
+    },
+    "no_overlapping_local_gain_sum_as_full_HOTA": true
+  },
+  "next_stage_authorized": false,
+  "not_run_branches": [
+    {
+      "branch": "LEARNED_POSITIVE_HISTORY_RELIABILITY",
+      "reason": "Zero actual source activation; cannot identify or fabricate supervised samples.",
+      "substitute": "Actual positive-soft-zero equivalence and engineering hard-negative preservation tests."
+    },
+    {
+      "branch": "BOTH_LEARNED_NATIVE_AND_POSITIVE_RELIABILITY",
+      "reason": "Positive component has no natural active observations; two identified learned components do not exist.",
+      "substitute": "Actual native-only/full-joint learned controls plus positive-zero equivalence; do not claim a learned positive component."
+    }
+  ],
+  "opportunity_event_table_sha256": "74a0b88783cf839112ed201670383b358328ef4e56c7eeaee6c4255e0c0e3019",
+  "regression": {
+    "activated_PATH": "/data3/liuyeqiang/InterMOT/.venv/bin",
+    "command": [
+      "/data3/liuyeqiang/InterMOT/.venv/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests"
+    ],
+    "failed_tests": [
+      "tests/test_n6_identity_namespace.py::test_single_person_wrong_id_correction_restores_public_id",
+      "tests/test_n6_identity_namespace.py::test_trackeval_synthetic_regression",
+      "tests/test_n72r20r3r2r3_pipeline.py::test_local_branch_is_expected - A...",
+      "tests/test_n7_baseline_preservation.py::test_n7_t12_correction_adds_no_idsw_to_others",
+      "tests/test_n8_temporal_observer.py::test_n8_t15_trackeval_idsw_drops_after_correction"
+    ],
+    "failure_classification": {
+      "actual_stat_list_TypeError_occurrences": 4,
+      "historical_literal_branch_name_assertion": 1,
+      "new_stage_failures": 0,
+      "pinned_TrackEval_direct_CLI_SEQMAP_FILE_list_TypeError": 4
+    },
+    "final_selected_suites": {
+      "new_stage": {
+        "command": [
+          "/data3/liuyeqiang/InterMOT/.venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_n72r20r4r1_analytics.py",
+          "tests/test_n72r20r4r1_evaluation.py",
+          "tests/test_n72r20r4r1_frozen_runtime.py",
+          "tests/test_n72r20r4r1_models.py",
+          "tests/test_n72r20r4r1_outer.py",
+          "tests/test_n72r20r4r1_runtime.py",
+          "tests/test_n72r20r4r1_solver.py",
+          "tests/test_n72r20r4r1_val.py"
+        ],
+        "log": {
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4R1_assets/evaluation_logs/new_stage_6e6b9c43207dcd047337a12dabe8b515166a6ec0c13cb840ae8ab613138e5fc8.jsonl.zst",
+          "rows": 1,
+          "sha256": "4004080d652aaa21bc621349f4349e467fb8f5dce7555c2ca8ddf9db0e416c98",
+          "uncompressed_sha256": "dc254a11866becde12022e6028ba9c175c4398a127cf1acf54d1bf9ec1f39741"
+        },
+        "returncode": 0,
+        "summary": [
+          "85 passed in 3.12s"
+        ]
+      },
+      "new_stage_and_R4_dependencies": {
+        "command": [
+          "/data3/liuyeqiang/InterMOT/.venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_n72r20r4_adapter.py",
+          "tests/test_n72r20r4_causality.py",
+          "tests/test_n72r20r4_diagnostics.py",
+          "tests/test_n72r20r4_global_solver.py",
+          "tests/test_n72r20r4_memory.py",
+          "tests/test_n72r20r4_posthoc.py",
+          "tests/test_n72r20r4_publish_git.py",
+          "tests/test_n72r20r4_reporting.py",
+          "tests/test_n72r20r4_storage.py",
+          "tests/test_n72r20r4_trackeval.py",
+          "tests/test_n72r20r4r1_analytics.py",
+          "tests/test_n72r20r4r1_evaluation.py",
+          "tests/test_n72r20r4r1_frozen_runtime.py",
+          "tests/test_n72r20r4r1_models.py",
+          "tests/test_n72r20r4r1_outer.py",
+          "tests/test_n72r20r4r1_runtime.py",
+          "tests/test_n72r20r4r1_solver.py",
+          "tests/test_n72r20r4r1_val.py"
+        ],
+        "log": {
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4R1_assets/evaluation_logs/new_stage_and_R4_dependencies_594d9fa07fab75e89724954bd2a438ff96f8a923536d9d0067ff4b268f281657.jsonl.zst",
+          "rows": 1,
+          "sha256": "6ac39d616dca974740522cbe302bc9d15957da8acd0b8130f1c2b7decf69634a",
+          "uncompressed_sha256": "8e12afc664ec187d10e477ecbd22279457d3e4f094a44b80d4df3fd0d36c2e24"
+        },
+        "returncode": 0,
+        "summary": [
+          "116 passed in 3.24s"
+        ]
+      }
+    },
+    "first_unactivated_attempt": {
+      "failed": 5,
+      "passed": 708,
+      "two_N6_subprocess_failures_were_missing_python_in_PATH": true
+    },
+    "historical_tests_and_third_party_not_modified_to_force_PASS": true,
+    "log": {
+      "path": "/data3/liuyeqiang/InterMOT_N72R20R4R1_assets/evaluation_logs/FULL_REPOSITORY_REGRESSION_ACTIVATED_PATH_7f93d7ac1a8a9b0ad66ebed7e6284781e8c043fa6f5acfcfbb225a5b9e35ffbe.jsonl.zst",
+      "rows": 1,
+      "sha256": "88f1522f96838694098ab0097efad14eabc29ddc31a1f81c0e82f06dcfac27e7",
+      "uncompressed_sha256": "7de4788bbf7a418f3fb60c43098f73a947667292663174ccce29fd10d5c109cb"
+    },
+    "previous_new_stage_and_R4_selected_dependency_suite": {
+      "failed": 0,
+      "new_stage_only_passed": 79,
+      "passed": 110
+    },
+    "returncode": 1,
+    "summary": [
+      "5 failed, 714 passed, 4 warnings in 53.77s"
+    ]
+  },
+  "resource_snapshot": {
+    "experimental_guard_status": "HARD_FLOOR_REACHED_NO_NEW_EXPERIMENTS",
+    "experimental_guard_unchanged": true,
+    "free_bytes": 104824659968,
+    "guard_error": "FAIL_ASSET_OR_STORAGE: 97.6256 GiB free; no new heavy cache",
+    "heavy_cache_forbidden": true,
+    "only_existing_evidence_report_and_Git_delivery": true,
+    "own_stage_bytes": 10907494
+  },
+  "runtime_GT_used": false,
+  "scientific_success": false,
+  "secondary_bottlenecks": [
+    "FAIL_CONTROLLER_VALUE_GENERALIZATION",
+    "FAIL_MEMORY_CONTAMINATION",
+    "FAIL_IDENTITY_EVIDENCE_DISCRIMINATION",
+    "FAIL_TARGET_CORRECTION_PERSISTENCE",
+    "NATIVE_RELIABILITY_P1_TO_P0_STATE_SHIFT",
+    "COUNTERFACTUAL_PROXY_NOT_FULL_MOT_OBJECTIVE"
+  ],
+  "stage": "N72R20R4R1",
+  "status": "SCIENTIFIC_EXECUTION_COMPLETE_GIT_DELIVERY_PENDING",
+  "test_accessed": false
+}

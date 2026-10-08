@@ -1,0 +1,108 @@
+{
+  "activated_PATH": "/data3/liuyeqiang/InterMOT/.venv/bin",
+  "command": [
+    "/data3/liuyeqiang/InterMOT/.venv/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "tests"
+  ],
+  "failed_tests": [
+    "tests/test_n6_identity_namespace.py::test_single_person_wrong_id_correction_restores_public_id",
+    "tests/test_n6_identity_namespace.py::test_trackeval_synthetic_regression",
+    "tests/test_n72r20r3r2r3_pipeline.py::test_local_branch_is_expected - A...",
+    "tests/test_n7_baseline_preservation.py::test_n7_t12_correction_adds_no_idsw_to_others",
+    "tests/test_n8_temporal_observer.py::test_n8_t15_trackeval_idsw_drops_after_correction"
+  ],
+  "failure_classification": {
+    "actual_stat_list_TypeError_occurrences": 4,
+    "historical_literal_branch_name_assertion": 1,
+    "new_stage_failures": 0,
+    "pinned_TrackEval_direct_CLI_SEQMAP_FILE_list_TypeError": 4
+  },
+  "final_selected_suites": {
+    "new_stage": {
+      "command": [
+        "/data3/liuyeqiang/InterMOT/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_n72r20r4r1_analytics.py",
+        "tests/test_n72r20r4r1_evaluation.py",
+        "tests/test_n72r20r4r1_frozen_runtime.py",
+        "tests/test_n72r20r4r1_models.py",
+        "tests/test_n72r20r4r1_outer.py",
+        "tests/test_n72r20r4r1_runtime.py",
+        "tests/test_n72r20r4r1_solver.py",
+        "tests/test_n72r20r4r1_val.py"
+      ],
+      "log": {
+        "path": "/data3/liuyeqiang/InterMOT_N72R20R4R1_assets/evaluation_logs/new_stage_6e6b9c43207dcd047337a12dabe8b515166a6ec0c13cb840ae8ab613138e5fc8.jsonl.zst",
+        "rows": 1,
+        "sha256": "4004080d652aaa21bc621349f4349e467fb8f5dce7555c2ca8ddf9db0e416c98",
+        "uncompressed_sha256": "dc254a11866becde12022e6028ba9c175c4398a127cf1acf54d1bf9ec1f39741"
+      },
+      "returncode": 0,
+      "summary": [
+        "85 passed in 3.12s"
+      ]
+    },
+    "new_stage_and_R4_dependencies": {
+      "command": [
+        "/data3/liuyeqiang/InterMOT/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_n72r20r4_adapter.py",
+        "tests/test_n72r20r4_causality.py",
+        "tests/test_n72r20r4_diagnostics.py",
+        "tests/test_n72r20r4_global_solver.py",
+        "tests/test_n72r20r4_memory.py",
+        "tests/test_n72r20r4_posthoc.py",
+        "tests/test_n72r20r4_publish_git.py",
+        "tests/test_n72r20r4_reporting.py",
+        "tests/test_n72r20r4_storage.py",
+        "tests/test_n72r20r4_trackeval.py",
+        "tests/test_n72r20r4r1_analytics.py",
+        "tests/test_n72r20r4r1_evaluation.py",
+        "tests/test_n72r20r4r1_frozen_runtime.py",
+        "tests/test_n72r20r4r1_models.py",
+        "tests/test_n72r20r4r1_outer.py",
+        "tests/test_n72r20r4r1_runtime.py",
+        "tests/test_n72r20r4r1_solver.py",
+        "tests/test_n72r20r4r1_val.py"
+      ],
+      "log": {
+        "path": "/data3/liuyeqiang/InterMOT_N72R20R4R1_assets/evaluation_logs/new_stage_and_R4_dependencies_594d9fa07fab75e89724954bd2a438ff96f8a923536d9d0067ff4b268f281657.jsonl.zst",
+        "rows": 1,
+        "sha256": "6ac39d616dca974740522cbe302bc9d15957da8acd0b8130f1c2b7decf69634a",
+        "uncompressed_sha256": "8e12afc664ec187d10e477ecbd22279457d3e4f094a44b80d4df3fd0d36c2e24"
+      },
+      "returncode": 0,
+      "summary": [
+        "116 passed in 3.24s"
+      ]
+    }
+  },
+  "first_unactivated_attempt": {
+    "failed": 5,
+    "passed": 708,
+    "two_N6_subprocess_failures_were_missing_python_in_PATH": true
+  },
+  "historical_tests_and_third_party_not_modified_to_force_PASS": true,
+  "log": {
+    "path": "/data3/liuyeqiang/InterMOT_N72R20R4R1_assets/evaluation_logs/FULL_REPOSITORY_REGRESSION_ACTIVATED_PATH_7f93d7ac1a8a9b0ad66ebed7e6284781e8c043fa6f5acfcfbb225a5b9e35ffbe.jsonl.zst",
+    "rows": 1,
+    "sha256": "88f1522f96838694098ab0097efad14eabc29ddc31a1f81c0e82f06dcfac27e7",
+    "uncompressed_sha256": "7de4788bbf7a418f3fb60c43098f73a947667292663174ccce29fd10d5c109cb"
+  },
+  "previous_new_stage_and_R4_selected_dependency_suite": {
+    "failed": 0,
+    "new_stage_only_passed": 79,
+    "passed": 110
+  },
+  "returncode": 1,
+  "summary": [
+    "5 failed, 714 passed, 4 warnings in 53.77s"
+  ]
+}

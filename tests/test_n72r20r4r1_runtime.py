@@ -163,5 +163,8 @@ def test_fold_reader_excludes_outer_and_inner(sequence):
 
 
 @pytest.mark.parametrize("split",["val","test","MOT17"])
-def test_val_is_gated_and_test_never_authorized(split):
+def test_val_is_gated_and_test_never_authorized(split,monkeypatch,tmp_path):
+    # Stage progress must not change this engineering fixture's pre-freeze state.
+    import scripts.n72r20r4r1_common as common
+    monkeypatch.setattr(common,'OUT',tmp_path)
     with pytest.raises(ValueError):events(split)

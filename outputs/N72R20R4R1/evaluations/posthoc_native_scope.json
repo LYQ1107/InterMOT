@@ -1,0 +1,886 @@
+{
+  "command": [
+    "/data3/liuyeqiang/InterMOT/.venv/bin/python",
+    "/data3/liuyeqiang/InterMOT/scripts/n72r20r3r2r3_trackeval_entry.py",
+    "/data3/liuyeqiang/InterMOT/third_party/MOTIP/TrackEval/scripts/run_mot_challenge.py",
+    "--GT_FOLDER",
+    "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train",
+    "--TRACKERS_FOLDER",
+    "/tmp/intermot-r4r1-eval-fjhi_bfw/trackers",
+    "--TRACKERS_TO_EVAL",
+    "POSTHOC_TARGET_NATIVE_ZERO",
+    "--TRACKER_SUB_FOLDER",
+    "data",
+    "--OUTPUT_FOLDER",
+    "/tmp/intermot-r4r1-eval-fjhi_bfw/eval",
+    "--OUTPUT_SUB_FOLDER",
+    "",
+    "--SEQMAP_FILE",
+    "/tmp/intermot-r4r1-eval-fjhi_bfw/seqmap.txt",
+    "--BENCHMARK",
+    "DanceTrack",
+    "--SPLIT_TO_EVAL",
+    "train",
+    "--SKIP_SPLIT_FOL",
+    "True",
+    "--DO_PREPROC",
+    "False",
+    "--CLASSES_TO_EVAL",
+    "pedestrian",
+    "--METRICS",
+    "HOTA",
+    "CLEAR",
+    "Identity",
+    "--USE_PARALLEL",
+    "False",
+    "--PLOT_CURVES",
+    "False",
+    "--PRINT_RESULTS",
+    "True",
+    "--PRINT_ONLY_COMBINED",
+    "False",
+    "--OUTPUT_SUMMARY",
+    "True",
+    "--OUTPUT_DETAILED",
+    "True"
+  ],
+  "full_sequence": true,
+  "log": {
+    "path": "/data3/liuyeqiang/InterMOT_N72R20R4R1_assets/evaluation_logs/posthoc_native_scope.jsonl.zst",
+    "rows": 1,
+    "sha256": "5066c80015d370d036eca51d6755ef2f145a8c2bb9fd5228d9df86cbb0d57f9d",
+    "uncompressed_sha256": "c961cac095ff38c2b031e855be71f0aa9425bcc2ba7375b658d4d87ffcfb2f55"
+  },
+  "manifests": {
+    "POSTHOC_TARGET_NATIVE_ZERO": {
+      "dancetrack0001": {
+        "adapter_calls": 702,
+        "adapter_manifest": [
+          {
+            "actual_training_sequences": [
+              "dancetrack0023",
+              "dancetrack0024",
+              "dancetrack0039",
+              "dancetrack0057",
+              "dancetrack0062",
+              "dancetrack0072"
+            ],
+            "parameters": 0,
+            "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0001__seed720321.pt",
+            "seed": 720321,
+            "sha256": "9ae70ee85761b6d3d5907ee2a76f790facc760d48da5e5245e95443829a94425"
+          },
+          {
+            "actual_training_sequences": [
+              "dancetrack0023",
+              "dancetrack0024",
+              "dancetrack0039",
+              "dancetrack0057",
+              "dancetrack0062",
+              "dancetrack0072"
+            ],
+            "parameters": 0,
+            "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0001__seed720322.pt",
+            "seed": 720322,
+            "sha256": "679f37f6dc83a5a1d96195a4281a0d52a549c7986094c102b401caaceb4d9c4d"
+          },
+          {
+            "actual_training_sequences": [
+              "dancetrack0023",
+              "dancetrack0024",
+              "dancetrack0039",
+              "dancetrack0057",
+              "dancetrack0062",
+              "dancetrack0072"
+            ],
+            "parameters": 0,
+            "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0001__seed720323.pt",
+            "seed": 720323,
+            "sha256": "035aa5d3051f6e0a5b4aee90ad9bdf487e2904bcd8497f0fe6bbf7097001112f"
+          }
+        ],
+        "base_trace_path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/dev/traces/B1_CAUSAL_BASELINE/dancetrack0001.jsonl.zst",
+        "base_trace_sha256": "4bda092c38cb7b3a639d13e0646780a673b43d1a5715484a8791a1cfc48c52f6",
+        "base_trajectory_sha256": "6757ec0f301dea8f43956f52e4d95056f4f4deee9a60b423bfe626c51ba1904f",
+        "committed_state_stream_sha256": "ad7481df53e23d6ef57ef9ddd712ac8d461fbaea9caade0f17a61ad15fb18115",
+        "complete_non_target_outputs": true,
+        "controller_manifest": [],
+        "delta": {
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4R1_assets/trajectories/6757ec0f301dea8f43956f52e4d95056f4f4deee9a60b423bfe626c51ba1904f.jsonl.zst",
+          "rows": 0,
+          "sha256": "f96deff1816083fdff8bc3e46c3fe6ca46a6bb49f4d5a00627616c13237a512c"
+        },
+        "delta_reconstruction_requires_only_existing_source_outputs_and_UID_public_changes": true,
+        "frames": 703,
+        "memory_policy": {
+          "anchor_min": 0.3,
+          "confirmation_k": 2,
+          "family": "P0",
+          "probability_min": 0.9
+        },
+        "memory_predictor_manifest": [],
+        "name": "POSTHOC_TARGET_NATIVE_ZERO",
+        "native_predictor_manifest": [],
+        "policy": {
+          "beneficial_min": 0.7,
+          "discount_scope": "target",
+          "family": "C0",
+          "harmful_max": 0.3,
+          "native_discount": 0.0,
+          "positive_discount": 1.0,
+          "source": "adapter",
+          "strength": 1.0,
+          "top_k": 5,
+          "value_min": 0.0
+        },
+        "proposal_stream_sha256": "b2ce24ac59e24fc6fe8cbca0bbed3fe49f9b70ee6cff26fd3ede5fe7dfb8cd32",
+        "runtime_GT_used": false,
+        "score_before_write": true,
+        "seconds": 9.21843627600174,
+        "sequence": "dancetrack0001",
+        "source_public_state_matches_when_MOT_is_identical": true,
+        "source_state_stream_sha256": "ad7481df53e23d6ef57ef9ddd712ac8d461fbaea9caade0f17a61ad15fb18115",
+        "trajectory_rows": 5537,
+        "trajectory_sha256": "6757ec0f301dea8f43956f52e4d95056f4f4deee9a60b423bfe626c51ba1904f"
+      },
+      "dancetrack0002": {
+        "adapter_calls": 1202,
+        "adapter_manifest": [
+          {
+            "actual_training_sequences": [
+              "dancetrack0001",
+              "dancetrack0024",
+              "dancetrack0039",
+              "dancetrack0057",
+              "dancetrack0062",
+              "dancetrack0072"
+            ],
+            "parameters": 0,
+            "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0002__seed720321.pt",
+            "seed": 720321,
+            "sha256": "fa9e6875da53c40c084c6332a1f460d78915e7eeae1f3682a51350eecf9d8204"
+          },
+          {
+            "actual_training_sequences": [
+              "dancetrack0001",
+              "dancetrack0024",
+              "dancetrack0039",
+              "dancetrack0057",
+              "dancetrack0062",
+              "dancetrack0072"
+            ],
+            "parameters": 0,
+            "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0002__seed720322.pt",
+            "seed": 720322,
+            "sha256": "de82b23bf9db054b37ecd60cbb9a5a22fb4643caf9ec92b067f1d9baab86468d"
+          },
+          {
+            "actual_training_sequences": [
+              "dancetrack0001",
+              "dancetrack0024",
+              "dancetrack0039",
+              "dancetrack0057",
+              "dancetrack0062",
+              "dancetrack0072"
+            ],
+            "parameters": 0,
+            "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0002__seed720323.pt",
+            "seed": 720323,
+            "sha256": "babda3054ba0042962a9d78b8879e815c887c34d174b33f63fa58f3587b6ad54"
+          }
+        ],
+        "base_trace_path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/dev/traces/B1_CAUSAL_BASELINE/dancetrack0002.jsonl.zst",
+        "base_trace_sha256": "de1279fa4642a51193d529dbe74a8fc8af24481dfeb42832a5a7c68a55ee4ca7",
+        "base_trajectory_sha256": "619940532d6bc5816d49f182b596fed57caa8d7037a4a9825a6ee677d3cdb115",
+        "committed_state_stream_sha256": "d4c89d44c0f4f38df0d8035a32bb13309d29116e68fcf144bbeb3c99570b2a7f",
+        "complete_non_target_outputs": true,
+        "controller_manifest": [],
+        "delta": {
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4R1_assets/trajectories/619940532d6bc5816d49f182b596fed57caa8d7037a4a9825a6ee677d3cdb115.jsonl.zst",
+          "rows": 0,
+          "sha256": "f96deff1816083fdff8bc3e46c3fe6ca46a6bb49f4d5a00627616c13237a512c"
+        },
+        "delta_reconstruction_requires_only_existing_source_outputs_and_UID_public_changes": true,
+        "frames": 1203,
+        "memory_policy": {
+          "anchor_min": 0.3,
+          "confirmation_k": 2,
+          "family": "P0",
+          "probability_min": 0.9
+        },
+        "memory_predictor_manifest": [],
+        "name": "POSTHOC_TARGET_NATIVE_ZERO",
+        "native_predictor_manifest": [],
+        "policy": {
+          "beneficial_min": 0.7,
+          "discount_scope": "target",
+          "family": "C0",
+          "harmful_max": 0.3,
+          "native_discount": 0.0,
+          "positive_discount": 1.0,
+          "source": "adapter",
+          "strength": 1.0,
+          "top_k": 5,
+          "value_min": 0.0
+        },
+        "proposal_stream_sha256": "3d8d18758e896b108b549374b7a1bd62ceaaf1454a3a31d286edd4548c1233f2",
+        "runtime_GT_used": false,
+        "score_before_write": true,
+        "seconds": 15.792939453000145,
+        "sequence": "dancetrack0002",
+        "source_public_state_matches_when_MOT_is_identical": true,
+        "source_state_stream_sha256": "d4c89d44c0f4f38df0d8035a32bb13309d29116e68fcf144bbeb3c99570b2a7f",
+        "trajectory_rows": 8980,
+        "trajectory_sha256": "619940532d6bc5816d49f182b596fed57caa8d7037a4a9825a6ee677d3cdb115"
+      },
+      "dancetrack0023": {
+        "adapter_calls": 1482,
+        "adapter_manifest": [
+          {
+            "actual_training_sequences": [
+              "dancetrack0001",
+              "dancetrack0002",
+              "dancetrack0039",
+              "dancetrack0057",
+              "dancetrack0062",
+              "dancetrack0072"
+            ],
+            "parameters": 0,
+            "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0023__seed720321.pt",
+            "seed": 720321,
+            "sha256": "b51a92797c306664c98541013a1cb59fa38547cc3d1954f65b845449ab18b852"
+          },
+          {
+            "actual_training_sequences": [
+              "dancetrack0001",
+              "dancetrack0002",
+              "dancetrack0039",
+              "dancetrack0057",
+              "dancetrack0062",
+              "dancetrack0072"
+            ],
+            "parameters": 0,
+            "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0023__seed720322.pt",
+            "seed": 720322,
+            "sha256": "660538c9e986229a3317f5ab00b4264618e25f327dd28595c77a45b1ad763d54"
+          },
+          {
+            "actual_training_sequences": [
+              "dancetrack0001",
+              "dancetrack0002",
+              "dancetrack0039",
+              "dancetrack0057",
+              "dancetrack0062",
+              "dancetrack0072"
+            ],
+            "parameters": 0,
+            "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0023__seed720323.pt",
+            "seed": 720323,
+            "sha256": "256e52442bbc9a3ac77d95c9d457c582c8a293304fb9142dcfe371ac7a7090c3"
+          }
+        ],
+        "base_trace_path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/dev/traces/B1_CAUSAL_BASELINE/dancetrack0023.jsonl.zst",
+        "base_trace_sha256": "44d28b61be66d8fb4cc346c48a74c7ec24620676589f4b42a0b0034fb6a156b0",
+        "base_trajectory_sha256": "da7b1158966e19cf6fd5164850fa1aa4328e4d234bb920beedbe56fd8efcf862",
+        "committed_state_stream_sha256": "c7c326a4d20c6ed73e5ae316a5b6f7ab7845643b0aa49c68b1dce39e1d516b7e",
+        "complete_non_target_outputs": true,
+        "controller_manifest": [],
+        "delta": {
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4R1_assets/trajectories/f2f87f407615aa1e64ad29cc61b2c8f9cc1d459bd3725b61a8b8a79fb62ad5bb.jsonl.zst",
+          "rows": 680,
+          "sha256": "e503db1dbac6727de18aa3a88969f6437cb4d58d85540a388d77fd211e431398"
+        },
+        "delta_reconstruction_requires_only_existing_source_outputs_and_UID_public_changes": true,
+        "frames": 1483,
+        "memory_policy": {
+          "anchor_min": 0.3,
+          "confirmation_k": 2,
+          "family": "P0",
+          "probability_min": 0.9
+        },
+        "memory_predictor_manifest": [],
+        "name": "POSTHOC_TARGET_NATIVE_ZERO",
+        "native_predictor_manifest": [],
+        "policy": {
+          "beneficial_min": 0.7,
+          "discount_scope": "target",
+          "family": "C0",
+          "harmful_max": 0.3,
+          "native_discount": 0.0,
+          "positive_discount": 1.0,
+          "source": "adapter",
+          "strength": 1.0,
+          "top_k": 1,
+          "value_min": 0.0
+        },
+        "proposal_stream_sha256": "f5bbb88217b03bf98d5addd4a50ff9199cb23b6fe2bbb4dff12a5ad06d0a5dba",
+        "runtime_GT_used": false,
+        "score_before_write": true,
+        "seconds": 15.465002326003741,
+        "sequence": "dancetrack0023",
+        "source_public_state_matches_when_MOT_is_identical": null,
+        "source_state_stream_sha256": "1462624bb4f9b3f4f10aeff007ffb86cc9b861f3d3ab3784fb745781213cf295",
+        "trajectory_rows": 11647,
+        "trajectory_sha256": "f2f87f407615aa1e64ad29cc61b2c8f9cc1d459bd3725b61a8b8a79fb62ad5bb"
+      },
+      "dancetrack0024": {
+        "adapter_calls": 762,
+        "adapter_manifest": [
+          {
+            "actual_training_sequences": [
+              "dancetrack0001",
+              "dancetrack0002",
+              "dancetrack0023",
+              "dancetrack0057",
+              "dancetrack0062",
+              "dancetrack0072"
+            ],
+            "parameters": 0,
+            "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0024__seed720321.pt",
+            "seed": 720321,
+            "sha256": "ed8307abbba07b10059244c57d64b7c79759844a4db225c928581d0c90e59a3f"
+          },
+          {
+            "actual_training_sequences": [
+              "dancetrack0001",
+              "dancetrack0002",
+              "dancetrack0023",
+              "dancetrack0057",
+              "dancetrack0062",
+              "dancetrack0072"
+            ],
+            "parameters": 0,
+            "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0024__seed720322.pt",
+            "seed": 720322,
+            "sha256": "03d0d60fbe2111ace9d41537c14053a190b43b2459a7caa3dfd3e69ebf5aa76b"
+          },
+          {
+            "actual_training_sequences": [
+              "dancetrack0001",
+              "dancetrack0002",
+              "dancetrack0023",
+              "dancetrack0057",
+              "dancetrack0062",
+              "dancetrack0072"
+            ],
+            "parameters": 0,
+            "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0024__seed720323.pt",
+            "seed": 720323,
+            "sha256": "4898fb27ff8663a8dbb9e0fc0646f2c346b12e79afe106444e0283b97f12d026"
+          }
+        ],
+        "base_trace_path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/dev/traces/B1_CAUSAL_BASELINE/dancetrack0024.jsonl.zst",
+        "base_trace_sha256": "08970489b75075bb8ca722c9a9744505f4a026ca247dde7edfe7b27044687ea6",
+        "base_trajectory_sha256": "5373aee9dcd83671ed7c2300cafe562d71258c4309952fa2e1bfa587fdd696c9",
+        "committed_state_stream_sha256": "802b94aa52f709ab81bcc93a3e2b755645e7496c301f8f42ed0ef079af10f70c",
+        "complete_non_target_outputs": true,
+        "controller_manifest": [],
+        "delta": {
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4R1_assets/trajectories/5373aee9dcd83671ed7c2300cafe562d71258c4309952fa2e1bfa587fdd696c9.jsonl.zst",
+          "rows": 0,
+          "sha256": "f96deff1816083fdff8bc3e46c3fe6ca46a6bb49f4d5a00627616c13237a512c"
+        },
+        "delta_reconstruction_requires_only_existing_source_outputs_and_UID_public_changes": true,
+        "frames": 763,
+        "memory_policy": {
+          "anchor_min": 0.3,
+          "confirmation_k": 2,
+          "family": "P0",
+          "probability_min": 0.9
+        },
+        "memory_predictor_manifest": [],
+        "name": "POSTHOC_TARGET_NATIVE_ZERO",
+        "native_predictor_manifest": [],
+        "policy": {
+          "beneficial_min": 0.7,
+          "discount_scope": "target",
+          "family": "C0",
+          "harmful_max": 0.3,
+          "native_discount": 0.0,
+          "positive_discount": 1.0,
+          "source": "adapter",
+          "strength": 1.0,
+          "top_k": 1,
+          "value_min": 0.0
+        },
+        "proposal_stream_sha256": "6d8c4675a53f36dd1b6c5084fb8a9efd94c30d394676fa465a427f44e8a9c8f9",
+        "runtime_GT_used": false,
+        "score_before_write": true,
+        "seconds": 5.1846256159988116,
+        "sequence": "dancetrack0024",
+        "source_public_state_matches_when_MOT_is_identical": true,
+        "source_state_stream_sha256": "802b94aa52f709ab81bcc93a3e2b755645e7496c301f8f42ed0ef079af10f70c",
+        "trajectory_rows": 4575,
+        "trajectory_sha256": "5373aee9dcd83671ed7c2300cafe562d71258c4309952fa2e1bfa587fdd696c9"
+      },
+      "dancetrack0039": {
+        "adapter_calls": 1241,
+        "adapter_manifest": [
+          {
+            "actual_training_sequences": [
+              "dancetrack0001",
+              "dancetrack0002",
+              "dancetrack0023",
+              "dancetrack0024",
+              "dancetrack0062",
+              "dancetrack0072"
+            ],
+            "parameters": 0,
+            "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0039__seed720321.pt",
+            "seed": 720321,
+            "sha256": "7b28aca0a05e5e736ff938ec8ce18b4b51fa88f2b495c323a7069839e9d346bd"
+          },
+          {
+            "actual_training_sequences": [
+              "dancetrack0001",
+              "dancetrack0002",
+              "dancetrack0023",
+              "dancetrack0024",
+              "dancetrack0062",
+              "dancetrack0072"
+            ],
+            "parameters": 0,
+            "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0039__seed720322.pt",
+            "seed": 720322,
+            "sha256": "f1615f56d515cb4d5160d6134564f51b6eee39222a27d99461686b080d4ad358"
+          },
+          {
+            "actual_training_sequences": [
+              "dancetrack0001",
+              "dancetrack0002",
+              "dancetrack0023",
+              "dancetrack0024",
+              "dancetrack0062",
+              "dancetrack0072"
+            ],
+            "parameters": 0,
+            "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0039__seed720323.pt",
+            "seed": 720323,
+            "sha256": "1be6db5dfcf4b6812f791fe2680815a884a4ef17bd15ee0ff311e63ef829c68f"
+          }
+        ],
+        "base_trace_path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/dev/traces/B1_CAUSAL_BASELINE/dancetrack0039.jsonl.zst",
+        "base_trace_sha256": "2f863a00fec485f4857b16845656cff322b72bfcfba68d36f32402435003b8f7",
+        "base_trajectory_sha256": "795d4f9a98a75dab51aeb9d0db83b11028de18d3f4ee5192a1d171ec12f1341f",
+        "committed_state_stream_sha256": "676aaca689e1bc5faab91fa7d7d729cdb4994e676aa03119860c3086cbf28229",
+        "complete_non_target_outputs": true,
+        "controller_manifest": [],
+        "delta": {
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4R1_assets/trajectories/901b0ff35dcbd61021ea570db4f57129457fec9130119c4f37148e405590a75d.jsonl.zst",
+          "rows": 6,
+          "sha256": "ace134a450b4299d00fdfe08270ef374c3e8ddd221fe4e51fc3c3c59d1a83682"
+        },
+        "delta_reconstruction_requires_only_existing_source_outputs_and_UID_public_changes": true,
+        "frames": 1242,
+        "memory_policy": {
+          "anchor_min": 0.3,
+          "confirmation_k": 2,
+          "family": "P0",
+          "probability_min": 0.9
+        },
+        "memory_predictor_manifest": [],
+        "name": "POSTHOC_TARGET_NATIVE_ZERO",
+        "native_predictor_manifest": [],
+        "policy": {
+          "beneficial_min": 0.7,
+          "discount_scope": "target",
+          "family": "C0",
+          "harmful_max": 0.3,
+          "native_discount": 0.0,
+          "positive_discount": 1.0,
+          "source": "adapter",
+          "strength": 1.0,
+          "top_k": 1,
+          "value_min": 0.0
+        },
+        "proposal_stream_sha256": "976a9a6265bd2d83aaf91e8cc64f6df4dda649b1ad1d992f346fe89df9e0071e",
+        "runtime_GT_used": false,
+        "score_before_write": true,
+        "seconds": 6.972535458000493,
+        "sequence": "dancetrack0039",
+        "source_public_state_matches_when_MOT_is_identical": null,
+        "source_state_stream_sha256": "71b665bf598ddaa8f02f99f22d41a1c587d079a32b50f0a4c98deb8b3e20cb2a",
+        "trajectory_rows": 6203,
+        "trajectory_sha256": "901b0ff35dcbd61021ea570db4f57129457fec9130119c4f37148e405590a75d"
+      },
+      "dancetrack0057": {
+        "adapter_calls": 621,
+        "adapter_manifest": [
+          {
+            "actual_training_sequences": [
+              "dancetrack0001",
+              "dancetrack0002",
+              "dancetrack0023",
+              "dancetrack0024",
+              "dancetrack0039",
+              "dancetrack0072"
+            ],
+            "parameters": 0,
+            "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0057__seed720321.pt",
+            "seed": 720321,
+            "sha256": "3ba9ff9f814aeaa020690b3661cd776cd3deb90c478059782907906d0ddd3900"
+          },
+          {
+            "actual_training_sequences": [
+              "dancetrack0001",
+              "dancetrack0002",
+              "dancetrack0023",
+              "dancetrack0024",
+              "dancetrack0039",
+              "dancetrack0072"
+            ],
+            "parameters": 0,
+            "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0057__seed720322.pt",
+            "seed": 720322,
+            "sha256": "8fc4e70abe69a4f6716ba088205fb89ebe0bfeb1fa303fd4b1bd900274002325"
+          },
+          {
+            "actual_training_sequences": [
+              "dancetrack0001",
+              "dancetrack0002",
+              "dancetrack0023",
+              "dancetrack0024",
+              "dancetrack0039",
+              "dancetrack0072"
+            ],
+            "parameters": 0,
+            "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0057__seed720323.pt",
+            "seed": 720323,
+            "sha256": "1e776ab2967f12028f8c627803f576a3847ab3d0d3f9a9a930638bc9447c5910"
+          }
+        ],
+        "base_trace_path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/dev/traces/B1_CAUSAL_BASELINE/dancetrack0057.jsonl.zst",
+        "base_trace_sha256": "3368ba286c3075bf8b9a147d064381f9e782c28815b54889cf93580fc06af647",
+        "base_trajectory_sha256": "5dd5f6e7fea5a4a659b8cb0afb4f46cc95d3324241903e047ae5c398c3a6a303",
+        "committed_state_stream_sha256": "49baaef69e5e9d1716b70c007d59ac20b6c2d83b23bff9578de9b8e88ba2006d",
+        "complete_non_target_outputs": true,
+        "controller_manifest": [],
+        "delta": {
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4R1_assets/trajectories/5dd5f6e7fea5a4a659b8cb0afb4f46cc95d3324241903e047ae5c398c3a6a303.jsonl.zst",
+          "rows": 0,
+          "sha256": "f96deff1816083fdff8bc3e46c3fe6ca46a6bb49f4d5a00627616c13237a512c"
+        },
+        "delta_reconstruction_requires_only_existing_source_outputs_and_UID_public_changes": true,
+        "frames": 622,
+        "memory_policy": {
+          "anchor_min": 0.3,
+          "confirmation_k": 2,
+          "family": "P0",
+          "probability_min": 0.9
+        },
+        "memory_predictor_manifest": [],
+        "name": "POSTHOC_TARGET_NATIVE_ZERO",
+        "native_predictor_manifest": [],
+        "policy": {
+          "beneficial_min": 0.7,
+          "discount_scope": "target",
+          "family": "C0",
+          "harmful_max": 0.3,
+          "native_discount": 0.0,
+          "positive_discount": 1.0,
+          "source": "adapter",
+          "strength": 1.0,
+          "top_k": 5,
+          "value_min": 0.0
+        },
+        "proposal_stream_sha256": "51450057b25cdcc373c06308fdc31c622db8ed8bbe631e4e4c77637d231c92d7",
+        "runtime_GT_used": false,
+        "score_before_write": true,
+        "seconds": 4.729236334998859,
+        "sequence": "dancetrack0057",
+        "source_public_state_matches_when_MOT_is_identical": true,
+        "source_state_stream_sha256": "49baaef69e5e9d1716b70c007d59ac20b6c2d83b23bff9578de9b8e88ba2006d",
+        "trajectory_rows": 3009,
+        "trajectory_sha256": "5dd5f6e7fea5a4a659b8cb0afb4f46cc95d3324241903e047ae5c398c3a6a303"
+      },
+      "dancetrack0062": {
+        "adapter_calls": 1202,
+        "adapter_manifest": [
+          {
+            "actual_training_sequences": [
+              "dancetrack0001",
+              "dancetrack0002",
+              "dancetrack0023",
+              "dancetrack0024",
+              "dancetrack0039",
+              "dancetrack0057"
+            ],
+            "parameters": 0,
+            "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0062__seed720321.pt",
+            "seed": 720321,
+            "sha256": "af1db6c36e0fe03f9c77f87fa3825bce43552433e1a63bac2abc5da106c63a74"
+          },
+          {
+            "actual_training_sequences": [
+              "dancetrack0001",
+              "dancetrack0002",
+              "dancetrack0023",
+              "dancetrack0024",
+              "dancetrack0039",
+              "dancetrack0057"
+            ],
+            "parameters": 0,
+            "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0062__seed720322.pt",
+            "seed": 720322,
+            "sha256": "d0e3b83aac4bd92bbd2479a3971e711301e411a26ddb80bbf046b91fc6c97a78"
+          },
+          {
+            "actual_training_sequences": [
+              "dancetrack0001",
+              "dancetrack0002",
+              "dancetrack0023",
+              "dancetrack0024",
+              "dancetrack0039",
+              "dancetrack0057"
+            ],
+            "parameters": 0,
+            "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0062__seed720323.pt",
+            "seed": 720323,
+            "sha256": "ba8389c7af62945904da7ea7401faa91a14bc893364465f64e0f4fe56f016a37"
+          }
+        ],
+        "base_trace_path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/dev/traces/B1_CAUSAL_BASELINE/dancetrack0062.jsonl.zst",
+        "base_trace_sha256": "6c3d4b425dac1e752fd5f6cd6d6bb1f0962eeb5846f1650a4c8a2e381d6eb629",
+        "base_trajectory_sha256": "6f5579503e0135febb42bfee66f1ab64ea0d6cd7e9e5e35edf0e31d64719c19d",
+        "committed_state_stream_sha256": "69887582eb65bbc7f248903a03404741ec413448c1a63cd9678af998acae421e",
+        "complete_non_target_outputs": true,
+        "controller_manifest": [],
+        "delta": {
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4R1_assets/trajectories/38aea3b6899b8ab4f025d015c3f0ed0c23420477c62734a920c15654e27389cd.jsonl.zst",
+          "rows": 811,
+          "sha256": "f79c9133226e790807d69c009c38041b08e0fac93fe6c5371daa69a34b39d341",
+          "uncompressed_sha256": "5c779a2630de46b1a980725bc7462e8decb9b09f1ec77b86b79fbb5b7886c245"
+        },
+        "delta_reconstruction_requires_only_existing_source_outputs_and_UID_public_changes": true,
+        "frames": 1203,
+        "memory_policy": {
+          "anchor_min": 0.3,
+          "confirmation_k": 2,
+          "family": "P0",
+          "probability_min": 0.9
+        },
+        "memory_predictor_manifest": [],
+        "name": "POSTHOC_TARGET_NATIVE_ZERO",
+        "native_predictor_manifest": [],
+        "policy": {
+          "beneficial_min": 0.7,
+          "discount_scope": "target",
+          "family": "C0",
+          "harmful_max": 0.3,
+          "native_discount": 0.0,
+          "positive_discount": 1.0,
+          "source": "adapter",
+          "strength": 1.0,
+          "top_k": 5,
+          "value_min": 0.0
+        },
+        "proposal_stream_sha256": "7e82e03bff1c81c1843681058fe1fe0d43290b2abc213598b4189ccff6f5043e",
+        "runtime_GT_used": false,
+        "score_before_write": true,
+        "seconds": 8.550291359999392,
+        "sequence": "dancetrack0062",
+        "source_public_state_matches_when_MOT_is_identical": null,
+        "source_state_stream_sha256": "7ed982288913f6e06422f1d32efec1ab1e2f9f8ef9957581b0a5c1a1cf4dffe7",
+        "trajectory_rows": 5043,
+        "trajectory_sha256": "38aea3b6899b8ab4f025d015c3f0ed0c23420477c62734a920c15654e27389cd"
+      },
+      "dancetrack0072": {
+        "adapter_calls": 1202,
+        "adapter_manifest": [
+          {
+            "actual_training_sequences": [
+              "dancetrack0002",
+              "dancetrack0023",
+              "dancetrack0024",
+              "dancetrack0039",
+              "dancetrack0057",
+              "dancetrack0062"
+            ],
+            "parameters": 0,
+            "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0072__seed720321.pt",
+            "seed": 720321,
+            "sha256": "ec3ce4538291f7d4fe1cdc15069ed7243743d40112fffbd1fa546befa2117885"
+          },
+          {
+            "actual_training_sequences": [
+              "dancetrack0002",
+              "dancetrack0023",
+              "dancetrack0024",
+              "dancetrack0039",
+              "dancetrack0057",
+              "dancetrack0062"
+            ],
+            "parameters": 0,
+            "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0072__seed720322.pt",
+            "seed": 720322,
+            "sha256": "4af9d71618075cd3d2841810fab73b30b0a6d787a4ec84d9609bab9ea4ec7332"
+          },
+          {
+            "actual_training_sequences": [
+              "dancetrack0002",
+              "dancetrack0023",
+              "dancetrack0024",
+              "dancetrack0039",
+              "dancetrack0057",
+              "dancetrack0062"
+            ],
+            "parameters": 0,
+            "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0072__seed720323.pt",
+            "seed": 720323,
+            "sha256": "5866334ebe74740a5b5b2c4db5fbcf1f6907d29a889d9b8cbc49be1c0be69210"
+          }
+        ],
+        "base_trace_path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/dev/traces/B1_CAUSAL_BASELINE/dancetrack0072.jsonl.zst",
+        "base_trace_sha256": "803b9c6530cdceb9b17286fca47fd0818e402b60f90770fad326b6ad90893551",
+        "base_trajectory_sha256": "cf7389965f834f883999eec586b383f0524717b122b13697325613ac498478b7",
+        "committed_state_stream_sha256": "b797774eddd8676b2cd621d684c395c42bcfbff575995e918b3a04707b0eeee2",
+        "complete_non_target_outputs": true,
+        "controller_manifest": [],
+        "delta": {
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4R1_assets/trajectories/f370e54fadcd51c9a77eb81d813532b932928cf1ee254b4f07d2a76244004ede.jsonl.zst",
+          "rows": 522,
+          "sha256": "d9c339e358f96ea222c4c1ab7460869892082cbb344ff149c5b9134c4c16cc52"
+        },
+        "delta_reconstruction_requires_only_existing_source_outputs_and_UID_public_changes": true,
+        "frames": 1203,
+        "memory_policy": {
+          "anchor_min": 0.3,
+          "confirmation_k": 2,
+          "family": "P0",
+          "probability_min": 0.9
+        },
+        "memory_predictor_manifest": [],
+        "name": "POSTHOC_TARGET_NATIVE_ZERO",
+        "native_predictor_manifest": [],
+        "policy": {
+          "beneficial_min": 0.7,
+          "discount_scope": "target",
+          "family": "C0",
+          "harmful_max": 0.3,
+          "native_discount": 0.0,
+          "positive_discount": 1.0,
+          "source": "adapter",
+          "strength": 1.0,
+          "top_k": 1,
+          "value_min": 0.0
+        },
+        "proposal_stream_sha256": "a9fb61ee1ae3931cf7d96f00839fe2789cbba53000c74f387367c8a2abd19426",
+        "runtime_GT_used": false,
+        "score_before_write": true,
+        "seconds": 7.037781998005812,
+        "sequence": "dancetrack0072",
+        "source_public_state_matches_when_MOT_is_identical": null,
+        "source_state_stream_sha256": "2027a26b7b15037834975ea5fea5d2fba886a6001ac1f758d8a2e298ee3484c2",
+        "trajectory_rows": 4195,
+        "trajectory_sha256": "f370e54fadcd51c9a77eb81d813532b932928cf1ee254b4f07d2a76244004ede"
+      }
+    }
+  },
+  "metrics": {
+    "POSTHOC_TARGET_NATIVE_ZERO": {
+      "AssA": 0.5485271233935535,
+      "DetA": 0.6231277543255059,
+      "FN": 12902.0,
+      "FP": 9157.0,
+      "HOTA": 0.5837032482013447,
+      "IDF1": 0.623326772617334,
+      "IDSW": 252.0,
+      "LocA": 0.9010422952100238,
+      "MOTA": 0.5785128650772661,
+      "per_sequence": {
+        "dancetrack0001": {
+          "AssA": 0.8417261973770992,
+          "DetA": 0.7480983777932986,
+          "FN": 352.0,
+          "FP": 977.0,
+          "HOTA": 0.7935300609870402,
+          "IDF1": 0.8728107952914155,
+          "IDSW": 0.0,
+          "LocA": 0.9286530873496502,
+          "MOTA": 0.7294381107491856
+        },
+        "dancetrack0002": {
+          "AssA": 0.1778045257449533,
+          "DetA": 0.6084002707381235,
+          "FN": 2338.0,
+          "FP": 2061.0,
+          "HOTA": 0.3287472362880979,
+          "IDF1": 0.3420518725667599,
+          "IDSW": 90.0,
+          "LocA": 0.8893388529099466,
+          "MOTA": 0.5150696770011883
+        },
+        "dancetrack0023": {
+          "AssA": 0.3388811150062023,
+          "DetA": 0.5539214721848885,
+          "FN": 4035.0,
+          "FP": 2657.0,
+          "HOTA": 0.43262082695337706,
+          "IDF1": 0.5268320363164721,
+          "IDSW": 67.0,
+          "LocA": 0.8571778064471599,
+          "MOTA": 0.48107485604606526
+        },
+        "dancetrack0024": {
+          "AssA": 0.8599236779801973,
+          "DetA": 0.8536343632765124,
+          "FN": 151.0,
+          "FP": 214.0,
+          "HOTA": 0.8567522738133547,
+          "IDF1": 0.9596126334323759,
+          "IDSW": 2.0,
+          "LocA": 0.9198801510359389,
+          "MOTA": 0.9186613475177305
+        },
+        "dancetrack0039": {
+          "AssA": 0.9176455134574864,
+          "DetA": 0.9131167611945791,
+          "FN": 59.0,
+          "FP": 170.0,
+          "HOTA": 0.9153582711376334,
+          "IDF1": 0.9800732004880033,
+          "IDSW": 4.0,
+          "LocA": 0.952682101699954,
+          "MOTA": 0.9617531188443861
+        },
+        "dancetrack0057": {
+          "AssA": 0.8413885272034443,
+          "DetA": 0.8036766329170778,
+          "FN": 263.0,
+          "FP": 268.0,
+          "HOTA": 0.8223158841445222,
+          "IDF1": 0.9113587227673374,
+          "IDSW": 1.0,
+          "LocA": 0.9294408620215295,
+          "MOTA": 0.8229027962716379
+        },
+        "dancetrack0062": {
+          "AssA": 0.4449856687840385,
+          "DetA": 0.6369248404900976,
+          "FN": 1709.0,
+          "FP": 525.0,
+          "HOTA": 0.5322929978529101,
+          "IDF1": 0.6395740905057675,
+          "IDSW": 16.0,
+          "LocA": 0.9076569225183341,
+          "MOTA": 0.6386703067287618
+        },
+        "dancetrack0072": {
+          "AssA": 0.10578544212832924,
+          "DetA": 0.2454859886815969,
+          "FN": 3995.0,
+          "FP": 2285.0,
+          "HOTA": 0.16105392515585545,
+          "IDF1": 0.18237623762376237,
+          "IDSW": 72.0,
+          "LocA": 0.8542250484922629,
+          "MOTA": -0.07569856054191364
+        }
+      },
+      "tracker": "POSTHOC_TARGET_NATIVE_ZERO"
+    }
+  },
+  "returncode": 0,
+  "same_evaluator_config_for_all_variants": true,
+  "temporary_raw_MOT_copies_removed_after_sealing": true
+}

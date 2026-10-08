@@ -15,8 +15,11 @@ from sam3_intermot.association.identity_authority import AuthorityConfig
 from sam3_intermot.association.causal_state_commit import memory_metrics
 
 
-def baseline_trace(sequence):
-    manifest=read_json(R4ASSETS/"dev/manifests/B1_CAUSAL_BASELINE"/f"{sequence}.json")
+def baseline_trace(sequence,split='train'):
+    if split=='val':
+        events('val');manifest=read_json(R4ASSETS/'val/manifests/BASELINE_CAUSAL'/f'{sequence}.json')
+    elif split=='train':manifest=read_json(R4ASSETS/"dev/manifests/B1_CAUSAL_BASELINE"/f"{sequence}.json")
+    else:raise ValueError('unregistered evaluation split')
     path=Path(manifest["trace_path"])
     if sha256(path)!=manifest["trace_sha256"]:raise RuntimeError("source baseline trace SHA mismatch")
     return read_zstd_jsonl(path),manifest
@@ -54,10 +57,12 @@ def run_runtime(sequence,frames,event,adapter,policy,memory,*,controller=None,me
         "native_predictor_manifest":[] if native_predictor is None else native_predictor.manifest}
 
 
-def posthoc(sequence,frames,event,trace,baseline):
+def posthoc(sequence,frames,event,trace,baseline,split='train'):
     # Called only after all runtime frames have completed. No labels are fed
     # back to the already-sealed tracker or its immutable learned models.
-    gt=gt_by_frame(DATASET/"train"/sequence/"gt/gt.txt");truth=target_truth(event,gt)
+    if split=='val':events('val')
+    elif split!='train':raise ValueError('unregistered truth split')
+    gt=gt_by_frame(DATASET/split/sequence/"gt/gt.txt");truth=target_truth(event,gt)
     writes=[];margins=[];rank1=competitive=visible=covered=0;drift=[];funnel=Counter();takeovers=[]
     continuity_changes=0;previous_identity=None;recoveries=0;last_none=False
     origins={};target_correct=[];baseline_correct=[];other_damage=[];N01=N10=changed_frames=state_changed=0
@@ -109,13 +114,17 @@ def posthoc(sequence,frames,event,trace,baseline):
 
 
 class EvaluationBatch:
-    def __init__(self,group,sequences):
+    def __init__(self,group,sequences,split='train'):
+        if split=='val':events('val')
+        elif split!='train':raise ValueError('unregistered evaluator split')
+        self.split=split
         self.group=group;self.sequences=list(sequences);self.temporary=tempfile.TemporaryDirectory(prefix="intermot-r4r1-eval-")
         self.root=Path(self.temporary.name);self.names=[];self.manifests={}
     def add(self,name,sequence,trace,profile):
         if sequence not in self.sequences:raise ValueError("evaluator sequence axis")
         if name not in self.names:self.names.append(name)
-        b,manifest=baseline_trace(sequence);text=trajectory_text(trace);digest=hashlib.sha256(text.encode()).hexdigest()
+        b,manifest=baseline_trace(sequence) if self.split=='train' else baseline_trace(sequence,'val')
+        text=trajectory_text(trace);digest=hashlib.sha256(text.encode()).hexdigest()
         expected_states=hashlib.sha256("".join(d["state_after"] for d in b).encode()).hexdigest()
         source_state_match=None
         if digest==manifest["trajectory_sha256"]:
@@ -135,13 +144,13 @@ class EvaluationBatch:
         return audit
     def evaluate(self):
         seqmap=self.root/"seqmap.txt";seqmap.write_text("name\n"+"\n".join(self.sequences)+"\n")
-        run=run_trackeval_many(self.root/"trackers",self.root/"eval",self.names,seqmap,gt_folder=DATASET/"train")
+        run=run_trackeval_many(self.root/"trackers",self.root/"eval",self.names,seqmap,gt_folder=DATASET/self.split)
         metrics={n:trackeval_summary(parse_trackeval(self.root/"eval",n,self.sequences)) for n in self.names}
         for n,m in metrics.items():
             if any(m[k] is None for k in ("HOTA","AssA","DetA","LocA","IDF1","MOTA","IDSW","FP","FN")):raise RuntimeError("missing official metric")
         log_path=ASSETS/"evaluation_logs"/(self.group.replace("/","__")+".jsonl.zst")
         log=stream_zstd(log_path,[{"stdout":Path(run["log"]).read_text()}])
-        result={"metrics":metrics,"manifests":self.manifests,"command":run["command"],"returncode":run["returncode"],"log":log,"full_sequence":True,"same_evaluator_config_for_all_variants":True,"temporary_raw_MOT_copies_removed_after_sealing":True}
+        result={"metrics":metrics,"manifests":self.manifests,"command":run["command"],"returncode":run["returncode"],"log":log,"full_sequence":True,"physical_GT_split":self.split,"same_evaluator_config_for_all_variants":True,"temporary_raw_MOT_copies_removed_after_sealing":True}
         write_json(OUT/"evaluations"/(self.group+".json"),result);return result
     def add_existing(self,name,sequence,manifest):
         """Reuse a sealed trajectory, not averaged per-fold HOTA numbers."""

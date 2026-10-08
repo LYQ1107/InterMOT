@@ -1,0 +1,2455 @@
+{
+  "calibration": {
+    "base_scale": 0.25,
+    "conflict_guard": false,
+    "identity_mean": 0.30660989727577664,
+    "identity_std": 0.15036247589098886,
+    "lifecycle": "dynamic",
+    "low_margin": 0.35,
+    "memory": "P0",
+    "mode": "off",
+    "persistence_guard": false,
+    "source": "adapter",
+    "strength": 0,
+    "write_margin": 0.03774680197238922,
+    "write_quality": 0.8358974456787109,
+    "write_score": 0.32470983266830444
+  },
+  "cases": [
+    {
+      "controller_key": null,
+      "memory": {
+        "anchor_min": 0.3,
+        "confirmation_k": 2,
+        "family": "P0",
+        "probability_min": 0.9
+      },
+      "memory_predictor": false,
+      "name": "BASELINE",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.7,
+        "discount_scope": "target",
+        "family": "C0",
+        "harmful_max": 0.3,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": null,
+      "memory": {
+        "anchor_min": 0.3,
+        "confirmation_k": 2,
+        "family": "P0",
+        "probability_min": 0.9
+      },
+      "memory_predictor": false,
+      "name": "C1_s0p5",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.7,
+        "discount_scope": "target",
+        "family": "C1",
+        "harmful_max": 0.3,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 0.5,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": null,
+      "memory": {
+        "anchor_min": 0.3,
+        "confirmation_k": 2,
+        "family": "P0",
+        "probability_min": 0.9
+      },
+      "memory_predictor": false,
+      "name": "C1_s1p0",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.7,
+        "discount_scope": "target",
+        "family": "C1",
+        "harmful_max": 0.3,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": null,
+      "memory": {
+        "anchor_min": 0.3,
+        "confirmation_k": 2,
+        "family": "P0",
+        "probability_min": 0.9
+      },
+      "memory_predictor": false,
+      "name": "C1_s2p0",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.7,
+        "discount_scope": "target",
+        "family": "C1",
+        "harmful_max": 0.3,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 2.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": null,
+      "memory": {
+        "anchor_min": 0.3,
+        "confirmation_k": 2,
+        "family": "P0",
+        "probability_min": 0.9
+      },
+      "memory_predictor": false,
+      "name": "C1_s4p0",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.7,
+        "discount_scope": "target",
+        "family": "C1",
+        "harmful_max": 0.3,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 4.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": null,
+      "memory": {
+        "anchor_min": 0.3,
+        "confirmation_k": 2,
+        "family": "P0",
+        "probability_min": 0.9
+      },
+      "memory_predictor": false,
+      "name": "C1_s8p0",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.7,
+        "discount_scope": "target",
+        "family": "C1",
+        "harmful_max": 0.3,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 8.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": "C2_L0",
+      "memory": {
+        "anchor_min": 0.3,
+        "confirmation_k": 2,
+        "family": "P0",
+        "probability_min": 0.9
+      },
+      "memory_predictor": false,
+      "name": "C2_L0_a0",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.9,
+        "discount_scope": "target",
+        "family": "C2",
+        "harmful_max": 0.1,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.05
+      }
+    },
+    {
+      "controller_key": "C2_L0",
+      "memory": {
+        "anchor_min": 0.3,
+        "confirmation_k": 2,
+        "family": "P0",
+        "probability_min": 0.9
+      },
+      "memory_predictor": false,
+      "name": "C2_L0_a1",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.9,
+        "discount_scope": "target",
+        "family": "C2",
+        "harmful_max": 0.1,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": "C3_L0",
+      "memory": {
+        "anchor_min": 0.3,
+        "confirmation_k": 2,
+        "family": "P0",
+        "probability_min": 0.9
+      },
+      "memory_predictor": false,
+      "name": "C3_L0_a0",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.9,
+        "discount_scope": "target",
+        "family": "C3",
+        "harmful_max": 0.1,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.05
+      }
+    },
+    {
+      "controller_key": "C3_L0",
+      "memory": {
+        "anchor_min": 0.3,
+        "confirmation_k": 2,
+        "family": "P0",
+        "probability_min": 0.9
+      },
+      "memory_predictor": false,
+      "name": "C3_L0_a1",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.9,
+        "discount_scope": "target",
+        "family": "C3",
+        "harmful_max": 0.1,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": "C4_L0",
+      "memory": {
+        "anchor_min": 0.3,
+        "confirmation_k": 2,
+        "family": "P0",
+        "probability_min": 0.9
+      },
+      "memory_predictor": false,
+      "name": "C4_L0_a0",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.7,
+        "discount_scope": "target",
+        "family": "C4",
+        "harmful_max": 0.1,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": "C4_L0",
+      "memory": {
+        "anchor_min": 0.3,
+        "confirmation_k": 2,
+        "family": "P0",
+        "probability_min": 0.9
+      },
+      "memory_predictor": false,
+      "name": "C4_L0_a1",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.7,
+        "discount_scope": "target",
+        "family": "C4",
+        "harmful_max": 0.3,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": "C4_L0",
+      "memory": {
+        "anchor_min": 0.3,
+        "confirmation_k": 2,
+        "family": "P0",
+        "probability_min": 0.9
+      },
+      "memory_predictor": false,
+      "name": "C4_L0_a2",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.9,
+        "discount_scope": "target",
+        "family": "C4",
+        "harmful_max": 0.1,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.05
+      }
+    },
+    {
+      "controller_key": "C5_L1",
+      "memory": {
+        "anchor_min": 0.3,
+        "confirmation_k": 2,
+        "family": "P0",
+        "probability_min": 0.9
+      },
+      "memory_predictor": false,
+      "name": "C5_L1_a0",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.9,
+        "discount_scope": "target",
+        "family": "C5",
+        "harmful_max": 0.1,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.05
+      }
+    },
+    {
+      "controller_key": "C5_L1",
+      "memory": {
+        "anchor_min": 0.3,
+        "confirmation_k": 2,
+        "family": "P0",
+        "probability_min": 0.9
+      },
+      "memory_predictor": false,
+      "name": "C5_L1_a1",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.9,
+        "discount_scope": "target",
+        "family": "C5",
+        "harmful_max": 0.1,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": "C6_L0",
+      "memory": {
+        "anchor_min": 0.3,
+        "confirmation_k": 2,
+        "family": "P0",
+        "probability_min": 0.9
+      },
+      "memory_predictor": false,
+      "name": "C6_L0_a0",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.9,
+        "discount_scope": "target",
+        "family": "C6",
+        "harmful_max": 0.1,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.05
+      }
+    },
+    {
+      "controller_key": "C6_L0",
+      "memory": {
+        "anchor_min": 0.3,
+        "confirmation_k": 2,
+        "family": "P0",
+        "probability_min": 0.9
+      },
+      "memory_predictor": false,
+      "name": "C6_L0_a1",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.9,
+        "discount_scope": "target",
+        "family": "C6",
+        "harmful_max": 0.1,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": "C6_L1",
+      "memory": {
+        "anchor_min": 0.3,
+        "confirmation_k": 2,
+        "family": "P0",
+        "probability_min": 0.9
+      },
+      "memory_predictor": false,
+      "name": "C6_L1_a0",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.9,
+        "discount_scope": "target",
+        "family": "C6",
+        "harmful_max": 0.1,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.05
+      }
+    },
+    {
+      "controller_key": "C6_L1",
+      "memory": {
+        "anchor_min": 0.3,
+        "confirmation_k": 2,
+        "family": "P0",
+        "probability_min": 0.9
+      },
+      "memory_predictor": false,
+      "name": "C6_L1_a1",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.9,
+        "discount_scope": "target",
+        "family": "C6",
+        "harmful_max": 0.1,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": "C6_L2",
+      "memory": {
+        "anchor_min": 0.3,
+        "confirmation_k": 2,
+        "family": "P0",
+        "probability_min": 0.9
+      },
+      "memory_predictor": false,
+      "name": "C6_L2_a0",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.9,
+        "discount_scope": "target",
+        "family": "C6",
+        "harmful_max": 0.1,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.05
+      }
+    },
+    {
+      "controller_key": "C6_L2",
+      "memory": {
+        "anchor_min": 0.3,
+        "confirmation_k": 2,
+        "family": "P0",
+        "probability_min": 0.9
+      },
+      "memory_predictor": false,
+      "name": "C6_L2_a1",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.9,
+        "discount_scope": "target",
+        "family": "C6",
+        "harmful_max": 0.1,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": "C6_L3",
+      "memory": {
+        "anchor_min": 0.3,
+        "confirmation_k": 2,
+        "family": "P0",
+        "probability_min": 0.9
+      },
+      "memory_predictor": false,
+      "name": "C6_L3_a0",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.9,
+        "discount_scope": "target",
+        "family": "C6",
+        "harmful_max": 0.1,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.05
+      }
+    },
+    {
+      "controller_key": "C6_L3",
+      "memory": {
+        "anchor_min": 0.3,
+        "confirmation_k": 2,
+        "family": "P0",
+        "probability_min": 0.9
+      },
+      "memory_predictor": false,
+      "name": "C6_L3_a1",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.9,
+        "discount_scope": "target",
+        "family": "C6",
+        "harmful_max": 0.1,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": null,
+      "memory": {
+        "anchor_min": 0.3,
+        "confirmation_k": 2,
+        "family": "P0",
+        "probability_min": 0.9
+      },
+      "memory_predictor": false,
+      "name": "MEMORY_P0",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.7,
+        "discount_scope": "target",
+        "family": "C0",
+        "harmful_max": 0.3,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": null,
+      "memory": {
+        "anchor_min": 0.3,
+        "confirmation_k": 2,
+        "family": "P1",
+        "probability_min": 0.9
+      },
+      "memory_predictor": false,
+      "name": "MEMORY_P1",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.7,
+        "discount_scope": "target",
+        "family": "C0",
+        "harmful_max": 0.3,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": null,
+      "memory": {
+        "anchor_min": 0.3,
+        "confirmation_k": 2,
+        "family": "P2",
+        "probability_min": 0.9
+      },
+      "memory_predictor": false,
+      "name": "MEMORY_P2",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.7,
+        "discount_scope": "target",
+        "family": "C0",
+        "harmful_max": 0.3,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": null,
+      "memory": {
+        "anchor_min": 0.3,
+        "confirmation_k": 2,
+        "family": "P3",
+        "probability_min": 0.9
+      },
+      "memory_predictor": false,
+      "name": "MEMORY_P3_K2_A3",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.7,
+        "discount_scope": "target",
+        "family": "C0",
+        "harmful_max": 0.3,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": null,
+      "memory": {
+        "anchor_min": 0.5,
+        "confirmation_k": 2,
+        "family": "P3",
+        "probability_min": 0.9
+      },
+      "memory_predictor": false,
+      "name": "MEMORY_P3_K2_A5",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.7,
+        "discount_scope": "target",
+        "family": "C0",
+        "harmful_max": 0.3,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": null,
+      "memory": {
+        "anchor_min": 0.7,
+        "confirmation_k": 2,
+        "family": "P3",
+        "probability_min": 0.9
+      },
+      "memory_predictor": false,
+      "name": "MEMORY_P3_K2_A7",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.7,
+        "discount_scope": "target",
+        "family": "C0",
+        "harmful_max": 0.3,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": null,
+      "memory": {
+        "anchor_min": 0.3,
+        "confirmation_k": 3,
+        "family": "P3",
+        "probability_min": 0.9
+      },
+      "memory_predictor": false,
+      "name": "MEMORY_P3_K3_A3",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.7,
+        "discount_scope": "target",
+        "family": "C0",
+        "harmful_max": 0.3,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": null,
+      "memory": {
+        "anchor_min": 0.5,
+        "confirmation_k": 3,
+        "family": "P3",
+        "probability_min": 0.9
+      },
+      "memory_predictor": false,
+      "name": "MEMORY_P3_K3_A5",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.7,
+        "discount_scope": "target",
+        "family": "C0",
+        "harmful_max": 0.3,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": null,
+      "memory": {
+        "anchor_min": 0.7,
+        "confirmation_k": 3,
+        "family": "P3",
+        "probability_min": 0.9
+      },
+      "memory_predictor": false,
+      "name": "MEMORY_P3_K3_A7",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.7,
+        "discount_scope": "target",
+        "family": "C0",
+        "harmful_max": 0.3,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": null,
+      "memory": {
+        "anchor_min": 0.3,
+        "confirmation_k": 2,
+        "family": "P4",
+        "probability_min": 0.9
+      },
+      "memory_predictor": false,
+      "name": "MEMORY_P4_K2_A3",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.7,
+        "discount_scope": "target",
+        "family": "C0",
+        "harmful_max": 0.3,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": null,
+      "memory": {
+        "anchor_min": 0.5,
+        "confirmation_k": 2,
+        "family": "P4",
+        "probability_min": 0.9
+      },
+      "memory_predictor": false,
+      "name": "MEMORY_P4_K2_A5",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.7,
+        "discount_scope": "target",
+        "family": "C0",
+        "harmful_max": 0.3,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": null,
+      "memory": {
+        "anchor_min": 0.7,
+        "confirmation_k": 2,
+        "family": "P4",
+        "probability_min": 0.9
+      },
+      "memory_predictor": false,
+      "name": "MEMORY_P4_K2_A7",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.7,
+        "discount_scope": "target",
+        "family": "C0",
+        "harmful_max": 0.3,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": null,
+      "memory": {
+        "anchor_min": 0.3,
+        "confirmation_k": 3,
+        "family": "P4",
+        "probability_min": 0.9
+      },
+      "memory_predictor": false,
+      "name": "MEMORY_P4_K3_A3",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.7,
+        "discount_scope": "target",
+        "family": "C0",
+        "harmful_max": 0.3,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": null,
+      "memory": {
+        "anchor_min": 0.5,
+        "confirmation_k": 3,
+        "family": "P4",
+        "probability_min": 0.9
+      },
+      "memory_predictor": false,
+      "name": "MEMORY_P4_K3_A5",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.7,
+        "discount_scope": "target",
+        "family": "C0",
+        "harmful_max": 0.3,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": null,
+      "memory": {
+        "anchor_min": 0.7,
+        "confirmation_k": 3,
+        "family": "P4",
+        "probability_min": 0.9
+      },
+      "memory_predictor": false,
+      "name": "MEMORY_P4_K3_A7",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.7,
+        "discount_scope": "target",
+        "family": "C0",
+        "harmful_max": 0.3,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": null,
+      "memory": {
+        "anchor_min": 0.3,
+        "confirmation_k": 2,
+        "family": "P5",
+        "probability_min": 0.5
+      },
+      "memory_predictor": true,
+      "name": "MEMORY_P5_P50_A3",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.7,
+        "discount_scope": "target",
+        "family": "C0",
+        "harmful_max": 0.3,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": null,
+      "memory": {
+        "anchor_min": 0.5,
+        "confirmation_k": 2,
+        "family": "P5",
+        "probability_min": 0.5
+      },
+      "memory_predictor": true,
+      "name": "MEMORY_P5_P50_A5",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.7,
+        "discount_scope": "target",
+        "family": "C0",
+        "harmful_max": 0.3,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": null,
+      "memory": {
+        "anchor_min": 0.7,
+        "confirmation_k": 2,
+        "family": "P5",
+        "probability_min": 0.5
+      },
+      "memory_predictor": true,
+      "name": "MEMORY_P5_P50_A7",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.7,
+        "discount_scope": "target",
+        "family": "C0",
+        "harmful_max": 0.3,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": null,
+      "memory": {
+        "anchor_min": 0.3,
+        "confirmation_k": 2,
+        "family": "P5",
+        "probability_min": 0.7
+      },
+      "memory_predictor": true,
+      "name": "MEMORY_P5_P70_A3",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.7,
+        "discount_scope": "target",
+        "family": "C0",
+        "harmful_max": 0.3,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": null,
+      "memory": {
+        "anchor_min": 0.5,
+        "confirmation_k": 2,
+        "family": "P5",
+        "probability_min": 0.7
+      },
+      "memory_predictor": true,
+      "name": "MEMORY_P5_P70_A5",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.7,
+        "discount_scope": "target",
+        "family": "C0",
+        "harmful_max": 0.3,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": null,
+      "memory": {
+        "anchor_min": 0.7,
+        "confirmation_k": 2,
+        "family": "P5",
+        "probability_min": 0.7
+      },
+      "memory_predictor": true,
+      "name": "MEMORY_P5_P70_A7",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.7,
+        "discount_scope": "target",
+        "family": "C0",
+        "harmful_max": 0.3,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": null,
+      "memory": {
+        "anchor_min": 0.3,
+        "confirmation_k": 2,
+        "family": "P5",
+        "probability_min": 0.9
+      },
+      "memory_predictor": true,
+      "name": "MEMORY_P5_P90_A3",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.7,
+        "discount_scope": "target",
+        "family": "C0",
+        "harmful_max": 0.3,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": null,
+      "memory": {
+        "anchor_min": 0.5,
+        "confirmation_k": 2,
+        "family": "P5",
+        "probability_min": 0.9
+      },
+      "memory_predictor": true,
+      "name": "MEMORY_P5_P90_A5",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.7,
+        "discount_scope": "target",
+        "family": "C0",
+        "harmful_max": 0.3,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": null,
+      "memory": {
+        "anchor_min": 0.7,
+        "confirmation_k": 2,
+        "family": "P5",
+        "probability_min": 0.9
+      },
+      "memory_predictor": true,
+      "name": "MEMORY_P5_P90_A7",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.7,
+        "discount_scope": "target",
+        "family": "C0",
+        "harmful_max": 0.3,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": null,
+      "memory": {
+        "anchor_min": 0.3,
+        "confirmation_k": 2,
+        "family": "P5",
+        "probability_min": 0.95
+      },
+      "memory_predictor": true,
+      "name": "MEMORY_P5_P95_A3",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.7,
+        "discount_scope": "target",
+        "family": "C0",
+        "harmful_max": 0.3,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": null,
+      "memory": {
+        "anchor_min": 0.5,
+        "confirmation_k": 2,
+        "family": "P5",
+        "probability_min": 0.95
+      },
+      "memory_predictor": true,
+      "name": "MEMORY_P5_P95_A5",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.7,
+        "discount_scope": "target",
+        "family": "C0",
+        "harmful_max": 0.3,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": null,
+      "memory": {
+        "anchor_min": 0.7,
+        "confirmation_k": 2,
+        "family": "P5",
+        "probability_min": 0.95
+      },
+      "memory_predictor": true,
+      "name": "MEMORY_P5_P95_A7",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.7,
+        "discount_scope": "target",
+        "family": "C0",
+        "harmful_max": 0.3,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": null,
+      "memory": {
+        "anchor_min": 0.3,
+        "confirmation_k": 2,
+        "family": "P5",
+        "probability_min": 0.99
+      },
+      "memory_predictor": true,
+      "name": "MEMORY_P5_P99_A3",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.7,
+        "discount_scope": "target",
+        "family": "C0",
+        "harmful_max": 0.3,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": null,
+      "memory": {
+        "anchor_min": 0.5,
+        "confirmation_k": 2,
+        "family": "P5",
+        "probability_min": 0.99
+      },
+      "memory_predictor": true,
+      "name": "MEMORY_P5_P99_A5",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.7,
+        "discount_scope": "target",
+        "family": "C0",
+        "harmful_max": 0.3,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": null,
+      "memory": {
+        "anchor_min": 0.7,
+        "confirmation_k": 2,
+        "family": "P5",
+        "probability_min": 0.99
+      },
+      "memory_predictor": true,
+      "name": "MEMORY_P5_P99_A7",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.7,
+        "discount_scope": "target",
+        "family": "C0",
+        "harmful_max": 0.3,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": null,
+      "memory": {
+        "anchor_min": 0.3,
+        "confirmation_k": 2,
+        "family": "P6",
+        "probability_min": 0.9
+      },
+      "memory_predictor": false,
+      "name": "MEMORY_P6_A3",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.7,
+        "discount_scope": "target",
+        "family": "C0",
+        "harmful_max": 0.3,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": null,
+      "memory": {
+        "anchor_min": 0.5,
+        "confirmation_k": 2,
+        "family": "P6",
+        "probability_min": 0.9
+      },
+      "memory_predictor": false,
+      "name": "MEMORY_P6_A5",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.7,
+        "discount_scope": "target",
+        "family": "C0",
+        "harmful_max": 0.3,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": null,
+      "memory": {
+        "anchor_min": 0.7,
+        "confirmation_k": 2,
+        "family": "P6",
+        "probability_min": 0.9
+      },
+      "memory_predictor": false,
+      "name": "MEMORY_P6_A7",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.7,
+        "discount_scope": "target",
+        "family": "C0",
+        "harmful_max": 0.3,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": null,
+      "memory": {
+        "anchor_min": 0.3,
+        "confirmation_k": 2,
+        "family": "P0",
+        "probability_min": 0.9
+      },
+      "memory_predictor": false,
+      "name": "NATIVE_GLOBAL_0",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.7,
+        "discount_scope": "global",
+        "family": "C0",
+        "harmful_max": 0.3,
+        "native_discount": 0.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": null,
+      "memory": {
+        "anchor_min": 0.3,
+        "confirmation_k": 2,
+        "family": "P0",
+        "probability_min": 0.9
+      },
+      "memory_predictor": false,
+      "name": "NATIVE_GLOBAL_25",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.7,
+        "discount_scope": "global",
+        "family": "C0",
+        "harmful_max": 0.3,
+        "native_discount": 0.25,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": null,
+      "memory": {
+        "anchor_min": 0.3,
+        "confirmation_k": 2,
+        "family": "P0",
+        "probability_min": 0.9
+      },
+      "memory_predictor": false,
+      "name": "NATIVE_GLOBAL_50",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.7,
+        "discount_scope": "global",
+        "family": "C0",
+        "harmful_max": 0.3,
+        "native_discount": 0.5,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": null,
+      "memory": {
+        "anchor_min": 0.3,
+        "confirmation_k": 2,
+        "family": "P0",
+        "probability_min": 0.9
+      },
+      "memory_predictor": false,
+      "name": "NATIVE_GLOBAL_100",
+      "native_predictor": false,
+      "policy": {
+        "beneficial_min": 0.7,
+        "discount_scope": "global",
+        "family": "C0",
+        "harmful_max": 0.3,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    },
+    {
+      "controller_key": null,
+      "memory": {
+        "anchor_min": 0.3,
+        "confirmation_k": 2,
+        "family": "P0",
+        "probability_min": 0.9
+      },
+      "memory_predictor": false,
+      "name": "NATIVE_IDENTITY",
+      "native_predictor": true,
+      "policy": {
+        "beneficial_min": 0.7,
+        "discount_scope": "target",
+        "family": "C0",
+        "harmful_max": 0.3,
+        "native_discount": 1.0,
+        "positive_discount": 1.0,
+        "source": "adapter",
+        "strength": 1.0,
+        "top_k": 1,
+        "value_min": 0.0
+      }
+    }
+  ],
+  "fit": [
+    "dancetrack0001",
+    "dancetrack0002",
+    "dancetrack0023",
+    "dancetrack0057",
+    "dancetrack0062",
+    "dancetrack0072"
+  ],
+  "frozen_before_inner_runtime": true,
+  "inner": "dancetrack0039",
+  "outer": "dancetrack0024",
+  "proposal_K": 1,
+  "proposal_audits": {
+    "1": {
+      "GT_used_only_for_labels_after_proposal": true,
+      "K": 1,
+      "actions": 603,
+      "adapter_manifest": [
+        {
+          "actual_training_sequences": [
+            "dancetrack0001",
+            "dancetrack0002",
+            "dancetrack0023",
+            "dancetrack0057",
+            "dancetrack0062",
+            "dancetrack0072"
+          ],
+          "parameters": 0,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0024__seed720321.pt",
+          "seed": 720321,
+          "sha256": "ed8307abbba07b10059244c57d64b7c79759844a4db225c928581d0c90e59a3f"
+        },
+        {
+          "actual_training_sequences": [
+            "dancetrack0001",
+            "dancetrack0002",
+            "dancetrack0023",
+            "dancetrack0057",
+            "dancetrack0062",
+            "dancetrack0072"
+          ],
+          "parameters": 0,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0024__seed720322.pt",
+          "seed": 720322,
+          "sha256": "03d0d60fbe2111ace9d41537c14053a190b43b2459a7caa3dfd3e69ebf5aa76b"
+        },
+        {
+          "actual_training_sequences": [
+            "dancetrack0001",
+            "dancetrack0002",
+            "dancetrack0023",
+            "dancetrack0057",
+            "dancetrack0062",
+            "dancetrack0072"
+          ],
+          "parameters": 0,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0024__seed720323.pt",
+          "seed": 720323,
+          "sha256": "4898fb27ff8663a8dbb9e0fc0646f2c346b12e79afe106444e0283b97f12d026"
+        }
+      ],
+      "naturally_beneficial": 10,
+      "oracle_beneficial_actions": 10,
+      "oracle_opportunity_events": 10,
+      "role": "inner",
+      "runtime_beneficial_actions": 10,
+      "runtime_beneficial_proposal_recall": 1.0,
+      "sequence": "dancetrack0039",
+      "source_sha256": "5bdd96f920ef9bb3f69ad6cbb655a5d9a4b485a2dd98a2e4fad9c9840381e9e2"
+    },
+    "3": {
+      "GT_used_only_for_labels_after_proposal": true,
+      "K": 3,
+      "actions": 1326,
+      "adapter_manifest": [
+        {
+          "actual_training_sequences": [
+            "dancetrack0001",
+            "dancetrack0002",
+            "dancetrack0023",
+            "dancetrack0057",
+            "dancetrack0062",
+            "dancetrack0072"
+          ],
+          "parameters": 0,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0024__seed720321.pt",
+          "seed": 720321,
+          "sha256": "ed8307abbba07b10059244c57d64b7c79759844a4db225c928581d0c90e59a3f"
+        },
+        {
+          "actual_training_sequences": [
+            "dancetrack0001",
+            "dancetrack0002",
+            "dancetrack0023",
+            "dancetrack0057",
+            "dancetrack0062",
+            "dancetrack0072"
+          ],
+          "parameters": 0,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0024__seed720322.pt",
+          "seed": 720322,
+          "sha256": "03d0d60fbe2111ace9d41537c14053a190b43b2459a7caa3dfd3e69ebf5aa76b"
+        },
+        {
+          "actual_training_sequences": [
+            "dancetrack0001",
+            "dancetrack0002",
+            "dancetrack0023",
+            "dancetrack0057",
+            "dancetrack0062",
+            "dancetrack0072"
+          ],
+          "parameters": 0,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0024__seed720323.pt",
+          "seed": 720323,
+          "sha256": "4898fb27ff8663a8dbb9e0fc0646f2c346b12e79afe106444e0283b97f12d026"
+        }
+      ],
+      "naturally_beneficial": 10,
+      "oracle_beneficial_actions": 10,
+      "oracle_opportunity_events": 10,
+      "role": "inner",
+      "runtime_beneficial_actions": 10,
+      "runtime_beneficial_proposal_recall": 1.0,
+      "sequence": "dancetrack0039",
+      "source_sha256": "5bdd96f920ef9bb3f69ad6cbb655a5d9a4b485a2dd98a2e4fad9c9840381e9e2"
+    },
+    "5": {
+      "GT_used_only_for_labels_after_proposal": true,
+      "K": 5,
+      "actions": 1650,
+      "adapter_manifest": [
+        {
+          "actual_training_sequences": [
+            "dancetrack0001",
+            "dancetrack0002",
+            "dancetrack0023",
+            "dancetrack0057",
+            "dancetrack0062",
+            "dancetrack0072"
+          ],
+          "parameters": 0,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0024__seed720321.pt",
+          "seed": 720321,
+          "sha256": "ed8307abbba07b10059244c57d64b7c79759844a4db225c928581d0c90e59a3f"
+        },
+        {
+          "actual_training_sequences": [
+            "dancetrack0001",
+            "dancetrack0002",
+            "dancetrack0023",
+            "dancetrack0057",
+            "dancetrack0062",
+            "dancetrack0072"
+          ],
+          "parameters": 0,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0024__seed720322.pt",
+          "seed": 720322,
+          "sha256": "03d0d60fbe2111ace9d41537c14053a190b43b2459a7caa3dfd3e69ebf5aa76b"
+        },
+        {
+          "actual_training_sequences": [
+            "dancetrack0001",
+            "dancetrack0002",
+            "dancetrack0023",
+            "dancetrack0057",
+            "dancetrack0062",
+            "dancetrack0072"
+          ],
+          "parameters": 0,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0024__seed720323.pt",
+          "seed": 720323,
+          "sha256": "4898fb27ff8663a8dbb9e0fc0646f2c346b12e79afe106444e0283b97f12d026"
+        }
+      ],
+      "naturally_beneficial": 10,
+      "oracle_beneficial_actions": 10,
+      "oracle_opportunity_events": 10,
+      "role": "inner",
+      "runtime_beneficial_actions": 10,
+      "runtime_beneficial_proposal_recall": 1.0,
+      "sequence": "dancetrack0039",
+      "source_sha256": "5bdd96f920ef9bb3f69ad6cbb655a5d9a4b485a2dd98a2e4fad9c9840381e9e2"
+    }
+  },
+  "threshold_rankings": {
+    "C2_L0": [
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.9,
+          0.1,
+          0.05
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.9,
+          0.1,
+          0.0
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.9,
+          0.3,
+          0.05
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.9,
+          0.3,
+          0.0
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.7,
+          0.1,
+          0.05
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.7,
+          0.1,
+          0.0
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.7,
+          0.3,
+          0.05
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.7,
+          0.3,
+          0.0
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.5,
+          0.1,
+          0.05
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.5,
+          0.1,
+          0.0
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.5,
+          0.3,
+          0.05
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.5,
+          0.3,
+          0.0
+        ]
+      }
+    ],
+    "C3_L0": [
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.9,
+          0.1,
+          0.05
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.9,
+          0.1,
+          0.0
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.9,
+          0.3,
+          0.05
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.9,
+          0.3,
+          0.0
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": -0.7357575757575758,
+        "thresholds": [
+          0.7,
+          0.1,
+          0.05
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": -0.7357575757575758,
+        "thresholds": [
+          0.7,
+          0.1,
+          0.0
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": -0.7357575757575758,
+        "thresholds": [
+          0.5,
+          0.1,
+          0.05
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": -0.7357575757575758,
+        "thresholds": [
+          0.5,
+          0.1,
+          0.0
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": -1.581212121212121,
+        "thresholds": [
+          0.7,
+          0.3,
+          0.05
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": -1.581212121212121,
+        "thresholds": [
+          0.7,
+          0.3,
+          0.0
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": -1.6096969696969698,
+        "thresholds": [
+          0.5,
+          0.3,
+          0.05
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": -1.6096969696969698,
+        "thresholds": [
+          0.5,
+          0.3,
+          0.0
+        ]
+      }
+    ],
+    "C4_L0": [
+      {
+        "inner_counterfactual_mean_value": -0.06606060606060607,
+        "thresholds": [
+          0.7,
+          0.1,
+          0.0
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": -0.06606060606060607,
+        "thresholds": [
+          0.7,
+          0.3,
+          0.0
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": -0.06606060606060607,
+        "thresholds": [
+          0.5,
+          0.1,
+          0.0
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": -0.06606060606060607,
+        "thresholds": [
+          0.5,
+          0.3,
+          0.0
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": -0.0696969696969697,
+        "thresholds": [
+          0.9,
+          0.1,
+          0.05
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": -0.0696969696969697,
+        "thresholds": [
+          0.9,
+          0.1,
+          0.0
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": -0.0696969696969697,
+        "thresholds": [
+          0.9,
+          0.3,
+          0.05
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": -0.0696969696969697,
+        "thresholds": [
+          0.9,
+          0.3,
+          0.0
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": -0.0696969696969697,
+        "thresholds": [
+          0.7,
+          0.1,
+          0.05
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": -0.0696969696969697,
+        "thresholds": [
+          0.7,
+          0.3,
+          0.05
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": -0.0696969696969697,
+        "thresholds": [
+          0.5,
+          0.1,
+          0.05
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": -0.0696969696969697,
+        "thresholds": [
+          0.5,
+          0.3,
+          0.05
+        ]
+      }
+    ],
+    "C5_L1": [
+      {
+        "inner_counterfactual_mean_value": -0.03939393939393939,
+        "thresholds": [
+          0.9,
+          0.1,
+          0.05
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": -0.03939393939393939,
+        "thresholds": [
+          0.9,
+          0.1,
+          0.0
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": -0.03939393939393939,
+        "thresholds": [
+          0.9,
+          0.3,
+          0.05
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": -0.03939393939393939,
+        "thresholds": [
+          0.9,
+          0.3,
+          0.0
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": -0.08,
+        "thresholds": [
+          0.7,
+          0.1,
+          0.05
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": -0.08,
+        "thresholds": [
+          0.7,
+          0.1,
+          0.0
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": -0.08,
+        "thresholds": [
+          0.7,
+          0.3,
+          0.05
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": -0.08,
+        "thresholds": [
+          0.7,
+          0.3,
+          0.0
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": -0.08606060606060606,
+        "thresholds": [
+          0.5,
+          0.1,
+          0.05
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": -0.08606060606060606,
+        "thresholds": [
+          0.5,
+          0.1,
+          0.0
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": -0.11393939393939394,
+        "thresholds": [
+          0.5,
+          0.3,
+          0.05
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": -0.13515151515151516,
+        "thresholds": [
+          0.5,
+          0.3,
+          0.0
+        ]
+      }
+    ],
+    "C6_L0": [
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.9,
+          0.1,
+          0.05
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.9,
+          0.1,
+          0.0
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.9,
+          0.3,
+          0.05
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.9,
+          0.3,
+          0.0
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.7,
+          0.1,
+          0.05
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.7,
+          0.1,
+          0.0
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.7,
+          0.3,
+          0.05
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.7,
+          0.3,
+          0.0
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.5,
+          0.1,
+          0.05
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.5,
+          0.1,
+          0.0
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.5,
+          0.3,
+          0.05
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.5,
+          0.3,
+          0.0
+        ]
+      }
+    ],
+    "C6_L1": [
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.9,
+          0.1,
+          0.05
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.9,
+          0.1,
+          0.0
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.9,
+          0.3,
+          0.05
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.9,
+          0.3,
+          0.0
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.7,
+          0.1,
+          0.05
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.7,
+          0.1,
+          0.0
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.7,
+          0.3,
+          0.05
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.7,
+          0.3,
+          0.0
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.5,
+          0.1,
+          0.05
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.5,
+          0.1,
+          0.0
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.5,
+          0.3,
+          0.05
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.5,
+          0.3,
+          0.0
+        ]
+      }
+    ],
+    "C6_L2": [
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.9,
+          0.1,
+          0.05
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.9,
+          0.1,
+          0.0
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.9,
+          0.3,
+          0.05
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.9,
+          0.3,
+          0.0
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.7,
+          0.1,
+          0.05
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.7,
+          0.1,
+          0.0
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.7,
+          0.3,
+          0.05
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.7,
+          0.3,
+          0.0
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.5,
+          0.1,
+          0.05
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.5,
+          0.1,
+          0.0
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.5,
+          0.3,
+          0.05
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.5,
+          0.3,
+          0.0
+        ]
+      }
+    ],
+    "C6_L3": [
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.9,
+          0.1,
+          0.05
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.9,
+          0.1,
+          0.0
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.9,
+          0.3,
+          0.05
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.9,
+          0.3,
+          0.0
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.7,
+          0.1,
+          0.05
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.7,
+          0.1,
+          0.0
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.7,
+          0.3,
+          0.05
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.7,
+          0.3,
+          0.0
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.5,
+          0.1,
+          0.05
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.5,
+          0.1,
+          0.0
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.5,
+          0.3,
+          0.05
+        ]
+      },
+      {
+        "inner_counterfactual_mean_value": 0.0,
+        "thresholds": [
+          0.5,
+          0.3,
+          0.0
+        ]
+      }
+    ]
+  }
+}

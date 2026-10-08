@@ -1,0 +1,14 @@
+{
+  "stage": "N72R20R4R1",
+  "goal_file": "outputs/N72R20R4R1/FINAL_GOAL.json",
+  "defined_before_new_VAL_input_access": true,
+  "eligibility": "The three preregistered DEV point-estimate conditions. The specification and PREREGISTRATION require reporting whether the CI lower bound exceeds zero; it does not turn that reported condition into a prohibition on confirmation. CI failure remains a scientific reliability limitation, not a PASS.",
+  "selection_data": "Only immutable family/joint inner evaluations. No outer metrics choose architecture, thresholds, memory or native policy.",
+  "family_rule": "Compare all preregistered family-selected and joint cases by mean inner HOTA delta, subject to every inner DetA guard; then mean AssA delta, fewer IDSW, lower capacity. Identical native-only and C6-native effects favor the simpler native-only model.",
+  "hyperparameter_rule": "Modal complete configuration among the eight inner-selected configurations of the winning family; ties favor the lexically deterministic configuration. No new grid.",
+  "refit": "Preserve winning architecture, three seeds and 30 reliability epochs; fit native reliability on actual causal P1 states from all eight train-development sequences. Reuse SHA-verified historical eight-train-sequence VAL Adapter, frozen GRU and existing VAL candidates. No backbone training.",
+  "freeze": "Fit-only checkpoint SHA and complete configuration in val/FROZEN_POLICY.json before events('val') or candidate/GT evaluation access.",
+  "validation": "One frozen BASELINE/TREATMENT full-trajectory invocation across the same 25 sequences, full GT/all public outputs; 2000 paired sequence bootstrap draws. No VAL selection, repeated tuning or TEST access.",
+  "historically_exposed_VAL_not_virgin": true,
+  "zero_write_memory_safety_pass_forbidden": true
+}
