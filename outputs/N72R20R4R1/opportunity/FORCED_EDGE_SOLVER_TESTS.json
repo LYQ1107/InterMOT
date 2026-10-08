@@ -1,0 +1,16 @@
+{
+  "stage": "N72R20R4R1",
+  "status": "PASS_ENGINEERING_ONLY",
+  "command": "PYTHONPATH=. OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 .venv/bin/python -m pytest -q tests/test_n72r20r4r1_solver.py tests/test_n72r20r4r1_runtime.py",
+  "tests_passed": 50,
+  "tests_failed": 0,
+  "first_attempt": {
+    "tests_passed": 49,
+    "tests_failed": 1,
+    "cause": "Fixture incorrectly required a pair swap although the competitor alternative had negative score and exact reduced Hungarian correctly selected NONE plus a birth.",
+    "resolution": "Corrected fixture to verify competitor LOST state and complete candidate ownership via birth; no solver behavior changed."
+  },
+  "full_repo_pass_claimed": false,
+  "scientific_improvement_claimed": false,
+  "actual_eight_sequence_KEEP_AA": "audit/NEW_KEEP_AA.json"
+}
