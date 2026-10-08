@@ -228,3 +228,9 @@ Official TrackEval re-evaluation of all frozen dev ablations and both all-25 VAL
 
 Frozen GRU: `/data3/liuyeqiang/InterMOT/outputs/N72R18/checkpoints/identity_memory_gru.pt`, SHA256 `94ba9c44e177b254ee54984195e839f37c78a648c010ffc723dd3f1d553976a2`. Strict Adapter checkpoint paths/SHA are in `adapter/STRICT_FOLD_CHECKPOINTS.json`; all authority paths/SHA are in `association/training/*.json` and `checkpoints/SEALED_EVIDENCE.json`; final VAL checkpoint paths/SHA are in `val/FROZEN_POLICY.json`.
 Final science decision `FAIL_GLOBAL_ASSOCIATION_AUTHORITY`. NEXT_STAGE_AUTHORIZED=False. No downstream training, new candidate generation or test evaluation was started.
+
+## Git delivery
+
+Science, code and 31-test snapshot `453fa33a4cd4bf33e11b91e6fc72400b9ae25c4e` was published on `codex/n72r20r4-causal-identity-trajectory-transfer` through the existing authenticated GitHub API, retaining every local blob/tree/commit SHA and using a non-force fast-forward. Local/remote HEAD equality and a clean tree were verified before completion metadata. SSH still times out before authentication; no SSH success is claimed.
+
+Completion evidence is in `audit/GIT_DELIVERY.json`. The final metadata commit is verified again after publication; its exact final SHA is bound by the external `git_api_publication/receipt__<final_HEAD>.json`, avoiding a self-referential SHA in a committed file. Task completion means complete, reproducible negative evidence—not a scientific PASS or next-stage authorization.

@@ -21,9 +21,9 @@
     "tests_and_compile": {"satisfied": true, "evidence": "checkpoints/TEST_RESULTS.json", "stage_tests_passed": 31, "selected_dependency_failed": 1, "failure": "unchanged historical branch-name assertion"},
     "historical_assets_and_runtime_freeze_preserved": {"satisfied": true, "evidence": "audit/SOURCE_LINEAGE.json; checkpoints/SEALED_EVIDENCE.json", "sealed_dev_VAL_runs": 322, "primary_checkpoint_SHA_entries": 124},
     "disk_and_other_jobs_preserved": {"satisfied": true, "evidence": "audit/STORAGE_SHARING.json; EXECUTION_LOG.md", "heavy_work_stop_gib": 100, "no_historical_deletion": true},
-    "final_commit_push_local_remote_equal_clean": {"satisfied": false, "evidence": "pending final Git delivery", "reason": "intermittent direct TLS/SSH/API transport; verified per-object API upload cache retained externally"}
+    "final_commit_push_local_remote_equal_clean": {"satisfied": true, "evidence": "audit/GIT_DELIVERY.json; external receipt__<final_HEAD>.json", "verified_science_code_and_tests_snapshot": "453fa33a4cd4bf33e11b91e6fc72400b9ae25c4e", "local_remote_equal_and_worktree_clean_verified_before_completion_metadata": true, "final_metadata_head_rechecked_after_publication": "bound by external final-HEAD receipt rather than circular in-commit SHA"}
   },
   "scientific_decision": "FAIL_GLOBAL_ASSOCIATION_AUTHORITY",
   "next_stage_authorized": false,
-  "overall_goal_complete": false
+  "overall_goal_complete": true
 }
