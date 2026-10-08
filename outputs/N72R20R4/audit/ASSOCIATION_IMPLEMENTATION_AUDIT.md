@@ -35,4 +35,4 @@ G1/G3 changed 1440 target-frame choices with N01=90/N10=0 in shadow reports. For
 
 ## Test evidence
 
-Pending real R4 regression suite and independently generated A/A trajectories; no structural finding is a scientific PASS.
+R4 runtime suite: 20 tests passed. All eight independently reconstructed native trajectories match the sealed source SHA and frame assignments. Dynamic causal baseline and identity-off pass exact output/state/lifecycle A/A and identical official TrackEval. Evidence: `causal_tracker/A_A_EQUIVALENCE.json`, `audit/BASELINE_EQUIVALENCE_REPORT.json`, `checkpoints/M0_M3.json`. These correctness results are not a scientific effect PASS.

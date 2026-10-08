@@ -41,7 +41,10 @@ def freeze() -> dict:
         else:
             check_storage(reserve_gib=0.03)
             dataset=r3.load_episode_dataset() if dataset is None else dataset
-            model,training=r3._fit_final(dataset,dataset.episodes,seed,epochs,torch.device("cuda:0" if torch.cuda.is_available() else "cpu"))
+            # CPU is the default because the GPU may have been claimed by
+            # another job since the initial audit. Explicit opt-in follows a
+            # fresh resource check and affects only this small metric fit.
+            model,training=r3._fit_final(dataset,dataset.episodes,seed,epochs,torch.device(os.environ.get("N72R20R4_TRAIN_DEVICE","cpu")))
             model_path.parent.mkdir(parents=True,exist_ok=True)
             torch.save({"stage":STAGE,"architecture":"CrossSceneIdentityAdapter","feature_dim":512,"bottleneck_dim":128,"state_dict":{k:v.detach().cpu() for k,v in model.state_dict().items()},"trainable_parameters":265472,"seed":seed,"actual_training_sequences":list(SEQUENCES),"parameter_fit_sequences":list(SEQUENCES),"VAL_used_for_training":False},model_path)
             record={"path":model_path,"sha256":sha256(model_path),"seed":seed,"epochs":epochs,"fit_sequences":SEQUENCES,"training":training}

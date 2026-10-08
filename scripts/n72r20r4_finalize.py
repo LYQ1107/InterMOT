@@ -26,6 +26,10 @@ def run() -> dict:
             path=ASSETS/"dev/audits"/name/f"{s}__memory.jsonl.zst"
             all_rows.extend(read_zstd_jsonl(path))
         summary=memory_metrics(all_rows)
+        by_sequence={s:[r for r in all_rows if r.get("sequence")==s] for s in SEQUENCES}
+        summary["per_sequence"]={s:memory_metrics(rows) for s,rows in by_sequence.items()}
+        summary["contamination_cascade_length_accepted_writes"]=max(m["contamination_cascade_length_accepted_writes"] for m in summary["per_sequence"].values())
+        summary["cascade_does_not_cross_sequence_boundary"]=True
         summary["HOTA"]=ablations[name]["HOTA"]
         rows_by_policy[policy]=summary
         write_manifests[policy]={"rows":len(all_rows),"source_files":[{"path":str(ASSETS/"dev/audits"/name/f"{s}__memory.jsonl.zst"),"sha256":sha256(ASSETS/"dev/audits"/name/f"{s}__memory.jsonl.zst")} for s in SEQUENCES]}
@@ -60,6 +64,7 @@ def run() -> dict:
     elif not gate1:
         if dev["deltas"]["DetA"] < -0.005:decision="FAIL_DETA_ASSA_TRADEOFF"
         elif memory_required and not selected_memory["safety_pass"]:decision="FAIL_MEMORY_STATE_CONTAMINATION"
+        elif all(v["changed_frames"]==0 for v in dev["interventions"].values()):decision="FAIL_GLOBAL_ASSOCIATION_AUTHORITY"
         else:decision="FAIL_TRAJECTORY_LEVEL_CAUSAL_BENEFIT"
     elif not gate2:decision="FAIL_VAL_GENERALIZATION"
     elif memory_required and not selected_memory["safety_pass"]:decision="FAIL_MEMORY_STATE_CONTAMINATION"

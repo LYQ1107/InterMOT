@@ -1,0 +1,23 @@
+{
+  "stage": "N72R20R4",
+  "goal_file": "outputs/N72R20R4/FINAL_GOAL.json",
+  "stage_suite": {
+    "command": "PYTHONPATH=. .venv/bin/python -m pytest -q tests/test_n72r20r4_*.py",
+    "passed": 26,
+    "failed": 0,
+    "seconds": 2.87
+  },
+  "selected_dependency_regression": {
+    "command": "PYTHONPATH=. .venv/bin/python -m pytest -q tests/test_n72r20r4_posthoc.py tests/test_n72r20r4_storage.py tests/test_n72r20_learned_identity_memory.py tests/test_n72r18_identity_memory.py tests/test_n72r20r3r2r3_pipeline.py",
+    "passed": 74,
+    "failed": 1,
+    "seconds": 20.13,
+    "failure": "tests/test_n72r20r3r2r3_pipeline.py::test_local_branch_is_expected",
+    "cause": "Historical test requires exact R3R2R3 branch name; current intentional R4 branch differs.",
+    "research_code_failure": false,
+    "historical_test_modified_or_skipped": false
+  },
+  "compileall": "PASS scripts/n72r20r4_*.py",
+  "entire_repository_suite_claimed_pass": false,
+  "structural_tests_are_not_scientific_effect_success": true
+}

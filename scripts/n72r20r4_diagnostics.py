@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Posthoc-only intervention-window TrackEval and single-target headroom."""
 from __future__ import annotations
-from collections import defaultdict
+import configparser
 from copy import deepcopy
 from scripts.n72r20r4_common import *
 from scripts.n72r20r4_trackeval import evaluate, METRICS
@@ -50,6 +50,35 @@ def headroom() -> dict:
     return result
 
 
+def preserve_gt_window(source: Path, lo: int, hi: int) -> str:
+    """Retain all original GT fields/classes, changing only the frame axis."""
+    lines=[]
+    for line in source.read_text().splitlines():
+        fields=line.split(",")
+        frame=int(float(fields[0]))-1
+        if lo<=frame<=hi:
+            fields[0]=str(frame-lo+1)
+            lines.append(",".join(fields)+"\n")
+    return "".join(lines)
+
+
+def merged_windows(rows: list[dict], length: int) -> list[tuple[int,int]]:
+    intervals=[]
+    for row in sorted(rows,key=lambda row:row["frame"]):
+        lo=max(0,row["frame"]-1);hi=min(length-1,row["frame"]+30)
+        if intervals and lo<=intervals[-1][1]+1:
+            intervals[-1]=(intervals[-1][0],max(hi,intervals[-1][1]))
+        else:intervals.append((lo,hi))
+    return intervals
+
+
+def owner_reallocations(row: dict) -> list[dict]:
+    b={uid:p for p,uid in row["baseline_all_public_assignments"].items() if uid is not None}
+    t={uid:p for p,uid in row["treatment_all_public_assignments"].items() if uid is not None}
+    return [{"candidate_uid":uid,"baseline_public_id":b[uid],"treatment_public_id":t[uid]}
+            for uid in sorted(b.keys() & t.keys()) if b[uid]!=t[uid]]
+
+
 def intervention_windows() -> dict:
     """Merge overlapping [event-1,event+30] intervals; evaluate each cluster.
 
@@ -60,38 +89,41 @@ def intervention_windows() -> dict:
     root=ASSETS/"local_interventions"
     gt_root=root/"gt"
     tracker_root=root/"trackers"
-    merged_records=[];all_events=[];seq_names=[]
+    merged_records=[];all_events=[];seq_names=[];scope_counts={}
+    folds=[read_json(OUT/"association/folds"/f"{s}.json") for s in SEQUENCES]
+    variants=list(folds[0]["manifests"])
+    if any(set(f["manifests"])!=set(variants) for f in folds):
+        raise ValueError("incomplete outer intervention variant axis")
     for sequence in SEQUENCES:
         baseline=load_trace("dev","B1_CAUSAL_BASELINE",sequence)
-        treatment=load_trace("dev","SELECTED_TREATMENT",sequence)
-        events_rows=read_zstd_jsonl(ASSETS/"dev/audits/SELECTED_TREATMENT"/f"{sequence}__interventions.jsonl.zst")
-        intervals=[]
-        for row in events_rows:
-            lo=max(0,row["frame"]-1);hi=min(len(baseline)-1,row["frame"]+30)
-            if intervals and lo<=intervals[-1][1]+1:
-                intervals[-1]=(intervals[-1][0],max(hi,intervals[-1][1]))
-            else:intervals.append((lo,hi))
-        gt=gt_by_frame(DATASET/"train"/sequence/"gt/gt.txt")
-        for i,(lo,hi) in enumerate(intervals):
-            name=f"{sequence}__cluster{i:04d}"
-            seq_names.append(name)
-            d=gt_root/name; (d/"gt").mkdir(parents=True,exist_ok=True)
-            (d/"seqinfo.ini").write_text(f"[Sequence]\nname={name}\nimDir=img1\nframeRate=20\nseqLength={hi-lo+1}\nimWidth=1920\nimHeight=1080\nimExt=.jpg\n")
-            lines=[]
-            for f in range(lo,hi+1):
-                for identity,box in gt.get(f,[]):
-                    x1,y1,x2,y2=box
-                    lines.append(f"{f-lo+1},{identity},{x1},{y1},{x2-x1},{y2-y1},1,1,1\n")
-            (d/"gt/gt.txt").write_text("".join(lines))
-            for tracker,source in (("BASELINE",baseline),("TREATMENT",treatment)):
-                rows=[{**r,"frame":r["frame"]-lo} for r in source[lo:hi+1]]
-                export_run(tracker,name,rows,{"posthoc_window_only":True,"source_sequence":sequence,"source_frames":[lo,hi]},group="local_interventions")
-            cluster={"sequence":sequence,"window_name":name,"absolute_frame_start":lo,"absolute_frame_end":hi,"interventions_in_cluster":sum(lo<=r["frame"]<=hi for r in events_rows)}
-            merged_records.append(cluster)
-        for r in events_rows:
-            cluster=next(c for c in merged_records if c["sequence"]==sequence and c["absolute_frame_start"]<=r["frame"]<=c["absolute_frame_end"])
-            r["local_TrackEval_cluster"]=cluster["window_name"]
-            all_events.append(r)
+        for variant in variants:
+            events_rows=read_zstd_jsonl(ASSETS/"dev/audits"/variant/f"{sequence}__interventions.jsonl.zst")
+            scope_counts.setdefault(variant,{})[sequence]=len(events_rows)
+            if not events_rows:continue
+            treatment=load_trace("dev",variant,sequence)
+            for i,(lo,hi) in enumerate(merged_windows(events_rows,len(baseline))):
+                check_storage(reserve_gib=0.01)
+                name=f"{sequence}__{variant}__cluster{i:04d}"
+                seq_names.append(name)
+                d=gt_root/name; (d/"gt").mkdir(parents=True,exist_ok=True)
+                config=configparser.ConfigParser()
+                config.read(DATASET/"train"/sequence/"seqinfo.ini")
+                config["Sequence"]["name"]=name
+                config["Sequence"]["seqLength"]=str(hi-lo+1)
+                with (d/"seqinfo.ini").open("w") as handle:config.write(handle)
+                (d/"gt/gt.txt").write_text(preserve_gt_window(DATASET/"train"/sequence/"gt/gt.txt",lo,hi))
+                for tracker,source in (("BASELINE",baseline),("TREATMENT",treatment)):
+                    rows=[{**r,"frame":r["frame"]-lo} for r in source[lo:hi+1]]
+                    export_run(tracker,name,rows,{"posthoc_window_only":True,"source_sequence":sequence,"variant":variant,"source_frames":[lo,hi]},group="local_interventions")
+                cluster={"sequence":sequence,"variant":variant,"window_name":name,"absolute_frame_start":lo,"absolute_frame_end":hi,"interventions_in_cluster":sum(lo<=r["frame"]<=hi for r in events_rows)}
+                merged_records.append(cluster)
+            for r in events_rows:
+                cluster=next(c for c in merged_records if c["sequence"]==sequence and c["variant"]==variant and c["absolute_frame_start"]<=r["frame"]<=c["absolute_frame_end"])
+                r["variant"]=variant
+                r["candidate_public_owner_reallocations"]=owner_reallocations(r)
+                r["ID_reallocation"]=bool(r["candidate_public_owner_reallocations"])
+                r["local_TrackEval_cluster"]=cluster["window_name"]
+                all_events.append(r)
     if seq_names:
         seqmap=tracker_root/"seqmap.txt";seqmap.write_text("name\n"+"\n".join(seq_names)+"\n")
         evaluated=run_trackeval_many(tracker_root,root/"eval",["BASELINE","TREATMENT"],seqmap,gt_split="train",gt_folder=gt_root)
@@ -103,9 +135,9 @@ def intervention_windows() -> dict:
             row["local_TrackEval_delta"]={k:t[k]-b[k] for k in METRICS}
             row["overlapping_intervention_effects_not_additive"]=True
     else:
-        metrics={};evaluated={"status":"NO_SELECTED_INTERVENTIONS"}
+        metrics={};evaluated={"status":"NO_INTERVENTIONS_IN_ANY_PREREGISTERED_VARIANT"}
     write_zstd(OUT/"association/TRAJECTORY_INTERVENTION_AUDIT.jsonl.zst",all_events)
-    result={"status":"COMPLETE" if seq_names else "NO_SELECTED_INTERVENTIONS","interventions":len(all_events),"clusters":merged_records,"metrics":metrics,"clustered_local_trackeval":True,"independent_event_causal_effect_claimed":False,"evaluation":evaluated}
+    result={"status":"COMPLETE" if seq_names else "NO_INTERVENTIONS_IN_ANY_PREREGISTERED_VARIANT","interventions":len(all_events),"scope_counts":scope_counts,"all_outer_variants_and_sequences_checked":True,"clusters":merged_records,"metrics":metrics,"clustered_local_trackeval":True,"independent_event_causal_effect_claimed":False,"original_GT_fields_preserved":True,"evaluation":evaluated}
     write_json(OUT/"association/LOCAL_TRAJECTORY_TRACK_EVAL.json",result)
     return result
 
