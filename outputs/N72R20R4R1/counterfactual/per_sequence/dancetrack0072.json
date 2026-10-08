@@ -1,0 +1,106 @@
+{
+  "H30_events": 90,
+  "action_counts": {
+    "GLOBAL_SWAP": 1047,
+    "REJECT_TARGET": 320,
+    "SWITCH_TO_CANDIDATE": 12
+  },
+  "artifact": {
+    "path": "/data3/liuyeqiang/InterMOT_N72R20R4R1_assets/counterfactual/dancetrack0072.jsonl.zst",
+    "rows": 2109,
+    "sha256": "3836192155f6cc34da5a4d717a11de8c0c5fc7efe92a95b9bb8ddfe9641e45ed",
+    "uncompressed_sha256": "4ba9e529c80b2cb33a619bad8ea28cff2c1b9fcee0bb5ba929f514632e9ea209"
+  },
+  "base_environment": "R4_CAUSAL_DYNAMIC_P0",
+  "eligible_identities": 5,
+  "identities": {
+    "0": {
+      "H30_strata": {
+        "harmful": 6,
+        "neutral": 6,
+        "positive": 6
+      },
+      "actions": 279,
+      "anchor_frame": 0,
+      "beneficial": 16,
+      "changed": 243,
+      "harmful": 222,
+      "neutral": 41,
+      "oracle_beneficial": 14
+    },
+    "1": {
+      "H30_strata": {
+        "harmful": 6,
+        "neutral": 6,
+        "positive": 6
+      },
+      "actions": 291,
+      "anchor_frame": 1,
+      "beneficial": 22,
+      "changed": 243,
+      "harmful": 215,
+      "neutral": 54,
+      "oracle_beneficial": 22
+    },
+    "2": {
+      "H30_strata": {
+        "harmful": 6,
+        "neutral": 6,
+        "positive": 6
+      },
+      "actions": 243,
+      "anchor_frame": 0,
+      "beneficial": 60,
+      "changed": 243,
+      "harmful": 167,
+      "neutral": 16,
+      "oracle_beneficial": 57
+    },
+    "3": {
+      "H30_strata": {
+        "harmful": 6,
+        "neutral": 6,
+        "positive": 6
+      },
+      "actions": 287,
+      "anchor_frame": 0,
+      "beneficial": 19,
+      "changed": 243,
+      "harmful": 218,
+      "neutral": 50,
+      "oracle_beneficial": 17
+    },
+    "4": {
+      "H30_strata": {
+        "harmful": 6,
+        "neutral": 6,
+        "positive": 6
+      },
+      "actions": 279,
+      "anchor_frame": 0,
+      "beneficial": 20,
+      "changed": 243,
+      "harmful": 211,
+      "neutral": 48,
+      "oracle_beneficial": 19
+    }
+  },
+  "natural_actions_only": true,
+  "no_positive_duplication": true,
+  "outer_labels_cannot_select_models": true,
+  "own_future_state": true,
+  "representation_independent_outcomes": true,
+  "seconds": 44.27626500700717,
+  "sequence": "dancetrack0072",
+  "taxonomy": {
+    "T0_ALREADY_CORRECT": 52,
+    "T1_RECOVERABLE_WRONG_MATCH": 47,
+    "T2_RECOVERABLE_NONE": 25,
+    "T3_COMPETITOR_OWNED": 72,
+    "T4_CANDIDATE_MISSING": 188,
+    "T5_VALID_REJECTION": 8,
+    "T7_GLOBAL_INTERVENTION_HARM": 0
+  },
+  "training_reader_requires_fit_sequence": true,
+  "window_trackeval": "COMPLETE"
+}

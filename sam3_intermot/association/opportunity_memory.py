@@ -39,8 +39,6 @@ def commit_causal_memory(tracker, *, rows, frame, baseline, solver, scores, scor
     feature=np.asarray(row["feature"],dtype=np.float32)
     result["eligible"]=True
     native=(row.get("native_scope"),int(row["native_tid"]))
-    tracker.native_streak=tracker.native_streak+1 if native==tracker.last_native_key and tracker.last_observation_frame==frame-1 else 1
-    tracker.last_native_key=native;tracker.last_observation_frame=frame
     agree=bool(len(scores) and i==int(np.argmax(scores)))
     anchor_agreement=float(np.dot(record.human_anchor,feature))
     safe_causal=agree and anchor_agreement>=policy.anchor_min and write_features["motion"]>=.1 and write_features["quality"]>=.5

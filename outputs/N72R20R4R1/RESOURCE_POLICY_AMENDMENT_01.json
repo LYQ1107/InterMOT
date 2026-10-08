@@ -1,0 +1,18 @@
+{
+  "stage": "N72R20R4R1",
+  "goal_file": "outputs/N72R20R4R1/FINAL_GOAL.json",
+  "classification": "NON_SCIENTIFIC_RESOURCE_IMPLEMENTATION_CORRECTION",
+  "reason": "The original helper stopped every write below 100 GiB, whereas user specification section 29 recommends pausing new heavy caches below 100 GiB. At approximately 99.99 GiB it interrupted 20-30 KiB learned-checkpoint writes despite all new-stage external assets totaling under 5 MiB.",
+  "heavy_cache_warning_floor_gib": 100,
+  "heavy_cache_reservation_definition_mib": 1,
+  "lightweight_write_hard_free_floor_gib": 99,
+  "external_stage_total_cap_mib": 48,
+  "permitted_below_warning": "Tiny bounded checkpoints, compact JSON metrics, compressed evaluator logs and reconstructible ownership deltas; no dataset/backbone/cache regeneration or duplicate raw output collections.",
+  "historical_assets_deletion": false,
+  "large_persistent_files_moved_to_root_volume": false,
+  "scientific_goal_changed": false,
+  "scientific_hypotheses_sampling_labels_losses_thresholds_gates_changed": false,
+  "outer_treatment_metrics_seen_before_amendment": false,
+  "val_accessed_this_stage": false,
+  "failed_jobs_resumed_with_existing_checkpoint_SHA_verification": true
+}

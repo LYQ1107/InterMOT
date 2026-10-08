@@ -30,11 +30,15 @@ BRANCH="codex/n72r20r4r1-global-opportunity-safe-authority"
 def check_storage(reserve_mib: float=0) -> dict[str,Any]:
     free=shutil.disk_usage(ROOT).free
     owned=sum(p.stat().st_size for p in ASSETS.rglob("*") if p.is_file()) if ASSETS.exists() else 0
-    if free-reserve_mib*(1<<20)<100*(1<<30):
+    amended=(OUT/"RESOURCE_POLICY_AMENDMENT_01.json").exists()
+    hard_floor=99 if amended else 100
+    if free-reserve_mib*(1<<20)<hard_floor*(1<<30) or (free<100*(1<<30) and reserve_mib>=1):
         raise RuntimeError(f"FAIL_ASSET_OR_STORAGE: {free/(1<<30):.4f} GiB free; no new heavy cache")
     if owned+reserve_mib*(1<<20)>48*(1<<20):
         raise RuntimeError("R4R1 persistent 48 MiB target exceeded; use streaming/own regenerable temporary files")
-    return {"free_bytes":free,"free_gib":free/(1<<30),"own_stage_bytes":owned,"reserved_mib":reserve_mib,"status":"WARNING" if free<105*(1<<30) else "PASS"}
+    return {"free_bytes":free,"free_gib":free/(1<<30),"own_stage_bytes":owned,"reserved_mib":reserve_mib,
+        "status":"LIGHTWEIGHT_ONLY" if free<100*(1<<30) else "WARNING" if free<105*(1<<30) else "PASS",
+        "heavy_cache_forbidden":free<100*(1<<30),"resource_amendment":amended}
 
 
 def events(split: str="train") -> dict[str,dict]:

@@ -120,6 +120,13 @@ def test_preclick_cannot_intervene():
         t.step(rows(0),0,forced_action=AssociationAction("KEEP",100001))
 
 
+def test_empty_candidate_frame_retains_full_public_axis_and_none():
+    t=tracker();t.step(rows(0),0);d=t.step([],1,collect_proposals=True,all_candidates=True)
+    assert d["base_matrix"].shape==(0,2) and not d["outputs"]
+    assert d["target_uid"] is None and d["proposals"][0]["action"]["family"]=="REJECT_TARGET"
+    assert not d["global_assignment_changed"]
+
+
 @pytest.mark.parametrize("f",[0,1,20])
 def test_exact_decomposition_and_positive_provenance(f):
     t=tracker();t.step(rows(0),0);s=t.states[100001];s.add_positive(10)

@@ -14,6 +14,7 @@ from sam3_intermot.association.opportunity_solver import AssociationAction
 from sam3_intermot.association.identity_authority import AuthorityConfig
 from scripts.n72r20r3_common import gt_by_frame
 from scripts.n72r20r4r1_supervision import prepare_anchors,measure_branch
+from scripts.n72r20r4r1_window_audit import WindowAudit
 from scripts.n72r20r4r1_common import *
 
 
@@ -57,6 +58,7 @@ def mine(sequence):
     frames=load_frames(sequence);gt=gt_by_frame(DATASET/"train"/sequence/"gt/gt.txt")
     anchors,matches=prepare_anchors(sequence,frames,gt)
     summaries={};tax=Counter();actions=Counter();long_records=[];started=time.perf_counter()
+    windows=WindowAudit(sequence,gt)
 
     def rows_generator():
         for identity,prepared in sorted(anchors.items()):
@@ -120,7 +122,7 @@ def mine(sequence):
                             selection.append((key,before.clone(),deepcopy(origins),row))
                             selection.sort(key=lambda x:x[0]);del selection[6:]
             for stratum,selection in selected.items():
-                for key,before,origins_at_t,row in selection:
+                for index,(key,before,origins_at_t,row) in enumerate(selection):
                     f=row["frame"];action=AssociationAction(**row["action"])
                     b=before.clone();t=before.clone()
                     btrace=[compact(b.step(frames[f][1],f))]+future(b,frames,f+1,30)
@@ -130,15 +132,19 @@ def mine(sequence):
                         "selection_sha256":key,"H10":measure_branch(btrace[:11],ttrace[:11],matches,local,row["action"]["public_id"],identity),
                         "H30":measure_branch(btrace,ttrace,matches,local,row["action"]["public_id"],identity),"own_future_state":True,"labels_posthoc_only":True}
                     yield long
+                    windows.add(identity,f,stratum,index,btrace,ttrace)
                     # Window inputs remain in RAM until the dedicated bounded
                     # evaluator consumes them; no persistent raw MOT copies.
                     long_records.append({"sequence":sequence,"identity_key":[sequence,identity],"frame":f,"stratum":stratum,"H10":long["H10"],"H30":long["H30"]})
             summaries[str(identity)]={"anchor_frame":anchor_frame,"actions":count,"beneficial":positive,"harmful":negative,"neutral":neutral,"changed":changed,"oracle_beneficial":oracle,"H30_strata":{k:len(v) for k,v in selected.items()}}
             print(json.dumps({"sequence":sequence,"identity":identity,**summaries[str(identity)]}),flush=True)
             write_json(OUT/"counterfactual/PROGRESS.json",{"sequence":sequence,"identities_completed":summaries,"elapsed_seconds":time.perf_counter()-started,"formal_outer_not_evaluated":True})
-    artifact=stream_zstd(target_path,rows_generator())
+    try:
+        artifact=stream_zstd(target_path,rows_generator())
+        window_result=windows.evaluate()
+    finally:windows.close()
     result={"sequence":sequence,"identities":summaries,"eligible_identities":len(anchors),"taxonomy":dict(tax),"action_counts":dict(actions),"artifact":artifact,
-        "H30_events":len(long_records),"seconds":time.perf_counter()-started,"base_environment":"R4_CAUSAL_DYNAMIC_P0","natural_actions_only":True,"no_positive_duplication":True,"own_future_state":True,"training_reader_requires_fit_sequence":True,"representation_independent_outcomes":True,"outer_labels_cannot_select_models":True}
+        "H30_events":len(long_records),"window_trackeval":window_result["status"],"seconds":time.perf_counter()-started,"base_environment":"R4_CAUSAL_DYNAMIC_P0","natural_actions_only":True,"no_positive_duplication":True,"own_future_state":True,"training_reader_requires_fit_sequence":True,"representation_independent_outcomes":True,"outer_labels_cannot_select_models":True}
     write_json(summary_path,result)
     return result
 

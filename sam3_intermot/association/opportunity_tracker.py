@@ -43,25 +43,39 @@ class InterventionPolicy:
 
 
 class OpportunityTracker(CausalIdentityTracker):
-    def __init__(self,*,intervention_policy=None,memory_policy=None,memory_predictor=None,audit_hashes=True,**kwargs):
+    def __init__(self,*,intervention_policy=None,memory_policy=None,memory_predictor=None,native_predictor=None,audit_hashes=True,**kwargs):
         super().__init__(**kwargs)
         self.intervention_policy=intervention_policy or InterventionPolicy()
         self.memory_policy=memory_policy or MemoryPolicy(self.config.memory)
-        self.memory_predictor=memory_predictor;self.audit_hashes=audit_hashes
+        self.memory_predictor=memory_predictor;self.native_predictor=native_predictor;self.audit_hashes=audit_hashes
         self.pending=[];self.native_streak=0;self.last_native_key=None;self.last_observation_frame=-1
+        self.observed_native_streak=0
         self.contradiction_streak=0;self.trust_snapshot=None
 
     def _scores(self,ordered,rows,frame):
         matrix=np.asarray(score_matrix_pairwise(ordered,observations(rows),frame,None,
             reid_weights={"sim":1.5,"iou":1.,"native":.5,"gap":.1},native_bonus=3.,positive_bonus=5.),dtype=np.float64)
         p=self.intervention_policy
-        if p.native_discount!=1 or p.positive_discount!=1:
+        if p.native_discount!=1 or p.positive_discount!=1 or self.native_predictor is not None:
             parts=decompose_scores(ordered,rows,frame)
             columns=range(len(ordered)) if p.discount_scope=="global" else [j for j,s in enumerate(ordered) if s.public_id==self.target_public]
             for j in columns:
                 matrix[:,j]-=(1-p.native_discount)*(parts["native_core"][:,j]+parts["native_bonus"][:,j])+(1-p.positive_discount)*parts["positive_bonus"][:,j]
+                if self.native_predictor is not None and ordered[j].public_id==self.target_public and frame>int(self.event["event_frame"]):
+                    record=self.bank.records[self.target_public];query=record.current_state
+                    raw=np.asarray([float(np.dot(query,r["feature"])) for r in rows])
+                    for i,r in enumerate(rows):
+                        wf=self.native_features(ordered[j],r,rows,i,raw,query,frame)
+                        reliability=self.native_predictor.predict(wf)["beneficial"]
+                        matrix[i,j]-=p.native_discount*(1-reliability)*(parts["native_core"][i,j]+parts["native_bonus"][i,j])
             matrix[parts["hard_mask"]]=-1e9
         return matrix
+
+    def native_features(self,state,row,rows,index,scores,query,frame):
+        return [float(scores[index]),margin(scores,index),float(np.dot(self.event["human_anchor"],row["feature"])),
+            float(np.dot(query,self.event["human_anchor"])),predicted_iou(state,np.asarray(row["box_xyxy"]),frame),float(row.get("conf",0.)),
+            min(1.,self.observed_native_streak/5.),min(1.,(frame-self.last_trusted_frame)/100.),
+            float(state.last_native_tid==int(row["native_tid"]) and state.last_native_scope==row.get("native_scope")),min(1.,len(rows)/50.)]
 
     def _identity(self,rows,encoded):
         record=None if self.bank is None else self.bank.records.get(self.target_public)
@@ -155,7 +169,15 @@ class OpportunityTracker(CausalIdentityTracker):
         wf={"motion":0. if idx is None else predicted_iou(state,np.asarray(rows[idx]["box_xyxy"]),frame),"quality":0. if idx is None else float(rows[idx].get("conf",0.)),"vector":None}
         if idx is not None and postclick:
             j=ordered.index(state)
-            wf["vector"]=[float(identity[idx]),margin(identity,idx),float(np.dot(self.event["human_anchor"],rows[idx]["feature"])),float(np.dot(query,self.event["human_anchor"])),wf["motion"],wf["quality"],min(1.,self.native_streak/5.),min(1.,(frame-self.last_trusted_frame)/100.),float(state.last_native_tid==int(rows[idx]["native_tid"])),min(1.,len(rows)/50.)]
+            native=(rows[idx].get("native_scope"),int(rows[idx]["native_tid"]))
+            self.observed_native_streak=self.observed_native_streak+1 if native==self.last_native_key and self.last_observation_frame==frame-1 else 1
+            self.last_native_key=native;self.last_observation_frame=frame
+            # Action-model confirmation streak is inactive under the frozen
+            # P0/P1/P2 source policies, matching the sealed mining features.
+            if self.memory_policy.family in ("P3","P4","P5","P6"):self.native_streak=self.observed_native_streak
+            wf["vector"]=[float(identity[idx]),margin(identity,idx),float(np.dot(self.event["human_anchor"],rows[idx]["feature"])),float(np.dot(query,self.event["human_anchor"])),wf["motion"],wf["quality"],min(1.,self.observed_native_streak/5.),min(1.,(frame-self.last_trusted_frame)/100.),float(state.last_native_tid==int(rows[idx]["native_tid"])),min(1.,len(rows)/50.)]
+        elif postclick:
+            self.native_streak=0;self.observed_native_streak=0;self.last_native_key=None;self.pending=[]
         commit=commit_causal_memory(self,rows=rows,frame=frame,baseline=baseline_solver or bs,solver=solver,scores=identity,score_hash=score_hash,write_features=wf)
         if commit["accepted"]:self.last_trusted_frame=frame
         by_uid={str(r["candidate_uid"]):r for r in rows};assignments=public_map(solver);final=dict(assignments);births=[];deaths=[]
@@ -175,4 +197,4 @@ class OpportunityTracker(CausalIdentityTracker):
         if len(assigned)!=len(set(assigned)):raise RuntimeError("duplicate candidate ownership")
         output=[{"public_id":p,"candidate_uid":u,"box_xyxy":list(by_uid[u]["box_xyxy"]),"confidence":float(by_uid[u].get("confidence",1.) or 1.)} for p,u in sorted(final.items()) if u is not None]
         self.frame=frame
-        return {"frame":frame,"outputs":output,"assignments":{str(p):u for p,u in final.items()},"base_assignments":{str(p):u for p,u in public_map(bs).items()},"target_public_id":self.target_public,"target_uid":final.get(self.target_public),"identity_scores":identity.tolist(),"memory":commit,"write_features":wf["vector"],"births":births,"deaths":deaths,"state_before":before,"state_after":state_digest(self.states) if self.audit_hashes else None,"proposals":proposals,"selected_action":None if selected is None else selected["action"],"base_matrix":base,"solver":solver,"states_before_commit_axis":[s.public_id for s in ordered],"runtime_gt_read":False,"runtime_future_gt_used":False}
+        return {"frame":frame,"outputs":output,"assignments":{str(p):u for p,u in final.items()},"base_assignments":{str(p):u for p,u in public_map(bs).items()},"target_public_id":self.target_public,"target_uid":final.get(self.target_public),"identity_scores":identity.tolist(),"memory":commit,"write_features":wf["vector"],"births":births,"deaths":deaths,"state_before":before,"state_after":state_digest(self.states) if self.audit_hashes else None,"proposals":proposals,"selected_action":None if selected is None else selected["action"],"global_assignment_changed":False if selected is None else selected["assignment_changed"],"base_matrix":base,"solver":solver,"states_before_commit_axis":[s.public_id for s in ordered],"runtime_gt_read":False,"runtime_future_gt_used":False}
