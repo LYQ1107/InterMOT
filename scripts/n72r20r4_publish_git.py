@@ -78,7 +78,28 @@ def commit_payload(raw: bytes) -> dict:
             "committer":git_person(parsed["committer"]),"message":message}
 
 
-def run(head: str) -> dict:
+def inline_tree_entries(changes: list[dict], uploaded: set[str]) -> list[dict]:
+    """Batch unuploaded UTF-8 blobs via documented tree.content; binary stays SHA.
+
+    Source bytes always come from sealed Git objects, not the working tree.
+    The returned tree SHA still has to equal the complete local tree SHA.
+    """
+    entries=[]
+    for record in changes:
+        entry=dict(record)
+        if entry["type"]=="blob" and entry["sha"] is not None and entry["sha"] not in uploaded:
+            raw=git("cat-file","blob",entry["sha"])
+            try:content=raw.decode("utf-8")
+            except UnicodeDecodeError:pass
+            else:
+                if content.encode("utf-8")!=raw:raise ValueError("UTF-8 blob roundtrip changed")
+                del entry["sha"]
+                entry["content"]=content
+        entries.append(entry)
+    return entries
+
+
+def run(head: str, *, inline_text: bool=False) -> dict:
     if git("branch","--show-current").decode().strip()!=BRANCH:
         raise ValueError("publisher requires the task's exact branch")
     head=git("rev-parse","--verify",head+"^{commit}").decode().strip()
@@ -100,7 +121,10 @@ def run(head: str) -> dict:
         old=tree_entries(parent);new=tree_entries(commit)
         changes=[new[p] for p in sorted(new) if new[p]!=old.get(p)]
         changes.extend({"path":p,"mode":old[p]["mode"],"type":old[p]["type"],"sha":None} for p in sorted(old.keys()-new.keys()))
-        blobs={r["sha"] for r in changes if r["type"]=="blob" and r["sha"] is not None}
+        if inline_text:
+            cached={p.stem.removeprefix("blob__") for p in cache_root.glob("blob__*.json")}
+            changes=inline_tree_entries(changes,cached)
+        blobs={r["sha"] for r in changes if r["type"]=="blob" and r.get("sha") is not None}
         def upload_blob(sha: str) -> str:
             done=cache_root/f"blob__{sha}.json"
             if done.exists():return sha
@@ -112,7 +136,9 @@ def run(head: str) -> dict:
         with ThreadPoolExecutor(max_workers=2) as pool:
             for sha in pool.map(upload_blob,sorted(blobs)):
                 print(json.dumps({"phase":"blob_verified","commit":commit,"sha":sha}),flush=True)
-        tree=api("POST",f"{API_ROOT}/trees",{"base_tree":git("rev-parse",parent+"^{tree}").decode().strip(),"tree":changes})
+        tree_body={"base_tree":git("rev-parse",parent+"^{tree}").decode().strip(),"tree":changes}
+        print(json.dumps({"phase":"tree_upload","commit":commit,"entries":len(changes),"inline_text_entries":sum("content" in r for r in changes),"request_bytes":len(json.dumps(tree_body).encode())}),flush=True)
+        tree=api("POST",f"{API_ROOT}/trees",tree_body)
         if tree["sha"]!=payload["tree"]:raise RuntimeError("uploaded tree SHA changed")
         created=api("POST",f"{API_ROOT}/commits",payload)
         write_json(cache_root/f"commit__{commit}.json",{"local_commit":commit,"GitHub_commit":created["sha"],"tree":tree["sha"],"objects_equal":created["sha"]==commit})
@@ -135,5 +161,7 @@ def run(head: str) -> dict:
 
 
 if __name__=="__main__":
-    parser=argparse.ArgumentParser();parser.add_argument("--head",default="HEAD");args=parser.parse_args()
-    print(json.dumps(run(args.head),sort_keys=True))
+    parser=argparse.ArgumentParser();parser.add_argument("--head",default="HEAD")
+    parser.add_argument("--inline-text",action="store_true",help="batch remaining UTF-8 blobs via GitHub tree.content")
+    args=parser.parse_args()
+    print(json.dumps(run(args.head,inline_text=args.inline_text),sort_keys=True))

@@ -18,6 +18,6 @@ The complete report, all 25 VAL rows, uncertainty, ablations and cached-feature 
 
 Checkpoint paths and SHA256 are enumerated in [SEALED_EVIDENCE.json](../outputs/N72R20R4/checkpoints/SEALED_EVIDENCE.json). All 322 dev/VAL trajectory+trace exports and frozen runtime core hashes were verified. Official re-evaluation exactly reproduced every metric, retaining original evaluator logs.
 
-Stage tests: 29 passed. Selected dependency regression: 74 passed, 1 unchanged historical branch-name assertion failed; no whole-repository PASS is claimed. No backbone training, new candidate generation, test evaluation, unrelated process termination or historical asset deletion occurred. Simulated GT-derived human anchors are not real-human evidence.
+Stage tests: 30 passed. Selected dependency regression: 74 passed, 1 unchanged historical branch-name assertion failed; no whole-repository PASS is claimed. No backbone training, new candidate generation, test evaluation, unrelated process termination or historical asset deletion occurred. Simulated GT-derived human anchors are not real-human evidence.
 
 Scientific completion and Git delivery are tracked separately in [stage_status.json](../outputs/N72R20R4/stage_status.json). The application Goal is not complete until final local/remote HEAD equality and a clean worktree are verified.
