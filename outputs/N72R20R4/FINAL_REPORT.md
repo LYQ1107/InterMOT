@@ -222,7 +222,7 @@ Missing intervals count visible-target frames with no correct clicked-ID output;
 
 ## Verification and checkpoints
 
-Stage suite: 30 passed, 0 failed. Selected dependency regression: 74 passed, 1 failed (unchanged historical branch-name assertion). Full-repository PASS is not claimed.
+Stage suite: 31 passed, 0 failed. Selected dependency regression: 74 passed, 1 failed (unchanged historical branch-name assertion). Full-repository PASS is not claimed.
 SHA verified 322 dev/VAL trajectory+trace exports; all causal runtime core hashes match the pre-formal freeze. Source ref verified through GitHub connector and matches the initial source HEAD; direct transport failures and verification timing are in SOURCE_LINEAGE.json.
 Official TrackEval re-evaluation of all frozen dev ablations and both all-25 VAL streams exactly reproduces every combined/per-sequence metric. Original evaluator logs remain unchanged; this is reproducibility verification, not policy reselection.
 

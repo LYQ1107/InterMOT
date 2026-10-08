@@ -99,7 +99,23 @@ def inline_tree_entries(changes: list[dict], uploaded: set[str]) -> list[dict]:
     return entries
 
 
-def run(head: str, *, inline_text: bool=False) -> dict:
+def tree_chunks(entries: list[dict], target_bytes: int) -> list[list[dict]]:
+    """Keep each Git blob whole, splitting only between tree entries.
+
+    This is a soft limit: one large file is retained as one whole entry.
+    """
+    if target_bytes<128:raise ValueError("tree chunk target must be at least 128 bytes")
+    chunks=[];current=[];size=0
+    for entry in entries:
+        encoded_size=len(json.dumps(entry).encode())+2
+        if current and size+encoded_size>target_bytes:
+            chunks.append(current);current=[];size=0
+        current.append(entry);size+=encoded_size
+    if current:chunks.append(current)
+    return chunks
+
+
+def run(head: str, *, inline_text: bool=False, tree_chunk_bytes: int=524288) -> dict:
     if git("branch","--show-current").decode().strip()!=BRANCH:
         raise ValueError("publisher requires the task's exact branch")
     head=git("rev-parse","--verify",head+"^{commit}").decode().strip()
@@ -136,12 +152,26 @@ def run(head: str, *, inline_text: bool=False) -> dict:
         with ThreadPoolExecutor(max_workers=2) as pool:
             for sha in pool.map(upload_blob,sorted(blobs)):
                 print(json.dumps({"phase":"blob_verified","commit":commit,"sha":sha}),flush=True)
-        tree_body={"base_tree":git("rev-parse",parent+"^{tree}").decode().strip(),"tree":changes}
-        print(json.dumps({"phase":"tree_upload","commit":commit,"entries":len(changes),"inline_text_entries":sum("content" in r for r in changes),"request_bytes":len(json.dumps(tree_body).encode())}),flush=True)
-        tree=api("POST",f"{API_ROOT}/trees",tree_body)
-        if tree["sha"]!=payload["tree"]:raise RuntimeError("uploaded tree SHA changed")
+        tree_sha=git("rev-parse",parent+"^{tree}").decode().strip()
+        chunks=tree_chunks(changes,tree_chunk_bytes) if inline_text else [changes]
+        for index,entries in enumerate(chunks):
+            tree_body={"base_tree":tree_sha,"tree":entries}
+            encoded=json.dumps(tree_body).encode()
+            digest=hashlib.sha256(encoded).hexdigest()
+            checkpoint=cache_root/f"tree_chunk__{commit}__{index:03d}__{digest}.json"
+            if checkpoint.exists():
+                proof=read_json(checkpoint)
+                if proof["request_sha256"]!=digest or proof["base_tree"]!=tree_sha:
+                    raise RuntimeError("tree chunk cache does not bind this exact request")
+                tree_sha=proof["result_tree"]
+                print(json.dumps({"phase":"tree_chunk_cache_verified","commit":commit,"index":index,"sha":tree_sha}),flush=True)
+                continue
+            print(json.dumps({"phase":"tree_upload","commit":commit,"index":index,"chunks":len(chunks),"entries":len(entries),"inline_text_entries":sum("content" in r for r in entries),"request_bytes":len(encoded)}),flush=True)
+            tree_sha=api("POST",f"{API_ROOT}/trees",tree_body)["sha"]
+            write_json(checkpoint,{"request_sha256":digest,"base_tree":tree_body["base_tree"],"result_tree":tree_sha,"verified_GitHub_response":True})
+        if tree_sha!=payload["tree"]:raise RuntimeError("uploaded complete tree SHA changed")
         created=api("POST",f"{API_ROOT}/commits",payload)
-        write_json(cache_root/f"commit__{commit}.json",{"local_commit":commit,"GitHub_commit":created["sha"],"tree":tree["sha"],"objects_equal":created["sha"]==commit})
+        write_json(cache_root/f"commit__{commit}.json",{"local_commit":commit,"GitHub_commit":created["sha"],"tree":tree_sha,"objects_equal":created["sha"]==commit})
         if created["sha"]!=commit:
             raise RuntimeError("GitHub normalized commit metadata; remote ref remains untouched")
         uploaded.append(commit)
@@ -163,5 +193,6 @@ def run(head: str, *, inline_text: bool=False) -> dict:
 if __name__=="__main__":
     parser=argparse.ArgumentParser();parser.add_argument("--head",default="HEAD")
     parser.add_argument("--inline-text",action="store_true",help="batch remaining UTF-8 blobs via GitHub tree.content")
+    parser.add_argument("--tree-chunk-bytes",type=int,default=524288,help="soft request size, never split file bytes")
     args=parser.parse_args()
-    print(json.dumps(run(args.head,inline_text=args.inline_text),sort_keys=True))
+    print(json.dumps(run(args.head,inline_text=args.inline_text,tree_chunk_bytes=args.tree_chunk_bytes),sort_keys=True))

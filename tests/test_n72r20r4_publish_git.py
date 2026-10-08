@@ -31,3 +31,12 @@ def test_inline_tree_batches_exact_utf8_and_retains_binary_deleted_and_cached(mo
     assert result[0]["content"].encode()==contents["text"] and "sha" not in result[0]
     assert result[1:]==records[1:]
     assert records[0]["sha"]=="text" and "content" not in records[0]
+
+
+def test_tree_chunks_preserve_all_entries_and_never_split_one_file():
+    entries=[{"path":"large","content":"x"*1000},{"path":"small1","content":"a"},{"path":"small2","sha":None}]
+    chunks=publisher.tree_chunks(entries,128)
+    assert [entry for chunk in chunks for entry in chunk]==entries
+    assert chunks[0]==[entries[0]]
+    assert chunks[1]==entries[1:]
+    with pytest.raises(ValueError):publisher.tree_chunks(entries,0)
