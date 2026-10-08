@@ -1,0 +1,775 @@
+{
+  "baseline": {
+    "AssA": 0.5433304753115834,
+    "DetA": 0.6230911682274578,
+    "FN": 12902.0,
+    "FP": 9157.0,
+    "HOTA": 0.5808919181126544,
+    "IDF1": 0.6175494256925472,
+    "IDSW": 250.0,
+    "LocA": 0.9010765894985205,
+    "MOTA": 0.5785506479767257,
+    "per_sequence": {
+      "dancetrack0001": {
+        "AssA": 0.8417261973770992,
+        "DetA": 0.7480983777932986,
+        "FN": 352.0,
+        "FP": 977.0,
+        "HOTA": 0.7935300609870402,
+        "IDF1": 0.8728107952914155,
+        "IDSW": 0.0,
+        "LocA": 0.9286530873496502,
+        "MOTA": 0.7294381107491856
+      },
+      "dancetrack0002": {
+        "AssA": 0.1778045257449533,
+        "DetA": 0.6084002707381235,
+        "FN": 2338.0,
+        "FP": 2061.0,
+        "HOTA": 0.3287472362880979,
+        "IDF1": 0.3420518725667599,
+        "IDSW": 90.0,
+        "LocA": 0.8893388529099466,
+        "MOTA": 0.5150696770011883
+      },
+      "dancetrack0023": {
+        "AssA": 0.37112627891455585,
+        "DetA": 0.5535793027232516,
+        "FN": 4035.0,
+        "FP": 2657.0,
+        "HOTA": 0.45243250050622374,
+        "IDF1": 0.5466115434500648,
+        "IDSW": 66.0,
+        "LocA": 0.857258561397597,
+        "MOTA": 0.48115163147792706
+      },
+      "dancetrack0024": {
+        "AssA": 0.8599236779801973,
+        "DetA": 0.8536343632765124,
+        "FN": 151.0,
+        "FP": 214.0,
+        "HOTA": 0.8567522738133547,
+        "IDF1": 0.9596126334323759,
+        "IDSW": 2.0,
+        "LocA": 0.9198801510359389,
+        "MOTA": 0.9186613475177305
+      },
+      "dancetrack0039": {
+        "AssA": 0.917798655316476,
+        "DetA": 0.9131167611945791,
+        "FN": 59.0,
+        "FP": 170.0,
+        "HOTA": 0.915434048115491,
+        "IDF1": 0.9800732004880033,
+        "IDSW": 4.0,
+        "LocA": 0.952682101699954,
+        "MOTA": 0.9617531188443861
+      },
+      "dancetrack0057": {
+        "AssA": 0.8413885272034443,
+        "DetA": 0.8036766329170778,
+        "FN": 263.0,
+        "FP": 268.0,
+        "HOTA": 0.8223158841445222,
+        "IDF1": 0.9113587227673374,
+        "IDSW": 1.0,
+        "LocA": 0.9294408620215295,
+        "MOTA": 0.8229027962716379
+      },
+      "dancetrack0062": {
+        "AssA": 0.3390642747805492,
+        "DetA": 0.6370096794287924,
+        "FN": 1709.0,
+        "FP": 525.0,
+        "HOTA": 0.4644991252184524,
+        "IDF1": 0.5456965394853593,
+        "IDSW": 17.0,
+        "LocA": 0.9076208602006244,
+        "MOTA": 0.6385097157539746
+      },
+      "dancetrack0072": {
+        "AssA": 0.09746463896188304,
+        "DetA": 0.24572245856549374,
+        "FN": 3995.0,
+        "FP": 2285.0,
+        "HOTA": 0.15468034267106398,
+        "IDF1": 0.1803960396039604,
+        "IDSW": 70.0,
+        "LocA": 0.8545143539497752,
+        "MOTA": -0.07535986452159187
+      }
+    },
+    "tracker": "B1_CAUSAL_BASELINE"
+  },
+  "deltas": {
+    "AssA": 0.0,
+    "DetA": 0.0,
+    "FN": 0.0,
+    "FP": 0.0,
+    "HOTA": 0.0,
+    "IDF1": 0.0,
+    "IDSW": 0.0,
+    "LocA": 0.0,
+    "MOTA": 0.0
+  },
+  "development_gate_pass": false,
+  "evaluation_provenance": {
+    "all_variants_share_config": true,
+    "command": [
+      "/data3/liuyeqiang/InterMOT/.venv/bin/python",
+      "/data3/liuyeqiang/InterMOT/scripts/n72r20r3r2r3_trackeval_entry.py",
+      "/data3/liuyeqiang/InterMOT/third_party/MOTIP/TrackEval/scripts/run_mot_challenge.py",
+      "--GT_FOLDER",
+      "/data3/liuyeqiang/InterMOT_N72R16_assets/dataset/train",
+      "--TRACKERS_FOLDER",
+      "/data3/liuyeqiang/InterMOT_N72R20R4_assets/dev/trackers",
+      "--TRACKERS_TO_EVAL",
+      "B1_CAUSAL_BASELINE",
+      "B2_ADAPTER_NO_WRITES",
+      "B3_CONSENSUS_MEMORY",
+      "MEMORY_P2_RELIABLE",
+      "RAW_REID",
+      "LEGACY_BASE_SCORE",
+      "B8_SHUFFLED_STATE",
+      "R2_LOW_CONFIDENCE",
+      "R2_RECOVERY",
+      "R4_CONFLICT_GUARD",
+      "R6_PERSISTENCE",
+      "B5_SCALAR",
+      "LOGISTIC_GATE",
+      "B6_MLP",
+      "B7_STRUCTURED",
+      "SELECTED_TREATMENT",
+      "B4_FIXED_INNER_SELECTED",
+      "G1_FIXED_0.1",
+      "G1_FIXED_0.25",
+      "G1_FIXED_0.5",
+      "G1_FIXED_1",
+      "SEED_SCALAR_720321",
+      "SEED_SCALAR_720322",
+      "SEED_SCALAR_720323",
+      "SEED_LOGISTIC_720321",
+      "SEED_LOGISTIC_720322",
+      "SEED_LOGISTIC_720323",
+      "SEED_MLP_720321",
+      "SEED_MLP_720322",
+      "SEED_MLP_720323",
+      "SEED_STRUCTURED_720321",
+      "SEED_STRUCTURED_720322",
+      "SEED_STRUCTURED_720323",
+      "HISTORICAL_R3R2_ADAPTER7",
+      "--TRACKER_SUB_FOLDER",
+      "data",
+      "--OUTPUT_FOLDER",
+      "/data3/liuyeqiang/InterMOT_N72R20R4_assets/dev/trackeval",
+      "--OUTPUT_SUB_FOLDER",
+      "",
+      "--SEQMAP_FILE",
+      "/data3/liuyeqiang/InterMOT_N72R20R4_assets/dev/trackers/seqmap.txt",
+      "--BENCHMARK",
+      "DanceTrack",
+      "--SPLIT_TO_EVAL",
+      "train",
+      "--SKIP_SPLIT_FOL",
+      "True",
+      "--DO_PREPROC",
+      "False",
+      "--CLASSES_TO_EVAL",
+      "pedestrian",
+      "--METRICS",
+      "HOTA",
+      "CLEAR",
+      "Identity",
+      "--USE_PARALLEL",
+      "False",
+      "--PLOT_CURVES",
+      "False",
+      "--PRINT_RESULTS",
+      "True",
+      "--PRINT_ONLY_COMBINED",
+      "False",
+      "--OUTPUT_SUMMARY",
+      "True",
+      "--OUTPUT_DETAILED",
+      "True"
+    ],
+    "full_sequence": true,
+    "gt_split": "train",
+    "log_path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/dev/trackeval/trackeval.log",
+    "log_sha256": "18337de559fc69fe0264df35d102e388702e1d795a5a0f19b81d3029a22fe54c",
+    "returncode": 0,
+    "runtime_gt_read": false,
+    "seqmap_sha256": "6929d59358569ced56362f6290b734080fdedd64d73a1b0535204f46ac996926",
+    "sequences": [
+      "dancetrack0001",
+      "dancetrack0002",
+      "dancetrack0023",
+      "dancetrack0024",
+      "dancetrack0039",
+      "dancetrack0057",
+      "dancetrack0062",
+      "dancetrack0072"
+    ],
+    "trackeval_commit": "12c8791b303e0a0b50f753af204249e622d0281a"
+  },
+  "interventions": {
+    "B1_CAUSAL_BASELINE": {
+      "N01": 0,
+      "N10": 0,
+      "changed_frames": 0,
+      "global_conflicts": 0,
+      "paired_HOTA": 0.0,
+      "persistent_corrections_30": 0
+    },
+    "B2_ADAPTER_NO_WRITES": {
+      "N01": 0,
+      "N10": 0,
+      "changed_frames": 0,
+      "global_conflicts": 0,
+      "paired_HOTA": 0.0,
+      "persistent_corrections_30": 0
+    },
+    "B3_CONSENSUS_MEMORY": {
+      "N01": 0,
+      "N10": 0,
+      "changed_frames": 0,
+      "global_conflicts": 0,
+      "paired_HOTA": 0.0,
+      "persistent_corrections_30": 0
+    },
+    "B4_FIXED_INNER_SELECTED": {
+      "N01": 0,
+      "N10": 0,
+      "changed_frames": 0,
+      "global_conflicts": 0,
+      "paired_HOTA": 0.0,
+      "persistent_corrections_30": 0
+    },
+    "B5_SCALAR": {
+      "N01": 0,
+      "N10": 0,
+      "changed_frames": 0,
+      "global_conflicts": 0,
+      "paired_HOTA": 0.0,
+      "persistent_corrections_30": 0
+    },
+    "B6_MLP": {
+      "N01": 0,
+      "N10": 0,
+      "changed_frames": 0,
+      "global_conflicts": 0,
+      "paired_HOTA": 0.0,
+      "persistent_corrections_30": 0
+    },
+    "B7_STRUCTURED": {
+      "N01": 0,
+      "N10": 0,
+      "changed_frames": 0,
+      "global_conflicts": 0,
+      "paired_HOTA": 0.0,
+      "persistent_corrections_30": 0
+    },
+    "B8_SHUFFLED_STATE": {
+      "N01": 0,
+      "N10": 0,
+      "changed_frames": 0,
+      "global_conflicts": 0,
+      "paired_HOTA": 0.0,
+      "persistent_corrections_30": 0
+    },
+    "G1_FIXED_0.1": {
+      "N01": 0,
+      "N10": 0,
+      "changed_frames": 0,
+      "global_conflicts": 0,
+      "paired_HOTA": 0.0,
+      "persistent_corrections_30": 0
+    },
+    "G1_FIXED_0.25": {
+      "N01": 0,
+      "N10": 0,
+      "changed_frames": 0,
+      "global_conflicts": 0,
+      "paired_HOTA": 0.0,
+      "persistent_corrections_30": 0
+    },
+    "G1_FIXED_0.5": {
+      "N01": 0,
+      "N10": 0,
+      "changed_frames": 0,
+      "global_conflicts": 0,
+      "paired_HOTA": 0.0,
+      "persistent_corrections_30": 0
+    },
+    "G1_FIXED_1": {
+      "N01": 0,
+      "N10": 0,
+      "changed_frames": 0,
+      "global_conflicts": 0,
+      "paired_HOTA": 0.0,
+      "persistent_corrections_30": 0
+    },
+    "HISTORICAL_R3R2_ADAPTER7": {
+      "N01": 0,
+      "N10": 0,
+      "changed_frames": 0,
+      "global_conflicts": 0,
+      "paired_HOTA": 0.0,
+      "persistent_corrections_30": 0
+    },
+    "LEGACY_BASE_SCORE": {
+      "N01": 0,
+      "N10": 0,
+      "changed_frames": 0,
+      "global_conflicts": 0,
+      "paired_HOTA": 0.0,
+      "persistent_corrections_30": 0
+    },
+    "LOGISTIC_GATE": {
+      "N01": 0,
+      "N10": 0,
+      "changed_frames": 0,
+      "global_conflicts": 0,
+      "paired_HOTA": 0.0,
+      "persistent_corrections_30": 0
+    },
+    "MEMORY_P2_RELIABLE": {
+      "N01": 0,
+      "N10": 0,
+      "changed_frames": 0,
+      "global_conflicts": 0,
+      "paired_HOTA": 0.0,
+      "persistent_corrections_30": 0
+    },
+    "R2_LOW_CONFIDENCE": {
+      "N01": 0,
+      "N10": 0,
+      "changed_frames": 0,
+      "global_conflicts": 0,
+      "paired_HOTA": 0.0,
+      "persistent_corrections_30": 0
+    },
+    "R2_RECOVERY": {
+      "N01": 0,
+      "N10": 0,
+      "changed_frames": 0,
+      "global_conflicts": 0,
+      "paired_HOTA": 0.0,
+      "persistent_corrections_30": 0
+    },
+    "R4_CONFLICT_GUARD": {
+      "N01": 0,
+      "N10": 0,
+      "changed_frames": 0,
+      "global_conflicts": 0,
+      "paired_HOTA": 0.0,
+      "persistent_corrections_30": 0
+    },
+    "R6_PERSISTENCE": {
+      "N01": 0,
+      "N10": 0,
+      "changed_frames": 0,
+      "global_conflicts": 0,
+      "paired_HOTA": 0.0,
+      "persistent_corrections_30": 0
+    },
+    "RAW_REID": {
+      "N01": 0,
+      "N10": 0,
+      "changed_frames": 0,
+      "global_conflicts": 0,
+      "paired_HOTA": 0.0,
+      "persistent_corrections_30": 0
+    },
+    "SEED_LOGISTIC_720321": {
+      "N01": 0,
+      "N10": 0,
+      "changed_frames": 0,
+      "global_conflicts": 0,
+      "paired_HOTA": 0.0,
+      "persistent_corrections_30": 0
+    },
+    "SEED_LOGISTIC_720322": {
+      "N01": 0,
+      "N10": 0,
+      "changed_frames": 0,
+      "global_conflicts": 0,
+      "paired_HOTA": 0.0,
+      "persistent_corrections_30": 0
+    },
+    "SEED_LOGISTIC_720323": {
+      "N01": 0,
+      "N10": 0,
+      "changed_frames": 0,
+      "global_conflicts": 0,
+      "paired_HOTA": 0.0,
+      "persistent_corrections_30": 0
+    },
+    "SEED_MLP_720321": {
+      "N01": 0,
+      "N10": 0,
+      "changed_frames": 0,
+      "global_conflicts": 0,
+      "paired_HOTA": 0.0,
+      "persistent_corrections_30": 0
+    },
+    "SEED_MLP_720322": {
+      "N01": 0,
+      "N10": 0,
+      "changed_frames": 0,
+      "global_conflicts": 0,
+      "paired_HOTA": 0.0,
+      "persistent_corrections_30": 0
+    },
+    "SEED_MLP_720323": {
+      "N01": 0,
+      "N10": 0,
+      "changed_frames": 0,
+      "global_conflicts": 0,
+      "paired_HOTA": 0.0,
+      "persistent_corrections_30": 0
+    },
+    "SEED_SCALAR_720321": {
+      "N01": 0,
+      "N10": 0,
+      "changed_frames": 0,
+      "global_conflicts": 0,
+      "paired_HOTA": 0.0,
+      "persistent_corrections_30": 0
+    },
+    "SEED_SCALAR_720322": {
+      "N01": 0,
+      "N10": 0,
+      "changed_frames": 0,
+      "global_conflicts": 0,
+      "paired_HOTA": 0.0,
+      "persistent_corrections_30": 0
+    },
+    "SEED_SCALAR_720323": {
+      "N01": 0,
+      "N10": 0,
+      "changed_frames": 0,
+      "global_conflicts": 0,
+      "paired_HOTA": 0.0,
+      "persistent_corrections_30": 0
+    },
+    "SEED_STRUCTURED_720321": {
+      "N01": 0,
+      "N10": 0,
+      "changed_frames": 0,
+      "global_conflicts": 0,
+      "paired_HOTA": 0.0,
+      "persistent_corrections_30": 0
+    },
+    "SEED_STRUCTURED_720322": {
+      "N01": 0,
+      "N10": 0,
+      "changed_frames": 0,
+      "global_conflicts": 0,
+      "paired_HOTA": 0.0,
+      "persistent_corrections_30": 0
+    },
+    "SEED_STRUCTURED_720323": {
+      "N01": 0,
+      "N10": 0,
+      "changed_frames": 0,
+      "global_conflicts": 0,
+      "paired_HOTA": 0.0,
+      "persistent_corrections_30": 0
+    },
+    "SELECTED_TREATMENT": {
+      "N01": 0,
+      "N10": 0,
+      "changed_frames": 0,
+      "global_conflicts": 0,
+      "paired_HOTA": 0.0,
+      "persistent_corrections_30": 0
+    }
+  },
+  "outer_GT_used_for_selection": false,
+  "paired": {
+    "HOTA_CI_lower_gt_zero": false,
+    "bootstrap": {
+      "AssA": {
+        "interval_95": [
+          0.0,
+          0.0
+        ],
+        "paired_per_sequence": {
+          "dancetrack0001": 0.0,
+          "dancetrack0002": 0.0,
+          "dancetrack0023": 0.0,
+          "dancetrack0024": 0.0,
+          "dancetrack0039": 0.0,
+          "dancetrack0057": 0.0,
+          "dancetrack0062": 0.0,
+          "dancetrack0072": 0.0
+        },
+        "sequence_macro_delta": 0.0
+      },
+      "DetA": {
+        "interval_95": [
+          0.0,
+          0.0
+        ],
+        "paired_per_sequence": {
+          "dancetrack0001": 0.0,
+          "dancetrack0002": 0.0,
+          "dancetrack0023": 0.0,
+          "dancetrack0024": 0.0,
+          "dancetrack0039": 0.0,
+          "dancetrack0057": 0.0,
+          "dancetrack0062": 0.0,
+          "dancetrack0072": 0.0
+        },
+        "sequence_macro_delta": 0.0
+      },
+      "FN": {
+        "interval_95": [
+          0.0,
+          0.0
+        ],
+        "paired_per_sequence": {
+          "dancetrack0001": 0.0,
+          "dancetrack0002": 0.0,
+          "dancetrack0023": 0.0,
+          "dancetrack0024": 0.0,
+          "dancetrack0039": 0.0,
+          "dancetrack0057": 0.0,
+          "dancetrack0062": 0.0,
+          "dancetrack0072": 0.0
+        },
+        "sequence_macro_delta": 0.0
+      },
+      "FP": {
+        "interval_95": [
+          0.0,
+          0.0
+        ],
+        "paired_per_sequence": {
+          "dancetrack0001": 0.0,
+          "dancetrack0002": 0.0,
+          "dancetrack0023": 0.0,
+          "dancetrack0024": 0.0,
+          "dancetrack0039": 0.0,
+          "dancetrack0057": 0.0,
+          "dancetrack0062": 0.0,
+          "dancetrack0072": 0.0
+        },
+        "sequence_macro_delta": 0.0
+      },
+      "HOTA": {
+        "interval_95": [
+          0.0,
+          0.0
+        ],
+        "paired_per_sequence": {
+          "dancetrack0001": 0.0,
+          "dancetrack0002": 0.0,
+          "dancetrack0023": 0.0,
+          "dancetrack0024": 0.0,
+          "dancetrack0039": 0.0,
+          "dancetrack0057": 0.0,
+          "dancetrack0062": 0.0,
+          "dancetrack0072": 0.0
+        },
+        "sequence_macro_delta": 0.0
+      },
+      "IDF1": {
+        "interval_95": [
+          0.0,
+          0.0
+        ],
+        "paired_per_sequence": {
+          "dancetrack0001": 0.0,
+          "dancetrack0002": 0.0,
+          "dancetrack0023": 0.0,
+          "dancetrack0024": 0.0,
+          "dancetrack0039": 0.0,
+          "dancetrack0057": 0.0,
+          "dancetrack0062": 0.0,
+          "dancetrack0072": 0.0
+        },
+        "sequence_macro_delta": 0.0
+      },
+      "IDSW": {
+        "interval_95": [
+          0.0,
+          0.0
+        ],
+        "paired_per_sequence": {
+          "dancetrack0001": 0.0,
+          "dancetrack0002": 0.0,
+          "dancetrack0023": 0.0,
+          "dancetrack0024": 0.0,
+          "dancetrack0039": 0.0,
+          "dancetrack0057": 0.0,
+          "dancetrack0062": 0.0,
+          "dancetrack0072": 0.0
+        },
+        "sequence_macro_delta": 0.0
+      },
+      "LocA": {
+        "interval_95": [
+          0.0,
+          0.0
+        ],
+        "paired_per_sequence": {
+          "dancetrack0001": 0.0,
+          "dancetrack0002": 0.0,
+          "dancetrack0023": 0.0,
+          "dancetrack0024": 0.0,
+          "dancetrack0039": 0.0,
+          "dancetrack0057": 0.0,
+          "dancetrack0062": 0.0,
+          "dancetrack0072": 0.0
+        },
+        "sequence_macro_delta": 0.0
+      },
+      "MOTA": {
+        "interval_95": [
+          0.0,
+          0.0
+        ],
+        "paired_per_sequence": {
+          "dancetrack0001": 0.0,
+          "dancetrack0002": 0.0,
+          "dancetrack0023": 0.0,
+          "dancetrack0024": 0.0,
+          "dancetrack0039": 0.0,
+          "dancetrack0057": 0.0,
+          "dancetrack0062": 0.0,
+          "dancetrack0072": 0.0
+        },
+        "sequence_macro_delta": 0.0
+      }
+    },
+    "combined_delta": {
+      "AssA": 0.0,
+      "DetA": 0.0,
+      "FN": 0.0,
+      "FP": 0.0,
+      "HOTA": 0.0,
+      "IDF1": 0.0,
+      "IDSW": 0.0,
+      "LocA": 0.0,
+      "MOTA": 0.0
+    },
+    "method": "paired sequence-cluster bootstrap of sequence-macro deltas; combined TrackEval delta separately reported",
+    "resamples": 2000,
+    "seed": 720401
+  },
+  "selected_names": [
+    "G0",
+    "G0",
+    "G0",
+    "G0",
+    "G0",
+    "G0",
+    "G0",
+    "G0"
+  ],
+  "status": "DEV_COMPLETE",
+  "treatment": {
+    "AssA": 0.5433304753115834,
+    "DetA": 0.6230911682274578,
+    "FN": 12902.0,
+    "FP": 9157.0,
+    "HOTA": 0.5808919181126544,
+    "IDF1": 0.6175494256925472,
+    "IDSW": 250.0,
+    "LocA": 0.9010765894985205,
+    "MOTA": 0.5785506479767257,
+    "per_sequence": {
+      "dancetrack0001": {
+        "AssA": 0.8417261973770992,
+        "DetA": 0.7480983777932986,
+        "FN": 352.0,
+        "FP": 977.0,
+        "HOTA": 0.7935300609870402,
+        "IDF1": 0.8728107952914155,
+        "IDSW": 0.0,
+        "LocA": 0.9286530873496502,
+        "MOTA": 0.7294381107491856
+      },
+      "dancetrack0002": {
+        "AssA": 0.1778045257449533,
+        "DetA": 0.6084002707381235,
+        "FN": 2338.0,
+        "FP": 2061.0,
+        "HOTA": 0.3287472362880979,
+        "IDF1": 0.3420518725667599,
+        "IDSW": 90.0,
+        "LocA": 0.8893388529099466,
+        "MOTA": 0.5150696770011883
+      },
+      "dancetrack0023": {
+        "AssA": 0.37112627891455585,
+        "DetA": 0.5535793027232516,
+        "FN": 4035.0,
+        "FP": 2657.0,
+        "HOTA": 0.45243250050622374,
+        "IDF1": 0.5466115434500648,
+        "IDSW": 66.0,
+        "LocA": 0.857258561397597,
+        "MOTA": 0.48115163147792706
+      },
+      "dancetrack0024": {
+        "AssA": 0.8599236779801973,
+        "DetA": 0.8536343632765124,
+        "FN": 151.0,
+        "FP": 214.0,
+        "HOTA": 0.8567522738133547,
+        "IDF1": 0.9596126334323759,
+        "IDSW": 2.0,
+        "LocA": 0.9198801510359389,
+        "MOTA": 0.9186613475177305
+      },
+      "dancetrack0039": {
+        "AssA": 0.917798655316476,
+        "DetA": 0.9131167611945791,
+        "FN": 59.0,
+        "FP": 170.0,
+        "HOTA": 0.915434048115491,
+        "IDF1": 0.9800732004880033,
+        "IDSW": 4.0,
+        "LocA": 0.952682101699954,
+        "MOTA": 0.9617531188443861
+      },
+      "dancetrack0057": {
+        "AssA": 0.8413885272034443,
+        "DetA": 0.8036766329170778,
+        "FN": 263.0,
+        "FP": 268.0,
+        "HOTA": 0.8223158841445222,
+        "IDF1": 0.9113587227673374,
+        "IDSW": 1.0,
+        "LocA": 0.9294408620215295,
+        "MOTA": 0.8229027962716379
+      },
+      "dancetrack0062": {
+        "AssA": 0.3390642747805492,
+        "DetA": 0.6370096794287924,
+        "FN": 1709.0,
+        "FP": 525.0,
+        "HOTA": 0.4644991252184524,
+        "IDF1": 0.5456965394853593,
+        "IDSW": 17.0,
+        "LocA": 0.9076208602006244,
+        "MOTA": 0.6385097157539746
+      },
+      "dancetrack0072": {
+        "AssA": 0.09746463896188304,
+        "DetA": 0.24572245856549374,
+        "FN": 3995.0,
+        "FP": 2285.0,
+        "HOTA": 0.15468034267106398,
+        "IDF1": 0.1803960396039604,
+        "IDSW": 70.0,
+        "LocA": 0.8545143539497752,
+        "MOTA": -0.07535986452159187
+      }
+    },
+    "tracker": "SELECTED_TREATMENT"
+  }
+}

@@ -1,0 +1,3636 @@
+{
+  "actual_models": {
+    "backbone_training": false,
+    "completed_folds": {
+      "dancetrack0001": [
+        {
+          "actual_training_sequences": [
+            "dancetrack0023",
+            "dancetrack0024",
+            "dancetrack0039",
+            "dancetrack0057",
+            "dancetrack0062",
+            "dancetrack0072"
+          ],
+          "code_sha256": {
+            "sam3_intermot/association/causal_identity_tracker.py": "e5417bf08ca55c927ba1b9501773a645178b4f6a540bb7dac1980f4424cf93d1",
+            "sam3_intermot/association/causal_state_commit.py": "0a146541dd6ca3d727fba1fe4bd1763e4f37ad2b2f54af531d58095c7a201e15",
+            "sam3_intermot/association/global_assignment_adapter.py": "0a0e8bac85504a7c35025ad87fe5c958e0f91b96a79824894118dffc8355db17",
+            "sam3_intermot/association/identity_authority.py": "fd0495384efb85769376f5b9bb8cc0d6e6b40a29cdcfa07e46efb25c94d191dd",
+            "scripts/n72r20r4_adapter_integration.py": "14184d97a4761d18cfc3a72429991db0570ad20af0219a6bdfbe30480122bf4e",
+            "scripts/n72r20r4_audit.py": "6c04336616da389351ae01b29170aa0b497b5117288d63e47a858b697ac9aa94",
+            "scripts/n72r20r4_baseline.py": "640b897fdc974c678cb68236556c0be17842f24c34008ebdb794b2c96f49a809",
+            "scripts/n72r20r4_common.py": "08f36fb1d74325af61491a1aa2eda13ee9b8cc2b09f4d69dabaec92256bba60a",
+            "scripts/n72r20r4_run_causal_tracker.py": "c99995c052adbd92e5198e0091a2038f08a1faba8e251da866a10d62830ff6ce",
+            "scripts/n72r20r4_trackeval.py": "a741a7d7a73fe9c4aead7ebc7afd9008c53751c42d401a8956553b7f7ba8547d"
+          },
+          "fit_episode_count": 28507,
+          "heldout_sequence": "dancetrack0001",
+          "inner_episode_count": 6903,
+          "internal_validation_sequence": "dancetrack0002",
+          "outer_heldout_absent": true,
+          "parameters": 265472,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0001__seed720321.pt",
+          "seed": 720321,
+          "sha256": "9ae70ee85761b6d3d5907ee2a76f790facc760d48da5e5245e95443829a94425",
+          "training": {
+            "best_epoch": 1,
+            "best_validation_loss": 2.2647218704223633,
+            "epochs_run": 6,
+            "hard_negative_margin": 0.2,
+            "history": [
+              {
+                "epoch": 1,
+                "train": {
+                  "hard": 0.07958540207307253,
+                  "listwise": 0.40049255293394836,
+                  "supcon": 4.848566625799451,
+                  "total": 1.3861229653869356
+                },
+                "validation": {
+                  "hard": 0.14634028396436147,
+                  "listwise": 0.8993548963751111,
+                  "supcon": 6.680494853428432,
+                  "total": 2.2647218704223633
+                }
+              },
+              {
+                "epoch": 2,
+                "train": {
+                  "hard": 0.04110888258687088,
+                  "listwise": 0.18971529017601693,
+                  "supcon": 4.447091817855835,
+                  "total": 1.0873554455382484
+                },
+                "validation": {
+                  "hard": 0.14543822620596206,
+                  "listwise": 0.8980150605951037,
+                  "supcon": 6.702692304338727,
+                  "total": 2.2676411867141724
+                }
+              },
+              {
+                "epoch": 3,
+                "train": {
+                  "hard": 0.03136855357193521,
+                  "listwise": 0.14660185149737767,
+                  "supcon": 4.2841663019997736,
+                  "total": 1.0097088356103217
+                },
+                "validation": {
+                  "hard": 0.145273534314973,
+                  "listwise": 0.902828186750412,
+                  "supcon": 6.729466302054269,
+                  "total": 2.2777761902127946
+                }
+              },
+              {
+                "epoch": 4,
+                "train": {
+                  "hard": 0.025290311048073427,
+                  "listwise": 0.12088541380528893,
+                  "supcon": 4.1625809243747165,
+                  "total": 0.9584596699901989
+                },
+                "validation": {
+                  "hard": 0.14700355912957871,
+                  "listwise": 0.9031392804213932,
+                  "supcon": 6.808229344231742,
+                  "total": 2.294185927936009
+                }
+              },
+              {
+                "epoch": 5,
+                "train": {
+                  "hard": 0.021300294004114612,
+                  "listwise": 0.10499730386904307,
+                  "supcon": 4.057804260935102,
+                  "total": 0.9208182288067681
+                },
+                "validation": {
+                  "hard": 0.14932966764484132,
+                  "listwise": 0.9198810075010572,
+                  "supcon": 6.792243787220547,
+                  "total": 2.308195778301784
+                }
+              },
+              {
+                "epoch": 6,
+                "train": {
+                  "hard": 0.0180966548588393,
+                  "listwise": 0.0910119769562568,
+                  "supcon": 3.96746170095035,
+                  "total": 0.8881236655371529
+                },
+                "validation": {
+                  "hard": 0.1529007043157305,
+                  "listwise": 0.9560796022415161,
+                  "supcon": 6.783683742795672,
+                  "total": 2.343396476336888
+                }
+              }
+            ],
+            "temperature": 0.07,
+            "trainable_parameters": 265472
+          }
+        },
+        {
+          "actual_training_sequences": [
+            "dancetrack0023",
+            "dancetrack0024",
+            "dancetrack0039",
+            "dancetrack0057",
+            "dancetrack0062",
+            "dancetrack0072"
+          ],
+          "code_sha256": {
+            "sam3_intermot/association/causal_identity_tracker.py": "e5417bf08ca55c927ba1b9501773a645178b4f6a540bb7dac1980f4424cf93d1",
+            "sam3_intermot/association/causal_state_commit.py": "0a146541dd6ca3d727fba1fe4bd1763e4f37ad2b2f54af531d58095c7a201e15",
+            "sam3_intermot/association/global_assignment_adapter.py": "0a0e8bac85504a7c35025ad87fe5c958e0f91b96a79824894118dffc8355db17",
+            "sam3_intermot/association/identity_authority.py": "fd0495384efb85769376f5b9bb8cc0d6e6b40a29cdcfa07e46efb25c94d191dd",
+            "scripts/n72r20r4_adapter_integration.py": "14184d97a4761d18cfc3a72429991db0570ad20af0219a6bdfbe30480122bf4e",
+            "scripts/n72r20r4_audit.py": "6c04336616da389351ae01b29170aa0b497b5117288d63e47a858b697ac9aa94",
+            "scripts/n72r20r4_baseline.py": "640b897fdc974c678cb68236556c0be17842f24c34008ebdb794b2c96f49a809",
+            "scripts/n72r20r4_common.py": "1937d692589f6f0d4d006843adf9ad3655e8c7c8fc8cb22f72d45698da61516a",
+            "scripts/n72r20r4_run_causal_tracker.py": "c99995c052adbd92e5198e0091a2038f08a1faba8e251da866a10d62830ff6ce",
+            "scripts/n72r20r4_trackeval.py": "a741a7d7a73fe9c4aead7ebc7afd9008c53751c42d401a8956553b7f7ba8547d"
+          },
+          "fit_episode_count": 28507,
+          "heldout_sequence": "dancetrack0001",
+          "inner_episode_count": 6903,
+          "internal_validation_sequence": "dancetrack0002",
+          "outer_heldout_absent": true,
+          "parameters": 265472,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0001__seed720322.pt",
+          "seed": 720322,
+          "sha256": "679f37f6dc83a5a1d96195a4281a0d52a549c7986094c102b401caaceb4d9c4d",
+          "training": {
+            "best_epoch": 2,
+            "best_validation_loss": 2.219644444329398,
+            "epochs_run": 7,
+            "hard_negative_margin": 0.2,
+            "history": [
+              {
+                "epoch": 1,
+                "train": {
+                  "hard": 0.07896759713600789,
+                  "listwise": 0.39528726546892096,
+                  "supcon": 4.807831364018576,
+                  "total": 1.3726470662014825
+                },
+                "validation": {
+                  "hard": 0.1421644783445767,
+                  "listwise": 0.8561985577855792,
+                  "supcon": 6.795997994286673,
+                  "total": 2.243831055504935
+                }
+              },
+              {
+                "epoch": 2,
+                "train": {
+                  "hard": 0.040201579819300344,
+                  "listwise": 0.18384713493287563,
+                  "supcon": 4.420775055885315,
+                  "total": 1.07604247544493
+                },
+                "validation": {
+                  "hard": 0.13736611072506225,
+                  "listwise": 0.8318908299718585,
+                  "supcon": 6.801401785441807,
+                  "total": 2.219644444329398
+                }
+              },
+              {
+                "epoch": 3,
+                "train": {
+                  "hard": 0.0309691199633692,
+                  "listwise": 0.14464125595986843,
+                  "supcon": 4.267605534621647,
+                  "total": 1.0043561937553542
+                },
+                "validation": {
+                  "hard": 0.14343244582414627,
+                  "listwise": 0.8776956966945103,
+                  "supcon": 6.792369331632342,
+                  "total": 2.2648561000823975
+                }
+              },
+              {
+                "epoch": 4,
+                "train": {
+                  "hard": 0.025106618480224694,
+                  "listwise": 0.12045451000865016,
+                  "supcon": 4.145598913942065,
+                  "total": 0.9545956307223865
+                },
+                "validation": {
+                  "hard": 0.14887387305498123,
+                  "listwise": 0.9163308484213692,
+                  "supcon": 6.7914449487413675,
+                  "total": 2.304394636835371
+                }
+              },
+              {
+                "epoch": 5,
+                "train": {
+                  "hard": 0.020953549471284662,
+                  "listwise": 0.10336291949663844,
+                  "supcon": 4.044630714825222,
+                  "total": 0.9164797791412899
+                },
+                "validation": {
+                  "hard": 0.1549693782414709,
+                  "listwise": 0.964882207768304,
+                  "supcon": 6.787019048418317,
+                  "total": 2.3532799312046597
+                }
+              },
+              {
+                "epoch": 6,
+                "train": {
+                  "hard": 0.01806880540347525,
+                  "listwise": 0.09174380770751409,
+                  "supcon": 3.95998586501394,
+                  "total": 0.8873547539114952
+                },
+                "validation": {
+                  "hard": 0.1639729259269578,
+                  "listwise": 1.038586084331785,
+                  "supcon": 6.791111367089408,
+                  "total": 2.429602997643607
+                }
+              },
+              {
+                "epoch": 7,
+                "train": {
+                  "hard": 0.015597590411614095,
+                  "listwise": 0.08163051001195397,
+                  "supcon": 3.8812961110046933,
+                  "total": 0.8610092603734562
+                },
+                "validation": {
+                  "hard": 0.17004032858780452,
+                  "listwise": 1.0976054412978036,
+                  "supcon": 6.76253172329494,
+                  "total": 2.484119858060564
+                }
+              }
+            ],
+            "temperature": 0.07,
+            "trainable_parameters": 265472
+          }
+        },
+        {
+          "actual_training_sequences": [
+            "dancetrack0023",
+            "dancetrack0024",
+            "dancetrack0039",
+            "dancetrack0057",
+            "dancetrack0062",
+            "dancetrack0072"
+          ],
+          "code_sha256": {
+            "sam3_intermot/association/causal_identity_tracker.py": "3b225ba1b25fcb0631dab762a0647394f942b3a1e063cec131602e58383aa090",
+            "sam3_intermot/association/causal_state_commit.py": "0a146541dd6ca3d727fba1fe4bd1763e4f37ad2b2f54af531d58095c7a201e15",
+            "sam3_intermot/association/global_assignment_adapter.py": "0a0e8bac85504a7c35025ad87fe5c958e0f91b96a79824894118dffc8355db17",
+            "sam3_intermot/association/identity_authority.py": "fd0495384efb85769376f5b9bb8cc0d6e6b40a29cdcfa07e46efb25c94d191dd",
+            "scripts/n72r20r4_adapter_integration.py": "14184d97a4761d18cfc3a72429991db0570ad20af0219a6bdfbe30480122bf4e",
+            "scripts/n72r20r4_audit.py": "6c04336616da389351ae01b29170aa0b497b5117288d63e47a858b697ac9aa94",
+            "scripts/n72r20r4_baseline.py": "640b897fdc974c678cb68236556c0be17842f24c34008ebdb794b2c96f49a809",
+            "scripts/n72r20r4_common.py": "1937d692589f6f0d4d006843adf9ad3655e8c7c8fc8cb22f72d45698da61516a",
+            "scripts/n72r20r4_run_causal_tracker.py": "c99995c052adbd92e5198e0091a2038f08a1faba8e251da866a10d62830ff6ce",
+            "scripts/n72r20r4_trackeval.py": "a741a7d7a73fe9c4aead7ebc7afd9008c53751c42d401a8956553b7f7ba8547d",
+            "scripts/n72r20r4_train_authority.py": "ae98a9d35763a7a3301d6ee4462cccb3546f55b8bb6600a06737127d99bbd3e1"
+          },
+          "fit_episode_count": 28507,
+          "heldout_sequence": "dancetrack0001",
+          "inner_episode_count": 6903,
+          "internal_validation_sequence": "dancetrack0002",
+          "outer_heldout_absent": true,
+          "parameters": 265472,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0001__seed720323.pt",
+          "seed": 720323,
+          "sha256": "035aa5d3051f6e0a5b4aee90ad9bdf487e2904bcd8497f0fe6bbf7097001112f",
+          "training": {
+            "best_epoch": 3,
+            "best_validation_loss": 2.192167724881853,
+            "epochs_run": 8,
+            "hard_negative_margin": 0.2,
+            "history": [
+              {
+                "epoch": 1,
+                "train": {
+                  "hard": 0.07962699893063732,
+                  "listwise": 0.4009640331247023,
+                  "supcon": 4.8144814882959635,
+                  "total": 1.3797857527221953
+                },
+                "validation": {
+                  "hard": 0.13568226460899627,
+                  "listwise": 0.7987023762294224,
+                  "supcon": 6.932869264057705,
+                  "total": 2.2124127319880893
+                }
+              },
+              {
+                "epoch": 2,
+                "train": {
+                  "hard": 0.04035477326916797,
+                  "listwise": 0.1847858200115817,
+                  "supcon": 4.4280392442430765,
+                  "total": 1.0784646421670914
+                },
+                "validation": {
+                  "hard": 0.13508004961269243,
+                  "listwise": 0.805436338697161,
+                  "supcon": 6.851975236620222,
+                  "total": 2.202847480773926
+                }
+              },
+              {
+                "epoch": 3,
+                "train": {
+                  "hard": 0.031003972116325582,
+                  "listwise": 0.14450813736766577,
+                  "supcon": 4.274498036929539,
+                  "total": 1.0056085490754672
+                },
+                "validation": {
+                  "hard": 0.1349270290562085,
+                  "listwise": 0.7950063092367989,
+                  "supcon": 6.850880111966815,
+                  "total": 2.192167724881853
+                }
+              },
+              {
+                "epoch": 4,
+                "train": {
+                  "hard": 0.024894584036831344,
+                  "listwise": 0.11906635255685874,
+                  "supcon": 4.15348482131958,
+                  "total": 0.9547422453761101
+                },
+                "validation": {
+                  "hard": 0.1392418880547796,
+                  "listwise": 0.8282206697123391,
+                  "supcon": 6.8579579421452115,
+                  "total": 2.227660655975342
+                }
+              },
+              {
+                "epoch": 5,
+                "train": {
+                  "hard": 0.020734535031286732,
+                  "listwise": 0.10294377271618162,
+                  "supcon": 4.051740275962012,
+                  "total": 0.9174387486917632
+                },
+                "validation": {
+                  "hard": 0.1454193081174578,
+                  "listwise": 0.8773299413067954,
+                  "supcon": 6.848202466964722,
+                  "total": 2.276054331234523
+                }
+              },
+              {
+                "epoch": 6,
+                "train": {
+                  "hard": 0.017785061250573823,
+                  "listwise": 0.09110829526824611,
+                  "supcon": 3.9647802029337202,
+                  "total": 0.8876213527151516
+                },
+                "validation": {
+                  "hard": 0.14822847449353763,
+                  "listwise": 0.9016646189349038,
+                  "supcon": 6.828831229891096,
+                  "total": 2.297076633998326
+                }
+              },
+              {
+                "epoch": 7,
+                "train": {
+                  "hard": 0.015484787972777017,
+                  "listwise": 0.08144989489976849,
+                  "supcon": 3.878689949001585,
+                  "total": 0.8602848510657038
+                },
+                "validation": {
+                  "hard": 0.15336723146694048,
+                  "listwise": 0.94474025283541,
+                  "supcon": 6.816078560692923,
+                  "total": 2.33862943308694
+                }
+              },
+              {
+                "epoch": 8,
+                "train": {
+                  "hard": 0.013697667978703976,
+                  "listwise": 0.07392267523599523,
+                  "supcon": 3.8088802567550113,
+                  "total": 0.8384382788624082
+                },
+                "validation": {
+                  "hard": 0.15940897060292109,
+                  "listwise": 0.9947793568883624,
+                  "supcon": 6.876305614198957,
+                  "total": 2.4019222259521484
+                }
+              }
+            ],
+            "temperature": 0.07,
+            "trainable_parameters": 265472
+          }
+        }
+      ],
+      "dancetrack0002": [
+        {
+          "actual_training_sequences": [
+            "dancetrack0001",
+            "dancetrack0024",
+            "dancetrack0039",
+            "dancetrack0057",
+            "dancetrack0062",
+            "dancetrack0072"
+          ],
+          "code_sha256": {
+            "sam3_intermot/association/causal_identity_tracker.py": "3b225ba1b25fcb0631dab762a0647394f942b3a1e063cec131602e58383aa090",
+            "sam3_intermot/association/causal_state_commit.py": "0a146541dd6ca3d727fba1fe4bd1763e4f37ad2b2f54af531d58095c7a201e15",
+            "sam3_intermot/association/global_assignment_adapter.py": "0a0e8bac85504a7c35025ad87fe5c958e0f91b96a79824894118dffc8355db17",
+            "sam3_intermot/association/identity_authority.py": "fd0495384efb85769376f5b9bb8cc0d6e6b40a29cdcfa07e46efb25c94d191dd",
+            "scripts/n72r20r4_adapter_integration.py": "14184d97a4761d18cfc3a72429991db0570ad20af0219a6bdfbe30480122bf4e",
+            "scripts/n72r20r4_audit.py": "6c04336616da389351ae01b29170aa0b497b5117288d63e47a858b697ac9aa94",
+            "scripts/n72r20r4_baseline.py": "640b897fdc974c678cb68236556c0be17842f24c34008ebdb794b2c96f49a809",
+            "scripts/n72r20r4_common.py": "1937d692589f6f0d4d006843adf9ad3655e8c7c8fc8cb22f72d45698da61516a",
+            "scripts/n72r20r4_run_causal_tracker.py": "c99995c052adbd92e5198e0091a2038f08a1faba8e251da866a10d62830ff6ce",
+            "scripts/n72r20r4_trackeval.py": "a741a7d7a73fe9c4aead7ebc7afd9008c53751c42d401a8956553b7f7ba8547d",
+            "scripts/n72r20r4_train_authority.py": "ae98a9d35763a7a3301d6ee4462cccb3546f55b8bb6600a06737127d99bbd3e1"
+          },
+          "fit_episode_count": 24088,
+          "heldout_sequence": "dancetrack0002",
+          "inner_episode_count": 8972,
+          "internal_validation_sequence": "dancetrack0023",
+          "outer_heldout_absent": true,
+          "parameters": 265472,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0002__seed720321.pt",
+          "seed": 720321,
+          "sha256": "fa9e6875da53c40c084c6332a1f460d78915e7eeae1f3682a51350eecf9d8204",
+          "training": {
+            "best_epoch": 2,
+            "best_validation_loss": 2.00498804781172,
+            "epochs_run": 7,
+            "hard_negative_margin": 0.2,
+            "history": [
+              {
+                "epoch": 1,
+                "train": {
+                  "hard": 0.0833210137207061,
+                  "listwise": 0.4172865664586425,
+                  "supcon": 4.817735284566879,
+                  "total": 1.3974978427092235
+                },
+                "validation": {
+                  "hard": 0.10573058533999655,
+                  "listwise": 0.5823947274022632,
+                  "supcon": 7.041061957677205,
+                  "total": 2.0117532677120633
+                }
+              },
+              {
+                "epoch": 2,
+                "train": {
+                  "hard": 0.040971348605429135,
+                  "listwise": 0.18480410954604545,
+                  "supcon": 4.358630339304606,
+                  "total": 1.0647244701782863
+                },
+                "validation": {
+                  "hard": 0.10361701581213209,
+                  "listwise": 0.5677971061733034,
+                  "supcon": 7.082337644365099,
+                  "total": 2.00498804781172
+                }
+              },
+              {
+                "epoch": 3,
+                "train": {
+                  "hard": 0.030631301846976083,
+                  "listwise": 0.1385498740710318,
+                  "supcon": 4.183278679847717,
+                  "total": 0.9813318786521753
+                },
+                "validation": {
+                  "hard": 0.10927889040774769,
+                  "listwise": 0.6017084618409475,
+                  "supcon": 7.126139137479994,
+                  "total": 2.0487920973036022
+                }
+              },
+              {
+                "epoch": 4,
+                "train": {
+                  "hard": 0.02454725621889035,
+                  "listwise": 0.11362567792336146,
+                  "supcon": 4.04917977253596,
+                  "total": 0.9283710978925228
+                },
+                "validation": {
+                  "hard": 0.11241046794586712,
+                  "listwise": 0.6258014125956429,
+                  "supcon": 7.1418074236975775,
+                  "total": 2.076645016670227
+                }
+              },
+              {
+                "epoch": 5,
+                "train": {
+                  "hard": 0.02014895051252097,
+                  "listwise": 0.09581574813152353,
+                  "supcon": 3.948061227798462,
+                  "total": 0.8894577994942665
+                },
+                "validation": {
+                  "hard": 0.1215469166636467,
+                  "listwise": 0.6893892354435391,
+                  "supcon": 7.0748329692416725,
+                  "total": 2.1286651955710516
+                }
+              },
+              {
+                "epoch": 6,
+                "train": {
+                  "hard": 0.016728562923769157,
+                  "listwise": 0.08302110681931178,
+                  "supcon": 3.8583604941765466,
+                  "total": 0.8580389320850372
+                },
+                "validation": {
+                  "hard": 0.1267766828338305,
+                  "listwise": 0.7242837448914846,
+                  "supcon": 7.082157664828831,
+                  "total": 2.1660706334643893
+                }
+              },
+              {
+                "epoch": 7,
+                "train": {
+                  "hard": 0.01439687074162066,
+                  "listwise": 0.0739104902992646,
+                  "supcon": 3.780134608348211,
+                  "total": 0.8328167982399464
+                },
+                "validation": {
+                  "hard": 0.1326665791372458,
+                  "listwise": 0.7667381266752878,
+                  "supcon": 7.095490243699816,
+                  "total": 2.2123695148362055
+                }
+              }
+            ],
+            "temperature": 0.07,
+            "trainable_parameters": 265472
+          }
+        },
+        {
+          "actual_training_sequences": [
+            "dancetrack0001",
+            "dancetrack0024",
+            "dancetrack0039",
+            "dancetrack0057",
+            "dancetrack0062",
+            "dancetrack0072"
+          ],
+          "code_sha256": {
+            "sam3_intermot/association/causal_identity_tracker.py": "3b225ba1b25fcb0631dab762a0647394f942b3a1e063cec131602e58383aa090",
+            "sam3_intermot/association/causal_state_commit.py": "0a146541dd6ca3d727fba1fe4bd1763e4f37ad2b2f54af531d58095c7a201e15",
+            "sam3_intermot/association/global_assignment_adapter.py": "0a0e8bac85504a7c35025ad87fe5c958e0f91b96a79824894118dffc8355db17",
+            "sam3_intermot/association/identity_authority.py": "fd0495384efb85769376f5b9bb8cc0d6e6b40a29cdcfa07e46efb25c94d191dd",
+            "scripts/n72r20r4_adapter_integration.py": "14184d97a4761d18cfc3a72429991db0570ad20af0219a6bdfbe30480122bf4e",
+            "scripts/n72r20r4_audit.py": "6c04336616da389351ae01b29170aa0b497b5117288d63e47a858b697ac9aa94",
+            "scripts/n72r20r4_baseline.py": "640b897fdc974c678cb68236556c0be17842f24c34008ebdb794b2c96f49a809",
+            "scripts/n72r20r4_common.py": "1937d692589f6f0d4d006843adf9ad3655e8c7c8fc8cb22f72d45698da61516a",
+            "scripts/n72r20r4_run_causal_tracker.py": "c99995c052adbd92e5198e0091a2038f08a1faba8e251da866a10d62830ff6ce",
+            "scripts/n72r20r4_trackeval.py": "a741a7d7a73fe9c4aead7ebc7afd9008c53751c42d401a8956553b7f7ba8547d",
+            "scripts/n72r20r4_train_authority.py": "ae98a9d35763a7a3301d6ee4462cccb3546f55b8bb6600a06737127d99bbd3e1"
+          },
+          "fit_episode_count": 24088,
+          "heldout_sequence": "dancetrack0002",
+          "inner_episode_count": 8972,
+          "internal_validation_sequence": "dancetrack0023",
+          "outer_heldout_absent": true,
+          "parameters": 265472,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0002__seed720322.pt",
+          "seed": 720322,
+          "sha256": "de82b23bf9db054b37ecd60cbb9a5a22fb4643caf9ec92b067f1d9baab86468d",
+          "training": {
+            "best_epoch": 1,
+            "best_validation_loss": 2.012848178545634,
+            "epochs_run": 6,
+            "hard_negative_margin": 0.2,
+            "history": [
+              {
+                "epoch": 1,
+                "train": {
+                  "hard": 0.08333433295289676,
+                  "listwise": 0.4176101420695583,
+                  "supcon": 4.78692211707433,
+                  "total": 1.3916614452997844
+                },
+                "validation": {
+                  "hard": 0.1048681473152505,
+                  "listwise": 0.57310684521993,
+                  "supcon": 7.093838267856174,
+                  "total": 2.012848178545634
+                }
+              },
+              {
+                "epoch": 2,
+                "train": {
+                  "hard": 0.04104633862152696,
+                  "listwise": 0.18326406988004842,
+                  "supcon": 4.343673159678777,
+                  "total": 1.060207971682151
+                },
+                "validation": {
+                  "hard": 0.10472997195190853,
+                  "listwise": 0.5667926751905017,
+                  "supcon": 7.1315113173590765,
+                  "total": 2.0140409933196173
+                }
+              },
+              {
+                "epoch": 3,
+                "train": {
+                  "hard": 0.03049375369058301,
+                  "listwise": 0.13792570183674494,
+                  "supcon": 4.157236069440842,
+                  "total": 0.975471685330073
+                },
+                "validation": {
+                  "hard": 0.1077445356382264,
+                  "listwise": 0.5862016429503759,
+                  "supcon": 7.158183442221747,
+                  "total": 2.0393872525956898
+                }
+              },
+              {
+                "epoch": 4,
+                "train": {
+                  "hard": 0.02459438416796426,
+                  "listwise": 0.11250256840139627,
+                  "supcon": 4.036441549658775,
+                  "total": 0.9247097633779049
+                },
+                "validation": {
+                  "hard": 0.11431268809570207,
+                  "listwise": 0.636056919892629,
+                  "supcon": 7.117467164993286,
+                  "total": 2.08241288529502
+                }
+              },
+              {
+                "epoch": 5,
+                "train": {
+                  "hard": 0.019834699768883485,
+                  "listwise": 0.09413639300813277,
+                  "supcon": 3.9273356099923453,
+                  "total": 0.8835704661905766
+                },
+                "validation": {
+                  "hard": 0.12335947197344568,
+                  "listwise": 0.7000592317846086,
+                  "supcon": 7.075406101014879,
+                  "total": 2.1398123701413474
+                }
+              },
+              {
+                "epoch": 6,
+                "train": {
+                  "hard": 0.01692655630176887,
+                  "listwise": 0.08301591671382387,
+                  "supcon": 3.8404327084620795,
+                  "total": 0.854487786690394
+                },
+                "validation": {
+                  "hard": 0.1294381208717823,
+                  "listwise": 0.7537843783696493,
+                  "supcon": 7.034773959053887,
+                  "total": 2.1866268051995172
+                }
+              }
+            ],
+            "temperature": 0.07,
+            "trainable_parameters": 265472
+          }
+        },
+        {
+          "actual_training_sequences": [
+            "dancetrack0001",
+            "dancetrack0024",
+            "dancetrack0039",
+            "dancetrack0057",
+            "dancetrack0062",
+            "dancetrack0072"
+          ],
+          "code_sha256": {
+            "sam3_intermot/association/causal_identity_tracker.py": "10c59799cb151d1493d2830c28a07852e43ed3aeeeff5426e139d5e9adbde72b",
+            "sam3_intermot/association/causal_state_commit.py": "0a146541dd6ca3d727fba1fe4bd1763e4f37ad2b2f54af531d58095c7a201e15",
+            "sam3_intermot/association/global_assignment_adapter.py": "0a0e8bac85504a7c35025ad87fe5c958e0f91b96a79824894118dffc8355db17",
+            "sam3_intermot/association/identity_authority.py": "5dfc3502da72dc168ab5e546039f801e1a1fcb9b3869af071c0c83398734246d",
+            "scripts/n72r20r4_adapter_integration.py": "14184d97a4761d18cfc3a72429991db0570ad20af0219a6bdfbe30480122bf4e",
+            "scripts/n72r20r4_audit.py": "6c04336616da389351ae01b29170aa0b497b5117288d63e47a858b697ac9aa94",
+            "scripts/n72r20r4_baseline.py": "640b897fdc974c678cb68236556c0be17842f24c34008ebdb794b2c96f49a809",
+            "scripts/n72r20r4_common.py": "1937d692589f6f0d4d006843adf9ad3655e8c7c8fc8cb22f72d45698da61516a",
+            "scripts/n72r20r4_counterfactual.py": "d6d7c6bc712a1965ff6b3993e6ef1637b3b35771f29ae5c7911b6065344b3c40",
+            "scripts/n72r20r4_run_causal_tracker.py": "c99995c052adbd92e5198e0091a2038f08a1faba8e251da866a10d62830ff6ce",
+            "scripts/n72r20r4_trackeval.py": "a741a7d7a73fe9c4aead7ebc7afd9008c53751c42d401a8956553b7f7ba8547d",
+            "scripts/n72r20r4_train_authority.py": "ae98a9d35763a7a3301d6ee4462cccb3546f55b8bb6600a06737127d99bbd3e1"
+          },
+          "fit_episode_count": 24088,
+          "heldout_sequence": "dancetrack0002",
+          "inner_episode_count": 8972,
+          "internal_validation_sequence": "dancetrack0023",
+          "outer_heldout_absent": true,
+          "parameters": 265472,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0002__seed720323.pt",
+          "seed": 720323,
+          "sha256": "babda3054ba0042962a9d78b8879e815c887c34d174b33f63fa58f3587b6ad54",
+          "training": {
+            "best_epoch": 2,
+            "best_validation_loss": 2.071444425317976,
+            "epochs_run": 7,
+            "hard_negative_margin": 0.2,
+            "history": [
+              {
+                "epoch": 1,
+                "train": {
+                  "hard": 0.08358757027114432,
+                  "listwise": 0.4172323973228534,
+                  "supcon": 4.774374316136043,
+                  "total": 1.3888247882326443
+                },
+                "validation": {
+                  "hard": 0.11397550379236539,
+                  "listwise": 0.6523963378535377,
+                  "supcon": 7.0108101103040905,
+                  "total": 2.0773534774780273
+                }
+              },
+              {
+                "epoch": 2,
+                "train": {
+                  "hard": 0.04122782382182777,
+                  "listwise": 0.18419551445792118,
+                  "supcon": 4.331815858681996,
+                  "total": 1.0588042636712391
+                },
+                "validation": {
+                  "hard": 0.11209151479932997,
+                  "listwise": 0.6289674109882779,
+                  "supcon": 7.100293318430583,
+                  "total": 2.071444425317976
+                }
+              },
+              {
+                "epoch": 3,
+                "train": {
+                  "hard": 0.030866141508643825,
+                  "listwise": 0.13868935157855353,
+                  "supcon": 4.155674497286479,
+                  "total": 0.9759974889457226
+                },
+                "validation": {
+                  "hard": 0.11957047838303778,
+                  "listwise": 0.6803588800960116,
+                  "supcon": 7.042231294843885,
+                  "total": 2.112719257672628
+                }
+              },
+              {
+                "epoch": 4,
+                "train": {
+                  "hard": 0.02403287310153246,
+                  "listwise": 0.11037604914357264,
+                  "supcon": 4.0262016505002975,
+                  "total": 0.9204229625562826
+                },
+                "validation": {
+                  "hard": 0.1254164551695188,
+                  "listwise": 0.7228240718444189,
+                  "supcon": 7.019650432798597,
+                  "total": 2.151837454901801
+                }
+              },
+              {
+                "epoch": 5,
+                "train": {
+                  "hard": 0.019746421603485942,
+                  "listwise": 0.09352591757973035,
+                  "supcon": 3.9194997052351632,
+                  "total": 0.8813751513759295
+                },
+                "validation": {
+                  "hard": 0.12751253528727424,
+                  "listwise": 0.7371382912000021,
+                  "supcon": 7.028437773386638,
+                  "total": 2.1683283514446683
+                }
+              },
+              {
+                "epoch": 6,
+                "train": {
+                  "hard": 0.01654645420300464,
+                  "listwise": 0.08174600281442206,
+                  "supcon": 3.8378759821256003,
+                  "total": 0.8526304997503757
+                },
+                "validation": {
+                  "hard": 0.13316337143381438,
+                  "listwise": 0.7793024182319641,
+                  "supcon": 6.984175311194526,
+                  "total": 2.2027701801723905
+                }
+              },
+              {
+                "epoch": 7,
+                "train": {
+                  "hard": 0.014203066646587104,
+                  "listwise": 0.07226534575844805,
+                  "supcon": 3.7611762235562005,
+                  "total": 0.8273412200311819
+                },
+                "validation": {
+                  "hard": 0.13855736040406758,
+                  "listwise": 0.8201197981834412,
+                  "supcon": 7.006230248345269,
+                  "total": 2.2490773465898304
+                }
+              }
+            ],
+            "temperature": 0.07,
+            "trainable_parameters": 265472
+          }
+        }
+      ],
+      "dancetrack0023": [
+        {
+          "actual_training_sequences": [
+            "dancetrack0001",
+            "dancetrack0002",
+            "dancetrack0039",
+            "dancetrack0057",
+            "dancetrack0062",
+            "dancetrack0072"
+          ],
+          "code_sha256": {
+            "sam3_intermot/association/causal_identity_tracker.py": "10c59799cb151d1493d2830c28a07852e43ed3aeeeff5426e139d5e9adbde72b",
+            "sam3_intermot/association/causal_state_commit.py": "0a146541dd6ca3d727fba1fe4bd1763e4f37ad2b2f54af531d58095c7a201e15",
+            "sam3_intermot/association/global_assignment_adapter.py": "0a0e8bac85504a7c35025ad87fe5c958e0f91b96a79824894118dffc8355db17",
+            "sam3_intermot/association/identity_authority.py": "5dfc3502da72dc168ab5e546039f801e1a1fcb9b3869af071c0c83398734246d",
+            "scripts/n72r20r4_adapter_integration.py": "14184d97a4761d18cfc3a72429991db0570ad20af0219a6bdfbe30480122bf4e",
+            "scripts/n72r20r4_audit.py": "6c04336616da389351ae01b29170aa0b497b5117288d63e47a858b697ac9aa94",
+            "scripts/n72r20r4_baseline.py": "640b897fdc974c678cb68236556c0be17842f24c34008ebdb794b2c96f49a809",
+            "scripts/n72r20r4_common.py": "1937d692589f6f0d4d006843adf9ad3655e8c7c8fc8cb22f72d45698da61516a",
+            "scripts/n72r20r4_counterfactual.py": "d6d7c6bc712a1965ff6b3993e6ef1637b3b35771f29ae5c7911b6065344b3c40",
+            "scripts/n72r20r4_run_causal_tracker.py": "c99995c052adbd92e5198e0091a2038f08a1faba8e251da866a10d62830ff6ce",
+            "scripts/n72r20r4_trackeval.py": "a741a7d7a73fe9c4aead7ebc7afd9008c53751c42d401a8956553b7f7ba8547d",
+            "scripts/n72r20r4_train_authority.py": "ae98a9d35763a7a3301d6ee4462cccb3546f55b8bb6600a06737127d99bbd3e1"
+          },
+          "fit_episode_count": 26636,
+          "heldout_sequence": "dancetrack0023",
+          "inner_episode_count": 4355,
+          "internal_validation_sequence": "dancetrack0024",
+          "outer_heldout_absent": true,
+          "parameters": 265472,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0023__seed720321.pt",
+          "seed": 720321,
+          "sha256": "b51a92797c306664c98541013a1cb59fa38547cc3d1954f65b845449ab18b852",
+          "training": {
+            "best_epoch": 2,
+            "best_validation_loss": 1.9952084223429363,
+            "epochs_run": 7,
+            "hard_negative_margin": 0.2,
+            "history": [
+              {
+                "epoch": 1,
+                "train": {
+                  "hard": 0.08742965160394614,
+                  "listwise": 0.4393140156314058,
+                  "supcon": 4.8835637434473576,
+                  "total": 1.4335127191723518
+                },
+                "validation": {
+                  "hard": 0.10904758506351048,
+                  "listwise": 0.588179373078876,
+                  "supcon": 7.005681249830458,
+                  "total": 2.0111251407199435
+                }
+              },
+              {
+                "epoch": 2,
+                "train": {
+                  "hard": 0.045192027359076264,
+                  "listwise": 0.20712581445586006,
+                  "supcon": 4.525649475601484,
+                  "total": 1.1212941340680391
+                },
+                "validation": {
+                  "hard": 0.10620647586054272,
+                  "listwise": 0.5702585412396325,
+                  "supcon": 7.018542660607232,
+                  "total": 1.9952084223429363
+                }
+              },
+              {
+                "epoch": 3,
+                "train": {
+                  "hard": 0.0344488577179189,
+                  "listwise": 0.16044801501732953,
+                  "supcon": 4.3626287478321,
+                  "total": 1.0398635459396075
+                },
+                "validation": {
+                  "hard": 0.10840240369240443,
+                  "listwise": 0.5761332578129239,
+                  "supcon": 7.02698638704088,
+                  "total": 2.0032110611597695
+                }
+              },
+              {
+                "epoch": 4,
+                "train": {
+                  "hard": 0.02756553533364017,
+                  "listwise": 0.13151211066628402,
+                  "supcon": 4.242441726180743,
+                  "total": 0.9855135746721951
+                },
+                "validation": {
+                  "hard": 0.11112263219224082,
+                  "listwise": 0.5892114672395918,
+                  "supcon": 7.0660218132866754,
+                  "total": 2.024640361467997
+                }
+              },
+              {
+                "epoch": 5,
+                "train": {
+                  "hard": 0.022913809971145865,
+                  "listwise": 0.11303529733756804,
+                  "supcon": 4.142998722364318,
+                  "total": 0.9462178203294862
+                },
+                "validation": {
+                  "hard": 0.11593758977121776,
+                  "listwise": 0.6201999882857004,
+                  "supcon": 7.062359915839301,
+                  "total": 2.05585957898034
+                }
+              },
+              {
+                "epoch": 6,
+                "train": {
+                  "hard": 0.01970512917230152,
+                  "listwise": 0.10026731299904157,
+                  "supcon": 4.052238833229497,
+                  "total": 0.9146561206511732
+                },
+                "validation": {
+                  "hard": 0.1167223420408037,
+                  "listwise": 0.6226672463946872,
+                  "supcon": 7.054578675164117,
+                  "total": 2.056927482287089
+                }
+              },
+              {
+                "epoch": 7,
+                "train": {
+                  "hard": 0.017236766493264236,
+                  "listwise": 0.09004727919709007,
+                  "supcon": 3.9785125480507904,
+                  "total": 0.8891971527405504
+                },
+                "validation": {
+                  "hard": 0.12837492840157616,
+                  "listwise": 0.7052591111924913,
+                  "supcon": 7.050721168518066,
+                  "total": 2.141078339682685
+                }
+              }
+            ],
+            "temperature": 0.07,
+            "trainable_parameters": 265472
+          }
+        },
+        {
+          "actual_training_sequences": [
+            "dancetrack0001",
+            "dancetrack0002",
+            "dancetrack0039",
+            "dancetrack0057",
+            "dancetrack0062",
+            "dancetrack0072"
+          ],
+          "code_sha256": {
+            "sam3_intermot/association/causal_identity_tracker.py": "10c59799cb151d1493d2830c28a07852e43ed3aeeeff5426e139d5e9adbde72b",
+            "sam3_intermot/association/causal_state_commit.py": "0a146541dd6ca3d727fba1fe4bd1763e4f37ad2b2f54af531d58095c7a201e15",
+            "sam3_intermot/association/global_assignment_adapter.py": "0a0e8bac85504a7c35025ad87fe5c958e0f91b96a79824894118dffc8355db17",
+            "sam3_intermot/association/identity_authority.py": "5dfc3502da72dc168ab5e546039f801e1a1fcb9b3869af071c0c83398734246d",
+            "scripts/n72r20r4_adapter_integration.py": "14184d97a4761d18cfc3a72429991db0570ad20af0219a6bdfbe30480122bf4e",
+            "scripts/n72r20r4_audit.py": "6c04336616da389351ae01b29170aa0b497b5117288d63e47a858b697ac9aa94",
+            "scripts/n72r20r4_baseline.py": "640b897fdc974c678cb68236556c0be17842f24c34008ebdb794b2c96f49a809",
+            "scripts/n72r20r4_common.py": "1937d692589f6f0d4d006843adf9ad3655e8c7c8fc8cb22f72d45698da61516a",
+            "scripts/n72r20r4_counterfactual.py": "d6d7c6bc712a1965ff6b3993e6ef1637b3b35771f29ae5c7911b6065344b3c40",
+            "scripts/n72r20r4_run_causal_tracker.py": "c99995c052adbd92e5198e0091a2038f08a1faba8e251da866a10d62830ff6ce",
+            "scripts/n72r20r4_trackeval.py": "a741a7d7a73fe9c4aead7ebc7afd9008c53751c42d401a8956553b7f7ba8547d",
+            "scripts/n72r20r4_train_authority.py": "ae98a9d35763a7a3301d6ee4462cccb3546f55b8bb6600a06737127d99bbd3e1"
+          },
+          "fit_episode_count": 26636,
+          "heldout_sequence": "dancetrack0023",
+          "inner_episode_count": 4355,
+          "internal_validation_sequence": "dancetrack0024",
+          "outer_heldout_absent": true,
+          "parameters": 265472,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0023__seed720322.pt",
+          "seed": 720322,
+          "sha256": "660538c9e986229a3317f5ab00b4264618e25f327dd28595c77a45b1ad763d54",
+          "training": {
+            "best_epoch": 1,
+            "best_validation_loss": 1.9745542605717976,
+            "epochs_run": 6,
+            "hard_negative_margin": 0.2,
+            "history": [
+              {
+                "epoch": 1,
+                "train": {
+                  "hard": 0.08591600099824509,
+                  "listwise": 0.4349276713042889,
+                  "supcon": 4.872483154512802,
+                  "total": 1.4266075210751228
+                },
+                "validation": {
+                  "hard": 0.10494474901093377,
+                  "listwise": 0.5579999254809486,
+                  "supcon": 6.977826860215929,
+                  "total": 1.9745542605717976
+                }
+              },
+              {
+                "epoch": 2,
+                "train": {
+                  "hard": 0.04398055501141638,
+                  "listwise": 0.20262156398791187,
+                  "supcon": 4.501372751199974,
+                  "total": 1.1116922419026214
+                },
+                "validation": {
+                  "hard": 0.10326004731986257,
+                  "listwise": 0.5448987318409814,
+                  "supcon": 7.074915303124322,
+                  "total": 1.980533825026618
+                }
+              },
+              {
+                "epoch": 3,
+                "train": {
+                  "hard": 0.03319312934324427,
+                  "listwise": 0.15584774737088186,
+                  "supcon": 4.336919253727175,
+                  "total": 1.0298702289473336
+                },
+                "validation": {
+                  "hard": 0.10210437989897198,
+                  "listwise": 0.5302198529243469,
+                  "supcon": 7.157275252872044,
+                  "total": 1.9820958375930786
+                }
+              },
+              {
+                "epoch": 4,
+                "train": {
+                  "hard": 0.026995979460342875,
+                  "listwise": 0.12936466004488603,
+                  "supcon": 4.221810304893638,
+                  "total": 0.9791259259547828
+                },
+                "validation": {
+                  "hard": 0.10272602654165691,
+                  "listwise": 0.5361536078982883,
+                  "supcon": 7.127570841047499,
+                  "total": 1.9822130468156602
+                }
+              },
+              {
+                "epoch": 5,
+                "train": {
+                  "hard": 0.02294773520585501,
+                  "listwise": 0.11256777410799602,
+                  "supcon": 4.123271411319949,
+                  "total": 0.9418116178152696
+                },
+                "validation": {
+                  "hard": 0.10417577541536754,
+                  "listwise": 0.5429330368836721,
+                  "supcon": 7.142492400275336,
+                  "total": 1.9922667079501681
+                }
+              },
+              {
+                "epoch": 6,
+                "train": {
+                  "hard": 0.019618667943297693,
+                  "listwise": 0.09864381025984602,
+                  "supcon": 4.035475195578809,
+                  "total": 0.909662590836579
+                },
+                "validation": {
+                  "hard": 0.10875779390335083,
+                  "listwise": 0.5706023474534353,
+                  "supcon": 7.137451701694065,
+                  "total": 2.0198442803488836
+                }
+              }
+            ],
+            "temperature": 0.07,
+            "trainable_parameters": 265472
+          }
+        },
+        {
+          "actual_training_sequences": [
+            "dancetrack0001",
+            "dancetrack0002",
+            "dancetrack0039",
+            "dancetrack0057",
+            "dancetrack0062",
+            "dancetrack0072"
+          ],
+          "code_sha256": {
+            "sam3_intermot/association/causal_identity_tracker.py": "10c59799cb151d1493d2830c28a07852e43ed3aeeeff5426e139d5e9adbde72b",
+            "sam3_intermot/association/causal_state_commit.py": "0a146541dd6ca3d727fba1fe4bd1763e4f37ad2b2f54af531d58095c7a201e15",
+            "sam3_intermot/association/global_assignment_adapter.py": "0a0e8bac85504a7c35025ad87fe5c958e0f91b96a79824894118dffc8355db17",
+            "sam3_intermot/association/identity_authority.py": "5dfc3502da72dc168ab5e546039f801e1a1fcb9b3869af071c0c83398734246d",
+            "scripts/n72r20r4_adapter_integration.py": "14184d97a4761d18cfc3a72429991db0570ad20af0219a6bdfbe30480122bf4e",
+            "scripts/n72r20r4_audit.py": "6c04336616da389351ae01b29170aa0b497b5117288d63e47a858b697ac9aa94",
+            "scripts/n72r20r4_baseline.py": "640b897fdc974c678cb68236556c0be17842f24c34008ebdb794b2c96f49a809",
+            "scripts/n72r20r4_common.py": "1937d692589f6f0d4d006843adf9ad3655e8c7c8fc8cb22f72d45698da61516a",
+            "scripts/n72r20r4_counterfactual.py": "d6d7c6bc712a1965ff6b3993e6ef1637b3b35771f29ae5c7911b6065344b3c40",
+            "scripts/n72r20r4_run_causal_tracker.py": "c99995c052adbd92e5198e0091a2038f08a1faba8e251da866a10d62830ff6ce",
+            "scripts/n72r20r4_trackeval.py": "a741a7d7a73fe9c4aead7ebc7afd9008c53751c42d401a8956553b7f7ba8547d",
+            "scripts/n72r20r4_train_authority.py": "ae98a9d35763a7a3301d6ee4462cccb3546f55b8bb6600a06737127d99bbd3e1"
+          },
+          "fit_episode_count": 26636,
+          "heldout_sequence": "dancetrack0023",
+          "inner_episode_count": 4355,
+          "internal_validation_sequence": "dancetrack0024",
+          "outer_heldout_absent": true,
+          "parameters": 265472,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0023__seed720323.pt",
+          "seed": 720323,
+          "sha256": "256e52442bbc9a3ac77d95c9d457c582c8a293304fb9142dcfe371ac7a7090c3",
+          "training": {
+            "best_epoch": 3,
+            "best_validation_loss": 1.959580938021342,
+            "epochs_run": 8,
+            "hard_negative_margin": 0.2,
+            "history": [
+              {
+                "epoch": 1,
+                "train": {
+                  "hard": 0.08744747015946316,
+                  "listwise": 0.4428777958986894,
+                  "supcon": 4.878490232071787,
+                  "total": 1.436065358935662
+                },
+                "validation": {
+                  "hard": 0.10873303727971183,
+                  "listwise": 0.5721194015608894,
+                  "supcon": 6.9374769528706866,
+                  "total": 1.9813614553875394
+                }
+              },
+              {
+                "epoch": 2,
+                "train": {
+                  "hard": 0.04448534077349699,
+                  "listwise": 0.2043157270494497,
+                  "supcon": 4.506258748612314,
+                  "total": 1.1144645551465593
+                },
+                "validation": {
+                  "hard": 0.10597488615247938,
+                  "listwise": 0.5501947999000549,
+                  "supcon": 6.969632413652208,
+                  "total": 1.9653162823783026
+                }
+              },
+              {
+                "epoch": 3,
+                "train": {
+                  "hard": 0.03344188732499222,
+                  "listwise": 0.1566966653994794,
+                  "supcon": 4.349103594725987,
+                  "total": 1.0332057655982252
+                },
+                "validation": {
+                  "hard": 0.10457711004548603,
+                  "listwise": 0.5401162538263533,
+                  "supcon": 6.992746247185601,
+                  "total": 1.959580938021342
+                }
+              },
+              {
+                "epoch": 4,
+                "train": {
+                  "hard": 0.0275116549137066,
+                  "listwise": 0.13165076850157864,
+                  "supcon": 4.230948448181152,
+                  "total": 0.9833428049987217
+                },
+                "validation": {
+                  "hard": 0.1082138940691948,
+                  "listwise": 0.5636834137969546,
+                  "supcon": 6.972068892584907,
+                  "total": 1.9797399971220229
+                }
+              },
+              {
+                "epoch": 5,
+                "train": {
+                  "hard": 0.02285921925081397,
+                  "listwise": 0.11212371092922283,
+                  "supcon": 4.135877888157682,
+                  "total": 0.943871149476969
+                },
+                "validation": {
+                  "hard": 0.11352930383549796,
+                  "listwise": 0.59634753730562,
+                  "supcon": 6.973940478430854,
+                  "total": 2.013841496573554
+                }
+              },
+              {
+                "epoch": 6,
+                "train": {
+                  "hard": 0.01970255750951902,
+                  "listwise": 0.09976160160775455,
+                  "supcon": 4.0500398671851965,
+                  "total": 0.9137100925985372
+                },
+                "validation": {
+                  "hard": 0.11752181665764914,
+                  "listwise": 0.6197278499603271,
+                  "supcon": 7.00174946255154,
+                  "total": 2.043582068549262
+                }
+              },
+              {
+                "epoch": 7,
+                "train": {
+                  "hard": 0.01731187530424235,
+                  "listwise": 0.089615321243709,
+                  "supcon": 3.9742531551505036,
+                  "total": 0.8879283317979777
+                },
+                "validation": {
+                  "hard": 0.12017787496248881,
+                  "listwise": 0.6372816231515672,
+                  "supcon": 7.0135949982537165,
+                  "total": 2.0640362236234875
+                }
+              },
+              {
+                "epoch": 8,
+                "train": {
+                  "hard": 0.015058267211436101,
+                  "listwise": 0.08109082225358712,
+                  "supcon": 3.904021685978152,
+                  "total": 0.8649068238600245
+                },
+                "validation": {
+                  "hard": 0.12624990195035934,
+                  "listwise": 0.673635204633077,
+                  "supcon": 7.014204290178087,
+                  "total": 2.1017260551452637
+                }
+              }
+            ],
+            "temperature": 0.07,
+            "trainable_parameters": 265472
+          }
+        }
+      ],
+      "dancetrack0024": [
+        {
+          "actual_training_sequences": [
+            "dancetrack0001",
+            "dancetrack0002",
+            "dancetrack0023",
+            "dancetrack0057",
+            "dancetrack0062",
+            "dancetrack0072"
+          ],
+          "code_sha256": {
+            "sam3_intermot/association/causal_identity_tracker.py": "10c59799cb151d1493d2830c28a07852e43ed3aeeeff5426e139d5e9adbde72b",
+            "sam3_intermot/association/causal_state_commit.py": "0a146541dd6ca3d727fba1fe4bd1763e4f37ad2b2f54af531d58095c7a201e15",
+            "sam3_intermot/association/global_assignment_adapter.py": "0a0e8bac85504a7c35025ad87fe5c958e0f91b96a79824894118dffc8355db17",
+            "sam3_intermot/association/identity_authority.py": "5dfc3502da72dc168ab5e546039f801e1a1fcb9b3869af071c0c83398734246d",
+            "scripts/n72r20r4_adapter_integration.py": "14184d97a4761d18cfc3a72429991db0570ad20af0219a6bdfbe30480122bf4e",
+            "scripts/n72r20r4_audit.py": "6c04336616da389351ae01b29170aa0b497b5117288d63e47a858b697ac9aa94",
+            "scripts/n72r20r4_baseline.py": "640b897fdc974c678cb68236556c0be17842f24c34008ebdb794b2c96f49a809",
+            "scripts/n72r20r4_common.py": "1937d692589f6f0d4d006843adf9ad3655e8c7c8fc8cb22f72d45698da61516a",
+            "scripts/n72r20r4_counterfactual.py": "d6d7c6bc712a1965ff6b3993e6ef1637b3b35771f29ae5c7911b6065344b3c40",
+            "scripts/n72r20r4_run_causal_tracker.py": "c99995c052adbd92e5198e0091a2038f08a1faba8e251da866a10d62830ff6ce",
+            "scripts/n72r20r4_run_loso.py": "afe41ddaeacf51f643825e8d9ccb67e603ca6f8b276d7cbad916141268fded87",
+            "scripts/n72r20r4_trackeval.py": "a741a7d7a73fe9c4aead7ebc7afd9008c53751c42d401a8956553b7f7ba8547d",
+            "scripts/n72r20r4_train_authority.py": "ae98a9d35763a7a3301d6ee4462cccb3546f55b8bb6600a06737127d99bbd3e1"
+          },
+          "fit_episode_count": 29579,
+          "heldout_sequence": "dancetrack0024",
+          "inner_episode_count": 6029,
+          "internal_validation_sequence": "dancetrack0039",
+          "outer_heldout_absent": true,
+          "parameters": 265472,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0024__seed720321.pt",
+          "seed": 720321,
+          "sha256": "ed8307abbba07b10059244c57d64b7c79759844a4db225c928581d0c90e59a3f",
+          "training": {
+            "best_epoch": 3,
+            "best_validation_loss": 1.6689638396104176,
+            "epochs_run": 8,
+            "hard_negative_margin": 0.2,
+            "history": [
+              {
+                "epoch": 1,
+                "train": {
+                  "hard": 0.08866571442320428,
+                  "listwise": 0.4528736526082302,
+                  "supcon": 5.013718251524301,
+                  "total": 1.4733504694083641
+                },
+                "validation": {
+                  "hard": 0.08272229538609584,
+                  "listwise": 0.3703439310193062,
+                  "supcon": 6.553170363108317,
+                  "total": 1.6975224912166595
+                }
+              },
+              {
+                "epoch": 2,
+                "train": {
+                  "hard": 0.04764727201184322,
+                  "listwise": 0.2243961221699057,
+                  "supcon": 4.674183442674834,
+                  "total": 1.1687622686912273
+                },
+                "validation": {
+                  "hard": 0.07391666652013858,
+                  "listwise": 0.33824315667152405,
+                  "supcon": 6.6504645347595215,
+                  "total": 1.6831194361050923
+                }
+              },
+              {
+                "epoch": 3,
+                "train": {
+                  "hard": 0.03725434858994237,
+                  "listwise": 0.17835369115245753,
+                  "supcon": 4.514109808823158,
+                  "total": 1.0886265306637204
+                },
+                "validation": {
+                  "hard": 0.06985682497421901,
+                  "listwise": 0.31723855435848236,
+                  "supcon": 6.688769300778707,
+                  "total": 1.6689638396104176
+                }
+              },
+              {
+                "epoch": 4,
+                "train": {
+                  "hard": 0.030654494072599656,
+                  "listwise": 0.1497810305706386,
+                  "supcon": 4.392246854716334,
+                  "total": 1.0343613192952912
+                },
+                "validation": {
+                  "hard": 0.07133252173662186,
+                  "listwise": 0.32439084847768146,
+                  "supcon": 6.741311430931091,
+                  "total": 1.6869196593761444
+                }
+              },
+              {
+                "epoch": 5,
+                "train": {
+                  "hard": 0.026579347760255993,
+                  "listwise": 0.13259542553589262,
+                  "supcon": 4.286683066137906,
+                  "total": 0.9952479220669845
+                },
+                "validation": {
+                  "hard": 0.06951463036239147,
+                  "listwise": 0.3144095341364543,
+                  "supcon": 6.7461009820302325,
+                  "total": 1.6775326629479725
+                }
+              },
+              {
+                "epoch": 6,
+                "train": {
+                  "hard": 0.022972238314305914,
+                  "listwise": 0.11754392421451108,
+                  "supcon": 4.1999500948807285,
+                  "total": 0.9621284049132774
+                },
+                "validation": {
+                  "hard": 0.07620265521109104,
+                  "listwise": 0.34607059384385747,
+                  "supcon": 6.697863539059957,
+                  "total": 1.7008838454882305
+                }
+              },
+              {
+                "epoch": 7,
+                "train": {
+                  "hard": 0.020266089267257988,
+                  "listwise": 0.10689592592675111,
+                  "supcon": 4.11976353875522,
+                  "total": 0.9349018623088968
+                },
+                "validation": {
+                  "hard": 0.07750272719810407,
+                  "listwise": 0.35087919359405834,
+                  "supcon": 6.72674020131429,
+                  "total": 1.7117277880509694
+                }
+              },
+              {
+                "epoch": 8,
+                "train": {
+                  "hard": 0.018718113705258946,
+                  "listwise": 0.09985073591614592,
+                  "supcon": 4.048425600446504,
+                  "total": 0.9132794881689137
+                },
+                "validation": {
+                  "hard": 0.07943322043865919,
+                  "listwise": 0.35601409152150154,
+                  "supcon": 6.706878185272217,
+                  "total": 1.7132764259974163
+                }
+              }
+            ],
+            "temperature": 0.07,
+            "trainable_parameters": 265472
+          }
+        },
+        {
+          "actual_training_sequences": [
+            "dancetrack0001",
+            "dancetrack0002",
+            "dancetrack0023",
+            "dancetrack0057",
+            "dancetrack0062",
+            "dancetrack0072"
+          ],
+          "code_sha256": {
+            "sam3_intermot/association/causal_identity_tracker.py": "10c59799cb151d1493d2830c28a07852e43ed3aeeeff5426e139d5e9adbde72b",
+            "sam3_intermot/association/causal_state_commit.py": "0a146541dd6ca3d727fba1fe4bd1763e4f37ad2b2f54af531d58095c7a201e15",
+            "sam3_intermot/association/global_assignment_adapter.py": "0a0e8bac85504a7c35025ad87fe5c958e0f91b96a79824894118dffc8355db17",
+            "sam3_intermot/association/identity_authority.py": "5dfc3502da72dc168ab5e546039f801e1a1fcb9b3869af071c0c83398734246d",
+            "scripts/n72r20r4_adapter_integration.py": "14184d97a4761d18cfc3a72429991db0570ad20af0219a6bdfbe30480122bf4e",
+            "scripts/n72r20r4_audit.py": "6c04336616da389351ae01b29170aa0b497b5117288d63e47a858b697ac9aa94",
+            "scripts/n72r20r4_baseline.py": "640b897fdc974c678cb68236556c0be17842f24c34008ebdb794b2c96f49a809",
+            "scripts/n72r20r4_common.py": "1937d692589f6f0d4d006843adf9ad3655e8c7c8fc8cb22f72d45698da61516a",
+            "scripts/n72r20r4_counterfactual.py": "d6d7c6bc712a1965ff6b3993e6ef1637b3b35771f29ae5c7911b6065344b3c40",
+            "scripts/n72r20r4_run_causal_tracker.py": "c99995c052adbd92e5198e0091a2038f08a1faba8e251da866a10d62830ff6ce",
+            "scripts/n72r20r4_run_loso.py": "afe41ddaeacf51f643825e8d9ccb67e603ca6f8b276d7cbad916141268fded87",
+            "scripts/n72r20r4_trackeval.py": "a741a7d7a73fe9c4aead7ebc7afd9008c53751c42d401a8956553b7f7ba8547d",
+            "scripts/n72r20r4_train_authority.py": "ae98a9d35763a7a3301d6ee4462cccb3546f55b8bb6600a06737127d99bbd3e1"
+          },
+          "fit_episode_count": 29579,
+          "heldout_sequence": "dancetrack0024",
+          "inner_episode_count": 6029,
+          "internal_validation_sequence": "dancetrack0039",
+          "outer_heldout_absent": true,
+          "parameters": 265472,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0024__seed720322.pt",
+          "seed": 720322,
+          "sha256": "03d0d60fbe2111ace9d41537c14053a190b43b2459a7caa3dfd3e69ebf5aa76b",
+          "training": {
+            "best_epoch": 2,
+            "best_validation_loss": 1.6510403354962666,
+            "epochs_run": 7,
+            "hard_negative_margin": 0.2,
+            "history": [
+              {
+                "epoch": 1,
+                "train": {
+                  "hard": 0.08803780023650877,
+                  "listwise": 0.45195873364292344,
+                  "supcon": 5.009110902917796,
+                  "total": 1.4713884879802834
+                },
+                "validation": {
+                  "hard": 0.0718873708198468,
+                  "listwise": 0.32146046310663223,
+                  "supcon": 6.629187027613322,
+                  "total": 1.6616753737131755
+                }
+              },
+              {
+                "epoch": 2,
+                "train": {
+                  "hard": 0.04678369480474242,
+                  "listwise": 0.22080987743262587,
+                  "supcon": 4.65305732036459,
+                  "total": 1.160778099092944
+                },
+                "validation": {
+                  "hard": 0.0681840917095542,
+                  "listwise": 0.3073652113477389,
+                  "supcon": 6.650191307067871,
+                  "total": 1.6510403354962666
+                }
+              },
+              {
+                "epoch": 3,
+                "train": {
+                  "hard": 0.036156584990435635,
+                  "listwise": 0.17451797245905318,
+                  "supcon": 4.4902824204543546,
+                  "total": 1.0798057708246955
+                },
+                "validation": {
+                  "hard": 0.06943498738110065,
+                  "listwise": 0.3156866083542506,
+                  "supcon": 6.699337124824524,
+                  "total": 1.6694410343964894
+                }
+              },
+              {
+                "epoch": 4,
+                "train": {
+                  "hard": 0.030638764548147547,
+                  "listwise": 0.14949519264286962,
+                  "supcon": 4.363400886798727,
+                  "total": 1.0283031340303093
+                },
+                "validation": {
+                  "hard": 0.06962901105483373,
+                  "listwise": 0.3168134440978368,
+                  "supcon": 6.722943902015686,
+                  "total": 1.6753280361493428
+                }
+              },
+              {
+                "epoch": 5,
+                "train": {
+                  "hard": 0.02573634436803645,
+                  "listwise": 0.12898843170240007,
+                  "supcon": 4.269845058178079,
+                  "total": 0.9881047287891651
+                },
+                "validation": {
+                  "hard": 0.07891517349829276,
+                  "listwise": 0.35992640381058055,
+                  "supcon": 6.722071607907613,
+                  "total": 1.720123787720998
+                }
+              },
+              {
+                "epoch": 6,
+                "train": {
+                  "hard": 0.02229166589677334,
+                  "listwise": 0.11490578487001617,
+                  "supcon": 4.173756114367781,
+                  "total": 0.9541153486432701
+                },
+                "validation": {
+                  "hard": 0.08671809422473113,
+                  "listwise": 0.40579452986518544,
+                  "supcon": 6.741262237230937,
+                  "total": 1.7713906069596608
+                }
+              },
+              {
+                "epoch": 7,
+                "train": {
+                  "hard": 0.02066850842073046,
+                  "listwise": 0.10666518748320382,
+                  "supcon": 4.0977690630945665,
+                  "total": 0.9303527166103495
+                },
+                "validation": {
+                  "hard": 0.08524789040287335,
+                  "listwise": 0.3966672991712888,
+                  "supcon": 6.7898430824279785,
+                  "total": 1.7716854810714722
+                }
+              }
+            ],
+            "temperature": 0.07,
+            "trainable_parameters": 265472
+          }
+        },
+        {
+          "actual_training_sequences": [
+            "dancetrack0001",
+            "dancetrack0002",
+            "dancetrack0023",
+            "dancetrack0057",
+            "dancetrack0062",
+            "dancetrack0072"
+          ],
+          "code_sha256": {
+            "sam3_intermot/association/causal_identity_tracker.py": "10c59799cb151d1493d2830c28a07852e43ed3aeeeff5426e139d5e9adbde72b",
+            "sam3_intermot/association/causal_state_commit.py": "0a146541dd6ca3d727fba1fe4bd1763e4f37ad2b2f54af531d58095c7a201e15",
+            "sam3_intermot/association/global_assignment_adapter.py": "0a0e8bac85504a7c35025ad87fe5c958e0f91b96a79824894118dffc8355db17",
+            "sam3_intermot/association/identity_authority.py": "5dfc3502da72dc168ab5e546039f801e1a1fcb9b3869af071c0c83398734246d",
+            "scripts/n72r20r4_adapter_integration.py": "14184d97a4761d18cfc3a72429991db0570ad20af0219a6bdfbe30480122bf4e",
+            "scripts/n72r20r4_audit.py": "6c04336616da389351ae01b29170aa0b497b5117288d63e47a858b697ac9aa94",
+            "scripts/n72r20r4_baseline.py": "640b897fdc974c678cb68236556c0be17842f24c34008ebdb794b2c96f49a809",
+            "scripts/n72r20r4_common.py": "1937d692589f6f0d4d006843adf9ad3655e8c7c8fc8cb22f72d45698da61516a",
+            "scripts/n72r20r4_counterfactual.py": "d6d7c6bc712a1965ff6b3993e6ef1637b3b35771f29ae5c7911b6065344b3c40",
+            "scripts/n72r20r4_run_causal_tracker.py": "c99995c052adbd92e5198e0091a2038f08a1faba8e251da866a10d62830ff6ce",
+            "scripts/n72r20r4_run_loso.py": "afe41ddaeacf51f643825e8d9ccb67e603ca6f8b276d7cbad916141268fded87",
+            "scripts/n72r20r4_trackeval.py": "a741a7d7a73fe9c4aead7ebc7afd9008c53751c42d401a8956553b7f7ba8547d",
+            "scripts/n72r20r4_train_authority.py": "ae98a9d35763a7a3301d6ee4462cccb3546f55b8bb6600a06737127d99bbd3e1"
+          },
+          "fit_episode_count": 29579,
+          "heldout_sequence": "dancetrack0024",
+          "inner_episode_count": 6029,
+          "internal_validation_sequence": "dancetrack0039",
+          "outer_heldout_absent": true,
+          "parameters": 265472,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0024__seed720323.pt",
+          "seed": 720323,
+          "sha256": "4898fb27ff8663a8dbb9e0fc0646f2c346b12e79afe106444e0283b97f12d026",
+          "training": {
+            "best_epoch": 3,
+            "best_validation_loss": 1.670652409394582,
+            "epochs_run": 8,
+            "hard_negative_margin": 0.2,
+            "history": [
+              {
+                "epoch": 1,
+                "train": {
+                  "hard": 0.08897414553011286,
+                  "listwise": 0.4577536269508559,
+                  "supcon": 5.01695702815878,
+                  "total": 1.478939882640181
+                },
+                "validation": {
+                  "hard": 0.07646754011511803,
+                  "listwise": 0.34057044610381126,
+                  "supcon": 6.588824828465779,
+                  "total": 1.6736289362112682
+                }
+              },
+              {
+                "epoch": 2,
+                "train": {
+                  "hard": 0.04695482950272231,
+                  "listwise": 0.22126708385245553,
+                  "supcon": 4.662881719655004,
+                  "total": 1.1632344126701355
+                },
+                "validation": {
+                  "hard": 0.07254400476813316,
+                  "listwise": 0.32771701614061993,
+                  "supcon": 6.685747742652893,
+                  "total": 1.6793753902117412
+                }
+              },
+              {
+                "epoch": 3,
+                "train": {
+                  "hard": 0.036836125791586675,
+                  "listwise": 0.17702452787037554,
+                  "supcon": 4.498769645033212,
+                  "total": 1.084145695998751
+                },
+                "validation": {
+                  "hard": 0.07042514967421691,
+                  "listwise": 0.3162587483723958,
+                  "supcon": 6.701543092727661,
+                  "total": 1.670652409394582
+                }
+              },
+              {
+                "epoch": 4,
+                "train": {
+                  "hard": 0.030451206490397453,
+                  "listwise": 0.14865390982093482,
+                  "supcon": 4.384075707402722,
+                  "total": 1.0315593090550652
+                },
+                "validation": {
+                  "hard": 0.07204822016259034,
+                  "listwise": 0.3269517831504345,
+                  "supcon": 6.699075977007548,
+                  "total": 1.681176672379176
+                }
+              },
+              {
+                "epoch": 5,
+                "train": {
+                  "hard": 0.02583836667753499,
+                  "listwise": 0.13000131077293692,
+                  "supcon": 4.281287209741,
+                  "total": 0.9914264339825203
+                },
+                "validation": {
+                  "hard": 0.0730775020395716,
+                  "listwise": 0.33318762108683586,
+                  "supcon": 6.712167660395305,
+                  "total": 1.6902366677920024
+                }
+              },
+              {
+                "epoch": 6,
+                "train": {
+                  "hard": 0.023088909107549436,
+                  "listwise": 0.11799773561029599,
+                  "supcon": 4.1999510978830275,
+                  "total": 0.9626057456279623
+                },
+                "validation": {
+                  "hard": 0.07879512539754312,
+                  "listwise": 0.3595624640583992,
+                  "supcon": 6.717506170272827,
+                  "total": 1.7188227772712708
+                }
+              },
+              {
+                "epoch": 7,
+                "train": {
+                  "hard": 0.020514592431999486,
+                  "listwise": 0.10700141034763434,
+                  "supcon": 4.117917513025218,
+                  "total": 0.9346878394998354
+                },
+                "validation": {
+                  "hard": 0.08445027936249971,
+                  "listwise": 0.3930139324317376,
+                  "supcon": 6.72488260269165,
+                  "total": 1.7548805475234985
+                }
+              },
+              {
+                "epoch": 8,
+                "train": {
+                  "hard": 0.01825328532542134,
+                  "listwise": 0.09752520700467043,
+                  "supcon": 4.043181653680472,
+                  "total": 0.9098122047966924
+                },
+                "validation": {
+                  "hard": 0.0883977822959423,
+                  "listwise": 0.414903249591589,
+                  "supcon": 6.722039540608724,
+                  "total": 1.7769907414913177
+                }
+              }
+            ],
+            "temperature": 0.07,
+            "trainable_parameters": 265472
+          }
+        }
+      ],
+      "dancetrack0039": [
+        {
+          "actual_training_sequences": [
+            "dancetrack0001",
+            "dancetrack0002",
+            "dancetrack0023",
+            "dancetrack0024",
+            "dancetrack0062",
+            "dancetrack0072"
+          ],
+          "code_sha256": {
+            "sam3_intermot/association/causal_identity_tracker.py": "10c59799cb151d1493d2830c28a07852e43ed3aeeeff5426e139d5e9adbde72b",
+            "sam3_intermot/association/causal_state_commit.py": "0a146541dd6ca3d727fba1fe4bd1763e4f37ad2b2f54af531d58095c7a201e15",
+            "sam3_intermot/association/global_assignment_adapter.py": "0a0e8bac85504a7c35025ad87fe5c958e0f91b96a79824894118dffc8355db17",
+            "sam3_intermot/association/identity_authority.py": "5dfc3502da72dc168ab5e546039f801e1a1fcb9b3869af071c0c83398734246d",
+            "scripts/n72r20r4_adapter_integration.py": "14184d97a4761d18cfc3a72429991db0570ad20af0219a6bdfbe30480122bf4e",
+            "scripts/n72r20r4_audit.py": "6c04336616da389351ae01b29170aa0b497b5117288d63e47a858b697ac9aa94",
+            "scripts/n72r20r4_baseline.py": "640b897fdc974c678cb68236556c0be17842f24c34008ebdb794b2c96f49a809",
+            "scripts/n72r20r4_common.py": "1937d692589f6f0d4d006843adf9ad3655e8c7c8fc8cb22f72d45698da61516a",
+            "scripts/n72r20r4_counterfactual.py": "d6d7c6bc712a1965ff6b3993e6ef1637b3b35771f29ae5c7911b6065344b3c40",
+            "scripts/n72r20r4_run_causal_tracker.py": "c99995c052adbd92e5198e0091a2038f08a1faba8e251da866a10d62830ff6ce",
+            "scripts/n72r20r4_run_loso.py": "afe41ddaeacf51f643825e8d9ccb67e603ca6f8b276d7cbad916141268fded87",
+            "scripts/n72r20r4_trackeval.py": "a741a7d7a73fe9c4aead7ebc7afd9008c53751c42d401a8956553b7f7ba8547d",
+            "scripts/n72r20r4_train_authority.py": "ae98a9d35763a7a3301d6ee4462cccb3546f55b8bb6600a06737127d99bbd3e1"
+          },
+          "fit_episode_count": 31198,
+          "heldout_sequence": "dancetrack0039",
+          "inner_episode_count": 2736,
+          "internal_validation_sequence": "dancetrack0057",
+          "outer_heldout_absent": true,
+          "parameters": 265472,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0039__seed720321.pt",
+          "seed": 720321,
+          "sha256": "7b28aca0a05e5e736ff938ec8ce18b4b51fa88f2b495c323a7069839e9d346bd",
+          "training": {
+            "best_epoch": 2,
+            "best_validation_loss": 1.8451812664667766,
+            "epochs_run": 7,
+            "hard_negative_margin": 0.2,
+            "history": [
+              {
+                "epoch": 1,
+                "train": {
+                  "hard": 0.08421154057637589,
+                  "listwise": 0.4362048912243765,
+                  "supcon": 4.963003705759517,
+                  "total": 1.445647949078044
+                },
+                "validation": {
+                  "hard": 0.10298921788732211,
+                  "listwise": 0.48071367541948956,
+                  "supcon": 6.826771815617879,
+                  "total": 1.8666659196217854
+                }
+              },
+              {
+                "epoch": 2,
+                "train": {
+                  "hard": 0.04424929789832381,
+                  "listwise": 0.2124733196907356,
+                  "supcon": 4.588341408088559,
+                  "total": 1.1389914711967843
+                },
+                "validation": {
+                  "hard": 0.09956354647874832,
+                  "listwise": 0.46544596056143445,
+                  "supcon": 6.799112717310588,
+                  "total": 1.8451812664667766
+                }
+              },
+              {
+                "epoch": 3,
+                "train": {
+                  "hard": 0.03395375133049293,
+                  "listwise": 0.16737958398021635,
+                  "supcon": 4.408052366287982,
+                  "total": 1.0557808172507364
+                },
+                "validation": {
+                  "hard": 0.10111428548892339,
+                  "listwise": 0.47057413558165234,
+                  "supcon": 6.862216949462891,
+                  "total": 1.863240400950114
+                }
+              },
+              {
+                "epoch": 4,
+                "train": {
+                  "hard": 0.027957664680529813,
+                  "listwise": 0.14036646766252206,
+                  "supcon": 4.275422619991615,
+                  "total": 1.0010425350705132
+                },
+                "validation": {
+                  "hard": 0.10664991786082585,
+                  "listwise": 0.5021822849909464,
+                  "supcon": 6.84452470143636,
+                  "total": 1.8924172321955364
+                }
+              },
+              {
+                "epoch": 5,
+                "train": {
+                  "hard": 0.024068108866693545,
+                  "listwise": 0.12349140607431287,
+                  "supcon": 4.165261268615723,
+                  "total": 0.9613572955131531
+                },
+                "validation": {
+                  "hard": 0.1094898742934068,
+                  "listwise": 0.5148695856332779,
+                  "supcon": 6.8686379591623945,
+                  "total": 1.910495142141978
+                }
+              },
+              {
+                "epoch": 6,
+                "train": {
+                  "hard": 0.020770585530849754,
+                  "listwise": 0.10905607875253333,
+                  "supcon": 4.072676365492774,
+                  "total": 0.9277454868691867
+                },
+                "validation": {
+                  "hard": 0.11438490450382233,
+                  "listwise": 0.5499048233032227,
+                  "supcon": 6.846769730250041,
+                  "total": 1.942135751247406
+                }
+              },
+              {
+                "epoch": 7,
+                "train": {
+                  "hard": 0.018427259884163983,
+                  "listwise": 0.09905107954486472,
+                  "supcon": 3.9885796992505185,
+                  "total": 0.900452482895773
+                },
+                "validation": {
+                  "hard": 0.1158624937136968,
+                  "listwise": 0.5603927771250407,
+                  "supcon": 6.826764186223348,
+                  "total": 1.9489181439081829
+                }
+              }
+            ],
+            "temperature": 0.07,
+            "trainable_parameters": 265472
+          }
+        },
+        {
+          "actual_training_sequences": [
+            "dancetrack0001",
+            "dancetrack0002",
+            "dancetrack0023",
+            "dancetrack0024",
+            "dancetrack0062",
+            "dancetrack0072"
+          ],
+          "code_sha256": {
+            "sam3_intermot/association/causal_identity_tracker.py": "a73a3ec784c1c09d45b329c4863d7569d7de218dbb408d90313766ea3ba32ce9",
+            "sam3_intermot/association/causal_state_commit.py": "0a146541dd6ca3d727fba1fe4bd1763e4f37ad2b2f54af531d58095c7a201e15",
+            "sam3_intermot/association/global_assignment_adapter.py": "0a0e8bac85504a7c35025ad87fe5c958e0f91b96a79824894118dffc8355db17",
+            "sam3_intermot/association/identity_authority.py": "5dfc3502da72dc168ab5e546039f801e1a1fcb9b3869af071c0c83398734246d",
+            "scripts/n72r20r4_adapter_integration.py": "14184d97a4761d18cfc3a72429991db0570ad20af0219a6bdfbe30480122bf4e",
+            "scripts/n72r20r4_audit.py": "6c04336616da389351ae01b29170aa0b497b5117288d63e47a858b697ac9aa94",
+            "scripts/n72r20r4_baseline.py": "640b897fdc974c678cb68236556c0be17842f24c34008ebdb794b2c96f49a809",
+            "scripts/n72r20r4_common.py": "1937d692589f6f0d4d006843adf9ad3655e8c7c8fc8cb22f72d45698da61516a",
+            "scripts/n72r20r4_counterfactual.py": "d6d7c6bc712a1965ff6b3993e6ef1637b3b35771f29ae5c7911b6065344b3c40",
+            "scripts/n72r20r4_run_causal_tracker.py": "c99995c052adbd92e5198e0091a2038f08a1faba8e251da866a10d62830ff6ce",
+            "scripts/n72r20r4_run_loso.py": "62e11f5730f842aeec2c5ae51a92f773923a91c916d4341851b416a325d16f48",
+            "scripts/n72r20r4_trackeval.py": "a741a7d7a73fe9c4aead7ebc7afd9008c53751c42d401a8956553b7f7ba8547d",
+            "scripts/n72r20r4_train_authority.py": "3bc82eae5479f83cb4163753c9771e85a82fb04deaf9fbd35c0332e22159109b"
+          },
+          "fit_episode_count": 31198,
+          "heldout_sequence": "dancetrack0039",
+          "inner_episode_count": 2736,
+          "internal_validation_sequence": "dancetrack0057",
+          "outer_heldout_absent": true,
+          "parameters": 265472,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0039__seed720322.pt",
+          "seed": 720322,
+          "sha256": "f1615f56d515cb4d5160d6134564f51b6eee39222a27d99461686b080d4ad358",
+          "training": {
+            "best_epoch": 2,
+            "best_validation_loss": 1.837395449479421,
+            "epochs_run": 7,
+            "hard_negative_margin": 0.2,
+            "history": [
+              {
+                "epoch": 1,
+                "train": {
+                  "hard": 0.08361941527147762,
+                  "listwise": 0.43364536908806345,
+                  "supcon": 4.953342179783055,
+                  "total": 1.4410376900532207
+                },
+                "validation": {
+                  "hard": 0.09678700690468152,
+                  "listwise": 0.4464281499385834,
+                  "supcon": 6.858425855636597,
+                  "total": 1.837470789750417
+                }
+              },
+              {
+                "epoch": 2,
+                "train": {
+                  "hard": 0.043398897667400176,
+                  "listwise": 0.20837707353419946,
+                  "supcon": 4.565875467706899,
+                  "total": 1.130231982371846
+                },
+                "validation": {
+                  "hard": 0.09151344746351242,
+                  "listwise": 0.4219440817832947,
+                  "supcon": 6.985743363698323,
+                  "total": 1.837395449479421
+                }
+              },
+              {
+                "epoch": 3,
+                "train": {
+                  "hard": 0.03294125632917295,
+                  "listwise": 0.1619647773074322,
+                  "supcon": 4.3875826616756255,
+                  "total": 1.0460695761149046
+                },
+                "validation": {
+                  "hard": 0.09142702383299668,
+                  "listwise": 0.42519156634807587,
+                  "supcon": 7.085208972295125,
+                  "total": 1.8605188131332397
+                }
+              },
+              {
+                "epoch": 4,
+                "train": {
+                  "hard": 0.027515100162537373,
+                  "listwise": 0.1386247119698368,
+                  "supcon": 4.2533066233650585,
+                  "total": 0.9947890609991356
+                },
+                "validation": {
+                  "hard": 0.09416543568174045,
+                  "listwise": 0.4389287084341049,
+                  "supcon": 6.996384859085083,
+                  "total": 1.8570388356844585
+                }
+              },
+              {
+                "epoch": 5,
+                "train": {
+                  "hard": 0.023080328082452056,
+                  "listwise": 0.11944612042337167,
+                  "supcon": 4.142865540551358,
+                  "total": 0.9526353068039065
+                },
+                "validation": {
+                  "hard": 0.09893633176883061,
+                  "listwise": 0.464328075448672,
+                  "supcon": 6.928422451019287,
+                  "total": 1.8697998921076457
+                }
+              },
+              {
+                "epoch": 6,
+                "train": {
+                  "hard": 0.02034471394707922,
+                  "listwise": 0.10722345064898006,
+                  "supcon": 4.045648500567577,
+                  "total": 0.9204221016070882
+                },
+                "validation": {
+                  "hard": 0.10070345426599185,
+                  "listwise": 0.48256360987822217,
+                  "supcon": 7.026766220728557,
+                  "total": 1.9080575505892436
+                }
+              },
+              {
+                "epoch": 7,
+                "train": {
+                  "hard": 0.018331144661566275,
+                  "listwise": 0.09794599391886445,
+                  "supcon": 3.9735933952644222,
+                  "total": 0.8963309174678364
+                },
+                "validation": {
+                  "hard": 0.1046363078057766,
+                  "listwise": 0.5049426058928171,
+                  "supcon": 7.0226883093516035,
+                  "total": 1.9304075439771016
+                }
+              }
+            ],
+            "temperature": 0.07,
+            "trainable_parameters": 265472
+          }
+        },
+        {
+          "actual_training_sequences": [
+            "dancetrack0001",
+            "dancetrack0002",
+            "dancetrack0023",
+            "dancetrack0024",
+            "dancetrack0062",
+            "dancetrack0072"
+          ],
+          "code_sha256": {
+            "sam3_intermot/association/causal_identity_tracker.py": "a73a3ec784c1c09d45b329c4863d7569d7de218dbb408d90313766ea3ba32ce9",
+            "sam3_intermot/association/causal_state_commit.py": "0a146541dd6ca3d727fba1fe4bd1763e4f37ad2b2f54af531d58095c7a201e15",
+            "sam3_intermot/association/global_assignment_adapter.py": "0a0e8bac85504a7c35025ad87fe5c958e0f91b96a79824894118dffc8355db17",
+            "sam3_intermot/association/identity_authority.py": "5dfc3502da72dc168ab5e546039f801e1a1fcb9b3869af071c0c83398734246d",
+            "scripts/n72r20r4_adapter_integration.py": "14184d97a4761d18cfc3a72429991db0570ad20af0219a6bdfbe30480122bf4e",
+            "scripts/n72r20r4_audit.py": "6c04336616da389351ae01b29170aa0b497b5117288d63e47a858b697ac9aa94",
+            "scripts/n72r20r4_baseline.py": "640b897fdc974c678cb68236556c0be17842f24c34008ebdb794b2c96f49a809",
+            "scripts/n72r20r4_common.py": "1937d692589f6f0d4d006843adf9ad3655e8c7c8fc8cb22f72d45698da61516a",
+            "scripts/n72r20r4_counterfactual.py": "d6d7c6bc712a1965ff6b3993e6ef1637b3b35771f29ae5c7911b6065344b3c40",
+            "scripts/n72r20r4_run_causal_tracker.py": "c99995c052adbd92e5198e0091a2038f08a1faba8e251da866a10d62830ff6ce",
+            "scripts/n72r20r4_run_loso.py": "62e11f5730f842aeec2c5ae51a92f773923a91c916d4341851b416a325d16f48",
+            "scripts/n72r20r4_trackeval.py": "a741a7d7a73fe9c4aead7ebc7afd9008c53751c42d401a8956553b7f7ba8547d",
+            "scripts/n72r20r4_train_authority.py": "3bc82eae5479f83cb4163753c9771e85a82fb04deaf9fbd35c0332e22159109b"
+          },
+          "fit_episode_count": 31198,
+          "heldout_sequence": "dancetrack0039",
+          "inner_episode_count": 2736,
+          "internal_validation_sequence": "dancetrack0057",
+          "outer_heldout_absent": true,
+          "parameters": 265472,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0039__seed720323.pt",
+          "seed": 720323,
+          "sha256": "1be6db5dfcf4b6812f791fe2680815a884a4ef17bd15ee0ff311e63ef829c68f",
+          "training": {
+            "best_epoch": 2,
+            "best_validation_loss": 1.830766757329305,
+            "epochs_run": 7,
+            "hard_negative_margin": 0.2,
+            "history": [
+              {
+                "epoch": 1,
+                "train": {
+                  "hard": 0.0847681537270546,
+                  "listwise": 0.4403175865529013,
+                  "supcon": 4.951903702782803,
+                  "total": 1.4476519666734289
+                },
+                "validation": {
+                  "hard": 0.09784974778691928,
+                  "listwise": 0.44971907138824463,
+                  "supcon": 6.808107693990071,
+                  "total": 1.830910563468933
+                }
+              },
+              {
+                "epoch": 2,
+                "train": {
+                  "hard": 0.043289510441608114,
+                  "listwise": 0.20823498509946417,
+                  "supcon": 4.580457640475914,
+                  "total": 1.1329844193380387
+                },
+                "validation": {
+                  "hard": 0.09399281690518062,
+                  "listwise": 0.4342798093954722,
+                  "supcon": 6.888441960016887,
+                  "total": 1.830766757329305
+                }
+              },
+              {
+                "epoch": 3,
+                "train": {
+                  "hard": 0.033658028534445605,
+                  "listwise": 0.1657052262396109,
+                  "supcon": 4.398272287650187,
+                  "total": 1.0520913073273956
+                },
+                "validation": {
+                  "hard": 0.09743013232946396,
+                  "listwise": 0.45385384062925976,
+                  "supcon": 6.8837837378184,
+                  "total": 1.850096623102824
+                }
+              },
+              {
+                "epoch": 4,
+                "train": {
+                  "hard": 0.027829171295781604,
+                  "listwise": 0.13976910588194114,
+                  "supcon": 4.263092111368648,
+                  "total": 0.9979533748548539
+                },
+                "validation": {
+                  "hard": 0.10317050044735272,
+                  "listwise": 0.4903210749228795,
+                  "supcon": 6.82191268603007,
+                  "total": 1.8753377199172974
+                }
+              },
+              {
+                "epoch": 5,
+                "train": {
+                  "hard": 0.02361181521879845,
+                  "listwise": 0.12188815020146918,
+                  "supcon": 4.150607671894011,
+                  "total": 0.9567320620427366
+                },
+                "validation": {
+                  "hard": 0.1051164095600446,
+                  "listwise": 0.5027961432933807,
+                  "supcon": 6.909672339757283,
+                  "total": 1.9057539105415344
+                }
+              },
+              {
+                "epoch": 6,
+                "train": {
+                  "hard": 0.021008362092810574,
+                  "listwise": 0.11016551930396283,
+                  "supcon": 4.069048713465206,
+                  "total": 0.9281769404645825
+                },
+                "validation": {
+                  "hard": 0.10856461897492409,
+                  "listwise": 0.522541825970014,
+                  "supcon": 6.8951302369435625,
+                  "total": 1.9232808152834575
+                }
+              },
+              {
+                "epoch": 7,
+                "train": {
+                  "hard": 0.018423440056990405,
+                  "listwise": 0.09860909082850472,
+                  "supcon": 3.982103750353954,
+                  "total": 0.8987145414117907
+                },
+                "validation": {
+                  "hard": 0.11354938770333926,
+                  "listwise": 0.5505414952834448,
+                  "supcon": 6.88599427541097,
+                  "total": 1.9504502614339192
+                }
+              }
+            ],
+            "temperature": 0.07,
+            "trainable_parameters": 265472
+          }
+        }
+      ],
+      "dancetrack0057": [
+        {
+          "actual_training_sequences": [
+            "dancetrack0001",
+            "dancetrack0002",
+            "dancetrack0023",
+            "dancetrack0024",
+            "dancetrack0039",
+            "dancetrack0072"
+          ],
+          "code_sha256": {
+            "sam3_intermot/association/causal_identity_tracker.py": "a73a3ec784c1c09d45b329c4863d7569d7de218dbb408d90313766ea3ba32ce9",
+            "sam3_intermot/association/causal_state_commit.py": "0a146541dd6ca3d727fba1fe4bd1763e4f37ad2b2f54af531d58095c7a201e15",
+            "sam3_intermot/association/global_assignment_adapter.py": "0a0e8bac85504a7c35025ad87fe5c958e0f91b96a79824894118dffc8355db17",
+            "sam3_intermot/association/identity_authority.py": "5dfc3502da72dc168ab5e546039f801e1a1fcb9b3869af071c0c83398734246d",
+            "scripts/n72r20r4_adapter_integration.py": "14184d97a4761d18cfc3a72429991db0570ad20af0219a6bdfbe30480122bf4e",
+            "scripts/n72r20r4_audit.py": "6c04336616da389351ae01b29170aa0b497b5117288d63e47a858b697ac9aa94",
+            "scripts/n72r20r4_baseline.py": "640b897fdc974c678cb68236556c0be17842f24c34008ebdb794b2c96f49a809",
+            "scripts/n72r20r4_common.py": "1937d692589f6f0d4d006843adf9ad3655e8c7c8fc8cb22f72d45698da61516a",
+            "scripts/n72r20r4_counterfactual.py": "d6d7c6bc712a1965ff6b3993e6ef1637b3b35771f29ae5c7911b6065344b3c40",
+            "scripts/n72r20r4_run_causal_tracker.py": "c99995c052adbd92e5198e0091a2038f08a1faba8e251da866a10d62830ff6ce",
+            "scripts/n72r20r4_run_loso.py": "62e11f5730f842aeec2c5ae51a92f773923a91c916d4341851b416a325d16f48",
+            "scripts/n72r20r4_trackeval.py": "a741a7d7a73fe9c4aead7ebc7afd9008c53751c42d401a8956553b7f7ba8547d",
+            "scripts/n72r20r4_train_authority.py": "3bc82eae5479f83cb4163753c9771e85a82fb04deaf9fbd35c0332e22159109b"
+          },
+          "fit_episode_count": 32714,
+          "heldout_sequence": "dancetrack0057",
+          "inner_episode_count": 4513,
+          "internal_validation_sequence": "dancetrack0062",
+          "outer_heldout_absent": true,
+          "parameters": 265472,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0057__seed720321.pt",
+          "seed": 720321,
+          "sha256": "3ba9ff9f814aeaa020690b3661cd776cd3deb90c478059782907906d0ddd3900",
+          "training": {
+            "best_epoch": 1,
+            "best_validation_loss": 2.0637418826421103,
+            "epochs_run": 6,
+            "hard_negative_margin": 0.2,
+            "history": [
+              {
+                "epoch": 1,
+                "train": {
+                  "hard": 0.07535297109279782,
+                  "listwise": 0.39394800760783255,
+                  "supcon": 4.836558915674686,
+                  "total": 1.3763303942978382
+                },
+                "validation": {
+                  "hard": 0.1337250711189376,
+                  "listwise": 0.6842060950067308,
+                  "supcon": 6.763953738742405,
+                  "total": 2.0637418826421103
+                }
+              },
+              {
+                "epoch": 2,
+                "train": {
+                  "hard": 0.03705306301708333,
+                  "listwise": 0.18211334268562496,
+                  "supcon": 4.404623165726662,
+                  "total": 1.070448599755764
+                },
+                "validation": {
+                  "hard": 0.13523118860191768,
+                  "listwise": 0.6913924747043185,
+                  "supcon": 6.729156335194905,
+                  "total": 2.0642700327767267
+                }
+              },
+              {
+                "epoch": 3,
+                "train": {
+                  "hard": 0.02800720333470963,
+                  "listwise": 0.1416048207320273,
+                  "supcon": 4.211358547210693,
+                  "total": 0.9894779929891229
+                },
+                "validation": {
+                  "hard": 0.1395008448097441,
+                  "listwise": 0.7231432729297214,
+                  "supcon": 6.7200344403584795,
+                  "total": 2.0950504144032798
+                }
+              },
+              {
+                "epoch": 4,
+                "train": {
+                  "hard": 0.022300956828985363,
+                  "listwise": 0.11572219734080136,
+                  "supcon": 4.063466936349869,
+                  "total": 0.9328757924959064
+                },
+                "validation": {
+                  "hard": 0.14320742256111568,
+                  "listwise": 0.7480561799473233,
+                  "supcon": 6.659649954901801,
+                  "total": 2.108627610736423
+                }
+              },
+              {
+                "epoch": 5,
+                "train": {
+                  "hard": 0.018527026593801565,
+                  "listwise": 0.09907831880263984,
+                  "supcon": 3.9390043914318085,
+                  "total": 0.8905846178531647
+                },
+                "validation": {
+                  "hard": 0.1528695589966244,
+                  "listwise": 0.8201493554645114,
+                  "supcon": 6.67042170630561,
+                  "total": 2.184807618459066
+                }
+              },
+              {
+                "epoch": 6,
+                "train": {
+                  "hard": 0.015561376698315144,
+                  "listwise": 0.08636916032992303,
+                  "supcon": 3.8463491275906563,
+                  "total": 0.8587512671947479
+                },
+                "validation": {
+                  "hard": 0.15821966363324058,
+                  "listwise": 0.8562886118888855,
+                  "supcon": 6.695641835530599,
+                  "total": 2.227060900794135
+                }
+              }
+            ],
+            "temperature": 0.07,
+            "trainable_parameters": 265472
+          }
+        },
+        {
+          "actual_training_sequences": [
+            "dancetrack0001",
+            "dancetrack0002",
+            "dancetrack0023",
+            "dancetrack0024",
+            "dancetrack0039",
+            "dancetrack0072"
+          ],
+          "code_sha256": {
+            "sam3_intermot/association/causal_identity_tracker.py": "a73a3ec784c1c09d45b329c4863d7569d7de218dbb408d90313766ea3ba32ce9",
+            "sam3_intermot/association/causal_state_commit.py": "0a146541dd6ca3d727fba1fe4bd1763e4f37ad2b2f54af531d58095c7a201e15",
+            "sam3_intermot/association/global_assignment_adapter.py": "0a0e8bac85504a7c35025ad87fe5c958e0f91b96a79824894118dffc8355db17",
+            "sam3_intermot/association/identity_authority.py": "5dfc3502da72dc168ab5e546039f801e1a1fcb9b3869af071c0c83398734246d",
+            "scripts/n72r20r4_adapter_integration.py": "14184d97a4761d18cfc3a72429991db0570ad20af0219a6bdfbe30480122bf4e",
+            "scripts/n72r20r4_audit.py": "6c04336616da389351ae01b29170aa0b497b5117288d63e47a858b697ac9aa94",
+            "scripts/n72r20r4_baseline.py": "640b897fdc974c678cb68236556c0be17842f24c34008ebdb794b2c96f49a809",
+            "scripts/n72r20r4_common.py": "1937d692589f6f0d4d006843adf9ad3655e8c7c8fc8cb22f72d45698da61516a",
+            "scripts/n72r20r4_counterfactual.py": "d6d7c6bc712a1965ff6b3993e6ef1637b3b35771f29ae5c7911b6065344b3c40",
+            "scripts/n72r20r4_run_causal_tracker.py": "c99995c052adbd92e5198e0091a2038f08a1faba8e251da866a10d62830ff6ce",
+            "scripts/n72r20r4_run_loso.py": "62e11f5730f842aeec2c5ae51a92f773923a91c916d4341851b416a325d16f48",
+            "scripts/n72r20r4_trackeval.py": "a741a7d7a73fe9c4aead7ebc7afd9008c53751c42d401a8956553b7f7ba8547d",
+            "scripts/n72r20r4_train_authority.py": "3bc82eae5479f83cb4163753c9771e85a82fb04deaf9fbd35c0332e22159109b"
+          },
+          "fit_episode_count": 32714,
+          "heldout_sequence": "dancetrack0057",
+          "inner_episode_count": 4513,
+          "internal_validation_sequence": "dancetrack0062",
+          "outer_heldout_absent": true,
+          "parameters": 265472,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0057__seed720322.pt",
+          "seed": 720322,
+          "sha256": "8fc4e70abe69a4f6716ba088205fb89ebe0bfeb1fa303fd4b1bd900274002325",
+          "training": {
+            "best_epoch": 1,
+            "best_validation_loss": 1.9920201698939006,
+            "epochs_run": 6,
+            "hard_negative_margin": 0.2,
+            "history": [
+              {
+                "epoch": 1,
+                "train": {
+                  "hard": 0.0744506010087207,
+                  "listwise": 0.39038224844262004,
+                  "supcon": 4.821964994072914,
+                  "total": 1.3696653824299574
+                },
+                "validation": {
+                  "hard": 0.12639635884099537,
+                  "listwise": 0.6096275051434835,
+                  "supcon": 6.785566965738933,
+                  "total": 1.9920201698939006
+                }
+              },
+              {
+                "epoch": 2,
+                "train": {
+                  "hard": 0.03615076941787265,
+                  "listwise": 0.17872332921251655,
+                  "supcon": 4.388844721019268,
+                  "total": 1.0637224363163114
+                },
+                "validation": {
+                  "hard": 0.13264375511142942,
+                  "listwise": 0.6533868047926161,
+                  "supcon": 6.715724150339763,
+                  "total": 2.0230603747897677
+                }
+              },
+              {
+                "epoch": 3,
+                "train": {
+                  "hard": 0.027127215260406956,
+                  "listwise": 0.1374091487377882,
+                  "supcon": 4.193081125617027,
+                  "total": 0.9814508287236094
+                },
+                "validation": {
+                  "hard": 0.1404420170519087,
+                  "listwise": 0.7071865532133315,
+                  "supcon": 6.676914109124078,
+                  "total": 2.070657809575399
+                }
+              },
+              {
+                "epoch": 4,
+                "train": {
+                  "hard": 0.02161335629352834,
+                  "listwise": 0.11285904224496335,
+                  "supcon": 4.039479650557041,
+                  "total": 0.9250776609405875
+                },
+                "validation": {
+                  "hard": 0.14612382484806907,
+                  "listwise": 0.7537057134840224,
+                  "supcon": 6.652054945627849,
+                  "total": 2.1133414374457464
+                }
+              },
+              {
+                "epoch": 5,
+                "train": {
+                  "hard": 0.01791653125837911,
+                  "listwise": 0.09703527844976634,
+                  "supcon": 3.929037306457758,
+                  "total": 0.8864260604605079
+                },
+                "validation": {
+                  "hard": 0.14704689383506775,
+                  "listwise": 0.7662079135576884,
+                  "supcon": 6.659270763397217,
+                  "total": 2.127471499972873
+                }
+              },
+              {
+                "epoch": 6,
+                "train": {
+                  "hard": 0.01490746128547471,
+                  "listwise": 0.08357662917114794,
+                  "supcon": 3.8148709014058113,
+                  "total": 0.8495323164388537
+                },
+                "validation": {
+                  "hard": 0.1508548723326789,
+                  "listwise": 0.7974325948291354,
+                  "supcon": 6.66151221593221,
+                  "total": 2.1599060429467096
+                }
+              }
+            ],
+            "temperature": 0.07,
+            "trainable_parameters": 265472
+          }
+        },
+        {
+          "actual_training_sequences": [
+            "dancetrack0001",
+            "dancetrack0002",
+            "dancetrack0023",
+            "dancetrack0024",
+            "dancetrack0039",
+            "dancetrack0072"
+          ],
+          "code_sha256": {
+            "sam3_intermot/association/causal_identity_tracker.py": "a73a3ec784c1c09d45b329c4863d7569d7de218dbb408d90313766ea3ba32ce9",
+            "sam3_intermot/association/causal_state_commit.py": "0a146541dd6ca3d727fba1fe4bd1763e4f37ad2b2f54af531d58095c7a201e15",
+            "sam3_intermot/association/global_assignment_adapter.py": "0a0e8bac85504a7c35025ad87fe5c958e0f91b96a79824894118dffc8355db17",
+            "sam3_intermot/association/identity_authority.py": "5dfc3502da72dc168ab5e546039f801e1a1fcb9b3869af071c0c83398734246d",
+            "scripts/n72r20r4_adapter_integration.py": "14184d97a4761d18cfc3a72429991db0570ad20af0219a6bdfbe30480122bf4e",
+            "scripts/n72r20r4_audit.py": "6c04336616da389351ae01b29170aa0b497b5117288d63e47a858b697ac9aa94",
+            "scripts/n72r20r4_baseline.py": "640b897fdc974c678cb68236556c0be17842f24c34008ebdb794b2c96f49a809",
+            "scripts/n72r20r4_common.py": "1937d692589f6f0d4d006843adf9ad3655e8c7c8fc8cb22f72d45698da61516a",
+            "scripts/n72r20r4_counterfactual.py": "d6d7c6bc712a1965ff6b3993e6ef1637b3b35771f29ae5c7911b6065344b3c40",
+            "scripts/n72r20r4_run_causal_tracker.py": "c99995c052adbd92e5198e0091a2038f08a1faba8e251da866a10d62830ff6ce",
+            "scripts/n72r20r4_run_loso.py": "62e11f5730f842aeec2c5ae51a92f773923a91c916d4341851b416a325d16f48",
+            "scripts/n72r20r4_run_val.py": "c0c0f1a37a218e5bc0d03c49c7560117af75d838359f582c83670a0ed75f6b4e",
+            "scripts/n72r20r4_trackeval.py": "a741a7d7a73fe9c4aead7ebc7afd9008c53751c42d401a8956553b7f7ba8547d",
+            "scripts/n72r20r4_train_authority.py": "8ac19f2e8df7e83f4186da8d5d6ad99bf7ea556da0adcca852919d2d19de63e0"
+          },
+          "fit_episode_count": 32714,
+          "heldout_sequence": "dancetrack0057",
+          "inner_episode_count": 4513,
+          "internal_validation_sequence": "dancetrack0062",
+          "outer_heldout_absent": true,
+          "parameters": 265472,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0057__seed720323.pt",
+          "seed": 720323,
+          "sha256": "1e776ab2967f12028f8c627803f576a3847ab3d0d3f9a9a930638bc9447c5910",
+          "training": {
+            "best_epoch": 1,
+            "best_validation_loss": 1.990564505259196,
+            "epochs_run": 6,
+            "hard_negative_margin": 0.2,
+            "history": [
+              {
+                "epoch": 1,
+                "train": {
+                  "hard": 0.07632549159461632,
+                  "listwise": 0.3996165953576565,
+                  "supcon": 4.824587143957615,
+                  "total": 1.3797991257160902
+                },
+                "validation": {
+                  "hard": 0.1253000936574406,
+                  "listwise": 0.619017846054501,
+                  "supcon": 6.732433107164171,
+                  "total": 1.990564505259196
+                }
+              },
+              {
+                "epoch": 2,
+                "train": {
+                  "hard": 0.03658582933712751,
+                  "listwise": 0.18095917347818613,
+                  "supcon": 4.400510996580124,
+                  "total": 1.0683785509318113
+                },
+                "validation": {
+                  "hard": 0.1314485487010744,
+                  "listwise": 0.6616597440507677,
+                  "supcon": 6.7071267233954535,
+                  "total": 2.029374811384413
+                }
+              },
+              {
+                "epoch": 3,
+                "train": {
+                  "hard": 0.027365844434825704,
+                  "listwise": 0.13875043205916882,
+                  "supcon": 4.19653607904911,
+                  "total": 0.9835308250039816
+                },
+                "validation": {
+                  "hard": 0.13762521660990185,
+                  "listwise": 0.7019616961479187,
+                  "supcon": 6.7005959616767035,
+                  "total": 2.0696060127682157
+                }
+              },
+              {
+                "epoch": 4,
+                "train": {
+                  "hard": 0.02207215694943443,
+                  "listwise": 0.11578997853212059,
+                  "supcon": 4.057077892124653,
+                  "total": 0.9316199952736497
+                },
+                "validation": {
+                  "hard": 0.14657225708166757,
+                  "listwise": 0.770199696222941,
+                  "supcon": 6.70152669482761,
+                  "total": 2.139819516075982
+                }
+              },
+              {
+                "epoch": 5,
+                "train": {
+                  "hard": 0.01804233454458881,
+                  "listwise": 0.09744179714471102,
+                  "supcon": 3.924238581210375,
+                  "total": 0.8858979940414429
+                },
+                "validation": {
+                  "hard": 0.15043720934126112,
+                  "listwise": 0.7965650690926446,
+                  "supcon": 6.694496684604221,
+                  "total": 2.165551847881741
+                }
+              },
+              {
+                "epoch": 6,
+                "train": {
+                  "hard": 0.015602375497110188,
+                  "listwise": 0.08658796560484916,
+                  "supcon": 3.832101259380579,
+                  "total": 0.856128703802824
+                },
+                "validation": {
+                  "hard": 0.1527196102672153,
+                  "listwise": 0.8040924337175157,
+                  "supcon": 6.725828965504964,
+                  "total": 2.1798021528455944
+                }
+              }
+            ],
+            "temperature": 0.07,
+            "trainable_parameters": 265472
+          }
+        }
+      ],
+      "dancetrack0062": [
+        {
+          "actual_training_sequences": [
+            "dancetrack0001",
+            "dancetrack0002",
+            "dancetrack0023",
+            "dancetrack0024",
+            "dancetrack0039",
+            "dancetrack0057"
+          ],
+          "code_sha256": {
+            "sam3_intermot/association/causal_identity_tracker.py": "a73a3ec784c1c09d45b329c4863d7569d7de218dbb408d90313766ea3ba32ce9",
+            "sam3_intermot/association/causal_state_commit.py": "0a146541dd6ca3d727fba1fe4bd1763e4f37ad2b2f54af531d58095c7a201e15",
+            "sam3_intermot/association/global_assignment_adapter.py": "0a0e8bac85504a7c35025ad87fe5c958e0f91b96a79824894118dffc8355db17",
+            "sam3_intermot/association/identity_authority.py": "5dfc3502da72dc168ab5e546039f801e1a1fcb9b3869af071c0c83398734246d",
+            "scripts/n72r20r4_adapter_integration.py": "14184d97a4761d18cfc3a72429991db0570ad20af0219a6bdfbe30480122bf4e",
+            "scripts/n72r20r4_audit.py": "6c04336616da389351ae01b29170aa0b497b5117288d63e47a858b697ac9aa94",
+            "scripts/n72r20r4_baseline.py": "640b897fdc974c678cb68236556c0be17842f24c34008ebdb794b2c96f49a809",
+            "scripts/n72r20r4_common.py": "1937d692589f6f0d4d006843adf9ad3655e8c7c8fc8cb22f72d45698da61516a",
+            "scripts/n72r20r4_counterfactual.py": "d6d7c6bc712a1965ff6b3993e6ef1637b3b35771f29ae5c7911b6065344b3c40",
+            "scripts/n72r20r4_run_causal_tracker.py": "c99995c052adbd92e5198e0091a2038f08a1faba8e251da866a10d62830ff6ce",
+            "scripts/n72r20r4_run_loso.py": "62e11f5730f842aeec2c5ae51a92f773923a91c916d4341851b416a325d16f48",
+            "scripts/n72r20r4_run_val.py": "c0c0f1a37a218e5bc0d03c49c7560117af75d838359f582c83670a0ed75f6b4e",
+            "scripts/n72r20r4_trackeval.py": "a741a7d7a73fe9c4aead7ebc7afd9008c53751c42d401a8956553b7f7ba8547d",
+            "scripts/n72r20r4_train_authority.py": "8ac19f2e8df7e83f4186da8d5d6ad99bf7ea556da0adcca852919d2d19de63e0"
+          },
+          "fit_episode_count": 33548,
+          "heldout_sequence": "dancetrack0062",
+          "inner_episode_count": 1902,
+          "internal_validation_sequence": "dancetrack0072",
+          "outer_heldout_absent": true,
+          "parameters": 265472,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0062__seed720321.pt",
+          "seed": 720321,
+          "sha256": "af1db6c36e0fe03f9c77f87fa3825bce43552433e1a63bac2abc5da106c63a74",
+          "training": {
+            "best_epoch": 1,
+            "best_validation_loss": 2.104074776172638,
+            "epochs_run": 6,
+            "hard_negative_margin": 0.2,
+            "history": [
+              {
+                "epoch": 1,
+                "train": {
+                  "hard": 0.07239280437881296,
+                  "listwise": 0.3766681965101849,
+                  "supcon": 4.78413141857494,
+                  "total": 1.3479730432683772
+                },
+                "validation": {
+                  "hard": 0.11783106997609138,
+                  "listwise": 0.6136659681797028,
+                  "supcon": 7.334213018417358,
+                  "total": 2.104074776172638
+                }
+              },
+              {
+                "epoch": 2,
+                "train": {
+                  "hard": 0.03571628180868698,
+                  "listwise": 0.1755570615782882,
+                  "supcon": 4.351140347394076,
+                  "total": 1.0529284043745561
+                },
+                "validation": {
+                  "hard": 0.11205488443374634,
+                  "listwise": 0.5808254778385162,
+                  "supcon": 7.522753357887268,
+                  "total": 2.1077871918678284
+                }
+              },
+              {
+                "epoch": 3,
+                "train": {
+                  "hard": 0.02752936939059785,
+                  "listwise": 0.13803407312794166,
+                  "supcon": 4.156498034795125,
+                  "total": 0.974839569944324
+                },
+                "validation": {
+                  "hard": 0.11395759135484695,
+                  "listwise": 0.5912030041217804,
+                  "supcon": 7.564127445220947,
+                  "total": 2.1268199682235718
+                }
+              },
+              {
+                "epoch": 4,
+                "train": {
+                  "hard": 0.022322917498196617,
+                  "listwise": 0.11375084338766156,
+                  "supcon": 4.009057984207615,
+                  "total": 0.9200270311398939
+                },
+                "validation": {
+                  "hard": 0.11720838770270348,
+                  "listwise": 0.6107987761497498,
+                  "supcon": 7.642059922218323,
+                  "total": 2.1626524329185486
+                }
+              },
+              {
+                "epoch": 5,
+                "train": {
+                  "hard": 0.018482943107797342,
+                  "listwise": 0.09742231407400334,
+                  "supcon": 3.894078821846933,
+                  "total": 0.87993467576576
+                },
+                "validation": {
+                  "hard": 0.1240767315030098,
+                  "listwise": 0.6566815823316574,
+                  "supcon": 7.6945648193359375,
+                  "total": 2.22040992975235
+                }
+              },
+              {
+                "epoch": 6,
+                "train": {
+                  "hard": 0.01591119593517347,
+                  "listwise": 0.0854877857773593,
+                  "supcon": 3.797139453165459,
+                  "total": 0.8480979294487925
+                },
+                "validation": {
+                  "hard": 0.1306915283203125,
+                  "listwise": 0.7069094926118851,
+                  "supcon": 7.675647854804993,
+                  "total": 2.268177330493927
+                }
+              }
+            ],
+            "temperature": 0.07,
+            "trainable_parameters": 265472
+          }
+        },
+        {
+          "actual_training_sequences": [
+            "dancetrack0001",
+            "dancetrack0002",
+            "dancetrack0023",
+            "dancetrack0024",
+            "dancetrack0039",
+            "dancetrack0057"
+          ],
+          "code_sha256": {
+            "sam3_intermot/association/causal_identity_tracker.py": "a73a3ec784c1c09d45b329c4863d7569d7de218dbb408d90313766ea3ba32ce9",
+            "sam3_intermot/association/causal_state_commit.py": "0a146541dd6ca3d727fba1fe4bd1763e4f37ad2b2f54af531d58095c7a201e15",
+            "sam3_intermot/association/global_assignment_adapter.py": "0a0e8bac85504a7c35025ad87fe5c958e0f91b96a79824894118dffc8355db17",
+            "sam3_intermot/association/identity_authority.py": "5dfc3502da72dc168ab5e546039f801e1a1fcb9b3869af071c0c83398734246d",
+            "scripts/n72r20r4_adapter_integration.py": "14184d97a4761d18cfc3a72429991db0570ad20af0219a6bdfbe30480122bf4e",
+            "scripts/n72r20r4_audit.py": "6c04336616da389351ae01b29170aa0b497b5117288d63e47a858b697ac9aa94",
+            "scripts/n72r20r4_baseline.py": "640b897fdc974c678cb68236556c0be17842f24c34008ebdb794b2c96f49a809",
+            "scripts/n72r20r4_common.py": "1937d692589f6f0d4d006843adf9ad3655e8c7c8fc8cb22f72d45698da61516a",
+            "scripts/n72r20r4_counterfactual.py": "d6d7c6bc712a1965ff6b3993e6ef1637b3b35771f29ae5c7911b6065344b3c40",
+            "scripts/n72r20r4_run_causal_tracker.py": "c99995c052adbd92e5198e0091a2038f08a1faba8e251da866a10d62830ff6ce",
+            "scripts/n72r20r4_run_loso.py": "62e11f5730f842aeec2c5ae51a92f773923a91c916d4341851b416a325d16f48",
+            "scripts/n72r20r4_run_val.py": "c0c0f1a37a218e5bc0d03c49c7560117af75d838359f582c83670a0ed75f6b4e",
+            "scripts/n72r20r4_trackeval.py": "a741a7d7a73fe9c4aead7ebc7afd9008c53751c42d401a8956553b7f7ba8547d",
+            "scripts/n72r20r4_train_authority.py": "8ac19f2e8df7e83f4186da8d5d6ad99bf7ea556da0adcca852919d2d19de63e0"
+          },
+          "fit_episode_count": 33548,
+          "heldout_sequence": "dancetrack0062",
+          "inner_episode_count": 1902,
+          "internal_validation_sequence": "dancetrack0072",
+          "outer_heldout_absent": true,
+          "parameters": 265472,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0062__seed720322.pt",
+          "seed": 720322,
+          "sha256": "d0e3b83aac4bd92bbd2479a3971e711301e411a26ddb80bbf046b91fc6c97a78",
+          "training": {
+            "best_epoch": 2,
+            "best_validation_loss": 2.143218159675598,
+            "epochs_run": 7,
+            "hard_negative_margin": 0.2,
+            "history": [
+              {
+                "epoch": 1,
+                "train": {
+                  "hard": 0.07169054821133614,
+                  "listwise": 0.3750373716607238,
+                  "supcon": 4.7634804248809814,
+                  "total": 1.3420715801643603
+                },
+                "validation": {
+                  "hard": 0.12123020179569721,
+                  "listwise": 0.631453663110733,
+                  "supcon": 7.441870331764221,
+                  "total": 2.144073784351349
+                }
+              },
+              {
+                "epoch": 2,
+                "train": {
+                  "hard": 0.034948728498861645,
+                  "listwise": 0.17267328907142987,
+                  "supcon": 4.331348101298015,
+                  "total": 1.0459326623064098
+                },
+                "validation": {
+                  "hard": 0.11696909181773663,
+                  "listwise": 0.602485403418541,
+                  "supcon": 7.5866944789886475,
+                  "total": 2.143218159675598
+                }
+              },
+              {
+                "epoch": 3,
+                "train": {
+                  "hard": 0.026531246377888954,
+                  "listwise": 0.1338233689241337,
+                  "supcon": 4.128550590890827,
+                  "total": 0.9648397438453905
+                },
+                "validation": {
+                  "hard": 0.11893422715365887,
+                  "listwise": 0.6115527600049973,
+                  "supcon": 7.588351130485535,
+                  "total": 2.153009831905365
+                }
+              },
+              {
+                "epoch": 4,
+                "train": {
+                  "hard": 0.02169860438020392,
+                  "listwise": 0.11166773228482767,
+                  "supcon": 3.9839826641660747,
+                  "total": 0.912803997596105
+                },
+                "validation": {
+                  "hard": 0.12232921458780766,
+                  "listwise": 0.6336048096418381,
+                  "supcon": 7.619704246520996,
+                  "total": 2.1820114850997925
+                }
+              },
+              {
+                "epoch": 5,
+                "train": {
+                  "hard": 0.018503712066872555,
+                  "listwise": 0.09668472781777382,
+                  "supcon": 3.871846798694495,
+                  "total": 0.8747548488053408
+                },
+                "validation": {
+                  "hard": 0.12437888793647289,
+                  "listwise": 0.647286906838417,
+                  "supcon": 7.650022029876709,
+                  "total": 2.2021670937538147
+                }
+              },
+              {
+                "epoch": 6,
+                "train": {
+                  "hard": 0.015194180449753097,
+                  "listwise": 0.0827317854220217,
+                  "supcon": 3.761574904123942,
+                  "total": 0.8380856188860807
+                },
+                "validation": {
+                  "hard": 0.1294575147330761,
+                  "listwise": 0.6817239224910736,
+                  "supcon": 7.567525625228882,
+                  "total": 2.221120536327362
+                }
+              },
+              {
+                "epoch": 7,
+                "train": {
+                  "hard": 0.013552170514947537,
+                  "listwise": 0.0748853042270198,
+                  "supcon": 3.6752383961822046,
+                  "total": 0.8126434295466451
+                },
+                "validation": {
+                  "hard": 0.13436677679419518,
+                  "listwise": 0.7172798663377762,
+                  "supcon": 7.7100982666015625,
+                  "total": 2.2861729860305786
+                }
+              }
+            ],
+            "temperature": 0.07,
+            "trainable_parameters": 265472
+          }
+        },
+        {
+          "actual_training_sequences": [
+            "dancetrack0001",
+            "dancetrack0002",
+            "dancetrack0023",
+            "dancetrack0024",
+            "dancetrack0039",
+            "dancetrack0057"
+          ],
+          "code_sha256": {
+            "sam3_intermot/association/causal_identity_tracker.py": "a73a3ec784c1c09d45b329c4863d7569d7de218dbb408d90313766ea3ba32ce9",
+            "sam3_intermot/association/causal_state_commit.py": "0a146541dd6ca3d727fba1fe4bd1763e4f37ad2b2f54af531d58095c7a201e15",
+            "sam3_intermot/association/global_assignment_adapter.py": "0a0e8bac85504a7c35025ad87fe5c958e0f91b96a79824894118dffc8355db17",
+            "sam3_intermot/association/identity_authority.py": "5dfc3502da72dc168ab5e546039f801e1a1fcb9b3869af071c0c83398734246d",
+            "scripts/n72r20r4_adapter_integration.py": "14184d97a4761d18cfc3a72429991db0570ad20af0219a6bdfbe30480122bf4e",
+            "scripts/n72r20r4_audit.py": "6c04336616da389351ae01b29170aa0b497b5117288d63e47a858b697ac9aa94",
+            "scripts/n72r20r4_baseline.py": "640b897fdc974c678cb68236556c0be17842f24c34008ebdb794b2c96f49a809",
+            "scripts/n72r20r4_common.py": "1937d692589f6f0d4d006843adf9ad3655e8c7c8fc8cb22f72d45698da61516a",
+            "scripts/n72r20r4_counterfactual.py": "d6d7c6bc712a1965ff6b3993e6ef1637b3b35771f29ae5c7911b6065344b3c40",
+            "scripts/n72r20r4_run_causal_tracker.py": "c99995c052adbd92e5198e0091a2038f08a1faba8e251da866a10d62830ff6ce",
+            "scripts/n72r20r4_run_loso.py": "62e11f5730f842aeec2c5ae51a92f773923a91c916d4341851b416a325d16f48",
+            "scripts/n72r20r4_run_val.py": "c0c0f1a37a218e5bc0d03c49c7560117af75d838359f582c83670a0ed75f6b4e",
+            "scripts/n72r20r4_trackeval.py": "a741a7d7a73fe9c4aead7ebc7afd9008c53751c42d401a8956553b7f7ba8547d",
+            "scripts/n72r20r4_train_authority.py": "8ac19f2e8df7e83f4186da8d5d6ad99bf7ea556da0adcca852919d2d19de63e0"
+          },
+          "fit_episode_count": 33548,
+          "heldout_sequence": "dancetrack0062",
+          "inner_episode_count": 1902,
+          "internal_validation_sequence": "dancetrack0072",
+          "outer_heldout_absent": true,
+          "parameters": 265472,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0062__seed720323.pt",
+          "seed": 720323,
+          "sha256": "ba8389c7af62945904da7ea7401faa91a14bc893364465f64e0f4fe56f016a37",
+          "training": {
+            "best_epoch": 2,
+            "best_validation_loss": 2.124578297138214,
+            "epochs_run": 7,
+            "hard_negative_margin": 0.2,
+            "history": [
+              {
+                "epoch": 1,
+                "train": {
+                  "hard": 0.07259153766614018,
+                  "listwise": 0.37805675692630536,
+                  "supcon": 4.76401484373844,
+                  "total": 1.3453780484922004
+                },
+                "validation": {
+                  "hard": 0.11894829198718071,
+                  "listwise": 0.6209860444068909,
+                  "supcon": 7.504806995391846,
+                  "total": 2.145737111568451
+                }
+              },
+              {
+                "epoch": 2,
+                "train": {
+                  "hard": 0.03523683897925146,
+                  "listwise": 0.1741065667434172,
+                  "supcon": 4.329328262444698,
+                  "total": 1.0470196053837284
+                },
+                "validation": {
+                  "hard": 0.11495361104607582,
+                  "listwise": 0.5908724665641785,
+                  "supcon": 7.553575754165649,
+                  "total": 2.124578297138214
+                }
+              },
+              {
+                "epoch": 3,
+                "train": {
+                  "hard": 0.026956720531664112,
+                  "listwise": 0.1354733957259944,
+                  "supcon": 4.132349245476,
+                  "total": 0.9673345955935392
+                },
+                "validation": {
+                  "hard": 0.11635756678879261,
+                  "listwise": 0.5956860035657883,
+                  "supcon": 7.6703269481658936,
+                  "total": 2.1530229449272156
+                }
+              },
+              {
+                "epoch": 4,
+                "train": {
+                  "hard": 0.022216195043063526,
+                  "listwise": 0.11363286344390927,
+                  "supcon": 3.993709101821437,
+                  "total": 0.9168179369334019
+                },
+                "validation": {
+                  "hard": 0.12010890245437622,
+                  "listwise": 0.6171935200691223,
+                  "supcon": 7.681753396987915,
+                  "total": 2.1775659918785095
+                }
+              },
+              {
+                "epoch": 5,
+                "train": {
+                  "hard": 0.01811588422931505,
+                  "listwise": 0.09523417270093253,
+                  "supcon": 3.8641068321285825,
+                  "total": 0.8716787271427385
+                },
+                "validation": {
+                  "hard": 0.12617128901183605,
+                  "listwise": 0.6688696891069412,
+                  "supcon": 7.684093594551086,
+                  "total": 2.2309226989746094
+                }
+              },
+              {
+                "epoch": 6,
+                "train": {
+                  "hard": 0.01596630114892667,
+                  "listwise": 0.08518603387655634,
+                  "supcon": 3.7685814879157324,
+                  "total": 0.8420956008362047
+                },
+                "validation": {
+                  "hard": 0.12790881469845772,
+                  "listwise": 0.6747199147939682,
+                  "supcon": 7.763308525085449,
+                  "total": 2.252963423728943
+                }
+              },
+              {
+                "epoch": 7,
+                "train": {
+                  "hard": 0.013746176507662643,
+                  "listwise": 0.07494420727545564,
+                  "supcon": 3.6770588809793647,
+                  "total": 0.8131052300785527
+                },
+                "validation": {
+                  "hard": 0.1320913601666689,
+                  "listwise": 0.7039034515619278,
+                  "supcon": 7.772878408432007,
+                  "total": 2.2848974466323853
+                }
+              }
+            ],
+            "temperature": 0.07,
+            "trainable_parameters": 265472
+          }
+        }
+      ],
+      "dancetrack0072": [
+        {
+          "actual_training_sequences": [
+            "dancetrack0002",
+            "dancetrack0023",
+            "dancetrack0024",
+            "dancetrack0039",
+            "dancetrack0057",
+            "dancetrack0062"
+          ],
+          "code_sha256": {
+            "sam3_intermot/association/causal_identity_tracker.py": "a73a3ec784c1c09d45b329c4863d7569d7de218dbb408d90313766ea3ba32ce9",
+            "sam3_intermot/association/causal_state_commit.py": "0a146541dd6ca3d727fba1fe4bd1763e4f37ad2b2f54af531d58095c7a201e15",
+            "sam3_intermot/association/global_assignment_adapter.py": "0a0e8bac85504a7c35025ad87fe5c958e0f91b96a79824894118dffc8355db17",
+            "sam3_intermot/association/identity_authority.py": "5dfc3502da72dc168ab5e546039f801e1a1fcb9b3869af071c0c83398734246d",
+            "scripts/n72r20r4_adapter_integration.py": "14184d97a4761d18cfc3a72429991db0570ad20af0219a6bdfbe30480122bf4e",
+            "scripts/n72r20r4_audit.py": "6c04336616da389351ae01b29170aa0b497b5117288d63e47a858b697ac9aa94",
+            "scripts/n72r20r4_baseline.py": "640b897fdc974c678cb68236556c0be17842f24c34008ebdb794b2c96f49a809",
+            "scripts/n72r20r4_common.py": "1937d692589f6f0d4d006843adf9ad3655e8c7c8fc8cb22f72d45698da61516a",
+            "scripts/n72r20r4_counterfactual.py": "d6d7c6bc712a1965ff6b3993e6ef1637b3b35771f29ae5c7911b6065344b3c40",
+            "scripts/n72r20r4_diagnostics.py": "0f5f6cf23fe5c2a3f4cf44c1cf8c40c38ef1883e5cfe89587e60bfe08e008e63",
+            "scripts/n72r20r4_run_causal_tracker.py": "c99995c052adbd92e5198e0091a2038f08a1faba8e251da866a10d62830ff6ce",
+            "scripts/n72r20r4_run_loso.py": "62e11f5730f842aeec2c5ae51a92f773923a91c916d4341851b416a325d16f48",
+            "scripts/n72r20r4_run_val.py": "c0c0f1a37a218e5bc0d03c49c7560117af75d838359f582c83670a0ed75f6b4e",
+            "scripts/n72r20r4_trackeval.py": "a741a7d7a73fe9c4aead7ebc7afd9008c53751c42d401a8956553b7f7ba8547d",
+            "scripts/n72r20r4_train_authority.py": "8ac19f2e8df7e83f4186da8d5d6ad99bf7ea556da0adcca852919d2d19de63e0"
+          },
+          "fit_episode_count": 33508,
+          "heldout_sequence": "dancetrack0072",
+          "inner_episode_count": 4553,
+          "internal_validation_sequence": "dancetrack0001",
+          "outer_heldout_absent": true,
+          "parameters": 265472,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0072__seed720321.pt",
+          "seed": 720321,
+          "sha256": "ec3ce4538291f7d4fe1cdc15069ed7243743d40112fffbd1fa546befa2117885",
+          "training": {
+            "best_epoch": 1,
+            "best_validation_loss": 1.9148537980185614,
+            "epochs_run": 6,
+            "hard_negative_margin": 0.2,
+            "history": [
+              {
+                "epoch": 1,
+                "train": {
+                  "hard": 0.07553010727419998,
+                  "listwise": 0.38578957770809985,
+                  "supcon": 4.825876618876602,
+                  "total": 1.3660709316080266
+                },
+                "validation": {
+                  "hard": 0.0896275153176652,
+                  "listwise": 0.48134368658065796,
+                  "supcon": 7.077922821044922,
+                  "total": 1.9148537980185614
+                }
+              },
+              {
+                "epoch": 2,
+                "train": {
+                  "hard": 0.03933256181577841,
+                  "listwise": 0.1892004329146761,
+                  "supcon": 4.442809213291515,
+                  "total": 1.0856287876764934
+                },
+                "validation": {
+                  "hard": 0.09383914371331532,
+                  "listwise": 0.49369123578071594,
+                  "supcon": 7.049808184305827,
+                  "total": 1.9224206739001803
+                }
+              },
+              {
+                "epoch": 3,
+                "train": {
+                  "hard": 0.030797429015916405,
+                  "listwise": 0.1506926981788693,
+                  "supcon": 4.289223902153246,
+                  "total": 1.0146969782583641
+                },
+                "validation": {
+                  "hard": 0.09315636174546348,
+                  "listwise": 0.48434227042728,
+                  "supcon": 7.123292869991726,
+                  "total": 1.9276321331659954
+                }
+              },
+              {
+                "epoch": 4,
+                "train": {
+                  "hard": 0.02541361294799682,
+                  "listwise": 0.12692380357872357,
+                  "supcon": 4.1567998943906845,
+                  "total": 0.9633665202241956
+                },
+                "validation": {
+                  "hard": 0.09671655669808388,
+                  "listwise": 0.5061997324228287,
+                  "supcon": 7.117329226599799,
+                  "total": 1.9490088754230075
+                }
+              },
+              {
+                "epoch": 5,
+                "train": {
+                  "hard": 0.021562300199134785,
+                  "listwise": 0.10989820087949435,
+                  "supcon": 4.050081050757206,
+                  "total": 0.9242268800735474
+                },
+                "validation": {
+                  "hard": 0.09771627643042141,
+                  "listwise": 0.5119812604453828,
+                  "supcon": 7.152413368225098,
+                  "total": 1.962007204691569
+                }
+              },
+              {
+                "epoch": 6,
+                "train": {
+                  "hard": 0.01906654334655314,
+                  "listwise": 0.09886187235965874,
+                  "supcon": 3.9592867439443413,
+                  "total": 0.8945325414339701
+                },
+                "validation": {
+                  "hard": 0.10654397846923934,
+                  "listwise": 0.5676816569434272,
+                  "supcon": 7.165034823947483,
+                  "total": 2.021997412045797
+                }
+              }
+            ],
+            "temperature": 0.07,
+            "trainable_parameters": 265472
+          }
+        },
+        {
+          "actual_training_sequences": [
+            "dancetrack0002",
+            "dancetrack0023",
+            "dancetrack0024",
+            "dancetrack0039",
+            "dancetrack0057",
+            "dancetrack0062"
+          ],
+          "code_sha256": {
+            "sam3_intermot/association/causal_identity_tracker.py": "a73a3ec784c1c09d45b329c4863d7569d7de218dbb408d90313766ea3ba32ce9",
+            "sam3_intermot/association/causal_state_commit.py": "0a146541dd6ca3d727fba1fe4bd1763e4f37ad2b2f54af531d58095c7a201e15",
+            "sam3_intermot/association/global_assignment_adapter.py": "0a0e8bac85504a7c35025ad87fe5c958e0f91b96a79824894118dffc8355db17",
+            "sam3_intermot/association/identity_authority.py": "5dfc3502da72dc168ab5e546039f801e1a1fcb9b3869af071c0c83398734246d",
+            "scripts/n72r20r4_adapter_integration.py": "14184d97a4761d18cfc3a72429991db0570ad20af0219a6bdfbe30480122bf4e",
+            "scripts/n72r20r4_audit.py": "6c04336616da389351ae01b29170aa0b497b5117288d63e47a858b697ac9aa94",
+            "scripts/n72r20r4_baseline.py": "640b897fdc974c678cb68236556c0be17842f24c34008ebdb794b2c96f49a809",
+            "scripts/n72r20r4_common.py": "1937d692589f6f0d4d006843adf9ad3655e8c7c8fc8cb22f72d45698da61516a",
+            "scripts/n72r20r4_counterfactual.py": "d6d7c6bc712a1965ff6b3993e6ef1637b3b35771f29ae5c7911b6065344b3c40",
+            "scripts/n72r20r4_diagnostics.py": "0f5f6cf23fe5c2a3f4cf44c1cf8c40c38ef1883e5cfe89587e60bfe08e008e63",
+            "scripts/n72r20r4_run_causal_tracker.py": "c99995c052adbd92e5198e0091a2038f08a1faba8e251da866a10d62830ff6ce",
+            "scripts/n72r20r4_run_loso.py": "62e11f5730f842aeec2c5ae51a92f773923a91c916d4341851b416a325d16f48",
+            "scripts/n72r20r4_run_val.py": "c0c0f1a37a218e5bc0d03c49c7560117af75d838359f582c83670a0ed75f6b4e",
+            "scripts/n72r20r4_trackeval.py": "a741a7d7a73fe9c4aead7ebc7afd9008c53751c42d401a8956553b7f7ba8547d",
+            "scripts/n72r20r4_train_authority.py": "8ac19f2e8df7e83f4186da8d5d6ad99bf7ea556da0adcca852919d2d19de63e0"
+          },
+          "fit_episode_count": 33508,
+          "heldout_sequence": "dancetrack0072",
+          "inner_episode_count": 4553,
+          "internal_validation_sequence": "dancetrack0001",
+          "outer_heldout_absent": true,
+          "parameters": 265472,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0072__seed720322.pt",
+          "seed": 720322,
+          "sha256": "4af9d71618075cd3d2841810fab73b30b0a6d787a4ec84d9609bab9ea4ec7332",
+          "training": {
+            "best_epoch": 2,
+            "best_validation_loss": 1.900242182943556,
+            "epochs_run": 7,
+            "hard_negative_margin": 0.2,
+            "history": [
+              {
+                "epoch": 1,
+                "train": {
+                  "hard": 0.07509705463819431,
+                  "listwise": 0.3834341838955879,
+                  "supcon": 4.7992931207021075,
+                  "total": 1.3583122419588494
+                },
+                "validation": {
+                  "hard": 0.09360228147771624,
+                  "listwise": 0.49240537650055355,
+                  "supcon": 7.0130528344048395,
+                  "total": 1.9137364228566487
+                }
+              },
+              {
+                "epoch": 2,
+                "train": {
+                  "hard": 0.03861667656085708,
+                  "listwise": 0.18606129266095883,
+                  "supcon": 4.43637043057066,
+                  "total": 1.0810587297786365
+                },
+                "validation": {
+                  "hard": 0.08903779172235066,
+                  "listwise": 0.4538159966468811,
+                  "supcon": 7.143093374040392,
+                  "total": 1.900242182943556
+                }
+              },
+              {
+                "epoch": 3,
+                "train": {
+                  "hard": 0.03026396617519133,
+                  "listwise": 0.148474442575014,
+                  "supcon": 4.268725098985614,
+                  "total": 1.008272263136777
+                },
+                "validation": {
+                  "hard": 0.09503346764379078,
+                  "listwise": 0.48096393711037105,
+                  "supcon": 7.130179034339057,
+                  "total": 1.9260064628389146
+                }
+              },
+              {
+                "epoch": 4,
+                "train": {
+                  "hard": 0.024972357504972904,
+                  "listwise": 0.1249814833881277,
+                  "supcon": 4.146006526369037,
+                  "total": 0.959177270080104
+                },
+                "validation": {
+                  "hard": 0.10064255404803488,
+                  "listwise": 0.511729348036978,
+                  "supcon": 7.123054292466906,
+                  "total": 1.956468727853563
+                }
+              },
+              {
+                "epoch": 5,
+                "train": {
+                  "hard": 0.021663676411139244,
+                  "listwise": 0.11045170180273778,
+                  "supcon": 4.045975031274738,
+                  "total": 0.92397945487138
+                },
+                "validation": {
+                  "hard": 0.10289238020777702,
+                  "listwise": 0.526365781823794,
+                  "supcon": 7.157020515865749,
+                  "total": 1.978348347875807
+                }
+              },
+              {
+                "epoch": 6,
+                "train": {
+                  "hard": 0.01886388940285101,
+                  "listwise": 0.09769345413554799,
+                  "supcon": 3.942997426697702,
+                  "total": 0.8900657314242739
+                },
+                "validation": {
+                  "hard": 0.10960154732068379,
+                  "listwise": 0.5719249480300479,
+                  "supcon": 7.172843138376872,
+                  "total": 2.028413944774204
+                }
+              },
+              {
+                "epoch": 7,
+                "train": {
+                  "hard": 0.016611311570600126,
+                  "listwise": 0.08736219121651216,
+                  "supcon": 3.8707865657228413,
+                  "total": 0.8648417754606768
+                },
+                "validation": {
+                  "hard": 0.1158291610578696,
+                  "listwise": 0.6136369440290663,
+                  "supcon": 7.136453734503852,
+                  "total": 2.064093576537238
+                }
+              }
+            ],
+            "temperature": 0.07,
+            "trainable_parameters": 265472
+          }
+        },
+        {
+          "actual_training_sequences": [
+            "dancetrack0002",
+            "dancetrack0023",
+            "dancetrack0024",
+            "dancetrack0039",
+            "dancetrack0057",
+            "dancetrack0062"
+          ],
+          "code_sha256": {
+            "sam3_intermot/association/causal_identity_tracker.py": "a73a3ec784c1c09d45b329c4863d7569d7de218dbb408d90313766ea3ba32ce9",
+            "sam3_intermot/association/causal_state_commit.py": "0a146541dd6ca3d727fba1fe4bd1763e4f37ad2b2f54af531d58095c7a201e15",
+            "sam3_intermot/association/global_assignment_adapter.py": "0a0e8bac85504a7c35025ad87fe5c958e0f91b96a79824894118dffc8355db17",
+            "sam3_intermot/association/identity_authority.py": "5dfc3502da72dc168ab5e546039f801e1a1fcb9b3869af071c0c83398734246d",
+            "scripts/n72r20r4_adapter_integration.py": "14184d97a4761d18cfc3a72429991db0570ad20af0219a6bdfbe30480122bf4e",
+            "scripts/n72r20r4_audit.py": "6c04336616da389351ae01b29170aa0b497b5117288d63e47a858b697ac9aa94",
+            "scripts/n72r20r4_baseline.py": "640b897fdc974c678cb68236556c0be17842f24c34008ebdb794b2c96f49a809",
+            "scripts/n72r20r4_common.py": "1937d692589f6f0d4d006843adf9ad3655e8c7c8fc8cb22f72d45698da61516a",
+            "scripts/n72r20r4_counterfactual.py": "d6d7c6bc712a1965ff6b3993e6ef1637b3b35771f29ae5c7911b6065344b3c40",
+            "scripts/n72r20r4_diagnostics.py": "0f5f6cf23fe5c2a3f4cf44c1cf8c40c38ef1883e5cfe89587e60bfe08e008e63",
+            "scripts/n72r20r4_run_causal_tracker.py": "c99995c052adbd92e5198e0091a2038f08a1faba8e251da866a10d62830ff6ce",
+            "scripts/n72r20r4_run_loso.py": "62e11f5730f842aeec2c5ae51a92f773923a91c916d4341851b416a325d16f48",
+            "scripts/n72r20r4_run_val.py": "c0c0f1a37a218e5bc0d03c49c7560117af75d838359f582c83670a0ed75f6b4e",
+            "scripts/n72r20r4_trackeval.py": "a741a7d7a73fe9c4aead7ebc7afd9008c53751c42d401a8956553b7f7ba8547d",
+            "scripts/n72r20r4_train_authority.py": "8ac19f2e8df7e83f4186da8d5d6ad99bf7ea556da0adcca852919d2d19de63e0"
+          },
+          "fit_episode_count": 33508,
+          "heldout_sequence": "dancetrack0072",
+          "inner_episode_count": 4553,
+          "internal_validation_sequence": "dancetrack0001",
+          "outer_heldout_absent": true,
+          "parameters": 265472,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0072__seed720323.pt",
+          "seed": 720323,
+          "sha256": "5866334ebe74740a5b5b2c4db5fbcf1f6907d29a889d9b8cbc49be1c0be69210",
+          "training": {
+            "best_epoch": 1,
+            "best_validation_loss": 1.92072241836124,
+            "epochs_run": 6,
+            "hard_negative_margin": 0.2,
+            "history": [
+              {
+                "epoch": 1,
+                "train": {
+                  "hard": 0.07595141745652213,
+                  "listwise": 0.38789202318047034,
+                  "supcon": 4.811799764633179,
+                  "total": 1.3654422760009766
+                },
+                "validation": {
+                  "hard": 0.09399076302846272,
+                  "listwise": 0.49756818016370136,
+                  "supcon": 7.021779961056179,
+                  "total": 1.92072241836124
+                }
+              },
+              {
+                "epoch": 2,
+                "train": {
+                  "hard": 0.03902441610328176,
+                  "listwise": 0.18719885137045023,
+                  "supcon": 4.4391288468332,
+                  "total": 1.082829515139262
+                },
+                "validation": {
+                  "hard": 0.09750391874048445,
+                  "listwise": 0.5079945292737749,
+                  "supcon": 6.978553718990749,
+                  "total": 1.9232061041726007
+                }
+              },
+              {
+                "epoch": 3,
+                "train": {
+                  "hard": 0.030281148512255062,
+                  "listwise": 0.14858839096445026,
+                  "supcon": 4.276135726408525,
+                  "total": 1.0098717799692443
+                },
+                "validation": {
+                  "hard": 0.10179223948054844,
+                  "listwise": 0.5244614316357507,
+                  "supcon": 7.023236486646864,
+                  "total": 1.9494671954049005
+                }
+              },
+              {
+                "epoch": 4,
+                "train": {
+                  "hard": 0.025448577676081295,
+                  "listwise": 0.12691483770807585,
+                  "supcon": 4.151557207107544,
+                  "total": 0.9623160064220428
+                },
+                "validation": {
+                  "hard": 0.10204179212450981,
+                  "listwise": 0.5344590544700623,
+                  "supcon": 7.1005420154995385,
+                  "total": 1.9749758508470323
+                }
+              },
+              {
+                "epoch": 5,
+                "train": {
+                  "hard": 0.021643635280656093,
+                  "listwise": 0.11011304717623827,
+                  "supcon": 4.04008982037053,
+                  "total": 0.9224597504644683
+                },
+                "validation": {
+                  "hard": 0.10511182414160834,
+                  "listwise": 0.5442811449368795,
+                  "supcon": 7.158777713775635,
+                  "total": 1.9970590538448758
+                }
+              },
+              {
+                "epoch": 6,
+                "train": {
+                  "hard": 0.01877244488533699,
+                  "listwise": 0.09711720342888977,
+                  "supcon": 3.953479011853536,
+                  "total": 0.891567509282719
+                },
+                "validation": {
+                  "hard": 0.10591296065184805,
+                  "listwise": 0.5593783623642392,
+                  "supcon": 7.135473410288493,
+                  "total": 2.007655700047811
+                }
+              }
+            ],
+            "temperature": 0.07,
+            "trainable_parameters": 265472
+          }
+        }
+      ]
+    },
+    "reason": "historic seven-sequence final refit contains current inner sequence",
+    "seeds": [
+      720321,
+      720322,
+      720323
+    ],
+    "stage": "N72R20R4",
+    "strict_6_1_1": true
+  },
+  "actual_query_tower_forward_calls": 24987,
+  "adapter_ensemble_score_calls_including_empty_frames": 8414,
+  "candidate_dimension": 512,
+  "historical_7_sequence_results": {
+    "AssA": 0.5433304753115834,
+    "DetA": 0.6230911682274578,
+    "FN": 12902.0,
+    "FP": 9157.0,
+    "HOTA": 0.5808919181126544,
+    "IDF1": 0.6175494256925472,
+    "IDSW": 250.0,
+    "LocA": 0.9010765894985205,
+    "MOTA": 0.5785506479767257,
+    "per_sequence": {
+      "dancetrack0001": {
+        "AssA": 0.8417261973770992,
+        "DetA": 0.7480983777932986,
+        "FN": 352.0,
+        "FP": 977.0,
+        "HOTA": 0.7935300609870402,
+        "IDF1": 0.8728107952914155,
+        "IDSW": 0.0,
+        "LocA": 0.9286530873496502,
+        "MOTA": 0.7294381107491856
+      },
+      "dancetrack0002": {
+        "AssA": 0.1778045257449533,
+        "DetA": 0.6084002707381235,
+        "FN": 2338.0,
+        "FP": 2061.0,
+        "HOTA": 0.3287472362880979,
+        "IDF1": 0.3420518725667599,
+        "IDSW": 90.0,
+        "LocA": 0.8893388529099466,
+        "MOTA": 0.5150696770011883
+      },
+      "dancetrack0023": {
+        "AssA": 0.37112627891455585,
+        "DetA": 0.5535793027232516,
+        "FN": 4035.0,
+        "FP": 2657.0,
+        "HOTA": 0.45243250050622374,
+        "IDF1": 0.5466115434500648,
+        "IDSW": 66.0,
+        "LocA": 0.857258561397597,
+        "MOTA": 0.48115163147792706
+      },
+      "dancetrack0024": {
+        "AssA": 0.8599236779801973,
+        "DetA": 0.8536343632765124,
+        "FN": 151.0,
+        "FP": 214.0,
+        "HOTA": 0.8567522738133547,
+        "IDF1": 0.9596126334323759,
+        "IDSW": 2.0,
+        "LocA": 0.9198801510359389,
+        "MOTA": 0.9186613475177305
+      },
+      "dancetrack0039": {
+        "AssA": 0.917798655316476,
+        "DetA": 0.9131167611945791,
+        "FN": 59.0,
+        "FP": 170.0,
+        "HOTA": 0.915434048115491,
+        "IDF1": 0.9800732004880033,
+        "IDSW": 4.0,
+        "LocA": 0.952682101699954,
+        "MOTA": 0.9617531188443861
+      },
+      "dancetrack0057": {
+        "AssA": 0.8413885272034443,
+        "DetA": 0.8036766329170778,
+        "FN": 263.0,
+        "FP": 268.0,
+        "HOTA": 0.8223158841445222,
+        "IDF1": 0.9113587227673374,
+        "IDSW": 1.0,
+        "LocA": 0.9294408620215295,
+        "MOTA": 0.8229027962716379
+      },
+      "dancetrack0062": {
+        "AssA": 0.3390642747805492,
+        "DetA": 0.6370096794287924,
+        "FN": 1709.0,
+        "FP": 525.0,
+        "HOTA": 0.4644991252184524,
+        "IDF1": 0.5456965394853593,
+        "IDSW": 17.0,
+        "LocA": 0.9076208602006244,
+        "MOTA": 0.6385097157539746
+      },
+      "dancetrack0072": {
+        "AssA": 0.09746463896188304,
+        "DetA": 0.24572245856549374,
+        "FN": 3995.0,
+        "FP": 2285.0,
+        "HOTA": 0.15468034267106398,
+        "IDF1": 0.1803960396039604,
+        "IDSW": 70.0,
+        "LocA": 0.8545143539497752,
+        "MOTA": -0.07535986452159187
+      }
+    },
+    "tracker": "HISTORICAL_R3R2_ADAPTER7"
+  },
+  "historical_R3R2_actual_inference": true,
+  "legacy_score_separately_labeled": true,
+  "nonempty_ensemble_score_calls": 8329,
+  "query_dimension": 512,
+  "status": "PASS_REAL_ADAPTER_IN_CAUSAL_ASSOCIATION"
+}

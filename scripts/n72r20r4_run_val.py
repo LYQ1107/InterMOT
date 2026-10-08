@@ -11,6 +11,7 @@ from scripts.n72r20r4_train_authority import train_fold, load_controller
 from scripts.n72r20r4_run_causal_tracker import run_rollout, export_run
 from scripts.n72r20r4_trackeval import evaluate, paired_metrics
 from scripts.n72r20r4_counterfactual import audit_pair
+from scripts.n72r20r4_storage import share_identical_exports
 from sam3_intermot.association.identity_authority import AuthorityConfig, ControllerEnsemble
 
 
@@ -18,6 +19,8 @@ def freeze() -> dict:
     path=OUT/"val/FROZEN_POLICY.json"
     if path.exists():
         policy=read_json(path)
+        if policy["source_development_result_sha256"]!=sha256(OUT/"dev_trackeval/RESULT.json"):
+            raise ValueError("frozen development result changed")
         for r in policy["adapter_checkpoints"]:
             if sha256(Path(r["path"]))!=r["sha256"]:raise ValueError("frozen VAL checkpoint SHA mismatch")
         return policy
@@ -79,7 +82,14 @@ def run() -> dict:
     for sequence in sequences:
         manifest_path=ASSETS/"val/completed"/f"{sequence}.json"
         if manifest_path.exists():
-            r=read_json(manifest_path);summaries[sequence]=r["posthoc_summary"];manifests[sequence]=r["manifests"]
+            r=read_json(manifest_path)
+            if r["policy_sha256"]!=sha256(OUT/"val/FROZEN_POLICY.json"):
+                raise ValueError("completed VAL run has a different frozen policy")
+            for m in r["manifests"].values():
+                for kind in ("trajectory","trace"):
+                    if sha256(Path(m[f"{kind}_path"]))!=m[f"{kind}_sha256"]:
+                        raise ValueError("completed VAL content SHA mismatch")
+            summaries[sequence]=r["posthoc_summary"];manifests[sequence]=r["manifests"]
             continue
         check_storage(reserve_gib=0.03)
         frames=load_frames(sequence,"val")
@@ -93,6 +103,10 @@ def run() -> dict:
         write_zstd(ASSETS/"val/audits"/f"{sequence}__memory.jsonl.zst",audit["memory_rows"])
         result={"manifests":{"baseline":bm,"treatment":tm},"posthoc_summary":audit["summary"],"policy_sha256":sha256(OUT/"val/FROZEN_POLICY.json"),"VAL_tuning":False}
         write_json(manifest_path,result)
+        # Only seal-time byte/SHA equality permits shared storage. This
+        # preserves every baseline/treatment path and never changes scores.
+        sharing=share_identical_exports(ASSETS,[ASSETS/"val/manifests"/name/f"{sequence}.json" for name in ("BASELINE_CAUSAL","TREATMENT_CAUSAL")])
+        write_json(ASSETS/"val/storage_sharing"/f"{sequence}.json",sharing)
         summaries[sequence]=audit["summary"];manifests[sequence]=result["manifests"]
         write_json(OUT/"val/PROGRESS.json",{"completed":len(summaries),"total":25,"sequences":sorted(summaries),"policy_sha256":sha256(OUT/"val/FROZEN_POLICY.json")})
         print(json.dumps({"VAL_sequence":sequence,"completed":len(summaries),"N01":audit["summary"]["N01"],"N10":audit["summary"]["N10"]}),flush=True)

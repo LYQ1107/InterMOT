@@ -1,0 +1,13 @@
+{
+  "stage": "N72R20R4",
+  "component": "posthoc transfer diagnostic",
+  "attempt": 1,
+  "cause": "Local per-variant dictionary shadowed the sequences parameter, so the completed eight-sequence diagnostic was incorrectly marked partial.",
+  "observed_status": "POSTHOC_PARTIAL_DIAGNOSTIC",
+  "actual_sequences_analyzed": 8,
+  "affected": "diagnostic completion label and output filename only",
+  "raw_trajectories_scores_checkpoints_affected": false,
+  "scientific_policy_modified": false,
+  "repair": "Rename the local dictionary and regenerate only the posthoc summary from the same sealed traces.",
+  "first_output_retained": "outputs/N72R20R4/adapter/POSTHOC_TRANSFER_DIAGNOSIS_PARTIAL.json"
+}

@@ -1,0 +1,29 @@
+{
+  "stage": "N72R20R4",
+  "goal_file": "outputs/N72R20R4/FINAL_GOAL.json",
+  "scientific_scope_complete": true,
+  "engineering_correctness_is_not_scientific_success": true,
+  "requirements": {
+    "M0_old_pipeline_audit": {"satisfied": true, "evidence": "audit/ASSOCIATION_IMPLEMENTATION_AUDIT.md; audit/CODE_FINDINGS.json"},
+    "M1_independent_causal_runtime": {"satisfied": true, "evidence": "sam3_intermot/association/causal_identity_tracker.py; tests/test_n72r20r4_causality.py; causal_tracker/RUNTIME_INVARIANTS.json"},
+    "M2_native_reconstruction_and_A_A": {"satisfied": true, "evidence": "causal_tracker/A_A_EQUIVALENCE.json; audit/BASELINE_EQUIVALENCE_REPORT.json"},
+    "M3_actual_512D_Adapter_three_seeds": {"satisfied": true, "evidence": "adapter/CHECKPOINT_AUDIT.json; adapter/STRICT_FOLD_CHECKPOINTS.json; adapter/ADAPTER_INTEGRATION_REPORT.json"},
+    "M4_complete_global_solver_and_authority": {"satisfied": true, "evidence": "causal_tracker/GLOBAL_ASSIGNMENT_AUDIT.json; association/G0.json through G4.json; dev_trackeval/ABLATIONS.json"},
+    "M5_all_variant_intervention_future_local_audits": {"satisfied": true, "evidence": "association/TRAJECTORY_INTERVENTION_AUDIT.jsonl.zst; association/LOCAL_TRAJECTORY_TRACK_EVAL.json", "events": 0, "empty_audit_is_not_omitted_experiment": true},
+    "M6_actual_frozen_GRU_P0_P1_P2": {"satisfied": true, "evidence": "memory/WRITE_POLICY_ABLATION.json; memory/STATE_DIVERGENCE.json; memory/WRONG_WRITE_AUDIT.jsonl.zst", "safety_gate_pass": false},
+    "M7_causal_counterfactual_controller_training": {"satisfied": true, "evidence": "association/AUTHORITY_SUPERVISION_AUDIT.json; association/training/*.json", "examples": 9972, "beneficial_labels": 0, "controller_superiority_established": false},
+    "M8_eight_fold_6_1_1_LOSO_and_seed_checks": {"satisfied": true, "evidence": "association/INNER_SELECTION.json; dev_trackeval/SEED_STABILITY.json; association/folds/*.json", "outer_variants": 34},
+    "M9_official_full_MOT_metrics_bootstrap_SHA_timing": {"satisfied": true, "evidence": "dev_trackeval/*.json; causal_tracker/LATENCY.json; checkpoints/SEALED_EVIDENCE.json; audit/TRACK_EVAL_REPRODUCTION.json"},
+    "M10_target_metrics_and_posthoc_headroom": {"satisfied": true, "evidence": "target_tracking/ALL_VARIANT_TARGET_METRICS.json; target_tracking/TARGET_CONTINUITY.json; target_tracking/REACQUISITION.json; target_tracking/TARGET_ID_ERROR.json; target_tracking/POSTHOC_HEADROOM.json"},
+    "M11_preregistered_R0_through_R6": {"satisfied": true, "evidence": "PREREGISTRATION.json; association/frozen_outer/*.json; dev_trackeval/ABLATIONS.json", "no_outer_informed_retuning": true},
+    "M12_all_25_frozen_VAL_no_tuning": {"satisfied": true, "evidence": "val/FROZEN_POLICY.json; val/RESULT.json; val/DELTA.json; audit/TRACK_EVAL_REPRODUCTION.json", "selected_policy": "G0/off/P0", "learned_policy_not_promoted_from_train": true},
+    "all_required_final_outputs_and_Q1_Q5": {"satisfied": true, "evidence": "FINAL_RESULT.json; FINAL_REPORT.md; docs/N72R20R4_FINAL_REPORT.md"},
+    "tests_and_compile": {"satisfied": true, "evidence": "checkpoints/TEST_RESULTS.json", "stage_tests_passed": 29, "selected_dependency_failed": 1, "failure": "unchanged historical branch-name assertion"},
+    "historical_assets_and_runtime_freeze_preserved": {"satisfied": true, "evidence": "audit/SOURCE_LINEAGE.json; checkpoints/SEALED_EVIDENCE.json", "sealed_dev_VAL_runs": 322, "primary_checkpoint_SHA_entries": 124},
+    "disk_and_other_jobs_preserved": {"satisfied": true, "evidence": "audit/STORAGE_SHARING.json; EXECUTION_LOG.md", "heavy_work_stop_gib": 100, "no_historical_deletion": true},
+    "final_commit_push_local_remote_equal_clean": {"satisfied": false, "evidence": "pending final Git delivery", "reason": "intermittent direct TLS/SSH/API transport; verified per-object API upload cache retained externally"}
+  },
+  "scientific_decision": "FAIL_GLOBAL_ASSOCIATION_AUTHORITY",
+  "next_stage_authorized": false,
+  "overall_goal_complete": false
+}

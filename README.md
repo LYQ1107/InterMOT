@@ -19,6 +19,10 @@ environment templates, and a path-portable configuration template. Local
 checkpoints, datasets, generated outputs, caches, private audit logs, and
 machine-specific manifests are intentionally excluded.
 
+Selected frozen research reports and SHA manifests are versioned explicitly;
+their external datasets, feature caches, trajectories and model binaries are
+not included.
+
 The project has no project-level open-source license declared yet. The SAM3
 dependency is referenced as an official submodule and remains subject to its
 own license and usage terms.
@@ -77,3 +81,23 @@ post-hoc evaluation in controlled experiments.
 This project uses the official Meta SAM3 implementation as an external
 dependency. Please consult the submodule's license and upstream documentation
 before redistribution or commercial use.
+
+## N72R20R4 causal association research
+
+The [R4 report](docs/N72R20R4_FINAL_REPORT.md) documents independent causal
+tracking, exact global assignment, actual cross-scene Adapter inference,
+three-seed authority/memory ablations, eight-fold development LOSO and frozen
+all-25 DanceTrack VAL evaluation. Engineering correctness passed, but the
+scientific result is `FAIL_GLOBAL_ASSOCIATION_AUTHORITY`: no identity-induced
+trajectory or HOTA gain. This is not a production promotion.
+
+R4 CPU unit tests do not require dataset or SAM3 inference:
+
+```bash
+PYTHONPATH=. python -m pytest -q tests/test_n72r20r4_*.py
+```
+
+Replaying/evaluating the research requires the externally stored candidate
+streams, weights and manifests. No dataset, backbone or candidate generation
+is automatically triggered by these tests. Refer to the frozen goal and
+protocol under `outputs/N72R20R4/` before running an experiment.

@@ -5,6 +5,7 @@ These results cannot change frozen inner/outer/VAL policies. GT is opened
 after the independent runtime traces have been sealed.
 """
 from __future__ import annotations
+import argparse
 from scripts.n72r20r4_common import *
 from scripts.n72r20r4_run_loso import load_trace
 from scripts.n72r20r4_train_authority import target_truth, matched_identity
@@ -34,15 +35,16 @@ def residual_bound(decision: dict, rows: list[dict], config: dict) -> dict:
             "certified_blocked": global_margin > max(0.0, advantage) + 1e-5}
 
 
-def run() -> dict:
+def run(sequences=SEQUENCES) -> dict:
+    if not set(sequences)<=set(SEQUENCES):raise ValueError("unknown development sequence")
     results={}
-    for sequence in SEQUENCES:
+    for sequence in sequences:
         event=events()[sequence]
         gt=gt_by_frame(DATASET/"train"/sequence/"gt/gt.txt")
         target=target_truth(event,gt)
         frames=load_frames(sequence)
-        sequences={}
-        for name in ("RAW_REID","LEGACY_BASE_SCORE","B2_ADAPTER_NO_WRITES","B3_CONSENSUS_MEMORY","MEMORY_P2_RELIABLE","HISTORICAL_R3R2_ADAPTER7","SELECTED_TREATMENT"):
+        variants={}
+        for name in ("RAW_REID","LEGACY_BASE_SCORE","B2_ADAPTER_NO_WRITES","B3_CONSENSUS_MEMORY","MEMORY_P2_RELIABLE","G1_FIXED_1","HISTORICAL_R3R2_ADAPTER7","SELECTED_TREATMENT"):
             trace=load_trace("dev",name,sequence)
             if len(frames)!=len(trace) or any(d["frame"]!=i for i,d in enumerate(trace)):
                 raise ValueError("posthoc frame axis mismatch")
@@ -93,18 +95,21 @@ def run() -> dict:
                     else:cascade=0
                     max_cascade=max(max_cascade,cascade)
             max_residual_pair_advantage=6*config["strength"]*config["base_scale"]
-            sequences[name]={"target_visible_frames":visible,"real_candidate_covered_frames":covered,"candidate_coverage_given_visible":covered/visible if visible else None,"competitive_identity_frames":competitive,"hard_negative_identity_wins":win,"hard_negative_identity_win_rate":win/competitive if competitive else None,"negative_definition":"every other real candidate, including unmatched false detections; duplicate target-positive candidates excluded","median_positive_minus_hard_negative_margin":float(np.median(score_margins)) if score_margins else None,"median_global_assignment_margin":float(np.median(global_margins)) if global_margins else None,"max_pairwise_identity_residual_advantage_from_clip":max_residual_pair_advantage,"baseline_target_assigned_frames":assigned,"global_margin_certifies_no_target_reallocation_frames":blocked,"certified_blocked_fraction_given_assigned":blocked/assigned if assigned else None,"median_actual_max_target_residual_advantage":float(np.median(advantages)) if advantages else None,"base_scale":config["base_scale"],"strength":config["strength"],"query_state_unique_hashes":len(set(state_hashes)),"state_divergence_observation_count":len(divergences),"mean_state_divergence_from_anchor":float(np.mean(divergences)) if divergences else None,"target_identity_continuity_changes_between_consecutive_matched_outputs":identity_changes,"target_matched_to_unmatched_transitions":gap_resets,"first_wrong_write":first_wrong,"longest_wrong_accepted_write_cascade_within_sequence":max_cascade,"runtime_profile_seconds":profile["seconds"],"runtime_profile_fps":profile["fps"],"posthoc_only":True,"used_to_tune_policy":False}
-        results[sequence]=sequences
+            variants[name]={"target_visible_frames":visible,"real_candidate_covered_frames":covered,"candidate_coverage_given_visible":covered/visible if visible else None,"competitive_identity_frames":competitive,"hard_negative_identity_wins":win,"hard_negative_identity_win_rate":win/competitive if competitive else None,"negative_definition":"every other real candidate, including unmatched false detections; duplicate target-positive candidates excluded","median_positive_minus_hard_negative_margin":float(np.median(score_margins)) if score_margins else None,"median_global_assignment_margin":float(np.median(global_margins)) if global_margins else None,"max_pairwise_identity_residual_advantage_from_clip":max_residual_pair_advantage,"baseline_target_assigned_frames":assigned,"global_margin_certifies_no_target_reallocation_frames":blocked,"certified_blocked_fraction_given_assigned":blocked/assigned if assigned else None,"median_actual_max_target_residual_advantage":float(np.median(advantages)) if advantages else None,"base_scale":config["base_scale"],"strength":config["strength"],"query_state_unique_hashes":len(set(state_hashes)),"state_divergence_observation_count":len(divergences),"mean_state_divergence_from_anchor":float(np.mean(divergences)) if divergences else None,"target_identity_continuity_changes_between_consecutive_matched_outputs":identity_changes,"target_matched_to_unmatched_transitions":gap_resets,"first_wrong_write":first_wrong,"longest_wrong_accepted_write_cascade_within_sequence":max_cascade,"runtime_profile_seconds":profile["seconds"],"runtime_profile_fps":profile["fps"],"posthoc_only":True,"used_to_tune_policy":False}
+        results[sequence]=variants
     aggregate={}
     for name in next(iter(results.values())):
         values=[r[name] for r in results.values()]
         counters={k:sum(r[k] for r in values) for k in ("target_visible_frames","real_candidate_covered_frames","competitive_identity_frames","hard_negative_identity_wins","baseline_target_assigned_frames","global_margin_certifies_no_target_reallocation_frames")}
         aggregate[name]={**counters,"candidate_coverage_given_visible":counters["real_candidate_covered_frames"]/counters["target_visible_frames"] if counters["target_visible_frames"] else None,"hard_negative_identity_win_rate":counters["hard_negative_identity_wins"]/counters["competitive_identity_frames"] if counters["competitive_identity_frames"] else None,"certified_blocked_fraction_given_assigned":counters["global_margin_certifies_no_target_reallocation_frames"]/counters["baseline_target_assigned_frames"] if counters["baseline_target_assigned_frames"] else None}
-    summary={"stage":STAGE,"status":"POSTHOC_COMPLETE","runtime_GT_used":False,"used_to_tune_policy":False,"per_sequence":results,"aggregate":aggregate,"score_margin_vs_global_authority_distinguished":True,"identity_rank_is_not_HOTA":True,"certificate_is_sufficient_not_necessary":True,"offline_profile_is_not_live_SAM3_end_to_end_latency":True}
-    write_json(OUT/"adapter/POSTHOC_TRANSFER_DIAGNOSIS.json",summary)
+    complete=set(sequences)==set(SEQUENCES)
+    summary={"stage":STAGE,"status":"POSTHOC_COMPLETE" if complete else "POSTHOC_PARTIAL_DIAGNOSTIC","complete_all_8_sequences":complete,"runtime_GT_used":False,"used_to_tune_policy":False,"per_sequence":results,"aggregate":aggregate,"score_margin_vs_global_authority_distinguished":True,"identity_rank_is_not_HOTA":True,"certificate_is_sufficient_not_necessary":True,"offline_profile_is_not_live_SAM3_end_to_end_latency":True}
+    write_json(OUT/"adapter"/("POSTHOC_TRANSFER_DIAGNOSIS.json" if complete else "POSTHOC_TRANSFER_DIAGNOSIS_PARTIAL.json"),summary)
     return summary
 
 
 if __name__=="__main__":
+    parser=argparse.ArgumentParser();parser.add_argument("--sequences",nargs="+",default=list(SEQUENCES));args=parser.parse_args()
     torch.set_num_threads(1)
-    print(json.dumps(run(),sort_keys=True))
+    result=run(args.sequences)
+    print(json.dumps({"status":result["status"],"aggregate":result["aggregate"]},sort_keys=True))
