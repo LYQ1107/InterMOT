@@ -1,4 +1,4 @@
-# N72R21R1 — active research, not final scientific closure
+# N72R21R1 — bounded research closure: FAIL_GLOBAL_MOT_TRANSFER
 
 FINAL GOAL: Safe One-Click Identity Intervention: Learning When and How Persistent Identity Evidence Should Modify Global Online Multi-Object Tracking
 
@@ -6,13 +6,15 @@ CENTRAL QUESTION: 用户点击一个人一次之后，能否利用长期身份�
 
 The authoritative frozen Goal is `outputs/N72R21R1/FINAL_GOAL.json`; the protocol is `outputs/N72R21R1/PREREGISTRATION.json`. This is explicitly authorized **new** research, not a relabeling of N72R21's scientific FAIL. MOT is primary; SOT is deferred. No downstream stage is authorized.
 
+Final scientific answer: the tested identity evidence did **not** establish safe, useful correction of complete online MOT. Permissive interventions damage baseline-correct trajectories; protected or calibrated policies keep the baseline but do not deliver useful interventions. Main classification is **FAIL_GLOBAL_MOT_TRANSFER**, with override-safety, trajectory-value and memory-contamination/usefulness bottlenecks. This is a bounded historical-TRAIN negative result, not a proof that one-click MOT is impossible. Engineering correctness and successful training are not scientific PASS. Code delivery is verified separately; the application Goal remains active until that delivery is verified.
+
 ## Verified inheritance and resources
 
 Code-only source: `051e593f073216e34b3744b17eff11c5f56b3956`. Full historical source and original assets remain in the original repository at `813be1e34a644ffeecf8b9ad0404aeefd6bd604b`. All 32 old full-joint runtime seals, 248 checkpoint SHA values and 40 actual TRAIN sequence directories were audited. These hashes do not mean new training or scientific success.
 
 The new worktree reuses the original Python environment, SAM3/OSNet observations and weights. Personal-mount free space was about 90 GiB at bootstrap; reserve is 60 GiB, new-stage artifact budget 8 GiB. No duplicated dataset/environment/tape, new downloads, foreign-process termination, SOT execution or VAL/TEST evaluation occurred in this audit.
 
-The original regression snapshot is 826 pass / 5 historical failures, not all tests passing. New-stage full regression actually completed first at843/5 and now at **865 pass / 5 historical failures**, including39 new tests. These are engineering evidence, not proof that every required scientific contract is closed. Initial code-only worktree attempts (834/14 and841/7) are retained: missing local historical fixtures/TrackEval entry were recovered using exact local sources, with no third-party/test changes or duplicated tape bytes. The original four pinned CLI failures and historical branch-literal failure remain visible.
+The original regression snapshot is826 pass /5 historical failures, not all tests passing. Retained new-stage checkpoints include843/5,865/5,897/5,911/5,920/5 and the scientific-closure snapshot923/5 (54.24s). The final-delivery full regression is **925 pass /5 unchanged historical failures** (50.33s), including the two additional INNER-selection focused cases. The25 required engineering contracts are mapped to actual passing nodes, with original371 artifact hashes, all2804 new epoch/selected weight SHAs and123 strict loaders rechecked. These are engineering evidence, not scientific PASS. Initial code-only worktree attempts (834/14 and841/7) are retained: missing local historical fixtures/TrackEval entry were recovered using exact local sources, with no third-party/test changes or duplicated tape bytes. Four pinned CLI `SEQMAP_FILE` list/type failures and one historical branch-literal failure remain visible.
 
 ## Phase A: actual reproduction and first-event evidence
 
@@ -100,9 +102,107 @@ Counts sum the two scenes and average seeds within each scene where applicable; 
 
 The additional full regression actually completed at895 pass /5 unchanged historical failures (54.31s), then **897 pass /5 unchanged historical failures** (52.82s) after two publication-round tests. Both XML files remain under `tests/FULL_REGRESSION_ON_POLICY_MEMORY*.xml`. The earlier865/5 result remains valid for its earlier checkpoint; the32 additional passing cases include the earlier publication-scope test,29 memory/on-policy/writer cases and two new exact-SHA/timezone publication guards. No historical test or pinned third-party code was patched to conceal failures. The371 sealed historical artifact hashes and clean original worktree were reverified after the new pilots.
 
-Still required: remaining mandatory controls and inexpensive A–H diagnostics; full25-contract evidence mapping; final five tables and conservative scientific classification; conditional fresh-sequence expansion/one-time confirmation only after gates justify it; final code-only publication with exact clean local/remote HEAD. Failed head optimization/pilots and successful unit tests are not substitutes for these requirements.
+The remaining inexpensive controls, teacher-state diagnostics, E6 fits, explicit B7/B8 own-history runs,25-contract evidence map,16-control index and five tables have now completed as described below. No useful safe development operating point qualified. Conditional fresh-sequence generation/confirmation remains **NOT_RUN**, not failed generalization. Final code-only delivery requires exact clean local/remote HEAD.
 
 The 40 TRAIN sequences are frozen into historical development 8, FIT 16, INNER 8 and confirmation 8. Only eight historical scenes currently have sealed candidate features. Confirmation has not been accessed for policy effects. Historical 25 VAL is not virgin; no cross-recording or person-disjointness claim is made.
+
+## C1/C6 teacher-state and diagnostic cache audit
+
+All22 strictly valid prospective clicks were evaluated in actual full C0 history, target-only history, and two **POSTHOC_ORACLE** diagnostics. Each mode has22,558 post-click decisions;17,516 have a strictly matched positive candidate. Rank-1 given availability is70.25% for joint C0,66.98% for target-only own history,77.10% with oracle past GT motion and81.66% with oracle past motion plus real verified-positive bank. Oracle feedback arrives only after the current prediction, never creates a missing candidate, and is not deployable online memory or a strict representational upper bound. Teacher state helps ranking but does not prove full MOT usefulness.
+
+The replay exposed64 overwritten **metadata cache fields** in the old committed-memory curriculum: a shared model `.last` cache was read after future diagnostic branches. Current probabilities were re-captured before those branches in a separate sealed correction receipt. Full C0 outputs, states and all32 training features were identical; write labeling/fitting does not read that cache field, so the original22 traces and3 writer fits were not altered. One interrupted unsealed teacher trace remains preserved; an output-only versioned recovery reran unchanged sealed code into a separate destination. See the local teacher diagnostic/recovery receipts; no completed artifact was overwritten.
+
+## E0–E7 and explicit B7/B8 closure
+
+E6 collected all current real candidates plus explicit NONE every32 frames in22 actual C0 rollouts:713 frame groups and4874 candidate/NONE rows. FIT6/INNER0002 are sequence-isolated;0001 is historically exposed diagnostic-only. TARGET/CORRECT_NONE, VERIFIED_OTHER/INCORRECT_NONE and UNKNOWN are distinct classes. UNKNOWN is never a verified hard negative; candidate availability and physical visibility are separate labels.
+
+All9 new scalar/logistic/MLP fits (3 seeds each) completed317 epochs and4121 nonzero-gradient optimizer steps, with changed weights and strict checkpoints. FIT-only normalization and INNER-only epoch/temperature/operating-point calibration were used. No model found a nonempty INNER operating point with empirical wrong-or-UNKNOWN claim risk<=2% and at least3 accepted frame groups: all9 deploy explicit CALIBRATION_ABSTAIN. The aggregate new-fit total is123, with29,000 nonzero-gradient optimizer steps. This is actual optimization, not evidence of identity reliability.
+
+All19 new E0–E6 policy cases × two complete sequences =38 new full-joint runs completed, plus read-only reuse of two sealed C0 trajectories. These include frozen joint-argmax under protected authority, calibrated thresholds, candidate-relative NONE, immutable-anchor, base-agreement, temporal confirmation, all9 calibrated heads, all3 predeclared unconstrained logistic diagnostic points and shadow. Every case preserves detections and ends with zero effective interventions under the common owner/global-regret protection. The two-sequence C0 output still has598 verified-other takeover frames; equal-to-C0 is not perfect identity tracking or scientific success.
+
+Identity claims are reported separately from actually emitted MOT assignments. For example, seed72111 unconstrained logistic on0002 accepts923 identity claims:40 correct TARGET,157 correct NONE,541 incorrect NONE,176 verified OTHER and9 UNKNOWN. Its726 wrong-or-UNKNOWN claims are not made safe by the global gate blocking execution. On0001 it accepts571 claims with28 wrong-or-UNKNOWN. These exposed-scene curves are diagnostics, not threshold reselection or deployment risk guarantees. All score/risk-coverage curves, Recall@FPR2%, calibration, claim-versus-commit counts and takeover intervals remain in the local E7 result.
+
+Explicit B7/B8 now also completed12 cases × two complete sequences =24 new runs and common nine-metric TrackEval. B7 uses paired TRAIN baseline/challenger future supervision, and B8 uses fitted benefit/harm/value predictions. Each runtime supplies its own actual preceding3 proposal-feature vectors; clones do not borrow parent history. H100 temporal/global-risk and H5 linear diagnostics retain all3 seeds. All four groups fail nonvacuity: protected full outputs equal C0. These are real gate runs, not a claim that running a multi-action model implicitly tested every named gate.
+
+The five missing frozen/negative control cases completed10 new full joint runs: R3R2 adapter, R4R1 native, shuffled original/confidence/shadow. Adapter combined HOTA=.526814 versus C0=.537183, with2 N01/902 N10 frames; original shuffled HOTA=.327930, with79 N01/636 N10. Native and shuffled shadow equal C0 without useful actions. The historical native comparator intentionally includes its original differing scorer; it is not a newly C0-preserving learned authority. The16 mandatory labels all reference real sealed results; aliased controls are explicitly not new experiments.
+
+## G: multi-target full evaluation and density scope
+
+The existing four actual joint source policies ×22 valid sole-click episodes were scored as88 full-sequence TrackEval records over8 historical scenes. The two invalid initial clicks were excluded without replacement. These are reused actual causal multi-object outputs, not new runs or target-only stitching. Average clicks inside each scene, then macro-average8 scenes: C0 HOTA=.599074, broad round0=.569317, original Full=.505571; delay1 KEEP equals C0. These scenes include old FIT and INNER exposures, so this is not independent confirmation.
+
+Frozen sparse0–4, medium5–8 and crowded9+ candidate-count strata were all evaluated. Both GT and already emitted predictions were masked after runtime while retaining original frame numbers and public IDs. Masked HOTA is **POSTHOC_DENSITY_MASKED_TRACKEVAL_DIAGNOSTIC**, not full-policy performance; gaps affect CLEAR continuity. Supported-scene counts are4/8/3; empty strata are explicit. No scene or density was chosen by effects.
+
+## Five main tables
+
+The local `tables/FIVE_FINAL_TABLES_V1.json` retains exact values, source SHAs, current-event/propagation definitions and all nine metrics. All values below are0–1 scale unless counts. Failure categories overlap; their counts must not be summed as causal roots.
+
+Table1: original six seed×scene rollouts. Direct means current harmful frame decision versus own KEEP, not an independent cause. Propagated means observed N10 with wrong own KEEP; selected15 paired events establish only limited causal roots.
+
+| Failure type | Direct decisions | Observed N10 | Wrong-own-KEEP N10 | Affected sequence/public IDs |
+|---|---:|---:|---:|---:|
+| Wrong candidate |102|1932|1853|15|
+| Incorrect NONE |1|17|16|12|
+| Verified-other takeover, subset |95|1865|1788|15|
+| State drift, observational subset |0|1869|1869|13|
+| Birth/death cooccurrence, not causal attribution |1|2|1|13|
+| Candidate missing |0|0|0|14|
+
+The candidate-missing row matches810 other postclick frames, but no N10: a missing positive cannot explain an onset where C0 is already strictly correct. Affected IDs are union within sequence, not distinct people or causally attributed victims. All103 direct decisions and1949 N10 frames are not independently decomposed by the15 selected branch probes.
+
+Table2: average seeds within scene, then sum two scenes. HarmEpisodes counts scenes with current direct harm, not independent causal onset count. Recall is strict UID over visible frames.
+
+| Authority | Changed frame decisions | N01 | N10 | HarmEpisodes | Recall |
+|---|---:|---:|---:|---:|---:|
+| C0 |0|0|0|0|.486258|
+| Broad confidence |8|37|569.333|1|.204898|
+| Recovery |0|0|0|0|.486258|
+| Global regret |0|0|0|0|.486258|
+| H100 learned risk |0|0|0|0|.486258|
+| H5 two-branch diagnostic |0|0|0|0|.486258|
+
+Table3: full two-sequence **combined** metrics, averaging seeds where present. These are not the paired sequence-macro deltas reported earlier.
+
+| Method | HOTA | AssA | IDF1 | DetA | IDSW |
+|---|---:|---:|---:|---:|---:|
+| CLICK_C0 |.537183|.440748|.535383|.656105|90|
+| Original ACIB |.334354|.176360|.334960|.646852|756|
+| Best simple: C0 fallback |.537183|.440748|.535383|.656105|90|
+| Joint H100 logistic, abstains |.537183|.440748|.535383|.656105|90|
+| Consensus safe-memory-only shadow |.537183|.440748|.535383|.656105|90|
+| Retained new diagnostic reference, abstains |.537183|.440748|.535383|.656105|90|
+
+INNER-only safety-first closure found zero qualifying simple and zero qualifying new useful methods. Best-simple is the explicit C0 fallback. The last row is lexical `ACTION_VALUE__MIXED__H100_GLOBAL_RISK__seed72111`, not an optimal or scientifically successful method. Its existing actual trajectory is referenced, not rerun/copied and counted as a new experiment. Selection uses only historical0002 metrics/statistics, never0001/combined effects; all seeds/failure controls stay available. Two focused tests perturb outer metrics and verify unchanged selection, and reject unsafe nonzero memory.
+
+Table4: K8 attention default writers under the same **frozen coupled authority**; these are not memory-only comparisons. Writes sum scenes; risks include UNKNOWN. Retention denominator is candidate-available target frames. Nonvacuous safety requires<=2% risk and>=60% retention.
+
+| Writer | Writes | Wrong/UNKNOWN rate | Retention | N10 | Combined HOTA |
+|---|---:|---:|---:|---:|---:|
+| P0 frozen |0|undefined|0|663|.498690|
+| Consensus |32|.281250|.014076|663|.505355|
+| Delayed |29|.310345|.012240|663|.505355|
+| Trained risk |0|undefined|0|663|.498690|
+| Rollback |29|.310345|.012240|663|.505355|
+
+Table5: original Full treatment versus C0. Additional historical scenes are exposed development, not fresh confirmation. Masked strata must not be compared as full-policy scores. AssA/IDF1 deltas and actual per-stratum takeover counts remain in the sealed table JSON.
+
+| Scope | C0 HOTA | Original Full HOTA | Estimator |
+|---|---:|---:|---|
+| Historical2 TRAIN |.537183|.334354|combined2 sequences, mean3 seeds|
+| Historical8 TRAIN,22 valid targets |.599074|.505571|click-average per scene, then scene macro|
+| Sparse,4 supported scenes |.431407|.395510|posthoc masked diagnostic|
+| Medium,8 supported scenes |.630457|.528289|posthoc masked diagnostic|
+| Crowded,3 supported scenes |.558274|.504402|posthoc masked diagnostic|
+| Frozen fresh confirmation8 |NOT_RUN|NOT_RUN|development gate failed|
+
+Paired sequence-cluster95% CIs for full learned/fixed/correction/memory/E/B7/B8 comparisons are in their retained result groups, with2000 resamples, seed72114 and only2 independent sequence clusters. Seeds/frames do not enlarge that count. Zero-action groups have zero paired effect; zero uncertainty for identical outputs does not prove useful identity recognition. Numerical thresholds and CIs are reported separately.
+
+## Scientific decision and stop boundary
+
+Gate0 passes the tested engineering/actual A/A contracts, with5 historical regression failures retained. Gate1 fails nonvacuity or N01/N10/collateral criteria, Gate2 fails useful full-MOT improvement, and the nonvacuous memory gate fails. Gate3 is **NOT_RUN**, not FAIL_GENERALIZATION. The answer is therefore **FAIL_GLOBAL_MOT_TRANSFER** under this bounded experimental scope. The identity signal sometimes ranks correctly; it did not become a trustworthy trajectory intervention.
+
+All registered inexpensive A–H branches were retained, including actual optimization, own-policy correction, oracle-state diagnostics, hard negatives, memory controls and explicit B7/B8. Conditional fresh FIT16/INNER8/CONFIRM8 candidate generation, a second optional C5 round, relational/backbone capacity expansion, extra datasets and pixel-level SAM3 reruns were not triggered: no useful safe operating point passed development. No fresh confirmation, VAL, TEST, SOT, downstream training or association stage is authorized. Sparse coverage problems do not justify changing candidates to conceal wrong overrides on existing positives.
+
+Recoverable local assets are about882MiB, comfortably below the8GiB stage budget; personal free space is about82GiB, above the60GiB floor. No GPU, new environment, dataset duplication, download or unrelated process termination was needed. Cached latency/parameter/RSS records are stored per actual run; no pixel-to-output FPS claim is made.
 
 ## Recovery and delivery
 
@@ -110,4 +210,4 @@ Use the original `.venv` and set `PYTHONPATH` to the new worktree. `n72r21r1_boo
 
 Bulk traces and branch truth are local-only. GitHub delivery is code/tests and necessary compact Goal/protocol/report/SHA documentation, not datasets, feature tapes, media, weights or large experiment output. The requested branch is `codex/n72r21r1-safe-joint-mot-intervention`. Verify current publication separately in local `git_delivery/PUBLISH_VERIFICATION__<remoteSHA>.json` and by a fresh remote read; the old code-only publication is not a claim that this new work is uploaded. SSH22/443 were unavailable at this checkpoint; the API fallback preserves offline commit ancestry under a guarded new local backup ref, imports the actual canonical remote commit with a verified hash, and adopts only an identical source tree. It never forces a remote ref or rewrites working files. Git publication is not scientific Goal closure.
 
-Final classification: **PENDING**. Application Goal: **ACTIVE**. Scientific success: **not established**. Next stage: **not authorized**.
+Final classification: **FAIL_GLOBAL_MOT_TRANSFER**. Scientific branch closure: **complete within the declared bounded scope**. Application Goal completion is recorded separately after exact clean code delivery is verified. Scientific success: **false**. Next stage: **not authorized**. The compact [local-evidence SHA catalog](N72R21R1_LOCAL_EVIDENCE_SHA.json) identifies unuploaded results and checkpoints; bulk evidence remains local-only.

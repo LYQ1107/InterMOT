@@ -1,0 +1,97 @@
+{
+  "FIT_sequences": [
+    "dancetrack0023",
+    "dancetrack0024",
+    "dancetrack0039",
+    "dancetrack0057",
+    "dancetrack0062",
+    "dancetrack0072"
+  ],
+  "INNER_sequences": [
+    "dancetrack0002"
+  ],
+  "current_claim_risk_max": 0.02,
+  "data_SHA": "67036bca9e4eb58fd7588c7665fed9712e2035253adcee630dc2677bf33d28ed",
+  "diagnostic_operating_point": {
+    "margin_min": 0.0,
+    "probability_min": 0.5,
+    "status": "UNCONSTRAINED_DIAGNOSTIC_NOT_SELECTED_OR_DEPLOYABLE",
+    "unknown_max": 0.5
+  },
+  "exposed_diagnostic_only": [
+    "dancetrack0001"
+  ],
+  "families": [
+    "SCALAR",
+    "LOGISTIC",
+    "MLP"
+  ],
+  "formal_goal_file": "outputs/N72R21R1/FINAL_GOAL.json",
+  "frozen_before_new_fits_and_full_policy_effects": true,
+  "loss": "Inverse FIT class-frequency correctness3class CE + physical candidate-availability BCE; equal FIT scenes and then equal frame groups; UNKNOWN separate class",
+  "margin_cutoffs": [
+    0.0,
+    0.05,
+    0.15
+  ],
+  "max_CPU_workers": 2,
+  "min_INNER_accepted_groups": 3,
+  "next_stage_authorized": false,
+  "no_VAL_TEST_fresh_confirmation": true,
+  "normalization": "FIT-only mean/std, floor.05",
+  "not_trajectory_safety_training": true,
+  "probability_cutoffs": [
+    0.5,
+    0.8,
+    0.9,
+    0.95,
+    0.98
+  ],
+  "reserve_GiB": 60,
+  "runtime_full_scope": [
+    "dancetrack0001",
+    "dancetrack0002"
+  ],
+  "runtime_global_regret_max": 0.2,
+  "runtime_memory": "Frozen ACIB P0 immutable anchor, no accepted bank writes; only actually committed feedback",
+  "runtime_own_history": "Fresh rollout per policy; C0-source to treatment-state shift explicitly reported",
+  "runtime_owner_protection": "No other-owner or displaced-public overrides; applies to all E0-E6 equally; unchanged full exact solver",
+  "seeds": [
+    72111,
+    72112,
+    72113
+  ],
+  "selection": "INNER temperature minimum current3class NLL, then max correct target recall with empirical claim-risk<=2%, >=3 selected groups; ties lower error then higher cutoff. No qualifying point => CALIBRATION_ABSTAIN.",
+  "simple_controls": [
+    "E0_FROZEN",
+    "E1_CALIBRATED",
+    "E2_RELATIVE_NONE",
+    "E3_ANCHOR",
+    "E4_BASE",
+    "E5_TEMPORAL"
+  ],
+  "source_code_SHA": {
+    "sam3_intermot/one_click/intervention_features.py": "a9371fa118a292eb90e1876e36770eb825074b2b5e50916fd8cc73fb9536c574",
+    "sam3_intermot/one_click/joint_intervention_primitives.py": "040420d19d324ebc97af964db947a6de681859596d2ceb290fa0e19a391980dc",
+    "sam3_intermot/one_click/open_set_verifier.py": "a760e18e9d5ecdc6dd9a6d39081e7a6d083f081a4b4f9183542af313429adc01",
+    "scripts/n72r21r1_train_open_set.py": "4d4aedd4bbba0ce8ef6cd4b44256bda2345c3e332bb72ca39779c57339e7c28f"
+  },
+  "stage": "N72R21R1",
+  "supervision_manifest_SHA": "36cddad104e1865b385d3a7d1e486ea8a51b5a0f650e601ea94e21b7aefc225c",
+  "supervision_manifest_path": "/data3/liuyeqiang/InterMOT_N72R21R1_worktree/outputs/N72R21R1/availability/current_axis_v1/SUPERVISION_MANIFEST.json",
+  "temperatures": [
+    0.5,
+    1.0,
+    2.0
+  ],
+  "threads_per_worker": 1,
+  "training": {
+    "batch_size": 256,
+    "learning_rate": 0.001,
+    "max_epochs": 60,
+    "max_seconds_per_fit": 180,
+    "patience": 8,
+    "weight_decay": 0.0001
+  },
+  "unknown_max": 0.02
+}
