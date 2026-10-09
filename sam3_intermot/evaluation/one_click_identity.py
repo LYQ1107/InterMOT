@@ -6,6 +6,8 @@ from sam3_intermot.evaluation.one_click_protocol import open_set_metrics,ratio
 def strict_identity_claim_metrics(runtime,truth,*,verified_rank1_labels=None):
     if len(runtime)!=len(truth) or not runtime:raise ValueError('full aligned frame axes')
     if [r['frame'] for r in runtime]!=[t.frame for t in truth]:raise ValueError('frame axis')
+    frames=[r['frame'] for r in runtime]
+    if any(b!=a+1 for a,b in zip(frames,frames[1:])):raise ValueError('one frame one decision contiguous axis')
     if any(r['runtime_future_gt_used'] is not False for r in runtime):raise ValueError('GT boundary')
     if any(not t.annotation_complete for t in truth):raise ValueError('incomplete annotations cannot invent identity truth')
     rank_correct=[r.get('rank1_candidate_uid') is not None and r.get('rank1_candidate_uid') in t.valid_target_candidate_uids for r,t in zip(runtime,truth)]
@@ -20,6 +22,7 @@ def strict_identity_claim_metrics(runtime,truth,*,verified_rank1_labels=None):
     y=np.asarray([v is True for v in verified_rank1_labels],dtype=bool)
     probability=np.asarray([r['rank1_identity_joint_probability'] for r in runtime],dtype=float)
     if not np.isfinite(probability).all() or ((probability<0)|(probability>1)).any():raise ValueError('invalid identity probability, including UNKNOWN frames')
+    if any(r.get('rank1_candidate_uid') is None and p!=0 for r,p in zip(runtime,probability)):raise ValueError('empty candidate set must have zero claim score')
     accepted=np.asarray([r['selected_candidate_uid'] is not None for r in runtime])
     strict_correct=np.asarray([r['selected_candidate_uid'] is not None and r['selected_candidate_uid'] in t.valid_target_candidate_uids for r,t in zip(runtime,truth)])
     available=np.asarray([bool(t.valid_target_candidate_uids) for t in truth]);visible=np.asarray([t.target_visible for t in truth])

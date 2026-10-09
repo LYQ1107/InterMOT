@@ -1,0 +1,759 @@
+{
+  "GT_sha256": "689beaf2dc58480e69aa809978ddb4f26078ed03e79f908ef6095160799e3b08",
+  "case": "T1_MIXED_TO_P1_K8_SEED72103",
+  "episodes": [
+    {
+      "development_only": true,
+      "episode_uid": "dancetrack0039__click0030",
+      "fps": 20.0,
+      "memory": {
+        "accepted_writes": 1158,
+        "correct_observation_retention": 0.28270042194092826,
+        "eligible_correct_observations": 1185,
+        "joint_safety_pass": false,
+        "wrong_write_rate": 0.7107081174438687,
+        "wrong_writes": 823
+      },
+      "open_set": {
+        "ECE": 0.09742768391018239,
+        "PR_AUC_average_precision": 0.9763038039577623,
+        "calibration_bins": [
+          {
+            "bin": 4,
+            "confidence": 0.46293423175811765,
+            "n": 10,
+            "positive_rate": 0.8
+          },
+          {
+            "bin": 5,
+            "confidence": 0.5559582580690798,
+            "n": 23,
+            "positive_rate": 1.0
+          },
+          {
+            "bin": 6,
+            "confidence": 0.657527967444006,
+            "n": 53,
+            "positive_rate": 0.8867924528301887
+          },
+          {
+            "bin": 7,
+            "confidence": 0.7633505173855357,
+            "n": 144,
+            "positive_rate": 0.9027777777777778
+          },
+          {
+            "bin": 8,
+            "confidence": 0.8561713930000278,
+            "n": 544,
+            "positive_rate": 0.9558823529411765
+          },
+          {
+            "bin": 9,
+            "confidence": 0.9339339773966362,
+            "n": 467,
+            "positive_rate": 0.9785867237687366
+          }
+        ],
+        "diagnostic_curve_not_deployment_threshold_tuning": true,
+        "negative_frames": 56,
+        "positive_frames": 1185,
+        "recall_at_fpr_2pct": 0.05147679324894515
+      },
+      "recording_id": "dancetrack0039",
+      "runtime_sha256": "b14ddecfe4c6879d34b9f8d73a5694640d1fa57337019a9b173455b81bc164a5",
+      "target": {
+        "P0_true_absence_fpr": 0.926829268292683,
+        "P1_present_unavailable_fpr": 0.6666666666666666,
+        "candidate_available_frames": 1185,
+        "candidate_coverage_given_visible": 0.9875,
+        "false_presence_duration_seconds": 1.9,
+        "false_presence_frames": 38,
+        "frames": 1241,
+        "longest_false_presence_seconds": 0.95,
+        "longest_verified_takeover_seconds": 8.25,
+        "negative_fpr": 0.8571428571428571,
+        "none_false_reject_rate": 0.06329113924050633,
+        "reacquisition_episodes": [
+          {
+            "delay_frames": 0,
+            "delay_seconds": 0.0,
+            "first_accept_correct": true,
+            "frame": 54,
+            "reacquired": true,
+            "recall_by_seconds": {
+              "1": true,
+              "10": true,
+              "2": true,
+              "5": true
+            },
+            "visible_window_frames": 5
+          },
+          {
+            "delay_frames": 24,
+            "delay_seconds": 1.2,
+            "first_accept_correct": false,
+            "frame": 60,
+            "reacquired": true,
+            "recall_by_seconds": {
+              "1": false,
+              "10": true,
+              "2": true,
+              "5": true
+            },
+            "visible_window_frames": 89
+          },
+          {
+            "delay_frames": null,
+            "delay_seconds": null,
+            "first_accept_correct": false,
+            "frame": 152,
+            "reacquired": false,
+            "recall_by_seconds": {
+              "1": false,
+              "10": false,
+              "2": false,
+              "5": false
+            },
+            "visible_window_frames": 154
+          },
+          {
+            "delay_frames": 2,
+            "delay_seconds": 0.1,
+            "first_accept_correct": false,
+            "frame": 309,
+            "reacquired": true,
+            "recall_by_seconds": {
+              "1": true,
+              "10": true,
+              "2": true,
+              "5": true
+            },
+            "visible_window_frames": 191
+          },
+          {
+            "delay_frames": 19,
+            "delay_seconds": 0.95,
+            "first_accept_correct": false,
+            "frame": 505,
+            "reacquired": true,
+            "recall_by_seconds": {
+              "1": true,
+              "10": true,
+              "2": true,
+              "5": true
+            },
+            "visible_window_frames": 256
+          },
+          {
+            "delay_frames": 4,
+            "delay_seconds": 0.2,
+            "first_accept_correct": false,
+            "frame": 765,
+            "reacquired": true,
+            "recall_by_seconds": {
+              "1": true,
+              "10": true,
+              "2": true,
+              "5": true
+            },
+            "visible_window_frames": 355
+          },
+          {
+            "delay_frames": 0,
+            "delay_seconds": 0.0,
+            "first_accept_correct": true,
+            "frame": 1124,
+            "reacquired": true,
+            "recall_by_seconds": {
+              "1": true,
+              "10": true,
+              "2": true,
+              "5": true
+            },
+            "visible_window_frames": 99
+          }
+        ],
+        "reacquisition_median_delay_seconds": 0.15000000000000002,
+        "reacquisition_precision_first_accept": 0.2857142857142857,
+        "reacquisition_recall": 0.8571428571428571,
+        "target_recall_all_visible": 0.2825,
+        "target_recall_given_candidate": 0.2852320675105485,
+        "verified_wrong_person_takeover_episodes": 55,
+        "verified_wrong_person_takeover_frames": 797,
+        "visible_frames": 1200
+      }
+    },
+    {
+      "development_only": true,
+      "episode_uid": "dancetrack0039__click0031",
+      "fps": 20.0,
+      "memory": {
+        "accepted_writes": 1224,
+        "correct_observation_retention": 0.12116182572614108,
+        "eligible_correct_observations": 1205,
+        "joint_safety_pass": false,
+        "wrong_write_rate": 0.880718954248366,
+        "wrong_writes": 1078
+      },
+      "open_set": {
+        "ECE": 0.09780677367755236,
+        "PR_AUC_average_precision": 0.9941609290536962,
+        "calibration_bins": [
+          {
+            "bin": 5,
+            "confidence": 0.5748966534932455,
+            "n": 3,
+            "positive_rate": 1.0
+          },
+          {
+            "bin": 6,
+            "confidence": 0.6648395359516144,
+            "n": 10,
+            "positive_rate": 0.7
+          },
+          {
+            "bin": 7,
+            "confidence": 0.761100951629349,
+            "n": 79,
+            "positive_rate": 0.8481012658227848
+          },
+          {
+            "bin": 8,
+            "confidence": 0.863558404517236,
+            "n": 766,
+            "positive_rate": 0.9738903394255874
+          },
+          {
+            "bin": 9,
+            "confidence": 0.9233315809588519,
+            "n": 383,
+            "positive_rate": 0.9973890339425587
+          }
+        ],
+        "diagnostic_curve_not_deployment_threshold_tuning": true,
+        "negative_frames": 36,
+        "positive_frames": 1205,
+        "recall_at_fpr_2pct": 0.07136929460580912
+      },
+      "recording_id": "dancetrack0039",
+      "runtime_sha256": "b60615bfdd561b25f6d095dcb0faee90c9184dc5f0fecf06c13cfce7f815f752",
+      "target": {
+        "P0_true_absence_fpr": 0.9032258064516129,
+        "P1_present_unavailable_fpr": 1.0,
+        "candidate_available_frames": 1205,
+        "candidate_coverage_given_visible": 0.9958677685950413,
+        "false_presence_duration_seconds": 1.4,
+        "false_presence_frames": 28,
+        "frames": 1241,
+        "longest_false_presence_seconds": 0.5,
+        "longest_verified_takeover_seconds": 10.75,
+        "negative_fpr": 0.9166666666666666,
+        "none_false_reject_rate": 0.011618257261410789,
+        "reacquisition_episodes": [
+          {
+            "delay_frames": 1,
+            "delay_seconds": 0.05,
+            "first_accept_correct": false,
+            "frame": 47,
+            "reacquired": true,
+            "recall_by_seconds": {
+              "1": true,
+              "10": true,
+              "2": true,
+              "5": true
+            },
+            "visible_window_frames": 5
+          },
+          {
+            "delay_frames": 0,
+            "delay_seconds": 0.0,
+            "first_accept_correct": true,
+            "frame": 54,
+            "reacquired": true,
+            "recall_by_seconds": {
+              "1": true,
+              "10": true,
+              "2": true,
+              "5": true
+            },
+            "visible_window_frames": 622
+          },
+          {
+            "delay_frames": 0,
+            "delay_seconds": 0.0,
+            "first_accept_correct": true,
+            "frame": 677,
+            "reacquired": true,
+            "recall_by_seconds": {
+              "1": true,
+              "10": true,
+              "2": true,
+              "5": true
+            },
+            "visible_window_frames": 78
+          },
+          {
+            "delay_frames": 32,
+            "delay_seconds": 1.6,
+            "first_accept_correct": false,
+            "frame": 757,
+            "reacquired": true,
+            "recall_by_seconds": {
+              "1": false,
+              "10": true,
+              "2": true,
+              "5": true
+            },
+            "visible_window_frames": 320
+          },
+          {
+            "delay_frames": null,
+            "delay_seconds": null,
+            "first_accept_correct": false,
+            "frame": 1078,
+            "reacquired": false,
+            "recall_by_seconds": {
+              "1": false,
+              "10": false,
+              "2": false,
+              "5": false
+            },
+            "visible_window_frames": 6
+          },
+          {
+            "delay_frames": null,
+            "delay_seconds": null,
+            "first_accept_correct": false,
+            "frame": 1086,
+            "reacquired": false,
+            "recall_by_seconds": {
+              "1": false,
+              "10": false,
+              "2": false,
+              "5": false
+            },
+            "visible_window_frames": 134
+          }
+        ],
+        "reacquisition_median_delay_seconds": 0.025,
+        "reacquisition_precision_first_accept": 0.3333333333333333,
+        "reacquisition_recall": 0.6666666666666666,
+        "target_recall_all_visible": 0.13553719008264462,
+        "target_recall_given_candidate": 0.13609958506224065,
+        "verified_wrong_person_takeover_episodes": 44,
+        "verified_wrong_person_takeover_frames": 1039,
+        "visible_frames": 1210
+      }
+    },
+    {
+      "development_only": true,
+      "episode_uid": "dancetrack0039__click0032",
+      "fps": 20.0,
+      "memory": {
+        "accepted_writes": 1118,
+        "correct_observation_retention": 0.4277456647398844,
+        "eligible_correct_observations": 1211,
+        "joint_safety_pass": false,
+        "wrong_write_rate": 0.5366726296958855,
+        "wrong_writes": 600
+      },
+      "open_set": {
+        "ECE": 0.16143175805892604,
+        "PR_AUC_average_precision": 0.9884730652021639,
+        "calibration_bins": [
+          {
+            "bin": 3,
+            "confidence": 0.3525102585554123,
+            "n": 2,
+            "positive_rate": 1.0
+          },
+          {
+            "bin": 4,
+            "confidence": 0.4503229260444641,
+            "n": 11,
+            "positive_rate": 0.8181818181818182
+          },
+          {
+            "bin": 5,
+            "confidence": 0.5628828048706055,
+            "n": 30,
+            "positive_rate": 0.9
+          },
+          {
+            "bin": 6,
+            "confidence": 0.6595002260862612,
+            "n": 102,
+            "positive_rate": 0.9509803921568627
+          },
+          {
+            "bin": 7,
+            "confidence": 0.7588660433758104,
+            "n": 343,
+            "positive_rate": 0.9737609329446064
+          },
+          {
+            "bin": 8,
+            "confidence": 0.8458851177667834,
+            "n": 485,
+            "positive_rate": 0.977319587628866
+          },
+          {
+            "bin": 9,
+            "confidence": 0.9339693035207578,
+            "n": 268,
+            "positive_rate": 1.0
+          }
+        ],
+        "diagnostic_curve_not_deployment_threshold_tuning": true,
+        "negative_frames": 30,
+        "positive_frames": 1211,
+        "recall_at_fpr_2pct": 0.20396366639141206
+      },
+      "recording_id": "dancetrack0039",
+      "runtime_sha256": "0eb1b6bffa8320b702cc981bcf6f059a65e2b93d217a5f249c5ab211f93c906b",
+      "target": {
+        "P0_true_absence_fpr": 0.7777777777777778,
+        "P1_present_unavailable_fpr": 0.5833333333333334,
+        "candidate_available_frames": 1211,
+        "candidate_coverage_given_visible": 0.9901880621422731,
+        "false_presence_duration_seconds": 0.7,
+        "false_presence_frames": 14,
+        "frames": 1241,
+        "longest_false_presence_seconds": 0.4,
+        "longest_verified_takeover_seconds": 3.5,
+        "negative_fpr": 0.7,
+        "none_false_reject_rate": 0.09413707679603633,
+        "reacquisition_episodes": [
+          {
+            "delay_frames": 4,
+            "delay_seconds": 0.2,
+            "first_accept_correct": false,
+            "frame": 43,
+            "reacquired": true,
+            "recall_by_seconds": {
+              "1": true,
+              "10": true,
+              "2": true,
+              "5": true
+            },
+            "visible_window_frames": 10
+          },
+          {
+            "delay_frames": 0,
+            "delay_seconds": 0.0,
+            "first_accept_correct": true,
+            "frame": 54,
+            "reacquired": true,
+            "recall_by_seconds": {
+              "1": true,
+              "10": true,
+              "2": true,
+              "5": true
+            },
+            "visible_window_frames": 257
+          },
+          {
+            "delay_frames": 22,
+            "delay_seconds": 1.1,
+            "first_accept_correct": false,
+            "frame": 312,
+            "reacquired": true,
+            "recall_by_seconds": {
+              "1": false,
+              "10": true,
+              "2": true,
+              "5": true
+            },
+            "visible_window_frames": 339
+          },
+          {
+            "delay_frames": 0,
+            "delay_seconds": 0.0,
+            "first_accept_correct": true,
+            "frame": 653,
+            "reacquired": true,
+            "recall_by_seconds": {
+              "1": true,
+              "10": true,
+              "2": true,
+              "5": true
+            },
+            "visible_window_frames": 578
+          }
+        ],
+        "reacquisition_median_delay_seconds": 0.1,
+        "reacquisition_precision_first_accept": 0.5,
+        "reacquisition_recall": 1.0,
+        "target_recall_all_visible": 0.42927228127555195,
+        "target_recall_given_candidate": 0.43352601156069365,
+        "verified_wrong_person_takeover_episodes": 67,
+        "verified_wrong_person_takeover_frames": 580,
+        "visible_frames": 1223
+      }
+    },
+    {
+      "development_only": true,
+      "episode_uid": "dancetrack0039__click0033",
+      "fps": 20.0,
+      "memory": {
+        "accepted_writes": 1240,
+        "correct_observation_retention": 0.5154811715481171,
+        "eligible_correct_observations": 1195,
+        "joint_safety_pass": false,
+        "wrong_write_rate": 0.5032258064516129,
+        "wrong_writes": 624
+      },
+      "open_set": {
+        "ECE": 0.050802992631311286,
+        "PR_AUC_average_precision": 0.9814947045758895,
+        "calibration_bins": [
+          {
+            "bin": 7,
+            "confidence": 0.7742675074509212,
+            "n": 14,
+            "positive_rate": 0.9285714285714286
+          },
+          {
+            "bin": 8,
+            "confidence": 0.8746704118068401,
+            "n": 325,
+            "positive_rate": 0.9446153846153846
+          },
+          {
+            "bin": 9,
+            "confidence": 0.9277670257239543,
+            "n": 902,
+            "positive_rate": 0.9700665188470067
+          }
+        ],
+        "diagnostic_curve_not_deployment_threshold_tuning": true,
+        "negative_frames": 46,
+        "positive_frames": 1195,
+        "recall_at_fpr_2pct": 0.15397489539748954
+      },
+      "recording_id": "dancetrack0039",
+      "runtime_sha256": "ad369ee9d56223c5dee4336fb939973a98e92103bd776283ee798beced21a3a9",
+      "target": {
+        "P0_true_absence_fpr": 1.0,
+        "P1_present_unavailable_fpr": 1.0,
+        "candidate_available_frames": 1195,
+        "candidate_coverage_given_visible": 0.984349258649094,
+        "false_presence_duration_seconds": 1.35,
+        "false_presence_frames": 27,
+        "frames": 1241,
+        "longest_false_presence_seconds": 0.55,
+        "longest_verified_takeover_seconds": 2.8,
+        "negative_fpr": 1.0,
+        "none_false_reject_rate": 0.0008368200836820083,
+        "reacquisition_episodes": [
+          {
+            "delay_frames": null,
+            "delay_seconds": null,
+            "first_accept_correct": false,
+            "frame": 67,
+            "reacquired": false,
+            "recall_by_seconds": {
+              "1": false,
+              "10": false,
+              "2": false,
+              "5": false
+            },
+            "visible_window_frames": 6
+          },
+          {
+            "delay_frames": 28,
+            "delay_seconds": 1.4,
+            "first_accept_correct": false,
+            "frame": 84,
+            "reacquired": true,
+            "recall_by_seconds": {
+              "1": false,
+              "10": true,
+              "2": true,
+              "5": true
+            },
+            "visible_window_frames": 57
+          },
+          {
+            "delay_frames": 2,
+            "delay_seconds": 0.1,
+            "first_accept_correct": false,
+            "frame": 145,
+            "reacquired": true,
+            "recall_by_seconds": {
+              "1": true,
+              "10": true,
+              "2": true,
+              "5": true
+            },
+            "visible_window_frames": 177
+          },
+          {
+            "delay_frames": 8,
+            "delay_seconds": 0.4,
+            "first_accept_correct": false,
+            "frame": 323,
+            "reacquired": true,
+            "recall_by_seconds": {
+              "1": true,
+              "10": true,
+              "2": true,
+              "5": true
+            },
+            "visible_window_frames": 193
+          },
+          {
+            "delay_frames": 5,
+            "delay_seconds": 0.25,
+            "first_accept_correct": false,
+            "frame": 518,
+            "reacquired": true,
+            "recall_by_seconds": {
+              "1": true,
+              "10": true,
+              "2": true,
+              "5": true
+            },
+            "visible_window_frames": 169
+          },
+          {
+            "delay_frames": 38,
+            "delay_seconds": 1.9,
+            "first_accept_correct": false,
+            "frame": 691,
+            "reacquired": true,
+            "recall_by_seconds": {
+              "1": false,
+              "10": true,
+              "2": true,
+              "5": true
+            },
+            "visible_window_frames": 62
+          },
+          {
+            "delay_frames": 29,
+            "delay_seconds": 1.45,
+            "first_accept_correct": false,
+            "frame": 754,
+            "reacquired": true,
+            "recall_by_seconds": {
+              "1": false,
+              "10": true,
+              "2": true,
+              "5": true
+            },
+            "visible_window_frames": 462
+          },
+          {
+            "delay_frames": 0,
+            "delay_seconds": 0.0,
+            "first_accept_correct": true,
+            "frame": 1217,
+            "reacquired": true,
+            "recall_by_seconds": {
+              "1": true,
+              "10": true,
+              "2": true,
+              "5": true
+            },
+            "visible_window_frames": 24
+          }
+        ],
+        "reacquisition_median_delay_seconds": 0.4,
+        "reacquisition_precision_first_accept": 0.125,
+        "reacquisition_recall": 0.875,
+        "target_recall_all_visible": 0.5296540362438221,
+        "target_recall_given_candidate": 0.5380753138075314,
+        "verified_wrong_person_takeover_episodes": 72,
+        "verified_wrong_person_takeover_frames": 587,
+        "visible_frames": 1214
+      }
+    },
+    {
+      "development_only": true,
+      "episode_uid": "dancetrack0039__click0034",
+      "fps": 20.0,
+      "memory": {
+        "accepted_writes": 1241,
+        "correct_observation_retention": 0.5709651257096513,
+        "eligible_correct_observations": 1233,
+        "joint_safety_pass": false,
+        "wrong_write_rate": 0.43271555197421435,
+        "wrong_writes": 537
+      },
+      "open_set": {
+        "ECE": 0.06872272880494254,
+        "PR_AUC_average_precision": 0.9976482432277252,
+        "calibration_bins": [
+          {
+            "bin": 7,
+            "confidence": 0.7797443920915778,
+            "n": 11,
+            "positive_rate": 0.8181818181818182
+          },
+          {
+            "bin": 8,
+            "confidence": 0.8791750971093235,
+            "n": 166,
+            "positive_rate": 0.9879518072289156
+          },
+          {
+            "bin": 9,
+            "confidence": 0.9334537961653301,
+            "n": 1064,
+            "positive_rate": 0.9962406015037594
+          }
+        ],
+        "diagnostic_curve_not_deployment_threshold_tuning": true,
+        "negative_frames": 8,
+        "positive_frames": 1233,
+        "recall_at_fpr_2pct": 0.2303325223033252
+      },
+      "recording_id": "dancetrack0039",
+      "runtime_sha256": "84bec55dd2e8f5c0da1f57131ed4f4e6e19851d3ad2653a59d191f201aea68e2",
+      "target": {
+        "P0_true_absence_fpr": 1.0,
+        "P1_present_unavailable_fpr": 1.0,
+        "candidate_available_frames": 1233,
+        "candidate_coverage_given_visible": 0.9943548387096774,
+        "false_presence_duration_seconds": 0.05,
+        "false_presence_frames": 1,
+        "frames": 1241,
+        "longest_false_presence_seconds": 0.05,
+        "longest_verified_takeover_seconds": 4.1,
+        "negative_fpr": 1.0,
+        "none_false_reject_rate": 0.0,
+        "reacquisition_episodes": [
+          {
+            "delay_frames": 5,
+            "delay_seconds": 0.25,
+            "first_accept_correct": false,
+            "frame": 744,
+            "reacquired": true,
+            "recall_by_seconds": {
+              "1": true,
+              "10": true,
+              "2": true,
+              "5": true
+            },
+            "visible_window_frames": 498
+          }
+        ],
+        "reacquisition_median_delay_seconds": 0.25,
+        "reacquisition_precision_first_accept": 0.0,
+        "reacquisition_recall": 1.0,
+        "target_recall_all_visible": 0.5758064516129032,
+        "target_recall_given_candidate": 0.5790754257907542,
+        "verified_wrong_person_takeover_episodes": 65,
+        "verified_wrong_person_takeover_frames": 517,
+        "visible_frames": 1240
+      }
+    }
+  ],
+  "next_stage_authorized": false,
+  "physical_absence_truth_available": false,
+  "runtime_seal_sha256": "77c97e98a59df3be5491008809bdc4e4eeae65843559b2224c17168f2fc8b0df",
+  "scientific_success": false,
+  "sequence": "dancetrack0039"
+}

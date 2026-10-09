@@ -10,6 +10,8 @@
   "LaSOT_FPS_physical_absence_or_cross_recording_truth_available": false,
   "LaSOT_existing_TRAIN_trim_SOT_future_frames": 3510,
   "LaSOT_existing_TRAIN_trim_SOT_windows_completed": 3,
+  "LaSOT_frame_only_candidate_windows_sealed": 0,
+  "LaSOT_frame_only_identity_windows_evaluated": 0,
   "P1_in_sample_pilot_memory_gate": "FAIL_NOT_GENERALIZATION",
   "P1_in_sample_pilot_wrong_write_rates": [
     0.4446404,
@@ -46,22 +48,24 @@
   "T1_currently_partial_fits": 0,
   "T1_expected_fits": 72,
   "T1_fitting_completed": true,
-  "T1_outer_runtime_cases_completed": 90,
+  "T1_outer_runtime_cases_completed": 120,
   "T1_outer_runtime_cases_expected": 120,
   "T1_source_states_first_fold_fit_and_inner_complete": true,
   "T2_T3_complete": false,
-  "T2_completed_fits": 0,
+  "T2_completed_fits": 21,
   "T2_expected_fits": 24,
-  "T2_own_state_and_paired_branch_scene_seals": 120,
+  "T2_outer_runtime_cases_completed": 45,
+  "T2_outer_runtime_cases_expected": 264,
+  "T2_own_state_and_paired_branch_scene_seals": 162,
   "T2_paired_real_data_gradient_preflight_passed": true,
   "application_goal_status": "active",
   "complete_original_LaSOT_person_available": false,
   "complete_repo_regression": {
     "failed": 5,
     "focused_and_full_revision_may_differ": true,
-    "passed": 776,
-    "scope": "/data3/liuyeqiang/InterMOT/outputs/N72R21/tests/FULL_SUITE_62.xml",
-    "source_XML_sha256": "369340b54669b4e5b108894b799260c4a37a9409969c4976d5c953634b1a465a"
+    "passed": 786,
+    "scope": "/data3/liuyeqiang/InterMOT/outputs/N72R21/tests/FULL_SUITE_72.xml",
+    "source_XML_sha256": "d48d01bca4f64327d1e6289044db467d42582850eb51e84dc4415fc309516e00"
   },
   "data_download_started": false,
   "encoder_control_feature_extraction_started": true,
@@ -69,11 +73,16 @@
   "final_goal_file": "outputs/N72R21/FINAL_GOAL.json",
   "focused_tests": {
     "failed": 0,
-    "passed": 62,
-    "scope": "/data3/liuyeqiang/InterMOT/outputs/N72R21/tests/FOCUSED_62.xml",
+    "passed": 72,
+    "scope": "/data3/liuyeqiang/InterMOT/outputs/N72R21/tests/FOCUSED_72.xml",
     "skipped": 0
   },
   "formal_final_goal": "One Click, Persistent Identity: Causal Long-Term Human Tracking Across Occlusion, Reappearance and Independent Recordings",
+  "frozen_VAL_evaluated_scene_cases": 30,
+  "frozen_VAL_initialized_sequences": 25,
+  "frozen_VAL_initialized_targets": 273,
+  "frozen_VAL_runtime_scene_cases_completed": 34,
+  "frozen_VAL_runtime_scene_cases_expected": 375,
   "frozen_general_visual_existing_cache_verified": true,
   "frozen_second_ReID_available_strict_real_loader_passed": true,
   "goal": "One-Click Long-Term Human Identity Tracking",
@@ -98,12 +107,12 @@
     "M2": "PARTIAL_METADATA_ONLY_MEDIA_ACCESS_UNRESOLVED",
     "M3": "ENGINEERING_SMOKE_PROTOCOL_FROZEN_FULL_SCIENTIFIC_PROTOCOL_PENDING",
     "M4": "B0_B6_AND_ACTUAL_FROZEN_ENCODER_CONTROLS_COMPLETE",
-    "M5_M13": "24_T0_FITS_COMPLETE_T1_MATCHED_SHIFTED_MIXED_TRAINING_AND_TRUE_T2_PAIRED_ROLLOUTS_ACTIVE_T3_AND_FINAL_SCIENCE_PENDING"
+    "M5_M13": "T0_24_T1_72_FITS_AND_T1_120_REPLAYS_COMPLETE_T2_ACTUAL_FITTING_AND_FROZEN_VAL_ACTIVE_T3_AND_FINAL_SCIENCE_PENDING"
   },
   "new_model_training_started": true,
   "new_training_started": true,
   "next_stage_authorized": false,
-  "progress_snapshot_utc": "2026-10-09T10:28:31.531241+00:00",
+  "progress_snapshot_utc": "2026-10-09T10:50:48.814373+00:00",
   "public_CHIRLA_CSVs_available": 20,
   "public_CHIRLA_CSVs_required": 20,
   "public_metadata_downloaded": true,
@@ -119,5 +128,5 @@
   "source_git_commit": "becfdf9c2b317e7c8b5427a894bc1f64b572809f",
   "source_local_equals_fresh_remote": true,
   "stage": "N72R21",
-  "status": "ACTIVE_T1_STATE_CONDITION_TRAINING_AND_T2_COUPLED_ROLLOUTS"
+  "status": "ACTIVE_T2_FROZEN_VALIDATION_AND_LAWFUL_DOMAIN_DIAGNOSTICS"
 }

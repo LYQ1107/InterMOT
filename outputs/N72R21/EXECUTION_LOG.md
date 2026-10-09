@@ -24,6 +24,16 @@ Three in-place TAO LaSOT/person TRAIN trims completed original frozen OSTrack in
 
 Latest actual focused suite: 36 passed. Full suite: 750 passed, 5 failed, four warnings in 51.22s. Same four fixed TrackEval CLI interface failures and one old branch-literal assertion; raw JUnit retained. Goal remains active, downstream unauthorized.
 
+## Complete T1 comparisons; frozen independent sequences and lawful domain fallback
+
+All72 T1 fits/all120 comparisons complete. Eight-scene seed-mean macro recalls: P0P0 .209274, P1P1 .216070, P1P0 .214363, MIXEDP1 .212365, MIXEDP0 .212309. Same-MIXED P1−P0 recall difference .0000558, paired sequence CI[-.0025384,.0030396]. Matched P1−P0 .0067957 is below preregistered .03 and changes training weights. P1 conservative non-target/unverified write rates78.47–79.37%, correct retention25.09–26.00%; no joint safety/usefulness PASS.
+
+First T2 outer scene0001/all33 case-seed records: FullK1/4/8 have zero writes, identical .208699 macro recall to anchor-only, zero retention and undefined write error. Full natural deployed negative FPR .991667/.908333/.997222. This is failure evidence, not a memory-capacity/safety claim or a cue for outer tuning. Remaining T2 cohort actively replaying.
+
+Frozen all25 VAL protocol committed3230d28 before VAL access. Existing metadata/SHA audit covers25508 frames/188971 candidates. Fixed source TRAIN outer0001/all3 INNER-selected seeds, six FIT+one INNER exclude allVAL. 273 first-eligible real-image sole clicks prepared, separate anonymous runtime inputs and GT identities; all15 rule/learned cases run unchanged operating points. VAL does not select models, thresholds, seeds, candidates or sequence subsets. Historical benchmark exposure remains disclosed. No duplicate data or SAM3 inference forVAL.
+
+ExistingSAM3 checkpoint3502755717bytes SHA0567debeec80ba4ac6369540c6c248025283cb3ff2b92827509e57e2b3541cb6 verified in place. LaSOT frame-only protocol/source prepared, temporal features disabled becauseFPS unknown, timestamps null, original contiguous frames unchanged; no cross-recording/absence/other-person identity truth invented. SoleGPU work waits all24 T2 fits; four-CPU runtime cap remains. CHIRLA media gate unresolved, T3 not run. All795 historical files reverified unchanged. Actual tests72focusedpass/786fullpass/5knownfail/4warnings56.61s. Goal active; final five tables, full evaluation and Git closure pending.
+
 ## T1 fitting complete; T2 pre-evaluation UNKNOWN and restart repairs
 
 All 72 T1 fits completed; all 336 original state scene seals exist. 10:28 UTC snapshot: 90/120 T1 runtime cases, 120/168 T2 paired-source seals, zero completed T2 fits. Actual T2 fit scheduling stopped before fitting because integer-key margin dictionaries compare unequal with their JSON-loaded string-key version. An independent verifier recomputed the original pilot labels and confirmed exact normalized JSON equality and unchanged bytes. Original labeler/trainer/adapter/models/loss/labels remain untouched; missing labels use the original labeler and existing records receive complete SHA/content reverification before fitting resumes.
