@@ -1,0 +1,29 @@
+{
+  "stage": "N72R21",
+  "final_goal_file": "outputs/N72R21/FINAL_GOAL.json",
+  "status": "FROZEN_BEFORE_T2_OUTER_INFERENCE",
+  "source": "Matching per-outer/seed T2_COUPLED_V1 checkpoint, INNER-selected only",
+  "seeds": [72101, 72102, 72103],
+  "scope": "All 52 deterministic one-click episodes / eight F1 TRAIN scenes, every future frame, no outer method selection",
+  "cases": {
+    "FULL_K8": {"policy": "FULL", "capacity": 8},
+    "FULL_K4": {"policy": "FULL", "capacity": 4},
+    "FULL_K1": {"policy": "FULL", "capacity": 1},
+    "ANCHOR_ONLY_P0": {"policy": "P0", "capacity": 8},
+    "WITHOUT_SAFE_WRITE_P1": {"policy": "P1", "capacity": 8},
+    "MEAN_PROTOTYPE_P1": {"policy": "MEAN", "capacity": 8},
+    "WITHOUT_DELAY": {"policy": "NO_DELAY", "capacity": 8},
+    "FIXED_CURRENT_SAFE_NO_FUTURE": {"policy": "SAFE_FIXED", "capacity": 8},
+    "BANK_ONLY_IDENTITY_P1": {"policy": "P1", "capacity": 8, "anchor_mode": "bank_only"},
+    "UNIFORM_BANK_ATTENTION": {"policy": "FULL", "capacity": 8, "selection": "uniform"},
+    "WITHOUT_AVAILABILITY": {"policy": "FULL", "capacity": 8, "availability": false}
+  },
+  "inference_deletion_controls_not_retrained_architectures": true,
+  "capacity_controls": "Same K8-trained weights; changing deployment bank capacity is explicitly an inference state-shift diagnostic",
+  "uniform_attention_control": "Uniform candidate-independent attention; remaining max/mean bank statistics are retained, not falsely claimed removal of every selection operation",
+  "only_bank_control": "Remove anchor-score/anchor-consistency features from identity scoring once machine bank exists, sole human anchor is initial fallback bank, P1 writes without anchor gating",
+  "without_availability_control": "Nonempty candidate set forces a candidate; structural empty set still NONE. Availability is constant for decisions/write inputs, not silently retained as a learned reject gate",
+  "no_cross_session_training": "All actual T2 models lack such supervision. No fake separately cross-session-trained comparison is created",
+  "success_claim": "Inference deletion differences alone cannot establish independently learned module benefit; report training/deployment distribution shift and unsupported cross-recording conclusions",
+  "next_stage_authorized": false
+}

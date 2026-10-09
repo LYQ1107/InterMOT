@@ -1,0 +1,15 @@
+{
+  "stage": "N72R21",
+  "final_goal_file": "outputs/N72R21/FINAL_GOAL.json",
+  "status": "SECONDARY_CLARIFICATION_FROZEN_BEFORE_T2_RUNTIME_OR_EVALUATION",
+  "reason": "Candidate availability PR-AUC/ECE does not measure whether rank1 actually is the confirmed identity. Do not relabel it as identity calibration.",
+  "score": "Actual model joint probability for its rank1 candidate; structural empty candidate set scores zero",
+  "truth": "Strict UID matching of rank1 or selected candidate to the target, not localization overlap alone",
+  "report": ["strict selected identity recall all visible", "strict selected identity recall given candidate", "strict selected identity precision", "rank1 identity-claim PR-AUC", "rank1 identity-claim ECE", "rank1 correct-claim recall at wrong-rank FPR2%"],
+  "secondary_negative_denominator": "Wrong rank or target-unavailable frames, including wrong rank when target candidate exists",
+  "primary_FPR2_denominator_unchanged": "Target candidate unavailable; original preregistered availability-based endpoint plus wrong-person takeover gates remains primary",
+  "metric_role": "Secondary descriptive calibration diagnostic, not new selected success threshold, no replacement of primary gate",
+  "future_truth": "Separate post-runtime-seal evaluator only",
+  "inference_threshold_selection_from_outer": false,
+  "next_stage_authorized": false
+}
