@@ -24,6 +24,14 @@ Three in-place TAO LaSOT/person TRAIN trims completed original frozen OSTrack in
 
 Latest actual focused suite: 36 passed. Full suite: 750 passed, 5 failed, four warnings in 51.22s. Same four fixed TrackEval CLI interface failures and one old branch-literal assertion; raw JUnit retained. Goal remains active, downstream unauthorized.
 
+## T1 fitting complete; T2 pre-evaluation UNKNOWN and restart repairs
+
+All 72 T1 fits completed; all 336 original state scene seals exist. 10:28 UTC snapshot: 90/120 T1 runtime cases, 120/168 T2 paired-source seals, zero completed T2 fits. Actual T2 fit scheduling stopped before fitting because integer-key margin dictionaries compare unequal with their JSON-loaded string-key version. An independent verifier recomputed the original pilot labels and confirmed exact normalized JSON equality and unchanged bytes. Original labeler/trainer/adapter/models/loss/labels remain untouched; missing labels use the original labeler and existing records receive complete SHA/content reverification before fitting resumes.
+
+Git 092fd202c24875ae3b09d4f9e204addc30374531 preserves pre-repair secondary calibration and eleven deployment controls. Before any actual T2 runtime/evaluation, corrected secondary unmatched-candidate identity labels from assumed negative to UNKNOWN. Primary target-unavailable FPR2 stays unchanged. UNKNOWN is excluded/count-reported only for secondary calibration, never removed from all-visible recall or treated as verified correct. All-UNKNOWN metrics remain undefined. Model training/operating points are not changed.
+
+T2 full K1/4/8 and module deletions are frozen inference state-shift controls, not retrained architecture superiority. FIT paired pilot: 1690 future pairs, 1488 logit changes >1e-4, only six selected-UID changes; no generalization claim. Latest real focused suite62 passed; full776 passed/5 failed/four warnings/51.40s. Same four TrackEval interface failures and old branch literal remain. Goal active, cross-recording and final science unfinished, no downstream authorization. See docs/N72R21_T2_PRE_EVALUATION_REPAIRS.md.
+
 ## Actual frozen controls; first T0 fits and numerical diagnosis
 
 All three new frozen encoder feature caches completed on eight scenes without GT; all 49,189 valid candidate ROIs were nonempty after clipping. SHA/source/UID/real-image seals precede independent evaluation. Same 39,760 competitive frames: OSNet 32.98%, second person-ReID 32.42%, matched ImageNet 28.20%, native-transform ImageNet 27.62%. No selection from outer controls or cross-day claim.

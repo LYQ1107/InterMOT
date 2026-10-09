@@ -32,7 +32,7 @@ def run(action,outers,gpu):
                           for seed in seeds for s in fit_sequences+[inner]]
                 if not T1_all_done or not all(p.exists() for p in expected):continue
                 storage(100<<20)
-                subprocess.run([sys.executable,'scripts/n72r21_label_coupled_states.py','--outer',outer,'--sequences',*fit_sequences,inner],cwd=ROOT,check=True)
+                subprocess.run([sys.executable,'scripts/n72r21_verify_risk_labels.py','--outer',outer,'--sequences',*fit_sequences,inner],cwd=ROOT,check=True)
                 subprocess.run([sys.executable,'scripts/n72r21_train_t2.py','--outer',outer,'--gpu',str(gpu)],cwd=ROOT,check=True)
             pending.remove(outer);progress=True
             print(json.dumps({'T2_completed_action':action,'outer':outer}),flush=True)

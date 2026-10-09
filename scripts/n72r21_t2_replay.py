@@ -88,7 +88,7 @@ def replay(sequences,seeds,names):
 
 
 def evaluate(sequences,seeds,names):
-    from sam3_intermot.one_click.datasets import dancetrack_annotations,dancetrack_truth
+    from sam3_intermot.one_click.datasets import dancetrack_annotations,dancetrack_truth,strict_candidate_matching
     from sam3_intermot.evaluation.one_click_protocol import evaluate_episode
     from sam3_intermot.evaluation.one_click_identity import strict_identity_claim_metrics
     inputs={e['episode_uid']:e for e in read_json(OUT/'development/RUNTIME_INPUTS.json')['inputs']}
@@ -102,6 +102,7 @@ def evaluate(sequences,seeds,names):
                 if sha256(artifact['path'])!=artifact['sha256']:raise ValueError('T2 runtime artifact changed before labels')
         gtroot=ROOT.parent/'InterMOT_N72R16_assets/dataset/train'/sequence;gt=dancetrack_annotations(gtroot)
         frames=[(p,[r for r in rows if valid_geometry(r)]) for p,rows in load_candidate_frames(ROOT.parent/'InterMOT_N72R20R2_assets',sequence)]
+        matched={int(p['frame']):strict_candidate_matching(rows,gt.get(int(p['frame']),[])) for p,rows in frames}
         for case,seal in seals.items():
             results=[]
             for artifact in seal['artifacts']:
@@ -109,13 +110,20 @@ def evaluate(sequences,seeds,names):
                 truth=[dancetrack_truth(int(p['frame']),rows,gt.get(int(p['frame']),[]),identity) for p,rows in frames if int(p['frame'])>event['frame']]
                 trace=read_zstd_jsonl(Path(artifact['path']))
                 result=evaluate_episode(trace,truth,fps=event['fps'],recording_id=sequence)
-                result['secondary_strict_identity_claim']=strict_identity_claim_metrics(trace,truth)
+                verified=[]
+                for r in trace:
+                    uid=r.get('rank1_candidate_uid');axis=matched[int(r['frame'])]
+                    if uid is not None and uid not in axis:raise ValueError('rank1 UID outside sealed candidate axis')
+                    label=axis.get(uid)
+                    verified.append(False if uid is None else None if label is None else bool(label==identity))
+                result['secondary_strict_identity_claim']=strict_identity_claim_metrics(trace,truth,verified_rank1_labels=verified)
                 result.update(episode_uid=artifact['episode_uid'],runtime_sha256=artifact['sha256'],initialization_failure=False,development_only=True);results.append(result)
             write_json(f'experiments/T2/evaluations/{case}/{sequence}.json',{'case':case,'sequence':sequence,'episodes':results,
                 'runtime_seal_sha256':sha256(OUT/'experiments/T2/runtime_seals'/case/f'{sequence}.json'),'GT_sha256':sha256(gtroot/'gt/gt.txt'),
                 'visible_GT_gap_not_physical_absence_truth':True,'inference_controls_not_retrained_architectures':True,
                 'evaluator_source_sha256':sha256(ROOT/'sam3_intermot/evaluation/one_click_identity.py'),
                 'secondary_metric_protocol_sha256':sha256(OUT/'protocol/T2_STRICT_IDENTITY_CLAIM_METRICS.json'),
+                'secondary_UNKNOWN_repair_protocol_sha256':sha256(OUT/'protocol/T2_VERIFIED_CLAIM_CALIBRATION_REPAIR.json'),
                 'independent_final_validation':False,'scientific_success':False,'next_stage_authorized':False})
             print(json.dumps({'T2_posthoc_evaluated':case,'sequence':sequence}),flush=True)
 
