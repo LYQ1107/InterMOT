@@ -1,0 +1,540 @@
+{
+  "VAL_test_confirmation_or_new_INNER_access": false,
+  "actual_case_count_planned": 82,
+  "all_configs_all_seeds_reported": true,
+  "common_controls": [
+    "NO_HUMAN_C0",
+    "CLICK_C0",
+    "RAW_ANCHOR",
+    "RAW_MEAN_P1"
+  ],
+  "configurations": [
+    {
+      "actor": "ACIB_P0_FROZEN",
+      "name": "CONFIDENCE_P0_BROAD",
+      "policy": {
+        "allow_reject": false,
+        "anchor_cosine_min": 0.4,
+        "base_margin_max": 4.0,
+        "benefit_min": 0.9,
+        "delay_frames": 1,
+        "displaced_max": 0,
+        "family": "confidence",
+        "harm_max": 0.02,
+        "identity_margin_min": 0.02,
+        "probability_min": 0.7,
+        "quality_min": 0.2,
+        "regret_max": 2.0,
+        "value_min": 0.0
+      }
+    },
+    {
+      "actor": "ACIB_P0_FROZEN",
+      "name": "CONFIDENCE_P1_MIDDLE",
+      "policy": {
+        "allow_reject": false,
+        "anchor_cosine_min": 0.6,
+        "base_margin_max": 2.0,
+        "benefit_min": 0.9,
+        "delay_frames": 2,
+        "displaced_max": 0,
+        "family": "confidence",
+        "harm_max": 0.02,
+        "identity_margin_min": 0.05,
+        "probability_min": 0.9,
+        "quality_min": 0.5,
+        "regret_max": 1.0,
+        "value_min": 0.0
+      }
+    },
+    {
+      "actor": "ACIB_P0_FROZEN",
+      "name": "CONFIDENCE_P2_STRICT",
+      "policy": {
+        "allow_reject": false,
+        "anchor_cosine_min": 0.8,
+        "base_margin_max": 1.0,
+        "benefit_min": 0.9,
+        "delay_frames": 2,
+        "displaced_max": 0,
+        "family": "confidence",
+        "harm_max": 0.02,
+        "identity_margin_min": 0.1,
+        "probability_min": 0.95,
+        "quality_min": 0.8,
+        "regret_max": 0.5,
+        "value_min": 0.0
+      }
+    },
+    {
+      "actor": "ACIB_P0_FROZEN",
+      "name": "CONFIDENCE_P3_ABSTAIN",
+      "policy": {
+        "allow_reject": false,
+        "anchor_cosine_min": 0.8,
+        "base_margin_max": 0.0,
+        "benefit_min": 0.9,
+        "delay_frames": 3,
+        "displaced_max": 0,
+        "family": "confidence",
+        "harm_max": 0.02,
+        "identity_margin_min": 0.2,
+        "probability_min": 0.99,
+        "quality_min": 0.8,
+        "regret_max": 0.0,
+        "value_min": 0.0
+      }
+    },
+    {
+      "actor": "ACIB_P0_FROZEN",
+      "name": "RECOVERY_P0_BROAD",
+      "policy": {
+        "allow_reject": false,
+        "anchor_cosine_min": 0.4,
+        "base_margin_max": 4.0,
+        "benefit_min": 0.9,
+        "delay_frames": 1,
+        "displaced_max": 0,
+        "family": "recovery",
+        "harm_max": 0.02,
+        "identity_margin_min": 0.02,
+        "probability_min": 0.7,
+        "quality_min": 0.2,
+        "regret_max": 2.0,
+        "value_min": 0.0
+      }
+    },
+    {
+      "actor": "ACIB_P0_FROZEN",
+      "name": "RECOVERY_P1_MIDDLE",
+      "policy": {
+        "allow_reject": false,
+        "anchor_cosine_min": 0.6,
+        "base_margin_max": 2.0,
+        "benefit_min": 0.9,
+        "delay_frames": 2,
+        "displaced_max": 0,
+        "family": "recovery",
+        "harm_max": 0.02,
+        "identity_margin_min": 0.05,
+        "probability_min": 0.9,
+        "quality_min": 0.5,
+        "regret_max": 1.0,
+        "value_min": 0.0
+      }
+    },
+    {
+      "actor": "ACIB_P0_FROZEN",
+      "name": "RECOVERY_P2_STRICT",
+      "policy": {
+        "allow_reject": false,
+        "anchor_cosine_min": 0.8,
+        "base_margin_max": 1.0,
+        "benefit_min": 0.9,
+        "delay_frames": 2,
+        "displaced_max": 0,
+        "family": "recovery",
+        "harm_max": 0.02,
+        "identity_margin_min": 0.1,
+        "probability_min": 0.95,
+        "quality_min": 0.8,
+        "regret_max": 0.5,
+        "value_min": 0.0
+      }
+    },
+    {
+      "actor": "ACIB_P0_FROZEN",
+      "name": "RECOVERY_P3_ABSTAIN",
+      "policy": {
+        "allow_reject": false,
+        "anchor_cosine_min": 0.8,
+        "base_margin_max": 0.0,
+        "benefit_min": 0.9,
+        "delay_frames": 3,
+        "displaced_max": 0,
+        "family": "recovery",
+        "harm_max": 0.02,
+        "identity_margin_min": 0.2,
+        "probability_min": 0.99,
+        "quality_min": 0.8,
+        "regret_max": 0.0,
+        "value_min": 0.0
+      }
+    },
+    {
+      "actor": "ACIB_P0_FROZEN",
+      "name": "GLOBAL_REGRET_P0_BROAD",
+      "policy": {
+        "allow_reject": false,
+        "anchor_cosine_min": 0.4,
+        "base_margin_max": 4.0,
+        "benefit_min": 0.9,
+        "delay_frames": 1,
+        "displaced_max": 0,
+        "family": "global_regret",
+        "harm_max": 0.02,
+        "identity_margin_min": 0.02,
+        "probability_min": 0.7,
+        "quality_min": 0.2,
+        "regret_max": 2.0,
+        "value_min": 0.0
+      }
+    },
+    {
+      "actor": "ACIB_P0_FROZEN",
+      "name": "GLOBAL_REGRET_P1_MIDDLE",
+      "policy": {
+        "allow_reject": false,
+        "anchor_cosine_min": 0.6,
+        "base_margin_max": 2.0,
+        "benefit_min": 0.9,
+        "delay_frames": 2,
+        "displaced_max": 0,
+        "family": "global_regret",
+        "harm_max": 0.02,
+        "identity_margin_min": 0.05,
+        "probability_min": 0.9,
+        "quality_min": 0.5,
+        "regret_max": 1.0,
+        "value_min": 0.0
+      }
+    },
+    {
+      "actor": "ACIB_P0_FROZEN",
+      "name": "GLOBAL_REGRET_P2_STRICT",
+      "policy": {
+        "allow_reject": false,
+        "anchor_cosine_min": 0.8,
+        "base_margin_max": 1.0,
+        "benefit_min": 0.9,
+        "delay_frames": 2,
+        "displaced_max": 0,
+        "family": "global_regret",
+        "harm_max": 0.02,
+        "identity_margin_min": 0.1,
+        "probability_min": 0.95,
+        "quality_min": 0.8,
+        "regret_max": 0.5,
+        "value_min": 0.0
+      }
+    },
+    {
+      "actor": "ACIB_P0_FROZEN",
+      "name": "GLOBAL_REGRET_P3_ABSTAIN",
+      "policy": {
+        "allow_reject": false,
+        "anchor_cosine_min": 0.8,
+        "base_margin_max": 0.0,
+        "benefit_min": 0.9,
+        "delay_frames": 3,
+        "displaced_max": 0,
+        "family": "global_regret",
+        "harm_max": 0.02,
+        "identity_margin_min": 0.2,
+        "probability_min": 0.99,
+        "quality_min": 0.8,
+        "regret_max": 0.0,
+        "value_min": 0.0
+      }
+    },
+    {
+      "actor": "ACIB_P0_FROZEN",
+      "name": "PROTECTED_P0_BROAD",
+      "policy": {
+        "allow_reject": false,
+        "anchor_cosine_min": 0.4,
+        "base_margin_max": 4.0,
+        "benefit_min": 0.9,
+        "delay_frames": 1,
+        "displaced_max": 0,
+        "family": "protected",
+        "harm_max": 0.02,
+        "identity_margin_min": 0.02,
+        "probability_min": 0.7,
+        "quality_min": 0.2,
+        "regret_max": 2.0,
+        "value_min": 0.0
+      }
+    },
+    {
+      "actor": "ACIB_P0_FROZEN",
+      "name": "PROTECTED_P1_MIDDLE",
+      "policy": {
+        "allow_reject": false,
+        "anchor_cosine_min": 0.6,
+        "base_margin_max": 2.0,
+        "benefit_min": 0.9,
+        "delay_frames": 2,
+        "displaced_max": 0,
+        "family": "protected",
+        "harm_max": 0.02,
+        "identity_margin_min": 0.05,
+        "probability_min": 0.9,
+        "quality_min": 0.5,
+        "regret_max": 1.0,
+        "value_min": 0.0
+      }
+    },
+    {
+      "actor": "ACIB_P0_FROZEN",
+      "name": "PROTECTED_P2_STRICT",
+      "policy": {
+        "allow_reject": false,
+        "anchor_cosine_min": 0.8,
+        "base_margin_max": 1.0,
+        "benefit_min": 0.9,
+        "delay_frames": 2,
+        "displaced_max": 0,
+        "family": "protected",
+        "harm_max": 0.02,
+        "identity_margin_min": 0.1,
+        "probability_min": 0.95,
+        "quality_min": 0.8,
+        "regret_max": 0.5,
+        "value_min": 0.0
+      }
+    },
+    {
+      "actor": "ACIB_P0_FROZEN",
+      "name": "PROTECTED_P3_ABSTAIN",
+      "policy": {
+        "allow_reject": false,
+        "anchor_cosine_min": 0.8,
+        "base_margin_max": 0.0,
+        "benefit_min": 0.9,
+        "delay_frames": 3,
+        "displaced_max": 0,
+        "family": "protected",
+        "harm_max": 0.02,
+        "identity_margin_min": 0.2,
+        "probability_min": 0.99,
+        "quality_min": 0.8,
+        "regret_max": 0.0,
+        "value_min": 0.0
+      }
+    },
+    {
+      "actor": "ACIB_P0_FROZEN",
+      "name": "DELAYED_P0_BROAD",
+      "policy": {
+        "allow_reject": false,
+        "anchor_cosine_min": 0.4,
+        "base_margin_max": 4.0,
+        "benefit_min": 0.9,
+        "delay_frames": 1,
+        "displaced_max": 0,
+        "family": "delayed",
+        "harm_max": 0.02,
+        "identity_margin_min": 0.02,
+        "probability_min": 0.7,
+        "quality_min": 0.2,
+        "regret_max": 2.0,
+        "value_min": 0.0
+      }
+    },
+    {
+      "actor": "ACIB_P0_FROZEN",
+      "name": "DELAYED_P1_MIDDLE",
+      "policy": {
+        "allow_reject": false,
+        "anchor_cosine_min": 0.6,
+        "base_margin_max": 2.0,
+        "benefit_min": 0.9,
+        "delay_frames": 2,
+        "displaced_max": 0,
+        "family": "delayed",
+        "harm_max": 0.02,
+        "identity_margin_min": 0.05,
+        "probability_min": 0.9,
+        "quality_min": 0.5,
+        "regret_max": 1.0,
+        "value_min": 0.0
+      }
+    },
+    {
+      "actor": "ACIB_P0_FROZEN",
+      "name": "DELAYED_P2_STRICT",
+      "policy": {
+        "allow_reject": false,
+        "anchor_cosine_min": 0.8,
+        "base_margin_max": 1.0,
+        "benefit_min": 0.9,
+        "delay_frames": 2,
+        "displaced_max": 0,
+        "family": "delayed",
+        "harm_max": 0.02,
+        "identity_margin_min": 0.1,
+        "probability_min": 0.95,
+        "quality_min": 0.8,
+        "regret_max": 0.5,
+        "value_min": 0.0
+      }
+    },
+    {
+      "actor": "ACIB_P0_FROZEN",
+      "name": "DELAYED_P3_ABSTAIN",
+      "policy": {
+        "allow_reject": false,
+        "anchor_cosine_min": 0.8,
+        "base_margin_max": 0.0,
+        "benefit_min": 0.9,
+        "delay_frames": 3,
+        "displaced_max": 0,
+        "family": "delayed",
+        "harm_max": 0.02,
+        "identity_margin_min": 0.2,
+        "probability_min": 0.99,
+        "quality_min": 0.8,
+        "regret_max": 0.0,
+        "value_min": 0.0
+      }
+    },
+    {
+      "actor": "ACIB_P0_FROZEN",
+      "name": "ABSTAIN_P0_BROAD",
+      "policy": {
+        "allow_reject": false,
+        "anchor_cosine_min": 0.4,
+        "base_margin_max": 4.0,
+        "benefit_min": 0.9,
+        "delay_frames": 1,
+        "displaced_max": 0,
+        "family": "abstain",
+        "harm_max": 0.02,
+        "identity_margin_min": 0.02,
+        "probability_min": 0.7,
+        "quality_min": 0.2,
+        "regret_max": 2.0,
+        "value_min": 0.0
+      }
+    },
+    {
+      "actor": "ACIB_P0_FROZEN",
+      "name": "ABSTAIN_P1_MIDDLE",
+      "policy": {
+        "allow_reject": false,
+        "anchor_cosine_min": 0.6,
+        "base_margin_max": 2.0,
+        "benefit_min": 0.9,
+        "delay_frames": 2,
+        "displaced_max": 0,
+        "family": "abstain",
+        "harm_max": 0.02,
+        "identity_margin_min": 0.05,
+        "probability_min": 0.9,
+        "quality_min": 0.5,
+        "regret_max": 1.0,
+        "value_min": 0.0
+      }
+    },
+    {
+      "actor": "ACIB_P0_FROZEN",
+      "name": "ABSTAIN_P2_STRICT",
+      "policy": {
+        "allow_reject": false,
+        "anchor_cosine_min": 0.8,
+        "base_margin_max": 1.0,
+        "benefit_min": 0.9,
+        "delay_frames": 2,
+        "displaced_max": 0,
+        "family": "abstain",
+        "harm_max": 0.02,
+        "identity_margin_min": 0.1,
+        "probability_min": 0.95,
+        "quality_min": 0.8,
+        "regret_max": 0.5,
+        "value_min": 0.0
+      }
+    },
+    {
+      "actor": "ACIB_P0_FROZEN",
+      "name": "ABSTAIN_P3_ABSTAIN",
+      "policy": {
+        "allow_reject": false,
+        "anchor_cosine_min": 0.8,
+        "base_margin_max": 0.0,
+        "benefit_min": 0.9,
+        "delay_frames": 3,
+        "displaced_max": 0,
+        "family": "abstain",
+        "harm_max": 0.02,
+        "identity_margin_min": 0.2,
+        "probability_min": 0.99,
+        "quality_min": 0.8,
+        "regret_max": 0.0,
+        "value_min": 0.0
+      }
+    },
+    {
+      "actor": "ACIB_P0_FROZEN",
+      "name": "SHADOW_ACIB_P0",
+      "policy": {
+        "allow_reject": false,
+        "anchor_cosine_min": 0.6,
+        "base_margin_max": 1.0,
+        "benefit_min": 0.9,
+        "delay_frames": 2,
+        "displaced_max": 0,
+        "family": "shadow",
+        "harm_max": 0.02,
+        "identity_margin_min": 0.05,
+        "probability_min": 0.9,
+        "quality_min": 0.5,
+        "regret_max": 1.0,
+        "value_min": 0.0
+      }
+    },
+    {
+      "actor": "ACIB_FULL_FROZEN",
+      "name": "ORIGINAL_ACIB_FULL",
+      "policy": {
+        "allow_reject": false,
+        "anchor_cosine_min": 0.6,
+        "base_margin_max": 1.0,
+        "benefit_min": 0.9,
+        "delay_frames": 2,
+        "displaced_max": 0,
+        "family": "original",
+        "harm_max": 0.02,
+        "identity_margin_min": 0.05,
+        "probability_min": 0.9,
+        "quality_min": 0.5,
+        "regret_max": 1.0,
+        "value_min": 0.0
+      }
+    }
+  ],
+  "fixed_unique_configs_per_family": 4,
+  "frozen_before_new_gate_effects": true,
+  "historical_weight_reproduction_seeds": [
+    72101,
+    72102,
+    72103
+  ],
+  "new_fit_seeds_unaffected": [
+    72111,
+    72112,
+    72113
+  ],
+  "preregistration_sha256": "75efe4df8ff373b989cfd1501a8bc57d08c970fc979a332a8032178144987824",
+  "progression": "Continue C/D/E/F/H diagnostics and TRAIN matched-state learning even if fixed gates fail.",
+  "purpose": "Historical-development TRAIN engineering/scientific safety pilot; no best choice from these scenes becomes a final operating point.",
+  "registered_per_family_max": 64,
+  "reject_rule": "Fixed candidate-proposal gates abstain to KEEP when ACIB proposes NONE; original diagnostic retains original REJECT.",
+  "safe_controls_memory": "P0; write mechanisms evaluated separately, not inferred safe from zero writes.",
+  "sequence_cases_planned": 164,
+  "sequences": [
+    "dancetrack0001",
+    "dancetrack0002"
+  ],
+  "solver_change": false,
+  "source_freeze": {
+    "sam3_intermot/one_click/intervention_features.py": "a9371fa118a292eb90e1876e36770eb825074b2b5e50916fd8cc73fb9536c574",
+    "sam3_intermot/one_click/intervention_gate.py": "5b66188f5b848a7079e853d1a3371d8196f6cfc2010fcb715ac2104c16096cef",
+    "sam3_intermot/one_click/joint_intervention_primitives.py": "040420d19d324ebc97af964db947a6de681859596d2ceb290fa0e19a391980dc",
+    "sam3_intermot/one_click/safe_mot_bridge.py": "204c672f98f0a2c6fe55d0327d5d26ecc225d27ffd7962a721d1dd5d32b57b66"
+  },
+  "stage": "N72R21R1",
+  "version": "B_BOUNDED_4POINT_V1",
+  "zero_intervention_is_not_scientific_PASS": true
+}

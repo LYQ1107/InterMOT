@@ -1,0 +1,222 @@
+{
+  "stage": "N72R21R1",
+  "final_goal_file": "outputs/N72R21R1/FINAL_GOAL.json",
+  "version": "V1_BEFORE_NEW_MODEL_EFFECTS",
+  "protocol_frozen": true,
+  "hypotheses": {
+    "A": "Feasible wrong proposals plus joint-state propagation explain excess N10; contiguous N10 frames are not independent intervention events.",
+    "B": "Selective uncertainty/ownership/global-regret gates preserve baseline-correct tracks better than forced identity authority.",
+    "C": "Joint-state matched training transfers better than target-only training.",
+    "D": "Trajectory-aligned benefit/harm supervision better separates interventions than single-frame candidate correctness.",
+    "E": "Anchor/base agreement and calibrated NONE reduce unavailable-target takeover at nonzero useful coverage.",
+    "F": "Committed-only independent pending/trusted writes can improve retention without reinforcing rejected proposals.",
+    "G": "Sequence-isolated expanded TRAIN and fixed density strata expose transfer and coverage failures.",
+    "H": "Small scalar/logistic/ranker controls may outperform unnecessary complex controllers."
+  },
+  "phase_order": [
+    "A_history_and_first_divergence",
+    "B_C0_shadow_and_fixed_gates",
+    "C_joint_state_corpus",
+    "D_counterfactual_trajectory_labels",
+    "E_NONE_hard_negatives",
+    "F_committed_safe_memory",
+    "G_expanded_TRAIN",
+    "H_structural_comparisons",
+    "freeze_INNER_selected_policy",
+    "one_time_CONFIRMATION",
+    "five_tables_and_code_only_delivery"
+  ],
+  "historical_development_sequences": [
+    "dancetrack0001",
+    "dancetrack0002",
+    "dancetrack0023",
+    "dancetrack0024",
+    "dancetrack0039",
+    "dancetrack0057",
+    "dancetrack0062",
+    "dancetrack0072"
+  ],
+  "new_split_rule": {
+    "source": "Actual readable official DanceTrack40TRAIN inventory, before new policy effects",
+    "order": "Ascending SHA256('N72R21R1_SPLIT_V1:'+sequence), excluding historical eight",
+    "confirmation": "First8 of remaining32",
+    "inner": "Next8",
+    "fit": "Remaining16",
+    "missing_candidates": "Generate only selected TRAIN groups incrementally; never reshuffle because of measured performance",
+    "exposure_audit_required": true,
+    "manifest": "outputs/N72R21R1/data/NEW_SEQUENCE_SPLIT.json",
+    "confirmation_runtime_access": "Only once after model/threshold/operating-point source and SHA freeze"
+  },
+  "episode_rule": {
+    "old_pilot": "Keep both original deterministic clicks for reproduction",
+    "expanded_train": "At most3 eligible identities per sequence, sorted by first eligible visible frame then official sequence-local ID. Initial box height>=48 and width>=16; initial observed candidate IoU>=0.5 required, missing initial candidate is failure and not a replacement.",
+    "initialization": "SIMULATED_ONE_CLICK_FROM_GT; immutable RGB OSNet crop at sole event frame only",
+    "whole_video": "Every original frame, independent full joint multi-object rollout for each one-click episode",
+    "no_person_disjointness_claim": true
+  },
+  "candidate_policy": "Same sealed real SAM3/OSNet UID/geometry-filtered input; no GT-created candidates; recovery changes labelled separately and require TRAIN coverage bottleneck evidence.",
+  "runtime": "Current/past only, original exact joint solver unchanged, complete unique ownership, actual committed observation feedback, no retroactive output edits.",
+  "horizons": [
+    1,
+    5,
+    20,
+    50,
+    100
+  ],
+  "metrics": {
+    "primary": [
+      "strict_UID_recall",
+      "frame_N01",
+      "frame_N10",
+      "N01_minus_N10",
+      "beneficial_intervention_onsets",
+      "harmful_intervention_onsets",
+      "harm_duration",
+      "distinct_affected_public_IDs",
+      "propagation_length",
+      "takeover_frames_episodes_duration",
+      "candidate_coverage",
+      "return_recovery",
+      "correction_persistence"
+    ],
+    "co_primary": [
+      "HOTA",
+      "AssA",
+      "IDF1",
+      "IDSW",
+      "DetA",
+      "LocA",
+      "MOTA",
+      "FP",
+      "FN"
+    ],
+    "memory": [
+      "accepted",
+      "correct",
+      "verified_other",
+      "UNKNOWN_unverified",
+      "wrong_or_unverified_upper_bound",
+      "correct_retention",
+      "drift",
+      "cascade"
+    ],
+    "latency": [
+      "association_only",
+      "cached_replay",
+      "parameters",
+      "RSS",
+      "cached_FPS_NOT_PIXEL_FPS"
+    ],
+    "confidence_intervals": "Paired sequence-cluster bootstrap2000, seed72114; average seeds and episodes inside sequence, not independent frames/seeds."
+  },
+  "event_definitions": {
+    "divergence": "First current candidate->public ownership difference from independently evolved C0, not necessarily first harmful event.",
+    "N10": "C0 strictly correct clicked UID identity and treatment not strictly correct, after sole click.",
+    "direct_harm": "Current intervention changes treatment's own KEEP assignment from target-correct to incorrect (posthoc truth only).",
+    "propagation": "Subsequent N10 with no new directly harmful intervention is a state-history-associated diagnostic, not a causal-origin proof.",
+    "causal_root": "Only same-prestate cloned independent future branches can establish an onset's counterfactual contribution.",
+    "harm_runs": "Maximal contiguous N10 frames, with explicit duration/right-censoring; runs are not interchangeable with harmful intervention onsets.",
+    "non_target_damage": "Baseline-origin identity proxy and distinct affected public IDs; not distinct people or net harm unless measured."
+  },
+  "search": {
+    "seeds": [
+      72111,
+      72112,
+      72113
+    ],
+    "model_families": [
+      "fixed",
+      "learnable_scalar",
+      "logistic",
+      "small_MLP",
+      "pairwise_ranker",
+      "global_risk",
+      "causal_temporal",
+      "dual_state",
+      "action_value"
+    ],
+    "conditional_family": "Relational attention/backbone adaptation only after R0-R8 diagnosis and failed justified simple models; record prereg amendment before any new effect.",
+    "probability_min": [
+      0.7,
+      0.9,
+      0.95,
+      0.99
+    ],
+    "identity_margin_min": [
+      0.02,
+      0.05,
+      0.1,
+      0.2
+    ],
+    "baseline_uncertainty_margin_max": [
+      0,
+      1,
+      2,
+      4
+    ],
+    "global_regret_max": [
+      0,
+      0.5,
+      1,
+      2
+    ],
+    "quality_min": [
+      0.2,
+      0.5,
+      0.8
+    ],
+    "anchor_cos_min": [
+      0.4,
+      0.6,
+      0.8
+    ],
+    "causal_delay": [
+      1,
+      2,
+      3
+    ],
+    "memory_capacity": [
+      1,
+      4,
+      8
+    ],
+    "bounded_search": "At most64 deterministic predefined TRAIN-INNER configurations per fixed family; no full Cartesian blind search.",
+    "selection": "INNER safety lexicographic: global correctness, nonvacuous intervention, harmful onsets/collateral risk, N01-N10, then AssA/HOTA. Keep failure controls and all seeds.",
+    "early_stop": "Max30 epochs, patience5 INNER, finite gradients/checkpoint logs, best INNER and latest resume"
+  },
+  "gates": {
+    "gate0": "A/A and shadow unchanged, one click, all frames, exact globally unique solver, no GT runtime, pre-event equality, isolated branches and committed-only bank.",
+    "gate1": "Real useful accepted interventions; N01>N10 and beneficial independent onsets>harmful onsets; no severe non-target damage. Always KEEP is not PASS.",
+    "gate2": {
+      "delta_HOTA_min_0to1": 0.005,
+      "delta_AssA_min": 0,
+      "delta_DetA_min": -0.005,
+      "maximum_single_sequence_HOTA_drop_0to1": 0.02,
+      "wrong_takeover_must_reduce": true,
+      "paired_CI_reported_separately": true
+    },
+    "gate3": "All operating points/models frozen before one-time independent TRAIN confirmation; historical25VAL is not virgin.",
+    "memory": {
+      "wrong_or_unverified_max": 0.02,
+      "correct_retention_min": 0.6,
+      "zero_writes_pass": false
+    }
+  },
+  "resources": {
+    "cpu_workers_max": 4,
+    "ML_threads_per_worker": 1,
+    "gpu_simultaneous_max": 1,
+    "gpu_requires_idle_check_and_no_foreign_process_termination": true,
+    "storage_floor_GiB": 60,
+    "new_stage_artifact_budget_GiB": 8,
+    "case_runtime_seconds_max": 1800,
+    "fit_runtime_seconds_max": 3600,
+    "reuse_existing_environment": true,
+    "reuse_existing_candidates_and_weights": true,
+    "no_SOT": true,
+    "no_whole_dataset_SAM3_rerun": true
+  },
+  "progression": "A-H inexpensive diagnostics required; bounded TRAIN pilots when supervision exists; expand only after useful direction/global safety; an individual model failure does not close all branches.",
+  "stop": "Stop unsafe/OOM/nonfinite experiment and retain failure; all feasible preregistered branches exhausted or documented unavailable before final classification. No next stage automatic.",
+  "github_delivery": "Code/tests/necessary small Goal/protocol/research summary/manifests only; local data, media, embeddings, large traces, weights and bulk experiment files not uploaded."
+}

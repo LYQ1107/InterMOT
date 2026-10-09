@@ -1,0 +1,23 @@
+{
+  "stage": "N72R21R1",
+  "version": "A3_FIRST_EVENT_V1",
+  "frozen_before_branch_effects": true,
+  "TRAIN_only": true,
+  "event_rule": "For each original ACIB Full seed/sequence: unique first complete ownership divergence, first N10, first direct harmful own-KEEP override, first N01. Events are posthoc TRAIN diagnostics, not learned runtime selection.",
+  "source": "outputs/N72R21R1/diagnostics/FIRST_DIVERGENCE_AUDIT.json",
+  "branches": ["BASELINE_ASSOCIATION_NO_ACTOR", "KEEP_WITH_ACTOR", "FORCED_ORIGINAL_PROPOSAL", "REJECT_TARGET", "RAW_ANCHOR_TOP_ALTERNATIVE", "BASE_COLUMN_TOP_ALTERNATIVE"],
+  "prestate": "Same original treatment state immediately before the selected frame, reproduced from sole click and sealed actual candidates. Never an independent C0 future state.",
+  "baseline_branch": "Clone that treatment's prestate, disable actor and use original C0 association. Distinct from independent historical C0.",
+  "KEEP_branch": "Same joint prestate and current identity actor; score proposals but execute KEEP and feed back actual committed UID.",
+  "alternative_rule": "Choose highest raw anchor cosine or baseline target-column score among current real UIDs different from own KEEP; stable UID tie-break. No GT-best choice. Hard-infeasible alternatives explicitly fail without override.",
+  "forced_rule": "Replay the originally sealed GT-free selected action at the event. A KEEP onset is a real no-intervention control, not an effective action.",
+  "followup": "After the one tested action, all actor branches use KEEP for 100 original future frames; baseline branch retains no actor. This isolates a one-shot action's causal joint-state propagation, not a new online controller or oracle rollout.",
+  "horizons": [1, 5, 20, 50, 100],
+  "time_zero_separate": true,
+  "offline_GT_after_all_event_branches_sealed": true,
+  "branch_state_isolation": "Independent trackers, managers, mutable identity banks, pending proposals and anchors; frozen inference parameters may be shared, forward scratch read immediately only.",
+  "required_metrics": ["target_correct", "N01_vs_same_prestate_KEEP", "N10_vs_same_prestate_KEEP", "verified_other_takeover", "UNKNOWN", "non_target_origin_correct_frame_damage", "distinct_affected_public_ids", "ownership_divergence_frames", "births", "deaths", "memory_writes", "wrong_or_unknown_writes", "recovery_frame", "propagation_duration"],
+  "no_full_MOT_metric_claim_for_short_branch": true,
+  "no_confirm_VAL_test_access": true,
+  "scientific_PASS_from_reproduction": false
+}
