@@ -1,5 +1,27 @@
 # N72R21 execution log
 
+## Baseline prerequisite complete; frozen encoder controls
+
+All eight registered TRAIN scenes / 52 first-eligible clicks completed actual B6 OSTrack inference and sealed posthoc evaluation (54,990 future frames). Pooled visible recall is 37.15%, SOT success AUC 0.330413; its original always-box behavior gives 2,108 visible-GT gap false-presence frames. No new SOT training, physical absence, same-candidate or scientific success claim. Baseline-before-design is complete for this bounded F1 cohort.
+
+Recovered only official Torchreid Market1501 ResNet50 weights after existing-cache search, direct no-proxy timeout and documented ordinary proxy fallback. 100,438,087 bytes, SHA256 `15d3fab6912688516ed2c281961eaf7ee8590ff51dfd6f61ba64daba90325c31`; no ReID dataset obtained, no login/CAPTCHA bypass, no vendor checksum invented. Its old Python2/NumPy statistics initially fail modern restricted loading; narrow numeric globals plus Latin-1 decoding preserve `weights_only=True` and yield strict full-model loading. General ImageNet ResNet50 reuses existing SHA-verified cache. Both actual models passed real clicked-crop forward; code licenses/provenance/23.5M feature parameters recorded, weights not republished.
+
+Frozen encoder protocol precedes feature comparison. Three actual current-crop controls run on the exact valid SAM3 UID axis, with original pixels, matched crop preprocessing and an explicitly separate official general-transform control. One idle GPU, 12GiB allocation cap, roughly 604MB feature budget, no future GT in extraction, no backbone or threshold fit. Latest focused input/metric-contract tests: 28 passed. Full updated repository regression: 742 passed, 5 failed, 4 warnings in 50.61s. The same four pinned TrackEval CLI list-versus-path failures and one historical branch-literal assertion remain; no failure was hidden or patched. Previous XML snapshots remain retained.
+
+## Second milestone: real frozen baselines and SOT recovery
+
+Prepared 52 first-eligible one-click targets for all eight F1 TRAIN scenes. Completed nine real configurations B0–B5 over the full cohort using actual frozen Adapter/GRU/reliability model classes, with separate GT-free runtime seals and posthoc evaluations. No new learned model fitted. NativeReliability P1-fit/P0-deploy mismatch disclosed. Eight-scene score-versus-output audit compares actual UID decisions, not assumed memory effect.
+
+Last sequence 0072 contains 13 zero-area SAM3 boxes. Initial typed observation validation failed before a seal; its sole 0-byte stage file was moved recoverably to stage diagnostics. Versioned GT-free geometry repair applies identically to every comparator; raw tape, earlier seven sequence seals and historical code/results remain untouched. No material bytes deleted. Full geometry repair/initialization failures remain in manifests.
+
+Five deterministic first-event smoke videos were generated from real source frames, at actual FPS, with runtime versus clearly labelled posthoc GT overlays. Decoding verified 42/43/61/61/61 frames, 896,552 total bytes. Local non-commercial research only; no raw video/image upload. Installed three minimal optional tools into the existing environment, not a replacement environment.
+
+CHIRLA public metadata recovered to 18/20 official CSVs; no media, crop/query pixels, gate acceptance or credential request. Obtained full official person-2/3/7 box files for in-place TAO LaSOT TRAIN windows; original frame numbering/box alignment verified, but physical absence and original FPS still unknown. Invalid person-7 boxes are not absence labels. ScienceDB and LaSOT public category-page retries failed without download; previous attempts retained.
+
+OSTrack official model folder listing and size were inspected first. A bounded direct-first public-download attempt recovered only one checkpoint (370,179,249 bytes, SHA256 8e01d6251569ac84dbb53fdd062cd938551be2d889582f789aa3070196f42f41). Download provenance, throughput and absent vendor checksum recorded. Original code/config individually Git-blob verified; strict weights-only loader and real five-frame upstream A/A check pass. Initial inference import exposed unused upstream training-package dependencies; device-neutral wrapper imports the unchanged pure crop file directly, without rebuilding or patching upstream training/SAM3 environments. Two real TRAIN SOT sequences completed, remaining six started on then-idle GPU0 with a 12GiB allocation cap; no unrelated process terminated. SOT emits boxes always, no invented NONE head.
+
+Complete regression at the preceding 22-focused-test revision: 736 passed / 5 failed. First invocation lacked a python alias in PATH for two legacy subprocesses; correct-venv-PATH repeat independently confirms four TrackEval SEQMAP_FILE list-interface failures plus the old literal-branch assertion. Latest focused run after the geometry test: 23 passed. Both actual full-run XML logs and classified failures retained; no test/third-party changes hide failures. All 795 historical sealed files were rechecked unchanged.
+
 Final Goal: **One Click, Persistent Identity: Causal Long-Term Human Tracking Across Occlusion, Reappearance and Independent Recordings**.
 
 ## 2026-10-09 — M0/M1 started

@@ -1,0 +1,23 @@
+{
+  "status": "FROZEN_BEFORE_ACTUAL_SOT_TRACKING_REPLAY",
+  "final_goal_file": "outputs/N72R21/FINAL_GOAL.json",
+  "baseline": "B6_OFFICIAL_OSTRACK_VITB256_CE",
+  "source": "Official botaoye/OSTrack source, public explicitly linked pretrained model",
+  "checkpoint_sha256": "8e01d6251569ac84dbb53fdd062cd938551be2d889582f789aa3070196f42f41",
+  "DanceTrack_train_sequences": ["dancetrack0001", "dancetrack0002", "dancetrack0023", "dancetrack0024", "dancetrack0039", "dancetrack0057", "dancetrack0062", "dancetrack0072"],
+  "one_click_initialization": "Same 52 first-eligible real GT-box simulations as development/RUNTIME_INPUTS.json. Exactly one initial RGB template; no refresh, extra clicks or future GT.",
+  "initial_pilot_sequences": ["dancetrack0001", "dancetrack0002"],
+  "inference_configuration": "Official vitb_256_mae_ce_32x4_ep300.yaml: template factor2/size128, search factor4/size256, CTR_POINT CE mask, centered Hann response, mean box-head prediction, clip_box margin10",
+  "original_none_policy": "None: original SOT always outputs a box. Report this absence limitation rather than invent an identity/NONE head.",
+  "same_candidate_axis_as_SAM3": false,
+  "comparison_scope": "Separate pixel-localization SOT reference. Candidate-conditional identity-ranking metrics are not defined for this baseline.",
+  "metrics": ["all_visible_IoU_ge_0_5_target_recall", "SOT_success_AUC_21_thresholds_IoU_gt_threshold", "normalized_center_precision_geometric_threshold_0_2", "verified_wrong_person_takeover_frames", "visible_GT_gap_false_presence", "reappearance_delay_seconds"],
+  "AMP": false,
+  "precision_reason": "Keep original float32 inference; no precision/performance-based result selection",
+  "GPU_max_allocated_GiB": 12,
+  "sequence_job_max_minutes": 30,
+  "LaSOT_trimmed_TRAIN_pilot_status": "Not part of this initial DanceTrack pilot; original FPS/absence labels unresolved, protocol required before replay",
+  "cross_recording_claim_authorized": false,
+  "is_independent_final_validation": false,
+  "scientific_success_from_this_baseline_alone": false
+}

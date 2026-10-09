@@ -40,8 +40,12 @@ def run():
             'actual_fps_not_inferred_from_filename':True}
     write_json('datasets/CHIRLA_METADATA_AUDIT.json',result)
     local=read_json(OUT/'datasets/DATASET_DISCOVERY.json')
-    write_json('datasets/LASOT_PERSON_AUDIT.json',{'status':'EXISTING_TAO_DERIVED_PERSON_SUBSETS_NOT_ORIGINAL_FULL_LASOT',
-               'existing_subsets':local['lasot_person_existing'],'complete_original_sequences':0,'original_GT_verified':False,
+    latest=read_json(OUT/'datasets/LASOT_OFFICIAL_METADATA.json') if (OUT/'datasets/LASOT_OFFICIAL_METADATA.json').exists() else {}
+    boxes_available=bool(latest.get('local_train_windows')) and all(r.get('all_window_frames_have_official_boxes') for r in latest['local_train_windows'])
+    write_json('datasets/LASOT_PERSON_AUDIT.json',{'status':'EXISTING_TAO_CONTIGUOUS_TEMPORALLY_TRIMMED_WINDOWS_NOT_FULL_ORIGINAL_LASOT',
+               'existing_subsets':local['lasot_person_existing'],'complete_original_sequences':0,'original_GT_boxes_verified_for_three_TRAIN_windows':boxes_available,
+               'official_box_annotation_manifest':'outputs/N72R21/datasets/LASOT_OFFICIAL_METADATA.json' if latest else None,
+               'original_FPS_verified':False,
                'true_absence_labels_verified':False,'GT_gaps_as_absence_allowed':False,'cross_video_global_identity_claim_allowed':False,
                'download_priority':'BAIDU_DIRECT_FIRST_ALREADY_ATTEMPTED_NO_TRANSFER',
                'baidu_url':'https://pan.baidu.com/s/1xFANiqkBHytE7stMOLUpLQ','share_link_alive_or_extraction_code_verified':False,

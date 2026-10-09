@@ -1,0 +1,73 @@
+{
+  "GPU_allocation_cap_GiB": 12,
+  "all_visible_localization_and_NONE_are_separate_endpoints": true,
+  "candidate_axis": "Identical valid positive-area finite boxes/UIDs as versioned B0-B5 geometry repair",
+  "code_sha256": {
+    "/data3/liuyeqiang/InterMOT/scripts/n72r21_encoder_controls.py": "d3f2a687dc72bd91fa05abc998362a91dbf80f3035782b7289c3f9c9f947e5e4"
+  },
+  "competitive_negative_truth": "Evaluation only; deterministic one-to-one IoU>=0.5 verified other identity; unresolved not verified negatives",
+  "embedding": "FP32 model forward, L2 normalized, float16 storage then renormalize for scoring",
+  "empty_clipped_ROI_policy": "Preserve UID with disclosed historical black8x8 fallback; never select/drop it from future GT",
+  "encoders": [
+    "SECOND_REID_MARKET_RESNET50",
+    "GENERAL_IMAGENET_RESNET50_MATCHED",
+    "GENERAL_IMAGENET_RESNET50_NATIVE"
+  ],
+  "exactly_one_actual_clicked_crop_anchor_per_target": true,
+  "expected_total_new_feature_bytes": 604434432,
+  "feature_cache_limit_bytes": 2147483648,
+  "final_goal_file": "outputs/N72R21/FINAL_GOAL.json",
+  "future_GT_during_extraction": false,
+  "lineage": {
+    "general": {
+      "checkpoint_path": "/data3/liuyeqiang/.cache/torch/hub/checkpoints/resnet50-0676ba61.pth",
+      "checkpoint_sha256": "0676ba61b6795bbe1773cffd859882e5e297624d384b6993f7c9e683e722fb8a",
+      "existing_cache_reused_not_copied": true,
+      "feature_parameters": 23508032,
+      "official_url": "https://download.pytorch.org/models/resnet50-0676ba61.pth",
+      "source_code_license": "Torchvision BSD-3-Clause",
+      "source_pretraining": "ImageNet1K V1",
+      "strict_full_model_load_before_classifier_removal": true,
+      "weight_republication": false
+    },
+    "second_ReID": {
+      "arbitrary_pickle_loader_enabled": false,
+      "checkpoint_bytes": 100438087,
+      "checkpoint_sha256": "15d3fab6912688516ed2c281961eaf7ee8590ff51dfd6f61ba64daba90325c31",
+      "feature_parameters": 23508032,
+      "legacy_Python2_string_decoding": "latin1",
+      "legacy_numeric_allowlist": [
+        "numpy.core.multiarray.scalar",
+        "numpy.dtype",
+        "Float64DType",
+        "Float32DType"
+      ],
+      "source_code_sha256": "6b871338b477421bbc23bc7b3028735fc67ab4f551d979c5ae8b2edf2d02c168",
+      "source_pretraining": "ImageNet initialization then Market1501 identity softmax (official model zoo)",
+      "strict_full_model_load": true,
+      "total_parameters_with_unused_classifier": 25046831,
+      "weights_only_deserialization": true
+    }
+  },
+  "matched_preprocessing": "Same original RGB ROI; historical round+clip; tensor bilinear antialias resize 256x128; ImageNet mean/std; no augmentation/context",
+  "max_seconds_per_sequence": 1800,
+  "missing_positive_candidate_not_counted_as_discrimination_failure": true,
+  "native_general_preprocessing": "Same original RGB ROI then official Torchvision IMAGENET1K_V1 resize 256, center crop224 and normalization",
+  "no_deployment_threshold_reselected_from_outer_results": true,
+  "no_oracle_memory": true,
+  "not_cross_recording_final_science": true,
+  "one_GPU_job_only": true,
+  "reid_preprocessing_caveat": "Resolution/normalization match official 256x128; tensor antialiased resize harmonized with existing OSNet, not silently asserted PIL-identical",
+  "sequences": [
+    "dancetrack0001",
+    "dancetrack0002",
+    "dancetrack0023",
+    "dancetrack0024",
+    "dancetrack0039",
+    "dancetrack0057",
+    "dancetrack0062",
+    "dancetrack0072"
+  ],
+  "status": "FROZEN_BEFORE_ENCODER_CONTROL_FEATURE_EXTRACTION_OR_COMPARISON",
+  "training_or_threshold_fit": false
+}

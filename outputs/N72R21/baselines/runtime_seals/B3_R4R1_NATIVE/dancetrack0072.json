@@ -1,0 +1,413 @@
+{
+  "AMP": false,
+  "actual_adapter_models": [
+    {
+      "actual_training_sequences": [
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062"
+      ],
+      "parameters": 0,
+      "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0072__seed720321.pt",
+      "seed": 720321,
+      "sha256": "ec3ce4538291f7d4fe1cdc15069ed7243743d40112fffbd1fa546befa2117885"
+    },
+    {
+      "actual_training_sequences": [
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062"
+      ],
+      "parameters": 0,
+      "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0072__seed720322.pt",
+      "seed": 720322,
+      "sha256": "4af9d71618075cd3d2841810fab73b30b0a6d787a4ec84d9609bab9ea4ec7332"
+    },
+    {
+      "actual_training_sequences": [
+        "dancetrack0002",
+        "dancetrack0023",
+        "dancetrack0024",
+        "dancetrack0039",
+        "dancetrack0057",
+        "dancetrack0062"
+      ],
+      "parameters": 0,
+      "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0072__seed720323.pt",
+      "seed": 720323,
+      "sha256": "5866334ebe74740a5b5b2c4db5fbcf1f6907d29a889d9b8cbc49be1c0be69210"
+    }
+  ],
+  "actual_gru_sha256": "94ba9c44e177b254ee54984195e839f37c78a648c010ffc723dd3f1d553976a2",
+  "all_baselines_same_retained_candidate_UID_axis": true,
+  "artifacts": [
+    {
+      "episode_uid": "dancetrack0072__click0047",
+      "frames": 1202,
+      "initialization_candidate_uid": "dancetrack0072:0:3:3",
+      "initialization_failure": false,
+      "path": "/data3/liuyeqiang/InterMOT_N72R21_assets/baselines/runtime/B3_R4R1_NATIVE/dancetrack0072__click0047.jsonl.zst",
+      "sha256": "e70a7bd6da4442c7032372218f5484aacd4f32da1a32b05efdfeab9f6b554e51"
+    },
+    {
+      "episode_uid": "dancetrack0072__click0048",
+      "frames": 1202,
+      "initialization_candidate_uid": "dancetrack0072:0:4:4",
+      "initialization_failure": false,
+      "path": "/data3/liuyeqiang/InterMOT_N72R21_assets/baselines/runtime/B3_R4R1_NATIVE/dancetrack0072__click0048.jsonl.zst",
+      "sha256": "8829fe2f01d3d25664739e869e1c62b75e511abc28efcdbf4f4b29e718d8b778"
+    },
+    {
+      "episode_uid": "dancetrack0072__click0049",
+      "frames": 1202,
+      "initialization_candidate_uid": "dancetrack0072:0:0:0",
+      "initialization_failure": false,
+      "path": "/data3/liuyeqiang/InterMOT_N72R21_assets/baselines/runtime/B3_R4R1_NATIVE/dancetrack0072__click0049.jsonl.zst",
+      "sha256": "8d8ec329069735de23b3a0c9f330367b2ddca5e3f631e00aeb931e2ad72a3190"
+    },
+    {
+      "episode_uid": "dancetrack0072__click0050",
+      "frames": 1202,
+      "initialization_candidate_uid": "dancetrack0072:0:2:2",
+      "initialization_failure": false,
+      "path": "/data3/liuyeqiang/InterMOT_N72R21_assets/baselines/runtime/B3_R4R1_NATIVE/dancetrack0072__click0050.jsonl.zst",
+      "sha256": "24044fae8ccfbb073dc62d93a7061de741452e0080948083282090fd38bbd21b"
+    },
+    {
+      "episode_uid": "dancetrack0072__click0051",
+      "frames": 1202,
+      "initialization_candidate_uid": "dancetrack0072:0:4:4",
+      "initialization_failure": false,
+      "path": "/data3/liuyeqiang/InterMOT_N72R21_assets/baselines/runtime/B3_R4R1_NATIVE/dancetrack0072__click0051.jsonl.zst",
+      "sha256": "b5fe34c7f08f2244cd97deed130d95fcf566c38c91e69fb1ec6bc4bb9313ca52"
+    }
+  ],
+  "candidate_axis_changed": true,
+  "candidate_sha256": {
+    "embeddings": "b98c136170cd40fb758b15a541ba4e31a3e31e38b4ae64cdc14a3192fb85ab42",
+    "metadata": "897a1cd0f956c563d6a7f2b56c82d16d08472c6081ef6e4ecf213ad9ee6eadab"
+  },
+  "case": "B3_R4R1_NATIVE",
+  "code_sha256": {
+    "sam3_intermot/association/causal_identity_tracker.py": "a73a3ec784c1c09d45b329c4863d7569d7de218dbb408d90313766ea3ba32ce9",
+    "sam3_intermot/association/causal_state_commit.py": "0a146541dd6ca3d727fba1fe4bd1763e4f37ad2b2f54af531d58095c7a201e15",
+    "sam3_intermot/association/opportunity_memory.py": "3bd3327a6c8ccb6b862ace6c62a1696cd55dc2510d33191e40a61425e02e3461",
+    "sam3_intermot/association/opportunity_tracker.py": "e771f4604f0a60abb248da1304947b1881f767736d92e1dad63c8e010437695f",
+    "sam3_intermot/one_click/runtime.py": "454d79a0a03a283d343c82543f1fac0041f360fe9a0085249e309378f92a5226",
+    "scripts/n72r21_baselines.py": "d5cc5204f1c94723b705bbc2e60d9543e2d62046fea09700a20bf416bbb2ccfe",
+    "scripts/n72r21_baselines_geometry_repair.py": "3e16fc38cebf1d297bd35fe5fa8bea44bec7eb1e1f26f9805d6cdbfeb3358215"
+  },
+  "device": "CPU",
+  "exposure": "All eight scenes repeatedly exposed historical TRAIN; not virgin final validation",
+  "future_gt_used": false,
+  "historical_native_training_state": "P1",
+  "historical_policy_manifest_sha256": "f299b4a9b12696c01a3b68e32a6beda59b0f0d74a118f1b6986fb4b2765c3d8f",
+  "initialization_manifest_sha256": "4af57438ecdddd3b75681697761dff2da31e071f51b61f42f152719c6a3872a1",
+  "input_validity_repair": "GT_FREE_REMOVE_ONLY_ZERO_AREA_NONFINITE_BOXES",
+  "invalid_geometry_excluded": [
+    {
+      "box_xyxy": [
+        432.99999237060547,
+        403.0000162124634,
+        432.99999237060547,
+        403.0000162124634
+      ],
+      "candidate_uid": "dancetrack0072:125:9:9",
+      "frame": 125,
+      "reason": "NONFINITE_OR_NONPOSITIVE_GEOMETRY"
+    },
+    {
+      "box_xyxy": [
+        655.0,
+        448.0000162124634,
+        655.0,
+        458.0000162869692
+      ],
+      "candidate_uid": "dancetrack0072:126:7:8",
+      "frame": 126,
+      "reason": "NONFINITE_OR_NONPOSITIVE_GEOMETRY"
+    },
+    {
+      "box_xyxy": [
+        655.0,
+        448.0000162124634,
+        655.0,
+        458.0000162869692
+      ],
+      "candidate_uid": "dancetrack0072:127:7:9",
+      "frame": 127,
+      "reason": "NONFINITE_OR_NONPOSITIVE_GEOMETRY"
+    },
+    {
+      "box_xyxy": [
+        645.9999847412109,
+        306.00000858306885,
+        645.9999847412109,
+        306.00000858306885
+      ],
+      "candidate_uid": "dancetrack0072:142:5:5",
+      "frame": 142,
+      "reason": "NONFINITE_OR_NONPOSITIVE_GEOMETRY"
+    },
+    {
+      "box_xyxy": [
+        664.0000152587891,
+        306.00000858306885,
+        664.0000152587891,
+        306.00000858306885
+      ],
+      "candidate_uid": "dancetrack0072:143:5:5",
+      "frame": 143,
+      "reason": "NONFINITE_OR_NONPOSITIVE_GEOMETRY"
+    },
+    {
+      "box_xyxy": [
+        424.00001525878906,
+        378.00002574920654,
+        424.00001525878906,
+        378.00002574920654
+      ],
+      "candidate_uid": "dancetrack0072:144:7:9",
+      "frame": 144,
+      "reason": "NONFINITE_OR_NONPOSITIVE_GEOMETRY"
+    },
+    {
+      "box_xyxy": [
+        424.00001525878906,
+        178.00000548362732,
+        424.00001525878906,
+        178.00000548362732
+      ],
+      "candidate_uid": "dancetrack0072:148:8:8",
+      "frame": 148,
+      "reason": "NONFINITE_OR_NONPOSITIVE_GEOMETRY"
+    },
+    {
+      "box_xyxy": [
+        415.0,
+        465.9999990463257,
+        415.0,
+        465.9999990463257
+      ],
+      "candidate_uid": "dancetrack0072:153:10:10",
+      "frame": 153,
+      "reason": "NONFINITE_OR_NONPOSITIVE_GEOMETRY"
+    },
+    {
+      "box_xyxy": [
+        507.99999237060547,
+        293.0000066757202,
+        508.99999238550663,
+        293.0000066757202
+      ],
+      "candidate_uid": "dancetrack0072:155:5:5",
+      "frame": 155,
+      "reason": "NONFINITE_OR_NONPOSITIVE_GEOMETRY"
+    },
+    {
+      "box_xyxy": [
+        455.0,
+        413.00002098083496,
+        455.0,
+        413.00002098083496
+      ],
+      "candidate_uid": "dancetrack0072:157:5:5",
+      "frame": 157,
+      "reason": "NONFINITE_OR_NONPOSITIVE_GEOMETRY"
+    },
+    {
+      "box_xyxy": [
+        970.9999847412109,
+        362.99999713897705,
+        970.9999847412109,
+        362.99999713897705
+      ],
+      "candidate_uid": "dancetrack0072:158:6:9",
+      "frame": 158,
+      "reason": "NONFINITE_OR_NONPOSITIVE_GEOMETRY"
+    },
+    {
+      "box_xyxy": [
+        953.0000305175781,
+        433.0000305175781,
+        953.0000305175781,
+        433.0000305175781
+      ],
+      "candidate_uid": "dancetrack0072:374:5:5",
+      "frame": 374,
+      "reason": "NONFINITE_OR_NONPOSITIVE_GEOMETRY"
+    },
+    {
+      "box_xyxy": [
+        944.0000152587891,
+        243.00000429153442,
+        944.0000152587891,
+        244.0000043157488
+      ],
+      "candidate_uid": "dancetrack0072:381:5:5",
+      "frame": 381,
+      "reason": "NONFINITE_OR_NONPOSITIVE_GEOMETRY"
+    }
+  ],
+  "native_deployment_state": "P0",
+  "native_models": [
+    {
+      "diagnostics": {
+        "approved_actual_value_mean": 0.726239800453186,
+        "approved_harmful": 2048,
+        "epoch_losses": [
+          1.1239597043771854,
+          1.0345663551626534,
+          1.010828732759103,
+          1.0023070423082374,
+          0.9979816147650795,
+          0.9969224676318552,
+          0.9956933869712654,
+          0.9946964616062998,
+          0.9928255403178862,
+          0.9940040495203829,
+          0.9921117102962801,
+          0.9924605790225939,
+          0.9922875446834784,
+          0.9918114577216663,
+          0.9907213312455978,
+          0.9918864814714453,
+          0.9926504472206379,
+          0.9924289536202091,
+          0.9923666016808872,
+          0.9928799346945751,
+          0.9940827961625724,
+          0.9916905925191682,
+          0.9925000941616365,
+          0.9923765412692366,
+          0.9938700020998373,
+          0.9916787428417425,
+          0.9921177796933843,
+          0.9935962146726148,
+          0.9939347519271675,
+          0.9935068919740874
+        ],
+        "fit_only_diagnostic_not_generalization": true,
+        "predicted_approved": 14962,
+        "value_MAE": 0.6601491570472717
+      },
+      "negative": 20812,
+      "parameters": 33,
+      "path": "/data3/liuyeqiang/InterMOT_N72R20R4R1_assets/models/dancetrack0072__NATIVE_RELIABILITY__seed720321.pt",
+      "positive": 23347,
+      "purpose": "NATIVE_RELIABILITY",
+      "seed": 720321,
+      "sha256": "2cb26edafd71b7b33d43632b75c60eeb8c5789a2251e338ca7071698a41d88e7"
+    },
+    {
+      "diagnostics": {
+        "approved_actual_value_mean": 0.7204540967941284,
+        "approved_harmful": 2130,
+        "epoch_losses": [
+          1.1908397208685162,
+          1.0547145707853909,
+          1.0219660750750839,
+          1.0088446338971455,
+          1.003700355688731,
+          0.9988756166107353,
+          0.9969694319812731,
+          0.9966002730117447,
+          0.9929457279457443,
+          0.9943581942854256,
+          0.9951546767662311,
+          0.993206662008132,
+          0.9919734974017088,
+          0.9918499006622139,
+          0.9939709675723108,
+          0.9917540837978495,
+          0.9919654281660059,
+          0.9916975135090708,
+          0.9937171065944365,
+          0.9899415318993317,
+          0.9916378780343067,
+          0.9922383729068712,
+          0.991350087626227,
+          0.9928088064851432,
+          0.993296557459338,
+          0.9915893660194572,
+          0.9921729023429169,
+          0.993009221964869,
+          0.9913347938965107,
+          0.9926164897008874
+        ],
+        "fit_only_diagnostic_not_generalization": true,
+        "predicted_approved": 15239,
+        "value_MAE": 0.6570286750793457
+      },
+      "negative": 20812,
+      "parameters": 33,
+      "path": "/data3/liuyeqiang/InterMOT_N72R20R4R1_assets/models/dancetrack0072__NATIVE_RELIABILITY__seed720322.pt",
+      "positive": 23347,
+      "purpose": "NATIVE_RELIABILITY",
+      "seed": 720322,
+      "sha256": "fb0002cab4c548b33706fa9864e681e8fd3392c4524cdcf4bbffc7bbb7efb0bc"
+    },
+    {
+      "diagnostics": {
+        "approved_actual_value_mean": 0.7215422987937927,
+        "approved_harmful": 2116,
+        "epoch_losses": [
+          1.288810075014487,
+          1.0782947451218792,
+          1.0335491121500389,
+          1.0199440135352913,
+          1.0131955037171814,
+          1.0077073409639556,
+          1.006058936146484,
+          1.0040605335400021,
+          1.001322061851107,
+          0.9983374839541556,
+          0.9974948585718527,
+          0.9959113632125416,
+          0.9953779167142408,
+          0.994866567096491,
+          0.9929337124714906,
+          0.9931789054267708,
+          0.9931079896017053,
+          0.9927023854748956,
+          0.9909144468691157,
+          0.9935893025891535,
+          0.9926033540703785,
+          0.9916708791392973,
+          0.9925542919115088,
+          0.9925577948833334,
+          0.9908413948683903,
+          0.9917656628564856,
+          0.9925324300239826,
+          0.9916859995359661,
+          0.9932829703407726,
+          0.9916056702876913
+        ],
+        "fit_only_diagnostic_not_generalization": true,
+        "predicted_approved": 15198,
+        "value_MAE": 0.6588572859764099
+      },
+      "negative": 20812,
+      "parameters": 33,
+      "path": "/data3/liuyeqiang/InterMOT_N72R20R4R1_assets/models/dancetrack0072__NATIVE_RELIABILITY__seed720323.pt",
+      "positive": 23347,
+      "purpose": "NATIVE_RELIABILITY",
+      "seed": 720323,
+      "sha256": "32b992861d1152d36574bfa11fed64511fff5a17f27928a577682c4a0b068dd1"
+    }
+  ],
+  "new_training": false,
+  "protocol_repair_manifest_sha256": "05f7ca52527397a4d886975009ce4d9637edb2dedbe357765e2e656d9829fe24",
+  "raw_source_tape_modified": false,
+  "runtime_truth_opened": false,
+  "sequence": "dancetrack0072",
+  "sequence_cumulative_seconds": 62.27122976600367,
+  "status": "SEALED_GT_FREE_RUNTIME",
+  "thresholds": "B0 uncalibrated engineering defaults; B1 historical fit/inner-frozen write score/margin; tracker native NONE mechanism unchanged"
+}

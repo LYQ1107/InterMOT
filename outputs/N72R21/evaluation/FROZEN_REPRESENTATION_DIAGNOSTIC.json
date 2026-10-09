@@ -1,0 +1,1182 @@
+{
+  "all_visible_tracking_metrics_reported_separately_in_baselines": true,
+  "candidate_missing_not_counted_as_identity_discrimination_win_or_loss": true,
+  "complete_registered_cohort": true,
+  "negative_identity_verification": "Current deterministic >=0.5 one-to-one GT matching; unresolved excluded, not guessed",
+  "new_fit_or_threshold_tuning": false,
+  "other_ReID_encoder_and_general_visual_encoder_controls": "PENDING_ACTUAL_FEATURE_EXTRACTION_NOT_REPLACED_BY_A_BIG_CONTROLLER",
+  "per_sequence": {
+    "dancetrack0001": {
+      "actual_adapter_model_manifest": [
+        {
+          "actual_training_sequences": [
+            "dancetrack0023",
+            "dancetrack0024",
+            "dancetrack0039",
+            "dancetrack0057",
+            "dancetrack0062",
+            "dancetrack0072"
+          ],
+          "parameters": 0,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0001__seed720321.pt",
+          "seed": 720321,
+          "sha256": "9ae70ee85761b6d3d5907ee2a76f790facc760d48da5e5245e95443829a94425"
+        },
+        {
+          "actual_training_sequences": [
+            "dancetrack0023",
+            "dancetrack0024",
+            "dancetrack0039",
+            "dancetrack0057",
+            "dancetrack0062",
+            "dancetrack0072"
+          ],
+          "parameters": 0,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0001__seed720322.pt",
+          "seed": 720322,
+          "sha256": "679f37f6dc83a5a1d96195a4281a0d52a549c7986094c102b401caaceb4d9c4d"
+        },
+        {
+          "actual_training_sequences": [
+            "dancetrack0023",
+            "dancetrack0024",
+            "dancetrack0039",
+            "dancetrack0057",
+            "dancetrack0062",
+            "dancetrack0072"
+          ],
+          "parameters": 0,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0001__seed720323.pt",
+          "seed": 720323,
+          "sha256": "035aa5d3051f6e0a5b4aee90ad9bdf487e2904bcd8497f0fe6bbf7097001112f"
+        }
+      ],
+      "counts": {
+        "competitive_true_other_ID": 4554,
+        "target_candidate_available": 4554,
+        "target_visible": 4905,
+        "unresolved_candidates_not_verified_negatives": 6832
+      },
+      "representations": {
+        "R3R2_STRICT_ADAPTER_ENSEMBLE": {
+          "0_5_SECONDS": {
+            "P10_P25_P75_margin": [
+              -0.1280207574367523,
+              -0.06973707675933838,
+              0.022929415106773376
+            ],
+            "competitive_frames": 619,
+            "hard_negative_win_rate": 0.36995153473344106,
+            "mean_margin": -0.02919654385675714,
+            "median_margin": -0.02230319380760193
+          },
+          "5_20_SECONDS": {
+            "P10_P25_P75_margin": [
+              -0.13631965219974518,
+              -0.0825599730014801,
+              0.006061553955078125
+            ],
+            "competitive_frames": 1921,
+            "hard_negative_win_rate": 0.2868297761582509,
+            "mean_margin": -0.04151016158061,
+            "median_margin": -0.038405925035476685
+          },
+          "ALL_FUTURE_COMPETITIVE": {
+            "P10_P25_P75_margin": [
+              -0.16362297683954238,
+              -0.0985308438539505,
+              0.00042197108268737793
+            ],
+            "competitive_frames": 4554,
+            "hard_negative_win_rate": 0.2534036012296882,
+            "mean_margin": -0.0548353796292278,
+            "median_margin": -0.04463636130094528
+          },
+          "GT20_SECONDS_WITHIN_RECORDING": {
+            "P10_P25_P75_margin": [
+              -0.2036414712667465,
+              -0.12905020266771317,
+              -0.012721538543701172
+            ],
+            "competitive_frames": 2014,
+            "hard_negative_win_rate": 0.18570009930486595,
+            "mean_margin": -0.07542534150338576,
+            "median_margin": -0.05869238078594208
+          }
+        },
+        "RAW_OSNET": {
+          "0_5_SECONDS": {
+            "P10_P25_P75_margin": [
+              -0.09540247917175293,
+              -0.05766451358795166,
+              0.02211993932723999
+            ],
+            "competitive_frames": 619,
+            "hard_negative_win_rate": 0.39095315024232635,
+            "mean_margin": -0.01973515633427461,
+            "median_margin": -0.01596975326538086
+          },
+          "5_20_SECONDS": {
+            "P10_P25_P75_margin": [
+              -0.1072877049446106,
+              -0.0655066967010498,
+              0.010286450386047363
+            ],
+            "competitive_frames": 1921,
+            "hard_negative_win_rate": 0.3300364393545029,
+            "mean_margin": -0.030678841920025582,
+            "median_margin": -0.02433311939239502
+          },
+          "ALL_FUTURE_COMPETITIVE": {
+            "P10_P25_P75_margin": [
+              -0.14331050515174865,
+              -0.08523553609848022,
+              0.006302475929260254
+            ],
+            "competitive_frames": 4554,
+            "hard_negative_win_rate": 0.295344751866491,
+            "mean_margin": -0.04409351143912364,
+            "median_margin": -0.03407546877861023
+          },
+          "GT20_SECONDS_WITHIN_RECORDING": {
+            "P10_P25_P75_margin": [
+              -0.16764219999313354,
+              -0.13360856473445892,
+              -0.004630759358406067
+            ],
+            "competitive_frames": 2014,
+            "hard_negative_win_rate": 0.23286991062562065,
+            "mean_margin": -0.06437524031503672,
+            "median_margin": -0.05691465735435486
+          }
+        }
+      }
+    },
+    "dancetrack0002": {
+      "actual_adapter_model_manifest": [
+        {
+          "actual_training_sequences": [
+            "dancetrack0001",
+            "dancetrack0024",
+            "dancetrack0039",
+            "dancetrack0057",
+            "dancetrack0062",
+            "dancetrack0072"
+          ],
+          "parameters": 0,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0002__seed720321.pt",
+          "seed": 720321,
+          "sha256": "fa9e6875da53c40c084c6332a1f460d78915e7eeae1f3682a51350eecf9d8204"
+        },
+        {
+          "actual_training_sequences": [
+            "dancetrack0001",
+            "dancetrack0024",
+            "dancetrack0039",
+            "dancetrack0057",
+            "dancetrack0062",
+            "dancetrack0072"
+          ],
+          "parameters": 0,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0002__seed720322.pt",
+          "seed": 720322,
+          "sha256": "de82b23bf9db054b37ecd60cbb9a5a22fb4643caf9ec92b067f1d9baab86468d"
+        },
+        {
+          "actual_training_sequences": [
+            "dancetrack0001",
+            "dancetrack0024",
+            "dancetrack0039",
+            "dancetrack0057",
+            "dancetrack0062",
+            "dancetrack0072"
+          ],
+          "parameters": 0,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0002__seed720323.pt",
+          "seed": 720323,
+          "sha256": "babda3054ba0042962a9d78b8879e815c887c34d174b33f63fa58f3587b6ad54"
+        }
+      ],
+      "counts": {
+        "competitive_true_other_ID": 6910,
+        "target_candidate_available": 6916,
+        "target_visible": 9249,
+        "unresolved_candidates_not_verified_negatives": 16440
+      },
+      "representations": {
+        "R3R2_STRICT_ADAPTER_ENSEMBLE": {
+          "0_5_SECONDS": {
+            "P10_P25_P75_margin": [
+              -0.11053039580583572,
+              -0.07110714167356491,
+              0.013266295194625854
+            ],
+            "competitive_frames": 685,
+            "hard_negative_win_rate": 0.3445255474452555,
+            "mean_margin": -0.029471464547580175,
+            "median_margin": -0.023520231246948242
+          },
+          "5_20_SECONDS": {
+            "P10_P25_P75_margin": [
+              -0.1499346375465393,
+              -0.10063942521810532,
+              -0.01892295479774475
+            ],
+            "competitive_frames": 1739,
+            "hard_negative_win_rate": 0.15756181713628523,
+            "mean_margin": -0.06109046862557607,
+            "median_margin": -0.05794369429349899
+          },
+          "ALL_FUTURE_COMPETITIVE": {
+            "P10_P25_P75_margin": [
+              -0.13512116223573684,
+              -0.0887873712927103,
+              -0.011050067842006683
+            ],
+            "competitive_frames": 6910,
+            "hard_negative_win_rate": 0.18813314037626627,
+            "mean_margin": -0.05203971004021905,
+            "median_margin": -0.0468842089176178
+          },
+          "GT20_SECONDS_WITHIN_RECORDING": {
+            "P10_P25_P75_margin": [
+              -0.13443469256162643,
+              -0.08655325695872307,
+              -0.012034671381115913
+            ],
+            "competitive_frames": 4486,
+            "hard_negative_win_rate": 0.1761034329023629,
+            "mean_margin": -0.05197728894849408,
+            "median_margin": -0.0463053360581398
+          }
+        },
+        "RAW_OSNET": {
+          "0_5_SECONDS": {
+            "P10_P25_P75_margin": [
+              -0.0607736349105835,
+              -0.03191417455673218,
+              0.026199698448181152
+            ],
+            "competitive_frames": 685,
+            "hard_negative_win_rate": 0.4802919708029197,
+            "mean_margin": -0.0031466007232666014,
+            "median_margin": -0.0018966197967529297
+          },
+          "5_20_SECONDS": {
+            "P10_P25_P75_margin": [
+              -0.10555949211120605,
+              -0.07240164279937744,
+              -0.006343215703964233
+            ],
+            "competitive_frames": 1739,
+            "hard_negative_win_rate": 0.20759056929269695,
+            "mean_margin": -0.04086882568351698,
+            "median_margin": -0.039067864418029785
+          },
+          "ALL_FUTURE_COMPETITIVE": {
+            "P10_P25_P75_margin": [
+              -0.1164945900440216,
+              -0.07593196630477905,
+              -0.006499364972114563
+            ],
+            "competitive_frames": 6910,
+            "hard_negative_win_rate": 0.2094066570188133,
+            "mean_margin": -0.042969791666643664,
+            "median_margin": -0.04034632444381714
+          },
+          "GT20_SECONDS_WITHIN_RECORDING": {
+            "P10_P25_P75_margin": [
+              -0.1238972544670105,
+              -0.08242638409137726,
+              -0.014230787754058838
+            ],
+            "competitive_frames": 4486,
+            "hard_negative_win_rate": 0.16874721355327685,
+            "mean_margin": -0.0498651250685319,
+            "median_margin": -0.04612371325492859
+          }
+        }
+      }
+    },
+    "dancetrack0023": {
+      "actual_adapter_model_manifest": [
+        {
+          "actual_training_sequences": [
+            "dancetrack0001",
+            "dancetrack0002",
+            "dancetrack0039",
+            "dancetrack0057",
+            "dancetrack0062",
+            "dancetrack0072"
+          ],
+          "parameters": 0,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0023__seed720321.pt",
+          "seed": 720321,
+          "sha256": "b51a92797c306664c98541013a1cb59fa38547cc3d1954f65b845449ab18b852"
+        },
+        {
+          "actual_training_sequences": [
+            "dancetrack0001",
+            "dancetrack0002",
+            "dancetrack0039",
+            "dancetrack0057",
+            "dancetrack0062",
+            "dancetrack0072"
+          ],
+          "parameters": 0,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0023__seed720322.pt",
+          "seed": 720322,
+          "sha256": "660538c9e986229a3317f5ab00b4264618e25f327dd28595c77a45b1ad763d54"
+        },
+        {
+          "actual_training_sequences": [
+            "dancetrack0001",
+            "dancetrack0002",
+            "dancetrack0039",
+            "dancetrack0057",
+            "dancetrack0062",
+            "dancetrack0072"
+          ],
+          "parameters": 0,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0023__seed720323.pt",
+          "seed": 720323,
+          "sha256": "256e52442bbc9a3ac77d95c9d457c582c8a293304fb9142dcfe371ac7a7090c3"
+        }
+      ],
+      "counts": {
+        "competitive_true_other_ID": 8953,
+        "target_candidate_available": 8985,
+        "target_visible": 13016,
+        "unresolved_candidates_not_verified_negatives": 23886
+      },
+      "representations": {
+        "R3R2_STRICT_ADAPTER_ENSEMBLE": {
+          "0_5_SECONDS": {
+            "P10_P25_P75_margin": [
+              -0.1466971293091774,
+              -0.09773851931095123,
+              0.0112982876598835
+            ],
+            "competitive_frames": 722,
+            "hard_negative_win_rate": 0.3171745152354571,
+            "mean_margin": -0.04276720672804563,
+            "median_margin": -0.035331398248672485
+          },
+          "5_20_SECONDS": {
+            "P10_P25_P75_margin": [
+              -0.17301773875951768,
+              -0.11720803380012512,
+              -0.009399067610502243
+            ],
+            "competitive_frames": 2438,
+            "hard_negative_win_rate": 0.22231337161607875,
+            "mean_margin": -0.06299369692362362,
+            "median_margin": -0.0677666962146759
+          },
+          "ALL_FUTURE_COMPETITIVE": {
+            "P10_P25_P75_margin": [
+              -0.16079675853252412,
+              -0.10796414315700531,
+              0.0017289817333221436
+            ],
+            "competitive_frames": 8953,
+            "hard_negative_win_rate": 0.25745560147436614,
+            "mean_margin": -0.05306135486464169,
+            "median_margin": -0.05350580811500549
+          },
+          "GT20_SECONDS_WITHIN_RECORDING": {
+            "P10_P25_P75_margin": [
+              -0.15664973556995393,
+              -0.10340114682912827,
+              0.0034709274768829346
+            ],
+            "competitive_frames": 5793,
+            "hard_negative_win_rate": 0.26480234766097016,
+            "mean_margin": -0.05016429375896663,
+            "median_margin": -0.049174726009368896
+          }
+        },
+        "RAW_OSNET": {
+          "0_5_SECONDS": {
+            "P10_P25_P75_margin": [
+              -0.08271269798278807,
+              -0.041500553488731384,
+              0.039561837911605835
+            ],
+            "competitive_frames": 722,
+            "hard_negative_win_rate": 0.4487534626038781,
+            "mean_margin": -0.0060280531727376074,
+            "median_margin": -0.008456975221633911
+          },
+          "5_20_SECONDS": {
+            "P10_P25_P75_margin": [
+              -0.10767801403999329,
+              -0.07198899984359741,
+              0.01217949390411377
+            ],
+            "competitive_frames": 2438,
+            "hard_negative_win_rate": 0.3203445447087777,
+            "mean_margin": -0.029327716907582586,
+            "median_margin": -0.028770238161087036
+          },
+          "ALL_FUTURE_COMPETITIVE": {
+            "P10_P25_P75_margin": [
+              -0.10609188079833984,
+              -0.06741005182266235,
+              0.011962652206420898
+            ],
+            "competitive_frames": 8953,
+            "hard_negative_win_rate": 0.3229085222830336,
+            "mean_margin": -0.028183475627747912,
+            "median_margin": -0.02640080451965332
+          },
+          "GT20_SECONDS_WITHIN_RECORDING": {
+            "P10_P25_P75_margin": [
+              -0.10737020969390869,
+              -0.06818664073944092,
+              0.009011626243591309
+            ],
+            "competitive_frames": 5793,
+            "hard_negative_win_rate": 0.30830312446055586,
+            "mean_margin": -0.030463219244575204,
+            "median_margin": -0.0281333327293396
+          }
+        }
+      }
+    },
+    "dancetrack0024": {
+      "actual_adapter_model_manifest": [
+        {
+          "actual_training_sequences": [
+            "dancetrack0001",
+            "dancetrack0002",
+            "dancetrack0023",
+            "dancetrack0057",
+            "dancetrack0062",
+            "dancetrack0072"
+          ],
+          "parameters": 0,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0024__seed720321.pt",
+          "seed": 720321,
+          "sha256": "ed8307abbba07b10059244c57d64b7c79759844a4db225c928581d0c90e59a3f"
+        },
+        {
+          "actual_training_sequences": [
+            "dancetrack0001",
+            "dancetrack0002",
+            "dancetrack0023",
+            "dancetrack0057",
+            "dancetrack0062",
+            "dancetrack0072"
+          ],
+          "parameters": 0,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0024__seed720322.pt",
+          "seed": 720322,
+          "sha256": "03d0d60fbe2111ace9d41537c14053a190b43b2459a7caa3dfd3e69ebf5aa76b"
+        },
+        {
+          "actual_training_sequences": [
+            "dancetrack0001",
+            "dancetrack0002",
+            "dancetrack0023",
+            "dancetrack0057",
+            "dancetrack0062",
+            "dancetrack0072"
+          ],
+          "parameters": 0,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0024__seed720323.pt",
+          "seed": 720323,
+          "sha256": "4898fb27ff8663a8dbb9e0fc0646f2c346b12e79afe106444e0283b97f12d026"
+        }
+      ],
+      "counts": {
+        "competitive_true_other_ID": 4355,
+        "target_candidate_available": 4355,
+        "target_visible": 4506,
+        "unresolved_candidates_not_verified_negatives": 1284
+      },
+      "representations": {
+        "R3R2_STRICT_ADAPTER_ENSEMBLE": {
+          "0_5_SECONDS": {
+            "P10_P25_P75_margin": [
+              -0.1509917676448822,
+              -0.1034407913684845,
+              0.022707611322402954
+            ],
+            "competitive_frames": 541,
+            "hard_negative_win_rate": 0.3197781885397412,
+            "mean_margin": -0.04025662504480859,
+            "median_margin": -0.046590954065322876
+          },
+          "5_20_SECONDS": {
+            "P10_P25_P75_margin": [
+              -0.14621483832597731,
+              -0.09737220779061317,
+              0.0158708319067955
+            ],
+            "competitive_frames": 1728,
+            "hard_negative_win_rate": 0.3177083333333333,
+            "mean_margin": -0.03994497400277329,
+            "median_margin": -0.041878387331962585
+          },
+          "ALL_FUTURE_COMPETITIVE": {
+            "P10_P25_P75_margin": [
+              -0.15235087871551514,
+              -0.0974954292178154,
+              0.019637182354927063
+            ],
+            "competitive_frames": 4355,
+            "hard_negative_win_rate": 0.3269804822043628,
+            "mean_margin": -0.039816529066841855,
+            "median_margin": -0.039226233959198
+          },
+          "GT20_SECONDS_WITHIN_RECORDING": {
+            "P10_P25_P75_margin": [
+              -0.15922664105892181,
+              -0.096718430519104,
+              0.021290656179189682
+            ],
+            "competitive_frames": 2086,
+            "hard_negative_win_rate": 0.336529242569511,
+            "mean_margin": -0.039595989865801824,
+            "median_margin": -0.03536737710237503
+          }
+        },
+        "RAW_OSNET": {
+          "0_5_SECONDS": {
+            "P10_P25_P75_margin": [
+              -0.08137506246566772,
+              -0.04929083585739136,
+              0.03117382526397705
+            ],
+            "competitive_frames": 541,
+            "hard_negative_win_rate": 0.4436229205175601,
+            "mean_margin": -0.005651746792185108,
+            "median_margin": -0.008905947208404541
+          },
+          "5_20_SECONDS": {
+            "P10_P25_P75_margin": [
+              -0.08904497027397155,
+              -0.05881129205226898,
+              0.02219650149345398
+            ],
+            "competitive_frames": 1728,
+            "hard_negative_win_rate": 0.36921296296296297,
+            "mean_margin": -0.017502684905021278,
+            "median_margin": -0.0195462703704834
+          },
+          "ALL_FUTURE_COMPETITIVE": {
+            "P10_P25_P75_margin": [
+              -0.09647308588027954,
+              -0.05764153599739075,
+              0.0261765718460083
+            ],
+            "competitive_frames": 4355,
+            "hard_negative_win_rate": 0.4096440872560276,
+            "mean_margin": -0.01664931423765373,
+            "median_margin": -0.01311105489730835
+          },
+          "GT20_SECONDS_WITHIN_RECORDING": {
+            "P10_P25_P75_margin": [
+              -0.11002755165100098,
+              -0.05879254639148712,
+              0.027564942836761475
+            ],
+            "competitive_frames": 2086,
+            "hard_negative_win_rate": 0.4343240651965484,
+            "mean_margin": -0.018794596823841363,
+            "median_margin": -0.00902906060218811
+          }
+        }
+      }
+    },
+    "dancetrack0039": {
+      "actual_adapter_model_manifest": [
+        {
+          "actual_training_sequences": [
+            "dancetrack0001",
+            "dancetrack0002",
+            "dancetrack0023",
+            "dancetrack0024",
+            "dancetrack0062",
+            "dancetrack0072"
+          ],
+          "parameters": 0,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0039__seed720321.pt",
+          "seed": 720321,
+          "sha256": "7b28aca0a05e5e736ff938ec8ce18b4b51fa88f2b495c323a7069839e9d346bd"
+        },
+        {
+          "actual_training_sequences": [
+            "dancetrack0001",
+            "dancetrack0002",
+            "dancetrack0023",
+            "dancetrack0024",
+            "dancetrack0062",
+            "dancetrack0072"
+          ],
+          "parameters": 0,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0039__seed720322.pt",
+          "seed": 720322,
+          "sha256": "f1615f56d515cb4d5160d6134564f51b6eee39222a27d99461686b080d4ad358"
+        },
+        {
+          "actual_training_sequences": [
+            "dancetrack0001",
+            "dancetrack0002",
+            "dancetrack0023",
+            "dancetrack0024",
+            "dancetrack0062",
+            "dancetrack0072"
+          ],
+          "parameters": 0,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0039__seed720323.pt",
+          "seed": 720323,
+          "sha256": "1be6db5dfcf4b6812f791fe2680815a884a4ef17bd15ee0ff311e63ef829c68f"
+        }
+      ],
+      "counts": {
+        "competitive_true_other_ID": 6028,
+        "target_candidate_available": 6029,
+        "target_visible": 6087,
+        "unresolved_candidates_not_verified_negatives": 845
+      },
+      "representations": {
+        "R3R2_STRICT_ADAPTER_ENSEMBLE": {
+          "0_5_SECONDS": {
+            "P10_P25_P75_margin": [
+              -0.05117475986480713,
+              -0.018199831247329712,
+              0.06603699922561646
+            ],
+            "competitive_frames": 473,
+            "hard_negative_win_rate": 0.6765327695560254,
+            "mean_margin": 0.02398099663645722,
+            "median_margin": 0.023989349603652954
+          },
+          "5_20_SECONDS": {
+            "P10_P25_P75_margin": [
+              -0.09956493973731995,
+              -0.05293858051300049,
+              0.04671850800514221
+            ],
+            "competitive_frames": 1481,
+            "hard_negative_win_rate": 0.4841323430114787,
+            "mean_margin": -0.006124745629310286,
+            "median_margin": -0.0034559965133666992
+          },
+          "ALL_FUTURE_COMPETITIVE": {
+            "P10_P25_P75_margin": [
+              -0.09715243279933929,
+              -0.05021468549966812,
+              0.04269199073314667
+            ],
+            "competitive_frames": 6028,
+            "hard_negative_win_rate": 0.48623092236230925,
+            "mean_margin": -0.005395335731774509,
+            "median_margin": -0.00255391001701355
+          },
+          "GT20_SECONDS_WITHIN_RECORDING": {
+            "P10_P25_P75_margin": [
+              -0.10008216798305511,
+              -0.052468281239271164,
+              0.037526149302721024
+            ],
+            "competitive_frames": 4074,
+            "hard_negative_win_rate": 0.4648993618065783,
+            "mean_margin": -0.008540831350803258,
+            "median_margin": -0.0063098520040512085
+          }
+        },
+        "RAW_OSNET": {
+          "0_5_SECONDS": {
+            "P10_P25_P75_margin": [
+              -0.05363194942474365,
+              -0.004004418849945068,
+              0.09101951122283936
+            ],
+            "competitive_frames": 473,
+            "hard_negative_win_rate": 0.7272727272727273,
+            "mean_margin": 0.04541356404790414,
+            "median_margin": 0.04909312725067139
+          },
+          "5_20_SECONDS": {
+            "P10_P25_P75_margin": [
+              -0.09055352210998535,
+              -0.04484820365905762,
+              0.043554723262786865
+            ],
+            "competitive_frames": 1481,
+            "hard_negative_win_rate": 0.5273463875759622,
+            "mean_margin": -0.0026961667243086914,
+            "median_margin": 0.0054961442947387695
+          },
+          "ALL_FUTURE_COMPETITIVE": {
+            "P10_P25_P75_margin": [
+              -0.08353310823440552,
+              -0.03834834694862366,
+              0.04981401562690735
+            ],
+            "competitive_frames": 6028,
+            "hard_negative_win_rate": 0.54628400796284,
+            "mean_margin": 0.004695249003294532,
+            "median_margin": 0.00802391767501831
+          },
+          "GT20_SECONDS_WITHIN_RECORDING": {
+            "P10_P25_P75_margin": [
+              -0.08407402038574219,
+              -0.03867104649543762,
+              0.04600435495376587
+            ],
+            "competitive_frames": 4074,
+            "hard_negative_win_rate": 0.5321551300932744,
+            "mean_margin": 0.00265472953262198,
+            "median_margin": 0.00463414192199707
+          }
+        }
+      }
+    },
+    "dancetrack0057": {
+      "actual_adapter_model_manifest": [
+        {
+          "actual_training_sequences": [
+            "dancetrack0001",
+            "dancetrack0002",
+            "dancetrack0023",
+            "dancetrack0024",
+            "dancetrack0039",
+            "dancetrack0072"
+          ],
+          "parameters": 0,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0057__seed720321.pt",
+          "seed": 720321,
+          "sha256": "3ba9ff9f814aeaa020690b3661cd776cd3deb90c478059782907906d0ddd3900"
+        },
+        {
+          "actual_training_sequences": [
+            "dancetrack0001",
+            "dancetrack0002",
+            "dancetrack0023",
+            "dancetrack0024",
+            "dancetrack0039",
+            "dancetrack0072"
+          ],
+          "parameters": 0,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0057__seed720322.pt",
+          "seed": 720322,
+          "sha256": "8fc4e70abe69a4f6716ba088205fb89ebe0bfeb1fa303fd4b1bd900274002325"
+        },
+        {
+          "actual_training_sequences": [
+            "dancetrack0001",
+            "dancetrack0002",
+            "dancetrack0023",
+            "dancetrack0024",
+            "dancetrack0039",
+            "dancetrack0072"
+          ],
+          "parameters": 0,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0057__seed720323.pt",
+          "seed": 720323,
+          "sha256": "1e776ab2967f12028f8c627803f576a3847ab3d0d3f9a9a930638bc9447c5910"
+        }
+      ],
+      "counts": {
+        "competitive_true_other_ID": 2734,
+        "target_candidate_available": 2738,
+        "target_visible": 2998,
+        "unresolved_candidates_not_verified_negatives": 1365
+      },
+      "representations": {
+        "R3R2_STRICT_ADAPTER_ENSEMBLE": {
+          "0_5_SECONDS": {
+            "P10_P25_P75_margin": [
+              -0.18266193866729735,
+              -0.11599588394165039,
+              0.003239274024963379
+            ],
+            "competitive_frames": 445,
+            "hard_negative_win_rate": 0.2696629213483146,
+            "mean_margin": -0.06079674493730738,
+            "median_margin": -0.05626325309276581
+          },
+          "5_20_SECONDS": {
+            "P10_P25_P75_margin": [
+              -0.14349026679992677,
+              -0.09549307823181152,
+              -0.0008952617645263672
+            ],
+            "competitive_frames": 1413,
+            "hard_negative_win_rate": 0.2448690728945506,
+            "mean_margin": -0.05063512239022535,
+            "median_margin": -0.0443136990070343
+          },
+          "ALL_FUTURE_COMPETITIVE": {
+            "P10_P25_P75_margin": [
+              -0.16132802963256834,
+              -0.1031070165336132,
+              -0.0004038885235786438
+            ],
+            "competitive_frames": 2734,
+            "hard_negative_win_rate": 0.24762253108997806,
+            "mean_margin": -0.05529424234755997,
+            "median_margin": -0.04780678451061249
+          },
+          "GT20_SECONDS_WITHIN_RECORDING": {
+            "P10_P25_P75_margin": [
+              -0.1754179522395134,
+              -0.1120862178504467,
+              -0.002018660306930542
+            ],
+            "competitive_frames": 876,
+            "hard_negative_win_rate": 0.2408675799086758,
+            "mean_margin": -0.060014245597875285,
+            "median_margin": -0.052459463477134705
+          }
+        },
+        "RAW_OSNET": {
+          "0_5_SECONDS": {
+            "P10_P25_P75_margin": [
+              -0.1601034641265869,
+              -0.0993121862411499,
+              0.007458031177520752
+            ],
+            "competitive_frames": 445,
+            "hard_negative_win_rate": 0.298876404494382,
+            "mean_margin": -0.04601336382748036,
+            "median_margin": -0.04131656885147095
+          },
+          "5_20_SECONDS": {
+            "P10_P25_P75_margin": [
+              -0.12385821342468262,
+              -0.08096587657928467,
+              0.0006593465805053711
+            ],
+            "competitive_frames": 1413,
+            "hard_negative_win_rate": 0.25336164189667376,
+            "mean_margin": -0.04307717451877149,
+            "median_margin": -0.03596985340118408
+          },
+          "ALL_FUTURE_COMPETITIVE": {
+            "P10_P25_P75_margin": [
+              -0.14165130853652955,
+              -0.0912022739648819,
+              0.001286730170249939
+            ],
+            "competitive_frames": 2734,
+            "hard_negative_win_rate": 0.2585954645208486,
+            "mean_margin": -0.0470506715443157,
+            "median_margin": -0.03929948806762695
+          },
+          "GT20_SECONDS_WITHIN_RECORDING": {
+            "P10_P25_P75_margin": [
+              -0.15674832463264465,
+              -0.10572056472301483,
+              -0.000809013843536377
+            ],
+            "competitive_frames": 876,
+            "hard_negative_win_rate": 0.2465753424657534,
+            "mean_margin": -0.053986919525007136,
+            "median_margin": -0.045569002628326416
+          }
+        }
+      }
+    },
+    "dancetrack0062": {
+      "actual_adapter_model_manifest": [
+        {
+          "actual_training_sequences": [
+            "dancetrack0001",
+            "dancetrack0002",
+            "dancetrack0023",
+            "dancetrack0024",
+            "dancetrack0039",
+            "dancetrack0057"
+          ],
+          "parameters": 0,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0062__seed720321.pt",
+          "seed": 720321,
+          "sha256": "af1db6c36e0fe03f9c77f87fa3825bce43552433e1a63bac2abc5da106c63a74"
+        },
+        {
+          "actual_training_sequences": [
+            "dancetrack0001",
+            "dancetrack0002",
+            "dancetrack0023",
+            "dancetrack0024",
+            "dancetrack0039",
+            "dancetrack0057"
+          ],
+          "parameters": 0,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0062__seed720322.pt",
+          "seed": 720322,
+          "sha256": "d0e3b83aac4bd92bbd2479a3971e711301e411a26ddb80bbf046b91fc6c97a78"
+        },
+        {
+          "actual_training_sequences": [
+            "dancetrack0001",
+            "dancetrack0002",
+            "dancetrack0023",
+            "dancetrack0024",
+            "dancetrack0039",
+            "dancetrack0057"
+          ],
+          "parameters": 0,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0062__seed720323.pt",
+          "seed": 720323,
+          "sha256": "ba8389c7af62945904da7ea7401faa91a14bc893364465f64e0f4fe56f016a37"
+        }
+      ],
+      "counts": {
+        "competitive_true_other_ID": 4468,
+        "target_candidate_available": 4518,
+        "target_visible": 6221,
+        "unresolved_candidates_not_verified_negatives": 2935
+      },
+      "representations": {
+        "R3R2_STRICT_ADAPTER_ENSEMBLE": {
+          "0_5_SECONDS": {
+            "P10_P25_P75_margin": [
+              -0.1261669397354126,
+              -0.08499328047037125,
+              0.030160807073116302
+            ],
+            "competitive_frames": 490,
+            "hard_negative_win_rate": 0.3795918367346939,
+            "mean_margin": -0.024407380393573215,
+            "median_margin": -0.030791670083999634
+          },
+          "5_20_SECONDS": {
+            "P10_P25_P75_margin": [
+              -0.1950274169445038,
+              -0.12637338042259216,
+              0.041395366191864014
+            ],
+            "competitive_frames": 529,
+            "hard_negative_win_rate": 0.3572778827977316,
+            "mean_margin": -0.028132132714040338,
+            "median_margin": -0.045680463314056396
+          },
+          "ALL_FUTURE_COMPETITIVE": {
+            "P10_P25_P75_margin": [
+              -0.20434246361255645,
+              -0.1290798857808113,
+              -0.0002265647053718567
+            ],
+            "competitive_frames": 4468,
+            "hard_negative_win_rate": 0.2491047448522829,
+            "mean_margin": -0.06976076335151786,
+            "median_margin": -0.05670619010925293
+          },
+          "GT20_SECONDS_WITHIN_RECORDING": {
+            "P10_P25_P75_margin": [
+              -0.21641137897968293,
+              -0.13900980353355408,
+              -0.008023619651794434
+            ],
+            "competitive_frames": 3449,
+            "hard_negative_win_rate": 0.2139750652363004,
+            "mean_margin": -0.08258903335923559,
+            "median_margin": -0.06308570504188538
+          }
+        },
+        "RAW_OSNET": {
+          "0_5_SECONDS": {
+            "P10_P25_P75_margin": [
+              -0.08848429918289184,
+              -0.044619351625442505,
+              0.03500807285308838
+            ],
+            "competitive_frames": 490,
+            "hard_negative_win_rate": 0.4448979591836735,
+            "mean_margin": -0.0014335423099751375,
+            "median_margin": -0.006846368312835693
+          },
+          "5_20_SECONDS": {
+            "P10_P25_P75_margin": [
+              -0.1189082384109497,
+              -0.07374554872512817,
+              0.04975175857543945
+            ],
+            "competitive_frames": 529,
+            "hard_negative_win_rate": 0.44045368620037806,
+            "mean_margin": -0.0032452832210266747,
+            "median_margin": -0.012717247009277344
+          },
+          "ALL_FUTURE_COMPETITIVE": {
+            "P10_P25_P75_margin": [
+              -0.15112460851669313,
+              -0.08810587227344513,
+              0.003525480628013611
+            ],
+            "competitive_frames": 4468,
+            "hard_negative_win_rate": 0.26589077887197854,
+            "mean_margin": -0.04545060742643121,
+            "median_margin": -0.0393749475479126
+          },
+          "GT20_SECONDS_WITHIN_RECORDING": {
+            "P10_P25_P75_margin": [
+              -0.1640073537826538,
+              -0.09518492221832275,
+              -0.005478799343109131
+            ],
+            "competitive_frames": 3449,
+            "hard_negative_win_rate": 0.21368512612351406,
+            "mean_margin": -0.058177478522900464,
+            "median_margin": -0.0469745397567749
+          }
+        }
+      }
+    },
+    "dancetrack0072": {
+      "actual_adapter_model_manifest": [
+        {
+          "actual_training_sequences": [
+            "dancetrack0002",
+            "dancetrack0023",
+            "dancetrack0024",
+            "dancetrack0039",
+            "dancetrack0057",
+            "dancetrack0062"
+          ],
+          "parameters": 0,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0072__seed720321.pt",
+          "seed": 720321,
+          "sha256": "ec3ce4538291f7d4fe1cdc15069ed7243743d40112fffbd1fa546befa2117885"
+        },
+        {
+          "actual_training_sequences": [
+            "dancetrack0002",
+            "dancetrack0023",
+            "dancetrack0024",
+            "dancetrack0039",
+            "dancetrack0057",
+            "dancetrack0062"
+          ],
+          "parameters": 0,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0072__seed720322.pt",
+          "seed": 720322,
+          "sha256": "4af9d71618075cd3d2841810fab73b30b0a6d787a4ec84d9609bab9ea4ec7332"
+        },
+        {
+          "actual_training_sequences": [
+            "dancetrack0002",
+            "dancetrack0023",
+            "dancetrack0024",
+            "dancetrack0039",
+            "dancetrack0057",
+            "dancetrack0062"
+          ],
+          "parameters": 0,
+          "path": "/data3/liuyeqiang/InterMOT_N72R20R4_assets/models/adapter6__dancetrack0072__seed720323.pt",
+          "seed": 720323,
+          "sha256": "5866334ebe74740a5b5b2c4db5fbcf1f6907d29a889d9b8cbc49be1c0be69210"
+        }
+      ],
+      "counts": {
+        "competitive_true_other_ID": 1758,
+        "target_candidate_available": 1906,
+        "target_visible": 5900,
+        "unresolved_candidates_not_verified_negatives": 11420
+      },
+      "representations": {
+        "R3R2_STRICT_ADAPTER_ENSEMBLE": {
+          "0_5_SECONDS": {
+            "P10_P25_P75_margin": [
+              -0.12599732875823974,
+              -0.07831940054893494,
+              0.02377989888191223
+            ],
+            "competitive_frames": 353,
+            "hard_negative_win_rate": 0.36827195467422097,
+            "mean_margin": -0.026058193222321464,
+            "median_margin": -0.02176123857498169
+          },
+          "5_20_SECONDS": {
+            "P10_P25_P75_margin": [
+              -0.17930806577205657,
+              -0.13045306503772736,
+              -0.013751447200775146
+            ],
+            "competitive_frames": 1117,
+            "hard_negative_win_rate": 0.20322291853178157,
+            "mean_margin": -0.07170617812535757,
+            "median_margin": -0.06857472658157349
+          },
+          "ALL_FUTURE_COMPETITIVE": {
+            "P10_P25_P75_margin": [
+              -0.17609725743532179,
+              -0.12217581272125244,
+              -0.004279270768165588
+            ],
+            "competitive_frames": 1758,
+            "hard_negative_win_rate": 0.23833902161547213,
+            "mean_margin": -0.06410843630207955,
+            "median_margin": -0.0595887154340744
+          },
+          "GT20_SECONDS_WITHIN_RECORDING": {
+            "P10_P25_P75_margin": [
+              -0.20813477784395218,
+              -0.14372534677386284,
+              -0.01254948228597641
+            ],
+            "competitive_frames": 288,
+            "hard_negative_win_rate": 0.2152777777777778,
+            "mean_margin": -0.08127877724149989,
+            "median_margin": -0.07681602984666824
+          }
+        },
+        "RAW_OSNET": {
+          "0_5_SECONDS": {
+            "P10_P25_P75_margin": [
+              -0.08583903312683105,
+              -0.05198544263839722,
+              0.018135905265808105
+            ],
+            "competitive_frames": 353,
+            "hard_negative_win_rate": 0.37677053824362605,
+            "mean_margin": -0.014861146215001179,
+            "median_margin": -0.01606971025466919
+          },
+          "5_20_SECONDS": {
+            "P10_P25_P75_margin": [
+              -0.14247074127197265,
+              -0.09946435689926147,
+              -0.008018970489501953
+            ],
+            "competitive_frames": 1117,
+            "hard_negative_win_rate": 0.22202327663384064,
+            "mean_margin": -0.054111512196096015,
+            "median_margin": -0.051763832569122314
+          },
+          "ALL_FUTURE_COMPETITIVE": {
+            "P10_P25_P75_margin": [
+              -0.13802947998046874,
+              -0.09065717458724976,
+              0.001562550663948059
+            ],
+            "competitive_frames": 1758,
+            "hard_negative_win_rate": 0.26109215017064846,
+            "mean_margin": -0.04572628450339429,
+            "median_margin": -0.0432831346988678
+          },
+          "GT20_SECONDS_WITHIN_RECORDING": {
+            "P10_P25_P75_margin": [
+              -0.1440098464488983,
+              -0.10025732219219208,
+              0.005073413252830505
+            ],
+            "competitive_frames": 288,
+            "hard_negative_win_rate": 0.2708333333333333,
+            "mean_margin": -0.05103564034733507,
+            "median_margin": -0.052009403705596924
+          }
+        }
+      }
+    }
+  },
+  "same_person_across_independent_recordings_claimed": false,
+  "scientific_success": false,
+  "status": "TRAIN_POSTHOC_NOT_GENERALIZATION",
+  "zero_area_geometry_repair_matches_baseline_UID_axis": true
+}

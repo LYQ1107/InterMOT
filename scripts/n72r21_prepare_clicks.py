@@ -16,7 +16,8 @@ from sam3_intermot.identity_probe.encoders import OSNetEncoder
 from scripts.n72r21_common import ROOT,ASSETS,OUT,read_json,write_json,sha256,storage
 
 
-def run(sequences):
+def run(sequences, scope='smoke'):
+    if scope not in ('smoke','development'):raise ValueError('registered preparation scope required')
     protocol=read_json(OUT/'protocol/ENGINEERING_SMOKE_PROTOCOL.json')
     if not set(sequences)<=set(protocol['sequences']):raise ValueError('not registered TRAIN development')
     torch.set_num_threads(1)
@@ -52,12 +53,13 @@ def run(sequences):
                                        'initialization_label':'SIMULATED_ONE_CLICK_FROM_GT','runtime_future_gt_used':False})
                 truth_inputs.append({'episode_uid':key,'sequence':sequence,'target_gt_identity':identity,'posthoc_or_train_truth_only':True})
         print(json.dumps({'sequence':sequence,'simulated_one_click_targets':len(initial),'device':'cpu','no_gpu_claim':True}),flush=True)
-    path=ASSETS/'smoke/anchors.npy';path.parent.mkdir(parents=True,exist_ok=True)
+    path=ASSETS/scope/'anchors.npy';path.parent.mkdir(parents=True,exist_ok=True)
+    if path.exists():raise FileExistsError('Do not overwrite an existing sealed initialization bank')
     np.save(path,np.stack(vectors).astype(np.float32))
-    write_json('smoke/RUNTIME_INPUTS.json',{'inputs':runtime_inputs,'anchor_path':str(path),'anchor_sha256':sha256(path),
+    write_json(f'{scope}/RUNTIME_INPUTS.json',{'inputs':runtime_inputs,'anchor_path':str(path),'anchor_sha256':sha256(path),
                'source_protocol_sha256':sha256(OUT/'protocol/ENGINEERING_SMOKE_PROTOCOL.json'),'runtime_GT_identity_fields':False})
-    write_json('smoke/INITIALIZATION_TRUTH.json',{'labels':truth_inputs,'runtime_inputs_contain_GT_identity':False})
+    write_json(f'{scope}/INITIALIZATION_TRUTH.json',{'labels':truth_inputs,'runtime_inputs_contain_GT_identity':False})
 
 
 if __name__=='__main__':
-    parser=argparse.ArgumentParser();parser.add_argument('--sequences',nargs='+',default=['dancetrack0001','dancetrack0002']);args=parser.parse_args();run(args.sequences)
+    parser=argparse.ArgumentParser();parser.add_argument('--scope',choices=['smoke','development'],default='smoke');parser.add_argument('--sequences',nargs='+',default=['dancetrack0001','dancetrack0002']);args=parser.parse_args();run(args.sequences,args.scope)
