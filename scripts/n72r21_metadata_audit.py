@@ -34,7 +34,7 @@ def run():
             'raw_video_pilot_available':False,'raw_annotation_pilot_available':False,
             'official_global_ID_claim_source':'CHIRLA authoritative documentation, not local-ID coincidence',
             'cross_session_runtime_executed':False,'metadata_does_not_prove_video_or_crop_download_permission':True,
-            'warning':'Downloaded ReID train_0 metadata is a single seq_000 camera recording: do not call it cross-session training. Tracking TRAIN metadata spans seq_004/seq_026, but overlap with ReID heldout membership must be audited before mixing.',
+            'warning':'train_0 is scenario-specific, not universally seq_000. Inspect each complete CSV and canonical recording/ID/frame memberships. Do not mix scenario-specific TRAIN with another protocol final gallery/query; different path prefixes alone do not prove independent pixels.',
             'hf_page_access_gate_source':'https://huggingface.co/datasets/bdager/CHIRLA',
             'hf_gate_verified_by_official_page':'Requires login/accepting contact-sharing conditions; server API currently network-blocked, no gated media requested',
             'actual_fps_not_inferred_from_filename':True}

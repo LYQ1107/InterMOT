@@ -1,0 +1,4131 @@
+{
+  "ReID_protocols": {
+    "long_term": {
+      "can_train_cross_recording_positive_pairs_in_official_ReID_train": false,
+      "continuous_target_tracking_from_crop_retrieval_claim_allowed": false,
+      "final_gallery": "all train subsets except train_0; anchor/features only, NEVER parameter fit",
+      "final_query": "all test subsets except test_0; NEVER development/selection",
+      "final_query_seen_TRAIN_IDs": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7,
+        9,
+        10,
+        11,
+        12
+      ],
+      "final_query_unseen_TRAIN_IDs": [],
+      "official_inner_val_subset": "test_0",
+      "official_train_subset": "train_0",
+      "train_final_gallery_crop_overlap": 0,
+      "train_final_query_crop_overlap": 0,
+      "train_recordings": [
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 1,
+          "recording_id": "camera_1_2023-07-26-13:21:40",
+          "sequence": "seq_020",
+          "timestamp_from_authoritative_metadata": "2023-07-26T13:21:40",
+          "timestamp_not_measured_video_PTS": true
+        }
+      ]
+    },
+    "multi_camera": {
+      "can_train_cross_recording_positive_pairs_in_official_ReID_train": false,
+      "continuous_target_tracking_from_crop_retrieval_claim_allowed": false,
+      "final_gallery": "all train subsets except train_0; anchor/features only, NEVER parameter fit",
+      "final_query": "all test subsets except test_0; NEVER development/selection",
+      "final_query_seen_TRAIN_IDs": [
+        1,
+        3,
+        5,
+        6,
+        9,
+        10,
+        18,
+        19
+      ],
+      "final_query_unseen_TRAIN_IDs": [
+        2,
+        4,
+        7,
+        8,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        24
+      ],
+      "official_inner_val_subset": "test_0",
+      "official_train_subset": "train_0",
+      "train_final_gallery_crop_overlap": 0,
+      "train_final_query_crop_overlap": 0,
+      "train_recordings": [
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-06-02-11:14:26",
+          "sequence": "seq_000",
+          "timestamp_from_authoritative_metadata": "2023-06-02T11:14:26",
+          "timestamp_not_measured_video_PTS": true
+        }
+      ]
+    },
+    "multi_camera_long_term": {
+      "can_train_cross_recording_positive_pairs_in_official_ReID_train": false,
+      "continuous_target_tracking_from_crop_retrieval_claim_allowed": false,
+      "final_gallery": "all train subsets except train_0; anchor/features only, NEVER parameter fit",
+      "final_query": "all test subsets except test_0; NEVER development/selection",
+      "final_query_seen_TRAIN_IDs": [
+        1,
+        3,
+        5,
+        6,
+        9,
+        10
+      ],
+      "final_query_unseen_TRAIN_IDs": [
+        2,
+        4,
+        7,
+        12,
+        14
+      ],
+      "official_inner_val_subset": "test_0",
+      "official_train_subset": "train_0",
+      "train_final_gallery_crop_overlap": 0,
+      "train_final_query_crop_overlap": 0,
+      "train_recordings": [
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-06-02-11:14:26",
+          "sequence": "seq_000",
+          "timestamp_from_authoritative_metadata": "2023-06-02T11:14:26",
+          "timestamp_not_measured_video_PTS": true
+        }
+      ]
+    },
+    "reappearance": {
+      "can_train_cross_recording_positive_pairs_in_official_ReID_train": false,
+      "continuous_target_tracking_from_crop_retrieval_claim_allowed": false,
+      "final_gallery": "all train subsets except train_0; anchor/features only, NEVER parameter fit",
+      "final_query": "all test subsets except test_0; NEVER development/selection",
+      "final_query_seen_TRAIN_IDs": [
+        1,
+        3,
+        5,
+        6,
+        9,
+        10
+      ],
+      "final_query_unseen_TRAIN_IDs": [
+        2,
+        4,
+        7,
+        8,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        18,
+        19,
+        24,
+        25,
+        26
+      ],
+      "official_inner_val_subset": "test_0",
+      "official_train_subset": "train_0",
+      "train_final_gallery_crop_overlap": 0,
+      "train_final_query_crop_overlap": 0,
+      "train_recordings": [
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 2,
+          "recording_id": "camera_2_2023-06-02-11:14:26",
+          "sequence": "seq_000",
+          "timestamp_from_authoritative_metadata": "2023-06-02T11:14:26",
+          "timestamp_not_measured_video_PTS": true
+        }
+      ]
+    }
+  },
+  "crop_path_intersection_matrix": {
+    "reid_long_term_gallery": {
+      "reid_long_term_query": 0,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 0,
+      "reid_multi_camera_gallery": 0,
+      "reid_multi_camera_long_term_gallery": 0,
+      "reid_multi_camera_long_term_query": 0,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_query": 0,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 0,
+      "reid_reappearance_gallery": 0,
+      "reid_reappearance_query": 0,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 0,
+      "tracking_brief_occlusions_train": 0,
+      "tracking_multiple_people_occlusions_test": 0,
+      "tracking_multiple_people_occlusions_train": 0
+    },
+    "reid_long_term_query": {
+      "reid_long_term_gallery": 0,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 0,
+      "reid_multi_camera_gallery": 0,
+      "reid_multi_camera_long_term_gallery": 0,
+      "reid_multi_camera_long_term_query": 0,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_query": 0,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 0,
+      "reid_reappearance_gallery": 0,
+      "reid_reappearance_query": 0,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 0,
+      "tracking_brief_occlusions_train": 0,
+      "tracking_multiple_people_occlusions_test": 0,
+      "tracking_multiple_people_occlusions_train": 0
+    },
+    "reid_long_term_train": {
+      "reid_long_term_gallery": 0,
+      "reid_long_term_query": 0,
+      "reid_long_term_val": 0,
+      "reid_multi_camera_gallery": 0,
+      "reid_multi_camera_long_term_gallery": 0,
+      "reid_multi_camera_long_term_query": 0,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_query": 0,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 0,
+      "reid_reappearance_gallery": 0,
+      "reid_reappearance_query": 0,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 0,
+      "tracking_brief_occlusions_train": 0,
+      "tracking_multiple_people_occlusions_test": 0,
+      "tracking_multiple_people_occlusions_train": 0
+    },
+    "reid_long_term_val": {
+      "reid_long_term_gallery": 0,
+      "reid_long_term_query": 0,
+      "reid_long_term_train": 0,
+      "reid_multi_camera_gallery": 0,
+      "reid_multi_camera_long_term_gallery": 0,
+      "reid_multi_camera_long_term_query": 0,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_query": 0,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 0,
+      "reid_reappearance_gallery": 0,
+      "reid_reappearance_query": 0,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 0,
+      "tracking_brief_occlusions_train": 0,
+      "tracking_multiple_people_occlusions_test": 0,
+      "tracking_multiple_people_occlusions_train": 0
+    },
+    "reid_multi_camera_gallery": {
+      "reid_long_term_gallery": 0,
+      "reid_long_term_query": 0,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 0,
+      "reid_multi_camera_long_term_gallery": 0,
+      "reid_multi_camera_long_term_query": 0,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_query": 0,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 0,
+      "reid_reappearance_gallery": 0,
+      "reid_reappearance_query": 0,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 0,
+      "tracking_brief_occlusions_train": 0,
+      "tracking_multiple_people_occlusions_test": 0,
+      "tracking_multiple_people_occlusions_train": 0
+    },
+    "reid_multi_camera_long_term_gallery": {
+      "reid_long_term_gallery": 0,
+      "reid_long_term_query": 0,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 0,
+      "reid_multi_camera_gallery": 0,
+      "reid_multi_camera_long_term_query": 0,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_query": 0,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 0,
+      "reid_reappearance_gallery": 0,
+      "reid_reappearance_query": 0,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 0,
+      "tracking_brief_occlusions_train": 0,
+      "tracking_multiple_people_occlusions_test": 0,
+      "tracking_multiple_people_occlusions_train": 0
+    },
+    "reid_multi_camera_long_term_query": {
+      "reid_long_term_gallery": 0,
+      "reid_long_term_query": 0,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 0,
+      "reid_multi_camera_gallery": 0,
+      "reid_multi_camera_long_term_gallery": 0,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_query": 0,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 0,
+      "reid_reappearance_gallery": 0,
+      "reid_reappearance_query": 0,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 0,
+      "tracking_brief_occlusions_train": 0,
+      "tracking_multiple_people_occlusions_test": 0,
+      "tracking_multiple_people_occlusions_train": 0
+    },
+    "reid_multi_camera_long_term_train": {
+      "reid_long_term_gallery": 0,
+      "reid_long_term_query": 0,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 0,
+      "reid_multi_camera_gallery": 0,
+      "reid_multi_camera_long_term_gallery": 0,
+      "reid_multi_camera_long_term_query": 0,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_query": 0,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 0,
+      "reid_reappearance_gallery": 0,
+      "reid_reappearance_query": 0,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 0,
+      "tracking_brief_occlusions_train": 0,
+      "tracking_multiple_people_occlusions_test": 0,
+      "tracking_multiple_people_occlusions_train": 0
+    },
+    "reid_multi_camera_long_term_val": {
+      "reid_long_term_gallery": 0,
+      "reid_long_term_query": 0,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 0,
+      "reid_multi_camera_gallery": 0,
+      "reid_multi_camera_long_term_gallery": 0,
+      "reid_multi_camera_long_term_query": 0,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_query": 0,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 0,
+      "reid_reappearance_gallery": 0,
+      "reid_reappearance_query": 0,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 0,
+      "tracking_brief_occlusions_train": 0,
+      "tracking_multiple_people_occlusions_test": 0,
+      "tracking_multiple_people_occlusions_train": 0
+    },
+    "reid_multi_camera_query": {
+      "reid_long_term_gallery": 0,
+      "reid_long_term_query": 0,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 0,
+      "reid_multi_camera_gallery": 0,
+      "reid_multi_camera_long_term_gallery": 0,
+      "reid_multi_camera_long_term_query": 0,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 0,
+      "reid_reappearance_gallery": 0,
+      "reid_reappearance_query": 0,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 0,
+      "tracking_brief_occlusions_train": 0,
+      "tracking_multiple_people_occlusions_test": 0,
+      "tracking_multiple_people_occlusions_train": 0
+    },
+    "reid_multi_camera_train": {
+      "reid_long_term_gallery": 0,
+      "reid_long_term_query": 0,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 0,
+      "reid_multi_camera_gallery": 0,
+      "reid_multi_camera_long_term_gallery": 0,
+      "reid_multi_camera_long_term_query": 0,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_query": 0,
+      "reid_multi_camera_val": 0,
+      "reid_reappearance_gallery": 0,
+      "reid_reappearance_query": 0,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 0,
+      "tracking_brief_occlusions_train": 0,
+      "tracking_multiple_people_occlusions_test": 0,
+      "tracking_multiple_people_occlusions_train": 0
+    },
+    "reid_multi_camera_val": {
+      "reid_long_term_gallery": 0,
+      "reid_long_term_query": 0,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 0,
+      "reid_multi_camera_gallery": 0,
+      "reid_multi_camera_long_term_gallery": 0,
+      "reid_multi_camera_long_term_query": 0,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_query": 0,
+      "reid_multi_camera_train": 0,
+      "reid_reappearance_gallery": 0,
+      "reid_reappearance_query": 0,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 0,
+      "tracking_brief_occlusions_train": 0,
+      "tracking_multiple_people_occlusions_test": 0,
+      "tracking_multiple_people_occlusions_train": 0
+    },
+    "reid_reappearance_gallery": {
+      "reid_long_term_gallery": 0,
+      "reid_long_term_query": 0,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 0,
+      "reid_multi_camera_gallery": 0,
+      "reid_multi_camera_long_term_gallery": 0,
+      "reid_multi_camera_long_term_query": 0,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_query": 0,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 0,
+      "reid_reappearance_query": 0,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 0,
+      "tracking_brief_occlusions_train": 0,
+      "tracking_multiple_people_occlusions_test": 0,
+      "tracking_multiple_people_occlusions_train": 0
+    },
+    "reid_reappearance_query": {
+      "reid_long_term_gallery": 0,
+      "reid_long_term_query": 0,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 0,
+      "reid_multi_camera_gallery": 0,
+      "reid_multi_camera_long_term_gallery": 0,
+      "reid_multi_camera_long_term_query": 0,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_query": 0,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 0,
+      "reid_reappearance_gallery": 0,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 0,
+      "tracking_brief_occlusions_train": 0,
+      "tracking_multiple_people_occlusions_test": 0,
+      "tracking_multiple_people_occlusions_train": 0
+    },
+    "reid_reappearance_train": {
+      "reid_long_term_gallery": 0,
+      "reid_long_term_query": 0,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 0,
+      "reid_multi_camera_gallery": 0,
+      "reid_multi_camera_long_term_gallery": 0,
+      "reid_multi_camera_long_term_query": 0,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_query": 0,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 0,
+      "reid_reappearance_gallery": 0,
+      "reid_reappearance_query": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 0,
+      "tracking_brief_occlusions_train": 0,
+      "tracking_multiple_people_occlusions_test": 0,
+      "tracking_multiple_people_occlusions_train": 0
+    },
+    "reid_reappearance_val": {
+      "reid_long_term_gallery": 0,
+      "reid_long_term_query": 0,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 0,
+      "reid_multi_camera_gallery": 0,
+      "reid_multi_camera_long_term_gallery": 0,
+      "reid_multi_camera_long_term_query": 0,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_query": 0,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 0,
+      "reid_reappearance_gallery": 0,
+      "reid_reappearance_query": 0,
+      "reid_reappearance_train": 0,
+      "tracking_brief_occlusions_test": 0,
+      "tracking_brief_occlusions_train": 0,
+      "tracking_multiple_people_occlusions_test": 0,
+      "tracking_multiple_people_occlusions_train": 0
+    },
+    "tracking_brief_occlusions_test": {
+      "reid_long_term_gallery": 0,
+      "reid_long_term_query": 0,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 0,
+      "reid_multi_camera_gallery": 0,
+      "reid_multi_camera_long_term_gallery": 0,
+      "reid_multi_camera_long_term_query": 0,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_query": 0,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 0,
+      "reid_reappearance_gallery": 0,
+      "reid_reappearance_query": 0,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_train": 0,
+      "tracking_multiple_people_occlusions_test": 0,
+      "tracking_multiple_people_occlusions_train": 0
+    },
+    "tracking_brief_occlusions_train": {
+      "reid_long_term_gallery": 0,
+      "reid_long_term_query": 0,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 0,
+      "reid_multi_camera_gallery": 0,
+      "reid_multi_camera_long_term_gallery": 0,
+      "reid_multi_camera_long_term_query": 0,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_query": 0,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 0,
+      "reid_reappearance_gallery": 0,
+      "reid_reappearance_query": 0,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 0,
+      "tracking_multiple_people_occlusions_test": 0,
+      "tracking_multiple_people_occlusions_train": 0
+    },
+    "tracking_multiple_people_occlusions_test": {
+      "reid_long_term_gallery": 0,
+      "reid_long_term_query": 0,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 0,
+      "reid_multi_camera_gallery": 0,
+      "reid_multi_camera_long_term_gallery": 0,
+      "reid_multi_camera_long_term_query": 0,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_query": 0,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 0,
+      "reid_reappearance_gallery": 0,
+      "reid_reappearance_query": 0,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 0,
+      "tracking_brief_occlusions_train": 0,
+      "tracking_multiple_people_occlusions_train": 0
+    },
+    "tracking_multiple_people_occlusions_train": {
+      "reid_long_term_gallery": 0,
+      "reid_long_term_query": 0,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 0,
+      "reid_multi_camera_gallery": 0,
+      "reid_multi_camera_long_term_gallery": 0,
+      "reid_multi_camera_long_term_query": 0,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_query": 0,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 0,
+      "reid_reappearance_gallery": 0,
+      "reid_reappearance_query": 0,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 0,
+      "tracking_brief_occlusions_train": 0,
+      "tracking_multiple_people_occlusions_test": 0
+    }
+  },
+  "cross_recording_episode_freeze_requires_lawful_actual_video_annotation_FPS_alignment": true,
+  "final_goal_file": "outputs/N72R21/FINAL_GOAL.json",
+  "next_stage_authorized": false,
+  "no_model_parameter_or_threshold_selection": true,
+  "no_raw_video_or_image_read": true,
+  "official_memberships": {
+    "reid_long_term_gallery": {
+      "IDs": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7,
+        9,
+        10,
+        11,
+        12,
+        13,
+        15,
+        16
+      ],
+      "SHA256": "28e9a2c3ae5b7d603fe6cd015103f009285d7f3ca070a1937865c2c7d2b72614",
+      "media_or_features_accessed": false,
+      "path": "/data3/liuyeqiang/InterMOT_N72R21_assets/official_sources/CHIRLA/benchmark/metadata/reid_long_term_gallery.csv",
+      "records": [
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 2,
+          "recording_id": "camera_2_2023-07-26-13:21:40",
+          "sequence": "seq_020",
+          "timestamp_from_authoritative_metadata": "2023-07-26T13:21:40",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-07-26-13:21:40",
+          "sequence": "seq_020",
+          "timestamp_from_authoritative_metadata": "2023-07-26T13:21:40",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 4,
+          "recording_id": "camera_4_2023-07-26-13:21:40",
+          "sequence": "seq_020",
+          "timestamp_from_authoritative_metadata": "2023-07-26T13:21:40",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 5,
+          "recording_id": "camera_5_2023-07-26-13:21:40",
+          "sequence": "seq_020",
+          "timestamp_from_authoritative_metadata": "2023-07-26T13:21:40",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 6,
+          "recording_id": "camera_6_2023-07-26-13:21:40",
+          "sequence": "seq_020",
+          "timestamp_from_authoritative_metadata": "2023-07-26T13:21:40",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 7,
+          "recording_id": "camera_7_2023-07-26-13:21:40",
+          "sequence": "seq_020",
+          "timestamp_from_authoritative_metadata": "2023-07-26T13:21:40",
+          "timestamp_not_measured_video_PTS": true
+        }
+      ],
+      "rows": 368,
+      "subsets": [
+        "train_1",
+        "train_2",
+        "train_3",
+        "train_4",
+        "train_5",
+        "train_6"
+      ],
+      "unique_crop_paths": 368
+    },
+    "reid_long_term_query": {
+      "IDs": [
+        -26,
+        -25,
+        -24,
+        -19,
+        -18,
+        -14,
+        -8,
+        -5,
+        1,
+        2,
+        3,
+        4,
+        6,
+        7,
+        9,
+        10,
+        11,
+        12
+      ],
+      "SHA256": "a1374bf8b54dd1d592b602e01b92ae6cfc855d0be859fec2c6b56d1763eb7cd1",
+      "media_or_features_accessed": false,
+      "path": "/data3/liuyeqiang/InterMOT_N72R21_assets/official_sources/CHIRLA/benchmark/metadata/reid_long_term_query.csv",
+      "records": [
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 2,
+          "recording_id": "camera_2_2023-06-02-11:14:26",
+          "sequence": "seq_000",
+          "timestamp_from_authoritative_metadata": "2023-06-02T11:14:26",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-06-02-11:14:26",
+          "sequence": "seq_000",
+          "timestamp_from_authoritative_metadata": "2023-06-02T11:14:26",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 4,
+          "recording_id": "camera_4_2023-06-02-11:14:26",
+          "sequence": "seq_000",
+          "timestamp_from_authoritative_metadata": "2023-06-02T11:14:26",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 5,
+          "recording_id": "camera_5_2023-06-02-11:14:26",
+          "sequence": "seq_000",
+          "timestamp_from_authoritative_metadata": "2023-06-02T11:14:26",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 6,
+          "recording_id": "camera_6_2023-06-02-11:14:26",
+          "sequence": "seq_000",
+          "timestamp_from_authoritative_metadata": "2023-06-02T11:14:26",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 7,
+          "recording_id": "camera_7_2023-06-02-11:14:26",
+          "sequence": "seq_000",
+          "timestamp_from_authoritative_metadata": "2023-06-02T11:14:26",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-06-02-12:03:33",
+          "sequence": "seq_001",
+          "timestamp_from_authoritative_metadata": "2023-06-02T12:03:33",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 4,
+          "recording_id": "camera_4_2023-06-02-12:03:33",
+          "sequence": "seq_001",
+          "timestamp_from_authoritative_metadata": "2023-06-02T12:03:33",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 5,
+          "recording_id": "camera_5_2023-06-02-12:03:33",
+          "sequence": "seq_001",
+          "timestamp_from_authoritative_metadata": "2023-06-02T12:03:33",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 2,
+          "recording_id": "camera_2_2023-06-02-12:09:07",
+          "sequence": "seq_002",
+          "timestamp_from_authoritative_metadata": "2023-06-02T12:09:07",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-06-02-12:09:07",
+          "sequence": "seq_002",
+          "timestamp_from_authoritative_metadata": "2023-06-02T12:09:07",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 2,
+          "recording_id": "camera_2_2023-06-08-12:29:08",
+          "sequence": "seq_004",
+          "timestamp_from_authoritative_metadata": "2023-06-08T12:29:08",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-06-08-12:29:08",
+          "sequence": "seq_004",
+          "timestamp_from_authoritative_metadata": "2023-06-08T12:29:08",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 4,
+          "recording_id": "camera_4_2023-06-08-12:29:08",
+          "sequence": "seq_004",
+          "timestamp_from_authoritative_metadata": "2023-06-08T12:29:08",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 5,
+          "recording_id": "camera_5_2023-06-08-12:29:08",
+          "sequence": "seq_004",
+          "timestamp_from_authoritative_metadata": "2023-06-08T12:29:08",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 6,
+          "recording_id": "camera_6_2023-06-08-12:29:08",
+          "sequence": "seq_004",
+          "timestamp_from_authoritative_metadata": "2023-06-08T12:29:08",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 7,
+          "recording_id": "camera_7_2023-06-08-12:29:08",
+          "sequence": "seq_004",
+          "timestamp_from_authoritative_metadata": "2023-06-08T12:29:08",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 2,
+          "recording_id": "camera_2_2023-06-13-13:24:46",
+          "sequence": "seq_006",
+          "timestamp_from_authoritative_metadata": "2023-06-13T13:24:46",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-06-13-13:24:46",
+          "sequence": "seq_006",
+          "timestamp_from_authoritative_metadata": "2023-06-13T13:24:46",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 5,
+          "recording_id": "camera_5_2023-06-13-13:24:46",
+          "sequence": "seq_006",
+          "timestamp_from_authoritative_metadata": "2023-06-13T13:24:46",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 2,
+          "recording_id": "camera_2_2023-06-13-13:31:40",
+          "sequence": "seq_007",
+          "timestamp_from_authoritative_metadata": "2023-06-13T13:31:40",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-06-13-13:31:40",
+          "sequence": "seq_007",
+          "timestamp_from_authoritative_metadata": "2023-06-13T13:31:40",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 2,
+          "recording_id": "camera_2_2023-12-01-11:05:52",
+          "sequence": "seq_024",
+          "timestamp_from_authoritative_metadata": "2023-12-01T11:05:52",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 4,
+          "recording_id": "camera_4_2023-12-01-11:05:52",
+          "sequence": "seq_024",
+          "timestamp_from_authoritative_metadata": "2023-12-01T11:05:52",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 5,
+          "recording_id": "camera_5_2023-12-01-11:05:52",
+          "sequence": "seq_024",
+          "timestamp_from_authoritative_metadata": "2023-12-01T11:05:52",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 6,
+          "recording_id": "camera_6_2023-12-01-11:05:52",
+          "sequence": "seq_024",
+          "timestamp_from_authoritative_metadata": "2023-12-01T11:05:52",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 7,
+          "recording_id": "camera_7_2023-12-01-11:05:52",
+          "sequence": "seq_024",
+          "timestamp_from_authoritative_metadata": "2023-12-01T11:05:52",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 2,
+          "recording_id": "camera_2_2023-12-04-12:11:17",
+          "sequence": "seq_025",
+          "timestamp_from_authoritative_metadata": "2023-12-04T12:11:17",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-12-04-12:11:17",
+          "sequence": "seq_025",
+          "timestamp_from_authoritative_metadata": "2023-12-04T12:11:17",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 4,
+          "recording_id": "camera_4_2023-12-04-12:11:17",
+          "sequence": "seq_025",
+          "timestamp_from_authoritative_metadata": "2023-12-04T12:11:17",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 5,
+          "recording_id": "camera_5_2023-12-04-12:11:17",
+          "sequence": "seq_025",
+          "timestamp_from_authoritative_metadata": "2023-12-04T12:11:17",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 6,
+          "recording_id": "camera_6_2023-12-04-12:11:17",
+          "sequence": "seq_025",
+          "timestamp_from_authoritative_metadata": "2023-12-04T12:11:17",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 7,
+          "recording_id": "camera_7_2023-12-04-12:11:17",
+          "sequence": "seq_025",
+          "timestamp_from_authoritative_metadata": "2023-12-04T12:11:17",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 2,
+          "recording_id": "camera_2_2023-12-05-12:12:13",
+          "sequence": "seq_026",
+          "timestamp_from_authoritative_metadata": "2023-12-05T12:12:13",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-12-05-12:12:13",
+          "sequence": "seq_026",
+          "timestamp_from_authoritative_metadata": "2023-12-05T12:12:13",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 4,
+          "recording_id": "camera_4_2023-12-05-12:12:13",
+          "sequence": "seq_026",
+          "timestamp_from_authoritative_metadata": "2023-12-05T12:12:13",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 5,
+          "recording_id": "camera_5_2023-12-05-12:12:13",
+          "sequence": "seq_026",
+          "timestamp_from_authoritative_metadata": "2023-12-05T12:12:13",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 6,
+          "recording_id": "camera_6_2023-12-05-12:12:13",
+          "sequence": "seq_026",
+          "timestamp_from_authoritative_metadata": "2023-12-05T12:12:13",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 7,
+          "recording_id": "camera_7_2023-12-05-12:12:13",
+          "sequence": "seq_026",
+          "timestamp_from_authoritative_metadata": "2023-12-05T12:12:13",
+          "timestamp_not_measured_video_PTS": true
+        }
+      ],
+      "rows": 4903,
+      "subsets": [
+        "test_1",
+        "test_2",
+        "test_3",
+        "test_4",
+        "test_5",
+        "test_6"
+      ],
+      "unique_crop_paths": 4903
+    },
+    "reid_long_term_train": {
+      "IDs": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7,
+        9,
+        10,
+        11,
+        12,
+        13,
+        15,
+        16
+      ],
+      "SHA256": "bddb0ea9cd82b00828a0d5ed832b23e7f5714a4b016ef5c0793ce7dd7cc6a0b7",
+      "media_or_features_accessed": false,
+      "path": "/data3/liuyeqiang/InterMOT_N72R21_assets/official_sources/CHIRLA/benchmark/metadata/reid_long_term_train.csv",
+      "records": [
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 1,
+          "recording_id": "camera_1_2023-07-26-13:21:40",
+          "sequence": "seq_020",
+          "timestamp_from_authoritative_metadata": "2023-07-26T13:21:40",
+          "timestamp_not_measured_video_PTS": true
+        }
+      ],
+      "rows": 65,
+      "subsets": [
+        "train_0"
+      ],
+      "unique_crop_paths": 65
+    },
+    "reid_long_term_val": {
+      "IDs": [
+        -24,
+        -19,
+        -18,
+        -14,
+        -5,
+        1,
+        2,
+        3,
+        4,
+        6,
+        7,
+        9,
+        10,
+        11,
+        12
+      ],
+      "SHA256": "29f6c2b049e6da91df28d7e160ea2ae7c09926630f96e812207a8165f5c6d0cb",
+      "media_or_features_accessed": false,
+      "path": "/data3/liuyeqiang/InterMOT_N72R21_assets/official_sources/CHIRLA/benchmark/metadata/reid_long_term_val.csv",
+      "records": [
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 1,
+          "recording_id": "camera_1_2023-06-02-11:14:25",
+          "sequence": "seq_000",
+          "timestamp_from_authoritative_metadata": "2023-06-02T11:14:25",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 1,
+          "recording_id": "camera_1_2023-06-02-12:03:33",
+          "sequence": "seq_001",
+          "timestamp_from_authoritative_metadata": "2023-06-02T12:03:33",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 1,
+          "recording_id": "camera_1_2023-06-02-12:09:07",
+          "sequence": "seq_002",
+          "timestamp_from_authoritative_metadata": "2023-06-02T12:09:07",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 1,
+          "recording_id": "camera_1_2023-06-08-12:29:08",
+          "sequence": "seq_004",
+          "timestamp_from_authoritative_metadata": "2023-06-08T12:29:08",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 1,
+          "recording_id": "camera_1_2023-06-13-13:24:46",
+          "sequence": "seq_006",
+          "timestamp_from_authoritative_metadata": "2023-06-13T13:24:46",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 1,
+          "recording_id": "camera_1_2023-06-13-13:31:40",
+          "sequence": "seq_007",
+          "timestamp_from_authoritative_metadata": "2023-06-13T13:31:40",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 1,
+          "recording_id": "camera_1_2023-12-01-11:05:52",
+          "sequence": "seq_024",
+          "timestamp_from_authoritative_metadata": "2023-12-01T11:05:52",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 1,
+          "recording_id": "camera_1_2023-12-04-12:11:17",
+          "sequence": "seq_025",
+          "timestamp_from_authoritative_metadata": "2023-12-04T12:11:17",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 1,
+          "recording_id": "camera_1_2023-12-05-12:12:13",
+          "sequence": "seq_026",
+          "timestamp_from_authoritative_metadata": "2023-12-05T12:12:13",
+          "timestamp_not_measured_video_PTS": true
+        }
+      ],
+      "rows": 1177,
+      "subsets": [
+        "test_0"
+      ],
+      "unique_crop_paths": 1177
+    },
+    "reid_multi_camera_gallery": {
+      "IDs": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        18,
+        19,
+        24
+      ],
+      "SHA256": "74d0ed4176b91489d9e75d5af851338537aaa12fa6b13d1aabed575f6abbac43",
+      "media_or_features_accessed": false,
+      "path": "/data3/liuyeqiang/InterMOT_N72R21_assets/official_sources/CHIRLA/benchmark/metadata/reid_multi_camera_gallery.csv",
+      "records": [
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-06-02-12:03:33",
+          "sequence": "seq_001",
+          "timestamp_from_authoritative_metadata": "2023-06-02T12:03:33",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-06-02-12:09:07",
+          "sequence": "seq_002",
+          "timestamp_from_authoritative_metadata": "2023-06-02T12:09:07",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 2,
+          "recording_id": "camera_2_2023-06-08-12:29:08",
+          "sequence": "seq_004",
+          "timestamp_from_authoritative_metadata": "2023-06-08T12:29:08",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-06-13-13:24:46",
+          "sequence": "seq_006",
+          "timestamp_from_authoritative_metadata": "2023-06-13T13:24:46",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-06-13-13:31:40",
+          "sequence": "seq_007",
+          "timestamp_from_authoritative_metadata": "2023-06-13T13:31:40",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 4,
+          "recording_id": "camera_4_2023-07-26-13:21:40",
+          "sequence": "seq_020",
+          "timestamp_from_authoritative_metadata": "2023-07-26T13:21:40",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 2,
+          "recording_id": "camera_2_2023-12-01-11:05:52",
+          "sequence": "seq_024",
+          "timestamp_from_authoritative_metadata": "2023-12-01T11:05:52",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 7,
+          "recording_id": "camera_7_2023-12-04-12:11:17",
+          "sequence": "seq_025",
+          "timestamp_from_authoritative_metadata": "2023-12-04T12:11:17",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 2,
+          "recording_id": "camera_2_2023-12-05-12:12:13",
+          "sequence": "seq_026",
+          "timestamp_from_authoritative_metadata": "2023-12-05T12:12:13",
+          "timestamp_not_measured_video_PTS": true
+        }
+      ],
+      "rows": 305,
+      "subsets": [
+        "train_1",
+        "train_2",
+        "train_3",
+        "train_4",
+        "train_5",
+        "train_6",
+        "train_7",
+        "train_8",
+        "train_9"
+      ],
+      "unique_crop_paths": 305
+    },
+    "reid_multi_camera_long_term_gallery": {
+      "IDs": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        18,
+        19,
+        24
+      ],
+      "SHA256": "e8d70ba36bf4fbc64226330b75f515ae2bff82022816535d44d24dbbf622921a",
+      "media_or_features_accessed": false,
+      "path": "/data3/liuyeqiang/InterMOT_N72R21_assets/official_sources/CHIRLA/benchmark/metadata/reid_multi_camera_long_term_gallery.csv",
+      "records": [
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-06-02-12:03:33",
+          "sequence": "seq_001",
+          "timestamp_from_authoritative_metadata": "2023-06-02T12:03:33",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-06-02-12:09:07",
+          "sequence": "seq_002",
+          "timestamp_from_authoritative_metadata": "2023-06-02T12:09:07",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 4,
+          "recording_id": "camera_4_2023-06-08-12:29:08",
+          "sequence": "seq_004",
+          "timestamp_from_authoritative_metadata": "2023-06-08T12:29:08",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 1,
+          "recording_id": "camera_1_2023-06-13-13:24:46",
+          "sequence": "seq_006",
+          "timestamp_from_authoritative_metadata": "2023-06-13T13:24:46",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 1,
+          "recording_id": "camera_1_2023-06-13-13:31:40",
+          "sequence": "seq_007",
+          "timestamp_from_authoritative_metadata": "2023-06-13T13:31:40",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 7,
+          "recording_id": "camera_7_2023-07-26-13:21:40",
+          "sequence": "seq_020",
+          "timestamp_from_authoritative_metadata": "2023-07-26T13:21:40",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-12-01-11:05:52",
+          "sequence": "seq_024",
+          "timestamp_from_authoritative_metadata": "2023-12-01T11:05:52",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 2,
+          "recording_id": "camera_2_2023-12-04-12:11:17",
+          "sequence": "seq_025",
+          "timestamp_from_authoritative_metadata": "2023-12-04T12:11:17",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 4,
+          "recording_id": "camera_4_2023-12-05-12:12:13",
+          "sequence": "seq_026",
+          "timestamp_from_authoritative_metadata": "2023-12-05T12:12:13",
+          "timestamp_not_measured_video_PTS": true
+        }
+      ],
+      "rows": 252,
+      "subsets": [
+        "train_1",
+        "train_2",
+        "train_3",
+        "train_4",
+        "train_5",
+        "train_6",
+        "train_7",
+        "train_8",
+        "train_9"
+      ],
+      "unique_crop_paths": 252
+    },
+    "reid_multi_camera_long_term_query": {
+      "IDs": [
+        -19,
+        -18,
+        -16,
+        -15,
+        -14,
+        -13,
+        -12,
+        -11,
+        -10,
+        -9,
+        -8,
+        -7,
+        -6,
+        -5,
+        -4,
+        -3,
+        -2,
+        -1,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        9,
+        10,
+        12,
+        14
+      ],
+      "SHA256": "14f9a287707243fc4f58e3b0ab7f9bc3c449f705d9c00162cab0c56d9a90aa37",
+      "media_or_features_accessed": false,
+      "path": "/data3/liuyeqiang/InterMOT_N72R21_assets/official_sources/CHIRLA/benchmark/metadata/reid_multi_camera_long_term_query.csv",
+      "records": [
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-06-02-12:09:07",
+          "sequence": "seq_002",
+          "timestamp_from_authoritative_metadata": "2023-06-02T12:09:07",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 2,
+          "recording_id": "camera_2_2023-06-08-12:29:08",
+          "sequence": "seq_004",
+          "timestamp_from_authoritative_metadata": "2023-06-08T12:29:08",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 4,
+          "recording_id": "camera_4_2023-06-08-12:29:08",
+          "sequence": "seq_004",
+          "timestamp_from_authoritative_metadata": "2023-06-08T12:29:08",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 6,
+          "recording_id": "camera_6_2023-06-08-12:29:08",
+          "sequence": "seq_004",
+          "timestamp_from_authoritative_metadata": "2023-06-08T12:29:08",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 7,
+          "recording_id": "camera_7_2023-06-08-12:29:08",
+          "sequence": "seq_004",
+          "timestamp_from_authoritative_metadata": "2023-06-08T12:29:08",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 1,
+          "recording_id": "camera_1_2023-06-13-13:31:40",
+          "sequence": "seq_007",
+          "timestamp_from_authoritative_metadata": "2023-06-13T13:31:40",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 2,
+          "recording_id": "camera_2_2023-06-02-12:09:07",
+          "sequence": "seq_020",
+          "timestamp_from_authoritative_metadata": "2023-06-02T12:09:07",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-07-26-13:21:40",
+          "sequence": "seq_020",
+          "timestamp_from_authoritative_metadata": "2023-07-26T13:21:40",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 5,
+          "recording_id": "camera_5_2023-07-26-13:21:40",
+          "sequence": "seq_020",
+          "timestamp_from_authoritative_metadata": "2023-07-26T13:21:40",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 6,
+          "recording_id": "camera_6_2023-07-26-13:21:40",
+          "sequence": "seq_020",
+          "timestamp_from_authoritative_metadata": "2023-07-26T13:21:40",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 7,
+          "recording_id": "camera_7_2023-06-08-12:29:08",
+          "sequence": "seq_020",
+          "timestamp_from_authoritative_metadata": "2023-06-08T12:29:08",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 1,
+          "recording_id": "camera_1_2023-12-01-11:05:52",
+          "sequence": "seq_024",
+          "timestamp_from_authoritative_metadata": "2023-12-01T11:05:52",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-12-01-11:05:52",
+          "sequence": "seq_024",
+          "timestamp_from_authoritative_metadata": "2023-12-01T11:05:52",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 4,
+          "recording_id": "camera_4_2023-12-04-12:11:17",
+          "sequence": "seq_025",
+          "timestamp_from_authoritative_metadata": "2023-12-04T12:11:17",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 2,
+          "recording_id": "camera_2_2023-06-08-12:29:08",
+          "sequence": "seq_026",
+          "timestamp_from_authoritative_metadata": "2023-06-08T12:29:08",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-12-04-12:11:17",
+          "sequence": "seq_026",
+          "timestamp_from_authoritative_metadata": "2023-12-04T12:11:17",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 5,
+          "recording_id": "camera_5_2023-07-26-13:21:40",
+          "sequence": "seq_026",
+          "timestamp_from_authoritative_metadata": "2023-07-26T13:21:40",
+          "timestamp_not_measured_video_PTS": true
+        }
+      ],
+      "rows": 2207,
+      "subsets": [
+        "test_1",
+        "test_2",
+        "test_3",
+        "test_4",
+        "test_5",
+        "test_6",
+        "test_7",
+        "test_8",
+        "test_9"
+      ],
+      "unique_crop_paths": 2207
+    },
+    "reid_multi_camera_long_term_train": {
+      "IDs": [
+        1,
+        3,
+        5,
+        6,
+        9,
+        10,
+        18,
+        19
+      ],
+      "SHA256": "89eb4a9d2e56e93ac15cb4a231a8f5d0ef6a189d946632080571ede2e8584c39",
+      "media_or_features_accessed": false,
+      "path": "/data3/liuyeqiang/InterMOT_N72R21_assets/official_sources/CHIRLA/benchmark/metadata/reid_multi_camera_long_term_train.csv",
+      "records": [
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-06-02-11:14:26",
+          "sequence": "seq_000",
+          "timestamp_from_authoritative_metadata": "2023-06-02T11:14:26",
+          "timestamp_not_measured_video_PTS": true
+        }
+      ],
+      "rows": 27,
+      "subsets": [
+        "train_0"
+      ],
+      "unique_crop_paths": 27
+    },
+    "reid_multi_camera_long_term_val": {
+      "IDs": [
+        -8,
+        -7,
+        -4,
+        -2,
+        1,
+        3,
+        5,
+        6
+      ],
+      "SHA256": "e842531510f296c0986fe2a4968ffdbd3fe573ab311993afab132e136ac52a52",
+      "media_or_features_accessed": false,
+      "path": "/data3/liuyeqiang/InterMOT_N72R21_assets/official_sources/CHIRLA/benchmark/metadata/reid_multi_camera_long_term_val.csv",
+      "records": [
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 4,
+          "recording_id": "camera_4_2023-06-08-12:29:08",
+          "sequence": "seq_004",
+          "timestamp_from_authoritative_metadata": "2023-06-08T12:29:08",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 1,
+          "recording_id": "camera_1_2023-06-08-12:29:08",
+          "sequence": "seq_026",
+          "timestamp_from_authoritative_metadata": "2023-06-08T12:29:08",
+          "timestamp_not_measured_video_PTS": true
+        }
+      ],
+      "rows": 258,
+      "subsets": [
+        "test_0"
+      ],
+      "unique_crop_paths": 258
+    },
+    "reid_multi_camera_query": {
+      "IDs": [
+        -26,
+        -25,
+        -9,
+        -8,
+        -5,
+        -2,
+        -1,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        18,
+        19,
+        24
+      ],
+      "SHA256": "9f441f95f7f0e0a8c1a257984e0c15869033083cf1ef8fc2511ab98689517902",
+      "media_or_features_accessed": false,
+      "path": "/data3/liuyeqiang/InterMOT_N72R21_assets/official_sources/CHIRLA/benchmark/metadata/reid_multi_camera_query.csv",
+      "records": [
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 1,
+          "recording_id": "camera_1_2023-06-02-12:03:33",
+          "sequence": "seq_001",
+          "timestamp_from_authoritative_metadata": "2023-06-02T12:03:33",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 2,
+          "recording_id": "camera_2_2023-06-02-12:03:33",
+          "sequence": "seq_001",
+          "timestamp_from_authoritative_metadata": "2023-06-02T12:03:33",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 4,
+          "recording_id": "camera_4_2023-06-02-12:03:33",
+          "sequence": "seq_001",
+          "timestamp_from_authoritative_metadata": "2023-06-02T12:03:33",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 2,
+          "recording_id": "camera_2_2023-06-02-12:09:07",
+          "sequence": "seq_002",
+          "timestamp_from_authoritative_metadata": "2023-06-02T12:09:07",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 4,
+          "recording_id": "camera_4_2023-06-02-12:09:07",
+          "sequence": "seq_002",
+          "timestamp_from_authoritative_metadata": "2023-06-02T12:09:07",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 1,
+          "recording_id": "camera_1_2023-06-08-12:29:08",
+          "sequence": "seq_004",
+          "timestamp_from_authoritative_metadata": "2023-06-08T12:29:08",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-06-08-12:29:08",
+          "sequence": "seq_004",
+          "timestamp_from_authoritative_metadata": "2023-06-08T12:29:08",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 4,
+          "recording_id": "camera_4_2023-06-08-12:29:08",
+          "sequence": "seq_004",
+          "timestamp_from_authoritative_metadata": "2023-06-08T12:29:08",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 5,
+          "recording_id": "camera_5_2023-06-08-12:29:08",
+          "sequence": "seq_004",
+          "timestamp_from_authoritative_metadata": "2023-06-08T12:29:08",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 6,
+          "recording_id": "camera_6_2023-06-08-12:29:08",
+          "sequence": "seq_004",
+          "timestamp_from_authoritative_metadata": "2023-06-08T12:29:08",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 7,
+          "recording_id": "camera_7_2023-06-08-12:29:08",
+          "sequence": "seq_004",
+          "timestamp_from_authoritative_metadata": "2023-06-08T12:29:08",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 1,
+          "recording_id": "camera_1_2023-06-13-13:24:46",
+          "sequence": "seq_006",
+          "timestamp_from_authoritative_metadata": "2023-06-13T13:24:46",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 2,
+          "recording_id": "camera_2_2023-06-13-13:24:46",
+          "sequence": "seq_006",
+          "timestamp_from_authoritative_metadata": "2023-06-13T13:24:46",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 5,
+          "recording_id": "camera_5_2023-06-13-13:24:46",
+          "sequence": "seq_006",
+          "timestamp_from_authoritative_metadata": "2023-06-13T13:24:46",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 1,
+          "recording_id": "camera_1_2023-06-13-13:31:40",
+          "sequence": "seq_007",
+          "timestamp_from_authoritative_metadata": "2023-06-13T13:31:40",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 2,
+          "recording_id": "camera_2_2023-06-13-13:31:40",
+          "sequence": "seq_007",
+          "timestamp_from_authoritative_metadata": "2023-06-13T13:31:40",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 1,
+          "recording_id": "camera_1_2023-07-26-13:21:40",
+          "sequence": "seq_020",
+          "timestamp_from_authoritative_metadata": "2023-07-26T13:21:40",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 2,
+          "recording_id": "camera_2_2023-07-26-13:21:40",
+          "sequence": "seq_020",
+          "timestamp_from_authoritative_metadata": "2023-07-26T13:21:40",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-07-26-13:21:40",
+          "sequence": "seq_020",
+          "timestamp_from_authoritative_metadata": "2023-07-26T13:21:40",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 5,
+          "recording_id": "camera_5_2023-07-26-13:21:40",
+          "sequence": "seq_020",
+          "timestamp_from_authoritative_metadata": "2023-07-26T13:21:40",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 6,
+          "recording_id": "camera_6_2023-07-26-13:21:40",
+          "sequence": "seq_020",
+          "timestamp_from_authoritative_metadata": "2023-07-26T13:21:40",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 7,
+          "recording_id": "camera_7_2023-07-26-13:21:40",
+          "sequence": "seq_020",
+          "timestamp_from_authoritative_metadata": "2023-07-26T13:21:40",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 1,
+          "recording_id": "camera_1_2023-12-01-11:05:52",
+          "sequence": "seq_024",
+          "timestamp_from_authoritative_metadata": "2023-12-01T11:05:52",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-12-01-11:05:52",
+          "sequence": "seq_024",
+          "timestamp_from_authoritative_metadata": "2023-12-01T11:05:52",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 4,
+          "recording_id": "camera_4_2023-12-01-11:05:52",
+          "sequence": "seq_024",
+          "timestamp_from_authoritative_metadata": "2023-12-01T11:05:52",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 5,
+          "recording_id": "camera_5_2023-12-01-11:05:52",
+          "sequence": "seq_024",
+          "timestamp_from_authoritative_metadata": "2023-12-01T11:05:52",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 6,
+          "recording_id": "camera_6_2023-12-01-11:05:52",
+          "sequence": "seq_024",
+          "timestamp_from_authoritative_metadata": "2023-12-01T11:05:52",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 7,
+          "recording_id": "camera_7_2023-12-01-11:05:52",
+          "sequence": "seq_024",
+          "timestamp_from_authoritative_metadata": "2023-12-01T11:05:52",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 1,
+          "recording_id": "camera_1_2023-12-04-12:11:17",
+          "sequence": "seq_025",
+          "timestamp_from_authoritative_metadata": "2023-12-04T12:11:17",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 2,
+          "recording_id": "camera_2_2023-12-04-12:11:17",
+          "sequence": "seq_025",
+          "timestamp_from_authoritative_metadata": "2023-12-04T12:11:17",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-12-04-12:11:17",
+          "sequence": "seq_025",
+          "timestamp_from_authoritative_metadata": "2023-12-04T12:11:17",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 4,
+          "recording_id": "camera_4_2023-12-04-12:11:17",
+          "sequence": "seq_025",
+          "timestamp_from_authoritative_metadata": "2023-12-04T12:11:17",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 5,
+          "recording_id": "camera_5_2023-12-04-12:11:17",
+          "sequence": "seq_025",
+          "timestamp_from_authoritative_metadata": "2023-12-04T12:11:17",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 6,
+          "recording_id": "camera_6_2023-12-04-12:11:17",
+          "sequence": "seq_025",
+          "timestamp_from_authoritative_metadata": "2023-12-04T12:11:17",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 1,
+          "recording_id": "camera_1_2023-12-05-12:12:13",
+          "sequence": "seq_026",
+          "timestamp_from_authoritative_metadata": "2023-12-05T12:12:13",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-12-05-12:12:13",
+          "sequence": "seq_026",
+          "timestamp_from_authoritative_metadata": "2023-12-05T12:12:13",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 4,
+          "recording_id": "camera_4_2023-12-05-12:12:13",
+          "sequence": "seq_026",
+          "timestamp_from_authoritative_metadata": "2023-12-05T12:12:13",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 5,
+          "recording_id": "camera_5_2023-12-05-12:12:13",
+          "sequence": "seq_026",
+          "timestamp_from_authoritative_metadata": "2023-12-05T12:12:13",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 7,
+          "recording_id": "camera_7_2023-12-05-12:12:13",
+          "sequence": "seq_026",
+          "timestamp_from_authoritative_metadata": "2023-12-05T12:12:13",
+          "timestamp_not_measured_video_PTS": true
+        }
+      ],
+      "rows": 4454,
+      "subsets": [
+        "test_1",
+        "test_2",
+        "test_3",
+        "test_4",
+        "test_5",
+        "test_6",
+        "test_7",
+        "test_8",
+        "test_9"
+      ],
+      "unique_crop_paths": 4454
+    },
+    "reid_multi_camera_train": {
+      "IDs": [
+        1,
+        3,
+        5,
+        6,
+        9,
+        10,
+        18,
+        19
+      ],
+      "SHA256": "f5a436ff6a0f2053456a79dd3a80dbf4c32d5390dae365789005b78679b11f6d",
+      "media_or_features_accessed": false,
+      "path": "/data3/liuyeqiang/InterMOT_N72R21_assets/official_sources/CHIRLA/benchmark/metadata/reid_multi_camera_train.csv",
+      "records": [
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-06-02-11:14:26",
+          "sequence": "seq_000",
+          "timestamp_from_authoritative_metadata": "2023-06-02T11:14:26",
+          "timestamp_not_measured_video_PTS": true
+        }
+      ],
+      "rows": 40,
+      "subsets": [
+        "train_0"
+      ],
+      "unique_crop_paths": 40
+    },
+    "reid_multi_camera_val": {
+      "IDs": [
+        1,
+        3,
+        5,
+        6,
+        9,
+        10
+      ],
+      "SHA256": "642fd4bf97890148e72a8adf1a42f781af33aa8b62dc739602e0ca9ce2248e6f",
+      "media_or_features_accessed": false,
+      "path": "/data3/liuyeqiang/InterMOT_N72R21_assets/official_sources/CHIRLA/benchmark/metadata/reid_multi_camera_val.csv",
+      "records": [
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 1,
+          "recording_id": "camera_1_2023-06-02-11:14:25",
+          "sequence": "seq_000",
+          "timestamp_from_authoritative_metadata": "2023-06-02T11:14:25",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 2,
+          "recording_id": "camera_2_2023-06-02-11:14:26",
+          "sequence": "seq_000",
+          "timestamp_from_authoritative_metadata": "2023-06-02T11:14:26",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 4,
+          "recording_id": "camera_4_2023-06-02-11:14:26",
+          "sequence": "seq_000",
+          "timestamp_from_authoritative_metadata": "2023-06-02T11:14:26",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 5,
+          "recording_id": "camera_5_2023-06-02-11:14:26",
+          "sequence": "seq_000",
+          "timestamp_from_authoritative_metadata": "2023-06-02T11:14:26",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 6,
+          "recording_id": "camera_6_2023-06-02-11:14:26",
+          "sequence": "seq_000",
+          "timestamp_from_authoritative_metadata": "2023-06-02T11:14:26",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 7,
+          "recording_id": "camera_7_2023-06-02-11:14:26",
+          "sequence": "seq_000",
+          "timestamp_from_authoritative_metadata": "2023-06-02T11:14:26",
+          "timestamp_not_measured_video_PTS": true
+        }
+      ],
+      "rows": 421,
+      "subsets": [
+        "test_0"
+      ],
+      "unique_crop_paths": 421
+    },
+    "reid_reappearance_gallery": {
+      "IDs": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        18,
+        19,
+        24,
+        25,
+        26
+      ],
+      "SHA256": "df58b7fe13ab7499f33971520464c4c4634a386d5fb1afc476a88bdc27a74d9b",
+      "media_or_features_accessed": false,
+      "path": "/data3/liuyeqiang/InterMOT_N72R21_assets/official_sources/CHIRLA/benchmark/metadata/reid_reappearance_gallery.csv",
+      "records": [
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 5,
+          "recording_id": "camera_5_2023-06-02-11:14:26",
+          "sequence": "seq_000",
+          "timestamp_from_authoritative_metadata": "2023-06-02T11:14:26",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-06-02-12:09:07",
+          "sequence": "seq_002",
+          "timestamp_from_authoritative_metadata": "2023-06-02T12:09:07",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 5,
+          "recording_id": "camera_5_2023-06-08-12:29:08",
+          "sequence": "seq_004",
+          "timestamp_from_authoritative_metadata": "2023-06-08T12:29:08",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-06-13-13:24:46",
+          "sequence": "seq_006",
+          "timestamp_from_authoritative_metadata": "2023-06-13T13:24:46",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-06-13-13:31:40",
+          "sequence": "seq_007",
+          "timestamp_from_authoritative_metadata": "2023-06-13T13:31:40",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 2,
+          "recording_id": "camera_2_2023-07-26-13:21:40",
+          "sequence": "seq_020",
+          "timestamp_from_authoritative_metadata": "2023-07-26T13:21:40",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 5,
+          "recording_id": "camera_5_2023-12-01-11:05:52",
+          "sequence": "seq_024",
+          "timestamp_from_authoritative_metadata": "2023-12-01T11:05:52",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 4,
+          "recording_id": "camera_4_2023-12-04-12:11:17",
+          "sequence": "seq_025",
+          "timestamp_from_authoritative_metadata": "2023-12-04T12:11:17",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-12-05-12:12:13",
+          "sequence": "seq_026",
+          "timestamp_from_authoritative_metadata": "2023-12-05T12:12:13",
+          "timestamp_not_measured_video_PTS": true
+        }
+      ],
+      "rows": 258,
+      "subsets": [
+        "train_1",
+        "train_2",
+        "train_3",
+        "train_4",
+        "train_5",
+        "train_6",
+        "train_7",
+        "train_8",
+        "train_9"
+      ],
+      "unique_crop_paths": 258
+    },
+    "reid_reappearance_query": {
+      "IDs": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        18,
+        19,
+        24,
+        25,
+        26
+      ],
+      "SHA256": "0f16b9be330941b94692b2b35e29664105bc50fa8bb7fc15a8e6a8f298fa4b73",
+      "media_or_features_accessed": false,
+      "path": "/data3/liuyeqiang/InterMOT_N72R21_assets/official_sources/CHIRLA/benchmark/metadata/reid_reappearance_query.csv",
+      "records": [
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 5,
+          "recording_id": "camera_5_2023-06-02-11:14:26",
+          "sequence": "seq_000",
+          "timestamp_from_authoritative_metadata": "2023-06-02T11:14:26",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-06-02-12:09:07",
+          "sequence": "seq_002",
+          "timestamp_from_authoritative_metadata": "2023-06-02T12:09:07",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 5,
+          "recording_id": "camera_5_2023-06-08-12:29:08",
+          "sequence": "seq_004",
+          "timestamp_from_authoritative_metadata": "2023-06-08T12:29:08",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-06-13-13:24:46",
+          "sequence": "seq_006",
+          "timestamp_from_authoritative_metadata": "2023-06-13T13:24:46",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-06-13-13:31:40",
+          "sequence": "seq_007",
+          "timestamp_from_authoritative_metadata": "2023-06-13T13:31:40",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 2,
+          "recording_id": "camera_2_2023-07-26-13:21:40",
+          "sequence": "seq_020",
+          "timestamp_from_authoritative_metadata": "2023-07-26T13:21:40",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 5,
+          "recording_id": "camera_5_2023-12-01-11:05:52",
+          "sequence": "seq_024",
+          "timestamp_from_authoritative_metadata": "2023-12-01T11:05:52",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 4,
+          "recording_id": "camera_4_2023-12-04-12:11:17",
+          "sequence": "seq_025",
+          "timestamp_from_authoritative_metadata": "2023-12-04T12:11:17",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-12-05-12:12:13",
+          "sequence": "seq_026",
+          "timestamp_from_authoritative_metadata": "2023-12-05T12:12:13",
+          "timestamp_not_measured_video_PTS": true
+        }
+      ],
+      "rows": 1251,
+      "subsets": [
+        "test_1",
+        "test_2",
+        "test_3",
+        "test_4",
+        "test_5",
+        "test_6",
+        "test_7",
+        "test_8",
+        "test_9"
+      ],
+      "unique_crop_paths": 1251
+    },
+    "reid_reappearance_train": {
+      "IDs": [
+        1,
+        3,
+        5,
+        6,
+        9,
+        10
+      ],
+      "SHA256": "4d0e7ced13f18f04d1663a74d515fbc2d948a99133670cca001326afde262f45",
+      "media_or_features_accessed": false,
+      "path": "/data3/liuyeqiang/InterMOT_N72R21_assets/official_sources/CHIRLA/benchmark/metadata/reid_reappearance_train.csv",
+      "records": [
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 2,
+          "recording_id": "camera_2_2023-06-02-11:14:26",
+          "sequence": "seq_000",
+          "timestamp_from_authoritative_metadata": "2023-06-02T11:14:26",
+          "timestamp_not_measured_video_PTS": true
+        }
+      ],
+      "rows": 23,
+      "subsets": [
+        "train_0"
+      ],
+      "unique_crop_paths": 23
+    },
+    "reid_reappearance_val": {
+      "IDs": [
+        1,
+        3,
+        5,
+        6,
+        9,
+        10
+      ],
+      "SHA256": "6561cd5940ab328e51e029606c813f947eb4bf4426198fdd3474294b08cc683b",
+      "media_or_features_accessed": false,
+      "path": "/data3/liuyeqiang/InterMOT_N72R21_assets/official_sources/CHIRLA/benchmark/metadata/reid_reappearance_val.csv",
+      "records": [
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 2,
+          "recording_id": "camera_2_2023-06-02-11:14:26",
+          "sequence": "seq_000",
+          "timestamp_from_authoritative_metadata": "2023-06-02T11:14:26",
+          "timestamp_not_measured_video_PTS": true
+        }
+      ],
+      "rows": 132,
+      "subsets": [
+        "test_0"
+      ],
+      "unique_crop_paths": 132
+    },
+    "tracking_brief_occlusions_test": {
+      "IDs": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        18,
+        19,
+        24,
+        25
+      ],
+      "SHA256": "5e426fba9c129250b459ac41319c00997402a84388d5962db194a7519a46efe2",
+      "media_or_features_accessed": false,
+      "path": "/data3/liuyeqiang/InterMOT_N72R21_assets/official_sources/CHIRLA/benchmark/metadata/tracking_brief_occlusions_test.csv",
+      "records": [
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 1,
+          "recording_id": "camera_1_2023-06-02-11:14:25",
+          "sequence": "seq_000",
+          "timestamp_from_authoritative_metadata": "2023-06-02T11:14:25",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 2,
+          "recording_id": "camera_2_2023-06-02-11:14:26",
+          "sequence": "seq_000",
+          "timestamp_from_authoritative_metadata": "2023-06-02T11:14:26",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-06-02-11:14:26",
+          "sequence": "seq_000",
+          "timestamp_from_authoritative_metadata": "2023-06-02T11:14:26",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 5,
+          "recording_id": "camera_5_2023-06-02-11:14:26",
+          "sequence": "seq_000",
+          "timestamp_from_authoritative_metadata": "2023-06-02T11:14:26",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 6,
+          "recording_id": "camera_6_2023-06-02-11:14:26",
+          "sequence": "seq_000",
+          "timestamp_from_authoritative_metadata": "2023-06-02T11:14:26",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 7,
+          "recording_id": "camera_7_2023-06-02-11:14:26",
+          "sequence": "seq_000",
+          "timestamp_from_authoritative_metadata": "2023-06-02T11:14:26",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 4,
+          "recording_id": "camera_4_2023-06-02-12:03:33",
+          "sequence": "seq_001",
+          "timestamp_from_authoritative_metadata": "2023-06-02T12:03:33",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 1,
+          "recording_id": "camera_1_2023-06-02-12:09:07",
+          "sequence": "seq_002",
+          "timestamp_from_authoritative_metadata": "2023-06-02T12:09:07",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 2,
+          "recording_id": "camera_2_2023-06-02-12:09:07",
+          "sequence": "seq_002",
+          "timestamp_from_authoritative_metadata": "2023-06-02T12:09:07",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-06-02-12:09:07",
+          "sequence": "seq_002",
+          "timestamp_from_authoritative_metadata": "2023-06-02T12:09:07",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 4,
+          "recording_id": "camera_4_2023-06-02-12:09:07",
+          "sequence": "seq_002",
+          "timestamp_from_authoritative_metadata": "2023-06-02T12:09:07",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 1,
+          "recording_id": "camera_1_2023-06-13-13:24:46",
+          "sequence": "seq_006",
+          "timestamp_from_authoritative_metadata": "2023-06-13T13:24:46",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 2,
+          "recording_id": "camera_2_2023-06-13-13:24:46",
+          "sequence": "seq_006",
+          "timestamp_from_authoritative_metadata": "2023-06-13T13:24:46",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-06-13-13:24:46",
+          "sequence": "seq_006",
+          "timestamp_from_authoritative_metadata": "2023-06-13T13:24:46",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 5,
+          "recording_id": "camera_5_2023-06-13-13:24:46",
+          "sequence": "seq_006",
+          "timestamp_from_authoritative_metadata": "2023-06-13T13:24:46",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 1,
+          "recording_id": "camera_1_2023-06-13-13:31:40",
+          "sequence": "seq_007",
+          "timestamp_from_authoritative_metadata": "2023-06-13T13:31:40",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-06-13-13:31:40",
+          "sequence": "seq_007",
+          "timestamp_from_authoritative_metadata": "2023-06-13T13:31:40",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 1,
+          "recording_id": "camera_1_2023-07-26-13:21:40",
+          "sequence": "seq_020",
+          "timestamp_from_authoritative_metadata": "2023-07-26T13:21:40",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 2,
+          "recording_id": "camera_2_2023-07-26-13:21:40",
+          "sequence": "seq_020",
+          "timestamp_from_authoritative_metadata": "2023-07-26T13:21:40",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-07-26-13:21:40",
+          "sequence": "seq_020",
+          "timestamp_from_authoritative_metadata": "2023-07-26T13:21:40",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 4,
+          "recording_id": "camera_4_2023-07-26-13:21:40",
+          "sequence": "seq_020",
+          "timestamp_from_authoritative_metadata": "2023-07-26T13:21:40",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 5,
+          "recording_id": "camera_5_2023-07-26-13:21:40",
+          "sequence": "seq_020",
+          "timestamp_from_authoritative_metadata": "2023-07-26T13:21:40",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 6,
+          "recording_id": "camera_6_2023-07-26-13:21:40",
+          "sequence": "seq_020",
+          "timestamp_from_authoritative_metadata": "2023-07-26T13:21:40",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 7,
+          "recording_id": "camera_7_2023-07-26-13:21:40",
+          "sequence": "seq_020",
+          "timestamp_from_authoritative_metadata": "2023-07-26T13:21:40",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 1,
+          "recording_id": "camera_1_2023-12-01-11:05:52",
+          "sequence": "seq_024",
+          "timestamp_from_authoritative_metadata": "2023-12-01T11:05:52",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 2,
+          "recording_id": "camera_2_2023-12-01-11:05:52",
+          "sequence": "seq_024",
+          "timestamp_from_authoritative_metadata": "2023-12-01T11:05:52",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-12-01-11:05:52",
+          "sequence": "seq_024",
+          "timestamp_from_authoritative_metadata": "2023-12-01T11:05:52",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 4,
+          "recording_id": "camera_4_2023-12-01-11:05:52",
+          "sequence": "seq_024",
+          "timestamp_from_authoritative_metadata": "2023-12-01T11:05:52",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 5,
+          "recording_id": "camera_5_2023-12-01-11:05:52",
+          "sequence": "seq_024",
+          "timestamp_from_authoritative_metadata": "2023-12-01T11:05:52",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 6,
+          "recording_id": "camera_6_2023-12-01-11:05:52",
+          "sequence": "seq_024",
+          "timestamp_from_authoritative_metadata": "2023-12-01T11:05:52",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 7,
+          "recording_id": "camera_7_2023-12-01-11:05:52",
+          "sequence": "seq_024",
+          "timestamp_from_authoritative_metadata": "2023-12-01T11:05:52",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 1,
+          "recording_id": "camera_1_2023-12-04-12:11:17",
+          "sequence": "seq_025",
+          "timestamp_from_authoritative_metadata": "2023-12-04T12:11:17",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 2,
+          "recording_id": "camera_2_2023-12-04-12:11:17",
+          "sequence": "seq_025",
+          "timestamp_from_authoritative_metadata": "2023-12-04T12:11:17",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-12-04-12:11:17",
+          "sequence": "seq_025",
+          "timestamp_from_authoritative_metadata": "2023-12-04T12:11:17",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 4,
+          "recording_id": "camera_4_2023-12-04-12:11:17",
+          "sequence": "seq_025",
+          "timestamp_from_authoritative_metadata": "2023-12-04T12:11:17",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 5,
+          "recording_id": "camera_5_2023-12-04-12:11:17",
+          "sequence": "seq_025",
+          "timestamp_from_authoritative_metadata": "2023-12-04T12:11:17",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 6,
+          "recording_id": "camera_6_2023-12-04-12:11:17",
+          "sequence": "seq_025",
+          "timestamp_from_authoritative_metadata": "2023-12-04T12:11:17",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 7,
+          "recording_id": "camera_7_2023-12-04-12:11:17",
+          "sequence": "seq_025",
+          "timestamp_from_authoritative_metadata": "2023-12-04T12:11:17",
+          "timestamp_not_measured_video_PTS": true
+        }
+      ],
+      "rows": 849,
+      "subsets": [
+        "TRACKING_NO_SUBSET"
+      ],
+      "unique_crop_paths": 849
+    },
+    "tracking_brief_occlusions_train": {
+      "IDs": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        14
+      ],
+      "SHA256": "d34b632b05026bbc2f41c3910d674d215fa4b930f63023f6efab81023796ec9b",
+      "media_or_features_accessed": false,
+      "path": "/data3/liuyeqiang/InterMOT_N72R21_assets/official_sources/CHIRLA/benchmark/metadata/tracking_brief_occlusions_train.csv",
+      "records": [
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 1,
+          "recording_id": "camera_1_2023-06-08-12:29:08",
+          "sequence": "seq_004",
+          "timestamp_from_authoritative_metadata": "2023-06-08T12:29:08",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 2,
+          "recording_id": "camera_2_2023-06-08-12:29:08",
+          "sequence": "seq_004",
+          "timestamp_from_authoritative_metadata": "2023-06-08T12:29:08",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-06-08-12:29:08",
+          "sequence": "seq_004",
+          "timestamp_from_authoritative_metadata": "2023-06-08T12:29:08",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 4,
+          "recording_id": "camera_4_2023-06-08-12:29:08",
+          "sequence": "seq_004",
+          "timestamp_from_authoritative_metadata": "2023-06-08T12:29:08",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 5,
+          "recording_id": "camera_5_2023-06-08-12:29:08",
+          "sequence": "seq_004",
+          "timestamp_from_authoritative_metadata": "2023-06-08T12:29:08",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 6,
+          "recording_id": "camera_6_2023-06-08-12:29:08",
+          "sequence": "seq_004",
+          "timestamp_from_authoritative_metadata": "2023-06-08T12:29:08",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 7,
+          "recording_id": "camera_7_2023-06-08-12:29:08",
+          "sequence": "seq_004",
+          "timestamp_from_authoritative_metadata": "2023-06-08T12:29:08",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 1,
+          "recording_id": "camera_1_2023-12-05-12:12:13",
+          "sequence": "seq_026",
+          "timestamp_from_authoritative_metadata": "2023-12-05T12:12:13",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 2,
+          "recording_id": "camera_2_2023-12-05-12:12:13",
+          "sequence": "seq_026",
+          "timestamp_from_authoritative_metadata": "2023-12-05T12:12:13",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-12-05-12:12:13",
+          "sequence": "seq_026",
+          "timestamp_from_authoritative_metadata": "2023-12-05T12:12:13",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 4,
+          "recording_id": "camera_4_2023-12-05-12:12:13",
+          "sequence": "seq_026",
+          "timestamp_from_authoritative_metadata": "2023-12-05T12:12:13",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 5,
+          "recording_id": "camera_5_2023-12-05-12:12:13",
+          "sequence": "seq_026",
+          "timestamp_from_authoritative_metadata": "2023-12-05T12:12:13",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 6,
+          "recording_id": "camera_6_2023-12-05-12:12:13",
+          "sequence": "seq_026",
+          "timestamp_from_authoritative_metadata": "2023-12-05T12:12:13",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 7,
+          "recording_id": "camera_7_2023-12-05-12:12:13",
+          "sequence": "seq_026",
+          "timestamp_from_authoritative_metadata": "2023-12-05T12:12:13",
+          "timestamp_not_measured_video_PTS": true
+        }
+      ],
+      "rows": 279,
+      "subsets": [
+        "TRACKING_NO_SUBSET"
+      ],
+      "unique_crop_paths": 279
+    },
+    "tracking_multiple_people_occlusions_test": {
+      "IDs": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        14,
+        15,
+        16,
+        18,
+        19,
+        24
+      ],
+      "SHA256": "2b214a53aa12049c8adbea90ef326d42241e5e173a00aa059cec107a75b856ed",
+      "media_or_features_accessed": false,
+      "path": "/data3/liuyeqiang/InterMOT_N72R21_assets/official_sources/CHIRLA/benchmark/metadata/tracking_multiple_people_occlusions_test.csv",
+      "records": [
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 2,
+          "recording_id": "camera_2_2023-06-02-11:14:26",
+          "sequence": "seq_000",
+          "timestamp_from_authoritative_metadata": "2023-06-02T11:14:26",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-06-02-11:14:26",
+          "sequence": "seq_000",
+          "timestamp_from_authoritative_metadata": "2023-06-02T11:14:26",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 5,
+          "recording_id": "camera_5_2023-06-02-11:14:26",
+          "sequence": "seq_000",
+          "timestamp_from_authoritative_metadata": "2023-06-02T11:14:26",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 6,
+          "recording_id": "camera_6_2023-06-02-11:14:26",
+          "sequence": "seq_000",
+          "timestamp_from_authoritative_metadata": "2023-06-02T11:14:26",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 2,
+          "recording_id": "camera_2_2023-06-02-12:09:07",
+          "sequence": "seq_002",
+          "timestamp_from_authoritative_metadata": "2023-06-02T12:09:07",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-06-02-12:09:07",
+          "sequence": "seq_002",
+          "timestamp_from_authoritative_metadata": "2023-06-02T12:09:07",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 4,
+          "recording_id": "camera_4_2023-06-02-12:09:07",
+          "sequence": "seq_002",
+          "timestamp_from_authoritative_metadata": "2023-06-02T12:09:07",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 2,
+          "recording_id": "camera_2_2023-06-13-13:24:46",
+          "sequence": "seq_006",
+          "timestamp_from_authoritative_metadata": "2023-06-13T13:24:46",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-06-13-13:24:46",
+          "sequence": "seq_006",
+          "timestamp_from_authoritative_metadata": "2023-06-13T13:24:46",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 1,
+          "recording_id": "camera_1_2023-06-13-13:31:40",
+          "sequence": "seq_007",
+          "timestamp_from_authoritative_metadata": "2023-06-13T13:31:40",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-06-13-13:31:40",
+          "sequence": "seq_007",
+          "timestamp_from_authoritative_metadata": "2023-06-13T13:31:40",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 1,
+          "recording_id": "camera_1_2023-07-26-13:21:40",
+          "sequence": "seq_020",
+          "timestamp_from_authoritative_metadata": "2023-07-26T13:21:40",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 2,
+          "recording_id": "camera_2_2023-07-26-13:21:40",
+          "sequence": "seq_020",
+          "timestamp_from_authoritative_metadata": "2023-07-26T13:21:40",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-07-26-13:21:40",
+          "sequence": "seq_020",
+          "timestamp_from_authoritative_metadata": "2023-07-26T13:21:40",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 4,
+          "recording_id": "camera_4_2023-07-26-13:21:40",
+          "sequence": "seq_020",
+          "timestamp_from_authoritative_metadata": "2023-07-26T13:21:40",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 5,
+          "recording_id": "camera_5_2023-07-26-13:21:40",
+          "sequence": "seq_020",
+          "timestamp_from_authoritative_metadata": "2023-07-26T13:21:40",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 6,
+          "recording_id": "camera_6_2023-07-26-13:21:40",
+          "sequence": "seq_020",
+          "timestamp_from_authoritative_metadata": "2023-07-26T13:21:40",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 7,
+          "recording_id": "camera_7_2023-07-26-13:21:40",
+          "sequence": "seq_020",
+          "timestamp_from_authoritative_metadata": "2023-07-26T13:21:40",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 1,
+          "recording_id": "camera_1_2023-12-01-11:05:52",
+          "sequence": "seq_024",
+          "timestamp_from_authoritative_metadata": "2023-12-01T11:05:52",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 2,
+          "recording_id": "camera_2_2023-12-01-11:05:52",
+          "sequence": "seq_024",
+          "timestamp_from_authoritative_metadata": "2023-12-01T11:05:52",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-12-01-11:05:52",
+          "sequence": "seq_024",
+          "timestamp_from_authoritative_metadata": "2023-12-01T11:05:52",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 5,
+          "recording_id": "camera_5_2023-12-01-11:05:52",
+          "sequence": "seq_024",
+          "timestamp_from_authoritative_metadata": "2023-12-01T11:05:52",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 7,
+          "recording_id": "camera_7_2023-12-01-11:05:52",
+          "sequence": "seq_024",
+          "timestamp_from_authoritative_metadata": "2023-12-01T11:05:52",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 1,
+          "recording_id": "camera_1_2023-12-04-12:11:17",
+          "sequence": "seq_025",
+          "timestamp_from_authoritative_metadata": "2023-12-04T12:11:17",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 2,
+          "recording_id": "camera_2_2023-12-04-12:11:17",
+          "sequence": "seq_025",
+          "timestamp_from_authoritative_metadata": "2023-12-04T12:11:17",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-12-04-12:11:17",
+          "sequence": "seq_025",
+          "timestamp_from_authoritative_metadata": "2023-12-04T12:11:17",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 5,
+          "recording_id": "camera_5_2023-12-04-12:11:17",
+          "sequence": "seq_025",
+          "timestamp_from_authoritative_metadata": "2023-12-04T12:11:17",
+          "timestamp_not_measured_video_PTS": true
+        }
+      ],
+      "rows": 141,
+      "subsets": [
+        "TRACKING_NO_SUBSET"
+      ],
+      "unique_crop_paths": 141
+    },
+    "tracking_multiple_people_occlusions_train": {
+      "IDs": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        10,
+        11,
+        14
+      ],
+      "SHA256": "e646817fbeca3c12e8414480e41f7c3633a3715b1e946b2993bcd9d43762725f",
+      "media_or_features_accessed": false,
+      "path": "/data3/liuyeqiang/InterMOT_N72R21_assets/official_sources/CHIRLA/benchmark/metadata/tracking_multiple_people_occlusions_train.csv",
+      "records": [
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 2,
+          "recording_id": "camera_2_2023-06-08-12:29:08",
+          "sequence": "seq_004",
+          "timestamp_from_authoritative_metadata": "2023-06-08T12:29:08",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-06-08-12:29:08",
+          "sequence": "seq_004",
+          "timestamp_from_authoritative_metadata": "2023-06-08T12:29:08",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 5,
+          "recording_id": "camera_5_2023-06-08-12:29:08",
+          "sequence": "seq_004",
+          "timestamp_from_authoritative_metadata": "2023-06-08T12:29:08",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 6,
+          "recording_id": "camera_6_2023-06-08-12:29:08",
+          "sequence": "seq_004",
+          "timestamp_from_authoritative_metadata": "2023-06-08T12:29:08",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 1,
+          "recording_id": "camera_1_2023-12-05-12:12:13",
+          "sequence": "seq_026",
+          "timestamp_from_authoritative_metadata": "2023-12-05T12:12:13",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 3,
+          "recording_id": "camera_3_2023-12-05-12:12:13",
+          "sequence": "seq_026",
+          "timestamp_from_authoritative_metadata": "2023-12-05T12:12:13",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 4,
+          "recording_id": "camera_4_2023-12-05-12:12:13",
+          "sequence": "seq_026",
+          "timestamp_from_authoritative_metadata": "2023-12-05T12:12:13",
+          "timestamp_not_measured_video_PTS": true
+        },
+        {
+          "actual_video_FPS_verified": false,
+          "camera_number": 5,
+          "recording_id": "camera_5_2023-12-05-12:12:13",
+          "sequence": "seq_026",
+          "timestamp_from_authoritative_metadata": "2023-12-05T12:12:13",
+          "timestamp_not_measured_video_PTS": true
+        }
+      ],
+      "rows": 27,
+      "subsets": [
+        "TRACKING_NO_SUBSET"
+      ],
+      "unique_crop_paths": 27
+    }
+  },
+  "original_recording_intersection_matrix": {
+    "reid_long_term_gallery": {
+      "reid_long_term_query": 0,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 0,
+      "reid_multi_camera_gallery": 1,
+      "reid_multi_camera_long_term_gallery": 1,
+      "reid_multi_camera_long_term_query": 3,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_query": 5,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 0,
+      "reid_reappearance_gallery": 1,
+      "reid_reappearance_query": 1,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 6,
+      "tracking_brief_occlusions_train": 0,
+      "tracking_multiple_people_occlusions_test": 6,
+      "tracking_multiple_people_occlusions_train": 0
+    },
+    "reid_long_term_query": {
+      "reid_long_term_gallery": 0,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 0,
+      "reid_multi_camera_gallery": 8,
+      "reid_multi_camera_long_term_gallery": 5,
+      "reid_multi_camera_long_term_query": 6,
+      "reid_multi_camera_long_term_train": 1,
+      "reid_multi_camera_long_term_val": 1,
+      "reid_multi_camera_query": 23,
+      "reid_multi_camera_train": 1,
+      "reid_multi_camera_val": 5,
+      "reid_reappearance_gallery": 8,
+      "reid_reappearance_query": 8,
+      "reid_reappearance_train": 1,
+      "reid_reappearance_val": 1,
+      "tracking_brief_occlusions_test": 23,
+      "tracking_brief_occlusions_train": 12,
+      "tracking_multiple_people_occlusions_test": 15,
+      "tracking_multiple_people_occlusions_train": 7
+    },
+    "reid_long_term_train": {
+      "reid_long_term_gallery": 0,
+      "reid_long_term_query": 0,
+      "reid_long_term_val": 0,
+      "reid_multi_camera_gallery": 0,
+      "reid_multi_camera_long_term_gallery": 0,
+      "reid_multi_camera_long_term_query": 0,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_query": 1,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 0,
+      "reid_reappearance_gallery": 0,
+      "reid_reappearance_query": 0,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 1,
+      "tracking_brief_occlusions_train": 0,
+      "tracking_multiple_people_occlusions_test": 1,
+      "tracking_multiple_people_occlusions_train": 0
+    },
+    "reid_long_term_val": {
+      "reid_long_term_gallery": 0,
+      "reid_long_term_query": 0,
+      "reid_long_term_train": 0,
+      "reid_multi_camera_gallery": 0,
+      "reid_multi_camera_long_term_gallery": 2,
+      "reid_multi_camera_long_term_query": 2,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_query": 7,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 1,
+      "reid_reappearance_gallery": 0,
+      "reid_reappearance_query": 0,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 6,
+      "tracking_brief_occlusions_train": 2,
+      "tracking_multiple_people_occlusions_test": 3,
+      "tracking_multiple_people_occlusions_train": 1
+    },
+    "reid_multi_camera_gallery": {
+      "reid_long_term_gallery": 1,
+      "reid_long_term_query": 8,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 0,
+      "reid_multi_camera_long_term_gallery": 2,
+      "reid_multi_camera_long_term_query": 2,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_query": 0,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 0,
+      "reid_reappearance_gallery": 3,
+      "reid_reappearance_query": 3,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 6,
+      "tracking_brief_occlusions_train": 2,
+      "tracking_multiple_people_occlusions_test": 5,
+      "tracking_multiple_people_occlusions_train": 1
+    },
+    "reid_multi_camera_long_term_gallery": {
+      "reid_long_term_gallery": 1,
+      "reid_long_term_query": 5,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 2,
+      "reid_multi_camera_gallery": 2,
+      "reid_multi_camera_long_term_query": 4,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 1,
+      "reid_multi_camera_query": 7,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 0,
+      "reid_reappearance_gallery": 1,
+      "reid_reappearance_query": 1,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 6,
+      "tracking_brief_occlusions_train": 2,
+      "tracking_multiple_people_occlusions_test": 5,
+      "tracking_multiple_people_occlusions_train": 1
+    },
+    "reid_multi_camera_long_term_query": {
+      "reid_long_term_gallery": 3,
+      "reid_long_term_query": 6,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 2,
+      "reid_multi_camera_gallery": 2,
+      "reid_multi_camera_long_term_gallery": 4,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 1,
+      "reid_multi_camera_query": 10,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 0,
+      "reid_reappearance_gallery": 2,
+      "reid_reappearance_query": 2,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 8,
+      "tracking_brief_occlusions_train": 4,
+      "tracking_multiple_people_occlusions_test": 7,
+      "tracking_multiple_people_occlusions_train": 2
+    },
+    "reid_multi_camera_long_term_train": {
+      "reid_long_term_gallery": 0,
+      "reid_long_term_query": 1,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 0,
+      "reid_multi_camera_gallery": 0,
+      "reid_multi_camera_long_term_gallery": 0,
+      "reid_multi_camera_long_term_query": 0,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_query": 0,
+      "reid_multi_camera_train": 1,
+      "reid_multi_camera_val": 0,
+      "reid_reappearance_gallery": 0,
+      "reid_reappearance_query": 0,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 1,
+      "tracking_brief_occlusions_train": 0,
+      "tracking_multiple_people_occlusions_test": 1,
+      "tracking_multiple_people_occlusions_train": 0
+    },
+    "reid_multi_camera_long_term_val": {
+      "reid_long_term_gallery": 0,
+      "reid_long_term_query": 1,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 0,
+      "reid_multi_camera_gallery": 0,
+      "reid_multi_camera_long_term_gallery": 1,
+      "reid_multi_camera_long_term_query": 1,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_query": 1,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 0,
+      "reid_reappearance_gallery": 0,
+      "reid_reappearance_query": 0,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 0,
+      "tracking_brief_occlusions_train": 1,
+      "tracking_multiple_people_occlusions_test": 0,
+      "tracking_multiple_people_occlusions_train": 0
+    },
+    "reid_multi_camera_query": {
+      "reid_long_term_gallery": 5,
+      "reid_long_term_query": 23,
+      "reid_long_term_train": 1,
+      "reid_long_term_val": 7,
+      "reid_multi_camera_gallery": 0,
+      "reid_multi_camera_long_term_gallery": 7,
+      "reid_multi_camera_long_term_query": 10,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 1,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 0,
+      "reid_reappearance_gallery": 5,
+      "reid_reappearance_query": 5,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 25,
+      "tracking_brief_occlusions_train": 11,
+      "tracking_multiple_people_occlusions_test": 18,
+      "tracking_multiple_people_occlusions_train": 7
+    },
+    "reid_multi_camera_train": {
+      "reid_long_term_gallery": 0,
+      "reid_long_term_query": 1,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 0,
+      "reid_multi_camera_gallery": 0,
+      "reid_multi_camera_long_term_gallery": 0,
+      "reid_multi_camera_long_term_query": 0,
+      "reid_multi_camera_long_term_train": 1,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_query": 0,
+      "reid_multi_camera_val": 0,
+      "reid_reappearance_gallery": 0,
+      "reid_reappearance_query": 0,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 1,
+      "tracking_brief_occlusions_train": 0,
+      "tracking_multiple_people_occlusions_test": 1,
+      "tracking_multiple_people_occlusions_train": 0
+    },
+    "reid_multi_camera_val": {
+      "reid_long_term_gallery": 0,
+      "reid_long_term_query": 5,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 1,
+      "reid_multi_camera_gallery": 0,
+      "reid_multi_camera_long_term_gallery": 0,
+      "reid_multi_camera_long_term_query": 0,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_query": 0,
+      "reid_multi_camera_train": 0,
+      "reid_reappearance_gallery": 1,
+      "reid_reappearance_query": 1,
+      "reid_reappearance_train": 1,
+      "reid_reappearance_val": 1,
+      "tracking_brief_occlusions_test": 5,
+      "tracking_brief_occlusions_train": 0,
+      "tracking_multiple_people_occlusions_test": 3,
+      "tracking_multiple_people_occlusions_train": 0
+    },
+    "reid_reappearance_gallery": {
+      "reid_long_term_gallery": 1,
+      "reid_long_term_query": 8,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 0,
+      "reid_multi_camera_gallery": 3,
+      "reid_multi_camera_long_term_gallery": 1,
+      "reid_multi_camera_long_term_query": 2,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_query": 5,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 1,
+      "reid_reappearance_query": 9,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 7,
+      "tracking_brief_occlusions_train": 2,
+      "tracking_multiple_people_occlusions_test": 6,
+      "tracking_multiple_people_occlusions_train": 2
+    },
+    "reid_reappearance_query": {
+      "reid_long_term_gallery": 1,
+      "reid_long_term_query": 8,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 0,
+      "reid_multi_camera_gallery": 3,
+      "reid_multi_camera_long_term_gallery": 1,
+      "reid_multi_camera_long_term_query": 2,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_query": 5,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 1,
+      "reid_reappearance_gallery": 9,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 7,
+      "tracking_brief_occlusions_train": 2,
+      "tracking_multiple_people_occlusions_test": 6,
+      "tracking_multiple_people_occlusions_train": 2
+    },
+    "reid_reappearance_train": {
+      "reid_long_term_gallery": 0,
+      "reid_long_term_query": 1,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 0,
+      "reid_multi_camera_gallery": 0,
+      "reid_multi_camera_long_term_gallery": 0,
+      "reid_multi_camera_long_term_query": 0,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_query": 0,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 1,
+      "reid_reappearance_gallery": 0,
+      "reid_reappearance_query": 0,
+      "reid_reappearance_val": 1,
+      "tracking_brief_occlusions_test": 1,
+      "tracking_brief_occlusions_train": 0,
+      "tracking_multiple_people_occlusions_test": 1,
+      "tracking_multiple_people_occlusions_train": 0
+    },
+    "reid_reappearance_val": {
+      "reid_long_term_gallery": 0,
+      "reid_long_term_query": 1,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 0,
+      "reid_multi_camera_gallery": 0,
+      "reid_multi_camera_long_term_gallery": 0,
+      "reid_multi_camera_long_term_query": 0,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_query": 0,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 1,
+      "reid_reappearance_gallery": 0,
+      "reid_reappearance_query": 0,
+      "reid_reappearance_train": 1,
+      "tracking_brief_occlusions_test": 1,
+      "tracking_brief_occlusions_train": 0,
+      "tracking_multiple_people_occlusions_test": 1,
+      "tracking_multiple_people_occlusions_train": 0
+    },
+    "tracking_brief_occlusions_test": {
+      "reid_long_term_gallery": 6,
+      "reid_long_term_query": 23,
+      "reid_long_term_train": 1,
+      "reid_long_term_val": 6,
+      "reid_multi_camera_gallery": 6,
+      "reid_multi_camera_long_term_gallery": 6,
+      "reid_multi_camera_long_term_query": 8,
+      "reid_multi_camera_long_term_train": 1,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_query": 25,
+      "reid_multi_camera_train": 1,
+      "reid_multi_camera_val": 5,
+      "reid_reappearance_gallery": 7,
+      "reid_reappearance_query": 7,
+      "reid_reappearance_train": 1,
+      "reid_reappearance_val": 1,
+      "tracking_brief_occlusions_train": 0,
+      "tracking_multiple_people_occlusions_test": 27,
+      "tracking_multiple_people_occlusions_train": 0
+    },
+    "tracking_brief_occlusions_train": {
+      "reid_long_term_gallery": 0,
+      "reid_long_term_query": 12,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 2,
+      "reid_multi_camera_gallery": 2,
+      "reid_multi_camera_long_term_gallery": 2,
+      "reid_multi_camera_long_term_query": 4,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 1,
+      "reid_multi_camera_query": 11,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 0,
+      "reid_reappearance_gallery": 2,
+      "reid_reappearance_query": 2,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 0,
+      "tracking_multiple_people_occlusions_test": 0,
+      "tracking_multiple_people_occlusions_train": 8
+    },
+    "tracking_multiple_people_occlusions_test": {
+      "reid_long_term_gallery": 6,
+      "reid_long_term_query": 15,
+      "reid_long_term_train": 1,
+      "reid_long_term_val": 3,
+      "reid_multi_camera_gallery": 5,
+      "reid_multi_camera_long_term_gallery": 5,
+      "reid_multi_camera_long_term_query": 7,
+      "reid_multi_camera_long_term_train": 1,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_query": 18,
+      "reid_multi_camera_train": 1,
+      "reid_multi_camera_val": 3,
+      "reid_reappearance_gallery": 6,
+      "reid_reappearance_query": 6,
+      "reid_reappearance_train": 1,
+      "reid_reappearance_val": 1,
+      "tracking_brief_occlusions_test": 27,
+      "tracking_brief_occlusions_train": 0,
+      "tracking_multiple_people_occlusions_train": 0
+    },
+    "tracking_multiple_people_occlusions_train": {
+      "reid_long_term_gallery": 0,
+      "reid_long_term_query": 7,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 1,
+      "reid_multi_camera_gallery": 1,
+      "reid_multi_camera_long_term_gallery": 1,
+      "reid_multi_camera_long_term_query": 2,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_query": 7,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 0,
+      "reid_reappearance_gallery": 2,
+      "reid_reappearance_query": 2,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 0,
+      "tracking_brief_occlusions_train": 8,
+      "tracking_multiple_people_occlusions_test": 0
+    }
+  },
+  "scientific_success": false,
+  "semantic_recording_ID_frame_intersection_matrix": {
+    "reid_long_term_gallery": {
+      "reid_long_term_query": 0,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 0,
+      "reid_multi_camera_gallery": 64,
+      "reid_multi_camera_long_term_gallery": 44,
+      "reid_multi_camera_long_term_query": 0,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_query": 12,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 0,
+      "reid_reappearance_gallery": 51,
+      "reid_reappearance_query": 10,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 2,
+      "tracking_brief_occlusions_train": 0,
+      "tracking_multiple_people_occlusions_test": 0,
+      "tracking_multiple_people_occlusions_train": 0
+    },
+    "reid_long_term_query": {
+      "reid_long_term_gallery": 0,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 0,
+      "reid_multi_camera_gallery": 3,
+      "reid_multi_camera_long_term_gallery": 6,
+      "reid_multi_camera_long_term_query": 238,
+      "reid_multi_camera_long_term_train": 2,
+      "reid_multi_camera_long_term_val": 35,
+      "reid_multi_camera_query": 1335,
+      "reid_multi_camera_train": 5,
+      "reid_multi_camera_val": 83,
+      "reid_reappearance_gallery": 0,
+      "reid_reappearance_query": 606,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 31,
+      "tracking_brief_occlusions_test": 12,
+      "tracking_brief_occlusions_train": 10,
+      "tracking_multiple_people_occlusions_test": 2,
+      "tracking_multiple_people_occlusions_train": 2
+    },
+    "reid_long_term_train": {
+      "reid_long_term_gallery": 0,
+      "reid_long_term_query": 0,
+      "reid_long_term_val": 0,
+      "reid_multi_camera_gallery": 0,
+      "reid_multi_camera_long_term_gallery": 0,
+      "reid_multi_camera_long_term_query": 0,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_query": 4,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 0,
+      "reid_reappearance_gallery": 0,
+      "reid_reappearance_query": 0,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 4,
+      "tracking_brief_occlusions_train": 0,
+      "tracking_multiple_people_occlusions_test": 0,
+      "tracking_multiple_people_occlusions_train": 0
+    },
+    "reid_long_term_val": {
+      "reid_long_term_gallery": 0,
+      "reid_long_term_query": 0,
+      "reid_long_term_train": 0,
+      "reid_multi_camera_gallery": 0,
+      "reid_multi_camera_long_term_gallery": 0,
+      "reid_multi_camera_long_term_query": 32,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_query": 402,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 22,
+      "reid_reappearance_gallery": 0,
+      "reid_reappearance_query": 0,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 9,
+      "tracking_brief_occlusions_train": 4,
+      "tracking_multiple_people_occlusions_test": 0,
+      "tracking_multiple_people_occlusions_train": 0
+    },
+    "reid_multi_camera_gallery": {
+      "reid_long_term_gallery": 64,
+      "reid_long_term_query": 3,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 0,
+      "reid_multi_camera_long_term_gallery": 60,
+      "reid_multi_camera_long_term_query": 0,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_query": 0,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 0,
+      "reid_reappearance_gallery": 44,
+      "reid_reappearance_query": 1,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 1,
+      "tracking_brief_occlusions_train": 2,
+      "tracking_multiple_people_occlusions_test": 0,
+      "tracking_multiple_people_occlusions_train": 0
+    },
+    "reid_multi_camera_long_term_gallery": {
+      "reid_long_term_gallery": 44,
+      "reid_long_term_query": 6,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 0,
+      "reid_multi_camera_gallery": 60,
+      "reid_multi_camera_long_term_query": 3,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 2,
+      "reid_multi_camera_query": 6,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 0,
+      "reid_reappearance_gallery": 7,
+      "reid_reappearance_query": 0,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 0,
+      "tracking_brief_occlusions_train": 1,
+      "tracking_multiple_people_occlusions_test": 0,
+      "tracking_multiple_people_occlusions_train": 0
+    },
+    "reid_multi_camera_long_term_query": {
+      "reid_long_term_gallery": 0,
+      "reid_long_term_query": 238,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 32,
+      "reid_multi_camera_gallery": 0,
+      "reid_multi_camera_long_term_gallery": 3,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 26,
+      "reid_multi_camera_query": 358,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 0,
+      "reid_reappearance_gallery": 1,
+      "reid_reappearance_query": 129,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 7,
+      "tracking_brief_occlusions_train": 3,
+      "tracking_multiple_people_occlusions_test": 1,
+      "tracking_multiple_people_occlusions_train": 0
+    },
+    "reid_multi_camera_long_term_train": {
+      "reid_long_term_gallery": 0,
+      "reid_long_term_query": 2,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 0,
+      "reid_multi_camera_gallery": 0,
+      "reid_multi_camera_long_term_gallery": 0,
+      "reid_multi_camera_long_term_query": 0,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_query": 0,
+      "reid_multi_camera_train": 27,
+      "reid_multi_camera_val": 0,
+      "reid_reappearance_gallery": 0,
+      "reid_reappearance_query": 0,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 0,
+      "tracking_brief_occlusions_train": 0,
+      "tracking_multiple_people_occlusions_test": 0,
+      "tracking_multiple_people_occlusions_train": 0
+    },
+    "reid_multi_camera_long_term_val": {
+      "reid_long_term_gallery": 0,
+      "reid_long_term_query": 35,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 0,
+      "reid_multi_camera_gallery": 0,
+      "reid_multi_camera_long_term_gallery": 2,
+      "reid_multi_camera_long_term_query": 26,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_query": 16,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 0,
+      "reid_reappearance_gallery": 0,
+      "reid_reappearance_query": 0,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 0,
+      "tracking_brief_occlusions_train": 0,
+      "tracking_multiple_people_occlusions_test": 0,
+      "tracking_multiple_people_occlusions_train": 0
+    },
+    "reid_multi_camera_query": {
+      "reid_long_term_gallery": 12,
+      "reid_long_term_query": 1335,
+      "reid_long_term_train": 4,
+      "reid_long_term_val": 402,
+      "reid_multi_camera_gallery": 0,
+      "reid_multi_camera_long_term_gallery": 6,
+      "reid_multi_camera_long_term_query": 358,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 16,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 0,
+      "reid_reappearance_gallery": 1,
+      "reid_reappearance_query": 753,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 44,
+      "tracking_brief_occlusions_train": 13,
+      "tracking_multiple_people_occlusions_test": 6,
+      "tracking_multiple_people_occlusions_train": 3
+    },
+    "reid_multi_camera_train": {
+      "reid_long_term_gallery": 0,
+      "reid_long_term_query": 5,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 0,
+      "reid_multi_camera_gallery": 0,
+      "reid_multi_camera_long_term_gallery": 0,
+      "reid_multi_camera_long_term_query": 0,
+      "reid_multi_camera_long_term_train": 27,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_query": 0,
+      "reid_multi_camera_val": 0,
+      "reid_reappearance_gallery": 0,
+      "reid_reappearance_query": 0,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 0,
+      "tracking_brief_occlusions_train": 0,
+      "tracking_multiple_people_occlusions_test": 0,
+      "tracking_multiple_people_occlusions_train": 0
+    },
+    "reid_multi_camera_val": {
+      "reid_long_term_gallery": 0,
+      "reid_long_term_query": 83,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 22,
+      "reid_multi_camera_gallery": 0,
+      "reid_multi_camera_long_term_gallery": 0,
+      "reid_multi_camera_long_term_query": 0,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_query": 0,
+      "reid_multi_camera_train": 0,
+      "reid_reappearance_gallery": 0,
+      "reid_reappearance_query": 132,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 58,
+      "tracking_brief_occlusions_test": 0,
+      "tracking_brief_occlusions_train": 0,
+      "tracking_multiple_people_occlusions_test": 1,
+      "tracking_multiple_people_occlusions_train": 0
+    },
+    "reid_reappearance_gallery": {
+      "reid_long_term_gallery": 51,
+      "reid_long_term_query": 0,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 0,
+      "reid_multi_camera_gallery": 44,
+      "reid_multi_camera_long_term_gallery": 7,
+      "reid_multi_camera_long_term_query": 1,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_query": 1,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 0,
+      "reid_reappearance_query": 0,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 0,
+      "tracking_brief_occlusions_train": 0,
+      "tracking_multiple_people_occlusions_test": 0,
+      "tracking_multiple_people_occlusions_train": 0
+    },
+    "reid_reappearance_query": {
+      "reid_long_term_gallery": 10,
+      "reid_long_term_query": 606,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 0,
+      "reid_multi_camera_gallery": 1,
+      "reid_multi_camera_long_term_gallery": 0,
+      "reid_multi_camera_long_term_query": 129,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_query": 753,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 132,
+      "reid_reappearance_gallery": 0,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 4,
+      "tracking_brief_occlusions_train": 2,
+      "tracking_multiple_people_occlusions_test": 0,
+      "tracking_multiple_people_occlusions_train": 0
+    },
+    "reid_reappearance_train": {
+      "reid_long_term_gallery": 0,
+      "reid_long_term_query": 0,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 0,
+      "reid_multi_camera_gallery": 0,
+      "reid_multi_camera_long_term_gallery": 0,
+      "reid_multi_camera_long_term_query": 0,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_query": 0,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 0,
+      "reid_reappearance_gallery": 0,
+      "reid_reappearance_query": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 0,
+      "tracking_brief_occlusions_train": 0,
+      "tracking_multiple_people_occlusions_test": 0,
+      "tracking_multiple_people_occlusions_train": 0
+    },
+    "reid_reappearance_val": {
+      "reid_long_term_gallery": 0,
+      "reid_long_term_query": 31,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 0,
+      "reid_multi_camera_gallery": 0,
+      "reid_multi_camera_long_term_gallery": 0,
+      "reid_multi_camera_long_term_query": 0,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_query": 0,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 58,
+      "reid_reappearance_gallery": 0,
+      "reid_reappearance_query": 0,
+      "reid_reappearance_train": 0,
+      "tracking_brief_occlusions_test": 0,
+      "tracking_brief_occlusions_train": 0,
+      "tracking_multiple_people_occlusions_test": 0,
+      "tracking_multiple_people_occlusions_train": 0
+    },
+    "tracking_brief_occlusions_test": {
+      "reid_long_term_gallery": 2,
+      "reid_long_term_query": 12,
+      "reid_long_term_train": 4,
+      "reid_long_term_val": 9,
+      "reid_multi_camera_gallery": 1,
+      "reid_multi_camera_long_term_gallery": 0,
+      "reid_multi_camera_long_term_query": 7,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_query": 44,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 0,
+      "reid_reappearance_gallery": 0,
+      "reid_reappearance_query": 4,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_train": 0,
+      "tracking_multiple_people_occlusions_test": 80,
+      "tracking_multiple_people_occlusions_train": 0
+    },
+    "tracking_brief_occlusions_train": {
+      "reid_long_term_gallery": 0,
+      "reid_long_term_query": 10,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 4,
+      "reid_multi_camera_gallery": 2,
+      "reid_multi_camera_long_term_gallery": 1,
+      "reid_multi_camera_long_term_query": 3,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_query": 13,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 0,
+      "reid_reappearance_gallery": 0,
+      "reid_reappearance_query": 2,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 0,
+      "tracking_multiple_people_occlusions_test": 0,
+      "tracking_multiple_people_occlusions_train": 19
+    },
+    "tracking_multiple_people_occlusions_test": {
+      "reid_long_term_gallery": 0,
+      "reid_long_term_query": 2,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 0,
+      "reid_multi_camera_gallery": 0,
+      "reid_multi_camera_long_term_gallery": 0,
+      "reid_multi_camera_long_term_query": 1,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_query": 6,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 1,
+      "reid_reappearance_gallery": 0,
+      "reid_reappearance_query": 0,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 80,
+      "tracking_brief_occlusions_train": 0,
+      "tracking_multiple_people_occlusions_train": 0
+    },
+    "tracking_multiple_people_occlusions_train": {
+      "reid_long_term_gallery": 0,
+      "reid_long_term_query": 2,
+      "reid_long_term_train": 0,
+      "reid_long_term_val": 0,
+      "reid_multi_camera_gallery": 0,
+      "reid_multi_camera_long_term_gallery": 0,
+      "reid_multi_camera_long_term_query": 0,
+      "reid_multi_camera_long_term_train": 0,
+      "reid_multi_camera_long_term_val": 0,
+      "reid_multi_camera_query": 3,
+      "reid_multi_camera_train": 0,
+      "reid_multi_camera_val": 0,
+      "reid_reappearance_gallery": 0,
+      "reid_reappearance_query": 0,
+      "reid_reappearance_train": 0,
+      "reid_reappearance_val": 0,
+      "tracking_brief_occlusions_test": 0,
+      "tracking_brief_occlusions_train": 19,
+      "tracking_multiple_people_occlusions_test": 0
+    }
+  },
+  "source_metadata_audit_sha256": "3a7e9d185d77d0edb9bb3b77b4163953603c7eb72b9de56c9806432602894755",
+  "status": "COMPLETE_OFFICIAL_PUBLIC_METADATA_ONLY_MEDIA_PROTOCOL_NOT_EXECUTED",
+  "strict_rule": "Keep all scenario-specific ReID/Tracking parameter-fit lineages separate; train_0 is scenario-specific, not one universal recording. Path prefixes differ, so zero path overlap alone is not proof of independent pixels/recordings. Do not mix another benchmark TRAIN with final-gallery/query source records.",
+  "tracking_TRAIN_vs_final_ReID_gallery_crop_overlap": {
+    "tracking_brief_occlusions_train": {
+      "reid_long_term_gallery": {
+        "path_overlap": 0,
+        "semantic_recording_ID_frame_overlap": 0,
+        "shared_original_recordings": []
+      },
+      "reid_multi_camera_gallery": {
+        "path_overlap": 0,
+        "semantic_recording_ID_frame_overlap": 2,
+        "shared_original_recordings": [
+          [
+            "seq_004",
+            "camera_2_2023-06-08-12:29:08"
+          ],
+          [
+            "seq_026",
+            "camera_2_2023-12-05-12:12:13"
+          ]
+        ]
+      },
+      "reid_multi_camera_long_term_gallery": {
+        "path_overlap": 0,
+        "semantic_recording_ID_frame_overlap": 1,
+        "shared_original_recordings": [
+          [
+            "seq_004",
+            "camera_4_2023-06-08-12:29:08"
+          ],
+          [
+            "seq_026",
+            "camera_4_2023-12-05-12:12:13"
+          ]
+        ]
+      },
+      "reid_reappearance_gallery": {
+        "path_overlap": 0,
+        "semantic_recording_ID_frame_overlap": 0,
+        "shared_original_recordings": [
+          [
+            "seq_004",
+            "camera_5_2023-06-08-12:29:08"
+          ],
+          [
+            "seq_026",
+            "camera_3_2023-12-05-12:12:13"
+          ]
+        ]
+      }
+    },
+    "tracking_multiple_people_occlusions_train": {
+      "reid_long_term_gallery": {
+        "path_overlap": 0,
+        "semantic_recording_ID_frame_overlap": 0,
+        "shared_original_recordings": []
+      },
+      "reid_multi_camera_gallery": {
+        "path_overlap": 0,
+        "semantic_recording_ID_frame_overlap": 0,
+        "shared_original_recordings": [
+          [
+            "seq_004",
+            "camera_2_2023-06-08-12:29:08"
+          ]
+        ]
+      },
+      "reid_multi_camera_long_term_gallery": {
+        "path_overlap": 0,
+        "semantic_recording_ID_frame_overlap": 0,
+        "shared_original_recordings": [
+          [
+            "seq_026",
+            "camera_4_2023-12-05-12:12:13"
+          ]
+        ]
+      },
+      "reid_reappearance_gallery": {
+        "path_overlap": 0,
+        "semantic_recording_ID_frame_overlap": 0,
+        "shared_original_recordings": [
+          [
+            "seq_004",
+            "camera_5_2023-06-08-12:29:08"
+          ],
+          [
+            "seq_026",
+            "camera_3_2023-12-05-12:12:13"
+          ]
+        ]
+      }
+    }
+  }
+}

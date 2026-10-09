@@ -1,5 +1,15 @@
 # N72R21 execution log
 
+## Actual frozen controls; first T0 fits and numerical diagnosis
+
+All three new frozen encoder feature caches completed on eight scenes without GT; all 49,189 valid candidate ROIs were nonempty after clipping. SHA/source/UID/real-image seals precede independent evaluation. Same 39,760 competitive frames: OSNet 32.98%, second person-ReID 32.42%, matched ImageNet 28.20%, native-transform ImageNet 27.62%. No selection from outer controls or cross-day claim.
+
+Recovered the final two official CHIRLA CSVs, now20/20 and27 official Git blobs verified. Complete metadata audit includes58 camera-recording names. Canonical recording/ID/frame matches reveal actual Tracking TRAIN / other-protocol final-gallery overlap hidden by differing path prefixes. Scenario-specific train_0 is not a universal seq_000; separate fit lineages are mandatory. No CHIRLA pixel/video read or legal-gate acceptance.
+
+F1 ACIB design and T0 training protocol frozen before implementation/fit. New source uses an immutable anchor, candidate-conditioned bank-evidence scorer, explicit candidate/NONE availability and separate write-correctness proxy. Physical absence and full future-risk training are not claimed. Three actual seeds fit the first strict 6/inner1/outer1 fold, with gradient/AMP/early-stop/best-SHA logs. A fourth fit completed in the next fold. The next seed's first minibatch failed on scaled nonfinite gradients; training stopped before that update. A controlled TRAIN-only reproduction (same weights/minibatch) identifies default FP16 scale65536 overflow in availability_head.2.weight; FP32 and FP16 scale1024 are finite. Original checkpoints and source are retained, no posthoc parameter/threshold selection; a separate numerical-repair run will be required. New focused suite32 passed. Initial T0 does not complete T1–T3 or justify scientific PASS.
+
+Git baseline milestone952b0a41791ce817a70a5f55e3ddc8c2186c3caf was SHA-identically fast-forward published; data/videos/weights not uploaded.
+
 ## Baseline prerequisite complete; frozen encoder controls
 
 All eight registered TRAIN scenes / 52 first-eligible clicks completed actual B6 OSTrack inference and sealed posthoc evaluation (54,990 future frames). Pooled visible recall is 37.15%, SOT success AUC 0.330413; its original always-box behavior gives 2,108 visible-GT gap false-presence frames. No new SOT training, physical absence, same-candidate or scientific success claim. Baseline-before-design is complete for this bounded F1 cohort.

@@ -1,0 +1,54 @@
+{
+  "batch_tensor_SHA256": {
+    "anchor": "cf7dfb3f4f1af0cc337c578be9b8d43391a14b8d342458cfb5052af30a39fea6",
+    "availability_label": "c7bb3282a73426a9ebae29c9f255a1777189072abdf9f5e3315738bd9f07217c",
+    "candidates": "d1d08994b38e311d3f8dd0917cd0c7f303c3a985b131f248d8441b679aeed47a",
+    "context": "b3b1e5c7f4b6c7da2c44b102cf2d1f4bb5186a50e2c2fa6c6f4e189c204a323e",
+    "quality": "0a432efb89ed23f5731a21de7bbe75fac1cc62bc07be097217b494f46ebfacfb",
+    "target_slot": "41d0f92f2cdd7981391ea81caf640b8a64ee368a8855a42f6cb7a80b70c96458",
+    "valid": "d9ab74e3c3081d0a296a02b33461626b3d1006699a43950075ed170cd4fa5b82",
+    "write_labels": "d69d178e2e6e11cc6f2178bf7197e168b9cb1f1d8fa92b3cd6daf7561b685be2",
+    "write_verified": "5503f892e2b509ec230ca82d087a7666f08854607445fcb122e70a46dc8250a4"
+  },
+  "checkpoint_or_threshold_selection": false,
+  "diagnostic_model_weights_saved": false,
+  "failed_batch_index": 0,
+  "failed_optimizer_step_applied": false,
+  "fit_sequences": [
+    "dancetrack0001",
+    "dancetrack0024",
+    "dancetrack0039",
+    "dancetrack0057",
+    "dancetrack0062",
+    "dancetrack0072"
+  ],
+  "initial_grad_scaler_scale": 65536.0,
+  "initial_loss": 3.091298818588257,
+  "initial_nonfinite_gradient_parameters": [
+    "availability_head.2.weight"
+  ],
+  "inner": "dancetrack0023",
+  "outer": "dancetrack0002",
+  "outer_labels_or_pixels_read": false,
+  "same_weights_same_minibatch_comparisons": {
+    "FP16_SCALE1024": {
+      "all_gradients_finite": true,
+      "loss": 3.091298818588257,
+      "nonfinite_gradient_parameters": [],
+      "scale": 1024.0
+    },
+    "FP32_UNSCALED": {
+      "all_gradients_finite": true,
+      "loss": 3.091259717941284,
+      "nonfinite_gradient_parameters": [],
+      "scale": 1.0
+    }
+  },
+  "seed": 72102,
+  "source_code_sha256": {
+    "sam3_intermot/one_click/acib.py": "36b36c8ec67577c121f72fc80354445445eb8754986cd9adf5c81378e5ccf23a",
+    "scripts/n72r21_diagnose_t0_amp.py": "4224118140cdfdc811972688a051352befe6954b64d2f225408d2155632c403c",
+    "scripts/n72r21_train_t0.py": "061d4e4176bd5d2419520f061eac0b318b91d42c1208012f3a7359f879530275"
+  },
+  "status": "ACTUAL_FAILED_MINIBATCH_REPRODUCED_AND_CONTROLLED_PRECISION_CHECK"
+}
