@@ -1,0 +1,19 @@
+{
+  "stage": "N72R21R1",
+  "final_goal_file": "outputs/N72R21R1/FINAL_GOAL.json",
+  "frozen_before_write_head_optimization_or_closed_loop_effects": true,
+  "families": ["JOINT_COMMITTED_CURRENT_AND_FUTURE_RISK_MLP"],
+  "seeds": [72111, 72112, 72113],
+  "data": "Verified actual committed-memory curriculum FIT six historical sequences and INNER0002; diagnostic0001 excluded from fitting and calibration.",
+  "supervision": "Current exact committed UID correctness; verified-other and UNKNOWN are negative. H100 other-person and target-N10 risk use only actual complete matched WRITE/DENY pairs, with explicit missing-label mask.",
+  "current_feature_axis": "Frozen32 opportunity features of actual committed UID, not original actor proposal UID; no GT or future features.",
+  "normalization": "FIT-only sequence-equal mean/std, std floor0.05; current loss sequence-equal, balanced correctness classes.",
+  "training": {"max_epochs":30,"patience":5,"batch_size":256,"learning_rate":0.001,"weight_decay":0.0001,"max_seconds_per_fit":3600,"threads":1},
+  "selection": "Earliest minimum INNER joint loss. No outer/confirmation/VAL/test selection. All three seeds retained.",
+  "risk_coverage_score_thresholds": [0.5,0.7,0.8,0.9,0.95,0.98,0.99,0.995],
+  "runtime_operating_point": {"correct_probability_min":0.98,"maximum_wrong_or_future_harm_probability":0.02},
+  "calibration_gate": "At the fixed runtime point: nonzero accepted observations, observed wrong-or-UNKNOWN <=2%, correct-write retention >=60% of currently correct committed observations; full candidate-available retention separately reported. At least one complete INNER pair must be selected, with zero observed paired future harm. Failure => explicit CALIBRATION_ABSTAIN; not population risk guarantee.",
+  "future_component_missing_not_imputed": true,
+  "rollout_plan": "Committed-only risk writer plus fixed/unsafe/frozen/delayed/diverse/rollback controls, capacities1/4/8 and mean/confidence/frozen existing attention aggregation. Shadow AA is engineering control only; actual coupled authority MOT pilot separately evaluated.",
+  "next_stage_authorized": false
+}

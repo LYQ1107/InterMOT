@@ -1,0 +1,20 @@
+{
+  "stage": "N72R21R1",
+  "final_goal_file": "outputs/N72R21R1/FINAL_GOAL.json",
+  "version": "C5_COMPONENT_RISK_CORRECTION_V1",
+  "frozen_before_new_correction_fit_effects": true,
+  "families": ["LOGISTIC", "GLOBAL_RISK", "CAUSAL_TEMPORAL"],
+  "data_contrasts": ["ON_POLICY_ONLY", "ORIGINAL_MIXED_PLUS_ON_POLICY"],
+  "seeds": [72111, 72112, 72113],
+  "reward": "Complete H100 canonical global-risk trajectory labels; time-zero and short windows retained separately, not substituted.",
+  "data": "Sealed original joint corpus plus actual round1 learned-policy own-history corpus. Strictly verified initialization only. FIT6, historical INNER0002; no outer0001 fit/selection, no fresh confirmation or VAL/TEST.",
+  "GLOBAL_RISK_components": "Three-class benefit/harm/neutral, global value, target-only value, explicit other-person future-harm logit, explicit target N10 future-harm logit. Runtime harmful=max(class harm, other-person harm, target harm). Current association cost is the exact solver's observed raw feature, not GT or a fabricated future value.",
+  "comparable_inputs": "Exactly frozen32 current action and previous3 causal proposal vectors. FIT sequence-equal normalization and loss; no additional images/candidates/backbone.",
+  "training": {"max_epochs": 30, "patience": 5, "batch_size": 128, "learning_rate": 0.001, "weight_decay": 0.0001, "threads": 1, "max_seconds_per_fit": 3600},
+  "selection": "Earliest minimum historical INNER objective epoch. Retain every epoch and checkpoint. Reuse frozen18-point benefit/harm/value calibration grid; empirical<=2% harm with>=5 accepted and nonzero benefit. No legal point is CALIBRATION_ABSTAIN, not PASS.",
+  "H100_noop_warning": "Actual new-policy replay required even for calibrated heads; training loss, static selection, and zero interventions do not prove full MOT success.",
+  "next_actual_round": "Freeze all fitted checkpoints before multi-person full joint replay and, if useful, the second actual on-policy rollout/relabel round. Max2 on-policy collection rounds, no automatic next stage.",
+  "no_GT_history_replacement": true,
+  "no_VAL_TEST_confirmation_used": true,
+  "next_stage_authorized": false
+}
