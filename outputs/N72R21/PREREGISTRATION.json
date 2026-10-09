@@ -1,0 +1,28 @@
+{
+  "stage": "N72R21",
+  "final_goal_file": "outputs/N72R21/FINAL_GOAL.json",
+  "status": "DESIGN_CONSTRAINTS_FROZEN_METADATA_DEPENDENT_PROTOCOL_PENDING",
+  "new_model_fit_started": false,
+  "final_evaluation_started": false,
+  "one_click": "First eligible initialization observation under a rule frozen before performance is observed; SIMULATED_ONE_CLICK_FROM_GT; anonymous token; immutable visual anchor; no second click.",
+  "runtime": "Causal target/NONE decisions without ground truth or future inputs. Independent recording resets motion/native state, not eligible identity memory.",
+  "data_policy": "Existing assets first. Metadata before bounded lawful TRAIN pilot. Baidu direct before alternative sources for LaSOT person. No full snapshot or duplicate dataset. Final inputs isolated until development freeze.",
+  "absence": "Evaluate true target absence separately from target-present but unavailable candidates. Never synthesize absence by silently dropping visible positives.",
+  "split_policy": "Respect official TRAIN/VAL/query/gallery semantics; additional unseen-person/recording/day/camera protocols only where actual metadata permits. Do not infer global identity from local numerical IDs.",
+  "primary_metrics": "All-visible and candidate-conditional recall; takeover; reacquisition; Recall@FPR<=2%; calibration; valid long-term retention; memory safety.",
+  "memory_safety_gate": {"maximum_wrong_write_rate": 0.02, "minimum_correct_observation_retention": 0.60, "zero_write_is_pass": false},
+  "training_seeds": [72101, 72102, 72103],
+  "bank_capacity_ablations": [1, 4, 8],
+  "state_matching_ablations": ["train_P0_deploy_P0", "train_P1_deploy_P1", "train_P1_deploy_P0", "mixed_causal_train_matching_deploy"],
+  "model_selection": "TRAIN-inner only; final inputs cannot select thresholds, memory policies, checkpoints or architectures.",
+  "pending_before_fit": [
+    "Verified dataset metadata, lawful video availability, and identity mapping",
+    "Concrete episode/split manifests and initialization rules",
+    "FPS/timestamp-supported horizon and reappearance definitions",
+    "Quantitative validation effect/safety thresholds and cluster-bootstrap units",
+    "Per-phase storage, time and GPU budget based on actual assets",
+    "Baseline and representation checkpoint/license audit"
+  ],
+  "negative_results_preserved": true,
+  "automatic_next_stage_allowed": false
+}

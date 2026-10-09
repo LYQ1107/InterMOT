@@ -1,0 +1,20 @@
+{
+  "stage": "N72R21",
+  "status": "FROZEN_PRE_ACQUISITION_BOUNDED_PHASE_BUDGET",
+  "personal_mount_minimum_free_gib": 60,
+  "metadata_max_mib": 128,
+  "initial_train_pilot_max_gib": 4,
+  "feature_cache_max_gib": 2,
+  "new_checkpoint_max_gib": 2,
+  "concurrent_video_downloads": 1,
+  "concurrent_video_decoders": 1,
+  "initial_gpu_jobs": 1,
+  "initial_gpu_memory_limit_gib": 12,
+  "individual_training_run_max_minutes": 30,
+  "check_storage_before_every_download_or_fit": true,
+  "larger_phase_requires_recorded_metadata_and_smoke_gate": true,
+  "unrelated_processes_may_be_terminated": false,
+  "tmp_root_persistent_storage_authorized": false,
+  "historical_resource_floor_reused": false,
+  "note": "N72R21 is separately authorized. Its bounded subset budget is based on ~93 GiB current free space; it does not rewrite previous stages' frozen floors. Actual source file sizes and license/access still govern acquisition. No entire dataset snapshot."
+}

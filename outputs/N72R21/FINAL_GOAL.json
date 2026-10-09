@@ -1,0 +1,27 @@
+{
+  "stage": "N72R21",
+  "goal": "One-Click Long-Term Human Identity Tracking",
+  "formal_final_goal": "One Click, Persistent Identity: Causal Long-Term Human Tracking Across Occlusion, Reappearance and Independent Recordings",
+  "central_question": "After one click, can the system reliably detect, locate and preserve a person's identity across disappearance, reappearance, clothing changes, cameras and independent recordings without mistaking others for that person?",
+  "goal_frozen": true,
+  "source_request": "/data3/liuyeqiang/.codex/attachments/08a171c7-8b34-460d-83c6-7f4d96c39118/Pasted text.txt",
+  "source_git_commit": "becfdf9c2b317e7c8b5427a894bc1f64b572809f",
+  "branch": "codex/n72r21-oneclick-longterm-identity",
+  "initialization_label": "SIMULATED_ONE_CLICK_FROM_GT",
+  "primary_endpoints": [
+    "all_visible_and_candidate_conditional_target_recall",
+    "wrong_person_takeover_frames_episodes_and_duration",
+    "reacquisition_recall_precision_delay_and_failure",
+    "open_set_recall_at_fpr_le_0p02_pr_auc_and_calibration",
+    "metadata_valid_long_term_and_cross_recording_identity_retention",
+    "memory_wrong_write_rate_and_correct_observation_retention"
+  ],
+  "runtime_ground_truth_allowed": false,
+  "runtime_future_observations_allowed": false,
+  "additional_clicks_allowed": false,
+  "cross_recording_identity_requires_official_metadata": true,
+  "cross_recording_motion_state_reset_required": true,
+  "mot_metrics_role": "SUPPLEMENTARY_ONLY_WHEN_LABELS_SUPPORT_THEM",
+  "scientific_success": null,
+  "next_stage_authorized": false
+}

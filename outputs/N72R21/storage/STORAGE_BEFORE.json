@@ -1,0 +1,59 @@
+{
+  "allocated_gpu_not_inferred_from_visibility": true,
+  "free_bytes": 99718582272,
+  "free_gib": 92.87016677856445,
+  "gpus": {
+    "command": [
+      "nvidia-smi",
+      "--query-gpu=index,uuid,memory.used,memory.total,utilization.gpu",
+      "--format=csv,noheader"
+    ],
+    "exit_code": 0,
+    "stderr": "",
+    "stdout": "0, GPU-d3a949d3-b3ef-04b0-92c5-594a63857898, 14 MiB, 40960 MiB, 0 %\n1, GPU-5de9a1c2-0cc1-4fda-7d25-493f86f52424, 14 MiB, 40960 MiB, 0 %\n2, GPU-a4095968-9191-50eb-d56c-ed633b31e2c0, 14 MiB, 40960 MiB, 0 %\n3, GPU-f931e51b-55b2-c2c2-6506-b6f986864d54, 26384 MiB, 40960 MiB, 44 %\n4, GPU-daa9b388-4540-242c-83d7-3261bb232a7c, 25113 MiB, 40960 MiB, 46 %\n5, GPU-f07a0798-7ddc-ec7c-a27c-d47124bbfe81, 14 MiB, 40960 MiB, 0 %\n6, GPU-c2902ddf-62f4-cc2f-5d9f-d33c74555847, 14 MiB, 40960 MiB, 0 %\n7, GPU-995c9557-d84e-1a76-f02f-b1ddea34e56b, 14 MiB, 40960 MiB, 0 %\n8, GPU-cd127bcd-08c4-fe6a-78ca-fc41123d7119, 25109 MiB, 40960 MiB, 44 %\n9, GPU-e947d8da-fc7a-4c0b-7d91-e9e67d34f4a6, 25111 MiB, 40960 MiB, 41 %\n"
+  },
+  "inodes": {
+    "command": [
+      "df",
+      "-i",
+      "/data3/liuyeqiang/InterMOT"
+    ],
+    "exit_code": 0,
+    "stderr": "",
+    "stdout": "Filesystem       Inodes   IUsed    IFree IUse% Mounted on\n/dev/loop18    67108864 4816392 62292472    8% /data3/liuyeqiang\n"
+  },
+  "mounts": {
+    "command": [
+      "findmnt",
+      "-T",
+      "/data3/liuyeqiang/InterMOT"
+    ],
+    "exit_code": 0,
+    "stderr": "",
+    "stdout": "TARGET            SOURCE      FSTYPE OPTIONS\n/data3/liuyeqiang /dev/loop18 ext4   rw,relatime\n"
+  },
+  "own_processes": {
+    "command": [
+      "ps",
+      "-u",
+      "liuyeqiang",
+      "-o",
+      "pid,etimes,comm"
+    ],
+    "exit_code": 0,
+    "stderr": "",
+    "stdout": "    PID ELAPSED COMMAND\n   1687   95846 systemd\n   1693   95845 (sd-pam)\n   1736   95845 pipewire\n   1737   95845 pipewire\n   1739   95845 wireplumber\n   1742   95845 pipewire-pulse\n   1753   95845 dbus-daemon\n   1926   95845 xdg-document-po\n   1936   95845 xdg-permission-\n   1971   95845 mihomo\n   3509   95834 sshd\n 366419   70853 codex\n 845008   38010 codex\n 845422   37999 codex-code-mode\n 986672       0 python\n 986683       0 ps\n"
+  },
+  "owner": "liuyeqiang",
+  "proxy_variable_names_present": [
+    "HTTP_PROXY",
+    "HTTPS_PROXY",
+    "ALL_PROXY",
+    "http_proxy",
+    "https_proxy",
+    "all_proxy"
+  ],
+  "requested_reserve_bytes": 0,
+  "safety_reserve_gib": 60,
+  "utc": "2026-10-09T06:05:30.023656+00:00"
+}
