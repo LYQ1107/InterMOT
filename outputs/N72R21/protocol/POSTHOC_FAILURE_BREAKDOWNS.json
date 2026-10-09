@@ -1,0 +1,18 @@
+{
+  "stage": "N72R21",
+  "final_goal_file": "outputs/N72R21/FINAL_GOAL.json",
+  "status": "DESCRIPTIVE_FAILURE_ANALYSIS_NOT_A_NEW_ENDPOINT_OR_GATE",
+  "prior_bin_reference": "outputs/N72R21/protocol/F1_WITHIN_VIDEO_DEVELOPMENT.json",
+  "density": "Valid current runtime candidates: sparse0-4, medium5-8, crowded9+; not GT person counts or dataset-name proxies",
+  "anchor_and_reappearance_gap_seconds": "Short<=5, Medium>5and<=20, Long>20; real DanceTrack FPS20. Long means within-recording only, never independent-session or cross-day",
+  "new_posthoc_overlap_split": "GT target-vs-other maximum box IoU>=0.25, explicitly a posthoc geometric-overlap proxy, not validated physical occlusion truth or a threshold chosen for success",
+  "hard_competitor": "Frozen raw OSNet current-candidate cosine to sole human anchor; same-identity versus maximum verified other identity, unmatched candidates UNKNOWN, ties not wins",
+  "write_labels": "Strict target; verified other; UNKNOWN unmatched. Conservative existing non-target-or-unverified write error preserved, not reclassified as all verified wrong persons",
+  "recovery": "Report all eligible visible-GT gap return windows; unsuccessful windows retained. Original IoU-based metrics unchanged; additional strict UID-based recovery and verified wrong first accepts separate",
+  "calibration": "Candidate availability and verified rank1 identity claims separate; UNKNOWN masked only in secondary claim calibration. Per-sequence strata and pooled-all-scene curves are distinct",
+  "scope": "Completed fixed-cohort T2 TRAIN controls and frozen25-sequence VAL; verify all compared scene runtimes before truth access",
+  "models_thresholds_or_candidate_policies_changed": false,
+  "selecting_best_seed_method_or_failure_examples_for_success": false,
+  "scientific_success": false,
+  "next_stage_authorized": false
+}

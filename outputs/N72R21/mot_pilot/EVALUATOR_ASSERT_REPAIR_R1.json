@@ -1,0 +1,28 @@
+{
+  "stage": "N72R21",
+  "version": "MOT_EVALUATOR_ASSERT_REPAIR_R1",
+  "registered_utc": "2026-10-09T12:15:55Z",
+  "research_direction_file": "outputs/N72R21/RESEARCH_DIRECTION_OVERRIDE.json",
+  "original_failure_file": "outputs/N72R21/mot_pilot/ORIGINAL_EVALUATOR_FAILURE.json",
+  "original_evaluator_sha256": "d1d00fb59f6cd41292a32556a2ecd07052d4a4055d8bb3aaf4e8a2f51430299f",
+  "original_evaluator_exact_backup": "/data3/liuyeqiang/InterMOT_N72R21_assets/diagnostics/MOT_EVALUATOR_ASSERT_ORIGINAL.py",
+  "all32_runtime_seals_already_complete": true,
+  "fault_owner": "Our post-evaluation assertion, not a tracker, model or upstream evaluator bug",
+  "incorrect_assertion": "Identical per-frame detections imply identical DetA, LocA and CLEAR FP/FN across all public-ID trajectories",
+  "primary_source_explanation": "Pinned HOTA weights per-frame matching by global ID alignment; CLEAR prioritizes continuity with previously matched IDs. Different public-ID trajectories can therefore yield different matched detections and derived detection/localization metrics despite identical geometric input",
+  "pinned_primary_sources": {
+    "third_party/MOTIP/TrackEval/trackeval/metrics/hota.py": "c582255c3d36bdb49c3ceeb2a5bd912cee009190dfcfe465b4173d03aaa97d6a",
+    "third_party/MOTIP/TrackEval/trackeval/metrics/clear.py": "ab3963eac401073fe1b2957c734af1e531368f42fca49627c14422350b2744f0"
+  },
+  "replacement_guard": "Exact per-frame exported multiset of (frame,x,y,width,height,confidence), excluding public identity and row ordering; preserve multiplicity, validate finite positive geometry and unique public IDs per frame. Retain existing trace candidate-UID and complete-frame-axis checks",
+  "repair_scope": "Evaluator and independent detection-multiset validator/tests only",
+  "runtime_sources_changed": false,
+  "runtime_or_training_rerun": false,
+  "weights_thresholds_or_association_changed": false,
+  "new_TrackEval_output_root": "/data3/liuyeqiang/InterMOT_N72R21_assets/mot_pilot/trackeval_R1",
+  "original_TrackEval_output_root_preserved": "/data3/liuyeqiang/InterMOT_N72R21_assets/mot_pilot/trackeval",
+  "selection_using_results": false,
+  "all16_cases_and_all3_seeds_required": true,
+  "VAL_used": false,
+  "next_stage_authorized": false
+}
