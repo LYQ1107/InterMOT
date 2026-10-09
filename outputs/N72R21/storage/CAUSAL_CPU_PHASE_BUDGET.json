@@ -1,0 +1,20 @@
+{
+  "stage": "N72R21",
+  "final_goal_file": "outputs/N72R21/FINAL_GOAL.json",
+  "status": "BOUNDED_EXTENSION_AFTER_REAL_STATE_SMOKE_AND_EXACT_RECONSTRUCTION",
+  "max_concurrent_CPU_runtime_workers": 4,
+  "threads_each_runtime_worker": 1,
+  "GPU_training_jobs": 1,
+  "GPU_allocation_limit_GiB": 12,
+  "CPU_role_budget": "Two frozen T0 state collectors, one controlled T1 outer replay, one T2 causal/paired-state pilot; one existing GPU fit process may perform host-side dataset preparation",
+  "observed_host_available_RAM_GiB_before_extension": 107,
+  "personal_mount_available_GiB_before_extension": 91.4,
+  "personal_mount_safety_reserve_GiB": 60,
+  "new_pixel_or_dataset_copies": 0,
+  "new_feature_vector_cache_copies": 0,
+  "bounded_state_branch_artifacts_estimated_max_GiB": 1,
+  "existing_feature_cache_budget_GiB": 2,
+  "existing_new_model_budget_GiB": 2,
+  "per_case_sequence_wall_clock_max_minutes": 30,
+  "reason": "Real CPU states and same-frame reconstruction already pass; frozen source folds require independent own-state trajectories. Additional workers use sealed candidate references and tiny models, no video decoding/downloads or extra GPUs."
+}

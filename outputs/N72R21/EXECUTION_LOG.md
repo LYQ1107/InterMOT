@@ -1,5 +1,17 @@
 # N72R21 execution log
 
+## T1 matched/shifted/mixed fits; true paired T2 source rollouts
+
+Final Goal: **One Click, Persistent Identity: Causal Long-Term Human Tracking Across Occlusion, Reappearance and Independent Recordings**.
+
+T0 milestone `317353d814ba74b1807e07f24bdad85b79b07050` was SHA-identically fast-forward published, with code/text/metadata only. T1 protocol frozen before fitting; exact before-state reconstruction preserves full INNER frame axis and no GT-positive writes. Three complete folds / 27 actual fits preceded continuing folds, with 88,391 parameters and finite accepted gradients. First OUTER scene has all three seeds and five prescribed matched/shifted/mixed comparisons; roughly 21% recall is weak, not a success decision. Remaining scene/seed counts are explicit and active.
+
+T2 protocol frozen before own-state collection: source T1 MIXED model, own P1 K8 states, stride-50 write/no-current-write paired actual next-up-to-10-frame trajectories. Each future branch has its own causal decisions/writes; no GT is opened until artifacts are sealed. First fixed FIT scene/seed has 153 supervised proposals, 130 satisfying the frozen offline safe-label rule, 16 UNKNOWN; these are labels, not deployed safety. Real-data current/risk loss/backward preflight passes. New current-input future-safe module, delayed trusted runtime and resumable trainer implemented; completed T2 fit/evaluation not yet claimed.
+
+Latest focused 53 passed; complete full-suite snapshot at 50-focused revision 764 passed, 5 failed, four warnings, 51.20s. Same old third-party CLI and branch-literal failures. No old code/tests patched. Two earlier analysis helper/name errors produced no result; corrected commands and actual JUnit are retained. Two single-threaded T0-source collectors, one controlled T1 runtime worker and one T2 worker fit the bounded CPU extension; a single existing GPU fitter runs T1. T2 fit scheduling waits for T1 completion. Source data/weights/history stay unchanged; 795 historical files rechecked, personal free space about 91.2 GiB, no cleanup or pixel copies.
+
+Official CHIRLA media-access recheck: HF still requires contact-sharing acceptance, ScienceDB direct/proxy both time out. No media downloaded or terms accepted by agent. Continue F1/LaSOT work while retaining lawful acquisition plan. Goal remains active, no final closure/downstream authorization.
+
 ## Repaired T0 completed; real causal state and LaSOT diagnostics
 
 Final Goal: **One Click, Persistent Identity: Causal Long-Term Human Tracking Across Occlusion, Reappearance and Independent Recordings**.
