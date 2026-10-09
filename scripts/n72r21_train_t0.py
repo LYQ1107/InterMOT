@@ -22,6 +22,8 @@ from scripts.n72r21_baselines_geometry_repair import valid_geometry
 from sam3_intermot.one_click.datasets import dancetrack_annotations,strict_candidate_matching
 from sam3_intermot.one_click.acib import ACIBNetwork,training_losses,AVAILABILITY_CLASSES,EVIDENCE_SCHEMA
 
+RUN_NAME='T0_AMP_R1'
+
 
 def split(outer,sequences):
     if len(sequences)!=8 or len(set(sequences))!=8 or outer not in sequences: raise ValueError('registered eight-sequence fold')
@@ -102,17 +104,29 @@ def loss(output,batch):
 
 def epoch(model,loader,device,optimizer,scaler):
     training=optimizer is not None;model.train(training);counts=0;totals={k:0. for k in ('total','decision','availability','write_correctness_proxy')}
-    correct=available=accepted=negative=false_accept=0;gradients=[]
+    correct=available=accepted=negative=false_accept=0;gradients=[];overflows=[];fallbacks=0
     for source in loader:
         batch={k:v.to(device) for k,v in source.items()}
-        if training:optimizer.zero_grad(set_to_none=True)
-        with torch.set_grad_enabled(training),torch.autocast(device_type=device.type,dtype=torch.float16,enabled=device.type=='cuda'):
-            output=forward(model,batch);parts=loss(output,batch)
-        if not all(torch.isfinite(v) for v in parts.values()):raise FloatingPointError('nonfinite actual training/inner loss')
-        if training:
+        retry=0
+        while True:
+            if training:optimizer.zero_grad(set_to_none=True)
+            use_amp=device.type=='cuda' and retry<5
+            with torch.set_grad_enabled(training),torch.autocast(device_type=device.type,dtype=torch.float16,enabled=use_amp):
+                output=forward(model,batch);parts=loss(output,batch)
+            if not all(torch.isfinite(v) for v in parts.values()):raise FloatingPointError('nonfinite actual training/inner loss')
+            if not training:break
             scaler.scale(parts['total']).backward();scaler.unscale_(optimizer)
+            invalid=[n for n,p in model.named_parameters() if p.grad is not None and not torch.isfinite(p.grad).all()]
+            if invalid:
+                overflows.append({'batch_start_sample':counts,'retry':retry,'AMP':use_amp,'scale':float(scaler.get_scale()),'nonfinite_parameter_names':invalid})
+                if not use_amp:raise FloatingPointError('FP32 same-minibatch gradient nonfinite; stop with no invalid update')
+                # GradScaler's checked found_inf path skips this optimizer step
+                # and lowers the scale. Retry the same data/unchanged parameters.
+                scaler.step(optimizer);scaler.update();retry+=1;continue
             norm=torch.nn.utils.clip_grad_norm_(model.parameters(),25.,error_if_nonfinite=True)
             gradients.append(float(norm));scaler.step(optimizer);scaler.update()
+            if device.type=='cuda' and not use_amp:fallbacks+=1
+            break
         n=len(batch['anchor']);counts+=n
         for k,v in parts.items():totals[k]+=float(v.detach())*n
         prediction=output['joint_probabilities'].argmax(-1);is_positive=batch['availability_label']==0
@@ -123,7 +137,9 @@ def epoch(model,loader,device,optimizer,scaler):
             'correct_candidate_recall':correct/available if available else None,'accepted_samples':accepted,
             'negative_samples':negative,'negative_false_accept_rate':false_accept/negative if negative else None,
             'gradient_norm_mean':float(np.mean(gradients)) if gradients else None,'gradient_norm_max':max(gradients) if gradients else None,
-            'all_loss_and_gradient_finite':True,'all_NONE':accepted==0,'all_present':accepted==counts}
+            'all_loss_and_gradient_finite':not overflows,'accepted_optimizer_gradients_finite':True,
+            'AMP_overflow_events':overflows,'same_minibatch_FP32_fallbacks':fallbacks,
+            'all_NONE':accepted==0,'all_present':accepted==counts}
 
 
 def rng_state(generator):
@@ -162,13 +178,14 @@ def fit(outer,seeds,gpu):
     device=checked_device(gpu)
     code={p:sha256(ROOT/p) for p in ['scripts/n72r21_train_t0.py','sam3_intermot/one_click/acib.py']}
     schema={'T0_protocol_sha256':sha256(OUT/'protocol/F1_ACIB_TRAINING.json'),'F1_protocol_sha256':sha256(OUT/'protocol/F1_WITHIN_VIDEO_DEVELOPMENT.json'),
+            'run_name':RUN_NAME,'numerical_repair_protocol_SHA256':sha256(OUT/'protocol/T0_AMP_NUMERICAL_REPAIR.json'),
             'code_sha256':code,'fit_sequences':fit_sequences,'inner_sequence':inner,'outer_sequence':outer,
             'fit_sources':fit_data.sources,'inner_sources':inner_data.sources,'outer_GT_or_pixels_read_by_fitting':False,
             'input_dim':512,'hidden_dim':128,'evidence_schema':list(EVIDENCE_SCHEMA),'availability_classes':list(AVAILABILITY_CLASSES),
             'physical_absence_supervision_available':False,'T0_empty_machine_bank':True,
             'fixed_OSNet_lineage_not_selected_from_outer_results':True}
     for seed in seeds:
-        tag=f'{outer}__seed{seed}';directory=ASSETS/'training/T0'/tag;done=OUT/'training/T0'/f'{tag}.json'
+        tag=f'{outer}__seed{seed}';directory=ASSETS/'training'/RUN_NAME/tag;done=OUT/'training'/RUN_NAME/f'{tag}.json'
         if done.exists() and read_json(done).get('completed'):
             record=read_json(done)
             if record['schema']!=schema or sha256(record['best_checkpoint_path'])!=record['best_checkpoint_sha256']:raise ValueError('sealed fit changed')
@@ -178,7 +195,7 @@ def fit(outer,seeds,gpu):
         torch.backends.cudnn.benchmark=False;torch.backends.cudnn.deterministic=True
         generator=torch.Generator().manual_seed(seed)
         model=ACIBNetwork().to(device);optimizer=torch.optim.AdamW(model.parameters(),lr=protocol['learning_rate'],weight_decay=protocol['weight_decay'])
-        scaler=torch.amp.GradScaler('cuda',enabled=device.type=='cuda')
+        scaler=torch.amp.GradScaler('cuda',init_scale=1024.,enabled=device.type=='cuda')
         latest=directory/'latest.pt';best=directory/'best.pt';batch_size=protocol['batch_size'];start_epoch=0;best_loss=math.inf;stale=0;logs=[];oom=[]
         if latest.exists():
             saved=torch.load(latest,map_location='cpu',weights_only=True)
@@ -212,18 +229,19 @@ def fit(outer,seeds,gpu):
                       'scaler':scaler.state_dict(),'rng':rng_state(generator),'best_loss':best_loss,'stale':stale,'logs':logs,'batch_size':batch_size,'OOM':oom}
             if improved:atomic_save(best,snapshot)
             atomic_save(latest,snapshot)
-            write_json(f'training/T0/{tag}.json',{'completed':False,'schema':schema,'seed':seed,'logs':logs,'OOM':oom,
+            write_json(f'training/{RUN_NAME}/{tag}.json',{'completed':False,'schema':schema,'seed':seed,'logs':logs,'OOM':oom,
                 'model_parameters':sum(p.numel() for p in model.parameters()),'best_checkpoint_path':str(best),
                 'best_checkpoint_sha256':sha256(best),'latest_checkpoint_path':str(latest),'latest_checkpoint_sha256':sha256(latest),
                 'runtime_device':str(device),'peak_GPU_allocated_bytes':torch.cuda.max_memory_allocated(device) if device.type=='cuda' else 0,
                 'no_scientific_or_full_memory_training_claim':True})
             print(json.dumps({'T0':tag,'epoch':number,'fit_loss':training['loss_components']['total'],'inner_loss':current,
                               'inner_candidate_recall':validation['correct_candidate_recall'],'inner_negative_FPR':validation['negative_false_accept_rate'],
-                              'gradient_finite':True,'best':improved,'seconds':round(time.monotonic()-started,1)}),flush=True)
+                              'accepted_gradient_finite':training['accepted_optimizer_gradients_finite'],
+                              'AMP_overflow_count':len(training['AMP_overflow_events']),'best':improved,'seconds':round(time.monotonic()-started,1)}),flush=True)
         record=read_json(done);record.update(completed=True,early_stopped=stale>=protocol['patience'],
              fit_availability_class_counts=fit_data.counts,inner_availability_class_counts=inner_data.counts,
              full_T1_T2_T3_complete=False,outer_evaluation_executed=False,next_stage_authorized=False)
-        write_json(f'training/T0/{tag}.json',record)
+        write_json(f'training/{RUN_NAME}/{tag}.json',record)
         del model,optimizer,scaler
         if device.type=='cuda':torch.cuda.empty_cache()
 

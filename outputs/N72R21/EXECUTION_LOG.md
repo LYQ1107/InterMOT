@@ -1,5 +1,17 @@
 # N72R21 execution log
 
+## Repaired T0 completed; real causal state and LaSOT diagnostics
+
+Final Goal: **One Click, Persistent Identity: Causal Long-Term Human Tracking Across Occlusion, Reappearance and Independent Recordings**.
+
+All 24 T0_AMP_R1 fold/seed fits, GT-free outer replays and separate posthoc evaluations completed. Same architecture/samples/splits/loss, initial AMP scale1024 and checked overflow recovery; all accepted gradients finite, zero repaired-run overflow events. Original four fits, failed next seed and exact diagnostic remain preserved, with original source at SHA-identically published Git `095c5b8a0e96e2bd0a5b06fc8561be701cbf62da`. Pooled per-seed all-visible recalls are 0.201770, 0.193242, 0.185999. Uncalibrated comparisons and no-write T0 do not pass scientific/memory gates. Explicit initialization-metadata access disclosure added, without rewriting frozen historical fit records.
+
+Actual P0/P1 state collection finished the first fold's six FIT plus one INNER scene for all three seeds. Runtime never opens GT and uses its own accepted observations, not oracle positives. Full contiguous decisions are retained with stride-five before-state references; INNER full-axis reconstruction is required before fitting. The predetermined first-fit in-sample P1 audit has wrong-write rates 0.4446404, 0.43113045, 0.39280036, each failing joint safety/usefulness. T1 fitting is not yet complete.
+
+Three in-place TAO LaSOT/person TRAIN trims completed original frozen OSTrack inference and separate official-box evaluation on 3,510 future frames. No data copied; unknown FPS/out-of-view truth is not invented, 22 invalid person-7 boxes are UNKNOWN. No continuous cross-recording/physical absence/generalization claim. CHIRLA media legal access remains unresolved while independent F1 work continues.
+
+Latest actual focused suite: 36 passed. Full suite: 750 passed, 5 failed, four warnings in 51.22s. Same four fixed TrackEval CLI interface failures and one old branch-literal assertion; raw JUnit retained. Goal remains active, downstream unauthorized.
+
 ## Actual frozen controls; first T0 fits and numerical diagnosis
 
 All three new frozen encoder feature caches completed on eight scenes without GT; all 49,189 valid candidate ROIs were nonempty after clipping. SHA/source/UID/real-image seals precede independent evaluation. Same 39,760 competitive frames: OSNet 32.98%, second person-ReID 32.42%, matched ImageNet 28.20%, native-transform ImageNet 27.62%. No selection from outer controls or cross-day claim.

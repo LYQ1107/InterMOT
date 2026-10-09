@@ -1,0 +1,21 @@
+{
+  "status": "FROZEN_BEFORE_REPAIRED_FIT",
+  "final_goal_file": "outputs/N72R21/FINAL_GOAL.json",
+  "original_source_commit": "095c5b8a0e96e2bd0a5b06fc8561be701cbf62da",
+  "original_training_source_SHA256": "061d4e4176bd5d2419520f061eac0b318b91d42c1208012f3a7359f879530275",
+  "original_completed_checkpoints_preserved": true,
+  "original_run_directory": "training/T0",
+  "new_separate_run_directory": "training/T0_AMP_R1",
+  "diagnosis": "Same failed TRAIN minibatch/weights: FP16 GradScaler scale65536 gives overflow in availability_head.2.weight; FP32 and FP16 scale1024 gradients finite",
+  "diagnostic_artifact": "outputs/N72R21/training/INITIAL_AMP_NONFINITE_DIAGNOSTIC.json",
+  "initial_GradScaler_scale": 1024,
+  "overflow_recovery": "Skip nonfinite optimizer step via GradScaler, reduce scale, retry identical minibatch; record every overflow. After five failed FP16 attempts use FP32 for that same minibatch, never delete data or apply nonfinite gradients.",
+  "loss_coefficients_architecture_splits_samples_seeds_learning_rate_unchanged": true,
+  "no_outer_or_query_selection": true,
+  "accepted_optimizer_gradients_must_be_finite": true,
+  "overflow_is_not_reported_as_all_gradients_finite": true,
+  "run_all_eight_folds_three_seeds_in_one_repaired_namespace": true,
+  "T1_T2_T3_complete": false,
+  "scientific_success": false,
+  "next_stage_authorized": false
+}
