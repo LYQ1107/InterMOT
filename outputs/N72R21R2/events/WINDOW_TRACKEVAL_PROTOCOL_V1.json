@@ -1,0 +1,15 @@
+{
+  "stage": "N72R21R2",
+  "goal_file": "outputs/N72R21R2/FINAL_GOAL.json",
+  "sampling_frozen_before_offline_action_labels": true,
+  "sequences": "Every inherited FIT16 and INNER8 video, no density/effect selection",
+  "event_rule": "First initialized sole-click episode by (click frame, episode UID), first registered event frame with 100 future original frames; never use branch reward or GT-best action to choose",
+  "branches": "All actual feasible registered arms, including harmful and identical-action controls; retain missing/infeasible reasons",
+  "evaluation_window": "Current action t and t+1 through t+100, 101 original frames",
+  "time_remap": "Evaluation-only frame origin remap; public IDs and detections unchanged",
+  "TrackEval_commit": "12c8791b303e0a0b50f753af204249e622d0281a",
+  "metrics": ["HOTA", "AssA", "DetA", "LocA", "IDF1", "IDSW", "MOTA", "FP", "FN"],
+  "not_whole_policy_MOT": true,
+  "overlapping_window_metrics_never_summed": true,
+  "frozen": true
+}

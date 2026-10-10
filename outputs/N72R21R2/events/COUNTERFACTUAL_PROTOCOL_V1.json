@@ -1,0 +1,21 @@
+{
+  "stage": "N72R21R2",
+  "version": "V1_BEFORE_ACTUAL_NEW_ACTION_BRANCHES",
+  "goal_file": "outputs/N72R21R2/FINAL_GOAL.json",
+  "source_distribution": "Own actual fresh C0-shadow P0 prestate; treatment and on-policy extensions must be separately recorded",
+  "sampling": "Use the frozen corpus_v2 chronological-first plus up to8 evenly spaced additional probes per class, including correct, wrong, no-positive, unavailable, competitive and observational propagation classes. Never select by branch effects.",
+  "runtime_plan": "Frame and episode UID only, no GT identity/positive UID/future label fields",
+  "branches": ["KEEP", "REJECT_TARGET", "RECOVERY", "RAW_IDENTITY_TOP", "LEARNED_IDENTITY_TOP", "TOP_ALTERNATIVE", "FEASIBLE_GLOBAL_SWAP", "DELAYED_CHALLENGER"],
+  "action_scope": "One current action then own KEEP continuation. DELAYED_CHALLENGER executes KEEP at t and waits until t+2 for3 consecutive current/past learned proposals with feature cosine>=.9 and boxIoU>=.3, then at most one feasible action. All future state is branch-owned.",
+  "candidate_choice": "Current raw-anchor cosine or current frozen joint candidate probabilities, deterministic UID tie break. Alternative excludes own KEEP UID; swap considers only currently competitor-owned UIDs. No offline positive UID enters action choice.",
+  "recovery_applicability": "Own current KEEP is NONE or target state is LOST; otherwise record NOT_APPLICABLE, not a new action experiment",
+  "hard_solver_constraints": "Original solve_counterfactual_global_assignment, no hard-negative relaxation or target-only splice",
+  "duplicate_action_configs": "Retain actual branches but mark identical current action signatures; never count them as new independent events",
+  "future_horizons": [1, 5, 20, 50, 100],
+  "future_definition": "k=1..H inclusive. Current t correctness is separate. Incomplete future windows stay incomplete, never imputed as negative labels.",
+  "cache_contract": "Capture current probabilities/features before running any future branch; frozen model may be shared, mutable tracker/bank/pending state may not",
+  "other_person_truth": "Offline source-prefix public identity origins, excluding clicked-person fragments. Compare branch versus its paired own KEEP, not another run's future state.",
+  "scientific_scope": "Counterfactual event supervision, not an adaptive deployable policy or whole-sequence HOTA result",
+  "resources": {"CPU_threads_per_worker": 1, "max_parallel_workers": 3, "floor_GiB": 60, "stage_budget_GiB": 8},
+  "frozen": true
+}
