@@ -1013,6 +1013,69 @@ exact original marker archives, new owner markers and
 `audit/IDLE_DRIVER_RECOVERY_INITIAL_READBACK_V1.json`. Only the wrapper, its
 tests and this necessary explanation enter the next code-only Git delivery.
 
+## All24 fixed-mechanism delivery and full SCALAR INNER comparison — progress
+
+The frozen delivery audit independently completed all original FIT16/INNER8
+videos with observed supervisor exit0. Before opening raw GT, it reverified
+every full-policy/onset runtime artifact, original worker hash and actual CLI
+log. It reparsed actual pinned nine-metric CSVs, reconstructed all postclick
+target outcomes, checked full-global UID/public uniqueness and rederived all
+**51** own-prefix one-shot labels from the actual same-tensor-prestate arms.
+Stored current/future components agree exactly. All original59 valid sole
+clicks and13 failed initialization slots are retained, including two all-failed
+videos. No new rollout, optimization, threshold or policy is introduced.
+
+Ten original mechanism reports now exist locally. Eight satisfy the task's
+named simple-report paths; two additionally retain the original P8/P9 controls.
+`DELAYED_CONFIRMATION.json` explicitly maps only to **P6 persistent causal
+challenger**: three consecutive current/past confirmations, original P5
+protection and own KEEP-margin gate. It does not rename P8/P9, add a new delayed
+policy or retrospectively change output. KEEP/SHADOW reuse the actual original
+baselines. Zero-action AA is verified as complete semantic-state/global-output
+and trajectory-byte equality, **not upgraded to baseline tensor replay proof**.
+The one-shot arms separately have actual full-tensor same-prestate evidence.
+
+Equal-video means, clicks inside video, paired2000-video bootstrap730104 and
+all nine full-original-video metrics are reported per FIT/INNER and frozen
+density. Compared with the earlier16 simple-policy role tables, maximum
+absolute macro-delta difference is5.4210108624e-20. Original weights and all
+reported artifacts were freshly SHA-reverified. FIT Recovery has17 actions,
+N01/N10=340/962 and delta HOTA-.0017436696; FIT Uncertain has31 actions,
+368/482 and delta HOTA-.0002771247. Their observed severe-other-H100 one-shot
+diagnostic counts are3 and4, respectively, still **not independent roots**.
+INNER Uncertain has3 actions in0016,8/3 frames and delta HOTA+.0010820132,
+below the unchanged.005 gate and confined to one video. All observed simple
+action diagnostics have zero component-safe complete-H100 positive decisions;
+P4-P9 remain vacuous. No simple mechanism qualifies original G1/G2, and no
+independent-event precision/recall is invented from frames or spaced windows.
+
+Meanwhile SCALAR/L3 completed **both** INNER points for all3 seeds and all8
+videos:48 cells,42 actual successful nonempty full-MOT CLI receipts,108 valid
+click/seed/point runs,36 repeated failed slots retained and118152 recorded
+tensor-C0-AA frame exposures. The latter are repeated observations, not new
+independent videos or clicks. Independent readback reverified all runtime,
+weight, onset, trajectory and metric evidence and exactly recomputed the
+shared selection from all48 cells. Both points have zero actions/writes and
+all nine paired deltas0. P0 is the original **fixed diagnostic fallback**, not
+a qualified best policy. Beneficial-root upper bound0 proves nonvacuity failure
+for this INNER configuration; it does not close pending FIT evaluation, the
+other13 MAIN/3 STATE groups or model-generated on-policy/staged dispositions.
+
+V26 actual regression: **1165 passed /5 unchanged historical failures**,
+observed pytest exit1; all**240** R2-focused tests pass, observed exit0. The12
+new delivery tests plus related existing audits passed as a separate41-test
+run. Existing scientific workers, historical tests and dependencies remain
+unchanged. Full original Goal remains ACTIVE/PENDING; final six tables and
+full-task scientific closure are not complete. CONFIRM/VAL/TEST/SOT unopened.
+
+Local evidence: `simple/delivery_audit_v1/COMPLETE.json`, all24 audit records,
+all10 named reports, `simple/SIMPLE_DELIVERY_INDEPENDENT_READBACK_V1.json`,
+and `mot/ALL48_SCALAR_INNER_POINTS_READBACK_V1.json`. Reproduction uses the
+existing local assets and `scripts.n72r21r2_simple_delivery_v1 freeze|run`;
+sealed protocols/reports are preserved rather than overwritten. Only source,
+tests and necessary explanation are published; no dataset, GT, model, metric,
+generated report or trajectory upload is included.
+
 ## Execution boundaries
 
 Reuse existing DanceTrack TRAIN images, SAM3/OSNet weights and original Python environment. Preserve historical evidence. All runtime decisions use only current real candidate UIDs and causal state. Sole click initializes identity, not unconditional override authority. Every intervention uses the complete global assignment and committed feedback. GT labels stay offline. Frames, seeds and propagated errors are not independent causal events.
