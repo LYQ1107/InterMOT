@@ -1,0 +1,81 @@
+{
+  "CPU_workers": 1,
+  "FIT_only_support_trigger_snapshot": {
+    "path": "/data3/liuyeqiang/InterMOT_N72R21R2_worktree/outputs/N72R21R2/training/authority_support_v1/snapshots/9ffaae87072cafd797c0acb00560579292d6e52a93e8475971e3bf02efcbd67d.json",
+    "sha256": "802a98025fa12f8960284062a82a3198884af8f3bed226932c4f466f17f434e1"
+  },
+  "changed": "Only explicitly named authority hard-filter vetoes, in an independent process-local diagnostic wrapper",
+  "estimated_extra_assets_GiB_upper": 0.5,
+  "existing_pilot_point_protocol_sha256": "1f6890096158553ec73734d986d24a7b00b52bb2a83456b0144a3b130631a761",
+  "families": [
+    "LOGISTIC_RISK"
+  ],
+  "frozen": true,
+  "goal_file": "outputs/N72R21R2/FINAL_GOAL.json",
+  "models": [
+    {
+      "checkpoint_sha256": "1266f71606cde92752686847612f305ddedacc782452d22d65ed81ca638ce9d3",
+      "experiment_uid": "PILOT__LOGISTIC_RISK__L3_HARM_AWARE__seed730101",
+      "family": "LOGISTIC_RISK",
+      "fit_record_sha256": "b61179606323c5521014709a48b6ca496c35f11600cb2ee88de2863dc0a78682",
+      "seed": 730101
+    },
+    {
+      "checkpoint_sha256": "477d462218c420b79fdc4fe0ecd1a616eb062c93f2b23278381d9717a54908af",
+      "experiment_uid": "PILOT__LOGISTIC_RISK__L3_HARM_AWARE__seed730102",
+      "family": "LOGISTIC_RISK",
+      "fit_record_sha256": "a3cda833a8273f17e976cfd8bc3d79db44e1b5da17c1926582b9a02947f390c6",
+      "seed": 730102
+    },
+    {
+      "checkpoint_sha256": "a941cffb454b90a75701fc765e040f5838f898694b7a3d25702e86d3cb7d6bfc",
+      "experiment_uid": "PILOT__LOGISTIC_RISK__L3_HARM_AWARE__seed730103",
+      "family": "LOGISTIC_RISK",
+      "fit_record_sha256": "f38303b0b18c202dcd0705ba5526426a5f6f6bd42c7dc66feaf3ee1eaf9ed12d",
+      "seed": 730103
+    }
+  ],
+  "no_GT_feature_or_force_candidate_or_target_only_trajectory_patch": true,
+  "no_INNER_or_confirmation_used_for_trigger_or_pilot": true,
+  "no_fits_or_scientific_success_or_next_stage_authorization": true,
+  "nonzero_actions_require_actual_own_prefix_harm_onset_audit_before_G1": true,
+  "point": {
+    "anchor_advantage_min": 0.1,
+    "claim_min": 0.8,
+    "confirmation_delay": 3,
+    "global_regret_max": 0.2,
+    "risk_max": 0.02
+  },
+  "policies": [
+    "LEGACY_RAW_ANCHOR",
+    "NO_GLOBAL_COST_CEILING",
+    "NO_COST_OR_DISPLACEMENT_CEILING",
+    "NO_COST_DISPLACEMENT_OR_ANCHOR_ADVANTAGE_CEILING"
+  ],
+  "reserve_GiB": 60,
+  "scope": "36 real own-full-video FIT pilot cells: 3 fixed seeds x4 named hand-filter variants x3 original FIT pilot videos. Same raw sealed click in all variants; old normalized-anchor evidence is not silently adopted as matched baseline.",
+  "seeds": [
+    730101,
+    730102,
+    730103
+  ],
+  "sequences": [
+    "dancetrack0074",
+    "dancetrack0020",
+    "dancetrack0032"
+  ],
+  "source_sha256": {
+    "sam3_intermot/one_click/authority_support_ablation.py": "a8d3f24206532ea552a968ad41f87de2e8667687d18287059650015c8f3d1543",
+    "sam3_intermot/one_click/event_authority_learning.py": "ed2b38930a2af0dd7dd4daab6cdba3145e99441e5ed02f2e27f1721f697745cd",
+    "sam3_intermot/one_click/event_authority_models.py": "9d2a753e8c5cfdf838c02904a93f2220b98f5de796ee0a31cec02253d477f5ba",
+    "sam3_intermot/one_click/event_authority_runtime.py": "4c5976a55e14b44e5600c8388817c9499a3db3dc6066bc2c74d7dae6bfa4d76c",
+    "sam3_intermot/one_click/joint_intervention_primitives.py": "040420d19d324ebc97af964db947a6de681859596d2ceb290fa0e19a391980dc",
+    "sam3_intermot/one_click/runtime_file_guard.py": "6b7b605c9601e43500b74017dfa01f01d337500a7ffae87cbe05d1b8e464f4ed",
+    "scripts/n72r21r2_event_context_v2.py": "9b4c5c03ae0d14408ad8d8c0fbd111fe56bee905fc734add277bbfba61b84399",
+    "scripts/n72r21r2_learned_pilot.py": "0ad92d81681fcf066d0b0e27601aa00dc543a4749464a1dc86461a019d3447c5",
+    "scripts/n72r21r2_support_ablation_driver.py": "c57a6fd8060906a090750d4b7ee55436ca79939be6a1223e31a2747415eb2a39",
+    "scripts/n72r21r2_support_ablation_pilot.py": "850a67d6fa108f5313b6d05f5724eab867eb6ab2da7dc108fae3e38c6d5c6efe"
+  },
+  "stage": "N72R21R2",
+  "unchanged": "Identity model/memory/candidates/current feature vectors/learned weights/thresholds/branch ranking/current-history/full solver/hard negatives/feedback/pinned evaluation"
+}

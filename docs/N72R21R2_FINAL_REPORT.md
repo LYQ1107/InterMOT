@@ -249,6 +249,96 @@ not replace unfinished main architecture/objective/on-policy/MOT/generalization
 requirements. Only source/tests/compact protocols and this explanation are
 published; weights, source rows, GT, traces, media and bulk evidence stay local.
 
+## Pure margin and frozen-authority support diagnostics — still PENDING
+
+Two new controls remove the earlier relative-NONE bonus confound:
+`PURE_REAL_CANDIDATE_MARGIN` ranks only real identity UIDs while retaining
+NONE probability mass; `PURE_UID_PLUS_NONE_MARGIN` ranks the full unchanged
+UID+NONE axis. Both reuse the existing selected temperature2.0, actual
+all24 sealed current sources and the same nonvacuous INNER selector. Neither
+changes association or trains a model. Both select CALIBRATION_ABSTAIN,
+which is not a safety PASS.
+
+At the fixed, explicitly unqualified p=.5/margin=.05 diagnostic point, the
+623 INNER sampled axes yield62 identity claims:32 correct TARGET,6 verified
+OTHER,24 UNKNOWN. Identity precision is51.613%, available-target recall
+32/263=12.167%, and OTHER+UNKNOWN identity-claim contamination48.387%.
+Verified-OTHER **row** FPR is6/2042=.294%; this is not the8.056% no-positive
+false-presence rate (29/360) or4.762% physically-absent false-presence rate
+(1/21). UID+NONE also accepts36 correct NONE decisions, so its pooled
+accepted-decision risk30/98=30.612% is not identity-claim contamination30/62.
+The shared hierarchical Brier=.087630 and true-axis NLL=1.753194 are current
+score diagnostics, not trained UNKNOWN calibration or future-safe authority.
+
+The separate frozen exact-CF diagnostic is running incrementally, without
+nearest32-frame imputation. First0074/0020/0032 plus the all-init-failed0027
+are complete. In those three actual pilot videos there are16 correlated
+safe direct-current H100-component opportunities. Both selected controls
+miss16/16; each loose diagnostic retains the correct repair UID at only1/16.
+These are claimed identities, not executed MOT corrections or independent
+causal onsets. All24 role results remain required before the final summary.
+
+A new OFFLINE frozen-hand-filter audit covers the complete16 FIT receipt
+census (one all-initialization-failed source remains in the denominator),
+not INNER. There are104 safe direct-current event-frame groups /104 distinct
+executed safe action configs after excluding194 duplicate config rows.
+Every config is vetoed by the existing global_regret<=.2 ceiling;101 are
+also vetoed by forbidding any displaced public ID,72 by anchor advantage,
+and4 by anchor cosine. Veto counts overlap. Even hypothetical ideal model
+scores and satisfied confirmation delay cannot pass any of these104 groups.
+Actual C0 source confirmation counts remain0; assuming them satisfied is
+explicitly an upper-bound diagnostic, not own-policy history or deployment.
+Thus zero pilot interventions cannot alone establish inadequate learned
+capacity: the fixed authorization support itself excludes these observed
+repairs. Safe component labels still do not establish full-policy MOT gain.
+Snapshot:
+`training/authority_support_v1/snapshots/9ffaae87072cafd797c0acb00560579292d6e52a93e8475971e3bf02efcbd67d.json`.
+
+The original gate remains an immutable control. A separate frozen FIT-only
+support-ablation pilot uses the existing LOGISTIC_RISK models/all three seeds,
+the original three FIT pilot videos, identical raw sealed-click anchors and
+four explicit variants: legacy, no global-cost ceiling, no cost/displacement
+ceilings, and no cost/displacement/anchor-advantage ceilings. All retain the
+same learned benefit/risk/value thresholds,3-frame own confirmation, current
+quality/anchor cosine, NONE filters, exact full-global feasibility, hard
+negative constraints, weights and causal feedback. Runtime feature values
+are never falsified to satisfy the old gate. There are36 registered full-video
+cells, one CPU worker, no new fit or best-seed selection. All nine pinned
+MOT metrics are measured; nonzero actions require own-prefix harm-onset
+audits before any G1 claim. These variants have no confirmation authority.
+Raw-anchor legacy is rerun rather than silently adopting the old extra-
+normalized pilot as a tensor-matched control. Preflight failures caused by
+an incorrect family identifier and missing protocol are retained; no replay
+or frozen protocol existed at those failures.
+
+The old offline diagnostic driver also exited143 while its marker still
+said ACTIVE. The cause is unknown. Its old marker/logs and successful0051
+utility receipt remain untouched. A new versioned owner verifies both old
+owner/child absent, seals54 existing successful operations, and only resumes
+missing dependency-ready operations from the unchanged all24/72-operation
+schedule. It changes no scientific job or split.
+
+Saved full regression V12 is **1023 passed /5 unchanged historical failures**
+in110.06s, with pytest exit1 retained. It precedes the three new support-
+ablation tests. The subsequent all-R2 focused run has101 passing tests
+(7.54s), with the corrected family-registration test separately passing.
+Four historical scalar-SEQMAP CLI tests and one historical branch-literal
+test remain failures; no old tests or third-party source are rewritten.
+
+The subsequent saved full V13 run, including support-ablation tests, is
+**1026 passed /5 unchanged historical failures** in107.07s, pytest exit1.
+The first three actual support-ablation cells (seed730101/raw-anchor legacy,
+all three original FIT pilot videos) complete pinned full-MOT evaluation:
+zero effective decisions and all nine paired metric deltas exactly zero.
+This is matched-control reproducibility, not nonvacuous correction. The
+remaining ablation cells are still running and are not inferred from that
+zero-action control.
+
+This is a progress checkpoint, not scientific closure. All24 own CF/state,
+main architecture/objective/full-MOT/model-on-policy, independent memory-risk,
+open-set repair misses/density/generalization and final audit requirements
+remain. CONFIRM/VAL/TEST/SOT are unopened; next-stage authorization is false.
+
 ## Execution boundaries
 
 Reuse existing DanceTrack TRAIN images, SAM3/OSNet weights and original Python environment. Preserve historical evidence. All runtime decisions use only current real candidate UIDs and causal state. Sole click initializes identity, not unconditional override authority. Every intervention uses the complete global assignment and committed feedback. GT labels stay offline. Frames, seeds and propagated errors are not independent causal events.
