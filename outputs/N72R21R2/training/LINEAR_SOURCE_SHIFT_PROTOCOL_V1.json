@@ -1,0 +1,36 @@
+{
+  "FIT_support": "Exact actual L3 pilot optimizer rows; first32 causal input columns, exact max-minus-min0 defines constant support. No parameter refit.",
+  "GT_cannot_change_scores": true,
+  "counterfactual": "Remove only algebraic FIT-constant-feature logit contributions OFFLINE to isolate source/own covariate shift. Never overwrite feature/model/policy or infer resulting future behavior.",
+  "family": "LOGISTIC_RISK",
+  "frozen": true,
+  "goal_file": "outputs/N72R21R2/FINAL_GOAL.json",
+  "linear_logit_absolute_tolerance": 0.0001,
+  "not_model_repair_or_qualification_or_architecture_failure": true,
+  "own_support": "All current choices at every actual frame from all three original raw-anchor legacy FIT pilot videos, not successful frame/UID selection",
+  "point": {
+    "anchor_advantage_min": 0.1,
+    "claim_min": 0.8,
+    "confirmation_delay": 3,
+    "global_regret_max": 0.2,
+    "risk_max": 0.02
+  },
+  "policy": "LEGACY_RAW_ANCHOR",
+  "score_reproduction_absolute_tolerance": 0.0001,
+  "seed": 730101,
+  "sequences": [
+    "dancetrack0074",
+    "dancetrack0020",
+    "dancetrack0032"
+  ],
+  "source_sha256": {
+    "sam3_intermot/evaluation/linear_source_shift.py": "5aea83391c52ae5d04afdb924130d87aac7252ae553e527a6dee0aa3033c84d1",
+    "sam3_intermot/one_click/event_authority_learning.py": "ed2b38930a2af0dd7dd4daab6cdba3145e99441e5ed02f2e27f1721f697745cd",
+    "sam3_intermot/one_click/event_authority_models.py": "9d2a753e8c5cfdf838c02904a93f2220b98f5de796ee0a31cec02253d477f5ba",
+    "sam3_intermot/one_click/intervention_features.py": "a9371fa118a292eb90e1876e36770eb825074b2b5e50916fd8cc73fb9536c574",
+    "scripts/n72r21r2_linear_source_shift.py": "98cbe697cda64d9a2f8cfb78b63c8ae300011f084a0a9172a7faceafce896344",
+    "scripts/n72r21r2_train_event_authority.py": "170b415a660172499aa14ad9c85526f4290804865303a9d86f193f27c18e5291"
+  },
+  "stage": "N72R21R2",
+  "support_ablation_protocol_sha256": "8eea4d861a8b53e2a2ed8ed92bccbd6a3909b50f904dce5b3356a80a41538486"
+}

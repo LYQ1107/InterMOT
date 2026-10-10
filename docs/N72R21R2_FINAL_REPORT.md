@@ -334,6 +334,30 @@ This is matched-control reproducibility, not nonvacuous correction. The
 remaining ablation cells are still running and are not inferred from that
 zero-action control.
 
+A separate frozen **read-only linear source/own-state diagnostic** now
+reproduces seed730101 raw-anchor legacy predictions over all three pilot
+videos (score max absolute error2.861e-6, measured logit error0). Five causal
+input dimensions are constant in the actual pilot FIT optimizer rows.
+Pending confirmation has source value0 and scale.05 but reaches normalized
+200 online; its absolute contribution reaches14.622/16.132/8.373 in the
+benefit/risk/value logits. Previous candidate agreement reaches normalized
+19.993, with2.407/2.836/.533 contributions. Their coefficients changed from
+initialization by only about1.34e-6/2.68e-6. This is a measured unsupported
+feature excursion, not proof of which dimension caused failure. Across
+9656/1596/3456 non-KEEP current choices, neither actual scores nor hypothetical
+scores with these constant-dimension contributions removed meet the frozen
+benefit/risk/value conditions. Removing them alone therefore has no observed
+score-only recovery in this diagnostic. No counterfactual score was deployed,
+weight refitted or future safety inferred. The initial read-only probe's
+numpy-int64 JSON serialization failure/partial file are preserved; the
+versioned successful record is `training/SUPPORT_LINEAR_SOURCE_SHIFT_DIAGNOSTIC_V2.json`.
+This remains pilot data support/distribution evidence, not an architecture
+failure or substitute for the pending matched-state/main/on-policy studies.
+
+The subsequent saved full V14 regression is1028 passed /5 unchanged
+historical failures (90.12s, pytest exit1); all103 R2-focused tests pass
+(7.84s). This does not turn the historical failures into an all-pass result.
+
 This is a progress checkpoint, not scientific closure. All24 own CF/state,
 main architecture/objective/full-MOT/model-on-policy, independent memory-risk,
 open-set repair misses/density/generalization and final audit requirements

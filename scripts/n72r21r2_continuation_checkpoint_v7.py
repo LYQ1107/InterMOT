@@ -23,12 +23,13 @@ def run(suffix):
             "owner": previous.proc(j.get("pid")), "active": j.get("active"),
             "active_procs": previous.active_procs(j.get("active")), "failed_retained": j.get("failed_retained", []),
             "completed": j.get("completed", [])}
-    publication_path = next(OUT / p for p in ("git_delivery/CHECKPOINT_PURE_MARGIN_HAND_FILTER_SUPPORT_V6.json",
+    publication_path = next(OUT / p for p in ("git_delivery/CHECKPOINT_LINEAR_SOURCE_SHIFT_V7.json",
+                                              "git_delivery/CHECKPOINT_PURE_MARGIN_HAND_FILTER_SUPPORT_V6.json",
                                               "git_delivery/CHECKPOINT_CURRENT_RISK_TENSOR_RECOVERY_V5.json") if (OUT / p).exists())
     publication = read_json(publication_path)
     assert publication["local_HEAD"] == publication["fresh_remote_HEAD"] and not publication["force_push"]
     local = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
-    regression_path = next(OUT / ("tests/REGRESSION_V" + v + ".json") for v in ("13", "12") if (OUT / ("tests/REGRESSION_V" + v + ".json")).exists())
+    regression_path = next(OUT / ("tests/REGRESSION_V" + v + ".json") for v in ("14", "13", "12") if (OUT / ("tests/REGRESSION_V" + v + ".json")).exists())
     regression = read_json(regression_path)
     support = read_json(OUT / "training/authority_support_v1/latest.json")
     assert sha256(support["path"]) == support["sha256"]
@@ -40,6 +41,7 @@ def run(suffix):
         "last_verified_published_HEAD": publication["fresh_remote_HEAD"], "publication_receipt_path": str(publication_path),
         "last_published_HEAD_is_current_local": local == publication["fresh_remote_HEAD"],
         "original_diagnostic_exit143_receipt_sha256": sha256(OUT / "events/offline_diagnostics_driver_v1_TERMINAL_143.json"),
+        "read_only_linear_source_shift_diagnostic_sha256": sha256(OUT / "training/SUPPORT_LINEAR_SOURCE_SHIFT_DIAGNOSTIC_V2.json") if (OUT / "training/SUPPORT_LINEAR_SOURCE_SHIFT_DIAGNOSTIC_V2.json").exists() else None,
         "CONFIRM_VAL_TEST_SOT_unopened": True, "next_stage_authorized": False,
         "remaining_full_task_scope": "All24 CF/simple/memory/state-source closure;42 registered main fits with full own-MOT and objective/architecture comparison; matched/model-generated on-policy and staged branches when feasible; G4 uncertainty/open-set misses/density/generalization/final evidence and verified code-only delivery. No scope narrowing."}
     relative = "audit/CONTINUATION_CHECKPOINT_SUPPORT_V7" + suffix + ".json"
