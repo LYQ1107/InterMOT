@@ -714,6 +714,102 @@ Only code, tests and this necessary explanation are included in V12 Git
 delivery. The generated data summaries, Table1 preparation, requirement ledger,
 weights, raw data and large evidence remain local.
 
+## V13 actual all24 event-label evidence, not scientific closure
+
+FINAL GOAL remains **Event-Level Causal Identity Association: Safe One-Click
+Intervention with Fresh-Sequence Generalization for Online MOT**. The full
+original M0-M11 task remains ACTIVE/PENDING; next-stage authorization is false.
+
+The new offline auditor `scripts/n72r21r2_event_delivery_v1.py` completed the
+original FIT16+INNER8, with actual supervisor exit0 observed. It verified every
+registered runtime seal and raw arm SHA before opening that video's original
+GT, reconstructed current candidate matching and the original source-prefix
+public identity-origin proxy, then recomputed **every label field** from actual
+paired trajectories. Labels match exactly for all17,567 arms and1,665,342
+current-plus-future **correlated arm-frame observations**. This does not add
+independent data or certify policy improvement. Current t, future k=1..H,
+UNKNOWN, verified OTHER, incomplete futures, duplicate action configurations,
+other-track harm, takeover, fragmentation and available motion/prototype
+measurements are kept distinct. The origin proxy excludes clicked-person
+fragments and is not an independent-person or global-IDF1 ground truth claim.
+Own KEEP outputs and semantic states match their original sealed source prefix
+through every selected window. Neither runtime, classifier, association,
+candidate generator nor training inputs were modified.
+
+Six requested local reports now exist: `events/EVENT_SCHEMA.json`,
+`EVENT_CORPUS.json`, `EVENT_LABEL_AUDIT.json`, `DIRECT_VS_PROPAGATED.json`,
+`COUNTERFACTUAL_BRANCHES.json` and `ACTION_FEASIBILITY.json`. Their references
+point to the actual immutable source tapes and24 recomputation receipts. They
+do not turn the old corpus's preparation-time pending annotations into new
+results or replace failed attempts. Original0099/0082 context/label failures,
+partial tapes and logs were rehashed and retained alongside successful repairs.
+All13 failed sole-click initializations remain, including the two all-failed
+videos; empty arms are not successful zero-action scientific evaluations.
+
+There are2,503 registered CF positions,15,665 complete H100 arms,8,054 duplicate
+executed-action configurations and792 observed safe-positive H100 arms
+(FIT570, INNER222). None is an independent beneficial correction-root count.
+The177 overlapping-window union components across video-local anonymous
+identities are correlation bookkeeping, not causal boundaries or independent
+bootstrap units. Independent beneficial/N10 roots and event precision/recall
+remain null. The original7,611 observed-harm counter also includes observed
+current harm in incomplete arms; it must not be presented as a complete-H100
+population risk denominator. Full-video own-policy results and independent
+root proof or valid negative bounds are still required for G1/G2.
+
+An important evidence boundary is explicit:15,632 arms have actual current
+tensor-inclusive prestate agreement with their sealed context. The1,935 arms
+in the three original pilot videos lack that retrospective tensor proof and
+retain semantic-only prestate evidence. No new source replay or invented
+tensor hash upgrades them. The actual22 representative CLI windows cover154
+arms; two all-failed videos are correctly NOT_RUN. The original189 pilot
+API/CLI comparisons across all nine pinned metrics remain exactly equal.
+Current-inclusive101-frame CLI windows and future-only100-frame trajectory
+utilities are different evidence, and overlapping window HOTA is never summed
+into a whole-video policy effect.
+
+V22 complete regression on current event/utility source: **1121 passed /5
+unchanged historical failures**, actual pytest exit1 observed. All196 current
+R2-focused tests pass, with observed exit0. Both supervisor completion and
+log/JUnit hashes were recorded. The required `tests/FOCUSED.json` and
+`tests/REGRESSION.json` reference these actual runs; they do not infer coverage
+of all35 required runtime semantics merely from pass counts. The earlier V21
+run (1113/5, focused188) and the separate8 utility tests are retained, not
+retroactively recounted. A compile-check syntax error in the new reporter was
+fixed before its protocol or runtime existed; no frozen scientific evidence
+was changed by that correction.
+
+Only the new source, tests and this necessary explanation are included in V13
+Git delivery. All generated event reports, raw GT, labels, trajectories,
+weights and bulk assets remain local. Controlled source recovery, exact-current
+availability diagnostics, fresh memory-risk replay and registered own-policy
+full-MOT groups continue; these evidence reports do not finish the Goal.
+
+### Actual component benefit is not actual global association benefit
+
+The subsequent `scripts/n72r21r2_component_global_utility_v1.py` run also
+completed all24 original videos with actual exit0 observed. It pairs every
+sealed arm label with its actual pinned future-only H100 nine-metric utility,
+retains incomplete and duplicate records explicitly, and reports all arms,
+distinct action configurations and distinct effective one-shot arms separately.
+No threshold, model, best action, seed or video was selected from this analysis.
+This is **POSTHOC DIAGNOSTIC, NOT POLICY SELECTION**.
+
+Among complete H100 distinct effective arms, FIT contains242 component-safe
+positive arms, but only32 improve both actual window HOTA and AssA;49 instead
+reduce at least one of them. INNER contains102 component-safe positive arms,
+but only3 improve both global window metrics;25 reduce at least one. Thus
+identity-component benefit and prestate-origin-proxy non-target safety do not
+guarantee positive global association utility. All3 INNER positive-global arms
+come from0016, not three independent sequences. These are still correlated
+window-arm counts, not independent corrections, population precision, policy
+qualification or whole-video results. The local receipt is
+`events/COMPONENT_VS_GLOBAL_UTILITY_DIAGNOSTIC_V1.json`; all raw pair identities,
+hashes, video/role counts and incomplete-window handling are retained. The
+frozen42 MAIN fits, original operating points and pending full-policy evaluation
+are unchanged; this diagnostic does not authorize confirmation or select a
+scientific final decision.
+
 ## Execution boundaries
 
 Reuse existing DanceTrack TRAIN images, SAM3/OSNet weights and original Python environment. Preserve historical evidence. All runtime decisions use only current real candidate UIDs and causal state. Sole click initializes identity, not unconditional override authority. Every intervention uses the complete global assignment and committed feedback. GT labels stay offline. Frames, seeds and propagated errors are not independent causal events.
