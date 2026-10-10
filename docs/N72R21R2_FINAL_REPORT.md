@@ -1076,6 +1076,58 @@ sealed protocols/reports are preserved rather than overwritten. Only source,
 tests and necessary explanation are published; no dataset, GT, model, metric,
 generated report or trajectory upload is included.
 
+## Continuation V18: actual historical/fresh baseline and FIT pilot delivery
+
+The original full Goal remains ACTIVE/PENDING. `mot/BASELINE.json` and
+`mot/PILOT.json` now contain actual source-verified evidence, not new experiments
+or full-task closure. Historical eight replay cells are **two videos × four
+conditions**, not eight independent videos. All three original FULL seeds are
+kept inside each video; equal-video means and paired cluster uncertainty remain
+separate from legacy combined TrackEval metrics. Historical and fresh FIT16 /
+INNER8 populations are never pooled or relabeled as independent confirmation.
+
+The audit freshly verifies historical code, model/fit records, sole anchors,
+initialization manifests, candidate indexes and metadata/embedding files;
+compares every original/reproduced frame's legacy decisions and states; checks
+trajectory-byte equality; and reparses the actual pinned nine-metric CSVs.
+Fresh24 KEEP/SHADOW baselines reference the independently raw-recomputed V17
+all24 audit. The historical replay contributes7624 repeated frame exposures,
+not independent identity events or modern tensor-C0 proof.
+
+Original FIT pilot consists of SCALAR / LOGISTIC_RISK, three seeds and three
+fixed FIT videos: six genuinely optimized models,18 actual successful CLI
+cells,36 valid click-seed runs and18 repeated failed initialization slots.
+Initial versus selected tensors were independently loaded, checked finite and
+compared with the sealed changed-weight census. Across32400 repeated full-video
+frame exposures, pilot output/legacy state/trajectory bytes equal C0, with zero
+effective interventions, zero writes and all nine paired metric deltas0.
+This proves vacuity for the original hard-filter pilot, **not safe correction**,
+not current MAIN policy success and not a basis to skip other research branches.
+
+V1/V2 audit attempts actually exited1 on historical-schema assumptions and are
+preserved with their original frozen code/protocols and failure receipts. V3
+uses the real old runtime-seal → initialization-manifest → candidate-index SHA
+chain. It requires the exact pre/on-click shadow schema and explicit false
+postclick intervention fields plus KEEP; no permissive missing-field default.
+Existing GT bytes are SHA-rehashed for integrity only: no new GT content parse,
+label, rollout, optimization, parameter change or runtime GT guidance occurs.
+Scientific workers and previously sealed experimental outputs are unchanged.
+
+V28 actual full regression:1192 passed /5 unchanged historical failures,
+58.179s, observed pytest exit1. All267 R2-focused tests pass,5.976s,
+observed exit0. The27 new baseline/schema tests also passed separately.
+Historical tests and pinned third-party interfaces were not modified or masked.
+
+Independent readback freshly verified3750 unique source artifacts, recomputed
+historical all-seed/equal-video and both pilot full-video summaries, and
+reparsed every pilot actual pinned CSV. Reports and receipts remain local:
+`mot/baseline_delivery_v3/COMPLETE.json` and
+`mot/BASELINE_PILOT_INDEPENDENT_READBACK_V1.json`. Reproduction uses existing
+assets and `scripts.n72r21r2_baseline_delivery_v3 freeze|run`; preserve already
+sealed reports rather than overwriting them. Only code, tests and necessary
+explanation are uploaded. CONFIRM/VAL/TEST/SOT remain unopened; G0–G4/full-task
+scientific closure and next-stage authorization remain unachieved.
+
 ## Execution boundaries
 
 Reuse existing DanceTrack TRAIN images, SAM3/OSNet weights and original Python environment. Preserve historical evidence. All runtime decisions use only current real candidate UIDs and causal state. Sole click initializes identity, not unconditional override authority. Every intervention uses the complete global assignment and committed feedback. GT labels stay offline. Frames, seeds and propagated errors are not independent causal events.
