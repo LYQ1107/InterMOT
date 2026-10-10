@@ -363,6 +363,76 @@ main architecture/objective/full-MOT/model-on-policy, independent memory-risk,
 open-set repair misses/density/generalization and final audit requirements
 remain. CONFIRM/VAL/TEST/SOT are unopened; next-stage authorization is false.
 
+## Own-prefix onset and finite MAIN full-MOT checkpoint
+
+FINAL GOAL remains **Event-Level Causal Identity Association: Safe One-Click
+Intervention with Fresh-Sequence Generalization for Online MOT**. The full
+stage remains ACTIVE/PENDING, not scientific closure.
+
+The matched hard-filter support pilot now has all36 actual full-video cells
+and all36 separate onset-audit receipts. All36 cells have zero effective
+decisions and all nine actual paired MOT deltas equal zero. Empty onset
+receipts explicitly say NOT_RUN_NO_EFFECTIVE_ACTION: no cloned intervention
+was invented and no zero-action safety PASS is awarded. Removing these
+named hand filters alone did not recover interventions for the fixed three
+existing pilot weights. This does not establish a MAIN-model, matched-state,
+or architectural failure.
+
+The new own-onset helper includes complete controller feature history and
+branch-pending buffers in clone fingerprints, not only tracker/identity
+core state. Every actual effective decision, if any, is reconstructed from
+the same whole own-policy prefix and split into own KEEP versus actual
+current action followed by own KEEP through H100. The parent is unchanged;
+both branches retain complete global ownership, current outputs/actions,
+prototype/motion state and tensor seals. Nonoverlapping candidate windows
+remain correlation controls, not independent causal-root proof. The first
+new test attempt failed collection because of a test-module import path;
+only the unfrozen test helper was repaired, without changing frozen science.
+The two onset tests and five compact/selection tests subsequently pass.
+
+`mot/MAIN_POLICY_PROTOCOL_V1.json` is frozen before any MAIN weight/outcome
+is inspected. It preserves the registered42 real fits and all three seeds.
+Every model is scheduled for full original-video INNER8 evaluation at two
+already-preregistered benefit thresholds (.8 and .5), with risk<=.02,
+confirmation3, identical raw sole-click anchors, P0 frozen memory, the same
+real candidate tapes and full global solver. The explicit support policy
+removes cost/displacement/anchor-advantage hard ceilings but retains original
+feasibility, hard negatives, quality/anchor cosine, strict NONE semantics,
+learned risk/value and own confirmation. It is development-only, not a
+qualified deployed gate. No extra capacity, epochs, fits, seed selection or
+exhaustive hard-filter Cartesian search are added.
+
+INNER selection shares one operating point across all three seeds in each
+family/objective group. Harm/nonvacuity precede video-macro HOTA/AssA/IDF1,
+with deterministic name ties; incomplete H100 effects cannot qualify the
+screen. All-vacuous/unsafe choices remain unqualified diagnostic selections.
+Selected-point FIT16 evaluation follows; actual pinned full-video metrics
+and own-onset audits are mandatory. Clicks and seeds are averaged inside
+video before the fixed2000-resample paired-video95%CI. Independent G1 root
+proof and complete G0/G1/G2 closure are still separate mandatory audits;
+this selector never authorizes CONFIRM, VAL, TEST, SOT or the next stage.
+
+The runtime verifies newly replayed C0 against sealed original outputs and
+states, and tensor equality throughout the zero-action prefix. It preserves
+every frame's complete global output/action/core seals and sampled own
+causal features, without copying giant solver matrices/feature caches.
+The fixed existing pilot51-frame runtime smoke matches C0 tensors/outputs
+on all51 frames. Actual compact round trips over all three fixed first-pilot
+episodes preserve decisions/KEEP proposals/tensor seals. Trace extrapolation
+is3.69GiB under the stated2000-frame/three-click planning assumption;6GiB
+includes planned trajectories/evaluation/branch room, not an unbounded
+storage permission. Actual free-space checks retain the60GiB floor. No raw
+images, new environment, historical assets or unique evidence are deleted.
+
+The single-CPU MAIN evaluation owner is launched and waits for all24 actual
+source prerequisites and complete three-seed weights; zero MAIN fits and
+zero MAIN full-video results exist at this checkpoint. The first complete
+V15 regression reports **1035 passed /5 unchanged historical failures**
+(69.83s, actual pytest exit1); all110 R2-focused tests pass (8.68s, exit0).
+The four scalar-SEQMAP CLI failures and one
+historical branch-literal failure remain visible. Confirmation remains
+unopened and scientific success remains pending.
+
 ## Execution boundaries
 
 Reuse existing DanceTrack TRAIN images, SAM3/OSNet weights and original Python environment. Preserve historical evidence. All runtime decisions use only current real candidate UIDs and causal state. Sole click initializes identity, not unconditional override authority. Every intervention uses the complete global assignment and committed feedback. GT labels stay offline. Frames, seeds and propagated errors are not independent causal events.
