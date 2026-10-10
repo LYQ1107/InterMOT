@@ -1,0 +1,126 @@
+{
+  "CONFIRM_VAL_TEST_opened": false,
+  "CPU_threads": 1,
+  "batch_size": 256,
+  "cutoffs": [
+    0.5,
+    0.8,
+    0.9,
+    0.95,
+    0.98
+  ],
+  "data_protocol_sha256": "1ff0e52e92247408db23e76f31a6862979d5f965da3651cd409a279116e7a178",
+  "diagnostic_point": {
+    "margin_min": 0.0,
+    "probability_min": 0.5,
+    "status": "UNCONSTRAINED_DIAGNOSTIC_NOT_SELECTED",
+    "unknown_max": 0.5
+  },
+  "epochs_max": 60,
+  "evaluation_scope": "Fixed every32 current-axis frame groups, not dense full-video claims or full-MOT outcomes",
+  "families": [
+    "SCALAR",
+    "LOGISTIC",
+    "MLP",
+    "MLP_HARD_NEGATIVE"
+  ],
+  "formal_goal_file": "outputs/N72R21R2/FINAL_GOAL.json",
+  "frozen_before_actual_new_fits_or_claim_results": true,
+  "future_intervention_safety_or_MOT_authority": false,
+  "goal": "Event-Level Causal Identity Association: Safe One-Click Intervention with Fresh-Sequence Generalization for Online MOT",
+  "gradient_clip": 10.0,
+  "hard_negative_contrast": "Same MLP architecture; FIT verified-other anchor-cosine>=.7 CE weight5; UNKNOWN never enters verified-negative weighting",
+  "learning_rate": 0.001,
+  "loss": "3-class current correctness CE plus current positive-candidate availability BCE. UNKNOWN independent class, not a verified identity negative.",
+  "margins": [
+    0.0,
+    0.05,
+    0.15
+  ],
+  "max_seconds_per_fit": 180,
+  "min_identity_claim_videos": 3,
+  "min_identity_claims": 10,
+  "normalization": "Hierarchical weighted FIT-only feature mean/std, std floor.05",
+  "patience": 8,
+  "raw_reference": "RAW_SCORE fixed T1 cutoff0 margin0 unknown1; not tuned or claimed safe",
+  "risk_max": 0.02,
+  "risk_sensitive_selective_prediction": "Calibrated learned verifier with explicit UNKNOWN abstention and INNER nonvacuity/risk test, distinct from unfiltered argmax",
+  "seeds": [
+    730101,
+    730102,
+    730103
+  ],
+  "selection": "INNER weighted current-class NLL epoch/temperature; max correct TARGET claims at <=2% empirical decision risk including UNKNOWN and incorrect NONE, at least10 actual identity claims in3 videos; deterministic ties higher cutoff/margin. No point => CALIBRATION_ABSTAIN, not safety PASS.",
+  "simple_controls": [
+    "RAW_SCORE",
+    "CALIBRATED_SCORE",
+    "CANDIDATE_MARGIN",
+    "BASE_AGREEMENT",
+    "TEMPORAL_CONFIRMATION"
+  ],
+  "source_sha256": {
+    "sam3_intermot/one_click/fresh_open_set_learning.py": "dea028419b7df544034388a12dfe47b58be7fa33c65c1ed4a4d8cf0b8d789ecf",
+    "sam3_intermot/one_click/intervention_features.py": "a9371fa118a292eb90e1876e36770eb825074b2b5e50916fd8cc73fb9536c574",
+    "sam3_intermot/one_click/open_set_verifier.py": "a760e18e9d5ecdc6dd9a6d39081e7a6d083f081a4b4f9183542af313429adc01",
+    "scripts/n72r21r2_train_open_set.py": "a3fc2f39531abbb50a77fa39178030b3223894c85ea792203d221c54c45af314"
+  },
+  "split": {
+    "confirmation": [
+      "dancetrack0015",
+      "dancetrack0053",
+      "dancetrack0029",
+      "dancetrack0087",
+      "dancetrack0083",
+      "dancetrack0066",
+      "dancetrack0033",
+      "dancetrack0045"
+    ],
+    "fit": [
+      "dancetrack0074",
+      "dancetrack0020",
+      "dancetrack0032",
+      "dancetrack0037",
+      "dancetrack0044",
+      "dancetrack0069",
+      "dancetrack0027",
+      "dancetrack0061",
+      "dancetrack0099",
+      "dancetrack0055",
+      "dancetrack0082",
+      "dancetrack0098",
+      "dancetrack0080",
+      "dancetrack0068",
+      "dancetrack0051",
+      "dancetrack0049"
+    ],
+    "historical_development": [
+      "dancetrack0001",
+      "dancetrack0002",
+      "dancetrack0023",
+      "dancetrack0024",
+      "dancetrack0039",
+      "dancetrack0057",
+      "dancetrack0062",
+      "dancetrack0072"
+    ],
+    "inner": [
+      "dancetrack0096",
+      "dancetrack0008",
+      "dancetrack0012",
+      "dancetrack0016",
+      "dancetrack0006",
+      "dancetrack0075",
+      "dancetrack0052",
+      "dancetrack0086"
+    ]
+  },
+  "stage": "N72R21R2",
+  "temperatures": [
+    0.5,
+    1.0,
+    2.0
+  ],
+  "unknown_max": 0.02,
+  "weight_decay": 0.0001,
+  "weighting": "Equal videos with valid source, equal sole-click episodes, equal sampled frame groups, then equal current-axis rows. All failed clicks/videos remain in source manifest, never replaced or counted as correct."
+}
