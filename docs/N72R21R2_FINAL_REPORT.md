@@ -150,6 +150,105 @@ environment/weights/candidates are reused. The actual filesystem has about
 documentation are published; bulk evidence and weights stay local. Goal is
 **ACTIVE**, scientific conclusion **PENDING**, next-stage authorization false.
 
+## Actual memory-risk inputs, clustered frontier and wait-owner recovery
+
+This is a progress checkpoint, not the final stage decision. The original
+live identity/association/candidate sources remain frozen and unchanged.
+An independently frozen fresh writer protocol reconstructs strictly past
+bank and pending embeddings from SHA-verified actual committed UID/frame
+references under all six existing M-A trajectories. It adds ten own-bank
+features to the existing32 current features. None of the inputs are oracle
+positive memory, uncommitted proposals, future observations or GT labels.
+Whole-video runtime seals precede the separate TARGET/VERIFIED_OTHER/UNKNOWN
+labels. UNKNOWN contributes to contamination risk, not verified-person
+hard-negative training.
+
+The first0074 input/label receipt has2670 rows (445 per teacher bank policy):
+1506 TARGET,792 VERIFIED_OTHER,372 UNKNOWN;2210 query rows have a nonempty
+past bank. These are correlated observations and six policy replicas in
+one video, not2670 independent identity events. Thirteen of the required24
+source videos are ready at this checkpoint. LOGISTIC/MLP ×3 seeds are
+registered but **zero fresh writer fits have run**: all24 source receipts
+and actual M-A metrics are required before optimization. The new head
+predicts **current committed-identity correctness**, not future association
+safety. Actual own-bank full-video writer replay, held-state feature shift
+and all-nine-metric C0 equivalence remain pending. A selected teacher-state
+point is not G4; the separately registered p=.5 diagnostic is explicitly
+unqualified. No hidden multicue/anchor/native/delay gate is added to this
+head and no association permission is granted.
+
+An immutable input-hash memory frontier verifies actual per-case accepted
+write provenance, complete full-video seals, unchanged clicks/opportunities
+and all nine actual C0 metrics. It averages seeds **inside** video clusters,
+separates pooled exposure rates from equal-video macro rates, and reports
+2000 whole-video bootstrap resamples (seed730104). Video-local GT identity
+clusters are an additional description, not cross-video person-disjoint
+proof. Independent causal write-event roots are not established; their CI
+is explicitly unavailable, not replaced by frames, write bursts or error
+intervals. Zero writes have undefined risk. An empirical [0,0] bootstrap
+interval cannot establish population risk<=2%; a separately named binomial
+interval concerns ANY-bad-write clusters, not per-write contamination.
+
+The first snapshot contains13 actual fixed-policy video receipts, including
+one all-initialization-failed video, hence **12 valid FIT video clusters**.
+No INNER result or future risk-head replay is included. Partial pooled
+actual accepted-write contamination/retention is:
+
+| Fixed M-A memory | Accepted writes | OTHER+UNKNOWN risk | Correct retention |
+| --- | ---: | ---: | ---: |
+| FROZEN | 0 | Undefined | 0% |
+| MEAN | 29521 | 49.629% | 100% |
+| DELAYED | 2494 | 22.334% | 13.026% |
+| MULTICUE | 2851 | 22.729% | 14.815% |
+| PENDING_TRUSTED | 789 | 23.067% | 4.082% |
+| ROLLBACK | 2494 | 22.334% | 13.026% |
+
+These write counts are exposures, not independent sample sizes. For
+MULTICUE the equal-video macro correct retention is13.277%, and the
+descriptive video-macro contamination95% CI is[18.951%,54.759%]. Its paired
+competitive Rank-1 macro improvement is only+.015363. All full-MOT deltas
+are exactly zero by design under M-A, proving isolation only. None of these
+partial observed fixed-policy points satisfies2% contamination/60% retention;
+the stage remains PENDING, rather than declaring a final memory result from
+an incomplete role census.
+
+The wait-only original42-job main fit driver ended with unified-process
+exit143, zero main fits and14/24 prerequisite videos. Its termination cause
+is unknown; the old marker and exit receipt are preserved. A separate V2
+owner verifies the old process is no longer the live owner, refuses to adopt
+any existing main attempt, and waits for exactly the same24 prerequisites
+and42 frozen jobs. It changes no model, objective, seed, threshold or split.
+
+Controlled-state V1 replay failed on fresh nonpilot tapes because the old CF
+V2 compactor records `before=null` for primitive future KEEP commits, while
+their `after` tensor fingerprints are available. A versioned wrapper does
+not compare a real hash to JSON null: it checks every nonnull direct-before,
+every available preceding sealed-after as the current-before reference,
+and every available current-after. Missing pilot tensor evidence remains
+UNAVAILABLE. Actual51-frame KEEP prefixes on0037/0044/0069 each pass1 direct
+before,50 previous-after-before and51 after checks, including original
+outputs/UIDs/semantic states/actions, under the GT-file guard. This is an
+engineering smoke, not full-video controlled supervision or on-policy
+closure. Old CF tapes, source-case frames/actions, partials and failures
+remain untouched. Recovery waits for all original24 attempts to terminate
+so it neither duplicates the counterfactual resource slot nor double-counts
+recovered videos in the original driver's completed/failed census.
+
+Saved-log/JUnit full regression V9 is **1006 passed /5 unchanged historical
+failures** in117.92s. The shell pipeline's zero return code belongs to tee,
+not pytest success; XML/log retain every failure. Five additional frontier
+tests pass, and the frontier+driver-recovery focused check has7 passing tests
+(4.69s). No third-party or historical test changes hide the failures. The
+subsequent separately saved full V10 regression is **1013 passed /5 unchanged
+historical failures** in110.59s, including frontier/recovery tests. Frozen protocols are
+`memory/RISK_WRITE_PROTOCOL_V1.json`, `memory/SAFETY_FRONTIER_PROTOCOL_V1.json`,
+`training/MAIN_WAIT_RECOVERY_PROTOCOL_V2.json` and
+`on_policy/JOINT_STATE_TENSOR_RECOVERY_PROTOCOL_V2.json` beneath stage outputs.
+They serve the same Final Goal, keep next-stage authorization false, and do
+not replace unfinished main architecture/objective/on-policy/MOT/generalization
+requirements. Only source/tests/compact protocols and this explanation are
+published; weights, source rows, GT, traces, media and bulk evidence stay local.
+
 ## Execution boundaries
 
 Reuse existing DanceTrack TRAIN images, SAM3/OSNet weights and original Python environment. Preserve historical evidence. All runtime decisions use only current real candidate UIDs and causal state. Sole click initializes identity, not unconditional override authority. Every intervention uses the complete global assignment and committed feedback. GT labels stay offline. Frames, seeds and propagated errors are not independent causal events.

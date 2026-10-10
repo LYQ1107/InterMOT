@@ -1,0 +1,240 @@
+{
+  "CPU_workers": 1,
+  "all24_prerequisites": [
+    "data/candidate_integrity",
+    "mot/baseline_results",
+    "events/counterfactual_sequences",
+    "events/current_context_sequences",
+    "events/label_audit",
+    "events/trajectory_utility_audit",
+    "simple/results"
+  ],
+  "frozen": true,
+  "goal_file": "outputs/N72R21R2/FINAL_GOAL.json",
+  "jobs": [
+    {
+      "family": "SCALAR",
+      "objective": "L3_HARM_AWARE",
+      "seed": 730101
+    },
+    {
+      "family": "SCALAR",
+      "objective": "L3_HARM_AWARE",
+      "seed": 730102
+    },
+    {
+      "family": "SCALAR",
+      "objective": "L3_HARM_AWARE",
+      "seed": 730103
+    },
+    {
+      "family": "LOGISTIC_RISK",
+      "objective": "L3_HARM_AWARE",
+      "seed": 730101
+    },
+    {
+      "family": "LOGISTIC_RISK",
+      "objective": "L3_HARM_AWARE",
+      "seed": 730102
+    },
+    {
+      "family": "LOGISTIC_RISK",
+      "objective": "L3_HARM_AWARE",
+      "seed": 730103
+    },
+    {
+      "family": "SMALL_MLP",
+      "objective": "L3_HARM_AWARE",
+      "seed": 730101
+    },
+    {
+      "family": "SMALL_MLP",
+      "objective": "L3_HARM_AWARE",
+      "seed": 730102
+    },
+    {
+      "family": "SMALL_MLP",
+      "objective": "L3_HARM_AWARE",
+      "seed": 730103
+    },
+    {
+      "family": "PAIRWISE_RANKER",
+      "objective": "L3_HARM_AWARE",
+      "seed": 730101
+    },
+    {
+      "family": "PAIRWISE_RANKER",
+      "objective": "L3_HARM_AWARE",
+      "seed": 730102
+    },
+    {
+      "family": "PAIRWISE_RANKER",
+      "objective": "L3_HARM_AWARE",
+      "seed": 730103
+    },
+    {
+      "family": "HARM_FIRST_DUAL_HEAD",
+      "objective": "L3_HARM_AWARE",
+      "seed": 730101
+    },
+    {
+      "family": "HARM_FIRST_DUAL_HEAD",
+      "objective": "L3_HARM_AWARE",
+      "seed": 730102
+    },
+    {
+      "family": "HARM_FIRST_DUAL_HEAD",
+      "objective": "L3_HARM_AWARE",
+      "seed": 730103
+    },
+    {
+      "family": "CAUSAL_TEMPORAL",
+      "objective": "L3_HARM_AWARE",
+      "seed": 730101
+    },
+    {
+      "family": "CAUSAL_TEMPORAL",
+      "objective": "L3_HARM_AWARE",
+      "seed": 730102
+    },
+    {
+      "family": "CAUSAL_TEMPORAL",
+      "objective": "L3_HARM_AWARE",
+      "seed": 730103
+    },
+    {
+      "family": "COUNTERFACTUAL_ACTION_VALUE",
+      "objective": "L3_HARM_AWARE",
+      "seed": 730101
+    },
+    {
+      "family": "COUNTERFACTUAL_ACTION_VALUE",
+      "objective": "L3_HARM_AWARE",
+      "seed": 730102
+    },
+    {
+      "family": "COUNTERFACTUAL_ACTION_VALUE",
+      "objective": "L3_HARM_AWARE",
+      "seed": 730103
+    },
+    {
+      "family": "DUAL_IDENTITY_STATE",
+      "objective": "L3_HARM_AWARE",
+      "seed": 730101
+    },
+    {
+      "family": "DUAL_IDENTITY_STATE",
+      "objective": "L3_HARM_AWARE",
+      "seed": 730102
+    },
+    {
+      "family": "DUAL_IDENTITY_STATE",
+      "objective": "L3_HARM_AWARE",
+      "seed": 730103
+    },
+    {
+      "family": "SMALL_MLP",
+      "objective": "L0_CURRENT_CORRECTNESS",
+      "seed": 730101
+    },
+    {
+      "family": "SMALL_MLP",
+      "objective": "L0_CURRENT_CORRECTNESS",
+      "seed": 730102
+    },
+    {
+      "family": "SMALL_MLP",
+      "objective": "L0_CURRENT_CORRECTNESS",
+      "seed": 730103
+    },
+    {
+      "family": "SMALL_MLP",
+      "objective": "L1_EVENT_CORRECTION",
+      "seed": 730101
+    },
+    {
+      "family": "SMALL_MLP",
+      "objective": "L1_EVENT_CORRECTION",
+      "seed": 730102
+    },
+    {
+      "family": "SMALL_MLP",
+      "objective": "L1_EVENT_CORRECTION",
+      "seed": 730103
+    },
+    {
+      "family": "SMALL_MLP",
+      "objective": "L2_LONG_CONTINUITY_H20_H50_H100",
+      "seed": 730101
+    },
+    {
+      "family": "SMALL_MLP",
+      "objective": "L2_LONG_CONTINUITY_H20_H50_H100",
+      "seed": 730102
+    },
+    {
+      "family": "SMALL_MLP",
+      "objective": "L2_LONG_CONTINUITY_H20_H50_H100",
+      "seed": 730103
+    },
+    {
+      "family": "SMALL_MLP",
+      "objective": "L4_GLOBAL_ASSIGNMENT_VALUE",
+      "seed": 730101
+    },
+    {
+      "family": "SMALL_MLP",
+      "objective": "L4_GLOBAL_ASSIGNMENT_VALUE",
+      "seed": 730102
+    },
+    {
+      "family": "SMALL_MLP",
+      "objective": "L4_GLOBAL_ASSIGNMENT_VALUE",
+      "seed": 730103
+    },
+    {
+      "family": "SMALL_MLP",
+      "objective": "L5_ACTUAL_TRAJECTORY_UTILITY",
+      "seed": 730101
+    },
+    {
+      "family": "SMALL_MLP",
+      "objective": "L5_ACTUAL_TRAJECTORY_UTILITY",
+      "seed": 730102
+    },
+    {
+      "family": "SMALL_MLP",
+      "objective": "L5_ACTUAL_TRAJECTORY_UTILITY",
+      "seed": 730103
+    },
+    {
+      "family": "SMALL_MLP",
+      "objective": "L6_RISK_CONSTRAINED_MULTI_OBJECTIVE",
+      "seed": 730101
+    },
+    {
+      "family": "SMALL_MLP",
+      "objective": "L6_RISK_CONSTRAINED_MULTI_OBJECTIVE",
+      "seed": 730102
+    },
+    {
+      "family": "SMALL_MLP",
+      "objective": "L6_RISK_CONSTRAINED_MULTI_OBJECTIVE",
+      "seed": 730103
+    }
+  ],
+  "no_subset_training_or_authority_or_confirmation_permission": true,
+  "old_exit_code": 143,
+  "old_marker_path": "/data3/liuyeqiang/InterMOT_N72R21R2_worktree/outputs/N72R21R2/training/main_fit_driver_v1.json",
+  "old_marker_sha256": "03ebcedef631dbcb280f228249bdb8d0fc4eb84bd54052b6926288c5ae21efba",
+  "previous_attempts_logs_and_mutable_marker_NOT_overwritten": true,
+  "source_sha256": {
+    "scripts/n72r21r2_main_fit_driver.py": "8f37378226c5384bf58173087b0a4adec7b29ec9380a86eb4b7fe037d93224ba",
+    "scripts/n72r21r2_main_fit_driver_v2.py": "802c0be7ce64a5dbcfda34dcfab44b36b7d4c2535fff5fefc17d89a2d26ced57",
+    "scripts/n72r21r2_train_event_authority.py": "170b415a660172499aa14ad9c85526f4290804865303a9d86f193f27c18e5291"
+  },
+  "stage": "N72R21R2",
+  "termination_cause": "UNKNOWN_NOT_INFERRED_FROM_RETURN_CODE",
+  "termination_receipt_sha256": "9ce9089c0ff60efda8eaf7763141877d9970d4c3b09f4459b434e93788f78a04",
+  "unchanged_main_job_protocol_sha256": "3be51519015b28daa96e816d43b41b10ca3e43e7f98ba5e47a12a1e730287114"
+}

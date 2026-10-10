@@ -1,0 +1,79 @@
+{
+  "G4_point_conditions": {
+    "correct_retention_min": 0.6,
+    "nonzero_actual_writes": true,
+    "wrong_plus_UNKNOWN_max": 0.02
+  },
+  "M_B_automatic": false,
+  "aggregation": "Sum clicks inside each video/seed, compute rates, average seeds inside video; equal videos primary. Report pooled exposure rates separately. Seeds/clicks/frames do not increase video cluster count.",
+  "association_stage_authorized": false,
+  "bootstrap_repetitions": 2000,
+  "bootstrap_seed": 730104,
+  "exposure": "Actual accepted writes; verified-other + UNKNOWN contamination. Retention denominator all actual correct C0 committed observations, including those rejected by writer.",
+  "final_requires_all24_fixed_and_all24_fresh_risk_results": true,
+  "frontier_points": "Only actually executed registered fixed/head operating points, never interpolated write coverage or retuned thresholds",
+  "frozen": true,
+  "goal": "Event-Level Causal Identity Association: Safe One-Click Intervention with Fresh-Sequence Generalization for Online MOT",
+  "goal_file": "outputs/N72R21R2/FINAL_GOAL.json",
+  "paired_recognition": "Same C0 opportunities/clicks and actual frozen-bank reference; available/competitive Rank1 and visible/available claim recall, paired video macro delta/95% CI. HOTA equality is isolation only.",
+  "partial_reports": "Immutable input-hash snapshots include all24 census and explicit missing videos; no G4/main-stage authorization",
+  "preregistration_sha256": "dca6997bb5788178fa18f5c4fcedd6ce43f367c06edd9857a5ea6b83fc223288",
+  "scope": "All24 fresh FIT16/INNER8 actual zero-authority full-memory videos, six fixed policies and all fresh risk-writer heads/points. Never subset selection or external confirmation access.",
+  "source_sha256": {
+    "sam3_intermot/evaluation/memory_safety_frontier.py": "d1fe162f0b235b0fc5c3cc8eb4510dca1c2094b640bcf2699034ab528fedef64",
+    "scripts/n72r21r2_memory_frontier.py": "de67888225443f83babdde663b8f887e4b625f0295e6c746542136d6a01b6446"
+  },
+  "split": {
+    "confirmation": [
+      "dancetrack0015",
+      "dancetrack0053",
+      "dancetrack0029",
+      "dancetrack0087",
+      "dancetrack0083",
+      "dancetrack0066",
+      "dancetrack0033",
+      "dancetrack0045"
+    ],
+    "fit": [
+      "dancetrack0074",
+      "dancetrack0020",
+      "dancetrack0032",
+      "dancetrack0037",
+      "dancetrack0044",
+      "dancetrack0069",
+      "dancetrack0027",
+      "dancetrack0061",
+      "dancetrack0099",
+      "dancetrack0055",
+      "dancetrack0082",
+      "dancetrack0098",
+      "dancetrack0080",
+      "dancetrack0068",
+      "dancetrack0051",
+      "dancetrack0049"
+    ],
+    "historical_development": [
+      "dancetrack0001",
+      "dancetrack0002",
+      "dancetrack0023",
+      "dancetrack0024",
+      "dancetrack0039",
+      "dancetrack0057",
+      "dancetrack0062",
+      "dancetrack0072"
+    ],
+    "inner": [
+      "dancetrack0096",
+      "dancetrack0008",
+      "dancetrack0012",
+      "dancetrack0016",
+      "dancetrack0006",
+      "dancetrack0075",
+      "dancetrack0052",
+      "dancetrack0086"
+    ]
+  },
+  "stage": "N72R21R2",
+  "uncertainty": "2000 percentile whole-video resamples seed730104. Additionally video-local GT-identity cluster description, NOT cross-scene person-disjoint proof. Independent causal write-event roots are unavailable until separately verified; do NOT substitute bursts/error intervals.",
+  "zero_error_uncertainty": "Degenerate empirical bootstrap [0,0] is NOT population2% proof. Separately report conditional binomial95% interval for ANY-bad-write clusters, not per-write risk. Zero writes have undefined risk."
+}
