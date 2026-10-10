@@ -433,6 +433,112 @@ The four scalar-SEQMAP CLI failures and one
 historical branch-literal failure remain visible. Confirmation remains
 unopened and scientific success remains pending.
 
+## Matched-state full-MOT adapter and original-scene audit (V9 checkpoint)
+
+The FINAL GOAL remains **Event-Level Causal Identity Association: Safe
+One-Click Intervention with Fresh-Sequence Generalization for Online MOT**.
+Scientific closure is **PENDING**, application Goal is **ACTIVE**, and
+confirmation/VAL/TEST/SOT and the next stage remain unauthorized/unopened.
+
+The finite matched-state evaluation adapter is frozen in
+`outputs/N72R21R2/on_policy/STATE_POLICY_PROTOCOL_V1.json`
+(SHA256 `a24d91f060ccdf8536fb0e6c0b56fd9d1b03d2533932ee1919a5344c3070557c`).
+It evaluates exactly the existing three training-state sources
+BASELINE_STATE/TREATMENT_STATE/MIXED_STATE, SMALLMLP/L3, and all three
+registered seeds. It adds **no optimizer runs, capacity choices, thresholds
+or best-seed selection**. Actual successful weights and all24 controlled
+sources are required. It reuses the unchanged frozen MAIN full-global
+runtime, zero-action tensor checks, actual own-prefix one-shot onset
+branches and pinned nine-metric evaluator under isolated state-policy
+output paths. Both registered points run on INNER8; one shared point per
+state source is then evaluated on FIT16 across all3 seeds (at most288
+video/model/point cells). Failed seeds are retained, not replaced by a
+successful subset. The one-CPU queue is launched and waiting for its
+actual source/weight prerequisites; **no state-policy full-MOT result
+exists at this checkpoint**. Controlled-source training is not actual
+learned-model-generated on-policy or staged-training closure.
+
+The M10 full-video tables now use all24 original candidate sources and
+the density grouping frozen before policy effects. There are11 MIXED,
+7 MEDIUM,5 CROWDED and1 SPARSE videos; all-click initialization failures
+in0027 and0012 are retained, leaving15 FIT and7 INNER usable video clusters.
+Nine actual full-video metrics are reported for C0 and eight fixed simple
+policies, with paired video bootstrap intervals, target recall, N01/N10
+and verified-other takeover. Clicks/seeds stay inside video. A singleton
+has no informative video-cluster CI. Candidate density is **not** GT
+people count. These are original full-video evaluations stratified by
+density; posthoc masked TrackEval is explicitly **NOT_RUN**, not silently
+substituted for complete trajectories.
+
+Selected descriptive C0 values (fraction units, not percentage points):
+
+| Split / original density | Usable videos | HOTA | Target recall: available / visible |
+| --- | ---: | ---: | ---: |
+| FIT / CROWDED | 3 | 0.280435 | 0.704546 / 0.276456 |
+| FIT / MEDIUM | 5 | 0.536532 | 0.606725 / 0.535168 |
+| FIT / MIXED | 7 | 0.413217 | 0.579849 / 0.427126 |
+| FIT / SPARSE | 0 | undefined | undefined |
+| INNER / CROWDED | 2 | 0.286453 | 0.565667 / 0.352253 |
+| INNER / MEDIUM | 2 | 0.335561 | 0.641078 / 0.194313 |
+| INNER / MIXED | 2 | 0.415664 | 0.653518 / 0.491446 |
+| INNER / SPARSE | 1 | 0.208799 | 1.000000 / 0.278546 |
+
+`data/VIDEO_DENSITY.json` contains the full40-sequence scope census;
+confirmation entries remain unopened, not invented effect records.
+`mot/DENSITY_BASELINE_SIMPLE_FULL_VIDEO_V1.json` contains the actual
+all24 C0/simple tables. MAIN and matched-state effect tables remain pending
+their actual own full-video results.
+
+The separate frozen M10 original-scene descriptor protocol
+(`data/SCENE_CHARACTERISTICS_PROTOCOL_V1.json`, SHA256
+`f5df320fe6aa369558385ec12d17ec9dce40f942658c7ade6b1efb420b8cc932`)
+also completed all24 FIT/INNER videos. It verifies sealed actual C0 and
+candidate/anchor/GT hashes before descriptive analysis. It reports
+original-frame GT people counts, actual visibility annotations, GT-box
+overlap proxy, current verified-other/UNKNOWN competition, positive
+candidate ownership, physical/strict-candidate observational returns,
+and raw-anchor cosine margins. UNKNOWN is not a verified competing
+identity; UNASSIGNED is not another public identity's ownership. These
+offline observations are neither deployable GT-aided features nor proven
+independent causal roots. No new online rollout, representation, memory
+training, density relabeling or threshold selection is performed.
+
+The sole sparse video0052 has2–4 GT people (mean3.709). Its three clicks
+have strict-positive available exposures307/311/309 versus physically
+visible1119/1196/1013; their verified-other raw-anchor win fractions are
+286/307,166/311 and229/309. This descriptive variation and single-video
+support do **not** establish that fewer people yield safer MOT intervention.
+All24 videos have constant GT visibility annotation1; box overlap is
+explicitly a geometric proxy, **not physical occlusion ground truth**.
+
+All24 fixed zero-authority memory results are now sealed. The actual
+frontier is still partial because learned risk-writer full-video results
+are pending. Across15 usable FIT videos, MEAN and MULTICUE pooled
+wrong+UNKNOWN write rates are49.06% and24.98%, with correct-observation
+retention100% and12.39%. Across7 usable INNER videos they are69.94% and
+25.27%, with retention100% and18.50%. None satisfies the2% contamination /
+60% retention point gate; these pooled exposure rates are not independent
+event confidence claims. HOTA equality is zero-authority isolation, not
+evidence that writing improves global association. The registered fresh
+risk-head optimization has completed all6 actual fits after all24 inputs
+became available (three LOGISTIC and three MLP seeds, nonzero gradient steps,
+129/1475 changed weights respectively, strict loaded INNER scores equal).
+All six selected sampled teacher-state points abstain; the launched own-bank
+full-video audit is still required and actual own-policy write safety remains
+unresolved. Zero accepted writes
+have undefined contamination risk and cannot qualify G4.
+
+The completed V17 full regression reports **1048 passed /5 unchanged
+historical failures** (85.72s, actual shell/pytest exit1), and all123
+R2-focused tests pass (4.95s, observed exit0), preserving the
+four pinned scalar-SEQMAP CLI incompatibilities and the historical
+branch-literal expectation. V16's completed log/JUnit were recovered
+(1043 passed /5 failures), but its original terminal exit status was not
+available after context compaction and is **not claimed observed**.
+Only code, tests, this necessary report and two compact frozen protocols
+are included in the V9 Git checkpoint; data, weights, GT, embeddings,
+runtime outputs, media and bulk result manifests remain local.
+
 ## Execution boundaries
 
 Reuse existing DanceTrack TRAIN images, SAM3/OSNet weights and original Python environment. Preserve historical evidence. All runtime decisions use only current real candidate UIDs and causal state. Sole click initializes identity, not unconditional override authority. Every intervention uses the complete global assignment and committed feedback. GT labels stay offline. Frames, seeds and propagated errors are not independent causal events.

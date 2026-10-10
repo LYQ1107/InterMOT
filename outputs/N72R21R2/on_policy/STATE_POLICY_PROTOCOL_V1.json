@@ -1,0 +1,99 @@
+{
+  "CPU_workers": 1,
+  "OMP_threads": 1,
+  "authority_support_policy": "NO_COST_DISPLACEMENT_OR_ANCHOR_ADVANTAGE_CEILING",
+  "confirmation_VAL_TEST_SOT_authorized": false,
+  "estimated_extra_assets_GiB_planning": 2.0,
+  "family": "SMALL_MLP",
+  "frozen": true,
+  "goal": "Event-Level Causal Identity Association: Safe One-Click Intervention with Fresh-Sequence Generalization for Online MOT",
+  "goal_file": "outputs/N72R21R2/FINAL_GOAL.json",
+  "independent_G1_root_proof_required_separately": true,
+  "inherited_MAIN_replay_protocol_sha256": "6ddf15ea3ad0b6d3934085dbfe3559742f3964c6793a6e707843da6eeedb348f",
+  "minimum_free_GiB": 60,
+  "modes": [
+    "BASELINE_STATE",
+    "TREATMENT_STATE",
+    "MIXED_STATE"
+  ],
+  "objective": "L3_HARM_AWARE",
+  "points": {
+    "P0_CLAIM80": {
+      "anchor_advantage_min": 0.1,
+      "claim_min": 0.8,
+      "confirmation_delay": 3,
+      "global_regret_max": 0.2,
+      "risk_max": 0.02
+    },
+    "P1_CLAIM50": {
+      "anchor_advantage_min": 0.1,
+      "claim_min": 0.5,
+      "confirmation_delay": 3,
+      "global_regret_max": 0.2,
+      "risk_max": 0.02
+    }
+  },
+  "qualified_model_generated_rounds_remain_separate": true,
+  "replay_and_selection": "Same raw anchor/current candidate axis, frozen P0 memory, full causal global assignment, strict NONE/hard negatives, own-prefix cloned one-shot all-action H100 audits, actual pinned nine-metric whole video and same shared all3-seed INNER points / selected FIT16 as MAIN. No new optimization, hyperparameters or best seed.",
+  "resource": "1 CPU worker only after all24 controlled source receipts. Estimated2GiB includes9/42 MAIN trace/trajectory/evaluation scale plus onset room; measured runtime growth/60GiB floor enforced, no deletion of unique sources.",
+  "seeds": [
+    730101,
+    730102,
+    730103
+  ],
+  "source_sha256": {
+    "sam3_intermot/evaluation/learned_policy_evidence.py": "5582c4edfc891d9cd4cf950c7f22f03b6b25a9d7779080d44b30dd7f2902be46",
+    "sam3_intermot/one_click/authority_support_ablation.py": "a8d3f24206532ea552a968ad41f87de2e8667687d18287059650015c8f3d1543",
+    "sam3_intermot/one_click/causal_state_fingerprint.py": "c123af7611db489ceb28c88e8625540b0ee2db17ac3ccda77084052f48fd8afb",
+    "sam3_intermot/one_click/event_authority_learning.py": "ed2b38930a2af0dd7dd4daab6cdba3145e99441e5ed02f2e27f1721f697745cd",
+    "sam3_intermot/one_click/event_authority_models.py": "9d2a753e8c5cfdf838c02904a93f2220b98f5de796ee0a31cec02253d477f5ba",
+    "sam3_intermot/one_click/event_authority_runtime.py": "4c5976a55e14b44e5600c8388817c9499a3db3dc6066bc2c74d7dae6bfa4d76c",
+    "sam3_intermot/one_click/joint_intervention_primitives.py": "040420d19d324ebc97af964db947a6de681859596d2ceb290fa0e19a391980dc",
+    "sam3_intermot/one_click/learned_onset_branches.py": "f1f687cbe92702211f7b76a1ff7d173de7fb47f73ee6efbd8042bc26d8735e64",
+    "sam3_intermot/one_click/runtime_file_guard.py": "6b7b605c9601e43500b74017dfa01f01d337500a7ffae87cbe05d1b8e464f4ed",
+    "scripts/n72r21r2_baseline.py": "94dcd76cb0780d97c2bb9802968e4617c6d00bea2158ebf271ed05865d7b68b8",
+    "scripts/n72r21r2_event_context_v2.py": "9b4c5c03ae0d14408ad8d8c0fbd111fe56bee905fc734add277bbfba61b84399",
+    "scripts/n72r21r2_joint_state_fit_driver.py": "3bc5fc2eef3696905211860b96769c4b870686c40670219c1533ce56a9be2397",
+    "scripts/n72r21r2_learned_pilot.py": "0ad92d81681fcf066d0b0e27601aa00dc543a4749464a1dc86461a019d3447c5",
+    "scripts/n72r21r2_main_policy.py": "e7d7fe15e3352aecc9966785341d9b0288fd338122d37cbb23032173c46dc17f",
+    "scripts/n72r21r2_main_policy_driver.py": "a1527bd4c3468eb4194956b337841ce2851b30171bd87be2945a53bc357b6da0",
+    "scripts/n72r21r2_simple_onset_audit.py": "9df4174948c8371c07a18fb091de2134c3368c680b1e7d818b5eb8f31dc4e685",
+    "scripts/n72r21r2_state_policy.py": "c1dd3c14f8d6429586443e73160df0de992fb9c857952ac5ec0713e92da97dee",
+    "scripts/n72r21r2_state_policy_driver.py": "c93c353f58f87c9562a1d63846d28edc03ddc1c201a4c2e769a7bfca212e32eb",
+    "scripts/n72r21r2_train_joint_state.py": "922570953ebc396ff3bf2a7da1231e2cd478f66094cd242c4c87cb6c72239412"
+  },
+  "split": {
+    "fit": [
+      "dancetrack0074",
+      "dancetrack0020",
+      "dancetrack0032",
+      "dancetrack0037",
+      "dancetrack0044",
+      "dancetrack0069",
+      "dancetrack0027",
+      "dancetrack0061",
+      "dancetrack0099",
+      "dancetrack0055",
+      "dancetrack0082",
+      "dancetrack0098",
+      "dancetrack0080",
+      "dancetrack0068",
+      "dancetrack0051",
+      "dancetrack0049"
+    ],
+    "inner": [
+      "dancetrack0096",
+      "dancetrack0008",
+      "dancetrack0012",
+      "dancetrack0016",
+      "dancetrack0006",
+      "dancetrack0075",
+      "dancetrack0052",
+      "dancetrack0086"
+    ]
+  },
+  "stage": "N72R21R2",
+  "state_fit_protocol_sha256": "9542f59a2ea1a340babac93468d542b390d002ebd168df6d17d2ee82f0fb9cc3",
+  "training_source": "Controlled BASELINE_STATE/TREATMENT_STATE/MIXED_STATE matched source contrast. It is not actual model-generated on-policy or staged-policy learning.",
+  "zero_or_failed_fits": "Actual no-benefit/harm supervision failure is retained, not a weight; do not synthesize/refit missing seeds or select a successful subset."
+}
