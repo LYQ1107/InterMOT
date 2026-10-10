@@ -593,6 +593,60 @@ metric metadata and units, exact C0 pairing, current/future onset completeness,
 no zero-action success, UNKNOWN separation and no frame/window-as-root claim.
 The historical tests and pinned third-party source remain unchanged.
 
+## Dead state-source owner and optimizer-evidence census (V11)
+
+The same FINAL GOAL is ACTIVE; the scientific decision remains PENDING.
+Fresh process/cwd checks found that tensor-recovery V2 owner2990146 and
+its marked child3220398 were no longer present while the old marker still
+said ACTIVE. Its terminal exit code was unavailable after the handoff:
+**no exit code, signal, OOM cause or scientific failure is inferred**.
+The immutable dead-owner observation retains hashes of the old marker,
+log, completed0037 click0 receipt and both runtime files, including the
+interrupted click1 partial. These are neither overwritten nor adopted as a
+completed video.
+
+A separately frozen V3 supervisor repeats the **same nineteen registered
+V1-failed videos** through the unchanged frozen V2 runtime and offline-label
+code, in separate output/log/asset paths. It changes no source-case/frame,
+action, sole click, candidate, feature, label, identity memory or association.
+The original five complete videos and all original failure evidence remain
+sealed. Only after both new full-video receipts and their artifacts verify
+can a previously absent canonical receipt be installed. This recovery is
+engineering preparation, not model-generated on-policy closure or G1/G2 PASS.
+
+The new census distinguishes fit-attempt records, measured no-optimization
+supervision failures and verified actual optimizer models. A model counts
+only with a registered successful status, matching frozen protocol and source
+hashes, positive optimizer/nonzero-gradient steps, changed weight elements
+and a present selected checkpoint with its exact recorded hash. It supports
+the actual integer/per-tensor/MAIN-per-tensor change schemas. A
+`FAIL_MEASURED_STATE_SOURCE_SUPERVISION_DIVERSITY` record with0 optimizer
+steps is retained as an attempt, **never counted as a trained model**.
+Unverifiable records remain separately visible; no successful subset becomes
+full experiment completion, deployment permission or scientific success.
+
+The first live verified census has17/42 registered MAIN fits,6 pilot fits,
+12 current-axis fits and6 fresh memory-risk fits. Controlled state-source
+fits remain0/9 pending all24 sources. All26 new recovery/census tests pass
+(4.13s, observed exit0).
+V3 has started0037 under a new live owner, but its full video is not yet
+complete. CONFIRM/VAL/TEST/SOT remain unopened.
+
+V19 complete regression: **1081 passed /5 unchanged historical failures**,
+78.308s, actual pytest exit1 observed by its supervising subprocess. The
+156 R2-focused tests pass (8.707s, observed exit0). The five failed test
+identities match V18 exactly; no skipped tests or errors, no historical
+expectation or pinned third-party edits, and no claim that all tests pass.
+
+The next live census advances to19 actual MAIN fits and5 sealed full-MOT
+cells for SCALAR/730101/P0. This includes0012 with all original click
+initializations failed, **not a successful zero-action evaluated video**.
+The other four videos (0096/0008/0016/0006), nine valid clicks, have0 effective
+interventions and0 own one-shot labels; their measured all-nine deltas are
+zero. This is vacuous C0 preservation, not causal identity benefit or a
+complete three-seed/point/group comparison. The independently verified
+memory frontier now contains fixed24/fresh-risk3, still explicitly PARTIAL.
+
 ## Execution boundaries
 
 Reuse existing DanceTrack TRAIN images, SAM3/OSNet weights and original Python environment. Preserve historical evidence. All runtime decisions use only current real candidate UIDs and causal state. Sole click initializes identity, not unconditional override authority. Every intervention uses the complete global assignment and committed feedback. GT labels stay offline. Frames, seeds and propagated errors are not independent causal events.
