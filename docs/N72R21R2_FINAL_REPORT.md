@@ -975,6 +975,44 @@ passed as a separate14-test run. No historical test or dependency was edited.
 Only source, tests and necessary explanation enter V15 Git delivery; GT,
 synthetic fixtures, data, metrics, weights and trajectories remain local.
 
+## Idle-owner terminal recovery — progress, not a scientific result
+
+A fresh `/proc` audit confirmed two original owners absent: exact-CF2884587
+and state-policy3166697. Their last markers had no active child or retained
+failure. Their actual exit codes were **not observed** and termination cause
+remains **UNKNOWN**. Five other owners were still live; the earlier progress
+record's seven-owner statement is not evidence of continuous liveness.
+
+The separate recovery protocol archives both original markers with exact
+byte-SHA equality and freezes the wrapper before launch. Preflight rechecks
+all original frozen policy/worker source hashes, the eight completed exact-CF
+prediction/results/raw-artifact/log sets, and absence of any partial or
+completed state-policy cell. A new exclusive owner namespace mirrors only
+mutable ownership metadata to the original canonical markers for existing
+watchers. Original workers, scientific outputs, weights, paths, split order,
+seeds, policies and gates are unchanged. No failed attempt is retried and no
+old evidence is removed, moved or relabeled as a scientific negative.
+
+Both new owners were independently confirmed live. The exact-CF owner then
+completed the previously missing0061 result, giving **9/24**, with all eight
+older completed evidence sets unchanged. The state-policy owner remains
+waiting for all24 controlled sources and all registered state weights; its
+recovery does not launch unqualified inference. Recovery is engineering
+continuation, **not** on-policy training, G1/G2 qualification or goal closure.
+
+V25 actual regression: **1153 passed /5 unchanged historical failures**, with
+observed pytest exit1; all**228** R2-focused tests pass with observed exit0.
+The nine new recovery tests also passed separately. Original protocol source
+files and historical tests were not edited. Scientific decision remains
+PENDING and the application Goal remains ACTIVE; all17 full-policy group
+closures, applicable on-policy/staged studies, final tables and full-task
+scientific closure remain open. CONFIRM/VAL/TEST/SOT remain unopened.
+
+Local evidence: `audit/IDLE_DRIVER_TERMINAL_RECOVERY_PROTOCOL_V1.json`, both
+exact original marker archives, new owner markers and
+`audit/IDLE_DRIVER_RECOVERY_INITIAL_READBACK_V1.json`. Only the wrapper, its
+tests and this necessary explanation enter the next code-only Git delivery.
+
 ## Execution boundaries
 
 Reuse existing DanceTrack TRAIN images, SAM3/OSNet weights and original Python environment. Preserve historical evidence. All runtime decisions use only current real candidate UIDs and causal state. Sole click initializes identity, not unconditional override authority. Every intervention uses the complete global assignment and committed feedback. GT labels stay offline. Frames, seeds and propagated errors are not independent causal events.
