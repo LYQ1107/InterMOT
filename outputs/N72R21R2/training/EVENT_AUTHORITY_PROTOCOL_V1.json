@@ -1,0 +1,33 @@
+{
+  "stage": "N72R21R2",
+  "goal_file": "outputs/N72R21R2/FINAL_GOAL.json",
+  "version": "V1_BEFORE_FRESH_EVENT_MODEL_OPTIMIZATION",
+  "source_distribution": "ACTUAL_FRESH_C0_SHADOW_P0; treatment/on-policy fits require new sealed explicit distributions",
+  "mandatory_main_corpus": "All 16 FIT and 8 INNER completed candidate/baseline/CF/context/offline labels and required P2-P9 simple full-video controls. No missing new scene replaced with historical data.",
+  "pilot": {
+    "fit": ["dancetrack0074", "dancetrack0020"],
+    "internal_validation": ["dancetrack0032"],
+    "families": ["SCALAR", "LOGISTIC_RISK"],
+    "objective": "L3_HARM_AWARE",
+    "not_main_fit_or_independent_confirmation": true,
+    "no_hyperparameter_expansion_on_loss_only": true
+  },
+  "families": ["SCALAR", "LOGISTIC_RISK", "SMALL_MLP", "PAIRWISE_RANKER", "HARM_FIRST_DUAL_HEAD", "CAUSAL_TEMPORAL", "COUNTERFACTUAL_ACTION_VALUE", "DUAL_IDENTITY_STATE"],
+  "conditional_family": "RELATIONAL_CONDITIONAL requires preregistered measured competition/global-regret representation deficit after simple trained controls",
+  "primary_family_objective": "L3_HARM_AWARE",
+  "same_architecture_loss_contrast": "SMALL_MLP for L0_CURRENT_CORRECTNESS, L1_EVENT_CORRECTION, L2_LONG_CONTINUITY_H20_H50_H100, L3_HARM_AWARE, L4_GLOBAL_ASSIGNMENT_VALUE, L5_ACTUAL_TRAJECTORY_UTILITY, L6_RISK_CONSTRAINED_MULTI_OBJECTIVE",
+  "inputs": "Frozen 32 current causal features plus 8 named branch-policy one-hots; temporal past 3. Only runtime_features can enter encoder. KEEP comparison uses actual same-event features, never random rows or GT-selected challengers.",
+  "weighting": "Remove exact duplicate executed action configs. Equal video, then sole-click episode, then observed correlation interval, then event position, then distinct feasible branch. Correlation intervals are NOT claimed proven independent causal origins.",
+  "normalization": "FIT-only hierarchical weighted current features; immutable branch one-hots not fitted; past zero padding remains zero",
+  "incomplete_futures": "Exclude incomplete required future windows per objective, never impute negative labels",
+  "actual_L5": "Requires sealed actual pinned API-vs-CLI A/A and future k1..100 HOTA/AssA paired utility, not global component proxy",
+  "seeds": [730101, 730102, 730103],
+  "training": {"learning_rate": 0.001, "weight_decay": 0.0001, "hidden": 32, "past_steps": 3, "epochs_max": 60, "patience": 8, "batch_size": 256, "gradient_clip": 10, "max_seconds_per_fit": 180, "CPU_threads": 1},
+  "loss_harm_weights": {"L0_CURRENT_CORRECTNESS": 1, "L1_EVENT_CORRECTION": 1, "L2_LONG_CONTINUITY_H20_H50_H100": 1, "L3_HARM_AWARE": 5, "L4_GLOBAL_ASSIGNMENT_VALUE": 5, "L5_ACTUAL_TRAJECTORY_UTILITY": 5, "L6_RISK_CONSTRAINED_MULTI_OBJECTIVE": 10},
+  "epoch_selection": "INNER correlated-video-macro risk-weighted validation loss; deterministic earliest-epoch tie. Pilot uses held-out FIT0032 only. Model/authority selection still requires own-policy nonvacuity/harm and full-MOT INNER metrics.",
+  "checkpoint_status": "TRAINED_UNCALIBRATED_NOT_DEPLOYABLE until actual full global own-policy validation and frozen operating point",
+  "all_seeds_retained_no_best_seed_selection": true,
+  "normalization_or_optimizer_never_use_INNER_CONFIRM_VAL_TEST": true,
+  "larger_structure_not_automatic": true,
+  "frozen": true
+}

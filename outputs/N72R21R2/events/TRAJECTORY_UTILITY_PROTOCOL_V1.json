@@ -1,0 +1,20 @@
+{
+  "stage": "N72R21R2",
+  "goal_file": "outputs/N72R21R2/FINAL_GOAL.json",
+  "version": "V1_BEFORE_ACTUAL_TRAJECTORY_UTILITY_OR_MODEL_FIT",
+  "TrackEval_commit": "12c8791b303e0a0b50f753af204249e622d0281a",
+  "configuration": "DanceTrack, pedestrian, SKIP_SPLIT_FOL=True, DO_PREPROC=False; exact existing pinned CLI settings",
+  "pre_utility_validation": "All nine metrics for every arm of the three frozen pilot windows must reproduce the existing CLI to absolute tolerance 1e-10",
+  "sampling": "All previously preregistered causal event arms; no utility/effect-selected subset",
+  "reward_window": "Original k=1..100 future frames only, excluding action-time t. Current correctness separately retained. Incomplete rewards are null, never negative or zero-filled.",
+  "L5_value": "0.5 * paired delta HOTA + 0.5 * paired delta AssA versus own same-prestate KEEP, computed by official preprocessing and metric implementations",
+  "metrics": ["HOTA", "AssA", "DetA", "LocA", "IDF1", "IDSW", "MOTA", "FP", "FN"],
+  "no_public_ID_remap_before_official_preprocessing": true,
+  "rounded_geometry_identical_to_MOT_export": true,
+  "overlapping_windows_not_summed_or_independent_clusters": true,
+  "utility_is_offline_label_never_runtime_feature": true,
+  "FIT_only_optimization_INNER_only_selection": true,
+  "confirmation_VAL_TEST_prohibited": true,
+  "whole_policy_MOT_evaluation_still_required": true,
+  "frozen": true
+}

@@ -1,0 +1,18 @@
+{
+  "stage": "N72R21R2",
+  "goal_file": "outputs/N72R21R2/FINAL_GOAL.json",
+  "version": "V1_BEFORE_ACTUAL_LEARNED_PILOT_ROLLOUT",
+  "sequences": ["dancetrack0074", "dancetrack0020", "dancetrack0032"],
+  "families": ["SCALAR", "LOGISTIC_RISK"],
+  "seeds": [730101, 730102, 730103],
+  "point": {"claim_min": 0.8, "risk_max": 0.02, "global_regret_max": 0.2, "anchor_advantage_min": 0.1, "confirmation_delay": 3},
+  "point_is_fixed_not_optimized_from_pilot_or_confirmation": true,
+  "candidate_policy": "Current frozen CF action rules, deduplicate identical forced actions before model scoring; DELAYED CF wait-policy value cannot be treated as a current forced edge",
+  "current_features": "Own actual prefix including previous intervention age and per-challenger confirmations; explicit distribution shift from baseline-only CF current training. Past primary identity proposal features only, no selected arm's future state.",
+  "solver": "Unchanged complete global solve, hard-negatives/NONE preserved, no displaced competitor authority in this conservative diagnostic",
+  "future_state": "Own policy only; actual accepted UID feedback, no-write P0 identity actor",
+  "scientific_scope": "Small frozen FIT pilot engineering/own-state diagnostic, not full16/8 main result or independent generalization",
+  "checkpoints_uncalibrated_development_diagnostics_only": true,
+  "zero_actions_or_loss_reduction_not_success": true,
+  "frozen": true
+}
