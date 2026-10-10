@@ -1,0 +1,99 @@
+{
+  "CPU_workers": 1,
+  "association_authority_or_confirmation_automatic": false,
+  "common_INNER_selection": "Identical union of baseline+past-actually-treated states for ALL three training modes; original hierarchical video/click/correlation-group/event/arm weighted loss",
+  "duplicates": "Drop same executed full trajectory duplicates; retain own KEEP reference",
+  "family": "SMALL_MLP",
+  "frozen_before_state_source_fits": true,
+  "goal_file": "outputs/N72R21R2/FINAL_GOAL.json",
+  "harm_weight": 5,
+  "modes": [
+    "BASELINE_STATE",
+    "TREATMENT_STATE",
+    "MIXED_STATE"
+  ],
+  "normalizer_and_optimizer": "Each mode's FIT rows only; INNER never normalizes or updates gradients",
+  "objective": "L3_HARM_AWARE",
+  "original_event_fit_protocol_sha256": "651cfea134283f4ee6512ba7d9299c7ebcea55b64b9ea1dd063ddbd0f7db9ab2",
+  "required_source_receipts": "All16 FIT+8 INNER joint-state whole-video runtime and supervision; no ready-subset training or failed-click replacement",
+  "seeds": [
+    730101,
+    730102,
+    730103
+  ],
+  "source_protocol_sha256": "1610be8d908070d61ba848db6eb1b442173440e9f1ddbb001b09efc89d4fef6f",
+  "source_sha256": {
+    "sam3_intermot/one_click/event_authority_learning.py": "ed2b38930a2af0dd7dd4daab6cdba3145e99441e5ed02f2e27f1721f697745cd",
+    "sam3_intermot/one_click/event_authority_models.py": "9d2a753e8c5cfdf838c02904a93f2220b98f5de796ee0a31cec02253d477f5ba",
+    "sam3_intermot/one_click/matched_event_observer.py": "a1c982120d409c1b7a0ae1abd62b72f4ce8262b50e7f0082c0cf4b446bd36834",
+    "scripts/n72r21r2_joint_state_fit_driver.py": "3bc5fc2eef3696905211860b96769c4b870686c40670219c1533ce56a9be2397",
+    "scripts/n72r21r2_train_event_authority.py": "170b415a660172499aa14ad9c85526f4290804865303a9d86f193f27c18e5291",
+    "scripts/n72r21r2_train_joint_state.py": "922570953ebc396ff3bf2a7da1231e2cd478f66094cd242c4c87cb6c72239412"
+  },
+  "split": {
+    "confirmation": [
+      "dancetrack0015",
+      "dancetrack0053",
+      "dancetrack0029",
+      "dancetrack0087",
+      "dancetrack0083",
+      "dancetrack0066",
+      "dancetrack0033",
+      "dancetrack0045"
+    ],
+    "fit": [
+      "dancetrack0074",
+      "dancetrack0020",
+      "dancetrack0032",
+      "dancetrack0037",
+      "dancetrack0044",
+      "dancetrack0069",
+      "dancetrack0027",
+      "dancetrack0061",
+      "dancetrack0099",
+      "dancetrack0055",
+      "dancetrack0082",
+      "dancetrack0098",
+      "dancetrack0080",
+      "dancetrack0068",
+      "dancetrack0051",
+      "dancetrack0049"
+    ],
+    "historical_development": [
+      "dancetrack0001",
+      "dancetrack0002",
+      "dancetrack0023",
+      "dancetrack0024",
+      "dancetrack0039",
+      "dancetrack0057",
+      "dancetrack0062",
+      "dancetrack0072"
+    ],
+    "inner": [
+      "dancetrack0096",
+      "dancetrack0008",
+      "dancetrack0012",
+      "dancetrack0016",
+      "dancetrack0006",
+      "dancetrack0075",
+      "dancetrack0052",
+      "dancetrack0086"
+    ]
+  },
+  "stage": "N72R21R2",
+  "staged_policy_curriculum_or_true_model_on_policy": false,
+  "supervision_failure": "If a mode has no FIT benefit/harm diversity, record measured failure without meaningless optimization",
+  "training": {
+    "CPU_threads": 1,
+    "batch_size": 256,
+    "epochs_max": 60,
+    "gradient_clip": 10,
+    "hidden": 32,
+    "learning_rate": 0.001,
+    "max_seconds_per_fit": 180,
+    "past_steps": 3,
+    "patience": 8,
+    "weight_decay": 0.0001
+  },
+  "treatment_rows": "Source case !=KEEP and an actual effective source action strictly BEFORE this probe frame. Includes recovery of already changed states, excludes not-yet-delayed/vacuous source phases; never selects future reward."
+}

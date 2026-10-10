@@ -84,6 +84,72 @@ The V6 full regression completed with **988 passed /5 unchanged historical failu
 
 Live source/control/memory drivers retain failures and refuse duplicate ownership. Disk remains above the60GiB reserve, existing environment/weights/images are reused, and no new dataset or checkpoint is downloaded. The application Goal remains **ACTIVE**, final scientific decision **PENDING**, next-stage authorization false, and CONFIRM/VAL/TEST/SOT unopened. This checkpoint is code, tests and compact protocol/documentation only; weights, candidate features, GT, source images and bulk evidence remain local.
 
+## Deployment-matched controlled-state checkpoint (still ACTIVE)
+
+The original live CF/training/association sources are unchanged. A separate
+observer reuses the exact existing LearnedEventBridge implementation on an
+isolated always-KEEP view. It copies current branch features, past3/8 history
+and CANDIDATE/NONE confirmation metadata before any future fork; after the
+actual commit it accepts only causal metadata, never the view's post-KEEP
+tracker/actor state. Unit tests match exact deployment features and preserve
+the real rejected state. The original C0 CF feature confirmation default0 is
+retained; it is not silently changed to match deployment.
+
+The separately frozen source protocol covers all24 fresh development videos.
+For each valid click and source family it chooses the first chronological
+already registered CF frame with H150 available. Non-KEEP/non-delayed sources
+must be currently applicable, feasible and assignment-changing. No future
+reward, truth or best scene is used for selection. KEEP, rejection, raw/learned
+identity top, alternative, recovery and delayed sources are replayed from
+their real C0 prefixes; inapplicable cases remain explicit, not replaced.
+Probe offsets1/5/20/50 have deployment-matched current features and nested
+one-current-action/own-KEEP H100 futures. Original sealed source outputs,
+semantic state and available full tensor states must agree. Actor tensors,
+tracker-manager metadata, observer histories and source core state are
+checked for clone isolation. Frozen weights' ephemeral inference caches are
+shared but never treated as causal state or reused after future forks.
+
+The first0074 runtime is genuinely executing: rejected, alternative and
+raw/learned source cases each have actual global assignment changes, while
+KEEP/delayed zero-effect cases remain zero-effect. This is **controlled
+one-shot treatment-state supervision, NOT model-generated on-policy closure,
+not independent safe corrections and not a full-MOT PASS**. It uses the
+actual P0 no-write bank. Safely updated memory states still require measured
+nonvacuous G4; unsafe mean writes or oracle positives cannot supply that label.
+
+Every originally frozen CF frame additionally collects all actual current
+UIDs plus explicit NONE before C0 commit. A separately frozen diagnostic
+reloads all12 current verifiers at their existing selected INNER points,
+seals all scores without truth input, then joins offline exact-frame labels
+to actual own-future CF opportunities. It separates safe current N01 repairs
+from future-only improvement, excludes delayed actions from the direct-current
+denominator and keeps UNKNOWN distinct. These are correlated event-frame
+opportunities, not independent onsets or executed MOT repairs. The diagnostic
+is running/waiting for complete source videos, not yet a measured conclusion;
+every32/nearest-frame imputation and threshold retuning are prohibited.
+
+Three paired state-source modes (Baseline/Treatment/Mixed), each with the
+same SMALL_MLP/L3 and3 seeds, are frozen before optimization. All use the same
+mixed INNER set for epoch selection; normalizers and gradients use only the
+respective FIT source. Treatment phases require an actual effective source
+action strictly before the probe, not future or not-yet-delayed effects.
+The driver waits for all24 source receipts; it does not optimize a ready subset.
+Insufficient benefit/harm diversity is a measured supervision failure, not
+a meaningless fit. True learned-policy correction and staged policy authority,
+own-deployment distribution audit, safely updated memory, full generalization
+gates and conditional confirmation remain unfinished.
+
+Full regression V8 actually completed **996 passing /5 unchanged historical
+failures** in124.34s. The five are the four historical TrackEval scalar
+SEQMAP_FILE CLI failures and the historical branch-literal assertion. Its5
+new observer/source-selection tests pass. Subsequent R2-focused75 tests pass
+in7.44s, including the later exact-CF and all24 state-source prerequisite tests.
+No all-tests-pass claim or third-party/test rewrite is made. Existing
+environment/weights/candidates are reused. The actual filesystem has about
+76.9GiB free, above the60GiB reserve. Only code, compact protocols and necessary
+documentation are published; bulk evidence and weights stay local. Goal is
+**ACTIVE**, scientific conclusion **PENDING**, next-stage authorization false.
+
 ## Execution boundaries
 
 Reuse existing DanceTrack TRAIN images, SAM3/OSNet weights and original Python environment. Preserve historical evidence. All runtime decisions use only current real candidate UIDs and causal state. Sole click initializes identity, not unconditional override authority. Every intervention uses the complete global assignment and committed feedback. GT labels stay offline. Frames, seeds and propagated errors are not independent causal events.
