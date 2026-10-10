@@ -647,6 +647,73 @@ zero. This is vacuous C0 preservation, not causal identity benefit or a
 complete three-seed/point/group comparison. The independently verified
 memory frontier now contains fixed24/fresh-risk3, still explicitly PARTIAL.
 
+## Actual data deliverables and full-task semantic census (V12)
+
+The FINAL GOAL is unchanged and ACTIVE. Whole-task scientific closure remains
+PENDING, not redefined around the completed preparation or code delivery.
+The task's74 named files, six final tables and35 engineering-test requirements
+are now explicitly inventoried. Presence of a file, a placeholder, a pass total
+or a narrow preparation proof is never counted as full-task completion.
+At this checkpoint13 requested files exist, five have a narrowly verified
+configuration/input-preparation scope, and **none of the six final tables is
+yet claimed semantically complete**. Existing versioned research evidence must
+still be summarized and verified, alongside remaining actual experiments.
+
+`data/CANDIDATE_EXTRACTION.json` and `data/CANDIDATE_INTEGRITY.json` now summarize
+all16 original FIT and8 original INNER videos: **24,890 complete original
+frames and178,975 real candidates**. Existing tapes were decoded again through
+the unchanged frozen integrity audit, checking complete original frame axes,
+unique current UIDs/embedding offsets, finite features, stored tape/index/done
+hashes, original geometry-count density and no runtime GT. SAM3/OSNet checkpoint
+file hashes were independently reread. No extraction, runtime rollout,
+training, threshold selection, future/confirmation truth access, raw-image copy
+or candidate change was added. The stored f16 tape hash is not misrepresented
+as reproduction of the original pre-storage f32 feature hash.
+
+The original extraction manifest's empty `completed_sequences` was a frozen
+preparation record, not the current completion census; it remains untouched.
+The two requested completed data reports explicitly link that manifest and
+all24 actual source receipts/assets. Original per-video integrity seals were
+recomputed identically, not rewritten or replaced.
+
+The all40-role Table1 **preparation** report retains the unopened CONFIRM8 and
+already-exposed historical8 without fabricating fresh results. Across the
+24 new videos there are72 registered sole-click attempts,59 valid and13
+retained failures: FIT41 valid/7 failed; INNER18 valid/6 failed. Videos0027 and
+0012 have no valid clicks and are not successful zero-action evaluations.
+Every valid click has actual same-input baseline coverage. Video-local GT
+identity counts are explicitly **not independent cross-scene people**;
+independent correction/N10-root counts remain unavailable, not filled with
+frame runs, click counts or seeds.
+
+The initial new report adapter incorrectly expected a top-level initialization
+`sequence`; the frozen schema instead stores it in each click. Its observed
+exit1, exact failed code hashes and absence of aggregate reports were retained
+in `audit/DATA_DELIVERY_V1_SCHEMA_FAILURE_ATTEMPT1.json`. Only this new adapter
+was repaired and regression-tested against the actual headerless/per-click
+format. Scientific inputs, initialization, candidates, memory, matcher,
+association, training code and frozen experiment protocols were not edited.
+
+Fourteen new tests cover all74 names/six tables/35 test semantics, matching
+input/role/click lineage and candidate axes, retained failed initializations,
+unopened confirmation, unproven independent units and the distinction between
+file presence/narrow proof/full completion. V20 complete regression:
+**1095 passed /5 unchanged historical failures**, actual pytest exit1 observed.
+All170 R2-focused tests pass with observed exit0. Failure identities match V19;
+no historical expectation or pinned third-party change, no all-tests-PASS claim.
+
+At the preparation checkpoint MAIN optimization has advanced to35/42 verified
+fits and11 own-policy full-MOT cells, with0/17 whole registered groups complete.
+Controlled sources remain5/24 while the isolated V3 worker progresses through
+0037 click2; no partial is promoted to a full source. Fresh risk replay has
+completed4/24 videos, and its fixed24/fresh-risk4 uncertainty snapshot remains
+PARTIAL. These independent registered branches continue. CONFIRM/VAL/TEST/SOT
+remain unopened; no on-policy/M-B/confirmation authorization is inferred.
+
+Only code, tests and this necessary explanation are included in V12 Git
+delivery. The generated data summaries, Table1 preparation, requirement ledger,
+weights, raw data and large evidence remain local.
+
 ## Execution boundaries
 
 Reuse existing DanceTrack TRAIN images, SAM3/OSNet weights and original Python environment. Preserve historical evidence. All runtime decisions use only current real candidate UIDs and causal state. Sole click initializes identity, not unconditional override authority. Every intervention uses the complete global assignment and committed feedback. GT labels stay offline. Frames, seeds and propagated errors are not independent causal events.
