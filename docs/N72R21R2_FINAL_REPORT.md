@@ -539,6 +539,60 @@ Only code, tests, this necessary report and two compact frozen protocols
 are included in the V9 Git checkpoint; data, weights, GT, embeddings,
 runtime outputs, media and bulk result manifests remain local.
 
+## Complete registered-group closure protocol and first risk video (V10)
+
+The unchanged FINAL GOAL remains ACTIVE; scientific closure is PENDING.
+All14 registered MAIN architecture/objective groups (42 weights) and three
+controlled state-source groups (9 weights) now have a frozen whole-group
+summary protocol: `mot/DEVELOPMENT_CLOSURE_PROTOCOL_V1.json`, SHA256
+`f1c7e4c7e590a26ec82f9c1fd631740718ab27f014ed86eadd41ed20074a1352`.
+It adds no optimizer, threshold, candidate, identity-memory or association
+choice. It was frozen before any MAIN/state-policy full-MOT outcomes.
+
+Every group requires both original INNER operating points on every planned
+video and seed, the exactly recomputed shared selection, then selected-point
+FIT16 on all three seeds. Missing/failed initializations remain in the census;
+no ready/successful subset is reported as complete. Actual source/weight/
+runtime/onset/log/artifact hashes, nonzero optimization, original density,
+full zero-action tensor/trajectory C0 equality and paired metrics are checked.
+Pinned `tracker`/`per_sequence` metadata are kept separate from nine scalar
+metrics; percentage-scaled rates and fractional FP/FN/IDSW are rejected.
+
+The summary gives full-video absolute/paired nine metrics, per-video and
+original-density results, video-cluster intervals, target recall, N01/N10,
+non-target origin proxies and every actual one-shot action label. G2 numerical
+targets and the CI are reported separately; zero baseline IDSW allows no
+increase. G1 uses only valid negative upper bounds on possible independent
+roots, original N01>N10 and severe-harm criteria. Enough action rows or spaced
+windows **never prove independent causal roots**; no new per-seed minimum is
+introduced. Event precision/recall remain undefined until separately verified
+roots exist. These summaries never authorize confirmation or close the entire
+task. The first sealed census truthfully contains0 complete /17 pending groups.
+
+Fresh risk-writer full-video evaluation has now completed the first FIT video,
+0074, all six fitted heads, both registered points and all three clicks.
+Its36 actual full-video tracker outputs have all nine pinned TrackEval metrics
+equal to C0; changing memory with zero association authority is isolation,
+not MOT improvement. All six selected operating points have0 actual accepted
+writes, undefined contamination risk and0 retention. No safety PASS is claimed.
+
+At the fixed0.5 **UNQUALIFIED DIAGNOSTIC** point, the six individual seeds have
+wrong+UNKNOWN write rates30.27%–35.24% and correct-observation retention
+61.64%–76.04%. After averaging seeds inside this one video, LOGISTIC/MLP pooled
+risks are32.30%/34.74%, retention68.22%/71.30%, and available-target Rank-1
+deltas versus frozen memory are+0.051073/+0.054023. Better descriptive identity
+ranking therefore coexists with unacceptable writes at these points. This is
+one FIT development video, not independent generalization or population2%
+safety evidence. The remaining23 videos are still required; the immutable
+frontier snapshot is PARTIAL, fixed24 / fresh-risk1.
+
+V18 actual full regression: **1055 passed /5 unchanged historical failures**,
+65.22s, observed exit1. All130 R2-focused tests pass,6.82s, observed exit0.
+Seven new closure tests cover complete seed/video grids, failed initialization,
+metric metadata and units, exact C0 pairing, current/future onset completeness,
+no zero-action success, UNKNOWN separation and no frame/window-as-root claim.
+The historical tests and pinned third-party source remain unchanged.
+
 ## Execution boundaries
 
 Reuse existing DanceTrack TRAIN images, SAM3/OSNet weights and original Python environment. Preserve historical evidence. All runtime decisions use only current real candidate UIDs and causal state. Sole click initializes identity, not unconditional override authority. Every intervention uses the complete global assignment and committed feedback. GT labels stay offline. Frames, seeds and propagated errors are not independent causal events.
