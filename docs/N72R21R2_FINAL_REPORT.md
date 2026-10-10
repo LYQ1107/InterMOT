@@ -891,6 +891,90 @@ modified, and no all-tests-PASS or scientific closure is claimed. Only the
 audit helper/runner, tests, publication runner and necessary explanation are
 included in Git delivery; reports, weights, GT and trajectories remain local.
 
+## V15 actual all24 late-prefix continuity diagnostic
+
+FINAL GOAL remains **Event-Level Causal Identity Association: Safe One-Click
+Intervention with Fresh-Sequence Generalization for Online MOT**. Full task
+ACTIVE/PENDING; no model/gate/selection change or next-stage authorization.
+
+The previous future-only window limitation has now been measured, rather
+than assumed. `scripts/n72r21r2_prefix_continuity_v1.py` froze a structural
+diagnostic before reading outcomes: the earliest original valid sole click in
+each original FIT16/INNER8 video, and its **last registered complete H100
+position**, retaining every actual branch at that position. Initialization,
+registered plans and frame counts alone determine selection; no label, metric,
+benefit, best seed/action or checkpoint chooses the event. Failed click slots
+are retained, and an all-failed video is NOT imputed as a zero-effect success.
+This is **POSTHOC METRIC-SCOPE DIAGNOSTIC, NOT POLICY SELECTION**.
+
+The method first completed an actual pinned API/CLI synthetic validation:
+two people and an ID exchange after a correct three-frame prefix. In the
+two-frame future-only domain, the exchanged IDs have HOTA=AssA=IDF1=1 and
+IDSW=0. On the actual five-frame prefix-inclusive trajectory they instead have
+HOTA=.5976143, AssA=.3571429, IDF1=.6 and IDSW=2. All36 scalar API/CLI
+comparisons agree exactly. This is an explicit method-validation fixture,
+**not DanceTrack research data, training samples or scientific success**.
+
+The real all24 diagnostic then completed with observed supervisor exit0.
+It verifies the whole original video's sealed runtime evidence before parsing
+its raw GT, checks source-prefix and actual KEEP outputs/state equality,
+then joins the unchanged **full-global** original C0_SHADOW prefix0..t-1 with
+each complete actual global arm t..t+100. No target-only splice, other-track
+borrowing, output-public-ID relabeling, padding or runtime rerun is performed.
+Future-only H100 and prefix-through-H100 both receive actual pinned TrackEval
+API **and CLI** evaluation; current-inclusive101-frame API metrics additionally
+separate the current-frame boundary from earlier identity continuity. The
+prefix ends at t+100, **not the original full-video endpoint**, and these are
+one-shot original C0_SHADOW branches, not current adaptive MAIN controllers.
+
+Actual census: **24 registered videos; 22 selected valid sole-click episodes;
+13 failed initialization slots retained; two all-failed NOT_RUN videos;
+153 paired branch arms; 44 successful actual CLI processes; 2,754 scalar
+API/CLI comparisons with measured maximum error0**. The selected current
+full-tensor prestate is available for19 events; three legacy events have only
+the original semantic join evidence and are not upgraded to new tensor replay.
+All per-sequence reports, original-source hashes, generated-evaluation artifact
+hashes and CLI exit/log receipts were separately re-read and verified.
+
+There are **52 distinct effective one-shot arms**, still correlated and NOT
+independent roots:37 FIT and15 INNER. HOTA's window-versus-prefix sign changes
+in31/37 FIT arms and8/15 INNER arms; AssA's sign changes in31/37 and9/15.
+Nine FIT and two INNER arms have nonpositive HOTA or AssA in the future-only
+window but positive values for **both** in the prefix-inclusive domain. Of
+those11 descriptive arms, six satisfy the original component-safe H100 label:
+five FIT arms in0032,0037,0061,0098,0068, and one INNER delayed arm in0086.
+These are not six independent corrected events or a population precision.
+Other arms instead expose prefix losses hidden by local zero/positive scores.
+
+For a concrete frozen diagnostic example,0032's LEARNED_IDENTITY_TOP arm has
+future-only delta HOTA=AssA=0; adding the current frame alone remains zero
+within the existing1e-10 API/CLI tolerance. Its actual prefix-inclusive deltas
+are HOTA+.0052245683, AssA+.0056995417 and IDF1+.0022808268, with IDSW+1.
+Thus the earlier history, not merely inclusion of t, changes interpretation.
+This is **not** a G2 policy PASS: one selected one-shot arm, truncated endpoint,
+no all-seed adaptive full-video result or independent-root proof. The INNER
+0086 delayed arm similarly changes from local HOTA-.0015002005/AssA-.0036071303
+to prefix HOTA+.0026130222/AssA+.0040718845. No arm is selected for deployment.
+
+The earlier all-arm component/window diagnostic remains valid for its local
+domain, but neither component counts nor future-only window utility alone
+establish the direction of history-inclusive association benefit. Existing
+L5 labels,42 MAIN fits, thresholds and selection remain **unchanged**. A new
+supervision comparison would need its own prospective protocol and all
+required original FIT/INNER controls, not retroactive reward replacement or
+best-window/arm tuning. M7's actual model-generated on-policy correction,
+staged learning, pending controlled-state fits and full-video qualification
+remain open; this measurement does not substitute for them.
+
+Local evidence: `events/PREFIX_CONTINUITY_DIAGNOSTIC_V1.json`,
+`events/PREFIX_CONTINUITY_DIAGNOSTIC_READBACK_V1.json`, and all24 per-sequence
+reports. V24 actual complete regression: **1144 passed /5 unchanged historical
+failures**, observed pytest exit1; all219 R2-focused tests pass with observed
+exit0. The11 new prefix tests plus three existing pinned-export tests also
+passed as a separate14-test run. No historical test or dependency was edited.
+Only source, tests and necessary explanation enter V15 Git delivery; GT,
+synthetic fixtures, data, metrics, weights and trajectories remain local.
+
 ## Execution boundaries
 
 Reuse existing DanceTrack TRAIN images, SAM3/OSNet weights and original Python environment. Preserve historical evidence. All runtime decisions use only current real candidate UIDs and causal state. Sole click initializes identity, not unconditional override authority. Every intervention uses the complete global assignment and committed feedback. GT labels stay offline. Frames, seeds and propagated errors are not independent causal events.
