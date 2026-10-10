@@ -810,6 +810,87 @@ frozen42 MAIN fits, original operating points and pending full-policy evaluation
 are unchanged; this diagnostic does not authorize confirmation or select a
 scientific final decision.
 
+## V14 actual MAIN source/deployment feature support, M7 remains open
+
+FINAL GOAL remains **Event-Level Causal Identity Association: Safe One-Click
+Intervention with Fresh-Sequence Generalization for Online MOT**. The full task
+is ACTIVE/PENDING, with no next-stage or confirmation authorization.
+
+`scripts/n72r21r2_main_feature_support_v1.py` performs a frozen read-only audit
+of an actually completed MAIN family/objective/point, requiring all original
+INNER8 and all three registered seeds before reading observations. It reuses
+the exact objective-specific accepted FIT optimizer rows, verifies the frozen
+hierarchical FIT normalizer against each actual checkpoint, and replays every
+stored sampled current-choice prediction with its actual own past3 and
+same-prestate KEEP. No runtime, score, model, normalizer, label or operating
+point is modified. The audit protocol and result remain local.
+
+The first actual run, **SCALAR/L3/P0_CLAIM80**, completed with observed exit0:
+6,058 original accepted FIT optimizer rows; all24 seed-video cells; 18 valid
+sole-click episodes and six failed-initialization slots **per seed**. The one
+all-failed video is retained per seed, not counted as a successful zero-effect
+video. Each seed retains19,692 full original-video frame decisions, with
+1,243 sampled current frames and4,418 sampled current choices. **All13,254
+stored sampled predictions reproduce with measured numeric maximum error0**;
+this is numerical reproduction, not a claim of new complete-controller tensor
+AA. The existing sampling is every16 post-click frames plus every effective
+decision, not an all-frame feature distribution census. All three seed replays
+have zero effective actions; repeated seeds do not add independent evidence.
+
+Five current FIT features are exactly constant. Of these,
+`pending_confirmation_count` is outside its FIT marginal range at all4,418
+sampled choices per seed, reaching absolute200 in the existing normalized
+units. `previous_candidate_agreement` is outside at3,038 choices per seed,
+reaching approximately20. The other three constant features, bank size,
+previous intervention age and learned-probability indicator, remain in range.
+These are **scaled/clipped encoded values**, not raw frame counts. Current
+training arm features originally call `opportunity_features` with default
+confirmation/agreement values (`n72r21r2_counterfactual.py`), while the real
+MAIN bridge supplies causal per-branch pending/agreement metadata. Past
+history is not the same distribution as current inputs: the FIT history has
+17,639 actual non-padding vectors, and each seed's sampled history has3,675
+non-padding vectors with54 padding vectors excluded. Only three of those
+history dimensions are constant. Padding is not counted as observations.
+
+This establishes a concrete current-input support mismatch, **not its causal
+effect on decisions or a representation/architecture failure**. In particular,
+the SCALAR family consumes only anchor advantage, proposed probability and
+global regret; the two shifted current dimensions are not its input subset.
+Zero-action tracker/C0 equality therefore does not imply equality of all
+learned-controller current features. Nor does shared extractor code prove
+training/deployment distribution alignment. The report also measures named
+M7 observable features, explicitly labeling `native_same` as a binary proxy,
+and bank size/prototype agreement as proxies rather than an actual native
+streak or bank-vector drift measurement.
+
+MAIN actually uses `SupportAblationBridge`, inheriting `LearnedEventBridge`,
+not the separate legacy `LearnedMOTIdentityBridge`. The already running
+prospective controlled-state source uses `MatchedEventObserver`, which invokes
+this same learned-bridge extractor on an isolated always-KEEP core view,
+accepting only causal history/confirmation metadata after the own real commit.
+Its BASELINE/TREATMENT/MIXED fits and their separately frozen normalizers must
+be measured after all24 sources complete. They are not a silent repair of the
+frozen42 MAIN fits. Actual model-generated on-policy correction and staged
+conservative-to-active learning remain mandatory open M7 work; neither this
+audit nor one zero-intervention point constitutes their execution or a reason
+to skip them.
+
+Separately, the existing future-only H100 window utility excludes pre-event
+identity continuity. A local zero/negative window delta does not by itself
+prove absence of prefix/whole-video association benefit. The earlier paired
+component/window diagnostic remains correctly bounded to its measured local
+windows; prefix-inclusive comparison has **not** yet been measured. It must
+not be turned into a whole-video negative conclusion or used to retroactively
+change L5 labels/models/selection.
+
+V23 actual complete regression: **1133 passed /5 unchanged historical
+failures**, actual pytest exit1 observed, identical failure identities to V22.
+All208 R2-focused tests pass with observed exit0, including12 new support-audit
+tests. No failure was hidden, no historical test or third-party dependency was
+modified, and no all-tests-PASS or scientific closure is claimed. Only the
+audit helper/runner, tests, publication runner and necessary explanation are
+included in Git delivery; reports, weights, GT and trajectories remain local.
+
 ## Execution boundaries
 
 Reuse existing DanceTrack TRAIN images, SAM3/OSNet weights and original Python environment. Preserve historical evidence. All runtime decisions use only current real candidate UIDs and causal state. Sole click initializes identity, not unconditional override authority. Every intervention uses the complete global assignment and committed feedback. GT labels stay offline. Frames, seeds and propagated errors are not independent causal events.
