@@ -1765,6 +1765,13 @@ full MOT groups are complete; BASELINE no-fit disposition does not increase
 that count. Goal ACTIVE/PENDING,60GiB floor unchanged, no confirmation or
 next-stage authorization.
 
+### V29 — storage blocker audit
+
+Snapshot:26.25GiB free; own allocations35.71GiB, protected core21.17GiB.
+Even erasing all noncore files plus single-link caches caps free space at
+41.54GiB, below60GiB. Three consecutive turns satisfy the blocked audit.
+Goal BLOCKED/PENDING, not complete; see `audit/STORAGE_BLOCKED_AUDIT_V29.json`.
+
 ## Execution boundaries
 
 Reuse existing DanceTrack TRAIN images, SAM3/OSNet weights and original Python environment. Preserve historical evidence. All runtime decisions use only current real candidate UIDs and causal state. Sole click initializes identity, not unconditional override authority. Every intervention uses the complete global assignment and committed feedback. GT labels stay offline. Frames, seeds and propagated errors are not independent causal events.
