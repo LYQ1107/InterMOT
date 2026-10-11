@@ -1250,6 +1250,79 @@ authorization remains false. Stage status/checkpoint receipts carry current
 counts and publication identity rather than treating this dated note as live
 job or final scientific evidence.
 
+## 2026-10-11 V21 — complete-attribute MOT A/A supplemental audit
+
+FINAL GOAL remains **Event-Level Causal Identity Association: Safe One-Click
+Intervention with Fresh-Sequence Generalization for Online MOT**. The35-item
+engineering/runtime evidence audit is still pending; pass totals do not close
+that requirement or any scientific gate.
+
+Inspection established a concrete verification-scope gap. The existing
+`full_tracker_fingerprint` includes frame, target/next public and state IDs,
+last trusted frame and all per-identity state attributes/tensors. It does not
+include tracker pending/native and observation streaks, trust snapshot,
+adapter-call state, nested StateManager allocation/public maps or the other
+tracker instance attributes. Old recorded hashes remain unchanged and useful
+for their actual subset; their name alone is not complete-MOT-state evidence.
+Likewise legacy baseline semantic/output/trajectory-byte A/A cannot be promoted
+to complete tensor/state A/A. This does not establish a scientific effect or
+prove that an old trajectory was wrong.
+
+New `sam3_intermot/evaluation/complete_mot_state.py` reads every tracker
+instance attribute and the inspected nested IdentityState, StateManager,
+appearance-state and configuration attributes. Exact array dtype, shape and
+bytes, NumPy scalar types, dictionary key types, deque capacity and serialized
+scalar/signed-zero distinctions are retained. It checks that tracker/public
+and manager/state maps share the same actual state objects. Unsupported opaque
+values and invalid states fail closed; no unrecognized field is stringified
+or silently dropped. Snapshot equality uses canonical bytes. Frozen original
+tracker, matcher, authority, memory and previous fingerprint code are unedited.
+
+The initial preparation exposed an unsupported nested manager, retained with
+actual1pass/10fail/pytest exit1. An intervening test indentation collection
+error was also retained, before any protocol or real replay existed. The
+inspected manager uses regular instance dictionaries, not slots; a subsequent
+receipt corrects that initial wording. Corrected preparation tests passed12,
+then the final exact-type suite passed13/0,2.164s, actual exit0. These include
+mutations invisible to the old subset, allocator drift, broken manager/public
+state aliases, invalid/opaque values and independent raw C0/SHADOW click arrays.
+
+`scripts/n72r21r2_complete_mot_AA_v1.py` froze original FIT16+INNER8, raw
+sealed click vectors, all original candidates, common frozen identity weights,
+source SHA and full video scope before any real audit replay. It pairs C0 with
+the original P0 SHADOW at every frame, asserts complete tracker-state equality
+before/after, original sealed semantic/output equality, unchanged current input
+contents, complete unique public/candidate ownership and zero additional clicks,
+writes or authority. Full replay also compares streamed trajectory SHA to both
+original trajectories; it does not duplicate their files. Identity actor and
+authority-controller state intentionally differ from actor-free C0 and are
+**not** claimed equal. Runtime executes under the actual GT-file guard, with
+no GT content parse, new encoder/SAM3 inference, optimizer, scientific point,
+weight, threshold or dataset/split change.
+
+Actual freeze/smoke operations both exited0. The0074 smoke covers32 original
+frames on each of3 registered clicks:96 paired-frame exposures in **one video**,
+not full-video/all24 proof or independent correction events. New exact owner
+115346 is running the finite original24 videos on one CPU, under the unchanged
+60GiB floor and a128MiB supplemental planning reserve. Its first actual full
+0074 click completed1203 frames; whole-video/all24 evidence remains pending
+until independently sealed and checked. This is an engineering negative
+control, not a replacement for the registered research branches.
+
+V32 actual regression: **1219 passed /5 unchanged historical failures /0 errors
+/0 skips**,56.949s, pytest exit1. All294 R2-focused tests passed,5.846s, exit0.
+All original paths were retained, with the same process-local CPU-only SAM3
+collection mitigation; no tests or dependencies were changed to hide failures.
+The full35-semantic runtime/test mapping and final scope audit are still needed.
+
+At the restoration readback MAIN had128 whole cells, fresh risk21 whole
+videos and the controlled-source owner3 additional V4 recoveries, all still
+live and without retained failures. The full17-group closure, memory frontier,
+conditional branches, six final tables and whole M0–M11 task remain unresolved.
+Git delivery still requires a fresh expected remote parent and actual nonforce
+push/readback; prior transport failures never imply publication. CONFIRM/VAL/
+TEST/SOT remain unopened, Goal ACTIVE/PENDING and next-stage authorization false.
+
 ## Execution boundaries
 
 Reuse existing DanceTrack TRAIN images, SAM3/OSNet weights and original Python environment. Preserve historical evidence. All runtime decisions use only current real candidate UIDs and causal state. Sole click initializes identity, not unconditional override authority. Every intervention uses the complete global assignment and committed feedback. GT labels stay offline. Frames, seeds and propagated errors are not independent causal events.
