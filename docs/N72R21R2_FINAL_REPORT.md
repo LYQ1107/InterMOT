@@ -1730,6 +1730,41 @@ is documentation/evidence only, not a new regression run. V26 native nonforce
 delivery ee09b4738069a05643c803d560d140d0cb00e391 was verified. Goal stays
 ACTIVE/PENDING, next-stage authorization false, CONFIRM/VAL/TEST/SOT unopened.
 
+### V28 — actual state-source support and measured no-fit disposition
+
+The original all24 source loader produced the following eligible FIT support:
+
+| Frozen source mode | Rows | Benefit labels | Risk labels |
+| --- | ---: | ---: | ---: |
+| BASELINE_STATE |517|0|336|
+| TREATMENT_STATE |2219|243|673|
+| MIXED_STATE |2736|243|1009|
+
+All modes have exactly the same1212 COMMON_INNER rows, including feature,
+past/KEEP, target, dtype, shape, ordering and hierarchical weights. MIXED FIT
+is the exact baseline+treatment row union. All24 input receipts remain in
+scope; nonempty FIT/INNER supports have15/7 videos because original failed
+initializations remain unreplaced. INNER positives were never moved into FIT.
+These correlated controlled rows are not independent correction events.
+
+`on_policy/BASELINE_STATE.json` binds actual original-function failure receipts
+for all three seeds. The measured zero-benefit FIT branch returned before
+storage/model/optimizer/checkpoint creation; process-local guards prohibited
+those constructors. Zero optimizer steps, models and checkpoints, no fabricated
+MOT metrics. The live state-policy owner observed these receipts and marked
+BASELINE_STATE `NOT_RUN_ACTUAL_SUPERVISION_FAILURE_NOT_A_WEIGHT`.
+This describes the specific earliest-feasible KEEP-source probe dataset,
+not general baseline training or failure of a trained identity model.
+TREATMENT/MIXED still require six actual seeded fits after resource recovery.
+
+Eleven additive tests passed. Actual source-attested V40:1385 passed/five
+unchanged historical failures, zero errors/skips,71.721s, pytest exit1;
+460 focused passed,10.392s, exit0. Full35 runtime semantics, all17 group
+dispositions/effects and final scientific gates remain required. Only2/17
+full MOT groups are complete; BASELINE no-fit disposition does not increase
+that count. Goal ACTIVE/PENDING,60GiB floor unchanged, no confirmation or
+next-stage authorization.
+
 ## Execution boundaries
 
 Reuse existing DanceTrack TRAIN images, SAM3/OSNet weights and original Python environment. Preserve historical evidence. All runtime decisions use only current real candidate UIDs and causal state. Sole click initializes identity, not unconditional override authority. Every intervention uses the complete global assignment and committed feedback. GT labels stay offline. Frames, seeds and propagated errors are not independent causal events.
