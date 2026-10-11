@@ -1547,6 +1547,81 @@ deliverables, independent-root/G0-G4 audit and final scientific decision remain
 required. Goal ACTIVE/PENDING; CONFIRM/VAL/TEST/SOT unopened and next-stage
 authorization false.
 
+### V25 — user-authorized own-project lossless storage recovery
+
+Final Goal remains **Event-Level Causal Identity Association: Safe One-Click
+Intervention with Fresh-Sequence Generalization for Online MOT**. Storage
+cleanup is operational recovery, not a scientific PASS or scope reduction.
+V24 code/tests/docs were actually delivered by normal nonforce Git push:
+commit `4455f62e9f76f16f567e60ce7f6a61dca1b4c70d`, tree
+`dcaa1218f0a642c69ee8482a9878d6a2743f4bec`; fresh remote ref, parent, all three
+blobs and local bytes were verified. New V25 files require a separate delivery.
+
+After the user requested cleanup within this project, two closed historical
+record directories were cold-archived, not discarded: N72R19R1
+`metrics/eval_cache` (360 JSON files) and N72R19 `noise_results` (78 JSONL files).
+All438 original byte streams remain recoverable in per-file zstd archives.
+Original total11780763775 bytes became1241081582 bytes: logical reclamation
+10539682193 bytes, approximately9.82GiB. Each original SHA256, original path,
+size, archive SHA256 and exact decoded SHA/size is in a prepared receipt sealed
+before explicit single-file unlink and a completion receipt. No recursive
+deletion was used. The first360 archives were independently decoded again and
+all archives/receipts flushed; the second78 were decoded twice, with compressed
+data and prepared receipts flushed before unlink. Protected closed-stage
+metadata and final-result hashes remained unchanged.
+
+Archive directories under the existing R2 asset root are
+`storage_legacy_n72r19r1_eval_cache_zstd_v1` and
+`storage_legacy_n72r19_noise_zstd_v2`. Old plain-record consumers must restore
+individual files on demand from the compressed copy, checking the receipt's
+original SHA; original JSON/JSONL paths are no longer populated. No datasets,
+checkpoints, frozen manifests, final summaries, installed environment,
+session history, current scientific inputs or other project trees were
+removed. This does not silently assume the archived records are scientifically
+redundant. Exact local mappings/proofs are in
+`audit/storage_legacy_cache_archive_v1/`,
+`audit/storage_legacy_noise_archive_v2/`, and
+`audit/OWN_PROJECT_STORAGE_CLEANUP_AND_QUEUE_RECOVERY_V1.json`.
+
+Actual MAIN and controlled-source parent logs both end in the unchanged60GiB
+storage-guard traceback; old PIDs65762/15144 were absent and active child
+markers empty. The controlled0052 child exit1 was actually recorded; the old
+parent process exit statuses were not observed and are not invented. Failures,
+old owner markers, logs, partials and all proven completed artifacts remain.
+Lifecycle-only MAIN V2 and controlled-source V5 wrappers froze new exclusive
+owner/log namespaces. MAIN reverified all181 completed whole cells, their
+runtime/onset/actual pinned nine-metric evaluation seals, actual model weights,
+source protocol, candidate lineage and original INNER selections. Controlled
+recovery reverified17 completed recoveries, preserving five original completed
+sources; only original0052/0086 remain, in their original order. Original
+scientific runtime/labels/driver, association, memory, seeds, points, selection
+rule, splits, CPU limits and60GiB floor did not change; no new fit was launched
+by storage recovery. Re-executing an existing deterministic INNER selection
+must retain identical sealed bytes.
+
+At2026-10-11T18:24:43 UTC, new owners231685/231684 were verified live. MAIN
+had183 runtime/onset/result cells, controlled source22/24. PURE_MARGIN had22;
+EXACT_CF had21 successes plus a preserved0075 child storage-guard failure,
+not22 successful diagnostics. The existing exact-CF owner remained live, so
+its failed cell must be recovered only through a later nonduplicating attempt.
+STATE fit/policy owners remained waiting for all24, with zero actual STATE
+fits/policy cells. All six owners were observed live at that snapshot; this
+does not rehabilitate earlier stale ACTIVE markers. Free space was
+67390693376 bytes, about62.76GiB, and concurrent disk use makes it unsafe to
+promise enough headroom for every remaining registered experiment.
+
+Thirty-one additive storage/recovery unit tests passed. Actual source-attested
+V38 full regression: **1349 passed/five unchanged historical failures/zero
+errors/skips**,58.859s, actual pytest exit1; **424 focused passed**,8.193s,
+exit0. Executed source hashes were unchanged. The four pinned scalar
+SEQMAP_FILE CLI incompatibilities and one historical branch-literal expectation
+remain visible. Unit checks do not prove all35 full runtime/scientific semantics.
+Only1/17 registered groups is closed; all original scientific deliverables,
+six final tables, conditional on-policy branches and G0-G4 closure remain
+required. Goal ACTIVE/PENDING; CONFIRM/VAL/TEST/SOT remain unopened and
+next-stage authorization false. GitHub delivery is code/tests/necessary docs
+only: no archives, generated audit/result JSON, GT, weights or bulk traces.
+
 ## Execution boundaries
 
 Reuse existing DanceTrack TRAIN images, SAM3/OSNet weights and original Python environment. Preserve historical evidence. All runtime decisions use only current real candidate UIDs and causal state. Sole click initializes identity, not unconditional override authority. Every intervention uses the complete global assignment and committed feedback. GT labels stay offline. Frames, seeds and propagated errors are not independent causal events.
