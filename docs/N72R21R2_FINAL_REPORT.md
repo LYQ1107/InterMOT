@@ -1128,6 +1128,55 @@ sealed reports rather than overwriting them. Only code, tests and necessary
 explanation are uploaded. CONFIRM/VAL/TEST/SOT remain unopened; G0–G4/full-task
 scientific closure and next-stage authorization remain unachieved.
 
+## Continuation V19: observed owner interruption and unchanged source recovery
+
+A later fresh host/process inspection found all seven previous research owners
+and recorded active children absent, despite stale ACTIVE/WAITING markers.
+Exact markers and interruption evidence are archived. Original exit codes and
+termination causes are **UNKNOWN**, not inferred as OOM, timeout or scientific
+failure. During the interval MAIN reached115 completed full-MOT cells, risk
+memory19/24 videos and controlled-state / exact / pure12/24. The actual all17
+closure independently verifies SCALAR's complete96-cell group: both INNER
+points / all three seeds, original diagnostic P0 and selected-point FIT16.
+All actions/writes/N01/N10 and all nine paired deltas remain0 in FIT and INNER.
+G1 nonvacuity and G2 numeric targets fail. This closes **one of17** registered
+groups negatively; it does not close other families or model-on-policy stages.
+
+Four confirmed dead **idle** owners are restored by a new versioned wrapper:
+exact-CF, pure-margin, waiting STATE fits and waiting STATE policy. Original
+scientific run loops, paths, protocol, order, thresholds and seeds are unchanged.
+The twelve exact/pure results and source/weight/score/log hashes are verified;
+active children, partial work, retained failure or a live/reused PID cannot
+qualify for idle restart. Fresh exclusive owner records mirror only archived
+mutable canonical ownership metadata. Original V1 recovery evidence is retained.
+
+Controlled-source V4 separately verifies seven complete V3 recoveries, including
+0082 which finished after the last stale driver update. Whole runtime/label/
+canonical manifests and episode artifacts are SHA-verified before skipping a
+video; incomplete clicks never qualify. The remaining twelve of the unchanged
+original nineteen recovery videos run in original order through frozen V3/V2
+scientific operations and new isolated V4 paths. Actual new0098 source output
+has been observed. This is still **controlled**, not model-generated on-policy
+training. Five restored owners are directly process-verified. Interrupted MAIN
+and memory cells remain preserved and require separately audited recovery;
+they are not quietly restarted, discarded or claimed live.
+
+V29 focused272 tests passed, but the full run executed no tests: SAM3 import
+triggered a shared CUDA enumeration/capability initialization assertion
+(`device=9, num_gpus=9`). Original exit2, collection log and diagnosis remain
+preserved; neither underlying driver cause nor a connection to the old owners'
+deaths is proven. V30 reran **all the same test paths** with process-local
+`CUDA_VISIBLE_DEVICES=''`:1197 passed /5 unchanged historical failures,
+0 errors /0 skips,59.444s, actual pytest exit1. All272 R2-focused tests pass,
+5.570s, actual exit0. No tests, dependencies or GPU-driver configuration changed;
+no foreign GPU process was terminated. This is CPU regression evidence, not a
+claim that the shared CUDA environment has been repaired.
+
+The originally planned35-semantic audit remains pending. No successful test
+count replaces its scope-matched runtime evidence. Original frozen experiments,
+weights, candidate lineage and gates remain unchanged. Full Goal ACTIVE/PENDING;
+CONFIRM/VAL/TEST/SOT unopened and next-stage authorization false.
+
 ## Execution boundaries
 
 Reuse existing DanceTrack TRAIN images, SAM3/OSNet weights and original Python environment. Preserve historical evidence. All runtime decisions use only current real candidate UIDs and causal state. Sole click initializes identity, not unconditional override authority. Every intervention uses the complete global assignment and committed feedback. GT labels stay offline. Frames, seeds and propagated errors are not independent causal events.
