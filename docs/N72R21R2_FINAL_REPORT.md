@@ -1685,6 +1685,51 @@ CONFIRM/VAL/TEST/SOT unopened and next-stage authorization false. V25 native
 nonforce delivery641fe60bc3c00270255dbb128fdc1a42bee503ea is verified; this
 V26 source/test/doc checkpoint requires its own actual remote readback.
 
+### V27 — own-project cleanup and actual storage-stopped queues
+
+The completed cold archives retain470 historical byte streams with exact
+restoration SHAs, reclaiming11169338259 logical bytes. An additional independent
+SHA256 and byte-for-byte comparison proved four closed duplicate groups:
+N16/N17 TRAIN/VAL protocol copies, and the old R3R2 episode index/state array
+across the three worktrees. Six redundant allocations were replaced by
+read-only hardlinks, retaining all10 paths and identical content hashes;
+677217290 more logical bytes reclaimed. Future in-place rewriting is forbidden:
+first create a private copy, rather than making a shared inode writable.
+N16/N17 embeddings have different hashes and were kept distinct. Dataset,
+weight, unique scientific byte streams and other projects were not removed.
+Cold-archived plain paths require verified restoration. Combined archive/dedup
+reclamation is11846555549 bytes, about11.03GiB, not a promised filesystem-free
+gain; concurrent writes continued. Earlier cache-cleanup df deltas are not
+added as exactly attributable reclaimed bytes.
+
+`on_policy/ALL24_CONTROLLED_SOURCE_ACTUAL_CANONICAL_READBACK_V1.json` checked
+290 references across the original FIT16+INNER8, raw/canonical seals, episode
+artifacts, source hashes and label/runtime bindings. All72 clicks remain
+registered:59 valid runtime episodes and13 original initialization failures,
+without replacements or zero-filled metrics. The5588 correlated arm rows
+include395 H100-safe positive and1870 harmful arms. These are controlled
+sources, not independent beneficial correction events or model-generated
+on-policy results. STATE training still has zero actual models/cells.
+
+The full17-group closure census now has2 complete groups: SCALAR/L3 and
+LOGISTIC_RISK/L3. All96 LOGISTIC cells received fresh pinned CSV/source/tensor
+readback. Both groups have zero effective interventions and nine zero global
+MOT deltas, failing G1/G2. Their fixed diagnostic selection is not qualified;
+neither this negative partial result nor all24 source preparation closes the
+whole research Goal. The other15 registered groups and all original final
+tables, semantic audits, conditional branches and gates remain required.
+
+`audit/OWN_PROJECT_STORAGE_CLEANUP_AND_ACTUAL_QUEUE_STOP_V27.json` binds fresh
+process/log observations. MAIN V2 stopped after192 sealed cells; EXACT_CF,
+PURE_MARGIN and STATE_FIT also stopped at the unchanged60GiB guard. Their
+stale markers are not live-owner evidence; parent exit statuses were not
+observed. The sole remaining STATE_POLICY owner is live but idle, awaiting
+weights, with no active child. No new fit/replay is started below the floor.
+Current Python hashes still equal actual V39 regression sources; this update
+is documentation/evidence only, not a new regression run. V26 native nonforce
+delivery ee09b4738069a05643c803d560d140d0cb00e391 was verified. Goal stays
+ACTIVE/PENDING, next-stage authorization false, CONFIRM/VAL/TEST/SOT unopened.
+
 ## Execution boundaries
 
 Reuse existing DanceTrack TRAIN images, SAM3/OSNet weights and original Python environment. Preserve historical evidence. All runtime decisions use only current real candidate UIDs and causal state. Sole click initializes identity, not unconditional override authority. Every intervention uses the complete global assignment and committed feedback. GT labels stay offline. Frames, seeds and propagated errors are not independent causal events.
