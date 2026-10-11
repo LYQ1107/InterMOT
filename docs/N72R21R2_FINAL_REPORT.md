@@ -1375,6 +1375,94 @@ current code-only publication remain required. Last verified remote code is
 V18; unpushed local checkpoints are not called GitHub delivery. Goal remains
 ACTIVE/PENDING; CONFIRM/VAL/TEST/SOT unopened, next-stage authorization false.
 
+### V23 — complete M-A raw frontier and source-attested narrow test coverage
+
+All24 supplemental complete-state A/A sequence dispositions were independently
+read back at2026-10-11T16:20:35 UTC:22 nonempty full videos,64191 correlated
+paired-frame exposures and two all-failed0027/0012 NOT_RUN dispositions.
+The original72 click attempts remain59 valid/13 failed; there is no replacement
+or independent-event/person claim. Recorded input/UID/output/trajectory evidence
+is independently checked; complete internal-state equality is asserted by the
+frozen paired runtime, not reconstructed by this reader. Actor/controller state
+is intentionally not equal to actor-free C0. This does not complete all G0.
+
+Fixed and fresh learned-risk M-A now both have all24 original sequence results.
+The standalone raw reader actually exited0 (session65932), verifying all1062
+case-click trajectories,1155438 correlated case-frame exposures and171415
+correlated accepted-write exposures. It checks exact original frame grids,
+current UID/unique public ownership, sole-click/GT-free runtime flags, zero
+authority, bank continuity, strictly past bank entries, score-before-write,
+actual accepted frame/UID lists, trajectory byte SHA and original pinned CLI
+log/seqmap/nine numeric metrics. No tracker/encoder/SAM3 replay or fitting is
+introduced. Offline write-outcome labels are preserved, **not** independently
+reclassified from raw GT. Legacy tensor fingerprints are never relabeled as
+complete all-attribute tracker A/A.
+
+All10 executed memory families fail necessary empirical G4 point conditions
+in both FIT and INNER. Counts are seed-averaged within videos, not independent
+writes; rates below are pooled exposure summaries, not population guarantees.
+
+| Executed family | FIT wrong+UNKNOWN / correct retention | INNER wrong+UNKNOWN / correct retention |
+| --- | --- | --- |
+| FROZEN; selected LOGISTIC; selected MLP | undefined /0% (zero writes) | undefined /0% (zero writes) |
+| MEAN |49.06% /100% |69.94% /100% |
+| DELAYED; ROLLBACK |23.98% /10.78% |21.98% /16.12% |
+| MULTICUE |24.98% /12.39% |25.27% /18.50% |
+| PENDING_TRUSTED |25.11% /3.49% |31.38% /4.03% |
+| LOGISTIC fixed-P50 unqualified diagnostic |20.46% /48.07% |14.69% /52.19% |
+| MLP fixed-P50 unqualified diagnostic |21.40% /55.35% |18.18% /55.29% |
+
+The original frozen necessary limits remain nonzero writes, wrong+UNKNOWN
+at most2% and correct retention at least60%. Zero-write risk is undefined,
+not0%; low contamination cannot compensate for rejected correct observations.
+Whole-video bootstrap has15 FIT and7 INNER nonempty video clusters; all-failed
+videos remain in the census without invented observations. Video-local GT IDs
+are not cross-scene person-disjoint evidence. Independent write-event risk CIs
+remain unavailable. Numeric failure of necessary conditions does not require
+fabricating those CIs or establish a population impossibility theorem.
+
+Six requested named reports (`memory/FROZEN.json`, `DELAYED.json`,
+`TRUSTED_BANK.json`, `RISK_WRITE.json`, `ROLLBACK.json`, `SAFETY_FRONTIER.json`)
+now bind actual full24 results to the raw audit and frozen frontier, including
+paired recognition/video CIs, bank drift, retained UNKNOWN writes and all nine
+zero global-MOT deltas. Constant MOT is isolation, not memory benefit. The
+named M-A necessary-gate disposition is
+`NOT_RUN_NO_EXECUTED_M_A_POINT_MEETS_NECESSARY_MEMORY_GATE` for M-B.
+No association/memory changes are authorized; full authority-group closure
+and the whole M0–M11 scientific decision are still pending.
+
+Four additive test files close eight **narrow unit-mapping** gaps with32
+passing tests: frozen real OSNet CPU weights/buffers, actual full-global
+correct/wrong committed state propagation, offline-GT ordering, actual pinned
+synthetic full-video vs H100-truncated TrackEval, numeric/per-sequence parsing,
+storage floor and code-only publication rejection boundaries. Temporary
+synthetic fixtures are unit evidence, not real correction events or DanceTrack
+effects. Eleven additional M9 delivery tests reject omitted UNKNOWN counts,
+zero-write safety, invalid counts/rates and point-pass-to-population inflation.
+
+Actual source-attested V34:1282 passed/five unchanged historical failures;
+357 focused passed. Final V35 includes all new source/readers/tests:
+**1293 passed/five unchanged historical failures/zero errors/skips**,59.278s,
+pytest exit1; **368 focused passed**,7.898s, exit0. Each harness captures all
+executed source SHAs before/after, unchanged. Historical failures remain four
+pinned scalar SEQMAP_FILE CLI incompatibilities and one branch-literal test;
+no original test path was excluded and no dependency/test was repaired to hide
+failure. CPU CUDA masking affects only these diagnostic processes.
+
+All35 original engineering requirements now have source-assertion/JUnit/SHA
+**narrow** mappings; full35 runtime/scientific semantic closure remains false.
+The74-file inventory now has37 named files present, not37 completed scientific
+requirements. Six final tables, all17 group closure, original conditional
+on-policy/staged/confirmation decisions and independent-root evidence remain
+required. CONFIRM/VAL/TEST/SOT stay unopened; Goal ACTIVE/PENDING and next-stage
+authorization false. The latest complete-group snapshot still closes only1/17.
+
+Code-only delivery excludes all generated result JSON, data, weights and traces.
+V22's exact commit1c02b200555704516384123e379eabd230d50783 was verified by a
+fresh normal Git remote ref. Current V23 publication is accepted only after
+its actual nonforce push, fresh remote identity, tree/parent and clean-worktree
+readback; the immutable local Git delivery receipt records that outcome.
+
 ## Execution boundaries
 
 Reuse existing DanceTrack TRAIN images, SAM3/OSNet weights and original Python environment. Preserve historical evidence. All runtime decisions use only current real candidate UIDs and causal state. Sole click initializes identity, not unconditional override authority. Every intervention uses the complete global assignment and committed feedback. GT labels stay offline. Frames, seeds and propagated errors are not independent causal events.
