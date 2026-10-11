@@ -1323,6 +1323,58 @@ Git delivery still requires a fresh expected remote parent and actual nonforce
 push/readback; prior transport failures never imply publication. CONFIRM/VAL/
 TEST/SOT remain unopened, Goal ACTIVE/PENDING and next-stage authorization false.
 
+### V22 — independent complete-state evidence interpretation and explicit test gaps
+
+The active supplemental replay/protocol is unchanged. An additive independent
+reader (`scripts/n72r21r2_complete_mot_AA_readback_v1.py`) verifies sealed
+original initialization/candidate/encoder lineage, every current UID/input
+hash, complete original frame grids, recorded before/after continuity, original
+C0/SHADOW global outputs, sole-click/no-GT/no-write boundaries and recomputed
+original trajectory byte SHA. No tracker rollout, raw GT/future-label parse,
+fitting, new candidate, threshold or scientific operating point is introduced.
+Frozen replay runtime asserts complete internal-state equality; the reader
+does **not** independently recreate internal tracker states or assert equality
+of the actor/authority controller with actor-free C0.
+
+The frozen sequence worker emits unconditional A/A/full-video booleans for
+empty episode lists. New interpretation explicitly assigns all-failed clicks
+`NOT_RUN_NO_VALID_CLICK_INITIALIZATIONS_RETAINED`, with A/A proof null and zero
+frame exposure. It rejects missing/duplicate/replaced clicks, truncated or
+smoke video scope, changed attributes/inputs, discontinuous boundaries,
+duplicate public/candidate ownership and extra-click/GT/write/authority flags.
+Original frozen code, receipts and failed attempts are preserved.
+
+Actual preparation:44 tests passed (31 new reader-evidence tests and13 existing
+complete-state tests), pytest exit0. Actual V33 full regression:1250 passed,
+five unchanged historical failures, zero errors/skips, pytest exit1; all325
+R2-focused tests passed, exit0. CPU collection mitigation remains process-local
+only, with all original test paths and unmodified historical failure classes.
+
+First actual independent standalone readback exited0 at2026-10-11T15:50:28 UTC:
+12 registered sequence dispositions,11 nonempty complete videos and one
+all-failed0027 NOT_RUN. It reverified30069 correlated paired-frame exposures,
+not independent events or persons. The other12 sequence dispositions were
+pending in that fixed snapshot; concurrent new completions do not enlarge its
+denominator. This establishes narrow evidence provenance, not full G0, useful
+intervention, memory safety, generalization or whole-stage scientific PASS.
+
+The35 required engineering semantics now have an explicit partial source-
+assertion/JUnit scope map:27 narrow mappings and8 unmapped requirements. Pending
+are frozen encoder, correct/wrong tracker-state propagation, GT-only offline
+labels, full-video TrackEval, numerical metric parsing, resource-budget tests
+and code-only Git tests/final readback. Mapped assertions carry explicit limits;
+test-name similarity, overall pass counts and synthetic offline trajectories
+do not complete broader runtime scope. The old V33 harness did not attest each
+test-source SHA immediately before execution; current inspected source hashes
+are therefore not misrepresented as independently attested execution hashes.
+
+MAIN/risk/controlled-source/exact/pure/STATE queues remain on the original finite
+protocols and resources; full17 groups, M7 actual model-generated on-policy
+branches, conditional decisions, all74 artifacts/six tables/G0–G4 and verified
+current code-only publication remain required. Last verified remote code is
+V18; unpushed local checkpoints are not called GitHub delivery. Goal remains
+ACTIVE/PENDING; CONFIRM/VAL/TEST/SOT unopened, next-stage authorization false.
+
 ## Execution boundaries
 
 Reuse existing DanceTrack TRAIN images, SAM3/OSNet weights and original Python environment. Preserve historical evidence. All runtime decisions use only current real candidate UIDs and causal state. Sole click initializes identity, not unconditional override authority. Every intervention uses the complete global assignment and committed feedback. GT labels stay offline. Frames, seeds and propagated errors are not independent causal events.
