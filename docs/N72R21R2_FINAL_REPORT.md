@@ -1177,6 +1177,79 @@ count replaces its scope-matched runtime evidence. Original frozen experiments,
 weights, candidate lineage and gates remain unchanged. Full Goal ACTIVE/PENDING;
 CONFIRM/VAL/TEST/SOT unopened and next-stage authorization false.
 
+## 2026-10-11 V20 — actual MAIN and memory owner recovery; full Goal pending
+
+FINAL GOAL remains **Event-Level Causal Identity Association: Safe One-Click
+Intervention with Fresh-Sequence Generalization for Online MOT**. This is
+execution continuity, not a new scientific policy or a final decision.
+
+Both original MAIN and memory owners and their recorded children were absent
+from `/proc`; no old process exit status or death cause was observed. Recovery
+rejects live/reused PIDs, retained failures, duplicate owners and unowned whole
+cell seals. Original ownership markers are archived byte-exactly before their
+mutable canonical mirrors are updated. No foreign process was stopped.
+
+`scripts/n72r21r2_main_terminal_recovery_v1.py` independently checked all115
+sealed MAIN cells: frozen source/actual fit/weight lineage, candidate and anchor
+SHA, runtime/own-onset seals, trajectory/branch SHA, original valid-click census,
+zero-action modern tensor/trajectory C0 equality where applicable, successful
+actual pinned CLI logs and CSV-reparsed nine metrics. The exact interrupted
+LOGISTIC_RISK/L3/seed730103/P0 cell on0016 reruns its whole three-click video in
+a new process-local BASE. Its old completed click0 and partial click1 files
+remain unchanged; neither is adopted as a sealed whole cell. The original
+driver's actual state object is hydrated with115 verified completions and its
+completed SCALAR group, retaining the original grid/order/all3 seeds/shared
+INNER selection. New owner65762 subsequently sealed the interrupted cell and
+resumed the next original cell:116 completed, no retained failure at readback.
+
+`scripts/n72r21r2_memory_terminal_recovery_v1.py` verified the six existing
+actual optimized risk-writer fits and their24 source receipts, all19 sealed
+whole-video results and actual nine-metric CSVs. On0016,26 of36 registered
+case-click seals additionally passed raw complete-frame semantic/output AA to
+C0, tensor AA to the same M-A FROZEN reference and accepted-write provenance
+checks. Only the10 missing cases rerun through the unchanged original runtime
+in a new process-local ASSETS. A26-trajectory SHA-verified symbolic-link view
+lets the real pinned CLI evaluate mixed old/new trajectories without copying
+data. All old sealed/partial files and original logs remain. New owner74999
+is running this finite remainder, then the remaining original development
+videos; it does not retrain, alter bank/matcher/association, grant authority,
+retune a point or enter M-B/confirmation. Frozen recovery protocols and actual
+launch receipts reside locally under `outputs/N72R21R2/audit/`.
+
+An unfrozen memory-wrapper bracket syntax error was caught during preparation,
+retained in `audit/MEMORY_RECOVERY_PREPARATION_FAILURE_V1.json`, then repaired
+before freezing or launching any memory worker. All9 new restoration tests
+then passed. Actual V31 regression ran all original test paths with the same
+process-local CPU-only collection mitigation: **1206 passed /5 unchanged
+historical failures /0 errors /0 skips**,59.260s, actual pytest exit1. All281
+R2-focused tests passed,5.984s, actual exit0. This is neither an all-pass suite
+nor evidence of repaired shared CUDA. The four pinned scalar-SEQMAP CLI
+failures and historical branch-literal failure remain visible.
+
+Controlled source recovery also produced real0098 runtime/labels; it remains
+controlled curriculum, not actual model-generated on-policy training. One of
+17 registered MAIN/STATE groups has a complete negative development closure;
+other groups and the complete memory frontier remain pending. No nonvacuous
+scientific success, independent beneficial-root count, G4 safety, full35-semantic
+audit, six final tables or whole-stage completion is asserted from restoration.
+
+Publication was pending during the above restoration preparation: the last
+verified published code wasV18/AACB, withV19/EEC8 and these new code/tests/docs
+local. A fresh HTTPS
+ref read failed with actual TLS exit128; strict batch SSH/22 timed out with
+exit255, and the connected GitHub branch-read transport also returned an
+error. No push/ref write was attempted without a fresh expected parent. No
+certificate/host checking or global proxy configuration was bypassed. Only
+code, tests and this necessary report are eligible for verified delivery.
+Subsequent publication identity and completion must be read from the actual
+versioned delivery receipt, not inferred from this dated preparation account.
+
+The full Goal remains ACTIVE/PENDING. The original frozen protocol and
+G0–G4 remain unchanged; CONFIRM/VAL/TEST/SOT stay unopened and next-stage
+authorization remains false. Stage status/checkpoint receipts carry current
+counts and publication identity rather than treating this dated note as live
+job or final scientific evidence.
+
 ## Execution boundaries
 
 Reuse existing DanceTrack TRAIN images, SAM3/OSNet weights and original Python environment. Preserve historical evidence. All runtime decisions use only current real candidate UIDs and causal state. Sole click initializes identity, not unconditional override authority. Every intervention uses the complete global assignment and committed feedback. GT labels stay offline. Frames, seeds and propagated errors are not independent causal events.
