@@ -1622,6 +1622,69 @@ required. Goal ACTIVE/PENDING; CONFIRM/VAL/TEST/SOT remain unopened and
 next-stage authorization false. GitHub delivery is code/tests/necessary docs
 only: no archives, generated audit/result JSON, GT, weights or bulk traces.
 
+### V26 — all42 MAIN model capacity and original timing readback
+
+`training/ALL42_MAIN_MODEL_CAPACITY_AND_TIMING_READBACK_V1.json` independently
+verified all42 actual MAIN models/14 three-seed family-objective groups. It
+loaded each selected checkpoint strictly, recomputed named tensor layouts and
+trainable parameter counts, compared every selected tensor with the original
+initial checkpoint, and verified changed-element counts/nonzero gradient-step
+records. Original training/source/protocol, all epoch-checkpoint, chosen-weight,
+initial-weight and validation-prediction hashes were checked. No fitting,
+weight selection, threshold choice, policy change or new timing benchmark was
+performed. All seven SMALL_MLP loss objectives have the same actual tensor
+layout and1411 parameters, but objective-specific eligible row counts and
+excluded-label support differ: identical structure is not proof of matched
+training support or causal superiority of a loss.
+
+The L3 architecture cost component, retaining all three original seeds.
+Parameter counts cover the learned authority head, not the shared frozen
+SAM3/OSNet/identity modules or the full tracker:
+
+| Family | Parameters | Original CPU forward median, ms |
+| --- | ---: | ---: |
+| Scalar |6|0.0511|
+| Logistic Risk |123|0.0487|
+| Small MLP |1411|0.0654|
+| Pairwise Ranker |1411|0.1320|
+| Harm-First Dual Head |2723|0.1264|
+| Causal Temporal |8771|0.5931|
+| Counterfactual Value |1411|0.1358|
+| Dual Identity State |2636|0.2291|
+
+These are the original100 CPU single-thread inference-mode calls using one
+normalized real INNER branch row, its past3 vectors and same-prestate KEEP row.
+The old `CPU_single_event_latency_ms` field includes slicing/dispatch around
+that call; it is **not** an entire-event or online-MOT latency. It excludes
+feature extraction, output conversion, SAM3/OSNet, solver/tracker and full-frame
+candidate evaluation. Min/median/max across the three recorded seed timings
+are not controlled timing confidence intervals or proof of family speed
+ranking. Different families have different capacities; a matched-capacity
+cross-family experiment is not claimed. Full Table3/Table4 still require the
+original complete own-policy effects, state-source studies and conditional
+relational disposition, rather than only model-cost measurements.
+
+New controlled0052 recovery received an independent canonical/artifact/source
+readback:27 references, both installed receipts equal their sealed V5 raw
+sources, all episode and label artifact SHAs valid, and old storage-failure
+logs unchanged. Its258 nested-arm rows include34 H100-safe positive arms and60
+harmful arms. These correlated controlled-state arms are not independent
+deployed corrections or actual model-generated on-policy training. The source
+pool is now23/24; original0086 remains live, and formal STATE fits still require
+all24. EXACT_CF has22 successful sequences plus the retained0075 storage
+failure, not an all-pass24-case report. Recovery must await the existing
+EXACT_CF owner's terminal state before retrying that failed cell.
+
+Twenty-five additive capacity/readback tests passed. Source-attested V39 full
+regression:1374 passed/five unchanged historical failures, zero errors/skips,
+59.648s, actual pytest exit1;449 focused passed,8.182s, exit0. Executed Python
+source remained byte-identical before/after. Tests/costs/source recovery do
+not prove whole-goal completion, G0-G4, independent causal roots, full35
+semantics, all17 groups or the six final tables. Goal ACTIVE/PENDING;
+CONFIRM/VAL/TEST/SOT unopened and next-stage authorization false. V25 native
+nonforce delivery641fe60bc3c00270255dbb128fdc1a42bee503ea is verified; this
+V26 source/test/doc checkpoint requires its own actual remote readback.
+
 ## Execution boundaries
 
 Reuse existing DanceTrack TRAIN images, SAM3/OSNet weights and original Python environment. Preserve historical evidence. All runtime decisions use only current real candidate UIDs and causal state. Sole click initializes identity, not unconditional override authority. Every intervention uses the complete global assignment and committed feedback. GT labels stay offline. Frames, seeds and propagated errors are not independent causal events.
