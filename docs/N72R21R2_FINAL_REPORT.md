@@ -1463,6 +1463,90 @@ fresh normal Git remote ref. Current V23 publication is accepted only after
 its actual nonforce push, fresh remote identity, tree/parent and clean-worktree
 readback; the immutable local Git delivery receipt records that outcome.
 
+### V24 — original raw-GT memory audit and current evidence binding
+
+The subsequent original all24 raw-GT audit actually exited0 (session22191,
+terminal chunk e289d5) at2026-10-11T17:19:37 UTC. It first reverified original
+runtime/result/source hashes and only then parsed original FIT16/INNER8 TRAIN
+GT annotations. Using the unchanged strict one-to-one IoU truth rule, it
+recomputed every original count and accepted write's frame/UID/outcome, plus
+post-anchor drift, for all1062 actual M-A cases. These are correlated case-click
+exposures, **not** independent events. It checked1155438 correlated case-frame
+exposures and171415 correlated writes:115926 TARGET,31371 VERIFIED_OTHER and
+24118 UNKNOWN. All counts, write labels and drift agree with the saved original
+results. All72 original click attempts remain59 valid/13 failed; all-failed
+0027/0012 dispositions remain NOT_RUN, without replacement.
+
+The audit also checks the original anchor GT identity/box, sole clicked UID,
+failed initialization, complete frame grid, offline-only GT ordering, no
+pre-anchor write, current committed write UID and finite bank drift. It does
+not replace the strict matcher, relabel UNKNOWN, run SAM3/OSNet/TrackEval,
+train a model, change thresholds, or modify memory/association. This is a fresh
+raw-label recomputation using the **same** truth rule, not independent
+algorithmic validation of that matcher. Annotation presence is not an
+occlusion oracle or evidence of cross-video person identity.
+
+`audit/MEMORY_ALL24_RAW_GT_LABEL_RECOMPUTATION_V1ACTUAL_ALL24.json` is the
+immutable full audit. `memory/RAW_GT_EXTENSION_OF_SIX_NAMED_REPORTS_V1.json`
+binds it to all six existing named M-A reports, preserving their original
+bytes and historical pre-recomputation statements. The actual extension
+reverified5779 distinct reference hashes, all24 sequence/click/case coverage,
+the original role summaries, paired recognition/video bootstrap intervals
+and all nine unchanged global-MOT deltas. It independently checked the
+existing necessary point dispositions without changing any denominator.
+
+All ten executed memory families still fail the original nonzero-write,
+wrong+UNKNOWN<=2% and correct-retention>=60% point conditions on both FIT and
+INNER. The new raw-GT evidence strengthens provenance of that negative result;
+it does not improve the underlying memory signal. Selected risk writers still
+make zero writes, with undefined risk, not a safety PASS. M-B remains
+`NOT_RUN_NO_EXECUTED_M_A_POINT_MEETS_NECESSARY_MEMORY_GATE`. Video-cluster
+intervals are descriptive and do not prove cross-recording independence or
+population2% safety; independent causal write-event uncertainty is unresolved.
+No full M9/open-set closure, all-authority closure or scientific PASS follows.
+
+Twenty-five additive raw-GT audit unit tests passed. Source-attested actual
+V36 full regression: **1318 passed/five unchanged historical failures/zero
+errors/skips**,61.922s, actual pytest exit1. **393 focused passed**,7.768s,
+exit0. The same four pinned scalar SEQMAP_FILE CLI failures and one historical
+branch-literal failure remain; no test path was excluded or failure concealed.
+All executed Python source hashes were unchanged before/after. Scope map V4
+rebinds all35 existing narrow assertion mappings to the actual V36 JUnit cases
+and executed-source SHA; full35 runtime/scientific semantics remain unproven.
+
+The user's storage cleanup removed only reproducible package caches: uv's
+normal offline prune reported12284 files/3.3GiB; the explicit personal pip
+HTTP-download cache had462 files/2690686976 allocated bytes, with zero files
+after cleanup. No datasets, checkpoints, installed environments, old results,
+failure/partial evidence, session history or other project trees were deleted.
+Downloads can be fetched again. Installed versions and CPU Torch/NumPy/SciPy
+smoke remained valid. Observed free space increased about5.82GiB at cleanup;
+subsequent concurrent usage reduced free space to66.37GiB at17:44 UTC. The
+60GiB floor and frozen worker limits remain unchanged. Future write headroom
+must be checked, not inferred from cache size or parent-filesystem capacity.
+
+V23 source publication and exact canonical Git synchronization are now
+complete: local and fresh verified remote commit
+`3e4e9887c517f63ef49d13662dc1ec8b4f736f2c`, tree
+`b442a8db5616b7e03f2c309342f96c5c08942687`, parent
+`1c02b200555704516384123e379eabd230d50783`. Native Git commit bytes and the
+original API metadata independently agree. Original local twin1ec3f49 remains
+under its backup ref; no force/reset/working-file rewrite. Failed earlier
+transports and the helper error are retained, not called successes. The new
+raw-GT source/tests in this V24 section are not retroactively called V23
+publication: acceptance requires their own fresh nonforce Git delivery and
+actual source/tree/parent readback receipt. Generated audit JSON, GT, weights,
+data and runtime traces remain local.
+
+At17:44 UTC, actual MAIN own-policy runtime/full-MOT/onset counts were175,
+controlled-state/exact-CF/pure-margin each21/24, and STATE fits/policy remained
+waiting for all24 sources. Original six owners were verified live. Only1/17
+registered groups is currently closed. All original M0-M11 requirements,
+conditional model-generated on-policy branches, six final tables,74 semantic
+deliverables, independent-root/G0-G4 audit and final scientific decision remain
+required. Goal ACTIVE/PENDING; CONFIRM/VAL/TEST/SOT unopened and next-stage
+authorization false.
+
 ## Execution boundaries
 
 Reuse existing DanceTrack TRAIN images, SAM3/OSNet weights and original Python environment. Preserve historical evidence. All runtime decisions use only current real candidate UIDs and causal state. Sole click initializes identity, not unconditional override authority. Every intervention uses the complete global assignment and committed feedback. GT labels stay offline. Frames, seeds and propagated errors are not independent causal events.
