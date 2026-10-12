@@ -43,7 +43,8 @@ complete; CONFIRM/VAL/TEST/SOT and next-stage authorization remain closed.
   original global replay/points/all3 seeds/INNER8/selected FIT16, actual fixed
   six-head51-frame GT-free smoke, queued192 cells reusing original STATE slot,
   no third full-video worker or runtime target payload, actual V51; subsequent
-  original Ranker96-cell seal/CSV/C0 readback and fifth whole-group negative.
+  original Ranker/MIXED96-cell seal/CSV/C0 readbacks, sixth whole-group negative,
+  original STATE192-cell terminal completion and actual transfer slot handoff.
 
 Actual model fits, passive current-identity claims, complete own-policy MOT
 effects, independent beneficial roots and unseen-scene generalization are

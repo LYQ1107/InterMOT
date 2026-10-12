@@ -109,3 +109,35 @@ At that snapshot, five of17 original groups had complete actual MOT results,
 one had a measured all3-seed prefit failure (not zero-valued MOT results),
 and11 remained pending. Original MAIN continues into HARM_FIRST_DUAL_HEAD.
 The new controlled-L1 transfer has not been substituted for these groups.
+
+## Subsequent STATE completion and actual slot handoff
+
+The original STATE owner subsequently sealed all192 registered cells and
+exited with no retained child failures. TREATMENT_STATE and MIXED_STATE each
+have96 actual cells; BASELINE_STATE remains an all3-seed measured prefit
+failure, not a trained model, full-MOT result or zero-metric comparator.
+The unchanged closure verified the newly complete MIXED group across FIT16
+and INNER8, including all three seeds and shared selected P0_CLAIM80.
+Independent readback reparsed all96 MIXED cells' actual pinned nine-metric
+CSVs: zero interventions/writes, all metrics exactly C0. Both roles failed
+G1/G2 with HOTA paired-video delta CI [0,0]; zero writes are not G4 safety.
+
+The original STATE terminal marker, missing original live processes and all192
+seal chains passed the transfer owner's unchanged slot gate. The same waiting
+owner then automatically launched its first actual full-global runtime:
+LEGACY_H100_BENEFIT/seed730101/P0_CLAIM80/dancetrack0096. Its real child process
+was confirmed running. This is an actual runtime start, not a completed cell,
+an evaluated effect, a new concurrent third full-MOT worker or a Goal pass.
+
+Local evidence under `outputs/N72R21R2/`:
+
+- `audit/V40_COMPLETE_MIXED96_ACTUAL_CSV_READBACK_V1.json`, SHA256
+  `7cb820844b6252d849bf115ddc4a44948c2b5ef7d73369e435ad8bd9c933713f`;
+- `mot/development_closure_v1/snapshots/8b3aeb825bda1006f87853732c4b9c7828d56845dc2746faef21fd1ac80837d3.json`,
+  SHA256 `fcd26d1e8bfbb36249b58b9f6caa9842ae052d84d382f23d9dfa1eb49459599c`.
+
+At this later snapshot, six original groups had complete actual MOT results,
+one had a terminal measured prefit failure, and10 remained pending. The two
+new controlled-L1 conditions/192 cells, original remaining groups, conditional
+on-policy rounds and whole-task deliverables remain separate pending work.
+No CONFIRM/VAL/TEST/SOT access or next-stage authorization occurred.
