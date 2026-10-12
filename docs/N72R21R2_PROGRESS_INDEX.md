@@ -49,7 +49,10 @@ complete; CONFIRM/VAL/TEST/SOT and next-stage authorization remain closed.
   selections,10/28 MAIN support reports and the still-open natural L1/M2 gap;
   subsequent HARM96 full registered seal/CSV/selection readback:87 evaluated
   cells, nine retained no-initialization dispositions and the seventh original
-  whole-group negative, with nine other original groups still pending.
+  whole-group negative, with nine other original groups still pending;
+  subsequent Legacy paired-transfer96 complete-condition CSV/selection/gate
+  readback, another zero-intervention negative; current-correction condition
+  and the paired comparison remain pending, separate from the original17.
 
 Actual model fits, passive current-identity claims, complete own-policy MOT
 effects, independent beneficial roots and unseen-scene generalization are

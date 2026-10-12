@@ -223,3 +223,33 @@ groups remain pending. Original MAIN has entered CAUSAL_TEMPORAL/L3; the
 controlled-L1 paired transfer remains separate and incomplete. Natural M2/L1,
 conditional rounds, all35/all74 semantics and full-task closure remain open.
 CONFIRM/VAL/TEST/SOT and next-stage authorization remain closed.
+
+## Subsequent first paired-transfer condition completion
+
+LEGACY_H100_BENEFIT has completed all96 registered dispositions: both INNER8
+points/all3 seeds, then shared selected P0_CLAIM80 on FIT16/all3 seeds.
+Independent offline readback verified frozen transfer/fit/checkpoint/source and
+candidate axes, runtime/onset guards, all artifact seals, raw onset counters,
+zero-action C0 core-tensor/trajectory checks and actual pinned nine-metric CSVs.
+The all-seed shared selection independently recomputed to P0_CLAIM80.
+There are87 evaluated sequence/point/seed cells and9 retained no-initialization
+dispositions (six INNER, three FIT), without metric imputation. The231 valid
+click replays are correlated replicas, not independent roots or person IDs.
+
+Effective interventions and memory writes were zero; all evaluated metrics
+matched C0. Unchanged G1/G2 gates failed in both FIT and INNER, with all nine
+macro deltas0 and paired-video95% delta CIs [0,0] on15 FIT and7 INNER usable
+video clusters. This is a complete single-condition negative, not G4 safety,
+proof that current-correction labels fail, or a completed paired comparison.
+
+Local evidence under `outputs/N72R21R2/`:
+
+- `audit/V40_TRANSFER_LEGACY_COMPLETE96_ACTUAL_CSV_SELECTION_READBACK_V1.json`,
+  SHA256 `d2a206c0704454fe185408f1d7bd058d8037dae42c8c08105dbe18fc7312e5ab`.
+
+The same original transfer owner has started CONTROLLED_UNIT_CORRECTION;
+its96 cells and the final paired label-effect comparison remain pending.
+This transfer does not increase or replace the original17-group census.
+No models, thresholds, points or source were changed for the readback.
+Original natural M2/L1, remaining registered groups, conditional rounds and
+full-task closure remain open. CONFIRM/VAL/TEST/SOT and next stage stay closed.
