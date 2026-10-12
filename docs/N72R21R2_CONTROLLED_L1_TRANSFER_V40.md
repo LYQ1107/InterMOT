@@ -191,3 +191,35 @@ No new natural-event labels, training, runtime, protocol change or root-count
 renaming occurred in this review. The original natural L1/M2 requirement,
 remaining original groups, conditional rounds, all35/all74 semantic coverage
 and final scientific closure remain pending. CONFIRM/VAL/TEST/SOT remain closed.
+
+## Subsequent HARM whole-group readback
+
+Original HARM_FIRST_DUAL_HEAD/L3 now has all96 registered dispositions:
+both INNER8 points/all3 seeds and shared selected P0_CLAIM80 on FIT16/all3
+seeds. Independent readback checked all runtime/onset/candidate/fit/checkpoint/
+trajectory seals and reparsed actual pinned nine-metric CSVs. There are87
+evaluated sequence/point/seed cells and9 no-valid-initialization dispositions
+(six INNER, three FIT), with no metrics imputed. The231 valid click replays
+are correlated replicas, not independent causal roots or person identities.
+The original all-seed point selection independently recomputed to P0_CLAIM80.
+
+There were zero effective interventions and writes; sealed zero-action C0
+core-tensor and trajectory checks passed and all evaluated metrics matched C0.
+Both FIT and INNER failed the original G1/G2 gates, with nine macro deltas0
+and paired-video95% delta CIs [0,0] on15 FIT and7 INNER usable video clusters.
+This is a whole-group negative, not G4 safety, confirmation qualification or
+scientific closure. No original weights, points, thresholds or source changed.
+
+Local evidence under `outputs/N72R21R2/`:
+
+- `audit/V40_COMPLETE_HARM96_ACTUAL_CSV_TRACE_READBACK_V1.json`, SHA256
+  `f3bbc5d69b14ab588a30882bcfd42690cb1e4c9071f0ef8c3b50c3df68c8f108`;
+- `mot/development_closure_v1/snapshots/47144542137daffb040a40e0106a0dea64932485def43359afd996bc40bd17af.json`,
+  SHA256 `20a45aa4f615f278e04eae0de9c130e20022b50b41fe3a5580142dfe17c08ab0`.
+
+Seven original groups now have complete MOT dispositions, one retains its
+measured all3-seed prefit failure without a model/MOT metrics, and nine original
+groups remain pending. Original MAIN has entered CAUSAL_TEMPORAL/L3; the
+controlled-L1 paired transfer remains separate and incomplete. Natural M2/L1,
+conditional rounds, all35/all74 semantics and full-task closure remain open.
+CONFIRM/VAL/TEST/SOT and next-stage authorization remain closed.

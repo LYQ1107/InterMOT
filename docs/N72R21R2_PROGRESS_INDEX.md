@@ -46,7 +46,10 @@ complete; CONFIRM/VAL/TEST/SOT and next-stage authorization remain closed.
   original Ranker/MIXED96-cell seal/CSV/C0 readbacks, sixth whole-group negative,
   original STATE192-cell terminal completion and actual transfer slot handoff;
   subsequent original HARM and Legacy transfer dual-point INNER48 CSV/shared
-  selections,10/28 MAIN support reports and the still-open natural L1/M2 gap.
+  selections,10/28 MAIN support reports and the still-open natural L1/M2 gap;
+  subsequent HARM96 full registered seal/CSV/selection readback:87 evaluated
+  cells, nine retained no-initialization dispositions and the seventh original
+  whole-group negative, with nine other original groups still pending.
 
 Actual model fits, passive current-identity claims, complete own-policy MOT
 effects, independent beneficial roots and unseen-scene generalization are
