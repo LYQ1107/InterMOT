@@ -21,6 +21,9 @@ complete; CONFIRM/VAL/TEST/SOT and next-stage authorization remain closed.
 - [V34 measured MAIN training/deployment support](N72R21R2_MAIN_M7_SUPPORT_V34.md):
   six original L3 points, unchanged frozen prediction replay, specific current
   confirmation/agreement mismatch,22 pending points and verified V33 push.
+- [V35 matched STATE source/deployment support](N72R21R2_STATE_M7_SUPPORT_V35.md):
+  both complete TREATMENT points, removed confirmation-default mismatch but
+  untreated-age support gap, actual V46 and two original MIXED points pending.
 
 Actual model fits, passive current-identity claims, complete own-policy MOT
 effects, independent beneficial roots and unseen-scene generalization are
