@@ -27,6 +27,10 @@ complete; CONFIRM/VAL/TEST/SOT and next-stage authorization remain closed.
 - [V36 known-source causal error units](N72R21R2_CONTROLLED_ERROR_UNITS_V36.md):
   all24 controlled-unit correction labels, explicit natural-L1 proof gap,
   actual V47 and newly complete MLP/TREATMENT96-cell group negatives.
+- [V37 derived native exposure and MIXED / ranker points](N72R21R2_NATIVE_COUNTER_MIXED_V37.md):
+  all5588 recorded source counters matched, three derived STATE point audits,
+  MIXED untreated-age support without interventions, original ranker/P0 and
+  MIXED/P0 full INNER points, actual V48 and unchanged original finite queues.
 
 Actual model fits, passive current-identity claims, complete own-policy MOT
 effects, independent beneficial roots and unseen-scene generalization are
