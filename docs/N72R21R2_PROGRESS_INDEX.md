@@ -39,6 +39,10 @@ complete; CONFIRM/VAL/TEST/SOT and next-stage authorization remain closed.
   distinct current-correction vs H100 benefit labels on identical source/risk/
   value/input/normalizer/initialization, six bounded actual1411-parameter fits,
   strict loader reproduction and teacher-only results, not natural/G1/MOT proof.
+- [V40 frozen paired real-stream transfer](N72R21R2_CONTROLLED_L1_TRANSFER_V40.md):
+  original global replay/points/all3 seeds/INNER8/selected FIT16, actual fixed
+  six-head51-frame GT-free smoke, queued192 cells reusing original STATE slot,
+  no third full-video worker or runtime target payload, actual V51.
 
 Actual model fits, passive current-identity claims, complete own-policy MOT
 effects, independent beneficial roots and unseen-scene generalization are
