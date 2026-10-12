@@ -15,6 +15,9 @@ complete; CONFIRM/VAL/TEST/SOT and next-stage authorization remain closed.
 - [V32 actual controller inventory/costs](N72R21R2_TRAINING_INVENTORY_V32.md):
   MAIN42+STATE6 actual optimized controllers, three measured prefit failures,
   same-architecture loss/support reporting, and all48 MLP/L3 INNER negatives.
+- [V33 actual supervision and STATE INNER](N72R21R2_OBJECTIVE_STATE_READBACK_V33.md):
+  all48 TREATMENT INNER seals/CSVs, all21 MLP target/FIT-normalizer readbacks,
+  seven objective reports and the explicit unresolved independent-event L1 gap.
 
 Actual model fits, passive current-identity claims, complete own-policy MOT
 effects, independent beneficial roots and unseen-scene generalization are
