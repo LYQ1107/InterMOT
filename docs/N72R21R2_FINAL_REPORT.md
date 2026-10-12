@@ -1740,30 +1740,24 @@ The original all24 source loader produced the following eligible FIT support:
 | TREATMENT_STATE |2219|243|673|
 | MIXED_STATE |2736|243|1009|
 
-All modes have exactly the same1212 COMMON_INNER rows, including feature,
-past/KEEP, target, dtype, shape, ordering and hierarchical weights. MIXED FIT
-is the exact baseline+treatment row union. All24 input receipts remain in
-scope; nonempty FIT/INNER supports have15/7 videos because original failed
-initializations remain unreplaced. INNER positives were never moved into FIT.
-These correlated controlled rows are not independent correction events.
+All modes share1212 COMMON_INNER rows with identical features, past/KEEP,
+targets, dtype, shape, order and hierarchical weights. MIXED FIT is exactly
+baseline+treatment. All24 receipts remain; nonempty FIT/INNER supports15/7
+retain original failed initializations. No INNER positives entered FIT;
+controlled correlated rows are not independent correction events.
 
-`on_policy/BASELINE_STATE.json` binds actual original-function failure receipts
-for all three seeds. The measured zero-benefit FIT branch returned before
-storage/model/optimizer/checkpoint creation; process-local guards prohibited
-those constructors. Zero optimizer steps, models and checkpoints, no fabricated
-MOT metrics. The live state-policy owner observed these receipts and marked
-BASELINE_STATE `NOT_RUN_ACTUAL_SUPERVISION_FAILURE_NOT_A_WEIGHT`.
-This describes the specific earliest-feasible KEEP-source probe dataset,
-not general baseline training or failure of a trained identity model.
-TREATMENT/MIXED still require six actual seeded fits after resource recovery.
+`on_policy/BASELINE_STATE.json`: all3 original-function zero-benefit failures,
+guarded before storage/model/optimizer/checkpoint creation. Zero steps/models,
+no fabricated MOT metrics. Live STATE_POLICY marked BASELINE NOT_RUN, not a
+weight. This specific earliest-feasible KEEP-source probe failure is not a
+general baseline-training or trained-identity-model failure. Six original
+TREATMENT/MIXED fits still awaited resources at this snapshot.
 
-Eleven additive tests passed. Actual source-attested V40:1385 passed/five
-unchanged historical failures, zero errors/skips,71.721s, pytest exit1;
-460 focused passed,10.392s, exit0. Full35 runtime semantics, all17 group
-dispositions/effects and final scientific gates remain required. Only2/17
-full MOT groups are complete; BASELINE no-fit disposition does not increase
-that count. Goal ACTIVE/PENDING,60GiB floor unchanged, no confirmation or
-next-stage authorization.
+Eleven additive tests passed. Actual V40:1385 passed/five unchanged historical
+failures, zero errors/skips,71.721s, exit1;460 focused passed,10.392s, exit0.
+Only2/17 full-MOT groups complete; BASELINE no-fit does not add one. Full35
+runtime semantics, all17 dispositions/effects and scientific gates remain.
+Goal then ACTIVE/PENDING,60GiB floor unchanged, no confirmation/next stage.
 
 ### V29 — storage blocker audit
 
@@ -1771,6 +1765,12 @@ Snapshot:26.25GiB free; own allocations35.71GiB, protected core21.17GiB.
 Even erasing all noncore files plus single-link caches caps free space at
 41.54GiB, below60GiB. Three consecutive turns satisfy the blocked audit.
 Goal BLOCKED/PENDING, not complete; see `audit/STORAGE_BLOCKED_AUDIT_V29.json`.
+
+### V30 — user-restored storage; original queues resumed
+
+See [V30 recovery evidence](N72R21R2_STORAGE_RESUME_V30.md):174GiB restored,
+six actual state fits, both24-sequence diagnostics complete, V41 regression,
+original MAIN/STATE queues running. Goal ACTIVE/PENDING, not scientific closure.
 
 ## Execution boundaries
 
