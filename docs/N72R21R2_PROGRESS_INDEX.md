@@ -18,6 +18,9 @@ complete; CONFIRM/VAL/TEST/SOT and next-stage authorization remain closed.
 - [V33 actual supervision and STATE INNER](N72R21R2_OBJECTIVE_STATE_READBACK_V33.md):
   all48 TREATMENT INNER seals/CSVs, all21 MLP target/FIT-normalizer readbacks,
   seven objective reports and the explicit unresolved independent-event L1 gap.
+- [V34 measured MAIN training/deployment support](N72R21R2_MAIN_M7_SUPPORT_V34.md):
+  six original L3 points, unchanged frozen prediction replay, specific current
+  confirmation/agreement mismatch,22 pending points and verified V33 push.
 
 Actual model fits, passive current-identity claims, complete own-policy MOT
 effects, independent beneficial roots and unseen-scene generalization are
