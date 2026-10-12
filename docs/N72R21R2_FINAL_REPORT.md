@@ -1771,6 +1771,7 @@ Goal BLOCKED/PENDING, not complete; see `audit/STORAGE_BLOCKED_AUDIT_V29.json`.
 See [V30 recovery evidence](N72R21R2_STORAGE_RESUME_V30.md):174GiB restored,
 six actual state fits, both24-sequence diagnostics complete, V41 regression,
 original MAIN/STATE queues running. Goal ACTIVE/PENDING, not scientific closure.
+Latest: [V31 exact-frame open-set diagnosis](N72R21R2_OPEN_SET_CF_V31.md).
 
 ## Execution boundaries
 
