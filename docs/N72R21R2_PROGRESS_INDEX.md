@@ -35,6 +35,10 @@ complete; CONFIRM/VAL/TEST/SOT and next-stage authorization remain closed.
   all72 fit receipts/13 source descriptions and3489 training weight paths,
   explicit initial-seal/pilot/passive/no-fit limits, original ranker/P1 complete
   INNER point, actual V49 and both missing named delivery artifacts populated.
+- [V39 matched controlled-unit L1 target contrast](N72R21R2_CONTROLLED_L1_CONTRAST_V39.md):
+  distinct current-correction vs H100 benefit labels on identical source/risk/
+  value/input/normalizer/initialization, six bounded actual1411-parameter fits,
+  strict loader reproduction and teacher-only results, not natural/G1/MOT proof.
 
 Actual model fits, passive current-identity claims, complete own-policy MOT
 effects, independent beneficial roots and unseen-scene generalization are
