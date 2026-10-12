@@ -42,7 +42,8 @@ complete; CONFIRM/VAL/TEST/SOT and next-stage authorization remain closed.
 - [V40 frozen paired real-stream transfer](N72R21R2_CONTROLLED_L1_TRANSFER_V40.md):
   original global replay/points/all3 seeds/INNER8/selected FIT16, actual fixed
   six-head51-frame GT-free smoke, queued192 cells reusing original STATE slot,
-  no third full-video worker or runtime target payload, actual V51.
+  no third full-video worker or runtime target payload, actual V51; subsequent
+  original Ranker96-cell seal/CSV/C0 readback and fifth whole-group negative.
 
 Actual model fits, passive current-identity claims, complete own-policy MOT
 effects, independent beneficial roots and unseen-scene generalization are

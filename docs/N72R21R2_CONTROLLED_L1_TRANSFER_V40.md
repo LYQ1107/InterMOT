@@ -83,3 +83,29 @@ closure are still pending. Qualified on-policy/staged/memory/relational rounds,
 all74 named-artifact semantics, six final tables and full G0-G4 audit remain
 part of the original Goal. CONFIRM/VAL/TEST/SOT and next-stage authorization
 remain closed. Only code/tests/necessary docs may be published; assets stay local.
+
+## Subsequent original Ranker whole-group readback
+
+The original PAIRWISE_RANKER/L3 group has now completed all96 registered
+cells: both INNER8 operating points/all3 seeds, then the shared selected
+P0_CLAIM80 point on FIT16/all3 seeds. The unchanged development-closure
+snapshot recomputed its selection and both role summaries. An independent
+readback also checked every cell's runtime/onset/fit/checkpoint/candidate and
+trajectory seals and reparsed the actual pinned TrackEval CSVs for all nine
+metrics. There were zero effective interventions; zero-action core tensors
+and trajectories matched C0, and every recorded metric matched C0 exactly.
+Both FIT and INNER G1/G2 failed, with paired-video delta CIs [0,0]. Zero writes
+do not establish G4 safety, and this fifth complete original MOT group does
+not complete the scientific Goal or authorize confirmation.
+
+Local evidence under `outputs/N72R21R2/`:
+
+- `audit/V40_COMPLETE_RANKER96_ACTUAL_CSV_TRACE_READBACK_V1.json`, SHA256
+  `d0944d065b909291c36e0dfb6181afe9e25a1d6723c4fdde431ba8961180a922`;
+- `mot/development_closure_v1/snapshots/bfd46351c3bfa667b8066580d438b9f1b34165d2b229f2c3bf81679e3ae05103.json`,
+  SHA256 `911a3c3d31d16cd0cbe796c5fe5b3ef4232036d9e6c42539826f132075dfd773`.
+
+At that snapshot, five of17 original groups had complete actual MOT results,
+one had a measured all3-seed prefit failure (not zero-valued MOT results),
+and11 remained pending. Original MAIN continues into HARM_FIRST_DUAL_HEAD.
+The new controlled-L1 transfer has not been substituted for these groups.
