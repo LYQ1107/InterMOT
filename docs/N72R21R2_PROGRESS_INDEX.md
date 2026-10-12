@@ -31,6 +31,10 @@ complete; CONFIRM/VAL/TEST/SOT and next-stage authorization remain closed.
   all5588 recorded source counters matched, three derived STATE point audits,
   MIXED untreated-age support without interventions, original ranker/P0 and
   MIXED/P0 full INNER points, actual V48 and unchanged original finite queues.
+- [V38 actual training-data and checkpoint deliverables](N72R21R2_TRAINING_ASSETS_V38.md):
+  all72 fit receipts/13 source descriptions and3489 training weight paths,
+  explicit initial-seal/pilot/passive/no-fit limits, original ranker/P1 complete
+  INNER point, actual V49 and both missing named delivery artifacts populated.
 
 Actual model fits, passive current-identity claims, complete own-policy MOT
 effects, independent beneficial roots and unseen-scene generalization are
