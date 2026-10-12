@@ -24,6 +24,9 @@ complete; CONFIRM/VAL/TEST/SOT and next-stage authorization remain closed.
 - [V35 matched STATE source/deployment support](N72R21R2_STATE_M7_SUPPORT_V35.md):
   both complete TREATMENT points, removed confirmation-default mismatch but
   untreated-age support gap, actual V46 and two original MIXED points pending.
+- [V36 known-source causal error units](N72R21R2_CONTROLLED_ERROR_UNITS_V36.md):
+  all24 controlled-unit correction labels, explicit natural-L1 proof gap,
+  actual V47 and newly complete MLP/TREATMENT96-cell group negatives.
 
 Actual model fits, passive current-identity claims, complete own-policy MOT
 effects, independent beneficial roots and unseen-scene generalization are
