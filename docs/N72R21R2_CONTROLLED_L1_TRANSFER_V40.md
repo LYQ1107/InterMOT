@@ -141,3 +141,53 @@ one had a terminal measured prefit failure, and10 remained pending. The two
 new controlled-L1 conditions/192 cells, original remaining groups, conditional
 on-policy rounds and whole-task deliverables remain separate pending work.
 No CONFIRM/VAL/TEST/SOT access or next-stage authorization occurred.
+
+## Subsequent complete dual-point INNER readbacks (not full groups)
+
+Original HARM_FIRST_DUAL_HEAD/L3 completed both INNER8 points for all3 seeds:
+48 registered cells. Independent checks reloaded actual pinned nine-metric
+CSVs and verified candidate/fit/checkpoint/runtime/onset/trajectory seals and
+zero-action C0 core-tensor evidence. The original shared all-seed selection
+recomputed to P0_CLAIM80. Selected FIT16 evaluation remains in progress; this
+does not complete the original96-cell group or increase the complete-group
+census. Both points' read-only M7 support audits reproduced4418 sampled branch
+predictions per seed with zero numeric error and exact FIT-only normalizers.
+All-frame action counts and sampled non-KEEP score-only pass counts were zero.
+Confirmation counts and previous-candidate agreement differ from the original
+FIT marginal support; this is not proof that those differences cause failure.
+Ten of28 original MAIN point-support reports are now available, not all28.
+
+Separately, LEGACY_H100_BENEFIT completed both INNER8 points/all3 seeds:
+48 registered cells,42 actual evaluated sequence/point/seed cells on7 usable
+video clusters, and108 correlated click replicas. The remaining6 cells retain
+the no-valid-initialization disposition, with no metrics imputed. Actual CSVs,
+frozen fit/checkpoint/candidate axes, GT-file guards, core tensors and trajectory
+seals were independently read back. All effective actions/writes were zero;
+all evaluated nine-metric results exactly matched C0. Shared all3-seed selection
+also recomputed to P0_CLAIM80, and its selected FIT16 replay has started.
+This does not finish its96-cell condition, the192-cell paired transfer, the
+CONTROLLED_UNIT_CORRECTION condition, or the scientific label comparison.
+Neither vacuity nor zero writes establishes memory safety or qualification.
+
+Local evidence under `outputs/N72R21R2/`:
+
+- `audit/V40_ORIGINAL_HARM_BOTH_POINTS48_ACTUAL_CSV_SELECTION_READBACK_V1.json`,
+  SHA256 `1746eda6683d62ab249cadb2dce71416c95e21e5d7dafb96ef14a5e50c3773d5`;
+- `training/main_feature_support_audit_v1/HARM_FIRST_DUAL_HEAD__L3_HARM_AWARE__P0_CLAIM80.json`
+  and the corresponding `P1_CLAIM50.json` report;
+- `audit/V40_TRANSFER_LEGACY_BOTH_POINTS48_ACTUAL_CSV_SELECTION_READBACK_V1.json`,
+  SHA256 `8f2693bd24d48ea94371443e1c26c4ba6d6247805c1ad36e293687f4a9f36b78`.
+
+## Natural event-unit requirement remains open
+
+A read-only comparison against task M2 sections9.1-9.3 confirms the limitation
+already stated in V36/V39: observed baseline category intervals, known
+controlled single-action errors, and exact-CF click/frame repair opportunities
+are different evidence scopes. The baseline corpus explicitly does not prove
+independent causal origins; the controlled-unit diagnostic explicitly does not
+implement independent natural L1. Exact C0 axes and paired future labels are
+reusable evidence, not an automatic conversion into natural error units.
+No new natural-event labels, training, runtime, protocol change or root-count
+renaming occurred in this review. The original natural L1/M2 requirement,
+remaining original groups, conditional rounds, all35/all74 semantic coverage
+and final scientific closure remain pending. CONFIRM/VAL/TEST/SOT remain closed.
