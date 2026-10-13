@@ -52,7 +52,10 @@ complete; CONFIRM/VAL/TEST/SOT and next-stage authorization remain closed.
   whole-group negative, with nine other original groups still pending;
   subsequent Legacy paired-transfer96 complete-condition CSV/selection/gate
   readback, another zero-intervention negative; current-correction condition
-  and the paired comparison remain pending, separate from the original17.
+  and the paired comparison remain pending, separate from the original17;
+  subsequent original CAUSAL_TEMPORAL P0 all24 INNER dispositions/actual CSVs
+  and frozen M7 prediction/support audit,11/28 MAIN reports available, with no
+  complete96-cell group or shared-point selection inferred.
 
 Actual model fits, passive current-identity claims, complete own-policy MOT
 effects, independent beneficial roots and unseen-scene generalization are

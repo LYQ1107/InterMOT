@@ -253,3 +253,38 @@ This transfer does not increase or replace the original17-group census.
 No models, thresholds, points or source were changed for the readback.
 Original natural M2/L1, remaining registered groups, conditional rounds and
 full-task closure remain open. CONFIRM/VAL/TEST/SOT and next stage stay closed.
+
+## Subsequent original CAUSAL_TEMPORAL P0 point and M7 audit
+
+Original CAUSAL_TEMPORAL/L3/P0 has all24 INNER8/all3-seed dispositions sealed:
+21 evaluated cells, three no-valid-initialization dispositions, seven usable
+video clusters and54 correlated click replicas. Independent readback checked
+all frozen source/fit/checkpoint/candidate/runtime/onset/artifact seals and
+reparsed actual nine-metric CSVs. Effective actions were zero; sealed zero-action
+C0 core-tensor/trajectory checks passed and all evaluated metrics matched C0.
+P1 and selected FIT16 remain pending, so this does not finish the96-cell group,
+determine its shared selected point or increase the original complete-group census.
+
+The unchanged frozen M7 audit reproduced4418 actual sampled branch predictions
+per seed with max numeric error0 and exact float32 FIT-only normalizers from6058
+optimizer rows. Per seed it retained18 valid clicks, six failed initialization
+slots and one all-failed video; it counted19692 actual global frames and1243
+sampled current frames. All-frame effective actions and sampled non-KEEP
+score-only passes were zero. Confirmation count was outside its FIT marginal
+range on4418/4418 samples, and previous candidate agreement on3038/4418.
+Previous intervention age was10 in both source and deployment: no age gap.
+These are sampled marginal-support diagnostics, not joint OOD/calibration,
+proof of a causal failure mechanism, on-policy training or all-frame feature audit.
+Eleven of28 original MAIN support reports are now available, not all28.
+
+Local evidence under `outputs/N72R21R2/`:
+
+- `audit/V40_ORIGINAL_CAUSAL_TEMPORAL_P0_COMPLETE24_ACTUAL_CSV_READBACK_V1.json`,
+  SHA256 `911d7b8806e3588b22bcc6ef9115d0732c186c49fddd1f4cf27ed43110b21007`;
+- `training/main_feature_support_audit_v1/CAUSAL_TEMPORAL__L3_HARM_AWARE__P0_CLAIM80.json`,
+  SHA256 `f9235499d45df3019de84e0d32adb4dc1456bb95d1cebc742546a292d5b2f83f`.
+
+No original code, models, points or thresholds changed. Natural M2/L1,
+remaining original groups, the controlled-L1 second condition/paired comparison,
+all35/all74 semantics and scientific closure remain pending. Confirmation,
+VAL/TEST/SOT and next-stage authorization remain closed; zero writes are not G4 safety.
