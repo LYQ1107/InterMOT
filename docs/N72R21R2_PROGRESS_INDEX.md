@@ -60,7 +60,9 @@ complete; CONFIRM/VAL/TEST/SOT and next-stage authorization remain closed.
   interventions, with P1/FIT16 and the complete paired comparison still pending;
   subsequent original CAUSAL_TEMPORAL both-INNER48 CSV/shared-selection
   closure and P1 frozen M7 audit:12/28 support reports, selected FIT16 pending,
-  with no full96-cell completion or G4 safety inferred.
+  with no full96-cell completion or G4 safety inferred; subsequent
+  current-correction both-INNER48 CSV/shared-selection readback: zero actions,
+  shared P0 and selected FIT16 pending, not the final192-cell paired comparison.
 
 Actual model fits, passive current-identity claims, complete own-policy MOT
 effects, independent beneficial roots and unseen-scene generalization are

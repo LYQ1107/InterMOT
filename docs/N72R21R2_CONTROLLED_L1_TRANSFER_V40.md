@@ -346,3 +346,29 @@ increase the original complete-group census. No refit, new rollout, threshold
 change or on-policy optimization was performed by either audit. Natural M2/L1,
 remaining registered groups, the paired transfer and full scientific closure
 remain open. Zero writes do not prove G4; CONFIRM/VAL/TEST/SOT and next stage stay closed.
+
+## Subsequent current-correction dual-INNER closure
+
+CONTROLLED_UNIT_CORRECTION now has both INNER8 points/all3 seeds sealed:
+48 registered dispositions,42 actual evaluated cells and six retained
+no-valid-initialization dispositions, without zero-metric imputation.
+Independent offline readback rechecked condition-specific frozen fits/weights,
+source and candidate axes, runtime/onset/trajectory seals, actual GT guards
+and raw onset counters, and reparsed actual pinned nine-metric CSVs.
+All effective actions and writes were zero; zero-action C0 core-tensor and
+trajectory checks passed and evaluated metrics matched C0. Original shared
+all-seed point selection independently recomputed to P0_CLAIM80.
+The108 correlated click/point/seed replicas span seven usable video clusters,
+not14 clusters, independent roots or proven person-disjoint identities.
+
+Local evidence under `outputs/N72R21R2/`:
+
+- `audit/V40_TRANSFER_CORRECTION_BOTH_POINTS48_ACTUAL_CSV_SELECTION_READBACK_V1.json`,
+  SHA256 `bfb8cfb60039db2a10320fb0fab27f59d3bfe9efe7da78cd65fb2bae1e2e4884`.
+
+Selected FIT16/all3-seed evaluation remains in progress. This does not complete
+the96-cell current-correction condition, the192-cell paired transfer, its final
+label-effect comparison or the original17-group census. No original policy,
+weights, thresholds or association changed; zero writes are not G4 safety.
+Natural M2/L1, remaining registered groups and scientific closure remain open.
+CONFIRM/VAL/TEST/SOT and next-stage authorization remain closed.
