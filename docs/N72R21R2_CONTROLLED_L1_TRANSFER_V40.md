@@ -640,3 +640,49 @@ runtime/trace/checkpoint references. Fifteen of28 reports are complete. Original
 whole-group census remains nine complete/one measured no-fit/seven pending.
 P1/FIT, natural M2/L1, all35/all74 semantics and whole-task closure remain open;
 zero writes do not prove G4 safety. CONFIRM/VAL/TEST/SOT remain closed.
+
+## DUAL_IDENTITY_STATE both-INNER48, shared selection and P1 M7
+
+All48 original INNER dispositions are now sealed: both operating points/all3
+seeds/INNER8. Independent readback reparsed actual pinned nine-metric CSVs and
+checked source/fits/checkpoints, GT-free runtime/onset seals, current candidate
+and anchor axes, frozen density, artifact hashes, raw onset counters, paired
+C0 deltas and zero-action core-tensor/trajectory equality. There were42
+evaluated cells and six retained no-init/no-metric dispositions,108 correlated
+valid click replicas, zero effective interventions and all nine paired MOT
+deltas0. The two points share seven usable video clusters, not14 independent
+videos. All-seed shared selection independently reproduced P0_CLAIM80 and the
+original status NO_NONVACUOUS_POINT_FIXED_DIAGNOSTIC_SELECTION_NOT_QUALIFIED.
+Selection permits only the registered diagnostic FIT continuation, not G1,
+G2, independent confirmation or next-stage qualification.
+
+After the whole-point readback, the unchanged frozen P1 M7 audit completed all
+seeds. Each exact float32 FIT normalizer was reproduced from6058 accepted
+correlated optimizer rows. Per seed:18 valid clicks, six failed slots, one
+all-failed video,19692 actual global frames,1243 sampled current frames and4418
+numerically reproduced choices; maximum prediction error0.0. All3175 sampled
+non-KEEP choices had zero score-only passes and all-frame effective actions
+were zero. Confirmation and previous-candidate agreement were outside their
+constant-zero FIT marginal ranges for4418 and3038 sampled choices respectively;
+previous-intervention age had zero outside-range choices. These are bounded
+marginal support diagnostics, not joint OOD/calibration or a proven causal
+explanation for zero interventions. No refit, feature zeroing/clamping, policy,
+candidate, memory or runtime change was made.
+
+Local immutable evidence under `outputs/N72R21R2/`:
+
+- `audit/V52_ORIGINAL_DUAL_IDENTITY_STATE_BOTH_POINTS48_ACTUAL_CSV_SELECTION_READBACK_V1.json`,
+  SHA256 `4d1fe95df01ef6026269f1119ec5f05fe4d630cf42b0ac95c583ec6d3c3d5d40`;
+- `training/main_feature_support_audit_v1/DUAL_IDENTITY_STATE__L3_HARM_AWARE__P1_CLAIM50.json`,
+  SHA256 `5869ed82d1aa2fdf264a04e72673f70a8dc6c7725922c25bae20582ae729053d`;
+- `audit/V52_DUAL_IDENTITY_STATE_BOTH_INNER_AND_MAIN16_SUPPORT_ACTUAL_READBACK_V1.json`,
+  SHA256 `f7466de7a2b9cac73206812f6fbc27ca937a214c7fafa7fbe658a1de77860cea`.
+
+All16 available MAIN M7 reports were reread against protocol/seed/video census,
+normalizer flags, numeric prediction tolerance and actual runtime/trace/weight
+references. Sixteen of28 reports are complete. The original queue continues
+shared-point FIT16/all3 seeds; full96-cell completion is not inferred. Original
+17-group census remains nine complete/one measured no-fit/seven pending.
+Natural M2/L1, remaining registered groups/M7, all35/all74 semantics and final
+scientific closure remain open. Zero writes do not prove G4 safety; CONFIRM,
+VAL, TEST, SOT and next-stage authorization remain closed.

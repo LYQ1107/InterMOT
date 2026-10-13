@@ -105,6 +105,15 @@ complete; CONFIRM/VAL/TEST/SOT and next-stage authorization remain closed.
   runtime-reference checked. Marginal support differences are not causal proof.
   P1/FIT/shared selection/full96 remain pending; original nine-group census
   and closed CONFIRM/VAL/TEST/SOT boundaries are unchanged.
+  Subsequent DUAL_IDENTITY_STATE both-INNER48 actual CSV/trace/shared-selection
+  readback:42 evaluated/six retained no-init, zero interventions, all nine
+  paired MOT deltas0 and independently reproduced shared P0 with unqualified
+  diagnostic selection status. Frozen P1 M7 reproduced all seeds numerically
+  with max error0.0; all16/28 reports were protocol/seed/runtime-reference
+  checked. Selected FIT16/full96 remain pending, and marginal support gaps do
+  not establish causal failure. Original nine-group census is unchanged;
+  CONFIRM/VAL/TEST/SOT and whole-task scientific closure remain unopened/open
+  respectively.
 
 Actual model fits, passive current-identity claims, complete own-policy MOT
 effects, independent beneficial roots and unseen-scene generalization are
