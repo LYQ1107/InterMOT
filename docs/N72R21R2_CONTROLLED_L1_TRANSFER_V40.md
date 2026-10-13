@@ -686,3 +686,46 @@ shared-point FIT16/all3 seeds; full96-cell completion is not inferred. Original
 Natural M2/L1, remaining registered groups/M7, all35/all74 semantics and final
 scientific closure remain open. Zero writes do not prove G4 safety; CONFIRM,
 VAL, TEST, SOT and next-stage authorization remain closed.
+
+## DUAL_IDENTITY_STATE complete96 negative and original17 census
+
+The preceding dual-INNER milestone is superseded for completion scope by all96
+registered dispositions: both INNER points/all3 seeds plus shared P0 selected
+FIT16/all3 seeds. Independent readback checked actual fits/checkpoints, source,
+current anchor/candidate axes, frozen density, GT-free runtime/onset/artifact
+seals, raw onset counters, paired C0 deltas and zero-action core-tensor/
+trajectory equality, and reparsed every actual pinned nine-metric CSV.
+All-seed original selection independently reproduced P0_CLAIM80 with the
+unqualified diagnostic status. No best seed/video/threshold was selected.
+
+There were87 actual evaluations and nine retained no-init/no-metric
+dispositions: FIT45 evaluated+three no-init; both INNER points42+six. The231
+valid click replicas are correlated, not independent roots. Role summaries
+use the shared selected point only: FIT48 dispositions and INNER24, including
+all registered seeds, not a successful subset or duplicated point exposure.
+FIT15 and INNER7 usable video clusters each gave all nine macro deltas0 versus
+C0 and paired video95% intervals[0,0]. Effective interventions and memory
+writes were zero. Both roles gave G1 FAIL_OBSERVED_NONVACUITY_OR_HARM_BOUND and
+G2 FAIL_NUMERIC_MOT_TARGETS. Zero writes are not nonvacuum G4 safety, and this
+group supplies no confirmed causal MOT gain or confirmation authorization.
+
+The unchanged frozen original17 closure snapshot independently agreed with
+the standalone actual-CSV readback's new-group summaries and gates. Original
+dispositions are now ten complete full-MOT groups, one measured all3-seed
+supervision prefit/no-model disposition, and six pending groups. The measured
+no-fit is not a completed full-MOT group and has null, not imputed-zero, MOT
+metrics. Original driver order continues with SMALL_MLP/L0_CURRENT_CORRECTNESS;
+no restart, new optimization, threshold or scientific-code change was made.
+
+Local immutable evidence under `outputs/N72R21R2/`:
+
+- `audit/V52_COMPLETE_DUAL_IDENTITY_STATE96_ACTUAL_CSV_TRACE_READBACK_V1.json`,
+  SHA256 `b3758351aa4aa3f6c2bc72fcef9533841288f7c1ba4fc9aa8d67687124f1dee0`;
+- `mot/development_closure_v1/snapshots/f69e7e56241c4285913fc88683963763ebc1290240334ff1082f1a8526b39263.json`,
+  SHA256 `37190920f1bbdc34e09d769e4b2aceb383b82902b37c8cf98d1703d67b5669be`.
+
+Sixteen of28 MAIN M7 reports remain complete. Natural M2/L1, the remaining
+registered groups/M7, all35/all74 semantics, conditional dispositions and
+whole-task scientific closure remain open. CONFIRM/VAL/TEST/SOT and next-stage
+authorization remain closed. This is a complete negative for this registered
+group, not proof that identity representation generally cannot support MOT.

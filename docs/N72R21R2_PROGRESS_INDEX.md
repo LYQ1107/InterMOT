@@ -114,6 +114,14 @@ complete; CONFIRM/VAL/TEST/SOT and next-stage authorization remain closed.
   not establish causal failure. Original nine-group census is unchanged;
   CONFIRM/VAL/TEST/SOT and whole-task scientific closure remain unopened/open
   respectively.
+  Subsequent DUAL_IDENTITY_STATE full96 actual CSV/trace/selection readback
+  supersedes that pending-group scope:87 evaluated/nine retained no-init,
+  zero interventions and writes, shared P0, all nine selected-point FIT/INNER
+  macro deltas0 and paired video95% intervals[0,0], both roles G1/G2 FAIL.
+  Frozen original17 closure independently agrees; census ten full-MOT groups,
+  one measured no-fit/null-MOT disposition and six pending. Sixteen of28 M7
+  reports remain complete. Original queue continues SMALL_MLP/current-
+  correctness, not whole-task closure, independent-root proof or G4 safety.
 
 Actual model fits, passive current-identity claims, complete own-policy MOT
 effects, independent beneficial roots and unseen-scene generalization are
