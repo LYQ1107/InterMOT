@@ -314,3 +314,35 @@ Local evidence under `outputs/N72R21R2/`:
 No code, weights, thresholds, candidate policy or association changed for this
 audit. Natural M2/L1, remaining registered groups, conditional rounds and full
 scientific closure remain open. CONFIRM/VAL/TEST/SOT and next stage stay closed.
+
+## Subsequent original CAUSAL_TEMPORAL dual-INNER closure
+
+Both CAUSAL_TEMPORAL/L3 INNER8 points are complete for all3 seeds:48 registered
+dispositions,42 actual evaluated cells and six no-valid-initialization cells
+without metric imputation. Independent readback rechecked frozen candidate/
+fit/checkpoint/runtime/onset/trajectory seals and actual pinned nine-metric CSVs.
+All effective actions and writes were zero; zero-action C0 core-tensor/trajectory
+checks passed and all evaluated metrics matched C0. Shared all-seed selection
+independently recomputed to P0_CLAIM80. The108 correlated click/point/seed
+replicas span seven usable video clusters, not14 clusters or independent roots.
+
+The frozen P1 M7 audit also reproduced4418 sampled predictions per seed with
+max numeric error0 and exact float32 FIT normalizers from6058 optimizer rows.
+Per-seed all-frame actions and sampled non-KEEP score-only passes were zero.
+Confirmation-count samples were4418/4418 outside the FIT marginal range and
+previous-agreement samples3038/4418; intervention age10 matched both domains.
+These marginal diagnostics are not joint OOD/calibration or a causal failure
+explanation. Twelve of28 original MAIN support reports are now available.
+
+Local evidence under `outputs/N72R21R2/`:
+
+- `audit/V40_ORIGINAL_CAUSAL_TEMPORAL_BOTH_POINTS48_ACTUAL_CSV_SELECTION_READBACK_V1.json`,
+  SHA256 `0dc2e56502d03ff772f33429c8d46dae21eb75bffe4fb2a0668b0704fa27af07`;
+- `training/main_feature_support_audit_v1/CAUSAL_TEMPORAL__L3_HARM_AWARE__P1_CLAIM50.json`,
+  SHA256 `7a35c9bf34039dc1f59ccd98c58638b1511d1518cc72831890343b6b56b8e8f6`.
+
+Selected FIT16 remains pending; this does not finish the96-cell group or
+increase the original complete-group census. No refit, new rollout, threshold
+change or on-policy optimization was performed by either audit. Natural M2/L1,
+remaining registered groups, the paired transfer and full scientific closure
+remain open. Zero writes do not prove G4; CONFIRM/VAL/TEST/SOT and next stage stay closed.
