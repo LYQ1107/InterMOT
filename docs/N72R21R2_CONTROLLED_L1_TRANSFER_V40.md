@@ -783,3 +783,60 @@ semantics or the whole scientific task. Original full-group census remains
 ten complete/one measured no-fit/six pending. Original queue continues P1;
 natural M2/L1 and remaining registered/conditional work stay open. Zero writes
 are not G4 safety; CONFIRM/VAL/TEST/SOT and next-stage authorization stay closed.
+
+## Original current-correctness both-INNER48 and P1 M7
+
+Both original operating points/all3 seeds/INNER8 are now sealed. Independent
+readback reparsed all actual pinned nine-metric CSVs and checked source/fits/
+weights, GT-free runtime/onset seals, current anchor/candidate axes, density,
+raw onset counters, artifact hashes, paired C0 deltas and zero-action core-
+tensor/trajectory equality. The48 dispositions include42 actual evaluations
+and six retained no-init/no-metric cells,108 correlated valid click replicas,
+zero effective interventions and all nine paired MOT deltas0. Both points
+share seven usable video clusters, not14 independent videos. Original shared
+all-seed selection independently reproduced P0_CLAIM80 with status
+NO_NONVACUOUS_POINT_FIXED_DIAGNOSTIC_SELECTION_NOT_QUALIFIED. This allows only
+the registered diagnostic FIT continuation, not confirmation or a G1 PASS.
+
+After the complete-point readback, unchanged frozen P1 M7 reproduced all seeds
+and exact float32 FIT normalizers from6799 correlated objective-specific FIT
+rows. Each seed retained18 valid clicks/six failed slots/one all-failed video,
+19692 global frames,1243 sampled current frames and4418 reproduced choices;
+maximum numeric prediction error0.0. Seed730101 had97 score-only passes among
+3175 sampled non-KEEP choices, versus zero for the other seeds. All-frame
+effective actions were zero. Marginal confirmation/agreement outside counts
+were4418/3038; intervention age had zero outside-range choices. These are not
+joint OOD/calibration, all-frame feature coverage or a proven failure cause.
+
+A separate GT-free actual-decision readback inspected all97 stored score-only
+passes, preserving runtime/trace hashes and source. All97 proposed own KEEP's
+candidate UID:69 RAW_IDENTITY_TOP and28 LEARNED_IDENTITY_TOP. Confirmation
+counts were1 for53,2 for26 and3 for18 choices; hence79 failed the frozen three-
+frame threshold and18 met it. Ninety-five met logged quality/anchor thresholds.
+All actual approvals/effective interventions were false, chosen branch was
+KEEP and global output hashes matched own KEEP. No new identity correction or
+independent beneficial root follows from these scores. Unlike P0, insufficient
+confirmation cannot explain all97 choices. The compact choice does not store
+the solver assignment_changed flag separately; same UID is not promoted into
+an independently replayed global-solver counterfactual. No solver replay,
+threshold change, feature zeroing/clipping or optimization was performed.
+
+Local immutable evidence under `outputs/N72R21R2/`:
+
+- `audit/V52_ORIGINAL_CURRENT_CORRECTNESS_BOTH_POINTS48_ACTUAL_CSV_SELECTION_READBACK_V1.json`,
+  SHA256 `3a6a6bca43145a296cfca9a602377121200220d9f9f4121e73dbec72e36a5ccd`;
+- `training/main_feature_support_audit_v1/SMALL_MLP__L0_CURRENT_CORRECTNESS__P1_CLAIM50.json`,
+  SHA256 `e297ff5af52e0497589b9ac7c19ebe5a697cc463c62151bb06ab267e24546569`;
+- `audit/V52_CURRENT_CORRECTNESS_BOTH_INNER_AND_MAIN18_SUPPORT_ACTUAL_READBACK_V1.json`,
+  SHA256 `4acc024d9c8b742fc56a57f7ff3198ede80167e4f4b01edc4b2bef117415a3df`;
+- `audit/V52_CURRENT_CORRECTNESS_P1_SCORE_ONLY97_ACTUAL_DECISION_READBACK_V1.json`,
+  SHA256 `5c021594a92d8a2e47f6fe59b4fe7272e228c44ae1287b9598ed505348e90eae`.
+
+All18 available MAIN M7 reports were reread against frozen protocol, full
+seed/video census, normalizer flags, prediction tolerance and actual runtime/
+trace/weight references. Eighteen of28 reports are complete. Original driver
+continues selected-point FIT16/all3 seeds; full96 is not inferred complete.
+Original17 census remains ten complete/one measured no-fit/six pending.
+Natural M2/L1, remaining registered groups/M7, all35/all74 semantics and whole-
+task closure remain open. Zero writes are not G4 safety, nominal scores are
+not actual-model on-policy eligibility, and CONFIRM/VAL/TEST/SOT stay closed.

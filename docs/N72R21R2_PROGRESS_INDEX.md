@@ -131,6 +131,15 @@ complete; CONFIRM/VAL/TEST/SOT and next-stage authorization remain closed.
   they are not corrections, independent roots or on-policy eligibility.
   P1/FIT/shared selection/full96 and whole-task closure remain pending;
   original ten-group census and closed CONFIRM/VAL/TEST/SOT are unchanged.
+  Subsequent current-correctness both-INNER48 actual CSV/trace/shared-selection
+  closure:42 evaluated/six retained no-init, zero actions/nine paired deltas0,
+  unqualified shared P0. Frozen P1 M7 and all18/28 report references were
+  checked. Seed1's97 nominal passes all proposed own KEEP's UID and were
+  actually unapproved/no-change;79 failed confirmation,18 met it, so the P0
+  insufficient-confirmation explanation is not generalized to all P1 cases.
+  No solver replay, threshold/refit or on-policy optimization occurred.
+  Selected FIT16/full96, remaining original/conditional work and full-task
+  closure remain pending; original ten-group census is unchanged.
 
 Actual model fits, passive current-identity claims, complete own-policy MOT
 effects, independent beneficial roots and unseen-scene generalization are
