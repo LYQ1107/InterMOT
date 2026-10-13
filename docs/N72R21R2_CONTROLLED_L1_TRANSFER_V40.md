@@ -443,3 +443,39 @@ fail, a completed natural-error L1/G1 study, or actual-model on-policy evidence.
 The two transfer conditions do not enlarge or replace the original17 census.
 Natural M2/L1, remaining original groups/M7, all35/all74 semantics and whole-task
 scientific closure remain open. CONFIRM/VAL/TEST/SOT and next stage stay closed.
+
+## Original COUNTERFACTUAL_ACTION_VALUE P0 complete-point/M7 readback
+
+P0_CLAIM80 INNER8/all3 seeds is now independently checked:24 registered cells,
+21 actual evaluations and three retained no-valid-initialization dispositions,
+54 correlated click replicas over seven usable videos. Actual pinned nine-metric
+CSVs, frozen fits/checkpoints, current candidate/anchor axes, GT-free runtime,
+raw onset counters and zero-action C0 core-tensor/trajectory seals were checked.
+Effective actions were0 and evaluated nine-metric deltas versus C0 were0.
+This is not the completed96-cell group or shared selection; P1/FIT remain open.
+
+Frozen read-only M7 reproduced all4418 sampled choice predictions per seed with
+maximum numerical error0, exact float32 FIT normalizers and6058 accepted FIT
+optimizer rows. Per seed:18 valid clicks, six failed slots, one all-failed video,
+19692 actual global frames,1243 sampled frames,3175 sampled non-KEEP choices,
+zero sampled non-KEEP score-only passes and zero all-frame effective actions.
+Confirmation-count samples outside the FIT marginal range were4418/4418;
+previous-candidate-agreement3038/4418; intervention-age0/4418 (both supports10).
+Marginal support differences are not joint OOD, calibration or proven causal
+failure explanations; sampled feature checks are not all-frame feature audits.
+No refit, feature zeroing/clipping, score counterfactual or on-policy training
+was executed. Thirteen of28 registered MAIN M7 reports are now available.
+
+Local immutable evidence under `outputs/N72R21R2/`:
+
+- `audit/V40_ORIGINAL_COUNTERFACTUAL_ACTION_VALUE_P0_COMPLETE24_ACTUAL_CSV_READBACK_V1.json`,
+  SHA256 `e7e67917c71b6b4aaae3cbd2c953ccf0d2145a7a267015beecc1063047936da3`;
+- `training/main_feature_support_audit_v1/COUNTERFACTUAL_ACTION_VALUE__L3_HARM_AWARE__P0_CLAIM80.json`,
+  SHA256 `f9f46f6cdec6c6074b0dadc8b1abb7804c7f94544b17925e41a7c60577f05fcf`;
+- `audit/V40_COUNTERFACTUAL_ACTION_VALUE_P0_AND_MAIN13_SUPPORT_ACTUAL_READBACK_V1.json`,
+  SHA256 `2cf84cb00a268f9c60ccab4f60c19e8b33b974c2fd9b16bbc52e233c4c6f8e86`.
+
+The original complete-group census remains eight full-MOT groups plus one
+measured no-fit disposition and eight pending. Natural M2/L1, remaining M7,
+all35/all74 semantics and whole-task closure remain open; zero writes do not
+establish G4. CONFIRM/VAL/TEST/SOT and next-stage authorization remain closed.

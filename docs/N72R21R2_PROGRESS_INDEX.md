@@ -74,6 +74,10 @@ complete; CONFIRM/VAL/TEST/SOT and next-stage authorization remain closed.
   G1/G2 FAIL; matched current-correction-minus-legacy nine deltas0 and paired
   video95% intervals[0,0]. Only this frozen teacher-label transfer diagnostic
   is closed, not natural L1/G1, on-policy training or the whole scientific task.
+  Subsequent original COUNTERFACTUAL_ACTION_VALUE P0 all24 INNER actual
+  CSV/trace readback and frozen M7 prediction/support audit: zero actions,
+  exact numeric prediction replay,13/28 support reports. P1/FIT/shared selection
+  and full96 group remain pending; marginal support gaps are not causal proof.
 
 Actual model fits, passive current-identity claims, complete own-policy MOT
 effects, independent beneficial roots and unseen-scene generalization are
