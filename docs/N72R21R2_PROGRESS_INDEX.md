@@ -122,6 +122,15 @@ complete; CONFIRM/VAL/TEST/SOT and next-stage authorization remain closed.
   one measured no-fit/null-MOT disposition and six pending. Sixteen of28 M7
   reports remain complete. Original queue continues SMALL_MLP/current-
   correctness, not whole-task closure, independent-root proof or G4 safety.
+  Subsequent original SMALL_MLP/current-correctness P0 all24 actual CSV/trace
+  readback:21 evaluated/three retained no-init, zero interventions and nine
+  paired MOT deltas0. Frozen M7 used6799 correlated FIT rows, reproduced4418
+  sampled choices/seed with error0.0, and all17/28 reports were reread. Seed1
+  had15 score-only passes, but all proposed own KEEP's candidate UID, failed
+  the frozen confirmation threshold and were actually unapproved/no-change;
+  they are not corrections, independent roots or on-policy eligibility.
+  P1/FIT/shared selection/full96 and whole-task closure remain pending;
+  original ten-group census and closed CONFIRM/VAL/TEST/SOT are unchanged.
 
 Actual model fits, passive current-identity claims, complete own-policy MOT
 effects, independent beneficial roots and unseen-scene generalization are

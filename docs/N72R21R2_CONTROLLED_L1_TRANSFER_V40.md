@@ -729,3 +729,57 @@ registered groups/M7, all35/all74 semantics, conditional dispositions and
 whole-task scientific closure remain open. CONFIRM/VAL/TEST/SOT and next-stage
 authorization remain closed. This is a complete negative for this registered
 group, not proof that identity representation generally cannot support MOT.
+
+## Original current-correctness P0 complete24 and M7
+
+SMALL_MLP/L0_CURRENT_CORRECTNESS P0_CLAIM80 completed all3 seeds/INNER8,
+without a policy restart or source/threshold change. Independent readback
+reparsed actual pinned nine-metric CSVs and checked original fits/checkpoints,
+GT-free source/runtime/onset seals, current anchor/candidate axes, density,
+artifacts, raw onset counters, paired C0 deltas and zero-action core-tensor/
+trajectory equality. All24 dispositions include21 evaluated cells and three
+retained no-init/no-metric cells,54 correlated valid click replicas, zero
+effective interventions and all nine paired MOT deltas0. P1, shared selection,
+selected FIT16 and the full96-cell group are not inferred complete.
+
+Only after that whole-point check, frozen read-only M7 reproduced each exact
+float32 FIT normalizer from6799 accepted correlated objective-specific FIT
+optimizer rows. Per seed:18 valid clicks/six failed slots/one all-failed video,
+19692 global frames,1243 sampled current frames and4418 reproduced choices,
+maximum numeric prediction error0.0. Of3175 sampled non-KEEP choices, seed730101
+had15 score-only passes; the other seeds had zero. All-frame effective actions
+were zero. Source confirmation/agreement were constant0; outside-range counts
+were4418 and3038 respectively, with zero outside-range intervention-age rows.
+These marginal comparisons are not joint OOD, calibration or proven causal
+explanations for no interventions; numeric replay is not bitwise AA or success.
+
+A separate GT-free readback inspected all15 actual stored score-only passes,
+preserving runtime/trace hashes and source. All were RAW_IDENTITY_TOP proposals
+with the same candidate UID as own KEEP. None met the frozen three-frame
+confirmation threshold; all met the logged quality/anchor thresholds. Actual
+choice approval and effective intervention were false, chosen branch was KEEP,
+and global output hashes matched own KEEP. Thus the scores do not constitute
+new identity corrections, independent beneficial roots or actual-model
+on-policy eligibility. The compact choice does not separately store the solver
+assignment_changed flag; same-target UID is not promoted into an independently
+replayed counterfactual global-solver claim. No solver replay/redesign, feature
+clipping/zeroing, new score counterfactual, threshold or optimization occurred.
+
+Local immutable evidence under `outputs/N72R21R2/`:
+
+- `audit/V52_ORIGINAL_CURRENT_CORRECTNESS_P0_COMPLETE24_ACTUAL_CSV_READBACK_V1.json`,
+  SHA256 `ba8a4004e53b0f5f282545dbec5f7637deb91efa80eeacb281dcf82cb39c6997`;
+- `training/main_feature_support_audit_v1/SMALL_MLP__L0_CURRENT_CORRECTNESS__P0_CLAIM80.json`,
+  SHA256 `5baf618702696f0620d756573805c8537ecf13cff495fbadd1f8986e0bc8a228`;
+- `audit/V52_CURRENT_CORRECTNESS_P0_AND_MAIN17_SUPPORT_ACTUAL_READBACK_V1.json`,
+  SHA256 `3013dc0f3bae928599a7f506d97791c3f61def6ac6f0722d56d0dcb81694d5bd`;
+- `audit/V52_CURRENT_CORRECTNESS_P0_SCORE_ONLY15_ACTUAL_DECISION_READBACK_V1.json`,
+  SHA256 `89bc2a44ad469cf83a2decfa864a6e9bb65bad33d515c85a4dd03339bb999486`.
+
+All17 available MAIN M7 reports were reread against frozen protocol, full
+seed/video census, normalizer flags, prediction tolerance and actual runtime/
+trace/weight references. Seventeen of28 reports are complete, not all35/all74
+semantics or the whole scientific task. Original full-group census remains
+ten complete/one measured no-fit/six pending. Original queue continues P1;
+natural M2/L1 and remaining registered/conditional work stay open. Zero writes
+are not G4 safety; CONFIRM/VAL/TEST/SOT and next-stage authorization stay closed.
