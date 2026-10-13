@@ -546,3 +546,51 @@ refit, policy/threshold change or new full-MOT worker was introduced by these
 readbacks. Fourteen of28 M7 reports remain available. Natural M2/L1, remaining
 original groups/M7, all35/all74 semantics and whole-task scientific closure
 remain incomplete. CONFIRM/VAL/TEST/SOT and next-stage authorization stay closed.
+
+## October13 host reboot: exclusive MAIN terminal recovery V2
+
+The previous owner527559 and active child2976988 were absent after the observed
+host boot at2026-10-13 19:26:36 local time. MAIN had694 completed cells, no
+retained failures, and an interrupted DUAL_IDENTITY_STATE/L3_HARM_AWARE,
+seed730103/P0_CLAIM80/dancetrack0052 runtime. Neither a whole runtime seal,
+onset seal nor result existed for that cell. The actual old exit code was not
+observed; reboot was observed but a per-process termination cause is not proven.
+
+Before continuation, all694 sealed cells were independently rechecked using
+the existing actual CSV/source/fit/checkpoint/GT-guard/current-candidate/anchor/
+artifact/C0 equality verifier. The old marker and interrupted log/trace/
+trajectory hashes are preserved in immutable recovery evidence. The exclusive
+new owner hydrates the original driver with those694 completions and completed
+groups. Only the interrupted whole cell reruns under a new artifact BASE;
+partial clicks are never adopted. Later cells retain the original scientific
+BASE, frozen order, all seeds, weights, two INNER points and shared selection.
+No policy, threshold, memory or split change, new fit or extra concurrent
+full-MOT worker is introduced. Original recovery V1 and scientific modules are
+unchanged. Dedicated recovery tests also check GT guarding, single-cell path
+isolation, live-worker rejection, state hydration and restoration on failure.
+
+Local evidence under `outputs/N72R21R2/`:
+
+- `audit/MAIN_TERMINAL_RECOVERY_PROTOCOL_V2.json`, SHA256
+  `2b750dcfc35842e258fa233afeba72f11ad07c18ab5a34830ff615dbb770c975`;
+- `audit/MAIN_TERMINAL_RECOVERY_V2_ACTUAL_LIVE_READBACK_V1.json`, SHA256
+  `9fbdf3daae5b660f9141a9f71447ae206440b563d6c4f9b1b9ebfb8203aae04d`.
+
+The live readback verified new owner10548 and runtime child10606 with actual
+scoped argv/cwd/process states, not merely a marker. This is engineering
+recovery, not another completed scientific group or an identity-association
+benefit. DUAL P0 complete24 and its M7 audit remain pending. The original census
+is still nine complete groups, one measured no-fit and seven pending, with
+14/28 M7 reports. CONFIRM/VAL/TEST/SOT and next-stage authorization remain closed.
+
+The replacement worker subsequently sealed the interrupted cell after an
+independent whole-cell check, increasing MAIN to695, and entered the original
+next P0 cell/dancetrack0086. Actual repeated process observations measured CPU
+tick growth on that same live child. This is resumed execution, not a finished
+P0 point. Actual source-attested V52 regression checked1651 Python files before
+and after execution:657 focused passed; full1582 passed, five unchanged
+historical failures and zero errors. Full pytest exit1 is retained. The failure
+set remains four pinned TrackEval old SEQMAP CLI failures and one historical
+branch-name assertion; no tests were excluded and no vendor code was edited.
+`tests/REGRESSION_V52.json` SHA256
+`41f90910adfb67bc98c174053c08e075073ca0109cd10ed24d2a7ad1e7deaea0`.

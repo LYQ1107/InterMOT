@@ -86,6 +86,18 @@ complete; CONFIRM/VAL/TEST/SOT and next-stage authorization remain closed.
   deltas0 and paired video95% intervals[0,0], FIT/INNER G1/G2 FAIL. Original
   census nine full-MOT groups, one measured no-fit and seven pending; MAIN
   continues DUAL_IDENTITY_STATE, not whole-task closure or G4 safety success.
+  Subsequent October13 host reboot interrupted MAIN at694 completed cells.
+  All694 sealed cells were independently CSV/artifact/source/GT-guard/C0
+  rechecked before exclusive terminal recovery V2. The original finite driver
+  is hydrated unchanged; only the unsealed interrupted whole cell uses a new
+  artifact BASE, preserving all partials. Actual new owner/child were verified
+  live. This recovery does not add a completed group, authorize CONFIRM or
+  resolve the open scientific gaps; DUAL P0 complete24/M7 remain pending.
+  The replacement subsequently sealed the interrupted cell/MAIN695 and
+  continued the last P0 cell, with live same-child CPU growth. Actual
+  source-attested V52:657 focused passed, full1582 passed/five unchanged
+  historical failures/zero errors, full pytest exit1; no exclusions or vendor
+  edits. Neither successful recovery nor unit tests imply scientific success.
 
 Actual model fits, passive current-identity claims, complete own-policy MOT
 effects, independent beneficial roots and unseen-scene generalization are
