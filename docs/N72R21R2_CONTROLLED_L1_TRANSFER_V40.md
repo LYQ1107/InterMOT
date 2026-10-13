@@ -840,3 +840,36 @@ Original17 census remains ten complete/one measured no-fit/six pending.
 Natural M2/L1, remaining registered groups/M7, all35/all74 semantics and whole-
 task closure remain open. Zero writes are not G4 safety, nominal scores are
 not actual-model on-policy eligibility, and CONFIRM/VAL/TEST/SOT stay closed.
+
+## V53 — current-correctness full96 closure checkpoint
+
+FINAL GOAL:
+Event-Level Causal Identity Association: Safe One-Click Intervention with Fresh-Sequence Generalization for Online MOT
+
+The post-864 independent actual readback completed the registered
+`SMALL_MLP/L0_CURRENT_CORRECTNESS` full96 evidence scope: both INNER8 points
+and shared all-seed P0_CLAIM80 FIT16 across all three seeds. It verified the
+existing source, fit/checkpoint, runtime/onset, density, candidate-lineage,
+artifact, GT-guard, and pinned full-video TrackEval chains. No new rollout,
+fit, threshold choice, policy, memory, association, candidate, or solver
+change was made. Effective interventions and memory writes were zero; all nine
+selected-point paired MOT deltas were zero. Accordingly this group is
+`G1=FAIL_OBSERVED_NONVACUITY_OR_HARM_BOUND` and
+`G2=FAIL_NUMERIC_MOT_TARGETS`, not a scientific success.
+
+The readback is sealed at
+`outputs/N72R21R2/audit/V52_CURRENT_CORRECTNESS_P1_M7_FULL96_INDEPENDENT_ACTUAL_READBACK_V1.json`
+(SHA256 `a15f5d18c02237691265d53a8d76ed531074247ab293531bdbad6dc7d58a34de`).
+The associated process checkpoint is
+`outputs/N72R21R2/audit/V52_CURRENT_CORRECTNESS_P1_M7_POST_PUBLICATION_WAIT51_PROCESS_SNAPSHOT_V1.json`
+(SHA256 `4470f0365d2acddac13e530fa6cc2a6fa2cc22d300876eed0cbc1149b5f2ea66`)
+and records the original owner after the 864-cell handoff.
+
+The independent original-17 closure snapshot
+`outputs/N72R21R2/mot/development_closure_v1/snapshots/142e0904ead38d149b15b66e83f684f28de85985d84e071b0a0d086608044cbc.json`
+records 11 complete full-MOT groups, one terminal no-fit disposition, and five
+remaining groups. The live finite MAIN owner remains PID 10548; the queue was
+not restarted and continues in its registered order. Stage status remains
+`ACTIVE/PENDING`; confirmation, next-stage association, and CONFIRM/VAL/TEST/SOT
+remain closed. This document records evidence only and does not authorize a
+new downstream experiment.

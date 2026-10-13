@@ -145,3 +145,44 @@ Actual model fits, passive current-identity claims, complete own-policy MOT
 effects, independent beneficial roots and unseen-scene generalization are
 different claims. No entry here substitutes partial preparation, zero actions,
 loss reduction, file existence or narrow tests for full scientific closure.
+
+## V53 — current-correctness full96 readback and live MAIN continuation
+
+FINAL GOAL:
+Event-Level Causal Identity Association: Safe One-Click Intervention with Fresh-Sequence Generalization for Online MOT
+
+The immutable post-864 readback closed the registered
+`SMALL_MLP/L0_CURRENT_CORRECTNESS` point at the evidence level, without
+starting another rollout or changing source, thresholds, candidates, memory,
+association, or solver behavior. All 96 registered cells were independently
+checked: three seeds, both INNER8 operating points, and the all-seed shared
+P0_CLAIM80 FIT16 point. The shared selection remains diagnostic and
+unqualified. There were 96/96 actual readback cells, with retained no-init
+dispositions preserved; effective actions and writes remained zero, all nine
+selected-point paired MOT deltas were zero, and both development gates failed:
+`G1=FAIL_OBSERVED_NONVACUITY_OR_HARM_BOUND` and
+`G2=FAIL_NUMERIC_MOT_TARGETS`. This is a complete negative for this
+registered group, not a claim that all identity or MOT research is resolved.
+
+Immutable evidence:
+
+- `outputs/N72R21R2/audit/V52_CURRENT_CORRECTNESS_P1_M7_FULL96_INDEPENDENT_ACTUAL_READBACK_V1.json`
+  (SHA256 `a15f5d18c02237691265d53a8d76ed531074247ab293531bdbad6dc7d58a34de`);
+- `outputs/N72R21R2/audit/V52_CURRENT_CORRECTNESS_P1_M7_POST_PUBLICATION_WAIT51_PROCESS_SNAPSHOT_V1.json`
+  (SHA256 `4470f0365d2acddac13e530fa6cc2a6fa2cc22d300876eed0cbc1149b5f2ea66`),
+  recording the same owner after 864 completed cells and the handoff to the
+  next registered L1 group;
+- `outputs/N72R21R2/mot/development_closure_v1/snapshots/142e0904ead38d149b15b66e83f684f28de85985d84e071b0a0d086608044cbc.json`,
+  the independent original-17 census: 11 complete full-MOT groups, one
+  terminal no-fit disposition, and five remaining groups;
+- `outputs/N72R21R2/mot/development_dispositions_v2/9f33db7c185f81000f02a4cc834a1854885a89ab35f1526f229363f3dac2a719.json`,
+  the corresponding all-17 disposition readback.
+
+The original finite MAIN driver was not restarted. The live checkpoint has
+owner PID 10548, 865 completed cells, and is continuing the registered
+`MAIN__SMALL_MLP__L1_EVENT_CORRECTION__seed730101__P0_CLAIM80` queue. The
+stage remains `ACTIVE/PENDING`; `scientific_success` is false,
+`confirmation_authorized` is false, `next_association_stage_authorized` is
+false, and CONFIRM/VAL/TEST/SOT remain closed. No new experiment is authorized
+by this checkpoint. Only code, tests, and necessary documentation are eligible
+for GitHub; datasets, weights, generated results, and bulk traces remain local.

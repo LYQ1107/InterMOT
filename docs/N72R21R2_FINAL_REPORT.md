@@ -1778,3 +1778,30 @@ Latest evidence: [progress index](N72R21R2_PROGRESS_INDEX.md).
 Reuse existing DanceTrack TRAIN images, SAM3/OSNet weights and original Python environment. Preserve historical evidence. All runtime decisions use only current real candidate UIDs and causal state. Sole click initializes identity, not unconditional override authority. Every intervention uses the complete global assignment and committed feedback. GT labels stay offline. Frames, seeds and propagated errors are not independent causal events.
 
 Only code, tests and necessary compact documentation are destined for GitHub. Data, embeddings, weights, media and bulk traces remain local. Completion requires actual experiments and final evidence-backed closure, not this bootstrap record.
+
+## Current checkpoint — V53 full96 actual readback
+
+FINAL GOAL:
+Event-Level Causal Identity Association: Safe One-Click Intervention with Fresh-Sequence Generalization for Online MOT
+
+The current-correctness registered group now has an independent full96
+actual-CSV and protocol readback. The scope is complete at the evidence level,
+but it is negative scientifically: zero effective actions, zero memory writes,
+zero paired MOT deltas, `G1=FAIL_OBSERVED_NONVACUITY_OR_HARM_BOUND`, and
+`G2=FAIL_NUMERIC_MOT_TARGETS`. The shared selected point is P0_CLAIM80 and
+remains a diagnostic selection, not confirmation qualification. The sealed
+readback is
+`outputs/N72R21R2/audit/V52_CURRENT_CORRECTNESS_P1_M7_FULL96_INDEPENDENT_ACTUAL_READBACK_V1.json`
+with SHA256
+`a15f5d18c02237691265d53a8d76ed531074247ab293531bdbad6dc7d58a34de`.
+
+The frozen original-17 census independently records 11 complete full-MOT
+groups, one terminal no-fit group, and five remaining groups in
+`outputs/N72R21R2/mot/development_closure_v1/snapshots/142e0904ead38d149b15b66e83f684f28de85985d84e071b0a0d086608044cbc.json`.
+The finite MAIN queue remains live under owner PID 10548 and continues the
+registered original sequence; it was not restarted. The overall research goal
+is therefore still `ACTIVE/PENDING`, not complete. `scientific_success` and
+`next_association_stage_authorized` remain false, and no CONFIRM, VAL, TEST,
+SOT, or downstream association stage is authorized by this result. Only code,
+tests, and necessary documentation are intended for GitHub; data, weights, and
+generated evidence remain local.
