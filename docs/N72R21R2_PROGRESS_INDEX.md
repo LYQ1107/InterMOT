@@ -68,6 +68,12 @@ complete; CONFIRM/VAL/TEST/SOT and next-stage authorization remain closed.
   census eight full-MOT groups, one measured no-fit and eight pending. Separate
   transfer192 terminal reported/owner absent; complete paired-label scientific
   readback remains pending, not an additional original17 group.
+  Subsequent complete paired192 actual CSV/trace/selection readback supersedes
+  that pending transfer scope: both conditions87 actual evaluations+nine
+  retained no-init dispositions, shared P0, zero interventions, both roles
+  G1/G2 FAIL; matched current-correction-minus-legacy nine deltas0 and paired
+  video95% intervals[0,0]. Only this frozen teacher-label transfer diagnostic
+  is closed, not natural L1/G1, on-policy training or the whole scientific task.
 
 Actual model fits, passive current-identity claims, complete own-policy MOT
 effects, independent beneficial roots and unseen-scene generalization are

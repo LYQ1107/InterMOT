@@ -404,3 +404,42 @@ label-effect comparison or the original17-group census. No original policy,
 weights, thresholds or association changed; zero writes are not G4 safety.
 Natural M2/L1, remaining registered groups and scientific closure remain open.
 CONFIRM/VAL/TEST/SOT and next-stage authorization remain closed.
+
+## Complete paired192 transfer: actual negative closure
+
+The preceding partial milestones are now superseded for completion scope by
+independent readback of all192 unique registered cells. Each condition has
+96 dispositions: both INNER points/all3 seeds plus shared selected FIT16/all3
+seeds;87 actual evaluations and nine retained failed-initialization dispositions
+per condition, with no fabricated metrics. The terminal owner and exact scoped
+worker modules were absent. Its process exit code was not directly observed.
+
+Readback checked all condition-specific fits/checkpoints and frozen source,
+anchor/candidate axes, full-global GT-free runtime/onset seals, actual raw onset
+counters, artifact SHA and zero-action C0 core-tensor/trajectory equality. All
+nine metrics were reparsed from actual pinned full-original-video CSVs. Both
+original all-seed INNER shared selections independently reproduced P0_CLAIM80.
+All interventions and memory writes were zero. Both conditions/roles fail
+original G1 and G2; neither zero errors nor zero writes establishes G4 safety.
+
+Current-correction minus legacy comparisons used exactly matched sequence,
+seed, click and selected point, not teacher Brier or the best successful subset.
+All nine macro metric differences are0, with paired-video95% intervals[0,0]
+for FIT15 and INNER7 usable clusters. Missing-initialization videos remain in
+the planned census; seeds/clicks/points do not increase independent support.
+Target-component count dictionaries also matched exactly between conditions.
+
+Local immutable evidence under `outputs/N72R21R2/`:
+
+- `audit/V40_TRANSFER_COMPLETE192_ACTUAL_CSV_TRACE_PAIRED_READBACK_V1.json`,
+  SHA256 `da26f46b37f34dfb7c8150e6de94fca84ce7812e0366024dddcbeb2612410044`;
+- `audit/V40_TRANSFER192_TERMINAL_ACTUAL_PROCESS_READBACK_V1.json`,
+  SHA256 `c81698835cceab50ce3302a42db691bf5f17b2e1e350892b9b645275164e2f18`.
+
+Bounded conclusion: changing only this matched controlled teacher benefit
+target did not yield deployed intervention or full-MOT improvement under the
+frozen original authority policy. This is not proof that all learned methods
+fail, a completed natural-error L1/G1 study, or actual-model on-policy evidence.
+The two transfer conditions do not enlarge or replace the original17 census.
+Natural M2/L1, remaining original groups/M7, all35/all74 semantics and whole-task
+scientific closure remain open. CONFIRM/VAL/TEST/SOT and next stage stay closed.
