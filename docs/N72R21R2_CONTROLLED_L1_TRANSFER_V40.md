@@ -479,3 +479,37 @@ The original complete-group census remains eight full-MOT groups plus one
 measured no-fit disposition and eight pending. Natural M2/L1, remaining M7,
 all35/all74 semantics and whole-task closure remain open; zero writes do not
 establish G4. CONFIRM/VAL/TEST/SOT and next-stage authorization remain closed.
+
+## Original COUNTERFACTUAL_ACTION_VALUE dual-INNER/M7 closure
+
+Both INNER points/all3 seeds now have48 sealed registered dispositions:
+42 actual evaluations and six retained no-initialization dispositions, without
+metric imputation. Independent actual pinned CSV/source/checkpoint/axis/runtime/
+onset/GT-guard/C0 tensor/trajectory readback found zero effective interventions
+and nine-metric deltas0. Original all-seed shared selection independently
+reproduced P0_CLAIM80. The108 correlated click/point/seed replicas span seven
+usable videos, not14 clusters or independently proven causal roots.
+
+Frozen P1 M7 reproduced4418 sampled predictions per seed with numerical error0
+and exact float32 FIT normalizers. It retained18 valid clicks, six failed slots,
+one all-failed video,19692 global frames,1243 sampled frames and3175 sampled
+non-KEEP choices per seed; score-only non-KEEP passes and effective actions0.
+FIT optimizer support had6058 accepted correlated rows. Marginal outside-range
+counts were confirmation4418, agreement3038 and intervention-age0 of4418;
+these are not joint OOD/calibration or a proven causal failure explanation.
+Fourteen of28 original MAIN M7 reports are now available. No refit, new policy,
+feature zeroing/clipping, counterfactual score trial or on-policy fit occurred.
+
+Local immutable evidence under `outputs/N72R21R2/`:
+
+- `audit/V40_ORIGINAL_COUNTERFACTUAL_ACTION_VALUE_BOTH_POINTS48_ACTUAL_CSV_SELECTION_READBACK_V1.json`,
+  SHA256 `42f9364f72d133088e5b715443664d16a7ef21141d690d205120cacd40253b00`;
+- `training/main_feature_support_audit_v1/COUNTERFACTUAL_ACTION_VALUE__L3_HARM_AWARE__P1_CLAIM50.json`,
+  SHA256 `45a3d87e170fc31a1f2017e4a568104e71b563c090cff2722c52164be06977d3`;
+- `audit/V40_COUNTERFACTUAL_ACTION_VALUE_BOTH_INNER_AND_MAIN14_SUPPORT_ACTUAL_READBACK_V1.json`,
+  SHA256 `f1e7ef0c9ea38dce61e4316ae8d7c666e70d04bb05dd116ecf00114c10433fa8`.
+
+Selected FIT16/all3 seeds remains pending: this is not the96-cell complete
+group or an increase in the original full-MOT group census. Natural M2/L1,
+remaining registered groups/M7, all35/all74 semantics and scientific closure
+remain open. Zero writes are not G4 safety; CONFIRM/VAL/TEST/SOT stay closed.
