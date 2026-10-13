@@ -594,3 +594,49 @@ set remains four pinned TrackEval old SEQMAP CLI failures and one historical
 branch-name assertion; no tests were excluded and no vendor code was edited.
 `tests/REGRESSION_V52.json` SHA256
 `41f90910adfb67bc98c174053c08e075073ca0109cd10ed24d2a7ad1e7deaea0`.
+
+## DUAL_IDENTITY_STATE P0 complete24 and frozen M7
+
+The resumed original queue subsequently sealed all24 P0_CLAIM80 INNER8/all3
+seed cells and automatically entered the original P1 point. Independent
+whole-point readback reparsed every actual pinned nine-metric CSV and checked
+fits/checkpoints, source/runtime/onset/GT-guard/current-axis/anchor/artifact
+links, original density, raw onset counters, paired C0 deltas and zero-action
+core-tensor/trajectory equality. There were21 evaluated cells and three
+retained no-initialization/no-metric dispositions,54 correlated valid click
+replicas, zero effective interventions and nine actual paired metric deltas0.
+These are not independent beneficial roots; no shared point selection or
+complete96-cell group is inferred before P1 and selected FIT are finished.
+
+Only after that readback, the unchanged frozen M7 audit completed all seeds.
+The6058 accepted correlated FIT optimizer rows reproduced each exact float32
+hierarchical FIT normalizer. Per seed, all8 INNER videos retained18 valid
+clicks/six failed slots/one all-failed video,19692 actual global frames and
+1243 sampled current frames. All4418 sampled choices reproduced with maximum
+numeric prediction error0.0;3175 sampled non-KEEP choices had zero score-only
+passes, and all-frame effective actions were zero. Numeric replay is not
+bitwise AA, all-frame feature coverage, calibration or research success.
+
+Marginal support showed the same bounded diagnostic pattern: FIT confirmation
+and previous-candidate agreement were constant0; actual confirmation was
+outside the FIT range for4418/4418 choices, and agreement for3038/4418.
+Previous-intervention age remained10 in both source and deployment, with zero
+outside-range choices. These marginal differences do not prove joint OOD or
+the causal reason for zero interventions. No feature zeroing/clamping, new
+fit, score counterfactual, runtime or memory change was performed.
+
+Local immutable evidence under `outputs/N72R21R2/`:
+
+- `audit/V52_ORIGINAL_DUAL_IDENTITY_STATE_P0_COMPLETE24_ACTUAL_CSV_READBACK_V1.json`,
+  SHA256 `589a1e615955c3c89fcd793ee739b71b8686e336b86036e8f1d73f07d6c903eb`;
+- `training/main_feature_support_audit_v1/DUAL_IDENTITY_STATE__L3_HARM_AWARE__P0_CLAIM80.json`,
+  SHA256 `003d53e13d21f033fcc419c0c6ef284db9dd5d14d9f6bf9dc027aa286871158e`;
+- `audit/V52_DUAL_IDENTITY_STATE_P0_AND_MAIN15_SUPPORT_ACTUAL_READBACK_V1.json`,
+  SHA256 `f59c748f9040e8ade71cce2fb8feb395c80aba73785f36c799e8a1fab9096e9b`.
+
+All15 available MAIN M7 reports were reread against their frozen protocol,
+seed/video census, exact-normalizer flags, prediction tolerance and actual
+runtime/trace/checkpoint references. Fifteen of28 reports are complete. Original
+whole-group census remains nine complete/one measured no-fit/seven pending.
+P1/FIT, natural M2/L1, all35/all74 semantics and whole-task closure remain open;
+zero writes do not prove G4 safety. CONFIRM/VAL/TEST/SOT remain closed.

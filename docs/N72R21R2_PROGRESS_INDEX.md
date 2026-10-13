@@ -98,6 +98,13 @@ complete; CONFIRM/VAL/TEST/SOT and next-stage authorization remain closed.
   source-attested V52:657 focused passed, full1582 passed/five unchanged
   historical failures/zero errors, full pytest exit1; no exclusions or vendor
   edits. Neither successful recovery nor unit tests imply scientific success.
+  Subsequent DUAL_IDENTITY_STATE P0 all24 actual CSV/source/trace readback:
+  21 evaluated/three retained no-init, zero interventions and all nine paired
+  MOT deltas0. Frozen M7 all seeds reproduced4418 sampled predictions each
+  with numeric error0.0; all15/28 reports were independently protocol/seed/
+  runtime-reference checked. Marginal support differences are not causal proof.
+  P1/FIT/shared selection/full96 remain pending; original nine-group census
+  and closed CONFIRM/VAL/TEST/SOT boundaries are unchanged.
 
 Actual model fits, passive current-identity claims, complete own-policy MOT
 effects, independent beneficial roots and unseen-scene generalization are
