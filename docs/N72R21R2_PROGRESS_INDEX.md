@@ -81,6 +81,11 @@ complete; CONFIRM/VAL/TEST/SOT and next-stage authorization remain closed.
   Subsequent COUNTERFACTUAL_ACTION_VALUE dual-INNER48 actual CSV/selection
   closure and P1 frozen M7: shared P0, zero interventions, exact numeric replay,
   14/28 support reports; selected FIT16/full96 remain pending, not G4 safety.
+  Subsequent COUNTERFACTUAL_ACTION_VALUE full96 actual CSV/trace/shared-point
+  readback supersedes that pending group scope: zero interventions, nine MOT
+  deltas0 and paired video95% intervals[0,0], FIT/INNER G1/G2 FAIL. Original
+  census nine full-MOT groups, one measured no-fit and seven pending; MAIN
+  continues DUAL_IDENTITY_STATE, not whole-task closure or G4 safety success.
 
 Actual model fits, passive current-identity claims, complete own-policy MOT
 effects, independent beneficial roots and unseen-scene generalization are

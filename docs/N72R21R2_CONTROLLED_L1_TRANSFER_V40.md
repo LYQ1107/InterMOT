@@ -513,3 +513,36 @@ Selected FIT16/all3 seeds remains pending: this is not the96-cell complete
 group or an increase in the original full-MOT group census. Natural M2/L1,
 remaining registered groups/M7, all35/all74 semantics and scientific closure
 remain open. Zero writes are not G4 safety; CONFIRM/VAL/TEST/SOT stay closed.
+
+## Original COUNTERFACTUAL_ACTION_VALUE complete96 negative
+
+The preceding dual-INNER milestone is superseded for completion scope by all96
+registered dispositions: both INNER points/all3 seeds plus shared P0 selected
+FIT16/all3 seeds. Independent readback checked frozen fits/checkpoints, current
+anchor/candidate axes, GT-free runtime/onset/source/artifact seals, raw onset
+counters and zero-action C0 core-tensor/trajectory equality, and reparsed all
+actual pinned nine-metric CSVs. Original all-seed point selection independently
+reproduced P0_CLAIM80. FIT had45 actual evaluations+three retained no-init
+dispositions; INNER42+six, not fabricated zero metrics. The231 valid click
+replicas are correlated and do not prove independent roots or person separation.
+
+All effective interventions and writes were zero. FIT15 and INNER7 usable
+video-cluster summaries each gave nine macro deltas0 versus C0, paired-video
+95% intervals[0,0], G1 FAIL_OBSERVED_NONVACUITY_OR_HARM_BOUND and G2
+FAIL_NUMERIC_MOT_TARGETS. Absence of writes is not a nonvacuum G4 safety PASS.
+This group supplies no confirmed MOT gain or next-stage authorization.
+
+Local immutable evidence under `outputs/N72R21R2/`:
+
+- `audit/V40_COMPLETE_COUNTERFACTUAL_ACTION_VALUE96_ACTUAL_CSV_TRACE_READBACK_V1.json`,
+  SHA256 `ef86cae661e223d3683c69780ec747ddabde088ee9961abf763568a9a26673ae`;
+- `mot/development_closure_v1/snapshots/adc65e1da9d4e915b3742fb2e25dad7d55c1682e8d2c5fb96cd93e8a73dc62f8.json`,
+  SHA256 `3b9b44199d34edb3f9cad0301b685274504755d5b9b90dc1a07c8102d0dc9446`.
+
+The original17 census is now nine complete full-MOT groups, one measured
+all3-seed prefit/no-model disposition and seven pending groups. The original
+MAIN driver continues its frozen order with DUAL_IDENTITY_STATE; no restart,
+refit, policy/threshold change or new full-MOT worker was introduced by these
+readbacks. Fourteen of28 M7 reports remain available. Natural M2/L1, remaining
+original groups/M7, all35/all74 semantics and whole-task scientific closure
+remain incomplete. CONFIRM/VAL/TEST/SOT and next-stage authorization stay closed.
