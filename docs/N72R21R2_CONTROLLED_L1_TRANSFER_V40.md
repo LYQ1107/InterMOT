@@ -288,3 +288,29 @@ No original code, models, points or thresholds changed. Natural M2/L1,
 remaining original groups, the controlled-L1 second condition/paired comparison,
 all35/all74 semantics and scientific closure remain pending. Confirmation,
 VAL/TEST/SOT and next-stage authorization remain closed; zero writes are not G4 safety.
+
+## Subsequent current-correction transfer P0 point readback
+
+CONTROLLED_UNIT_CORRECTION/P0 has all24 INNER8/all3-seed dispositions sealed.
+Independent offline checks reloaded the correct condition-specific frozen fits
+and checkpoints, verified candidate/anchor/runtime/onset/artifact SHA chains,
+actual GT guards and raw onset counters, and reparsed actual pinned nine-metric
+CSVs. There are21 evaluated cells and three no-valid-initialization dispositions,
+with no metrics imputed, on seven usable video clusters and54 correlated click
+replicas. No frame, click or seed replicas are treated as independent roots.
+
+Effective interventions and memory writes were zero. Sealed zero-action C0
+core-tensor/trajectory checks passed and all evaluated metrics matched C0.
+This is a complete P0 development-point readback, not a completed96-cell
+condition, shared-point selection, paired label-effect comparison or G4 safety.
+P1/all3 seeds and selected FIT16 remain pending. Neither this point nor the
+transfer conditions replace the original17-group census.
+
+Local evidence under `outputs/N72R21R2/`:
+
+- `audit/V40_TRANSFER_CORRECTION_P0_ALL3_INNER8_ACTUAL_READBACK_V1.json`, SHA256
+  `a2a8a257608e14af9167490d44d1697716e42d29962dd3fbd6c686facc43a343`.
+
+No code, weights, thresholds, candidate policy or association changed for this
+audit. Natural M2/L1, remaining registered groups, conditional rounds and full
+scientific closure remain open. CONFIRM/VAL/TEST/SOT and next stage stay closed.
