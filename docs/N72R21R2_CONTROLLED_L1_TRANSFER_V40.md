@@ -224,6 +224,38 @@ controlled-L1 paired transfer remains separate and incomplete. Natural M2/L1,
 conditional rounds, all35/all74 semantics and full-task closure remain open.
 CONFIRM/VAL/TEST/SOT and next-stage authorization remain closed.
 
+## Subsequent original CAUSAL_TEMPORAL complete96 readback
+
+The original CAUSAL_TEMPORAL/L3 group now has all96 registered cells sealed:
+both INNER points/all3 seeds and independently reselected P0_CLAIM80 FIT16/all3
+seeds. Independent readback reparsed actual pinned nine-metric CSVs and checked
+frozen fits/checkpoints, candidate and anchor axes, runtime/onset/artifact seals,
+actual GT-free guards, raw onset counters and zero-action C0 core-tensor/trajectory
+equality. There were87 actual evaluations and nine retained no-initialization
+dispositions (FIT45+3, INNER42+6), not imputed zero metrics. The231 valid click
+replicas are correlated, not independent causal roots.
+
+All effective interventions and writes were zero. FIT and INNER each had nine
+macro deltas0 and paired video95% intervals[0,0], with15 and seven usable video
+clusters respectively. Both original G1 and G2 failed; absence of writes is not
+G4 safety. No confirmation or next-stage authorization follows.
+
+Local immutable evidence under `outputs/N72R21R2/`:
+
+- `audit/V40_COMPLETE_CAUSAL_TEMPORAL96_ACTUAL_CSV_TRACE_READBACK_V1.json`,
+  SHA256 `cead4cc1bb6de8f197d4992ab01f564c2023d14b718d04326725107bf5e563c3`;
+- `mot/development_closure_v1/snapshots/c67d558710f16bd7e2242fe9b7c9aa71384a3efd30d24c46b43a1fb79618efea.json`,
+  SHA256 `803de4a55f9ad24dbb65374a746e7d392ca4467a1713adc8e377afa4baebd2da`.
+
+The original census is now eight complete full-MOT groups, one measured
+all3-seed prefit/no-model disposition, and eight pending groups. The original
+MAIN driver continues its frozen order with COUNTERFACTUAL_ACTION_VALUE.
+The separate transfer driver has reported192 sealed cells and terminal status;
+its owner is absent, but complete current-correction/paired-label readback is
+still pending. This terminal marker alone is not a scientific conclusion or an
+additional original17 group. Natural M2/L1, remaining M7 reports, all35 runtime
+semantics/all74 artifact semantics and whole-stage closure remain incomplete.
+
 ## Subsequent first paired-transfer condition completion
 
 LEGACY_H100_BENEFIT has completed all96 registered dispositions: both INNER8

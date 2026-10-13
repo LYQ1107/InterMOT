@@ -63,6 +63,11 @@ complete; CONFIRM/VAL/TEST/SOT and next-stage authorization remain closed.
   with no full96-cell completion or G4 safety inferred; subsequent
   current-correction both-INNER48 CSV/shared-selection readback: zero actions,
   shared P0 and selected FIT16 pending, not the final192-cell paired comparison.
+  Subsequent original CAUSAL_TEMPORAL96 actual CSV/trace/selection readback:
+  zero interventions, all nine MOT deltas0 and FIT/INNER G1/G2 FAIL; original
+  census eight full-MOT groups, one measured no-fit and eight pending. Separate
+  transfer192 terminal reported/owner absent; complete paired-label scientific
+  readback remains pending, not an additional original17 group.
 
 Actual model fits, passive current-identity claims, complete own-policy MOT
 effects, independent beneficial roots and unseen-scene generalization are
