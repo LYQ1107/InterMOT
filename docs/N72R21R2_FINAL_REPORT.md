@@ -1841,3 +1841,13 @@ PIDs 607244 and 607335 are absent; the marker is therefore stale and was not
 used to infer a live owner or justify a restart. No dataset, checkpoint, unique
 result, other project, or research process was touched. The queue remains
 `SAFE_STOP_NO_RESTART` until the storage guard can pass.
+
+### Fresh resume audit — 2026-10-15
+
+After the blocked goal was resumed, a fresh dry-run found 42.525616 GiB free,
+17.474384 GiB below the unchanged reserve. The only clearly regenerable
+project-local targets were pip/pytest/`__pycache__` files totaling 9,848,757
+bytes (about 0.009 GiB), so deleting them cannot restore the guard. HuggingFace
+and Torch caches, environments, datasets, checkpoints, and R2 evidence remain
+protected. No cleanup or experiment was started. Evidence is sealed in
+`outputs/N72R21R2/audit/V143_FRESH_RESUME_STORAGE_DRY_RUN_20261015.json`.
