@@ -1805,3 +1805,28 @@ is therefore still `ACTIVE/PENDING`, not complete. `scientific_success` and
 SOT, or downstream association stage is authorized by this result. Only code,
 tests, and necessary documentation are intended for GitHub; data, weights, and
 generated evidence remain local.
+
+## 2026-10-15 — current regression and storage readback (engineering progress, not scientific closure)
+
+The current worktree regression was rerun with the fixed project virtual
+environment and recorded in
+`outputs/N72R21R2/tests/REGRESSION_CURRENT_20261015.json`.
+The result was **1582 passed / 5 failed**, actual pytest exit code 1.
+Four failures are the retained pinned TrackEval CLI interface defect where
+`SEQMAP_FILE` is parsed as a list but the downstream dataset loader requires a
+path-like scalar. The fifth is the retained historical branch-literal
+assertion for the old N72R20R3R2R3 branch. The project tests and third-party
+TrackEval source were not edited to hide these failures.
+
+This regression is an engineering/interface audit only. It does not establish
+nonvacuous intervention, MOT improvement, fresh-sequence generalization,
+memory safety, or scientific closure.
+
+The current MAIN marker contains 959 sealed cells and no retained failed cell;
+the next registered cell is `dancetrack0049`, but its recorded owner PID is no
+longer live. The latest sealed evidence remains V141: three valid
+initializations, zero direct decisions, zero paired MOT deltas versus C0, and
+`scientific_closure=false`. The queue is not restarted below the unchanged
+60 GiB storage reserve; current free space is approximately 42 GiB. The stage
+therefore remains `ACTIVE_ORIGINAL_QUEUES_NO_SCIENTIFIC_CLOSURE`, scientific
+decision `PENDING`, and next-association authorization `false`.
