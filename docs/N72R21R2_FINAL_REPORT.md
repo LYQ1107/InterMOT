@@ -1830,3 +1830,14 @@ initializations, zero direct decisions, zero paired MOT deltas versus C0, and
 60 GiB storage reserve; current free space is approximately 42 GiB. The stage
 therefore remains `ACTIVE_ORIGINAL_QUEUES_NO_SCIENTIFIC_CLOSURE`, scientific
 decision `PENDING`, and next-association authorization `false`.
+
+## 2026-10-15 — current resource and owner readback
+
+The authoritative resource readback is sealed at
+`outputs/N72R21R2/audit/V142_CURRENT_RESOURCE_OWNER_READBACK_20261015.json`.
+The personal mount has 45,066,895,360 bytes available (41.971817 GiB),
+18.028183 GiB below the unchanged 60 GiB reserve. The MAIN marker's recorded
+PIDs 607244 and 607335 are absent; the marker is therefore stale and was not
+used to infer a live owner or justify a restart. No dataset, checkpoint, unique
+result, other project, or research process was touched. The queue remains
+`SAFE_STOP_NO_RESTART` until the storage guard can pass.
