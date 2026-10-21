@@ -1851,3 +1851,35 @@ bytes (about 0.009 GiB), so deleting them cannot restore the guard. HuggingFace
 and Torch caches, environments, datasets, checkpoints, and R2 evidence remain
 protected. No cleanup or experiment was started. Evidence is sealed in
 `outputs/N72R21R2/audit/V143_FRESH_RESUME_STORAGE_DRY_RUN_20261015.json`.
+
+## 2026-10-21 — user-authorized NAS storage recovery (engineering only)
+
+The user authorized the mounted NAS for this project after the personal
+filesystem fell below the frozen 60 GiB reserve. The verified mount is
+`/data3/liuyeqiang/nas/A100` (`fuse.sshfs`), with the isolated R2 asset root
+`/data3/liuyeqiang/nas/A100/exp/InterMOT_N72R21R2_assets`; the readback showed
+approximately 3756.88 GiB available. The parent `/data3/liuyeqiang/nas` is
+not the mountpoint and is not used as a storage target.
+
+The project-owned `main_policy_v1`, `main_policy_v1_logs`, and
+`training/event_authority_v1` directories now live on that NAS root. Their
+original local paths remain compatibility symlinks, so existing absolute
+artifact and checkpoint records do not change. Before the checkpoint switch,
+2089 overlapping local checkpoint files were compared byte-for-byte with the
+NAS copies and all matched; the final loader smoke verified SHA256 and
+`torch.load(weights_only=True)` for all42 MAIN fit records. SSHFS ownership
+warnings were treated as a filesystem capability limitation only; no content
+or project ownership was changed.
+
+The storage guard now accepts an explicit backend through
+`N72R21R2_STORAGE_ROOT` and `N72R21R2_STORAGE_MOUNT`; the latter must resolve
+to an actual mount. The reproducible receipt is
+`outputs/N72R21R2/audit/NAS_STORAGE_READBACK_20261021.json` (SHA256
+`4ff58b11980f64f3a412010a7f619eee2fa16aa9862b6453280d932f07384fbb`), and the
+verification helper is
+`scripts/n72r21r2_nas_storage_readback.py`. This is an engineering/resource
+change only: the frozen Goal, candidate matcher, association logic, model
+protocol, scientific gates, VAL/TEST/SOT boundaries and next-stage
+authorization are unchanged. No research worker was restarted by this
+readback; the original finite queue remains subject to stale-owner recovery
+checks before continuation.

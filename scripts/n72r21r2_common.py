@@ -11,6 +11,10 @@ OUT = ROOT / "outputs/N72R21R2"
 R1 = ROOT.parent / "InterMOT_N72R21R1_worktree"
 HISTORY = ROOT.parent / "InterMOT"
 ASSETS = Path(os.environ.get("N72R21R2_ASSET_ROOT", str(ROOT.parent / "InterMOT_N72R21R2_assets"))).resolve()
+_storage_root_env = os.environ.get("N72R21R2_STORAGE_ROOT")
+_storage_mount_env = os.environ.get("N72R21R2_STORAGE_MOUNT")
+STORAGE_ROOT = Path(_storage_root_env).resolve() if _storage_root_env else ASSETS
+STORAGE_MOUNT = Path(_storage_mount_env).resolve() if _storage_mount_env else None
 TRAIN = ROOT.parent / "InterMOT_N72R16_assets/dataset/train"
 OLD_CANDIDATES = ROOT.parent / "InterMOT_N72R20R2_assets"
 PYTHON = HISTORY / ".venv/bin/python"
@@ -66,11 +70,16 @@ def append_log(action, **fields):
 
 
 def storage(reserve_bytes=0):
-    free = shutil.disk_usage(ASSETS if ASSETS.exists() else ROOT).free
+    if not STORAGE_ROOT.exists():
+        raise RuntimeError(f"R2 storage root does not exist: {STORAGE_ROOT}")
+    if STORAGE_MOUNT is not None and not STORAGE_MOUNT.is_mount():
+        raise RuntimeError(f"R2 storage mount is not mounted: {STORAGE_MOUNT}")
+    free = shutil.disk_usage(STORAGE_ROOT).free
     floor = 60 * (1 << 30)
     if free - reserve_bytes < floor:
         raise RuntimeError("R2 would violate the60GiB actual filesystem reserve")
     return {"utc": utcnow(), "filesystem_free_bytes": free, "filesystem_free_GiB": free / (1 << 30), "floor_GiB": 60,
+            "storage_root": str(STORAGE_ROOT), "storage_mount": str(STORAGE_MOUNT) if STORAGE_MOUNT else None,
             "personal_limit_not_inferred_from_filesystem_free_space": True}
 
 
