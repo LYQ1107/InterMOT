@@ -50,8 +50,16 @@ def current_marker():
     active = marker.get("active")
     assert marker["stage"] == "N72R21R2" and marker["goal"] == GOAL
     assert marker["status"] == "ACTIVE_FINITE_REGISTERED_MAIN_OWN_POLICY_FULL_MOT"
-    assert isinstance(active, dict) and active.get("action") == "runtime"
-    legacy.dead_active(marker)
+    if not (isinstance(active, dict) and active.get("action") == "runtime"):
+        # A previous recovery process may have safely hydrated owner.json and
+        # then died before retrying the child. Reuse its sealed active receipt
+        # only after checking both the original owner and child are absent.
+        fresh = read_json(OUT / FRESH)
+        recovered = fresh.get("recovery_resumed_from_active") or fresh.get("recovery_started_from_active")
+        assert isinstance(recovered, dict) and recovered.get("action") == "runtime"
+        legacy.dead_active(dict(marker, active=recovered))
+    else:
+        legacy.dead_active(marker)
     legacy.no_live_scoped_workers(MODULES)
     assert marker["failed_retained"] == []
     assert marker["confirmation_authorized"] is False
@@ -131,7 +139,14 @@ def frozen():
 def operation(action, sequence, family, objective, seed, point):
     p = frozen()
     key = "MAIN__" + family + "__" + objective + "__seed" + str(seed) + "__" + point + "/" + sequence
-    assert key == p["active_key"], key
+    expected = p["active_key"]
+    fresh_path = OUT / FRESH
+    if fresh_path.exists():
+        fresh = read_json(fresh_path)
+        fresh_active = (fresh.get("active") or fresh.get("recovery_resumed_from_active") or
+                        fresh.get("recovery_started_from_active") or {})
+        expected = fresh_active.get("key", expected)
+    assert key == expected, key
     original = policy.BASE
     try:
         policy.BASE = RECOVERY_BASE
@@ -148,26 +163,62 @@ def operation(action, sequence, family, objective, seed, point):
 def run():
     p = frozen()
     marker_path, marker = current_marker()
-    assert sha256(marker_path) == p["old_marker_sha256"]
+    fresh_path = OUT / FRESH
+    resuming = fresh_path.exists()
+    if resuming:
+        fresh = read_json(fresh_path)
+        assert fresh["stale_owner_recovery_protocol_sha256"] == sha256(PROTOCOL)
+        assert fresh["original_marker_archive"] == p["original_marker_archive"]
+        assert sha256(fresh["original_marker_archive"]) == p["old_marker_sha256"]
+        assert fresh["failed_retained"] == []
+        assert sha256(marker_path) == sha256(fresh_path)
+        resume_active = (marker.get("active") or fresh.get("recovery_resumed_from_active") or
+                         fresh.get("recovery_started_from_active") or {})
+        assert resume_active.get("action") == "runtime"
+        recovery_target_key = resume_active["key"]
+        resume_state = dict(fresh)
+        resume_state["active"] = None
+        resume_state["recovery_resumed_from_active"] = resume_active
+        resume_state["pid"] = os.getpid()
+    else:
+        assert sha256(marker_path) == p["old_marker_sha256"]
+        recovery_target_key = p["active_key"]
+        resume_state = dict(marker)
+        resume_state["active"] = None
+        resume_state["recovery_started_from_active"] = marker["active"]
+        resume_state["pid"] = os.getpid()
     assert output_keys() == sorted(marker["completed"])
-    if (OUT / FRESH).exists():
-        raise FileExistsError("Never start a duplicate stale-owner recovery")
+    recovery_log_root = RECOVERY_LOGS / ("replay_" + str(os.getpid()))
+    assert not recovery_log_root.exists()
     saved = driver.OUT, driver.write_json, driver.run_cell, driver.ASSETS
+    bootstrapped = False
 
     def mirrored(relative, value, **kwargs):
+        nonlocal bootstrapped
         if relative != MARKER:
             return write_json(relative, value, **kwargs)
-        if not (OUT / FRESH).exists():
-            old_path, old_value = current_marker()
-            assert sha256(old_path) == p["old_marker_sha256"]
-            assert old_value["active"]["key"] == p["active_key"]
-            value.update(completed=list(p["completed_output_keys"] if "completed_output_keys" in p else marker["completed"]))
+        if not bootstrapped:
+            if not (OUT / FRESH).exists():
+                old_path, old_value = current_marker()
+                assert sha256(old_path) == p["old_marker_sha256"]
+                assert old_value["active"]["key"] == p["active_key"]
+                value.clear()
+                value.update(resume_state)
+            else:
+                existing = read_json(OUT / FRESH)
+                value.clear()
+                value.update(existing)
+                value["active"] = None
+                value["pid"] = os.getpid()
+            bootstrapped = True
         value.update(
             stale_owner_recovery_protocol_sha256=sha256(PROTOCOL),
             original_marker_archive=p["original_marker_archive"],
             old_exit_code_not_observed_cause_UNKNOWN=True,
         )
-        path = write_json(FRESH, value, **kwargs)
+        fresh_kwargs = dict(kwargs)
+        fresh_kwargs["mutable"] = bool((OUT / FRESH).exists())
+        path = write_json(FRESH, value, **fresh_kwargs)
         write_json(relative, value, mutable=True)
         return path
 
@@ -176,11 +227,19 @@ def run():
     def recovered_cell(state, marker_value, job, point, sequence):
         uid = "MAIN__" + job["family"] + "__" + job["objective"] + "__seed" + str(job["seed"]) + "__" + point
         key = uid + "/" + sequence
-        if key != p["active_key"]:
+        if key != recovery_target_key:
             return original_cell(state, marker_value, job, point, sequence)
         if key in state["completed"] or any(row["key"] == key for row in state["failed_retained"]):
             return
-        log = RECOVERY_LOGS / uid / (sequence + ".log")
+        log = recovery_log_root / uid / (sequence + ".log")
+        if log.exists():
+            attempt = 1
+            while True:
+                candidate = RECOVERY_LOGS / uid / (sequence + f".resume{attempt}.log")
+                if not candidate.exists():
+                    log = candidate
+                    break
+                attempt += 1
         log.parent.mkdir(parents=True, exist_ok=True)
         with log.open("x") as handle:
             for action, folder in (("runtime", "runtime"), ("onsets", "onset_runtime"), ("evaluate", "results")):
@@ -211,10 +270,12 @@ def run():
         mirrored(MARKER, state, mutable=True)
 
     try:
-        driver.OUT = routed_output(MARKER, FRESH)
+        driver_probe = FRESH + ".driver_probe"
+        assert not (OUT / driver_probe).exists()
+        driver.OUT = routed_output(MARKER, driver_probe if resuming else FRESH)
         driver.write_json = mirrored
         driver.run_cell = recovered_cell
-        driver.ASSETS = RECOVERY_LOGS
+        driver.ASSETS = recovery_log_root
         driver.run()
     finally:
         driver.OUT, driver.write_json, driver.run_cell, driver.ASSETS = saved
