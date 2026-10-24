@@ -12,6 +12,7 @@ from pathlib import Path
 from scripts.n72r21r2_common import (
     GOAL,
     OUT,
+    ROOT,
     append_log,
     read_json,
     sha256,
@@ -41,6 +42,13 @@ MISSING_REPORTS = (
 def ref(path):
     path = Path(path)
     return {"path": str(path), "sha256": sha256(path)}
+
+
+def latest_versioned(directory, prefix):
+    candidates = list(Path(directory).glob(f"{prefix}_V*.json"))
+    if not candidates:
+        raise FileNotFoundError(f"No versioned {prefix} receipt in {directory}")
+    return max(candidates, key=lambda path: int(path.stem.rsplit("_V", 1)[1]))
 
 
 def compact_group(group):
@@ -269,11 +277,12 @@ def run(dry_run=False):
                 if (OUT / relative).exists()]
     if existing:
         raise FileExistsError(f"Preserve existing final evidence; already present: {existing}")
-    test_receipt = read_json(OUT / "tests/REGRESSION_V52.json")
+    regression_path = latest_versioned(OUT / "tests", "REGRESSION")
+    test_receipt = read_json(regression_path)
     if not dry_run:
         report_refs = write_missing(evidence)
         report_path = OUT / "FINAL_REPORT.md"
-        report_path.write_text(report_text(evidence, report_refs, ref(OUT / "tests/REGRESSION_V52.json")))
+        report_path.write_text(report_text(evidence, report_refs, ref(regression_path)))
         result_body = {
             **common(evidence, "FINAL_SCIENTIFIC_CLOSURE_NEGATIVE"),
             "decision": DECISION,
@@ -291,7 +300,7 @@ def run(dry_run=False):
                        "population_safety": False},
             "confirmation": {"status": "NOT_RUN_UNAUTHORIZED", "sequences": evidence["preregistration"]["split"]["confirmation"]},
             "split_integrity": {"frozen_train_roles": 40, "FIT16": 16, "INNER8": 8, "CONFIRMATION8_accessed": False},
-            "test_regression": {"path": str(OUT / "tests/REGRESSION_V52.json"), "sha256": sha256(OUT / "tests/REGRESSION_V52.json"),
+            "test_regression": {"path": str(regression_path), "sha256": sha256(regression_path),
                                  "passed": test_receipt["passed"], "failed": test_receipt["failed"],
                                  "exit_code": test_receipt["actual_shell_exit_code"]},
             "generated_reports": report_refs,
@@ -334,17 +343,86 @@ def reconcile():
     storage(8 << 20)
     result_path = OUT / "FINAL_RESULT.json"
     ledger_paths = sorted((OUT / "audit").glob("FULL_TASK_DELIVERABLE_LEDGER_V1*.json"))
-    if not result_path.exists() or not ledger_paths:
-        raise FileNotFoundError("Final result and requirement ledger are both required")
+    regression_path = latest_versioned(OUT / "tests", "REGRESSION")
+    tables_path = latest_versioned(OUT / "tables", "FINAL_SIX_TABLES")
+    required35_path = latest_versioned(OUT / "audit", "REQUIRED35_RUNTIME_SCOPE_AUDIT")
+    report_path = OUT / "FINAL_REPORT.md"
+    if not result_path.exists() or not ledger_paths or not tables_path.exists() or not required35_path.exists():
+        raise FileNotFoundError("Final result, requirement ledger, six tables, and required35 audit are all required")
     result = read_json(result_path)
     ledger_path = ledger_paths[-1]
+    tables = read_json(tables_path)
+    required35 = read_json(required35_path)
+    if not tables["all_six_tables_accounted"]:
+        raise ValueError("six-table assembler did not account for every required table")
+    if not required35["all_requirements_mapped"]:
+        raise ValueError("required35 assembler did not map every engineering requirement")
+    if report_path.exists():
+        report = report_path.read_text()
+        marker = "## Final delivery audit"
+        if marker not in report:
+            report += """
+
+## Final delivery audit
+
+The six required tables are now assembled in
+`outputs/N72R21R2/tables/FINAL_SIX_TABLES_V1.json`.  Every required field is
+represented by an actual measurement or an explicit `UNPROVEN`/`NOT_RUN`
+disposition; no post-hoc best strategy was selected after observing the
+negative result.  Table 1 keeps independent-person and independent-causal-root
+fields unavailable rather than converting correlated frames, clicks or seeds
+into independent evidence.
+
+The methods actually explored include KEEP/SHADOW, recovery-only,
+baseline-uncertainty, global-regret, competitor-protection, native-reliability,
+delayed confirmation and selective abstention controls, plus Scalar, Logistic,
+Small MLP, Pairwise Ranker, Global Risk, Temporal, Value and Dual-State learned
+families across the registered objectives.  The complete learned full-MOT
+groups were C0-equivalent at runtime: zero effective actions, zero N01/N10 and
+zero paired nine-metric deltas.  Simple controls did produce diagnostic actions
+in FIT/INNER, but the observed N01/N10 and other-person harm evidence failed G1
+and their paired HOTA/AssA/IDF1 evidence failed G2; those actions are not a
+qualified correction policy.  Relational structure, model-generated on-policy
+training, M-B memory integration and CONFIRMATION8 were conditionally NOT_RUN
+because no earlier branch passed the preregistered gates.
+
+The 35 engineering requirements have a source-attested focused mapping in
+`outputs/N72R21R2/audit/REQUIRED35_RUNTIME_SCOPE_AUDIT_V1.json`; the focused
+receipt passed, while the complete regression remains 1582 passed / 5 retained
+historical failures.  The audit explicitly records the scope limits of unit and
+synthetic checks, so it is not a claim of positive full-MOT scientific success.
+The most promising next direction is a provenance-complete causal event tape
+with nonvacuous real global-assignment opportunities and an independently
+verified candidate/association interface, rather than increasing model size or
+running confirmation on a zero-action policy.
+"""
+        for directory, prefix, current in (
+            (OUT / "tests", "REGRESSION", regression_path),
+            (OUT / "tables", "FINAL_SIX_TABLES", tables_path),
+            (OUT / "audit", "REQUIRED35_RUNTIME_SCOPE_AUDIT", required35_path),
+        ):
+            for old_path in Path(directory).glob(f"{prefix}_V*.json"):
+                report = report.replace(str(old_path.relative_to(ROOT)), str(current.relative_to(ROOT)))
+        if report != report_path.read_text():
+            report_path.write_text(report)
+    regression = read_json(regression_path)
     result.update({
         "research_closure_complete": True,
+        "final_tables_delivered": True,
+        "six_final_tables_complete": True,
+        "final_tables": ref(tables_path),
+        "required35_regression_coverage_complete": True,
+        "required35_runtime_scope_audit": ref(required35_path),
+        "required35_full_semantics_complete": False,
         "whole_task_complete": False,
         "full_task_completion_proven": False,
         "requirement_ledger": ref(ledger_path),
-        "required35_full_semantics_complete": False,
+        "test_regression": {"path": str(regression_path), "sha256": sha256(regression_path),
+                            "passed": regression["passed"], "failed": regression["failed"],
+                            "exit_code": regression["actual_shell_exit_code"]},
     })
+    if report_path.exists():
+        result["final_report"] = ref(report_path)
     write_json("FINAL_RESULT.json", result, mutable=True)
     update_status(
         application_goal_status="ACTIVE_NEGATIVE_RESEARCH_CLOSURE_FULL_TASK_AUDIT_UNPROVEN",
@@ -352,11 +430,19 @@ def reconcile():
         scientific_decision=DECISION,
         scientific_success=False,
         next_association_stage_authorized=False,
+        required_final_tables_complete=True,
+        six_final_tables_complete=True,
+        required35_regression_coverage_complete=True,
+        required35_full_semantics_complete=False,
         whole_task_completion_proven=False,
+        latest_final_tables=ref(tables_path),
+        latest_required35_runtime_scope_audit=ref(required35_path),
+        latest_full_regression=ref(regression_path),
+        latest_final_report=ref(report_path) if report_path.exists() else None,
         latest_full_task_deliverable_ledger=ref(ledger_path),
     )
-    append_log("FINAL_RESULT_RECONCILED_WITH_REQUIREMENT_LEDGER", ledger=ref(ledger_path), whole_task_complete=False)
-    print({"reconciled": True, "whole_task_complete": False, "ledger": str(ledger_path)})
+    append_log("FINAL_RESULT_RECONCILED_WITH_TABLES_AND_REQUIRED35_AUDIT", ledger=ref(ledger_path), tables=ref(tables_path), required35=ref(required35_path), whole_task_complete=False)
+    print({"reconciled": True, "whole_task_complete": False, "six_final_tables_complete": True, "required35_regression_coverage_complete": True, "ledger": str(ledger_path), "tables": str(tables_path), "required35": str(required35_path)})
 
 
 if __name__ == "__main__":
