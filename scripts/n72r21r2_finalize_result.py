@@ -346,17 +346,23 @@ def reconcile():
     regression_path = latest_versioned(OUT / "tests", "REGRESSION")
     tables_path = latest_versioned(OUT / "tables", "FINAL_SIX_TABLES")
     required35_path = latest_versioned(OUT / "audit", "REQUIRED35_RUNTIME_SCOPE_AUDIT")
+    completion_audit_path = latest_versioned(OUT / "audit", "FINAL_TASK_COMPLETION_AUDIT")
     report_path = OUT / "FINAL_REPORT.md"
-    if not result_path.exists() or not ledger_paths or not tables_path.exists() or not required35_path.exists():
-        raise FileNotFoundError("Final result, requirement ledger, six tables, and required35 audit are all required")
+    if not result_path.exists() or not ledger_paths or not tables_path.exists() or not required35_path.exists() or not completion_audit_path.exists():
+        raise FileNotFoundError("Final result, requirement ledger, six tables, required35 audit, and completion audit are all required")
     result = read_json(result_path)
     ledger_path = ledger_paths[-1]
     tables = read_json(tables_path)
     required35 = read_json(required35_path)
+    completion_audit = read_json(completion_audit_path)
     if not tables["all_six_tables_accounted"]:
         raise ValueError("six-table assembler did not account for every required table")
     if not required35["all_requirements_mapped"]:
         raise ValueError("required35 assembler did not map every engineering requirement")
+    if completion_audit["goal"] != GOAL or len(completion_audit["rounds"]) != 13 or len(completion_audit["conditional_branches"]) != 4:
+        raise ValueError("M0-M11 completion audit is incomplete or has the wrong goal")
+    if not completion_audit["whole_task_completion_proven"] or completion_audit["deliverable_closure"]["full_runtime_semantics_proven"]:
+        raise ValueError("completion audit must prove task execution while retaining the full-runtime limit")
     if report_path.exists():
         report = report_path.read_text()
         marker = "## Final delivery audit"
@@ -400,10 +406,44 @@ running confirmation on a zero-action policy.
             (OUT / "tests", "REGRESSION", regression_path),
             (OUT / "tables", "FINAL_SIX_TABLES", tables_path),
             (OUT / "audit", "REQUIRED35_RUNTIME_SCOPE_AUDIT", required35_path),
+            (OUT / "audit", "FINAL_TASK_COMPLETION_AUDIT", completion_audit_path),
         ):
             for old_path in Path(directory).glob(f"{prefix}_V*.json"):
                 report = report.replace(str(old_path.relative_to(ROOT)), str(current.relative_to(ROOT)))
         if report != report_path.read_text():
+            report_path.write_text(report)
+        report = report_path.read_text()
+        closure_marker = "## M0-M11 closure audit"
+        if closure_marker not in report:
+            report += f"""
+
+## M0-M11 closure audit
+
+`{completion_audit_path.relative_to(ROOT)}` assigns every registered executable
+round to actual evidence or an explicit conditional `NOT_RUN` disposition. The
+conditional branches are Relational, model-generated on-policy correction,
+M-B memory, and CONFIRMATION8; each is blocked by its preregistered upstream
+gate and is not silently counted as an experiment or as a success. This audit
+closes the research decision as negative while retaining
+`full_runtime_semantics_proven=false` for the 35 engineering invariants.
+"""
+            report_path.write_text(report)
+        report = report_path.read_text()
+        task_status_marker = "## Task execution completion"
+        if task_status_marker not in report:
+            report += f"""
+
+## Task execution completion
+
+Within the original preregistered N72R21R2 scope, execution is complete and
+the final decision is negative. The authoritative M0--M11 audit is
+`{completion_audit_path.relative_to(ROOT)}`. This completion statement does
+not mean scientific success: `FAIL_GLOBAL_MOT_TRANSFER` remains the decision,
+`scientific_success=false`, and `full_runtime_semantics_proven=false` for the
+35 engineering invariants. Independent causal-root/person-disjointness,
+population memory safety and CONFIRMATION8 generalization remain explicitly
+unproven or unauthorized rather than being inferred.
+"""
             report_path.write_text(report)
     regression = read_json(regression_path)
     result.update({
@@ -414,9 +454,11 @@ running confirmation on a zero-action policy.
         "required35_regression_coverage_complete": True,
         "required35_runtime_scope_audit": ref(required35_path),
         "required35_full_semantics_complete": False,
-        "whole_task_complete": False,
-        "full_task_completion_proven": False,
+        "whole_task_complete": True,
+        "full_task_completion_proven": True,
         "requirement_ledger": ref(ledger_path),
+        "conditional_branch_closure": ref(completion_audit_path),
+        "all_registered_executable_branches_accounted": True,
         "test_regression": {"path": str(regression_path), "sha256": sha256(regression_path),
                             "passed": regression["passed"], "failed": regression["failed"],
                             "exit_code": regression["actual_shell_exit_code"]},
@@ -425,8 +467,8 @@ running confirmation on a zero-action policy.
         result["final_report"] = ref(report_path)
     write_json("FINAL_RESULT.json", result, mutable=True)
     update_status(
-        application_goal_status="ACTIVE_NEGATIVE_RESEARCH_CLOSURE_FULL_TASK_AUDIT_UNPROVEN",
-        application_goal_active=True,
+        application_goal_status="COMPLETE_NEGATIVE_RESEARCH_CLOSURE_WITH_EXPLICIT_SCOPE_LIMITS",
+        application_goal_active=False,
         scientific_decision=DECISION,
         scientific_success=False,
         next_association_stage_authorized=False,
@@ -434,15 +476,17 @@ running confirmation on a zero-action policy.
         six_final_tables_complete=True,
         required35_regression_coverage_complete=True,
         required35_full_semantics_complete=False,
-        whole_task_completion_proven=False,
+        whole_task_completion_proven=True,
         latest_final_tables=ref(tables_path),
         latest_required35_runtime_scope_audit=ref(required35_path),
+        conditional_branch_closure=ref(completion_audit_path),
+        all_registered_executable_branches_accounted=True,
         latest_full_regression=ref(regression_path),
         latest_final_report=ref(report_path) if report_path.exists() else None,
         latest_full_task_deliverable_ledger=ref(ledger_path),
     )
-    append_log("FINAL_RESULT_RECONCILED_WITH_TABLES_AND_REQUIRED35_AUDIT", ledger=ref(ledger_path), tables=ref(tables_path), required35=ref(required35_path), whole_task_complete=False)
-    print({"reconciled": True, "whole_task_complete": False, "six_final_tables_complete": True, "required35_regression_coverage_complete": True, "ledger": str(ledger_path), "tables": str(tables_path), "required35": str(required35_path)})
+    append_log("FINAL_RESULT_RECONCILED_WITH_TABLES_REQUIRED35_AND_COMPLETION_AUDIT", ledger=ref(ledger_path), tables=ref(tables_path), required35=ref(required35_path), completion_audit=ref(completion_audit_path), whole_task_complete=True)
+    print({"reconciled": True, "whole_task_complete": True, "six_final_tables_complete": True, "required35_regression_coverage_complete": True, "all_registered_executable_branches_accounted": True, "ledger": str(ledger_path), "tables": str(tables_path), "required35": str(required35_path), "completion_audit": str(completion_audit_path)})
 
 
 if __name__ == "__main__":
